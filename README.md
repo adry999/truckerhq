@@ -13,6 +13,13 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
+## Live FMCSA data (optional)
+
+Carrier Lookup search (`/tools/carrier-lookup`) uses sample data by
+default. To search live FMCSA records instead, copy `.env.example` to
+`.env.local` and set `FMCSA_WEBKEY` — see that file for how to get a free
+key. Without it the site works exactly as before, just on sample data.
+
 ## Scripts
 
 - `npm run dev` — dev server

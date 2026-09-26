@@ -9,6 +9,7 @@ import {
   healthTextColor,
   healthLabel,
 } from "@/lib/data";
+import { searchFmcsaCarriers, fmcsaEnabled } from "@/lib/fmcsa";
 
 export const metadata: Metadata = {
   title: "Carrier Lookup by DOT or MC Number",
@@ -43,19 +44,25 @@ export default async function CarrierLookupPage({
   searchParams: Promise<{ q?: string; status?: string; mode?: string }>;
 }) {
   const params = await searchParams;
-  const q = (params.q ?? "").trim().toLowerCase().replace(/^(dot|mc)\s*/, "");
+  const rawQ = params.q ?? "";
+  const q = rawQ.trim().toLowerCase().replace(/^(dot|mc)\s*/, "");
   const status = params.status ?? "All";
   const mode = params.mode ?? "All";
   const isSearching = params.q !== undefined;
 
-  const matched = CARRIERS.filter(
-    (c) =>
-      !q ||
-      c.name.toLowerCase().includes(q) ||
-      c.dot.includes(q) ||
-      c.mc.toLowerCase().includes(q) ||
-      c.city.toLowerCase().includes(q),
-  );
+  const liveResults = isSearching ? await searchFmcsaCarriers(rawQ) : null;
+  const usingLiveData = liveResults !== null;
+
+  const matched = usingLiveData
+    ? liveResults
+    : CARRIERS.filter(
+        (c) =>
+          !q ||
+          c.name.toLowerCase().includes(q) ||
+          c.dot.includes(q) ||
+          c.mc.toLowerCase().includes(q) ||
+          c.city.toLowerCase().includes(q),
+      );
   const shown = matched.filter((c) => status === "All" || c.status === status);
 
   const modeHref = (m: string) => {
@@ -287,14 +294,11 @@ export default async function CarrierLookupPage({
           </div>
           {shown.map((c, i) => {
             const sc = STATUS_COLORS[c.status];
-            return (
-              <Link
-                key={c.slug}
-                href={`/tools/carrier-lookup/${c.slug}`}
-                className={`grid grid-cols-[1fr_auto] items-center gap-3 px-5 py-[18px] tabular-nums hover:bg-offwhite md:grid-cols-[2.4fr_1fr_1fr_80px_130px_110px] md:gap-4 ${
-                  i ? "border-t border-[#ECEDEA]" : ""
-                }`}
-              >
+            const rowClassName = `grid grid-cols-[1fr_auto] items-center gap-3 px-5 py-[18px] tabular-nums md:grid-cols-[2.4fr_1fr_1fr_80px_130px_110px] md:gap-4 ${
+              usingLiveData ? "" : "hover:bg-offwhite"
+            } ${i ? "border-t border-[#ECEDEA]" : ""}`;
+            const rowContent = (
+              <>
                 <span className="col-span-2 flex flex-col gap-0.5 md:col-span-1">
                   <span className="text-[17px] font-bold">{c.name}</span>
                   <span className="text-sm text-grey">
@@ -303,7 +307,7 @@ export default async function CarrierLookupPage({
                 </span>
                 <span className="hidden text-[15px] md:block">{c.dot}</span>
                 <span className="hidden text-[15px] md:block">{c.mc}</span>
-                <span className="hidden text-[15px] md:block">{c.trucks}</span>
+                <span className="hidden text-[15px] md:block">{c.trucks || "—"}</span>
                 <span>
                   <span
                     className="flex items-center gap-1.5 rounded-lg px-2.5 py-1 font-display text-[15px] font-extrabold tracking-[.08em]"
@@ -332,6 +336,17 @@ export default async function CarrierLookupPage({
                     </span>
                   </span>
                 </span>
+              </>
+            );
+            // Live FMCSA rows don't have a detail page behind them (only
+            // the sample-data profiles do), so they render as plain rows.
+            return usingLiveData ? (
+              <div key={c.dot || c.slug} className={rowClassName}>
+                {rowContent}
+              </div>
+            ) : (
+              <Link key={c.slug} href={`/tools/carrier-lookup/${c.slug}`} className={rowClassName}>
+                {rowContent}
               </Link>
             );
           })}
@@ -343,8 +358,11 @@ export default async function CarrierLookupPage({
           )}
         </div>
         <div className="text-[13px] text-grey">
-          Sample data. Real results come from FMCSA records, updated every 24
-          hours.
+          {usingLiveData
+            ? "Live data from FMCSA public records."
+            : isSearching && fmcsaEnabled()
+              ? "No live FMCSA match. Showing sample data instead."
+              : "Sample data. Real results come from FMCSA records, updated every 24 hours."}
         </div>
       </section>
 
