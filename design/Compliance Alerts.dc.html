@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><style>body{margin:0;background:#F7F7F5;font-family:Inter,sans-serif;color:#16181B;-webkit-font-smoothing:antialiased}a{color:#0E5C3A}a:hover{color:#16181B}*{box-sizing:border-box}input::placeholder{color:#6B7280}</style></helmet>
+<div style="min-height:100vh;display:flex;flex-direction:column;">
+<dc-import name="SiteHeader" active="Tools" hint-size="100%,72px" style="position:sticky;top:0;z-index:20;display:block;"></dc-import>
+
+<section style="background:#16181B;color:#F7F7F5;">
+<div style="max-width:1280px;margin:0 auto;padding:clamp(40px,6vw,72px) clamp(20px,4vw,40px);display:flex;flex-direction:column;gap:16px;">
+<div style="display:flex;flex-wrap:wrap;gap:8px;font-size:14px;color:#AEB2B8;"><a href="Tools.dc.html" style="color:#F7F7F5;">Tools</a><span>/</span><span>Compliance Alerts</span></div>
+<h1 style="margin:0;font-family:'Barlow Condensed';font-weight:800;font-size:clamp(48px,7vw,88px);line-height:.9;text-transform:uppercase;">Know before the broker does</h1>
+<p style="margin:0;font-size:clamp(17px,2vw,19px);line-height:1.5;color:#D4D6DA;max-width:620px;text-wrap:pretty;">We check your FMCSA record every day. If your authority, insurance filing or safety status changes, you get a text the same day. Free, in English or Russian.</p>
+</div>
+<div style="height:6px;background:repeating-linear-gradient(90deg,#F2A900 0 48px,transparent 48px 80px);"></div>
+</section>
+
+<section style="max-width:1280px;width:100%;margin:0 auto;padding:32px clamp(16px,4vw,40px) 96px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:24px;align-items:start;">
+<sc-if value="{{ notDone }}" hint-placeholder-val="{{ true }}">
+<form onSubmit="{{ submit }}" style="background:#FFFFFF;border:1px solid #DEDFDB;border-radius:8px;padding:clamp(20px,3vw,28px);display:flex;flex-direction:column;gap:22px;">
+<label style="display:flex;flex-direction:column;gap:6px;">
+<span style="font-family:'Barlow Condensed';font-weight:800;font-size:22px;text-transform:uppercase;">1. Your DOT or MC number</span>
+<input value="{{ dot }}" onChange="{{ setDot }}" placeholder="DOT 3412897" inputmode="numeric" style="height:56px;border:1.5px solid #9CA0A8;border-radius:8px;padding:0 14px;font-family:Inter;font-size:18px;font-weight:600;font-variant-numeric:tabular-nums;outline:none;" style-focus="border-color:#0E5C3A;">
+<sc-if value="{{ found }}"><span style="display:flex;align-items:center;gap:8px;font-size:14px;color:#0E5C3A;font-weight:600;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>Carpathian Freight LLC · Des Plaines, IL</span></sc-if>
+</label>
+<div style="display:flex;flex-direction:column;gap:10px;">
+<span style="font-family:'Barlow Condensed';font-weight:800;font-size:22px;text-transform:uppercase;">2. What to watch</span>
+<sc-for list="{{ watch }}" as="w" hint-placeholder-count="6">
+<button type="button" onClick="{{ w.toggle }}" style="min-height:60px;display:flex;align-items:center;gap:14px;padding:10px 14px;border-radius:8px;border:1.5px solid {{ w.bd }};background:{{ w.bg }};text-align:left;cursor:pointer;font-family:Inter;color:#16181B;">
+<span style="width:26px;height:26px;flex:none;border-radius:5px;border:2px solid {{ w.boxBd }};background:{{ w.boxBg }};display:flex;align-items:center;justify-content:center;"><sc-if value="{{ w.on }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></sc-if></span>
+<span style="display:flex;flex-direction:column;gap:2px;"><span style="font-weight:600;font-size:16px;">{{ w.t }}</span><span style="font-size:14px;color:#4B5058;">{{ w.d }}</span></span>
+</button>
+</sc-for>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px;">
+<span style="font-family:'Barlow Condensed';font-weight:800;font-size:22px;text-transform:uppercase;">3. Where to text you</span>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;">
+<input value="{{ phone }}" onChange="{{ setPhone }}" type="tel" placeholder="(XXX) XXX-XXXX" aria-label="Mobile phone" style="height:56px;border:1.5px solid #9CA0A8;border-radius:8px;padding:0 14px;font-family:Inter;font-size:18px;font-variant-numeric:tabular-nums;outline:none;" style-focus="border-color:#0E5C3A;">
+<div style="display:flex;border:1.5px solid #9CA0A8;border-radius:8px;overflow:hidden;height:56px;">
+<sc-for list="{{ langs }}" as="l"><button type="button" onClick="{{ l.pick }}" style="flex:1;border:0;background:{{ l.bg }};color:{{ l.fg }};font-family:Inter;font-size:16px;font-weight:600;cursor:pointer;">{{ l.name }}</button></sc-for>
+</div>
+</div>
+</div>
+<button type="submit" style="height:60px;border:0;border-radius:10px;background:#F2A900;color:#16181B;font-family:'Barlow Condensed';font-weight:800;font-size:23px;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;" style-hover="background:#FFBC1F;">Turn on alerts</button>
+<span style="font-size:13px;line-height:1.5;color:#6B7280;">Free. About 1–3 texts a year for most carriers. Reply STOP any time.</span>
+</form>
+</sc-if>
+<sc-if value="{{ done }}">
+<div style="background:#FFFFFF;border:1px solid #DEDFDB;border-radius:8px;padding:clamp(24px,3vw,32px);display:flex;flex-direction:column;gap:14px;">
+<div style="width:52px;height:52px;border-radius:50%;background:#0E5C3A;display:flex;align-items:center;justify-content:center;"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#F2A900" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></div>
+<h2 style="margin:0;font-family:'Barlow Condensed';font-weight:800;font-size:36px;line-height:1;text-transform:uppercase;">Alerts are on</h2>
+<p style="margin:0;font-size:16px;line-height:1.55;color:#3F444B;">We're watching {{ count }} items for {{ dotShown }}. A confirmation text is on its way.</p>
+<div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:6px;">
+<a href="New MC Checklist.dc.html" style="height:52px;display:flex;align-items:center;padding:0 22px;border-radius:10px;border:2px solid #16181B;color:#16181B;text-decoration:none;font-family:'Barlow Condensed';font-weight:800;font-size:19px;letter-spacing:.05em;text-transform:uppercase;">New MC Checklist</a>
+<button onClick="{{ reset }}" style="height:52px;padding:0 18px;border:0;background:transparent;color:#0E5C3A;font-family:Inter;font-size:15px;font-weight:600;cursor:pointer;text-decoration:underline;">Watch another carrier</button>
+</div>
+</div>
+</sc-if>
+
+<aside style="display:flex;flex-direction:column;gap:16px;">
+<div style="background:#16181B;border-radius:8px;padding:24px;display:flex;flex-direction:column;gap:14px;color:#F7F7F5;">
+<span style="font-family:'Barlow Condensed';font-weight:700;font-size:16px;letter-spacing:.1em;color:#F2A900;">WHAT A TEXT LOOKS LIKE</span>
+<div style="align-self:flex-start;max-width:340px;background:#2A2D32;border-radius:16px 16px 16px 4px;padding:14px 16px;font-size:15px;line-height:1.5;">{{ sample }}</div>
+<span style="font-size:13px;color:#AEB2B8;">Trucker HQ · today, 7:02 AM</span>
+</div>
+<div style="background:#FFFFFF;border:1px solid #DEDFDB;border-radius:8px;padding:22px;display:flex;flex-direction:column;gap:10px;">
+<h2 style="margin:0;font-family:'Barlow Condensed';font-weight:800;font-size:24px;">Why this matters</h2>
+<p style="margin:0;font-size:15px;line-height:1.55;color:#3F444B;text-wrap:pretty;">If your insurance filing lapses, FMCSA can revoke your authority, and brokers stop tendering loads. Most carriers find out when a load gets cancelled. A text the same day gives you time to call your agent.</p>
+</div>
+</aside>
+</section>
+
+<div style="margin-top:auto;"><dc-import name="SiteFooter" hint-size="100%,360px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { dot: '', phone: '', lang: 'EN', done: false, on: { auth: true, ins: true, ucr: true, boc: true, oos: true, insp: false } };
+  renderVals() {
+    const s = this.state;
+    const items = [
+      ['auth', 'Operating authority', 'Active, pending, revoked or inactive'],
+      ['ins', 'Insurance filing', 'BIPD and cargo on file, cancellation notices'],
+      ['ucr', 'UCR registration', 'Reminder before the yearly deadline'],
+      ['boc', 'BOC-3 process agent', 'Filing missing or removed'],
+      ['oos', 'Out-of-service order', 'Any new OOS order on your DOT'],
+      ['insp', 'New inspections and crashes', 'Every roadside inspection that hits your record'],
+    ];
+    const count = Object.values(s.on).filter(Boolean).length;
+    return {
+      dot: s.dot, phone: s.phone, done: s.done, notDone: !s.done, count,
+      dotShown: s.dot || 'DOT 3412897',
+      found: s.dot.replace(/\D/g, '').length >= 6,
+      setDot: e => this.setState({ dot: e.target.value }),
+      setPhone: e => this.setState({ phone: e.target.value }),
+      watch: items.map(([k, t, d]) => { const on = !!s.on[k]; return { t, d, on, bd: on ? '#0E5C3A' : '#DEDFDB', bg: on ? '#EEF6F1' : '#FFFFFF', boxBd: on ? '#0E5C3A' : '#9CA0A8', boxBg: on ? '#0E5C3A' : '#FFFFFF', toggle: () => this.setState(p => ({ on: { ...p.on, [k]: !p.on[k] } })) }; }),
+      langs: [['EN', 'English'], ['RU', 'Русский']].map(([c, name]) => ({ name, bg: s.lang === c ? '#16181B' : '#FFFFFF', fg: s.lang === c ? '#F7F7F5' : '#16181B', pick: () => this.setState({ lang: c }) })),
+      sample: s.lang === 'RU' ? 'Trucker HQ: страховой полис DOT 3412897 будет отменён 14 окт. Позвоните агенту, чтобы избежать отзыва MC.' : 'Trucker HQ: Insurance cancellation filed for DOT 3412897, effective Oct 14. Call your agent to keep your authority active.',
+      submit: e => { e.preventDefault(); this.setState({ done: true }); },
+      reset: () => this.setState({ done: false, dot: '' }),
+    };
+  }
+}
+</script>
+</body>
+</html>

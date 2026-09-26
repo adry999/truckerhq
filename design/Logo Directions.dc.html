@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><meta name="design_doc_mode" content="canvas"><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><style>body{margin:0;background:#E9E9E5;font-family:Inter,sans-serif;color:#16181B}a{color:#0E5C3A}a:hover{color:#16181B}</style></helmet>
+<section style="padding:64px;display:flex;flex-direction:column;gap:32px;">
+<div style="display:flex;flex-direction:column;gap:8px;max-width:760px;">
+<div style="font-family:'Barlow Condensed';font-weight:800;font-size:44px;text-transform:uppercase;">Trucker HQ — Logo directions</div>
+<div style="font-size:16px;color:#4B5058;line-height:1.5;">Three takes on highway signage, none using the Interstate shield. Each shows the full lockup, the HQ symbol from 96px down to 16px, the three sub-brands, and light and dark versions. The design system and homepage use <a href="#1a">1a</a>. Any direction can be swapped in.</div>
+</div>
+<div style="display:flex;gap:32px;flex-wrap:wrap;align-items:flex-start;">
+<sc-for list="{{ dirs }}" as="d" hint-placeholder-count="3">
+<div id="{{ d.id }}" style="width:560px;background:#FFFFFF;border-radius:20px;overflow:hidden;box-shadow:0 1px 0 rgba(0,0,0,.06);">
+<div style="padding:24px 28px 20px;display:flex;flex-direction:column;gap:6px;">
+<div style="display:flex;align-items:center;gap:10px;"><span style="background:#16181B;color:#F7F7F5;font-family:'Barlow Condensed';font-weight:700;font-size:16px;padding:3px 9px;border-radius:6px;">{{ d.id }}</span><span style="font-family:'Barlow Condensed';font-weight:800;font-size:28px;text-transform:uppercase;">{{ d.name }}</span></div>
+<div style="font-size:14px;color:#4B5058;line-height:1.5;">{{ d.note }}</div>
+</div>
+<div style="background:#F7F7F5;padding:36px 28px;display:flex;flex-direction:column;gap:32px;">
+<dc-import name="Logo" direction="{{ d.dir }}" size="{{ 64 }}" hint-size="360px,90px"></dc-import>
+<div style="display:flex;align-items:flex-end;gap:20px;">
+<dc-import name="Logo" direction="{{ d.dir }}" mark="{{ true }}" size="{{ 96 }}" hint-size="96px,96px"></dc-import>
+<dc-import name="Logo" direction="{{ d.dir }}" mark="{{ true }}" size="{{ 48 }}" hint-size="48px,48px"></dc-import>
+<dc-import name="Logo" direction="{{ d.dir }}" mark="{{ true }}" size="{{ 32 }}" hint-size="32px,32px"></dc-import>
+<dc-import name="Logo" direction="{{ d.dir }}" mark="{{ true }}" size="{{ 16 }}" hint-size="16px,16px"></dc-import>
+<span style="font-size:12px;color:#6B7280;font-family:ui-monospace,monospace;">96 · 48 · 32 · 16px</span>
+</div>
+<div style="height:4px;background:repeating-linear-gradient(90deg,#16181B 0 28px,transparent 28px 48px);opacity:.15;"></div>
+<div style="display:flex;flex-direction:column;gap:20px;align-items:flex-start;">
+<dc-import name="Logo" direction="{{ d.dir }}" sub="DISPATCH" size="{{ 40 }}" hint-size="300px,60px"></dc-import>
+<dc-import name="Logo" direction="{{ d.dir }}" sub="JOBS" size="{{ 40 }}" hint-size="300px,60px"></dc-import>
+<dc-import name="Logo" direction="{{ d.dir }}" sub="TOOLS" size="{{ 40 }}" hint-size="300px,60px"></dc-import>
+</div>
+</div>
+<div style="background:#16181B;padding:36px 28px;display:flex;flex-direction:column;gap:32px;">
+<dc-import name="Logo" direction="{{ d.dir }}" theme="dark" size="{{ 64 }}" hint-size="360px,90px"></dc-import>
+<div style="display:flex;align-items:flex-end;gap:20px;">
+<dc-import name="Logo" direction="{{ d.dir }}" theme="dark" mark="{{ true }}" size="{{ 96 }}" hint-size="96px,96px"></dc-import>
+<dc-import name="Logo" direction="{{ d.dir }}" theme="dark" mark="{{ true }}" size="{{ 48 }}" hint-size="48px,48px"></dc-import>
+<dc-import name="Logo" direction="{{ d.dir }}" theme="dark" mark="{{ true }}" size="{{ 32 }}" hint-size="32px,32px"></dc-import>
+<dc-import name="Logo" direction="{{ d.dir }}" theme="dark" mark="{{ true }}" size="{{ 16 }}" hint-size="16px,16px"></dc-import>
+</div>
+<div style="display:flex;flex-direction:column;gap:20px;align-items:flex-start;">
+<dc-import name="Logo" direction="{{ d.dir }}" theme="dark" sub="DISPATCH" size="{{ 40 }}" hint-size="300px,60px"></dc-import>
+<dc-import name="Logo" direction="{{ d.dir }}" theme="dark" sub="JOBS" size="{{ 40 }}" hint-size="300px,60px"></dc-import>
+<dc-import name="Logo" direction="{{ d.dir }}" theme="dark" sub="TOOLS" size="{{ 40 }}" hint-size="300px,60px"></dc-import>
+</div>
+</div>
+</div>
+</sc-for>
+</div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    return { dirs: [
+      { id: '1a', dir: 'sign', name: 'Sign Panel', note: 'The whole name sits on a green guide-sign panel with a reflective inner border. HQ in amber. Sub-brands attach as an amber destination tab.' },
+      { id: '1b', dir: 'exit', name: 'Exit Tab', note: 'Green panel with an amber HQ tab raised on top, like an exit number tab. Sub-brands sit under a road-line dash.' },
+      { id: '1c', dir: 'marker', name: 'Mile Marker', note: 'Plain wordmark with HQ in a small green marker plate. Lightest option; the plate works as the app icon.' },
+    ] };
+  }
+}
+</script>
+</body>
+</html>

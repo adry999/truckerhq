@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Overpass:wght@800;900&display=swap" rel="stylesheet"></helmet>
+<div style="display:inline-flex;font-size:{{ fs }}px;line-height:1;font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;">
+<sc-if value="{{ signFull }}" hint-placeholder-val="{{ true }}">
+<div style="display:inline-flex;align-items:stretch;gap:.12em;font-family:Overpass,sans-serif;font-size:{{ sfs }}px;">
+<div style="display:inline-flex;background:#0E5C3A;border-radius:.16em;padding:.07em;box-shadow:{{ edge }};">
+<div style="border:.045em solid #F7F7F5;border-radius:.11em;display:flex;align-items:stretch;position:relative;"><span style="position:absolute;left:.12em;top:.12em;width:.07em;height:.07em;border-radius:50%;background:rgba(247,247,245,.55);"></span><span style="position:absolute;left:.12em;bottom:.12em;width:.07em;height:.07em;border-radius:50%;background:rgba(247,247,245,.55);"></span><span style="position:absolute;right:.12em;top:.12em;width:.07em;height:.07em;border-radius:50%;background:rgba(247,247,245,.55);"></span><span style="position:absolute;right:.12em;bottom:.12em;width:.07em;height:.07em;border-radius:50%;background:rgba(247,247,245,.55);"></span><span style="padding:.2em .3em .12em .44em;color:#F7F7F5;font-weight:800;">Trucker</span><span style="border-left:.045em solid #F7F7F5;padding:.2em .44em .12em .3em;color:#F2A900;font-weight:900;">HQ</span></div>
+</div>
+<sc-if value="{{ hasSub }}"><div style="background:#F2A900;color:#16181B;border-radius:.16em;padding:.08em .4em 0;display:flex;align-items:center;font-weight:900;font-size:.56em;letter-spacing:.06em;">{{ sub }}</div></sc-if>
+</div>
+</sc-if>
+<sc-if value="{{ signMark }}">
+<svg viewBox="0 0 100 108" style="width:.93em;height:1em;display:block;"><defs><clipPath id="thqShield"><path d="M8 6 C30 14 70 14 92 6 C100 40 96 78 50 104 C4 78 0 40 8 6 Z"></path></clipPath></defs><path d="M8 6 C30 14 70 14 92 6 C100 40 96 78 50 104 C4 78 0 40 8 6 Z" fill="#0E5C3A"></path><rect x="0" y="0" width="100" height="32" fill="#F2A900" clip-path="url(#thqShield)"></rect><path d="M8 6 C30 14 70 14 92 6 C100 40 96 78 50 104 C4 78 0 40 8 6 Z" fill="none" stroke="#F7F7F5" stroke-width="5"></path><text x="50" y="72" text-anchor="middle" font-family="Overpass" font-weight="900" font-size="34" fill="#F7F7F5">HQ</text></svg>
+</sc-if>
+<sc-if value="{{ exitFull }}">
+<div style="display:inline-flex;flex-direction:column;align-items:flex-start;gap:.16em;">
+<div style="display:flex;align-items:flex-end;">
+<div style="margin-top:.34em;background:#0E5C3A;color:#F7F7F5;font-weight:800;letter-spacing:.02em;padding:.13em .34em .08em;border-radius:.16em 0 .16em .16em;">Trucker</div>
+<div style="background:#F2A900;color:#16181B;font-weight:800;padding:.13em .24em .08em;border-radius:.16em .16em .16em 0;">HQ</div>
+</div>
+<sc-if value="{{ hasSub }}"><div style="display:flex;align-items:center;gap:.4em;font-size:.36em;font-weight:700;letter-spacing:.2em;color:{{ fg }};"><span style="width:2.4em;height:.16em;background:repeating-linear-gradient(90deg,#F2A900 0 .5em,transparent .5em .8em);"></span>{{ sub }}</div></sc-if>
+</div>
+</sc-if>
+<sc-if value="{{ exitMark }}">
+<div style="width:1em;height:1em;background:#F2A900;border-radius:.2em;overflow:hidden;display:flex;flex-direction:column;box-shadow:{{ edge }};">
+<div style="flex:1;display:flex;align-items:center;justify-content:center;color:#16181B;font-weight:800;font-size:.56em;padding-top:.05em;">HQ</div>
+<div style="height:.17em;background:#0E5C3A;"></div>
+</div>
+</sc-if>
+<sc-if value="{{ markerFull }}">
+<div style="display:inline-flex;align-items:center;gap:.2em;">
+<span style="font-weight:800;color:{{ fg }};letter-spacing:.01em;">Trucker</span>
+<div style="background:#0E5C3A;color:#F7F7F5;border-radius:.14em;padding:.12em .2em .04em;font-weight:800;display:flex;flex-direction:column;align-items:center;gap:.06em;box-shadow:{{ edge }};">HQ<span style="width:100%;height:.07em;background:#F2A900;"></span></div>
+<sc-if value="{{ hasSub }}"><div style="display:flex;align-items:center;gap:.3em;margin-left:.1em;"><span style="width:.05em;height:.9em;background:#F2A900;"></span><span style="font-size:.6em;font-weight:700;letter-spacing:.1em;color:{{ fg }};">{{ sub }}</span></div></sc-if>
+</div>
+</sc-if>
+<sc-if value="{{ markerMark }}">
+<div style="width:1em;height:1em;background:#0E5C3A;border-radius:.2em;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.05em;box-shadow:{{ edge }};">
+<span style="color:#F7F7F5;font-weight:800;font-size:.52em;padding-top:.05em;">HQ</span>
+<span style="width:.52em;height:.08em;background:#F2A900;"></span>
+</div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:420,&quot;height&quot;:120},&quot;direction&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;sign&quot;,&quot;exit&quot;,&quot;marker&quot;],&quot;default&quot;:&quot;sign&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;mark&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;sub&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;&quot;,&quot;DISPATCH&quot;,&quot;JOBS&quot;,&quot;TOOLS&quot;],&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;light&quot;,&quot;dark&quot;],&quot;default&quot;:&quot;light&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;size&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:48,&quot;min&quot;:12,&quot;max&quot;:200,&quot;tsType&quot;:&quot;number&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const p = this.props;
+    const d = p.direction ?? 'sign', mark = !!p.mark, dark = (p.theme ?? 'light') === 'dark';
+    const size = p.size ?? 32, sub = p.sub ?? '';
+    const small = size < 24;
+    return {
+      fs: size, sfs: Math.round(size * 0.78), sub, hasSub: !!sub,
+      fg: dark ? '#F7F7F5' : '#16181B',
+      edge: dark ? '0 0 0 1px rgba(247,247,245,.35)' : 'none',
+      ring: small ? 'none' : '.045em solid #F7F7F5',
+      markPad: small ? '0' : '.07em',
+      markFs: small ? '.62em' : '.5em',
+      signFull: d === 'sign' && !mark, signMark: d === 'sign' && mark,
+      exitFull: d === 'exit' && !mark, exitMark: d === 'exit' && mark,
+      markerFull: d === 'marker' && !mark, markerMark: d === 'marker' && mark,
+    };
+  }
+}
+</script>
+</body>
+</html>

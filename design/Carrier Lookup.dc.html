@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><style>body{margin:0;background:#F7F7F5;font-family:Inter,sans-serif;color:#16181B;-webkit-font-smoothing:antialiased}a{color:#0E5C3A}a:hover{color:#16181B}*{box-sizing:border-box}input::placeholder{color:#6B7280}</style></helmet>
+<div style="min-height:100vh;display:flex;flex-direction:column;">
+<dc-import name="SiteHeader" active="Tools" hint-size="100%,72px" style="position:sticky;top:0;z-index:20;display:block;"></dc-import>
+
+<sc-if value="{{ isSearch }}" hint-placeholder-val="{{ true }}">
+<section style="background:#16181B;color:#F7F7F5;">
+<div style="max-width:1080px;margin:0 auto;padding:clamp(48px,8vw,104px) clamp(20px,4vw,40px) clamp(56px,8vw,96px);display:flex;flex-direction:column;gap:22px;">
+<div style="display:flex;align-items:center;gap:10px;"><span style="height:28px;display:inline-flex;align-items:center;padding:0 10px;border-radius:7px;background:#F2A900;color:#16181B;font-family:'Barlow Condensed';font-weight:800;font-size:15px;letter-spacing:.08em;">FREE</span><span style="font-family:'Barlow Condensed';font-weight:700;font-size:15px;letter-spacing:.16em;color:#F2A900;">TRUCKER HQ TOOLS · CARRIER LOOKUP</span></div>
+<h1 style="margin:0;font-family:'Barlow Condensed';font-weight:800;font-size:clamp(48px,8vw,96px);line-height:.9;text-transform:uppercase;">Check any carrier<br>in 10 seconds.</h1>
+<p style="margin:0;font-size:clamp(17px,2vw,19px);line-height:1.5;color:#D4D6DA;max-width:600px;">Authority, insurance, inspections and crashes from public FMCSA data, summed up in one Health Score.</p>
+<div style="display:flex;gap:6px;flex-wrap:wrap;">
+<sc-for list="{{ modes }}" as="m" hint-placeholder-count="4"><button onClick="{{ m.pick }}" style="height:44px;padding:0 16px;border-radius:10px;border:{{ m.border }};background:{{ m.bg }};color:{{ m.fg }};font-family:'Barlow Condensed';font-weight:800;font-size:17px;letter-spacing:.06em;cursor:pointer;">{{ m.label }}</button></sc-for>
+</div>
+<form onSubmit="{{ submit }}" style="display:flex;flex-direction:{{ searchDir }};gap:6px;background:#FFFFFF;border:3px solid #F2A900;border-radius:8px;padding:6px;max-width:860px;">
+<div style="flex:1;display:flex;align-items:center;gap:12px;padding:0 8px 0 14px;min-height:60px;">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:#16181B;"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+<input aria-label="Search carriers" value="{{ q }}" onChange="{{ setQ }}" placeholder="{{ placeholder }}" style="flex:1;min-width:0;border:0;outline:none;font-family:Inter;font-size:18px;color:#16181B;background:transparent;">
+</div>
+<button type="submit" style="min-height:60px;padding:0 32px;border:0;border-radius:5px;background:#F2A900;color:#16181B;font-family:'Barlow Condensed';font-weight:800;font-size:24px;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;" style-hover="background:#FFBC1F;">Search</button>
+</form>
+<div style="display:flex;flex-wrap:wrap;gap:8px 16px;font-size:14px;color:#AEB2B8;align-items:center;">
+<span>Recent:</span>
+<sc-for list="{{ recent }}" as="r" hint-placeholder-count="3"><button onClick="{{ r.go }}" style="min-height:36px;background:transparent;border:0;padding:0;color:#F7F7F5;text-decoration:underline;font-family:Inter;font-size:14px;cursor:pointer;">{{ r.label }}</button></sc-for>
+</div>
+</div>
+<div style="height:6px;background:repeating-linear-gradient(90deg,#F2A900 0 48px,transparent 48px 80px);"></div>
+</section>
+<section style="max-width:1280px;width:100%;margin:0 auto;padding:clamp(56px,8vw,88px) clamp(20px,4vw,40px);display:flex;flex-direction:column;gap:28px;">
+<div style="display:flex;flex-direction:column;gap:8px;">
+<h2 style="margin:0;font-family:'Barlow Condensed';font-weight:800;font-size:clamp(34px,5vw,52px);line-height:1;">What the score looks at</h2>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;">
+<sc-for list="{{ factors }}" as="f" hint-placeholder-count="4">
+<div style="background:#FFFFFF;border:1.5px solid #DEDFDB;border-radius:8px;padding:22px;display:flex;flex-direction:column;gap:10px;">
+<div style="display:flex;justify-content:space-between;align-items:baseline;"><span style="font-family:'Barlow Condensed';font-weight:800;font-size:26px;text-transform:uppercase;">{{ f.t }}</span><span style="font-family:'Barlow Condensed';font-weight:800;font-size:22px;color:#0E5C3A;">{{ f.w }}</span></div>
+<div style="font-size:15px;line-height:1.5;color:#4B5058;">{{ f.d }}</div>
+</div>
+</sc-for>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center;font-size:15px;">
+<span style="display:flex;align-items:center;gap:8px;"><span style="width:14px;height:14px;border-radius:50%;background:#0E5C3A;"></span><b>80–100</b> Good</span>
+<span style="display:flex;align-items:center;gap:8px;"><span style="width:14px;height:14px;border-radius:50%;background:#F2A900;"></span><b>60–79</b> Watch</span>
+<span style="display:flex;align-items:center;gap:8px;"><span style="width:14px;height:14px;border-radius:50%;background:#B42318;"></span><b>0–59</b> Risk</span>
+</div>
+<div style="height:4px;background:repeating-linear-gradient(90deg,#16181B 0 28px,transparent 28px 48px);opacity:.15;margin:12px 0;"></div>
+<div style="display:flex;flex-direction:column;gap:14px;">
+<h3 style="margin:0;font-family:'Barlow Condensed';font-weight:800;font-size:28px;text-transform:uppercase;">Browse carriers by state</h3>
+<div style="display:flex;flex-wrap:wrap;gap:8px;">
+<sc-for list="{{ states }}" as="s" hint-placeholder-count="8"><a href="{{ s.href }}" style="height:44px;display:inline-flex;align-items:center;gap:8px;padding:0 14px;border-radius:10px;background:#FFFFFF;border:1.5px solid #DEDFDB;color:#16181B;text-decoration:none;font-weight:600;font-size:15px;" style-hover="border-color:#0E5C3A;color:#16181B;">{{ s.name }}<span style="color:#6B7280;font-weight:500;font-size:13px;">{{ s.count }}</span></a></sc-for>
+</div>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isResults }}">
+<section style="background:#16181B;">
+<div style="max-width:1280px;margin:0 auto;padding:20px clamp(16px,4vw,40px);">
+<form onSubmit="{{ submit }}" style="display:flex;gap:6px;background:#FFFFFF;border:2px solid #F2A900;border-radius:8px;padding:5px;max-width:760px;">
+<input aria-label="Search carriers" value="{{ q }}" onChange="{{ setQ }}" placeholder="DOT, MC or name" style="flex:1;min-width:0;border:0;outline:none;padding:0 14px;font-family:Inter;font-size:17px;color:#16181B;min-height:50px;background:transparent;">
+<button type="submit" style="min-height:50px;padding:0 22px;border:0;border-radius:10px;background:#F2A900;color:#16181B;font-family:'Barlow Condensed';font-weight:800;font-size:20px;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;">Search</button>
+</form>
+</div>
+</section>
+<section style="max-width:1280px;width:100%;margin:0 auto;padding:32px clamp(16px,4vw,40px) 80px;display:flex;flex-direction:column;gap:20px;">
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;">
+<div style="display:flex;flex-direction:column;gap:6px;">
+<button onClick="{{ goSearch }}" style="align-self:flex-start;min-height:36px;padding:0;border:0;background:transparent;color:#0E5C3A;font-family:'Barlow Condensed';font-weight:700;font-size:17px;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;">← New search</button>
+<h1 style="margin:0;font-family:'Barlow Condensed';font-weight:800;font-size:clamp(32px,4vw,44px);line-height:1;text-transform:uppercase;">{{ resultsTitle }}</h1>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:6px;">
+<sc-for list="{{ filters }}" as="f" hint-placeholder-count="4"><button onClick="{{ f.pick }}" style="height:44px;padding:0 14px;border-radius:10px;border:{{ f.border }};background:{{ f.bg }};color:{{ f.fg }};font-family:'Barlow Condensed';font-weight:800;font-size:16px;letter-spacing:.06em;cursor:pointer;display:flex;align-items:center;gap:8px;">{{ f.label }}<span style="font-family:Inter;font-weight:600;font-size:13px;opacity:.75;">{{ f.count }}</span></button></sc-for>
+</div>
+</div>
+<div style="background:#FFFFFF;border:1px solid #DEDFDB;border-radius:8px;overflow:hidden;">
+<sc-if value="{{ desktop }}" hint-placeholder-val="{{ true }}">
+<div style="display:grid;grid-template-columns:minmax(0,2.4fr) minmax(0,1fr) minmax(0,1fr) 80px 130px 110px;gap:16px;padding:14px 20px;background:#16181B;color:#F7F7F5;font-family:'Barlow Condensed';font-weight:700;font-size:15px;letter-spacing:.1em;">
+<span>CARRIER</span><span>DOT</span><span>MC</span><span>TRUCKS</span><span>AUTHORITY</span><span style="text-align:right;">HEALTH</span>
+</div>
+</sc-if>
+<sc-for list="{{ results }}" as="c" hint-placeholder-count="6">
+<button onClick="{{ c.open }}" style="width:100%;display:grid;grid-template-columns:{{ rowCols }};gap:{{ rowGap }};align-items:center;padding:18px 20px;border:0;border-top:{{ c.border }};background:#FFFFFF;text-align:left;cursor:pointer;font-family:Inter;color:#16181B;font-variant-numeric:tabular-nums;" style-hover="background:#F7F7F5;">
+<span style="display:flex;flex-direction:column;gap:3px;grid-column:{{ nameSpan }};"><span style="font-weight:700;font-size:17px;">{{ c.name }}</span><span style="font-size:14px;color:#6B7280;">{{ c.city }}, {{ c.st }}{{ c.mobileMeta }}</span></span>
+<sc-if value="{{ desktop }}" hint-placeholder-val="{{ true }}"><span style="font-size:15px;">{{ c.dot }}</span><span style="font-size:15px;">{{ c.mc }}</span><span style="font-size:15px;">{{ c.trucks }}</span></sc-if>
+<span><span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 10px;border-radius:8px;background:{{ c.bbg }};color:{{ c.bfg }};font-family:'Barlow Condensed';font-weight:800;font-size:15px;letter-spacing:.08em;"><span style="width:8px;height:8px;border-radius:50%;background:{{ c.bdot }};"></span>{{ c.status }}</span></span>
+<span style="display:flex;justify-content:flex-end;"><span style="display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 6px 0 4px;border-radius:10px;border:1.5px solid #DEDFDB;"><span style="width:28px;height:28px;border-radius:50%;background:{{ c.hc }};color:{{ c.hfg }};display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed';font-weight:800;font-size:16px;">{{ c.score }}</span><span style="font-family:'Barlow Condensed';font-weight:800;font-size:14px;letter-spacing:.06em;color:{{ c.ht }};padding-right:4px;">{{ c.label }}</span></span></span>
+</button>
+</sc-for>
+<sc-if value="{{ noResults }}"><div style="padding:40px 20px;text-align:center;font-size:16px;color:#4B5058;">No carriers found. Try a DOT number, MC number or part of the company name.</div></sc-if>
+</div>
+<div style="font-size:13px;color:#6B7280;">Sample data. Real results come from FMCSA records, updated every 24 hours.</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isProfile }}">
+<section style="background:#16181B;color:#F7F7F5;">
+<div style="max-width:1280px;margin:0 auto;padding:24px clamp(16px,4vw,40px) 40px;display:flex;flex-direction:column;gap:20px;">
+<button onClick="{{ goResults }}" style="align-self:flex-start;min-height:44px;padding:0;border:0;background:transparent;color:#F2A900;font-family:'Barlow Condensed';font-weight:700;font-size:17px;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;">← Back to results</button>
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:28px;">
+<div style="display:flex;flex-direction:column;gap:12px;min-width:0;flex:1 1 420px;">
+<div style="display:flex;flex-wrap:wrap;gap:8px;">
+<span style="display:inline-flex;align-items:center;gap:7px;height:30px;padding:0 12px;border-radius:8px;background:{{ p.bbg }};color:{{ p.bfg }};font-family:'Barlow Condensed';font-weight:800;font-size:16px;letter-spacing:.08em;"><span style="width:8px;height:8px;border-radius:50%;background:{{ p.bdot }};"></span>{{ p.status }}</span>
+<span style="display:inline-flex;align-items:center;height:30px;padding:0 12px;border-radius:8px;border:1px solid rgba(247,247,245,.35);font-family:'Barlow Condensed';font-weight:700;font-size:16px;letter-spacing:.08em;">{{ p.opType }}</span>
+<sc-if value="{{ p.isNew }}"><span style="display:inline-flex;align-items:center;height:30px;padding:0 12px;border-radius:8px;background:#F2A900;color:#16181B;font-family:'Barlow Condensed';font-weight:800;font-size:16px;letter-spacing:.08em;">NEW MC</span></sc-if>
+</div>
+<h1 style="margin:0;font-family:'Barlow Condensed';font-weight:800;font-size:clamp(40px,6vw,72px);line-height:.92;text-transform:uppercase;">{{ p.name }}</h1>
+<div style="display:flex;flex-wrap:wrap;gap:6px 20px;font-size:16px;color:#D4D6DA;font-variant-numeric:tabular-nums;"><span>DOT <b style="color:#F7F7F5;">{{ p.dot }}</b></span><span><b style="color:#F7F7F5;">{{ p.mc }}</b></span><span>{{ p.city }}, {{ p.st }}</span></div>
+</div>
+<div style="display:flex;align-items:center;gap:18px;background:#1F2226;border-radius:10px;padding:18px 22px;box-shadow:inset 0 0 0 1.5px rgba(247,247,245,.14);">
+<div style="width:112px;height:112px;border-radius:50%;background:conic-gradient({{ p.hc }} {{ p.pct }}, #33373D 0);display:flex;align-items:center;justify-content:center;flex:none;">
+<div style="width:90px;height:90px;border-radius:50%;background:#1F2226;display:flex;flex-direction:column;align-items:center;justify-content:center;"><span style="font-family:'Barlow Condensed';font-weight:800;font-size:44px;line-height:1;">{{ p.score }}</span><span style="font-size:11px;font-weight:600;color:#AEB2B8;letter-spacing:.08em;">/100</span></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:4px;"><span style="font-family:'Barlow Condensed';font-weight:700;font-size:14px;letter-spacing:.14em;color:#AEB2B8;">HEALTH SCORE</span><span style="font-family:'Barlow Condensed';font-weight:800;font-size:30px;line-height:1;color:{{ p.hdark }};">{{ p.label }}</span><span style="font-size:13px;color:#AEB2B8;">Updated today</span></div>
+</div>
+</div>
+</div>
+</section>
+<section style="background:#F2A900;">
+<div style="max-width:1280px;margin:0 auto;padding:18px clamp(16px,4vw,40px);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 24px;">
+<div style="display:flex;flex-direction:column;gap:2px;"><span style="font-family:'Barlow Condensed';font-weight:800;font-size:26px;line-height:1.05;text-transform:uppercase;color:#16181B;">Is this your company? Claim your profile.</span><span style="font-size:15px;color:#16181B;">Add your phone and lanes, get compliance alerts, and show brokers you are real. Free.</span></div>
+<a href="#" style="height:52px;display:flex;align-items:center;padding:0 24px;border-radius:12px;background:#16181B;color:#F7F7F5;text-decoration:none;font-family:'Barlow Condensed';font-weight:800;font-size:20px;letter-spacing:.05em;text-transform:uppercase;" style-hover="background:#0E5C3A;color:#F7F7F5;">Claim profile</a>
+</div>
+</section>
+<section style="max-width:1280px;width:100%;margin:0 auto;padding:32px clamp(16px,4vw,40px) 80px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:20px;align-items:start;">
+<div style="grid-column:{{ mainSpan }};display:flex;flex-direction:column;gap:20px;min-width:0;">
+<div style="background:#FFFFFF;border:1px solid #DEDFDB;border-radius:8px;padding:22px;display:flex;flex-direction:column;gap:16px;">
+<h2 style="margin:0;font-family:'Barlow Condensed';font-weight:800;font-size:28px;text-transform:uppercase;">Score breakdown</h2>
+<sc-for list="{{ p.breakdown }}" as="b" hint-placeholder-count="4">
+<div style="display:flex;flex-direction:column;gap:6px;">
+<div style="display:flex;justify-content:space-between;gap:12px;font-size:15px;"><span style="font-weight:600;">{{ b.t }}</span><span style="font-variant-numeric:tabular-nums;color:#4B5058;"><b style="color:#16181B;">{{ b.v }}</b> / {{ b.max }}</span></div>
+<div style="height:10px;border-radius:5px;background:#ECEDEA;overflow:hidden;"><div style="height:100%;width:{{ b.pct }};background:{{ b.c }};border-radius:5px;"></div></div>
+<div style="font-size:14px;color:#6B7280;">{{ b.note }}</div>
+</div>
+</sc-for>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:20px;">
+<sc-for list="{{ p.panels }}" as="pn" hint-placeholder-count="3">
+<div style="background:#FFFFFF;border:1px solid #DEDFDB;border-radius:8px;overflow:hidden;">
+<div style="padding:16px 20px;font-family:'Barlow Condensed';font-weight:800;font-size:22px;text-transform:uppercase;border-bottom:1px solid #ECEDEA;">{{ pn.t }}</div>
+<sc-for list="{{ pn.rows }}" as="r">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 20px;border-top:{{ r.border }};font-size:15px;font-variant-numeric:tabular-nums;"><span style="color:#4B5058;">{{ r.k }}</span><span style="font-weight:600;text-align:right;color:{{ r.c }};">{{ r.v }}</span></div>
+</sc-for>
+</div>
+</sc-for>
+</div>
+</div>
+<aside style="position:sticky;top:92px;display:flex;flex-direction:column;gap:16px;">
+<div style="background:#0E5C3A;border-radius:8px;padding:0;">
+<div style="border:0;border-radius:8px;padding:24px 22px;display:flex;flex-direction:column;gap:14px;color:#F7F7F5;">
+<div style="font-family:'Barlow Condensed';font-weight:700;font-size:15px;letter-spacing:.14em;color:#F2A900;">{{ cta.eyebrow }}</div>
+<div style="font-family:'Barlow Condensed';font-weight:800;font-size:34px;line-height:.95;text-transform:uppercase;">{{ cta.title }}</div>
+<div style="font-size:15px;line-height:1.5;color:#E3EAE6;">{{ cta.body }}</div>
+<a href="{{ cta.href }}" style="height:56px;display:flex;align-items:center;justify-content:center;border-radius:12px;background:#F2A900;color:#16181B;text-decoration:none;font-family:'Barlow Condensed';font-weight:800;font-size:20px;letter-spacing:.05em;text-transform:uppercase;" style-hover="background:#FFBC1F;color:#16181B;">{{ cta.btn }}</a>
+</div>
+</div>
+<div style="background:#FFFFFF;border:1.5px solid #DEDFDB;border-radius:8px;padding:20px;display:flex;flex-direction:column;gap:12px;">
+<div style="font-family:'Barlow Condensed';font-weight:800;font-size:22px;text-transform:uppercase;">Watch this carrier</div>
+<div style="font-size:14px;line-height:1.5;color:#4B5058;">Get a text if authority, insurance or safety status changes.</div>
+<a href="#" style="height:48px;display:flex;align-items:center;justify-content:center;border-radius:10px;border:2px solid #16181B;color:#16181B;text-decoration:none;font-family:'Barlow Condensed';font-weight:800;font-size:18px;letter-spacing:.05em;text-transform:uppercase;" style-hover="background:#16181B;color:#F7F7F5;">Set alert</a>
+</div>
+</aside>
+</section>
+</sc-if>
+
+<div style="margin-top:auto;"><dc-import name="SiteFooter" hint-size="100%,360px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;view&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;search&quot;,&quot;results&quot;,&quot;profile&quot;],&quot;default&quot;:&quot;search&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { w: typeof window !== 'undefined' ? window.innerWidth : 1280, view: this.props.view ?? 'search', q: '', mode: 'All', filter: 'All', sel: 1 };
+  componentDidMount() { this.onR = () => this.setState({ w: window.innerWidth }); window.addEventListener('resize', this.onR); this.onR(); }
+  componentWillUnmount() { window.removeEventListener('resize', this.onR); }
+  componentDidUpdate(pp) { if (pp.view !== this.props.view && this.props.view) this.setState({ view: this.props.view }); }
+  data() {
+    return [
+      { name: 'Carpathian Freight LLC', city: 'Des Plaines', st: 'IL', dot: '3412897', mc: 'MC 1182044', trucks: 4, drivers: 5, status: 'ACTIVE', score: 91, age: 38, ins: 'ok', insDate: 'Mar 14, 2027', insp: 22, oosV: 9.1, oosD: 2.0, crashes: 0, equip: 'Dry van, Reefer' },
+      { name: 'Moldova Express Inc', city: 'Sacramento', st: 'CA', dot: '3890122', mc: 'MC 1420876', trucks: 2, drivers: 2, status: 'WARNING', score: 68, age: 5, ins: 'soon', insDate: 'Oct 12, 2026', insp: 4, oosV: 25.0, oosD: 0, crashes: 0, equip: 'Reefer' },
+      { name: 'Volga Line Transport', city: 'Houston', st: 'TX', dot: '2987410', mc: 'MC 1003318', trucks: 7, drivers: 8, status: 'ACTIVE', score: 84, age: 61, ins: 'ok', insDate: 'Jan 02, 2027', insp: 41, oosV: 17.1, oosD: 2.4, crashes: 1, equip: 'Dry van, Flatbed' },
+      { name: 'Danube Road Corp', city: 'Charlotte', st: 'NC', dot: '3561209', mc: 'MC 1256910', trucks: 1, drivers: 1, status: 'INACTIVE', score: 37, age: 26, ins: 'none', insDate: 'Lapsed Jul 30, 2026', insp: 9, oosV: 33.3, oosD: 11.1, crashes: 1, equip: 'Dry van' },
+      { name: 'Iron Horse Hauling', city: 'Phoenix', st: 'AZ', dot: '4012653', mc: 'MC 1511240', trucks: 3, drivers: 3, status: 'ACTIVE', score: 79, age: 14, ins: 'ok', insDate: 'Feb 20, 2027', insp: 11, oosV: 18.2, oosD: 0, crashes: 0, equip: 'Power only' },
+      { name: 'Lone Star Freightways', city: 'Dallas', st: 'TX', dot: '3702281', mc: 'MC 1333590', trucks: 9, drivers: 11, status: 'ACTIVE', score: 88, age: 44, ins: 'ok', insDate: 'May 08, 2027', insp: 57, oosV: 12.3, oosD: 1.8, crashes: 1, equip: 'Reefer, Dry van' },
+      { name: 'Dniester Freight LLC', city: 'Jacksonville', st: 'FL', dot: '4120077', mc: 'MC 1560932', trucks: 1, drivers: 1, status: 'ACTIVE', score: 72, age: 3, ins: 'ok', insDate: 'Jun 30, 2027', insp: 1, oosV: 0, oosD: 0, crashes: 0, equip: 'Box truck' },
+      { name: 'Red River Freight Co', city: 'Tulsa', st: 'OK', dot: '3198845', mc: 'MC 1102467', trucks: 2, drivers: 2, status: 'WARNING', score: 58, age: 52, ins: 'soon', insDate: 'Oct 04, 2026', insp: 15, oosV: 26.7, oosD: 6.7, crashes: 2, equip: 'Flatbed' },
+    ];
+  }
+  renderVals() {
+    const S = this.state, mobile = S.w < 760, all = this.data();
+    const hc = s => s >= 80 ? '#0E5C3A' : s >= 60 ? '#F2A900' : '#B42318';
+    const hfg = s => s >= 60 && s < 80 ? '#16181B' : '#F7F7F5';
+    const ht = s => s >= 80 ? '#0E5C3A' : s >= 60 ? '#7A5300' : '#B42318';
+    const hl = s => s >= 80 ? 'GOOD' : s >= 60 ? 'WATCH' : 'RISK';
+    const B = { ACTIVE: ['#E2F0E8', '#0E5C3A', '#0E5C3A'], INACTIVE: ['#FBE9E7', '#B42318', '#B42318'], WARNING: ['#FFF1CC', '#7A5300', '#F2A900'] };
+    const dec = (c, i) => ({ ...c, bbg: B[c.status][0], bfg: B[c.status][1], bdot: B[c.status][2], hc: hc(c.score), hfg: hfg(c.score), ht: ht(c.score), label: hl(c.score) });
+    const q = S.q.trim().toLowerCase().replace(/^(dot|mc)\s*/, '');
+    const matched = all.map((c, i) => ({ ...c, i })).filter(c => !q || c.name.toLowerCase().includes(q) || c.dot.includes(q) || c.mc.toLowerCase().includes(q) || c.city.toLowerCase().includes(q));
+    const shown = matched.filter(c => S.filter === 'All' || c.status === S.filter);
+    const go = view => this.setState({ view });
+    const submit = e => { e && e.preventDefault(); this.setState({ view: 'results', filter: 'All' }); };
+    const c = dec(all[S.sel]);
+    const age = c.age < 12 ? c.age + ' months' : Math.floor(c.age / 12) + ' yr ' + (c.age % 12) + ' mo';
+    const nat = { v: 22.3, d: 6.7 };
+    const bd = [
+      { t: 'Authority', max: 30, v: c.status === 'INACTIVE' ? 0 : c.age < 6 ? 20 : 30, note: c.status === 'INACTIVE' ? 'Operating authority is not active.' : c.age < 6 ? 'Active, but under 6 months old.' : 'Active common authority.' },
+      { t: 'Insurance', max: 25, v: c.ins === 'ok' ? 25 : c.ins === 'soon' ? 12 : 0, note: c.ins === 'ok' ? 'On file, BIPD $750,000+.' : c.ins === 'soon' ? 'Expires within 30 days.' : 'No active insurance on file.' },
+      { t: 'Inspections', max: 30, v: Math.max(0, Math.round(30 - c.oosV * .6 - c.oosD)), note: c.insp < 3 ? 'Too few inspections to judge fully.' : `Vehicle OOS ${c.oosV}% vs ${nat.v}% national.` },
+      { t: 'Crashes', max: 15, v: Math.max(0, 15 - c.crashes * 5), note: c.crashes ? `${c.crashes} reportable in 24 months.` : 'No reportable crashes in 24 months.' },
+    ].map(b => ({ ...b, pct: Math.round(b.v / b.max * 100) + '%', c: hc(b.v / b.max * 100) }));
+    const rows = arr => arr.map(([k, v, col], i) => ({ k, v, c: col || '#16181B', border: i ? '1px solid #ECEDEA' : '0' }));
+    let cta;
+    if (c.status === 'INACTIVE') cta = { eyebrow: 'AUTHORITY INACTIVE', title: 'Get back on the road', body: 'Reinstating an MC takes insurance filing, BOC-3 and the right forms. Our checklist walks you through every step.', btn: 'Open reinstate checklist', href: '#' };
+    else if (c.age < 6) cta = { eyebrow: `MC IS ${c.age} MONTHS OLD`, title: 'Starter MC dispatch', body: 'Many brokers will not book a new MC. We know the ones that will, and we send your setup packets for you.', btn: 'See Starter MC', href: 'Dispatch.dc.html' };
+    else if (c.ins === 'soon') cta = { eyebrow: 'INSURANCE EXPIRES SOON', title: 'Do not get caught', body: 'Free compliance alerts by text before insurance, UCR or authority dates. Takes 30 seconds to set up.', btn: 'Turn on alerts', href: '#' };
+    else if (c.trucks >= 3) cta = { eyebrow: `${c.trucks} TRUCKS · STRONG SCORE`, title: 'Need drivers?', body: 'Post a driver job and reach CDL drivers who speak English or Russian. We check CDL and MVR.', btn: 'Hire drivers', href: 'Hire Drivers.dc.html' };
+    else cta = { eyebrow: 'OWNER-OPERATOR', title: 'Keep more of every load', body: 'Flat weekly dispatch, no percentage. 24/7 on your time zone.', btn: 'See dispatch', href: 'Dispatch.dc.html' };
+    const counts = k => matched.filter(x => k === 'All' || x.status === k).length;
+    return {
+      desktop: !mobile, isSearch: S.view === 'search', isResults: S.view === 'results', isProfile: S.view === 'profile',
+      searchDir: mobile ? 'column' : 'row', q: S.q, setQ: e => this.setState({ q: e.target.value }), submit,
+      placeholder: { All: 'Search any carrier by DOT, MC or name', DOT: 'DOT number, e.g. 3412897', MC: 'MC number, e.g. 1182044', Name: 'Company name' }[S.mode],
+      modes: ['All', 'DOT', 'MC', 'Name'].map(m => ({ label: m === 'All' ? 'ALL' : m === 'Name' ? 'NAME' : m, bg: S.mode === m ? '#F2A900' : 'transparent', fg: S.mode === m ? '#16181B' : '#F7F7F5', border: S.mode === m ? '0' : '1px solid rgba(247,247,245,.3)', pick: () => this.setState({ mode: m }) })),
+      recent: [['DOT 3412897', '3412897'], ['MC 1420876', '1420876'], ['Freight', 'freight']].map(([label, v]) => ({ label, go: () => this.setState({ q: v, view: 'results', filter: 'All' }) })),
+      factors: [
+        { t: 'Authority', w: '30 pts', d: 'Is the MC active, and how long has it been active?' },
+        { t: 'Insurance', w: '25 pts', d: 'Liability and cargo on file, and how soon it expires.' },
+        { t: 'Inspections', w: '30 pts', d: 'Out-of-service rates compared to the national average.' },
+        { t: 'Crashes', w: '15 pts', d: 'Reportable crashes in the last 24 months.' },
+      ],
+      states: [['Texas', '48,210', 'State Texas.dc.html'], ['California', '41,905'], ['Florida', '29,340'], ['Illinois', '22,118'], ['Georgia', '17,602'], ['New Jersey', '14,977'], ['Ohio', '13,450'], ['Pennsylvania', '12,806']].map(([name, count, href]) => ({ name, count, href: href || '#' })),
+      goSearch: () => go('search'), goResults: () => go('results'),
+      resultsTitle: `${shown.length} carrier${shown.length === 1 ? '' : 's'}${S.q ? ` for “${S.q}”` : ''}`,
+      filters: ['All', 'ACTIVE', 'WARNING', 'INACTIVE'].map(f => ({ label: f === 'All' ? 'ALL' : f, count: counts(f), bg: S.filter === f ? '#16181B' : '#FFFFFF', fg: S.filter === f ? '#F7F7F5' : '#16181B', border: S.filter === f ? '1.5px solid #16181B' : '1.5px solid #DEDFDB', pick: () => this.setState({ filter: f }) })),
+      rowCols: mobile ? 'minmax(0,1fr) auto' : 'minmax(0,2.4fr) minmax(0,1fr) minmax(0,1fr) 80px 130px 110px',
+      rowGap: mobile ? '10px 12px' : '16px', nameSpan: mobile ? '1 / -1' : 'auto',
+      results: shown.map((x, k) => ({ ...dec(x), border: k ? '1px solid #ECEDEA' : '0', mobileMeta: mobile ? ` · DOT ${x.dot} · ${x.trucks} trucks` : '', open: () => this.setState({ sel: x.i, view: 'profile' }) })),
+      noResults: shown.length === 0,
+      mainSpan: S.w >= 1000 ? 'span 2' : 'auto',
+      p: { ...c, pct: c.score + '%', hdark: c.score >= 80 ? '#5FD39B' : c.score >= 60 ? '#F2A900' : '#FF7A6B', isNew: c.age < 6, opType: 'INTERSTATE · FOR-HIRE', breakdown: bd,
+        panels: [
+          { t: 'Authority & insurance', rows: rows([['Status', c.status, B[c.status][1]], ['Authority age', age], ['BIPD insurance', c.ins === 'none' ? 'None on file' : '$750,000', c.ins === 'none' ? '#B42318' : null], ['Expires', c.insDate, c.ins === 'ok' ? null : c.ins === 'soon' ? '#7A5300' : '#B42318'], ['BOC-3', 'On file']]) },
+          { t: 'Safety · 24 months', rows: rows([['Inspections', c.insp], ['Vehicle OOS', `${c.oosV}%  (nat. ${nat.v}%)`, c.oosV > nat.v ? '#B42318' : '#0E5C3A'], ['Driver OOS', `${c.oosD}%  (nat. ${nat.d}%)`, c.oosD > nat.d ? '#B42318' : '#0E5C3A'], ['Crashes', c.crashes], ['Safety rating', 'Not rated']]) },
+          { t: 'Fleet & operation', rows: rows([['Power units', c.trucks], ['Drivers', c.drivers], ['Equipment', c.equip], ['Cargo', 'General freight'], ['Home base', `${c.city}, ${c.st}`]]) },
+        ] },
+      cta,
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><meta name="design_doc_mode" content="canvas"><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet"><style>body{margin:0;background:#E9E9E5;font-family:Inter,sans-serif;color:#16181B}a{color:#0E5C3A}a:hover{color:#16181B}</style></helmet>
+<section style="padding:64px;display:flex;gap:64px;align-items:flex-start;">
+<div style="display:flex;flex-direction:column;gap:14px;">
+<div style="font-family:'Barlow Condensed';font-weight:800;font-size:28px;text-transform:uppercase;">Desktop · 1440</div>
+<iframe ref="{{ dRef }}" src="Homepage.dc.html" style="width:1440px;height:{{ dH }}px;border:0;background:#F7F7F5;border-radius:12px;box-shadow:0 2px 0 rgba(0,0,0,.06);"></iframe>
+</div>
+<div style="display:flex;flex-direction:column;gap:14px;">
+<div style="font-family:'Barlow Condensed';font-weight:800;font-size:28px;text-transform:uppercase;">Mobile · 390</div>
+<iframe ref="{{ mRef }}" src="Homepage.dc.html" style="width:390px;height:{{ mH }}px;border:0;background:#F7F7F5;border-radius:28px;box-shadow:0 0 0 10px #16181B;"></iframe>
+</div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { dH: 900, mH: 800 };
+  dRef = React.createRef(); mRef = React.createRef();
+  componentDidMount() {
+    this.t = setInterval(() => {
+      const h = r => { try { return r.current?.contentDocument?.documentElement?.scrollHeight || 0; } catch (e) { return 0; } };
+      const d = h(this.dRef), m = h(this.mRef);
+      if ((d && d !== this.state.dH) || (m && m !== this.state.mH)) this.setState({ dH: d || this.state.dH, mH: m || this.state.mH });
+    }, 800);
+  }
+  componentWillUnmount() { clearInterval(this.t); }
+  renderVals() { return { dRef: this.dRef, mRef: this.mRef, dH: this.state.dH, mH: this.state.mH }; }
+}
+</script>
+</body>
+</html>

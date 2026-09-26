@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><meta name="design_doc_mode" content="canvas"><link href="https://fonts.googleapis.com/css2?family=Overpass:wght@800;900&family=Barlow+Condensed:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"><style>body{margin:0;background:#E9EAE6;font-family:Inter,sans-serif;color:#16181B}a{color:#0E5C3A}a:hover{color:#16181B}</style></helmet>
+<section style="padding:48px 48px 0;display:flex;flex-direction:column;gap:24px;">
+<div style="display:flex;flex-direction:column;gap:6px;max-width:760px;">
+<div style="font-family:'Barlow Condensed';font-weight:800;font-size:32px;text-transform:uppercase;">2a vs 2d in real use</div>
+<div style="font-size:15px;line-height:1.5;color:#3F444B;">The same places the logo has to work: site header, mobile header, browser tab, and a truck door decal. <a href="#3c">3c</a> combines them: the 2a panel as the logo and the 2d shield as the icon.</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(460px,1fr));gap:24px;">
+<sc-for list="{{ compare }}" as="c" hint-placeholder-count="3">
+<div id="{{ c.id }}" style="background:#FFFFFF;border-radius:10px;padding:24px;display:flex;flex-direction:column;gap:16px;">
+<div style="display:flex;align-items:center;gap:10px;"><span style="background:#16181B;color:#F2A900;font-family:'Barlow Condensed';font-weight:800;font-size:16px;padding:3px 8px;border-radius:4px;">{{ c.id }}</span><span style="font-family:'Barlow Condensed';font-weight:800;font-size:22px;text-transform:uppercase;">{{ c.name }}</span></div>
+<div style="background:#16181B;border-radius:8px;height:64px;padding:0 18px;display:flex;align-items:center;gap:18px;">
+<div style="font-size:26px;line-height:1;font-family:Overpass,sans-serif;display:flex;">
+<sc-if value="{{ c.panel }}">
+<div style="display:inline-flex;background:#0E5C3A;border-radius:.16em;padding:.07em;"><div style="border:.045em solid #F7F7F5;border-radius:.11em;display:flex;align-items:stretch;position:relative;"><span style="position:absolute;left:.12em;top:.12em;width:.07em;height:.07em;border-radius:50%;background:rgba(247,247,245,.55);"></span><span style="position:absolute;left:.12em;bottom:.12em;width:.07em;height:.07em;border-radius:50%;background:rgba(247,247,245,.55);"></span><span style="position:absolute;right:.12em;top:.12em;width:.07em;height:.07em;border-radius:50%;background:rgba(247,247,245,.55);"></span><span style="position:absolute;right:.12em;bottom:.12em;width:.07em;height:.07em;border-radius:50%;background:rgba(247,247,245,.55);"></span><span style="padding:.2em .3em .12em .44em;color:#F7F7F5;font-weight:800;">TRUCKER</span><span style="border-left:.045em solid #F7F7F5;padding:.2em .44em .12em .3em;color:#F2A900;font-weight:900;">HQ</span></div></div>
+</sc-if>
+<sc-if value="{{ c.shield }}">
+<div style="display:inline-flex;align-items:center;gap:.24em;"><span style="font-weight:900;color:#F7F7F5;padding-top:.08em;">TRUCKER</span><svg viewBox="0 0 100 108" style="width:1.35em;height:1.46em;"><defs><clipPath id="cmpA{{ $index }}"><path d="M8 6 C30 14 70 14 92 6 C100 40 96 78 50 104 C4 78 0 40 8 6 Z"></path></clipPath></defs><path d="M8 6 C30 14 70 14 92 6 C100 40 96 78 50 104 C4 78 0 40 8 6 Z" fill="#0E5C3A"></path><rect x="0" y="0" width="100" height="32" fill="#F2A900" clip-path="url(#cmpA{{ $index }})"></rect><path d="M8 6 C30 14 70 14 92 6 C100 40 96 78 50 104 C4 78 0 40 8 6 Z" fill="none" stroke="#F7F7F5" stroke-width="5"></path><text x="50" y="72" text-anchor="middle" font-family="Overpass" font-weight="900" font-size="34" fill="#F7F7F5">HQ</text></svg></div>
+</sc-if>
+</div>
+<span style="color:#C9CBCF;font-size:14px;">Dispatch</span><span style="color:#C9CBCF;font-size:14px;">Jobs</span><span style="margin-left:auto;background:#F2A900;color:#16181B;font-family:'Barlow Condensed';font-weight:800;font-size:15px;padding:8px 14px;border-radius:6px;text-transform:uppercase;">Get started</span>
+</div>
+<div style="display:flex;gap:16px;align-items:stretch;flex-wrap:wrap;">
+<div style="width:200px;background:#16181B;border-radius:8px;height:52px;padding:0 12px;display:flex;align-items:center;justify-content:space-between;">
+<div style="font-size:19px;line-height:1;font-family:Overpass,sans-serif;display:flex;">
+<sc-if value="{{ c.panel }}"><div style="display:inline-flex;background:#0E5C3A;border-radius:.16em;padding:.07em;"><div style="border:.045em solid #F7F7F5;border-radius:.11em;display:flex;position:relative;"><span style="position:absolute;left:.12em;top:.12em;width:.07em;height:.07em;border-radius:50%;background:rgba(247,247,245,.55);"></span><span style="position:absolute;left:.12em;bottom:.12em;width:.07em;height:.07em;border-radius:50%;background:rgba(247,247,245,.55);"></span><span style="position:absolute;right:.12em;top:.12em;width:.07em;height:.07em;border-radius:50%;background:rgba(247,247,245,.55);"></span><span style="position:absolute;right:.12em;bottom:.12em;width:.07em;height:.07em;border-radius:50%;background:rgba(247,247,245,.55);"></span><span style="padding:.2em .3em .12em .44em;color:#F7F7F5;font-weight:800;">TRUCKER</span><span style="border-left:.045em solid #F7F7F5;padding:.2em .44em .12em .3em;color:#F2A900;font-weight:900;">HQ</span></div></div></sc-if>
+<sc-if value="{{ c.shield }}"><div style="display:inline-flex;align-items:center;gap:.24em;"><span style="font-weight:900;color:#F7F7F5;padding-top:.08em;">TRUCKER</span><svg viewBox="0 0 100 108" style="width:1.35em;height:1.46em;"><defs><clipPath id="cmpB{{ $index }}"><path d="M8 6 C30 14 70 14 92 6 C100 40 96 78 50 104 C4 78 0 40 8 6 Z"></path></clipPath></defs><path d="M8 6 C30 14 70 14 92 6 C100 40 96 78 50 104 C4 78 0 40 8 6 Z" fill="#0E5C3A"></path><rect x="0" y="0" width="100" height="32" fill="#F2A900" clip-path="url(#cmpB{{ $index }})"></rect><path d="M8 6 C30 14 70 14 92 6 C100 40 96 78 50 104 C4 78 0 40 8 6 Z" fill="none" stroke="#F7F7F5" stroke-width="5"></path><text x="50" y="72" text-anchor="middle" font-family="Overpass" font-weight="900" font-size="34" fill="#F7F7F5">HQ</text></svg></div></sc-if>
+</div>
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F7F7F5" stroke-width="2.5" stroke-linecap="round"><path d="M4 6h16"></path><path d="M4 12h16"></path><path d="M4 18h16"></path></svg>
+</div>
+<div style="flex:1;min-width:180px;background:#DADBD7;border-radius:8px 8px 0 0;padding:8px 8px 0;display:flex;align-items:flex-end;">
+<div style="background:#FFFFFF;border-radius:6px 6px 0 0;padding:8px 12px;display:flex;align-items:center;gap:8px;font-size:13px;color:#16181B;">
+<sc-if value="{{ c.iconPanel }}"><div style="width:18px;height:18px;box-sizing:border-box;background:#0E5C3A;border-radius:4px;padding:1.5px;display:flex;"><div style="flex:1;border:1px solid #F7F7F5;border-radius:3px;display:flex;align-items:center;justify-content:center;font-family:Overpass;font-weight:900;font-size:7.5px;color:#F2A900;padding-top:1px;">HQ</div></div></sc-if>
+<sc-if value="{{ c.iconShield }}"><svg viewBox="0 0 100 108" style="width:17px;height:18px;"><path d="M8 6 C30 14 70 14 92 6 C100 40 96 78 50 104 C4 78 0 40 8 6 Z" fill="#0E5C3A" stroke="#0E5C3A" stroke-width="4"></path><path d="M8 6 C30 14 70 14 92 6 L92 30 L8 30 Z" fill="#F2A900"></path><text x="50" y="80" text-anchor="middle" font-family="Overpass" font-weight="900" font-size="40" fill="#F7F7F5">HQ</text></svg></sc-if>
+Trucker HQ · Dispatch
+</div>
+</div>
+</div>
+<div style="background:#F7F7F5;border-radius:8px;padding:28px;display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap;">
+<div style="font-size:44px;line-height:1;font-family:Overpass,sans-serif;display:flex;">
+<sc-if value="{{ c.panel }}"><div style="display:inline-flex;background:#0E5C3A;border-radius:.16em;padding:.07em;"><div style="border:.045em solid #F7F7F5;border-radius:.11em;display:flex;position:relative;"><span style="position:absolute;left:.12em;top:.12em;width:.07em;height:.07em;border-radius:50%;background:rgba(247,247,245,.55);"></span><span style="position:absolute;left:.12em;bottom:.12em;width:.07em;height:.07em;border-radius:50%;background:rgba(247,247,245,.55);"></span><span style="position:absolute;right:.12em;top:.12em;width:.07em;height:.07em;border-radius:50%;background:rgba(247,247,245,.55);"></span><span style="position:absolute;right:.12em;bottom:.12em;width:.07em;height:.07em;border-radius:50%;background:rgba(247,247,245,.55);"></span><span style="padding:.2em .3em .12em .44em;color:#F7F7F5;font-weight:800;">TRUCKER</span><span style="border-left:.045em solid #F7F7F5;padding:.2em .44em .12em .3em;color:#F2A900;font-weight:900;">HQ</span></div></div></sc-if>
+<sc-if value="{{ c.shield }}"><div style="display:inline-flex;align-items:center;gap:.24em;"><span style="font-weight:900;color:#16181B;padding-top:.08em;">TRUCKER</span><svg viewBox="0 0 100 108" style="width:1.35em;height:1.46em;"><defs><clipPath id="cmpC{{ $index }}"><path d="M8 6 C30 14 70 14 92 6 C100 40 96 78 50 104 C4 78 0 40 8 6 Z"></path></clipPath></defs><path d="M8 6 C30 14 70 14 92 6 C100 40 96 78 50 104 C4 78 0 40 8 6 Z" fill="#0E5C3A"></path><rect x="0" y="0" width="100" height="32" fill="#F2A900" clip-path="url(#cmpC{{ $index }})"></rect><path d="M8 6 C30 14 70 14 92 6 C100 40 96 78 50 104 C4 78 0 40 8 6 Z" fill="none" stroke="#F7F7F5" stroke-width="5"></path><text x="50" y="72" text-anchor="middle" font-family="Overpass" font-weight="900" font-size="34" fill="#F7F7F5">HQ</text></svg></div></sc-if>
+</div>
+<div style="display:flex;flex-direction:column;gap:2px;font-family:Overpass,sans-serif;font-weight:800;font-size:13px;color:#16181B;letter-spacing:.04em;"><span>USDOT XXXXXXX</span><span>MC XXXXXXX</span></div>
+</div>
+<div style="display:flex;align-items:center;gap:16px;">
+<sc-if value="{{ c.iconPanel }}"><div style="width:72px;height:72px;box-sizing:border-box;background:#0E5C3A;border-radius:14px;padding:5px;display:flex;"><div style="flex:1;border:3px solid #F7F7F5;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:Overpass;font-weight:900;font-size:30px;color:#F2A900;padding-top:4px;">HQ</div></div></sc-if>
+<sc-if value="{{ c.iconShield }}"><div style="width:72px;height:72px;border-radius:14px;background:#16181B;display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 100 108" style="width:52px;height:56px;"><defs><clipPath id="cmpI{{ $index }}"><path d="M8 6 C30 14 70 14 92 6 C100 40 96 78 50 104 C4 78 0 40 8 6 Z"></path></clipPath></defs><path d="M8 6 C30 14 70 14 92 6 C100 40 96 78 50 104 C4 78 0 40 8 6 Z" fill="#0E5C3A"></path><rect x="0" y="0" width="100" height="32" fill="#F2A900" clip-path="url(#cmpI{{ $index }})"></rect><path d="M8 6 C30 14 70 14 92 6 C100 40 96 78 50 104 C4 78 0 40 8 6 Z" fill="none" stroke="#F7F7F5" stroke-width="5"></path><text x="50" y="72" text-anchor="middle" font-family="Overpass" font-weight="900" font-size="34" fill="#F7F7F5">HQ</text></svg></div></sc-if>
+<span style="font-size:13px;color:#6B7280;">App icon, favicon, profile picture</span>
+</div>
+<div style="font-size:14px;line-height:1.5;color:#4B5058;">{{ c.note }}</div>
+</div>
+</sc-for>
+</div>
+</section>
+<section style="padding:48px;display:flex;flex-direction:column;gap:24px;">
+<div style="display:flex;flex-direction:column;gap:6px;max-width:760px;">
+<div style="font-family:'Barlow Condensed';font-weight:800;font-size:32px;text-transform:uppercase;">Logo refinements: road sign</div>
+<div style="font-size:15px;line-height:1.5;color:#3F444B;">Four ways to push the approved sign panel further. All use Overpass, a free font based on the lettering on US highway signs. Each shows the full logo, the header size on dark, and the app icon.</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(460px,1fr));gap:24px;">
+
+<div id="2a" style="background:#FFFFFF;border-radius:10px;padding:24px;display:flex;flex-direction:column;gap:16px;">
+<div style="display:flex;align-items:center;gap:10px;"><span style="background:#16181B;color:#F2A900;font-family:'Barlow Condensed';font-weight:800;font-size:16px;padding:3px 8px;border-radius:4px;">2a</span><span style="font-family:'Barlow Condensed';font-weight:800;font-size:22px;text-transform:uppercase;">Bolted panel</span></div>
+<div style="font-size:14px;line-height:1.5;color:#4B5058;">Closest to 1a. Corner bolts like a real sign, and HQ gets its own section divided by a white rule.</div>
+<sc-for list="{{ sizes }}" as="s" hint-placeholder-count="2">
+<div style="background:{{ s.bg }};border-radius:8px;padding:{{ s.pad }};display:flex;justify-content:center;">
+<div style="font-size:{{ s.fs }}px;line-height:1;font-family:Overpass,sans-serif;position:relative;display:inline-flex;background:#0E5C3A;border-radius:.16em;padding:.07em;">
+<div style="border:.045em solid #F7F7F5;border-radius:.11em;display:flex;align-items:stretch;position:relative;">
+<span style="position:absolute;left:.12em;top:.12em;width:.07em;height:.07em;border-radius:50%;background:rgba(247,247,245,.55);"></span>
+<span style="position:absolute;left:.12em;bottom:.12em;width:.07em;height:.07em;border-radius:50%;background:rgba(247,247,245,.55);"></span>
+<span style="position:absolute;right:.12em;top:.12em;width:.07em;height:.07em;border-radius:50%;background:rgba(247,247,245,.55);"></span>
+<span style="position:absolute;right:.12em;bottom:.12em;width:.07em;height:.07em;border-radius:50%;background:rgba(247,247,245,.55);"></span>
+<span style="padding:.2em .3em .12em .44em;color:#F7F7F5;font-weight:800;">TRUCKER</span>
+<span style="border-left:.045em solid #F7F7F5;padding:.2em .44em .12em .3em;color:#F2A900;font-weight:900;">HQ</span>
+</div>
+</div>
+</div>
+</sc-for>
+<div style="display:flex;align-items:center;gap:16px;">
+<div style="width:72px;height:72px;box-sizing:border-box;background:#0E5C3A;border-radius:14px;padding:5px;display:flex;"><div style="flex:1;border:3px solid #F7F7F5;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:Overpass;font-weight:900;font-size:30px;color:#F2A900;padding-top:4px;">HQ</div></div>
+<span style="font-size:13px;color:#6B7280;">App icon / favicon</span>
+</div>
+</div>
+
+<div id="2b" style="background:#FFFFFF;border-radius:10px;padding:24px;display:flex;flex-direction:column;gap:16px;">
+<div style="display:flex;align-items:center;gap:10px;"><span style="background:#16181B;color:#F2A900;font-family:'Barlow Condensed';font-weight:800;font-size:16px;padding:3px 8px;border-radius:4px;">2b</span><span style="font-family:'Barlow Condensed';font-weight:800;font-size:22px;text-transform:uppercase;">Exit tab</span></div>
+<div style="font-size:14px;line-height:1.5;color:#4B5058;">HQ sits on top like the exit number tab on an interstate sign. The most recognizable sign shape.</div>
+<sc-for list="{{ sizes }}" as="s" hint-placeholder-count="2">
+<div style="background:{{ s.bg }};border-radius:8px;padding:{{ s.pad }};display:flex;justify-content:center;">
+<div style="font-size:{{ s.fs }}px;line-height:1;font-family:Overpass,sans-serif;display:inline-flex;flex-direction:column;align-items:flex-end;">
+<div style="margin-right:.3em;background:#0E5C3A;border-radius:.14em .14em 0 0;padding:.06em .06em 0;display:flex;"><div style="background:#F2A900;color:#16181B;border-radius:.09em .09em 0 0;font-weight:900;font-size:.6em;padding:.16em .4em .06em;">HQ</div></div>
+<div style="background:#0E5C3A;border-radius:.16em;padding:.07em;display:flex;"><div style="border:.045em solid #F7F7F5;border-radius:.11em;padding:.2em .44em .12em;color:#F7F7F5;font-weight:800;">TRUCKER</div></div>
+</div>
+</div>
+</sc-for>
+<div style="display:flex;align-items:center;gap:16px;">
+<div style="width:72px;height:72px;box-sizing:border-box;background:#0E5C3A;border-radius:14px;overflow:hidden;display:flex;flex-direction:column;"><div style="height:26px;background:#F2A900;"></div><div style="flex:1;display:flex;align-items:center;justify-content:center;font-family:Overpass;font-weight:900;font-size:28px;color:#F7F7F5;padding-top:4px;">HQ</div></div>
+<span style="font-size:13px;color:#6B7280;">App icon / favicon</span>
+</div>
+</div>
+
+<div id="2c" style="background:#FFFFFF;border-radius:10px;padding:24px;display:flex;flex-direction:column;gap:16px;">
+<div style="display:flex;align-items:center;gap:10px;"><span style="background:#16181B;color:#F2A900;font-family:'Barlow Condensed';font-weight:800;font-size:16px;padding:3px 8px;border-radius:4px;">2c</span><span style="font-family:'Barlow Condensed';font-weight:800;font-size:22px;text-transform:uppercase;">Exit arrow</span></div>
+<div style="font-size:14px;line-height:1.5;color:#4B5058;">Adds the diagonal ramp arrow from exit signs. Reads as "take this exit" and gives the icon a shape of its own.</div>
+<sc-for list="{{ sizes }}" as="s" hint-placeholder-count="2">
+<div style="background:{{ s.bg }};border-radius:8px;padding:{{ s.pad }};display:flex;justify-content:center;">
+<div style="font-size:{{ s.fs }}px;line-height:1;font-family:Overpass,sans-serif;display:inline-flex;background:#0E5C3A;border-radius:.16em;padding:.07em;">
+<div style="border:.045em solid #F7F7F5;border-radius:.11em;display:flex;align-items:center;gap:.28em;padding:.2em .36em .12em .44em;">
+<span style="color:#F7F7F5;font-weight:800;">TRUCKER</span><span style="color:#F2A900;font-weight:900;">HQ</span>
+<svg viewBox="0 0 24 24" style="width:.78em;height:.78em;margin-top:-.08em;flex:none;"><path d="M5 19 L17 7 M8 6 H18 V16" stroke="#F7F7F5" stroke-width="3.6" fill="none" stroke-linecap="square"></path></svg>
+</div>
+</div>
+</div>
+</sc-for>
+<div style="display:flex;align-items:center;gap:16px;">
+<div style="width:72px;height:72px;box-sizing:border-box;background:#0E5C3A;border-radius:14px;padding:5px;display:flex;"><div style="flex:1;border:3px solid #F7F7F5;border-radius:10px;display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 24 24" style="width:34px;height:34px;"><path d="M5 19 L17 7 M8 6 H18 V16" stroke="#F2A900" stroke-width="3.6" fill="none" stroke-linecap="square"></path></svg></div></div>
+<span style="font-size:13px;color:#6B7280;">App icon / favicon</span>
+</div>
+</div>
+
+<div id="2d" style="background:#FFFFFF;border-radius:10px;padding:24px;display:flex;flex-direction:column;gap:16px;">
+<div style="display:flex;align-items:center;gap:10px;"><span style="background:#16181B;color:#F2A900;font-family:'Barlow Condensed';font-weight:800;font-size:16px;padding:3px 8px;border-radius:4px;">2d</span><span style="font-family:'Barlow Condensed';font-weight:800;font-size:22px;text-transform:uppercase;">Route shield</span></div>
+<div style="font-size:14px;line-height:1.5;color:#4B5058;">The wordmark followed by HQ inside a route-marker shield in brand colors. The shield also works alone as the icon.</div>
+<sc-for list="{{ sizes }}" as="s" hint-placeholder-count="2">
+<div style="background:{{ s.bg }};border-radius:8px;padding:{{ s.pad }};display:flex;justify-content:center;">
+<div style="font-size:{{ s.fs }}px;line-height:1;font-family:Overpass,sans-serif;display:inline-flex;align-items:center;gap:.24em;">
+<span style="font-weight:900;color:{{ s.fg }};letter-spacing:.01em;padding-top:.08em;">TRUCKER</span>
+<svg viewBox="0 0 100 108" style="width:1.35em;height:1.46em;flex:none;"><defs><clipPath id="sh{{ $index }}"><path d="M8 6 C30 14 70 14 92 6 C100 40 96 78 50 104 C4 78 0 40 8 6 Z"></path></clipPath></defs><path d="M8 6 C30 14 70 14 92 6 C100 40 96 78 50 104 C4 78 0 40 8 6 Z" fill="#0E5C3A"></path><rect x="0" y="0" width="100" height="32" fill="#F2A900" clip-path="url(#sh{{ $index }})"></rect><path d="M8 6 C30 14 70 14 92 6 C100 40 96 78 50 104 C4 78 0 40 8 6 Z" fill="none" stroke="#F7F7F5" stroke-width="5"></path><text x="50" y="72" text-anchor="middle" font-family="Overpass" font-weight="900" font-size="34" fill="#F7F7F5">HQ</text></svg>
+</div>
+</div>
+</sc-for>
+<div style="display:flex;align-items:center;gap:16px;">
+<div style="width:72px;height:72px;border-radius:14px;background:#16181B;display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 100 108" style="width:52px;height:56px;"><defs><clipPath id="shIcon"><path d="M8 6 C30 14 70 14 92 6 C100 40 96 78 50 104 C4 78 0 40 8 6 Z"></path></clipPath></defs><path d="M8 6 C30 14 70 14 92 6 C100 40 96 78 50 104 C4 78 0 40 8 6 Z" fill="#0E5C3A"></path><rect x="0" y="0" width="100" height="32" fill="#F2A900" clip-path="url(#shIcon)"></rect><path d="M8 6 C30 14 70 14 92 6 C100 40 96 78 50 104 C4 78 0 40 8 6 Z" fill="none" stroke="#F7F7F5" stroke-width="5"></path><text x="50" y="72" text-anchor="middle" font-family="Overpass" font-weight="900" font-size="34" fill="#F7F7F5">HQ</text></svg></div>
+<span style="font-size:13px;color:#6B7280;">App icon / favicon</span>
+</div>
+</div>
+
+</div>
+<div style="font-size:14px;color:#4B5058;">Reference: the approved <a href="Logo Directions.dc.html#1a">1a</a> sign panel.</div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      compare: [
+        { id: '3a', name: '2a Bolted panel', panel: true, shield: false, iconPanel: true, iconShield: false, note: 'Holds together as one sign at every size. The favicon is small but still reads as a green sign.' },
+        { id: '3b', name: '2d Route shield', panel: false, shield: true, iconPanel: false, iconShield: true, note: 'More distinctive shape and the strongest icon. The wordmark is plain text, so the logo feels less like a sign.' },
+        { id: '3c', name: 'Panel + shield icon', panel: true, shield: false, iconPanel: false, iconShield: true, note: 'The 2a panel everywhere the name appears, and the 2d shield wherever space is square: favicon, app icon, profile picture.' },
+      ],
+      sizes: [
+        { fs: 64, bg: '#F7F7F5', fg: '#16181B', pad: '36px 20px' },
+        { fs: 28, bg: '#16181B', fg: '#F7F7F5', pad: '20px' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

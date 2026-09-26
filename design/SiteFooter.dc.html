@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<footer style="background:#16181B;color:#C9CBCF;font-family:Inter,sans-serif;">
+<div style="height:6px;background:repeating-linear-gradient(90deg,#F2A900 0 48px,transparent 48px 80px);"></div>
+<div style="max-width:1280px;margin:0 auto;padding:56px clamp(20px,4vw,40px) 32px;display:flex;flex-direction:column;gap:40px;">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:32px;">
+<div style="display:flex;flex-direction:column;gap:16px;">
+<dc-import name="Logo" direction="sign" theme="dark" size="{{ 32 }}" hint-size="170px,40px"></dc-import>
+<div style="font-size:14px;line-height:1.5;">Dispatch, jobs and tools for US truckers.</div>
+</div>
+<sc-for list="{{ cols }}" as="col" hint-placeholder-count="3">
+<div style="display:flex;flex-direction:column;gap:4px;">
+<div style="font-family:'Barlow Condensed';font-weight:700;font-size:15px;letter-spacing:.14em;color:#F2A900;margin-bottom:6px;">{{ col.h }}</div>
+<sc-for list="{{ col.links }}" as="l"><a href="{{ l.href }}" style="color:#E4E6E9;text-decoration:none;font-size:15px;min-height:36px;display:flex;align-items:center;" style-hover="color:#F2A900;">{{ l.t }}</a></sc-for>
+</div>
+</sc-for>
+</div>
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:13px;color:#8A8F98;border-top:1px solid rgba(247,247,245,.12);padding-top:24px;">
+<span>© 2026 Trucker HQ. Carrier data from public FMCSA records.</span>
+<span>English · Русский</span>
+</div>
+</div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:360}}">
+class Component extends DCLogic {
+  renderVals() {
+    const L = (t, href = '#') => ({ t, href });
+    return { cols: [
+      { h: 'SERVICES', links: [L('Dispatch', 'Dispatch.dc.html'), L('Driver Jobs', 'Jobs.dc.html'), L('Hire Drivers', 'Hire Drivers.dc.html')] },
+      { h: 'FREE TOOLS', links: [L('All tools', 'Tools.dc.html'), L('Carrier Lookup', 'Carrier Lookup.dc.html'), L('Profit per Mile', 'Profit Calculator.dc.html'), L('Compliance Alerts', 'Compliance Alerts.dc.html'), L('New MC Checklist', 'New MC Checklist.dc.html'), L('Texas carriers', 'State Texas.dc.html')] },
+      { h: 'CONTACT', links: [L('(XXX) XXX-XXXX · 24/7'), L('hello@truckerhq.com'), L('Resources'), L('About us')] },
+    ] };
+  }
+}
+</script>
+</body>
+</html>

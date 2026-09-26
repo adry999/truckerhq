@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><script src="./image-slot.js"></script><style>body{margin:0;background:#F7F7F5;font-family:Inter,sans-serif;color:#16181B;-webkit-font-smoothing:antialiased}a{color:#0E5C3A}a:hover{color:#16181B}input::placeholder{color:#6B7280}*{box-sizing:border-box}</style></helmet>
+<div style="min-height:100vh;display:flex;flex-direction:column;">
+
+<dc-import name="SiteHeader" hint-size="100%,72px" style="position:sticky;top:0;z-index:20;display:block;"></dc-import>
+
+<section style="position:relative;background:#16181B;color:#F7F7F5;overflow:hidden;">
+<sc-if value="{{ heroPhotoBg }}" hint-placeholder-val="{{ true }}">
+<div style="position:absolute;top:0;bottom:0;right:0;left:{{ heroSlotLeft }};"><image-slot id="home-hero" src="https://images.unsplash.com/photo-1720811559395-3ed8d1b16649?fm=jpg&amp;q=70&amp;w=2000&amp;auto=format&amp;fit=crop" credit="Photo by Tom Jackson on Unsplash" credit-href="https://unsplash.com/@themrjaxon" shape="rect" placeholder="Your own photo: one of your trucks on the road (not stock)"></image-slot></div>
+<div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(22,24,27,.95) 0%,rgba(22,24,27,.75) 55%,rgba(22,24,27,.15) 100%);"></div>
+</sc-if>
+<div style="position:relative;pointer-events:none;max-width:1280px;margin:0 auto;padding:clamp(56px,10vw,120px) clamp(20px,4vw,40px) clamp(56px,9vw,104px);display:flex;flex-direction:column;gap:22px;">
+<div style="font-family:'Barlow Condensed';font-weight:700;font-size:16px;letter-spacing:.12em;text-transform:uppercase;color:#F2A900;">Dispatch · CDL jobs · Free carrier tools</div>
+<h1 style="margin:0;font-family:'Barlow Condensed';font-weight:800;font-size:clamp(52px,9vw,112px);line-height:.9;text-transform:uppercase;max-width:880px;">Dispatch that picks up at 3 a.m.</h1>
+<p style="margin:0;font-size:clamp(17px,2vw,20px);line-height:1.5;color:#D4D6DA;max-width:600px;text-wrap:pretty;">Flat weekly rate, never a percentage. English and Russian-speaking dispatchers on every US time zone. CDL jobs and free carrier checks on the same site.</p>
+<div style="pointer-events:auto;margin-top:10px;max-width:820px;display:flex;flex-direction:{{ searchDir }};gap:{{ searchGap }};background:#FFFFFF;border:3px solid #F2A900;border-radius:8px;padding:{{ searchPad }};">
+<div style="flex:1;display:flex;align-items:center;gap:12px;padding:0 8px 0 14px;min-height:60px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:#16181B;"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg><input aria-label="Search carriers" placeholder="Check a broker or carrier: DOT, MC or name" style="flex:1;min-width:0;border:0;outline:none;font-family:Inter;font-size:18px;color:#16181B;background:transparent;"></div>
+<button style="min-height:60px;padding:0 32px;border:0;border-radius:5px;background:#F2A900;color:#16181B;font-family:'Barlow Condensed';font-weight:800;font-size:24px;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;" style-hover="background:#FFBC1F;">Check</button>
+</div>
+<a href="Carrier Lookup.dc.html" style="pointer-events:auto;max-width:820px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;padding:12px 16px;border-radius:6px;background:rgba(247,247,245,.07);border:1px solid rgba(247,247,245,.16);color:#F7F7F5;text-decoration:none;" style-hover="border-color:#F2A900;color:#F7F7F5;">
+<span style="font-size:13px;color:#AEB2B8;">Last checked 2 min ago</span>
+<span style="font-weight:600;font-size:15px;">Carpathian Freight</span>
+<span style="font-size:14px;color:#C9CBCF;font-variant-numeric:tabular-nums;">DOT 3412897 · Authorized · Insured</span>
+<span style="margin-left:auto;display:inline-flex;align-items:center;gap:8px;font-size:13px;color:#C9CBCF;"><span style="width:30px;height:30px;border-radius:50%;background:#0E5C3A;color:#F7F7F5;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed';font-weight:800;font-size:16px;">86</span>Health Score</span>
+</a>
+<sc-if value="{{ heroPhotoInline }}"><div style="pointer-events:auto;aspect-ratio:16/9;position:relative;margin-top:6px;"><image-slot id="home-hero" src="https://images.unsplash.com/photo-1720811559395-3ed8d1b16649?fm=jpg&amp;q=70&amp;w=2000&amp;auto=format&amp;fit=crop" credit="Photo by Tom Jackson on Unsplash" credit-href="https://unsplash.com/@themrjaxon" shape="rounded" radius="8" placeholder="Your own photo: one of your trucks on the road"></image-slot></div></sc-if>
+</div>
+<div style="position:relative;height:6px;background:repeating-linear-gradient(90deg,#F2A900 0 48px,transparent 48px 80px);"></div>
+</section>
+<section style="background:#F7F7F5;border-bottom:1px solid #DEDFDB;">
+<div style="max-width:1280px;margin:0 auto;padding:22px clamp(20px,4vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px 32px;">
+<sc-for list="{{ facts }}" as="f" hint-placeholder-count="4">
+<div style="display:flex;flex-direction:column;gap:2px;"><span style="font-size:13px;color:#6B7280;">{{ f.k }}</span><span style="font-size:16px;font-weight:600;color:#16181B;">{{ f.v }}</span></div>
+</sc-for>
+</div>
+</section>
+<section style="max-width:1280px;width:100%;margin:0 auto;padding:clamp(56px,8vw,96px) clamp(20px,4vw,40px);display:flex;flex-direction:column;gap:28px;">
+<h2 style="margin:0;font-family:'Barlow Condensed';font-weight:800;font-size:clamp(36px,5vw,56px);line-height:1;">Dispatch, jobs and hiring</h2>
+<div style="display:grid;grid-template-columns:{{ svcCols }};gap:16px;">
+<div style="grid-row:{{ dispSpan }};background:#0E5C3A;border-radius:8px;overflow:hidden;display:flex;flex-direction:column;color:#F7F7F5;">
+<div style="height:220px;position:relative;"><image-slot id="home-dispatch-office" src="https://images.unsplash.com/photo-1631914730551-1cfbcdf6f603?fm=jpg&amp;q=70&amp;w=2000&amp;auto=format&amp;fit=crop" credit="Photo by Sávio Palácio Fontes on Unsplash" credit-href="https://unsplash.com/@savio777" shape="rect" placeholder="Photo: your dispatch office, dispatcher on the phone"></image-slot></div>
+<div style="padding:28px 28px 28px;display:flex;flex-direction:column;gap:16px;flex:1;">
+<div style="font-family:'Barlow Condensed';font-weight:800;font-size:48px;line-height:.95;text-transform:uppercase;">Dispatch</div>
+<div style="font-size:18px;line-height:1.45;font-weight:500;max-width:480px;">One flat price a week. You keep everything you haul above it.</div>
+<ul style="margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px 20px;flex:1;">
+<sc-for list="{{ dispItems }}" as="it"><li style="display:flex;gap:10px;font-size:15px;line-height:1.4;color:#E3EAE6;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F2A900" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:2px;"><path d="M20 6 9 17l-5-5"></path></svg>{{ it }}</li></sc-for>
+</ul>
+<a href="Dispatch.dc.html" style="align-self:flex-start;margin-top:8px;height:56px;display:flex;align-items:center;padding:0 28px;border-radius:10px;background:#F2A900;color:#16181B;text-decoration:none;font-family:'Barlow Condensed';font-weight:800;font-size:21px;letter-spacing:.05em;text-transform:uppercase;" style-hover="background:#FFBC1F;color:#16181B;">Start dispatch</a>
+</div>
+</div>
+<sc-for list="{{ smallSvc }}" as="c" hint-placeholder-count="2">
+<a href="{{ c.href }}" style="background:#FFFFFF;border:1.5px solid #DEDFDB;border-radius:8px;padding:26px 24px;display:flex;flex-direction:column;gap:12px;text-decoration:none;color:#16181B;" style-hover="border-color:#0E5C3A;color:#16181B;">
+<div style="font-family:'Barlow Condensed';font-weight:800;font-size:34px;line-height:.95;text-transform:uppercase;">{{ c.title }}</div>
+<div style="font-size:16px;line-height:1.55;color:#3F444B;flex:1;text-wrap:pretty;">{{ c.line }}</div>
+<div style="display:flex;align-items:center;gap:8px;font-family:'Barlow Condensed';font-weight:800;font-size:19px;letter-spacing:.05em;text-transform:uppercase;color:#0E5C3A;">{{ c.cta }}<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></div>
+</a>
+</sc-for>
+</div>
+</section>
+<section style="background:#FFFFFF;border-top:1px solid #DEDFDB;border-bottom:1px solid #DEDFDB;">
+<div style="max-width:1280px;margin:0 auto;padding:clamp(48px,7vw,80px) clamp(20px,4vw,40px);display:flex;flex-direction:column;gap:28px;">
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;">
+<div style="display:flex;flex-direction:column;gap:8px;">
+<div style="display:flex;align-items:center;gap:10px;"><span style="height:28px;display:inline-flex;align-items:center;padding:0 10px;border-radius:7px;background:#16181B;color:#F2A900;font-family:'Barlow Condensed';font-weight:800;font-size:15px;letter-spacing:.08em;">FREE</span><span style="font-family:'Barlow Condensed';font-weight:700;font-size:15px;letter-spacing:.16em;color:#6B7280;">TRUCKER HQ TOOLS</span></div>
+<h2 style="margin:0;font-family:'Barlow Condensed';font-weight:800;font-size:clamp(32px,4vw,48px);line-height:1;">Free tools. No sign-up.</h2>
+</div>
+<a href="Tools.dc.html" style="font-family:'Barlow Condensed';font-weight:700;font-size:19px;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;min-height:44px;display:flex;align-items:center;">All tools →</a>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;">
+<sc-for list="{{ tools }}" as="t" hint-placeholder-count="4">
+<a href="{{ t.href }}" style="text-decoration:none;color:#16181B;background:#F7F7F5;border:1.5px solid #DEDFDB;border-radius:8px;padding:22px;display:flex;flex-direction:column;gap:10px;min-height:190px;" style-hover="border-color:#0E5C3A;color:#16181B;">
+<div style="font-family:'Barlow Condensed';font-weight:800;font-size:28px;line-height:1;text-transform:uppercase;">{{ t.name }}</div>
+<div style="font-size:15px;line-height:1.45;color:#4B5058;flex:1;">{{ t.desc }}</div>
+<sc-if value="{{ t.hasScore }}"><span style="align-self:flex-start;display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 10px 0 4px;border-radius:15px;background:#FFFFFF;border:1px solid #DEDFDB;font-size:12px;font-weight:600;color:#3F444B;"><span style="width:22px;height:22px;border-radius:50%;background:#0E5C3A;color:#F7F7F5;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed';font-weight:800;font-size:13px;">86</span>Health Score</span></sc-if>
+<div style="font-family:'Barlow Condensed';font-weight:700;font-size:17px;letter-spacing:.05em;text-transform:uppercase;color:#0E5C3A;">Open →</div>
+</a>
+</sc-for>
+</div>
+</div>
+</section>
+
+<section style="max-width:1280px;width:100%;margin:0 auto;padding:clamp(56px,8vw,96px) clamp(20px,4vw,40px);display:flex;flex-direction:column;gap:40px;">
+<div style="display:flex;flex-direction:column;gap:8px;">
+<h2 style="margin:0;font-family:'Barlow Condensed';font-weight:800;font-size:clamp(36px,5vw,56px);line-height:1;">How dispatch works</h2>
+</div>
+<div style="position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:32px;">
+<sc-if value="{{ desktop }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;left:28px;right:28px;top:27px;height:4px;background:repeating-linear-gradient(90deg,#F2A900 0 32px,transparent 32px 52px);"></div></sc-if>
+<sc-for list="{{ steps }}" as="s" hint-placeholder-count="3">
+<div style="position:relative;display:flex;flex-direction:column;gap:14px;">
+<div style="width:58px;height:58px;border-radius:6px;background:#16181B;color:#F2A900;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed';font-weight:800;font-size:28px;box-shadow:0 0 0 6px #F7F7F5;">{{ s.n }}</div>
+<div style="font-family:'Barlow Condensed';font-weight:800;font-size:30px;line-height:1;text-transform:uppercase;">{{ s.title }}</div>
+<div style="font-size:16px;line-height:1.55;color:#3F444B;max-width:340px;">{{ s.desc }}</div>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section style="background:#16181B;color:#F7F7F5;">
+<div style="max-width:1280px;margin:0 auto;padding:clamp(56px,8vw,96px) clamp(20px,4vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:40px;align-items:center;">
+<div style="display:flex;flex-direction:column;gap:20px;">
+<div style="font-family:'Barlow Condensed';font-weight:700;font-size:15px;letter-spacing:.16em;color:#F2A900;">DISPATCH PRICING</div>
+<h2 style="margin:0;font-family:'Barlow Condensed';font-weight:800;font-size:clamp(40px,6vw,64px);line-height:.95;">One flat price.<br>No percentage.</h2>
+<div style="display:flex;align-items:baseline;gap:10px;"><span style="font-family:'Barlow Condensed';font-weight:800;font-size:clamp(64px,9vw,96px);line-height:1;color:#F2A900;">$XXX</span><span style="font-size:18px;color:#C9CBCF;">/ week per truck</span></div>
+<p style="margin:0;font-size:17px;line-height:1.55;color:#D4D6DA;max-width:520px;text-wrap:pretty;">Includes a dispatcher on your time zone, rate negotiation on every load, broker checks, fuel card discounts, invoicing, and your own website and Google profile.</p>
+<div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:8px;">
+<a href="#" style="height:56px;display:flex;align-items:center;padding:0 28px;border-radius:12px;background:#F2A900;color:#16181B;text-decoration:none;font-family:'Barlow Condensed';font-weight:800;font-size:21px;letter-spacing:.05em;text-transform:uppercase;" style-hover="background:#FFBC1F;color:#16181B;">Start dispatch</a>
+<a href="#" style="height:56px;display:flex;align-items:center;padding:0 26px;border-radius:12px;border:2px solid #F7F7F5;color:#F7F7F5;text-decoration:none;font-family:'Barlow Condensed';font-weight:800;font-size:21px;letter-spacing:.05em;text-transform:uppercase;" style-hover="background:#F7F7F5;color:#16181B;">Call us 24/7</a>
+</div>
+</div>
+<div style="background:#0E5C3A;border-radius:10px;padding:6px;">
+<div style="border:1.5px solid rgba(247,247,245,.7);border-radius:6px;padding:28px 24px;display:flex;flex-direction:column;gap:18px;">
+<div style="font-family:'Barlow Condensed';font-weight:700;font-size:15px;letter-spacing:.14em;color:#F2A900;">EXAMPLE · $8,000 GROSS A WEEK</div>
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding-bottom:16px;border-bottom:1px solid rgba(247,247,245,.25);"><span style="font-size:16px;">10% dispatcher</span><span style="font-family:'Barlow Condensed';font-weight:800;font-size:40px;font-variant-numeric:tabular-nums;">$800</span></div>
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding-bottom:16px;border-bottom:1px solid rgba(247,247,245,.25);"><span style="font-size:16px;">8% dispatcher</span><span style="font-family:'Barlow Condensed';font-weight:800;font-size:40px;font-variant-numeric:tabular-nums;">$640</span></div>
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:16px;font-weight:700;">Trucker HQ</span><span style="font-family:'Barlow Condensed';font-weight:800;font-size:40px;color:#F2A900;">$XXX</span></div>
+<div style="font-size:14px;line-height:1.5;color:#DCE6E0;">Good week or bad week, the price stays the same. The more you haul, the more you keep.</div>
+</div>
+</div>
+</div>
+</section>
+
+<section style="max-width:1280px;width:100%;margin:0 auto;padding:clamp(56px,8vw,96px) clamp(20px,4vw,40px);display:flex;flex-direction:column;gap:28px;">
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;">
+<div style="display:flex;flex-direction:column;gap:8px;">
+<h2 style="margin:0;font-family:'Barlow Condensed';font-weight:800;font-size:clamp(36px,5vw,56px);line-height:1;">Latest CDL jobs</h2>
+</div>
+<a href="#" style="font-family:'Barlow Condensed';font-weight:700;font-size:19px;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;min-height:44px;display:flex;align-items:center;">See all jobs →</a>
+</div>
+<div style="background:#FFFFFF;border:1px solid #DEDFDB;border-radius:8px;overflow:hidden;">
+<sc-for list="{{ jobs }}" as="j" hint-placeholder-count="5">
+<a href="#" style="display:flex;flex-wrap:wrap;align-items:center;gap:10px 24px;padding:18px 22px;border-top:{{ j.border }};text-decoration:none;color:#16181B;" style-hover="background:#F7F7F5;color:#16181B;">
+<div style="flex:1 1 260px;display:flex;flex-direction:column;gap:3px;">
+<div style="font-weight:700;font-size:17px;">{{ j.title }}</div>
+<div style="font-size:14px;color:#6B7280;">{{ j.co }} · {{ j.loc }}</div>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:8px;flex:0 1 auto;">
+<span style="height:28px;display:inline-flex;align-items:center;padding:0 10px;border-radius:7px;background:#E2F0E8;color:#0E5C3A;font-family:'Barlow Condensed';font-weight:800;font-size:15px;letter-spacing:.08em;">{{ j.type }}</span>
+<span style="height:28px;display:inline-flex;align-items:center;padding:0 10px;border-radius:7px;background:#EEEFEC;color:#3F444B;font-family:'Barlow Condensed';font-weight:700;font-size:15px;letter-spacing:.06em;">{{ j.equip }}</span>
+</div>
+<div style="flex:0 0 150px;display:flex;flex-direction:column;align-items:flex-start;gap:2px;">
+<div style="font-weight:700;font-size:17px;font-variant-numeric:tabular-nums;">{{ j.pay }}</div>
+<div style="font-size:13px;color:#6B7280;">{{ j.posted }}</div>
+</div>
+</a>
+</sc-for>
+</div>
+</section>
+
+<section style="max-width:1280px;width:100%;margin:0 auto;padding:clamp(56px,8vw,96px) clamp(20px,4vw,40px);display:flex;flex-direction:column;gap:28px;">
+<div style="display:flex;flex-direction:column;gap:10px;max-width:640px;">
+<h2 style="margin:0;font-family:'Barlow Condensed';font-weight:800;font-size:clamp(36px,5vw,56px);line-height:1;">The people who answer the phone</h2>
+<p style="margin:0;font-size:17px;line-height:1.55;color:#3F444B;text-wrap:pretty;">You get one dispatcher who learns your truck, your lanes and when you need to be home.</p>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:20px;">
+<sc-for list="{{ team }}" as="p" hint-placeholder-count="3">
+<div style="display:flex;flex-direction:column;gap:12px;">
+<div style="aspect-ratio:4/5;position:relative;"><image-slot id="team-{{ $index }}" shape="rounded" radius="8" placeholder="Photo of dispatcher"></image-slot></div>
+<div style="display:flex;flex-direction:column;gap:3px;"><span style="font-weight:700;font-size:18px;">{{ p.name }}</span><span style="font-size:15px;color:#4B5058;">{{ p.role }}</span><span style="font-size:14px;color:#6B7280;">{{ p.note }}</span></div>
+</div>
+</sc-for>
+</div>
+</section>
+<section style="background:#FFFFFF;border-top:1px solid #DEDFDB;border-bottom:1px solid #DEDFDB;">
+<div style="max-width:1280px;margin:0 auto;padding:clamp(56px,8vw,96px) clamp(20px,4vw,40px);display:flex;flex-direction:column;gap:32px;">
+<h2 style="margin:0;font-family:'Barlow Condensed';font-weight:800;font-size:clamp(36px,5vw,56px);line-height:1;">From the drivers</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;">
+<sc-for list="{{ quotes }}" as="q" hint-placeholder-count="3">
+<figure style="margin:0;background:#F7F7F5;border:1.5px solid #DEDFDB;border-radius:8px;padding:26px 24px;display:flex;flex-direction:column;gap:20px;">
+<div style="width:40px;height:6px;background:#F2A900;border-radius:1px;"></div>
+<blockquote style="margin:0;font-size:18px;line-height:1.5;flex:1;">"{{ q.text }}"</blockquote>
+<figcaption style="display:flex;align-items:center;gap:12px;">
+<image-slot id="quote-{{ $index }}" shape="circle" placeholder="" style="width:48px;height:48px;flex:none;"></image-slot>
+<div style="display:flex;flex-direction:column;gap:2px;flex:1;"><span style="font-weight:700;font-size:15px;">{{ q.name }}</span><span style="font-size:14px;color:#6B7280;">{{ q.role }}</span></div>
+<span style="height:26px;display:inline-flex;align-items:center;padding:0 8px;border-radius:6px;border:1px solid #9CA0A8;font-family:'Barlow Condensed';font-weight:800;font-size:14px;letter-spacing:.06em;color:#3F444B;">{{ q.lang }}</span>
+</figcaption>
+</figure>
+</sc-for>
+</div>
+<figure style="margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:20px;align-items:center;">
+<div style="aspect-ratio:16/9;position:relative;"><image-slot id="home-settlement" shape="rounded" radius="8" placeholder="Screenshot: a real weekly settlement, names and numbers blurred"></image-slot></div>
+<figcaption style="font-size:16px;line-height:1.55;color:#3F444B;max-width:440px;text-wrap:pretty;">A real week from one of our drivers. Gross, fuel, and our flat fee, with nothing taken as a percentage.</figcaption>
+</figure>
+</div>
+</section>
+
+<section style="max-width:900px;width:100%;margin:0 auto;padding:clamp(56px,8vw,96px) clamp(20px,4vw,40px);display:flex;flex-direction:column;gap:28px;">
+<h2 style="margin:0;font-family:'Barlow Condensed';font-weight:800;font-size:clamp(36px,5vw,56px);line-height:1;">Questions</h2>
+<div style="display:flex;flex-direction:column;border-top:2px solid #16181B;">
+<sc-for list="{{ faq }}" as="f" hint-placeholder-count="5">
+<div style="border-bottom:1px solid #DEDFDB;">
+<button onClick="{{ f.toggle }}" style="width:100%;min-height:68px;padding:16px 4px;background:transparent;border:0;display:flex;justify-content:space-between;align-items:center;gap:16px;text-align:left;cursor:pointer;font-family:Inter;font-size:18px;font-weight:600;color:#16181B;">{{ f.q }}<span style="flex:none;width:36px;height:36px;border-radius:9px;background:{{ f.iconBg }};color:{{ f.iconFg }};display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:500;">{{ f.icon }}</span></button>
+<sc-if value="{{ f.open }}"><div style="padding:0 56px 22px 4px;font-size:16px;line-height:1.6;color:#3F444B;">{{ f.a }}</div></sc-if>
+</div>
+</sc-for>
+</div>
+</section>
+
+<div style="margin-top:auto;"><dc-import name="SiteFooter" hint-size="100%,360px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;logoDirection&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;sign&quot;,&quot;exit&quot;,&quot;marker&quot;],&quot;default&quot;:&quot;sign&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;heroPhoto&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  state = { w: typeof window !== 'undefined' ? window.innerWidth : 1280, menu: false, lang: 'EN', faq: 0 };
+  componentDidMount() { this.onR = () => this.setState({ w: window.innerWidth }); window.addEventListener('resize', this.onR); this.onR(); }
+  componentWillUnmount() { window.removeEventListener('resize', this.onR); }
+  renderVals() {
+    const mobile = this.state.w < 960;
+    const faq = [
+      ['How is a flat weekly rate better than a percentage?', 'A percentage dispatcher earns more when you haul more. We charge the same every week, so the extra money from a good week stays with you.'],
+      ['Do I need to sign a long contract?', 'No. Dispatch is week to week. Stop any time with one week notice.'],
+      ['I just got my MC. Can you work with me?', 'Yes. We help new authorities from day one: broker setup packets, the New MC Checklist, and lanes that accept new carriers.'],
+      ['Can I talk to someone in Russian?', 'Yes. Our dispatchers speak English and Russian, 24/7 on every US time zone.'],
+      ['Where does the Carrier Lookup data come from?', 'Public FMCSA records: authority, insurance, inspections and crash history. The Health Score sums it up from 0 to 100.'],
+    ];
+    return {
+      desktop: !mobile, mobile, menuShown: mobile && this.state.menu,
+      logoDir: this.props.logoDirection ?? 'sign', logoSize: mobile ? 26 : 30,
+      heroPhoto: this.props.heroPhoto ?? true,
+      searchDir: mobile ? 'column' : 'row', searchGap: mobile ? '6px' : '0', searchPad: '6px',
+      toggleMenu: () => this.setState(s => ({ menu: !s.menu })),
+      nav: ['Dispatch', 'Jobs', 'Hire Drivers', 'Tools', 'Resources'],
+      langCode: this.state.lang, langOpen: !!this.state.langOpen, toggleLang: () => this.setState(s => ({ langOpen: !s.langOpen })),
+      langs: [['EN', 'English'], ['RU', 'Русский']].map(([code, name]) => ({ code, name, bg: code === this.state.lang ? '#FFF1CC' : 'transparent', fw: code === this.state.lang ? 700 : 500, pick: () => this.setState({ lang: code, langOpen: false }) })),
+      heroSlotLeft: mobile ? '0' : '52%', heroPhotoBg: (this.props.heroPhoto ?? true) && !mobile, heroPhotoInline: (this.props.heroPhoto ?? true) && mobile, svcCols: mobile ? 'minmax(0,1fr)' : 'minmax(0,1.35fr) minmax(0,1fr)', dispSpan: mobile ? 'auto' : 'span 2',
+      facts: [{ k: 'In business since', v: '20XX · City, ST' }, { k: 'Dispatch line, 24/7', v: '(XXX) XXX-XXXX' }, { k: 'We speak', v: 'English · Русский' }, { k: 'Office hours', v: 'Mon–Sun, all US time zones' }],
+      dispItems: ['Loads booked day and night', 'Rate negotiation on every load', 'Broker checked before you say yes', 'Rate cons, invoices, factoring', 'Fuel card discounts', 'Your website and Google profile'],
+      smallSvc: [{ title: 'Driver jobs', href: 'Jobs.dc.html', cta: 'Browse jobs', line: 'Pay and home time are posted on every job. Apply in English or Russian and a person calls you back.' }, { title: 'Hire drivers', href: 'Hire Drivers.dc.html', cta: 'Hire drivers', line: 'Post a job. We check CDL, MVR and experience before a driver reaches you.' }],
+      team: [{ name: 'Dispatcher Name', role: 'Dispatcher · Dry van, reefer', note: 'EN · RU · Nights, Central time' }, { name: 'Dispatcher Name', role: 'Dispatcher · Flatbed', note: 'EN · RU · Days, Eastern time' }, { name: 'Dispatcher Name', role: 'New MC onboarding', note: 'EN · RU · Days, Pacific time' }],
+      stats: [
+        { big: '24/7', small: 'Dispatch on every US time zone' },
+        { big: '0%', small: 'We never take a cut of your gross' },
+        { big: 'EN · RU', small: 'Talk to us in your language' },
+        { big: 'FREE', small: 'Carrier tools on FMCSA data' },
+      ],
+      services: [
+        { eyebrow: 'TRUCKER HQ DISPATCH', title: 'Dispatch', line: 'Flat weekly rate. No percentage.', cta: 'Start dispatch', items: ['24/7 on US time zones', 'Load boards and rate negotiation', 'Fuel discounts and paperwork', 'Broker vetting before every load', 'Your website and Google profile'] },
+        { eyebrow: 'TRUCKER HQ JOBS', title: 'Driver jobs', line: 'CDL jobs with the pay posted up front.', cta: 'Browse jobs', items: ['OTR, regional and local', 'Company driver and lease options', 'Apply in English or Russian', 'Get a call back, not a bot'] },
+        { eyebrow: 'TRUCKER HQ JOBS', title: 'Hire drivers', line: 'A truck sitting still makes no money.', cta: 'Hire drivers', items: ['Post a driver job in minutes', 'We check CDL, MVR and experience', 'Reach drivers who speak your language', 'Solo and team drivers'] },
+      ],
+      tools: [
+        { num: '01', name: 'Carrier Lookup', desc: 'Search by DOT or MC. Authority, insurance, safety and a Health Score.', hasScore: true, href: 'Carrier Lookup.dc.html' },
+        { num: '02', name: 'Profit per Mile', desc: 'Fuel, insurance, truck payment. See what a load really pays.', hasScore: false, href: 'Profit Calculator.dc.html' },
+        { num: '03', name: 'Compliance Alerts', desc: 'Get a text before your insurance, UCR or authority status changes.', hasScore: false, href: 'Compliance Alerts.dc.html' },
+        { num: '04', name: 'New MC Checklist', desc: 'Every step for your first 6 months, from BOC-3 to first load.', hasScore: false, href: 'New MC Checklist.dc.html' },
+      ],
+      steps: [
+        { n: '1', title: 'Call or sign up', desc: 'Tell us your truck, your lanes and when you want to be home. Ten minutes on the phone.' },
+        { n: '2', title: 'We book the loads', desc: 'We search the boards, check every broker and push for the best rate. You say yes or no.' },
+        { n: '3', title: 'You drive', desc: 'Rate cons, invoices, factoring paperwork. We handle it so you can focus on the road.' },
+      ],
+      includes: ['24/7 dispatcher on your time zone', 'Rate negotiation on every load', 'Broker vetting and setup packets', 'Fuel card discounts', 'Invoicing and paperwork', 'Website and Google profile'],
+      jobs: [
+        { title: 'OTR Company Driver', co: 'Carpathian Freight', loc: 'Des Plaines, IL', type: 'OTR', equip: 'DRY VAN', pay: '$0.68–0.72/mi', posted: 'Today' },
+        { title: 'Regional Driver, home weekly', co: 'Volga Line Transport', loc: 'Jacksonville, FL', type: 'REGIONAL', equip: 'REEFER', pay: '$1,800/wk', posted: 'Today' },
+        { title: 'Team Drivers', co: 'Iron Horse Hauling', loc: 'Phoenix, AZ', type: 'OTR', equip: 'DRY VAN', pay: '$0.90/mi split', posted: '1 day ago' },
+        { title: 'Local Flatbed Driver', co: 'Danube Road Corp', loc: 'Charlotte, NC', type: 'LOCAL', equip: 'FLATBED', pay: '$28/hr', posted: '2 days ago' },
+        { title: 'Lease Purchase, Owner-Op', co: 'Moldova Express', loc: 'Sacramento, CA', type: 'OTR', equip: 'REEFER', pay: '88% of load', posted: '3 days ago' },
+      ].map((j, i) => ({ ...j, border: i ? '1px solid #ECEDEA' : '0' })),
+      quotes: [
+        { text: 'Same price every week. Last month I ran hard and kept all of it. With my old dispatcher that was $700 gone.', name: 'Ion R.', role: 'Owner-operator, 2 trucks · IL', lang: 'RU' },
+        { text: 'My MC was 3 months old and nobody wanted me. They found brokers that work with new carriers and got me moving.', name: 'Sergei M.', role: 'New carrier · FL', lang: 'RU' },
+        { text: 'I check every broker in Carrier Lookup before I say yes. Takes ten seconds from the cab.', name: 'Mike D.', role: 'Owner-operator · TX', lang: 'EN' },
+      ],
+      faq: faq.map(([q, a], i) => { const open = this.state.faq === i; return { q, a, open, icon: open ? '−' : '+', iconBg: open ? '#F2A900' : '#EEEFEC', iconFg: '#16181B', toggle: () => this.setState({ faq: open ? -1 : i }) }; }),
+      footCols: [
+        { h: 'SERVICES', links: ['Dispatch', 'Driver Jobs', 'Hire Drivers'] },
+        { h: 'FREE TOOLS', links: ['Carrier Lookup', 'Profit per Mile', 'Compliance Alerts', 'New MC Checklist'] },
+        { h: 'CONTACT', links: ['(XXX) XXX-XXXX · 24/7', 'hello@truckerhq.com', 'Resources', 'About us'] },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

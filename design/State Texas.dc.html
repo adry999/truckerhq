@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><script src="./image-slot.js"></script><style>body{margin:0;background:#F7F7F5;font-family:Inter,sans-serif;color:#16181B;-webkit-font-smoothing:antialiased}a{color:#0E5C3A}a:hover{color:#16181B}*{box-sizing:border-box}</style></helmet>
+<div style="min-height:100vh;display:flex;flex-direction:column;">
+<dc-import name="SiteHeader" active="Tools" hint-size="100%,72px" style="position:sticky;top:0;z-index:20;display:block;"></dc-import>
+
+<section style="position:relative;background:#16181B;color:#F7F7F5;overflow:hidden;">
+<div style="position:absolute;inset:0;"><image-slot id="texas-hero" shape="rect" src="https://images.unsplash.com/photo-1779583074717-e60fa13131ce?fm=jpg&amp;q=70&amp;w=2000&amp;auto=format&amp;fit=crop" credit="Photo by Fabio Sasso on Unsplash" credit-href="https://unsplash.com/@abduzeedo" placeholder="Your own photo"></image-slot></div>
+<div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(22,24,27,.95) 0%,rgba(22,24,27,.7) 60%,rgba(22,24,27,.4) 100%);"></div>
+<div style="position:relative;max-width:1280px;margin:0 auto;padding:clamp(40px,7vw,88px) clamp(20px,4vw,40px);display:flex;flex-direction:column;gap:18px;">
+<div style="display:flex;flex-wrap:wrap;gap:8px;font-size:14px;color:#AEB2B8;"><a href="Carrier Lookup.dc.html" style="color:#F7F7F5;">Carrier Lookup</a><span>/</span><span>States</span><span>/</span><span style="color:#F2A900;">Texas</span></div>
+<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+<span style="height:56px;min-width:72px;display:inline-flex;align-items:center;justify-content:center;border-radius:10px;background:#0E5C3A;border:2px solid #F7F7F5;font-family:'Barlow Condensed';font-weight:800;font-size:34px;padding:0 12px;">TX</span>
+<h1 style="margin:0;font-family:'Barlow Condensed';font-weight:800;font-size:clamp(48px,8vw,96px);line-height:.9;text-transform:uppercase;">Texas carriers</h1>
+</div>
+<p style="margin:0;font-size:clamp(17px,2vw,19px);line-height:1.5;color:#D4D6DA;max-width:640px;">Every for-hire interstate carrier based in Texas, from public FMCSA data. Search, filter and check any Health Score.</p>
+</div>
+<div style="position:relative;height:6px;background:repeating-linear-gradient(90deg,#F2A900 0 48px,transparent 48px 80px);"></div>
+</section>
+
+<section style="background:#FFFFFF;border-bottom:1px solid #DEDFDB;">
+<div style="max-width:1280px;margin:0 auto;padding:28px clamp(20px,4vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:20px 32px;">
+<sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+<div style="display:flex;flex-direction:column;gap:4px;">
+<div style="font-family:'Barlow Condensed';font-weight:800;font-size:44px;line-height:1;color:#0E5C3A;font-variant-numeric:tabular-nums;">{{ s.big }}</div>
+<div style="font-size:15px;color:#3F444B;line-height:1.35;">{{ s.small }}</div>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section style="max-width:1280px;width:100%;margin:0 auto;padding:clamp(48px,7vw,80px) clamp(20px,4vw,40px) 32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:20px;">
+<div style="background:#FFFFFF;border:1px solid #DEDFDB;border-radius:8px;padding:24px;display:flex;flex-direction:column;gap:16px;">
+<h2 style="margin:0;font-family:'Barlow Condensed';font-weight:800;font-size:30px;text-transform:uppercase;">Top equipment types</h2>
+<sc-for list="{{ equip }}" as="e" hint-placeholder-count="7">
+<div style="display:grid;grid-template-columns:110px minmax(0,1fr) 48px;gap:12px;align-items:center;font-size:15px;">
+<span style="font-weight:600;">{{ e.t }}</span>
+<span style="height:14px;border-radius:4px;background:#ECEDEA;overflow:hidden;"><span style="display:block;height:100%;width:{{ e.bar }};background:{{ e.c }};border-radius:4px;"></span></span>
+<span style="text-align:right;font-variant-numeric:tabular-nums;font-weight:600;">{{ e.pct }}</span>
+</div>
+</sc-for>
+</div>
+<div style="background:#FFFFFF;border:1px solid #DEDFDB;border-radius:8px;overflow:hidden;">
+<div style="padding:24px 24px 12px;"><h2 style="margin:0;font-family:'Barlow Condensed';font-weight:800;font-size:30px;text-transform:uppercase;">Top cities</h2></div>
+<sc-for list="{{ cities }}" as="c" hint-placeholder-count="6">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 24px;border-top:1px solid #ECEDEA;font-size:15px;font-variant-numeric:tabular-nums;">
+<span style="display:flex;align-items:center;gap:12px;"><span style="width:26px;font-family:'Barlow Condensed';font-weight:800;font-size:18px;color:#6B7280;">{{ c.n }}</span><span style="font-weight:600;">{{ c.t }}</span></span>
+<span><b>{{ c.count }}</b><span style="color:#6B7280;"> carriers</span></span>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section style="max-width:1280px;width:100%;margin:0 auto;padding:32px clamp(16px,4vw,40px) 40px;display:flex;flex-direction:column;gap:18px;">
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;">
+<h2 style="margin:0;font-family:'Barlow Condensed';font-weight:800;font-size:clamp(32px,4vw,44px);line-height:1;">Texas carrier list</h2>
+<div style="display:flex;flex-wrap:wrap;gap:6px;">
+<sc-for list="{{ eqFilters }}" as="f" hint-placeholder-count="5"><button onClick="{{ f.pick }}" style="height:44px;padding:0 14px;border-radius:10px;border:{{ f.border }};background:{{ f.bg }};color:{{ f.fg }};font-family:'Barlow Condensed';font-weight:800;font-size:16px;letter-spacing:.06em;cursor:pointer;">{{ f.label }}</button></sc-for>
+</div>
+</div>
+<div style="background:#FFFFFF;border:1px solid #DEDFDB;border-radius:8px;overflow:hidden;">
+<sc-if value="{{ desktop }}" hint-placeholder-val="{{ true }}">
+<div style="display:grid;grid-template-columns:minmax(0,2.2fr) minmax(0,1fr) minmax(0,1.2fr) 80px 130px 110px;gap:16px;padding:14px 20px;background:#16181B;color:#F7F7F5;font-family:'Barlow Condensed';font-weight:700;font-size:15px;letter-spacing:.1em;">
+<span>CARRIER</span><span>DOT</span><span>EQUIPMENT</span><span>TRUCKS</span><span>AUTHORITY</span><span style="text-align:right;">HEALTH</span>
+</div>
+</sc-if>
+<sc-for list="{{ rows }}" as="c" hint-placeholder-count="8">
+<a href="Carrier Lookup.dc.html" style="display:grid;grid-template-columns:{{ rowCols }};gap:{{ rowGap }};align-items:center;padding:18px 20px;border-top:{{ c.border }};text-decoration:none;color:#16181B;font-variant-numeric:tabular-nums;" style-hover="background:#F7F7F5;color:#16181B;">
+<span style="display:flex;flex-direction:column;gap:3px;grid-column:{{ nameSpan }};"><span style="font-weight:700;font-size:17px;">{{ c.name }}</span><span style="font-size:14px;color:#6B7280;">{{ c.city }}{{ c.mobileMeta }}</span></span>
+<sc-if value="{{ desktop }}" hint-placeholder-val="{{ true }}"><span style="font-size:15px;">{{ c.dot }}</span><span style="font-size:15px;">{{ c.eq }}</span><span style="font-size:15px;">{{ c.trucks }}</span></sc-if>
+<span><span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 10px;border-radius:8px;background:{{ c.bbg }};color:{{ c.bfg }};font-family:'Barlow Condensed';font-weight:800;font-size:15px;letter-spacing:.08em;"><span style="width:8px;height:8px;border-radius:50%;background:{{ c.bdot }};"></span>{{ c.status }}</span></span>
+<span style="display:flex;justify-content:flex-end;"><span style="display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 6px 0 4px;border-radius:10px;border:1.5px solid #DEDFDB;"><span style="width:28px;height:28px;border-radius:50%;background:{{ c.hc }};color:{{ c.hfg }};display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed';font-weight:800;font-size:16px;">{{ c.score }}</span><span style="font-family:'Barlow Condensed';font-weight:800;font-size:14px;letter-spacing:.06em;color:{{ c.ht }};padding-right:4px;">{{ c.label }}</span></span></span>
+</a>
+</sc-for>
+</div>
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;">
+<span style="font-size:14px;color:#6B7280;">{{ showing }}</span>
+<a href="Carrier Lookup.dc.html" style="height:48px;display:flex;align-items:center;padding:0 20px;border-radius:10px;border:2px solid #16181B;color:#16181B;text-decoration:none;font-family:'Barlow Condensed';font-weight:800;font-size:18px;letter-spacing:.05em;text-transform:uppercase;" style-hover="background:#16181B;color:#F7F7F5;">Search all Texas carriers</a>
+</div>
+</section>
+
+<section style="max-width:1280px;width:100%;margin:0 auto;padding:32px clamp(16px,4vw,40px) clamp(56px,8vw,96px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:20px;">
+<div style="background:#0E5C3A;border-radius:10px;padding:6px;display:flex;">
+<div style="flex:1;border:1.5px solid rgba(247,247,245,.7);border-radius:6px;padding:28px 24px;display:flex;flex-direction:column;gap:14px;color:#F7F7F5;">
+<div style="font-family:'Barlow Condensed';font-weight:700;font-size:15px;letter-spacing:.14em;color:#F2A900;">TEXAS OWNER-OPERATOR?</div>
+<div style="font-family:'Barlow Condensed';font-weight:800;font-size:40px;line-height:.95;text-transform:uppercase;">Flat dispatch out of Texas</div>
+<div style="font-size:16px;line-height:1.5;color:#E3EAE6;flex:1;">We know the Texas triangle, the border freight out of Laredo and the reefer lanes to the Southeast. One flat price per week.</div>
+<a href="Dispatch.dc.html" style="align-self:flex-start;height:56px;display:flex;align-items:center;padding:0 26px;border-radius:12px;background:#F2A900;color:#16181B;text-decoration:none;font-family:'Barlow Condensed';font-weight:800;font-size:20px;letter-spacing:.05em;text-transform:uppercase;" style-hover="background:#FFBC1F;color:#16181B;">See dispatch</a>
+</div>
+</div>
+<div style="background:#16181B;border-radius:10px;padding:28px 24px;display:flex;flex-direction:column;gap:14px;color:#F7F7F5;box-shadow:inset 0 0 0 1.5px rgba(247,247,245,.14);">
+<div style="font-family:'Barlow Condensed';font-weight:700;font-size:15px;letter-spacing:.14em;color:#F2A900;">HIRING IN TEXAS?</div>
+<div style="font-family:'Barlow Condensed';font-weight:800;font-size:40px;line-height:.95;text-transform:uppercase;">Find CDL drivers near you</div>
+<div style="font-size:16px;line-height:1.5;color:#C9CBCF;flex:1;">Post a job and reach drivers in Houston, Dallas and San Antonio. We check CDL and MVR before you call.</div>
+<a href="Hire Drivers.dc.html" style="align-self:flex-start;height:56px;display:flex;align-items:center;padding:0 26px;border-radius:12px;border:2px solid #F7F7F5;color:#F7F7F5;text-decoration:none;font-family:'Barlow Condensed';font-weight:800;font-size:20px;letter-spacing:.05em;text-transform:uppercase;" style-hover="background:#F7F7F5;color:#16181B;">Hire drivers</a>
+</div>
+</section>
+<div style="margin-top:auto;"><dc-import name="SiteFooter" hint-size="100%,360px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { w: typeof window !== 'undefined' ? window.innerWidth : 1280, eq: 'All' };
+  componentDidMount() { this.onR = () => this.setState({ w: window.innerWidth }); window.addEventListener('resize', this.onR); this.onR(); }
+  componentWillUnmount() { window.removeEventListener('resize', this.onR); }
+  renderVals() {
+    const mobile = this.state.w < 760, eq = this.state.eq;
+    const hc = s => s >= 80 ? '#0E5C3A' : s >= 60 ? '#F2A900' : '#B42318';
+    const B = { ACTIVE: ['#E2F0E8', '#0E5C3A', '#0E5C3A'], INACTIVE: ['#FBE9E7', '#B42318', '#B42318'], WARNING: ['#FFF1CC', '#7A5300', '#F2A900'] };
+    const data = [
+      ['Lone Star Freightways', 'Dallas', '3702281', 'Reefer', 9, 'ACTIVE', 88], ['Volga Line Transport', 'Houston', '2987410', 'Dry van', 7, 'ACTIVE', 84],
+      ['Bluebonnet Carriers LLC', 'San Antonio', '3844019', 'Flatbed', 3, 'ACTIVE', 81], ['Gulf Coast Haulers', 'Houston', '3309762', 'Dry van', 2, 'WARNING', 66],
+      ['Laredo Border Express', 'Laredo', '3990514', 'Dry van', 12, 'ACTIVE', 77], ['Prut River Trucking', 'Fort Worth', '4108833', 'Power only', 1, 'ACTIVE', 71],
+      ['Big Bend Transport Co', 'El Paso', '3122690', 'Flatbed', 5, 'INACTIVE', 42], ['Alamo Reefer Lines', 'San Antonio', '3655127', 'Reefer', 4, 'WARNING', 63],
+    ].map(([name, city, dot, e, trucks, status, score]) => ({ name, city, dot, eq: e, trucks, status, score }));
+    const shown = data.filter(d => eq === 'All' || d.eq === eq);
+    const equip = [['Dry van', 41], ['Reefer', 19], ['Flatbed', 16], ['Power only', 9], ['Step deck', 6], ['Box truck', 5], ['Tanker', 4]];
+    return {
+      desktop: !mobile,
+      stats: [{ big: '48,210', small: 'Active for-hire carriers' }, { big: '1,284', small: 'New MCs in the last 30 days' }, { big: '76', small: 'Average Health Score' }, { big: '3.1', small: 'Trucks per carrier, average' }],
+      equip: equip.map(([t, p], i) => ({ t, pct: p + '%', bar: (p / 41 * 100) + '%', c: i === 0 ? '#0E5C3A' : i < 3 ? '#3F7D5E' : '#9CA0A8' })),
+      cities: [['Houston', '9,820'], ['Dallas', '7,415'], ['San Antonio', '4,960'], ['Laredo', '3,705'], ['Fort Worth', '3,188'], ['El Paso', '2,634']].map(([t, count], i) => ({ n: i + 1, t, count })),
+      eqFilters: ['All', 'Dry van', 'Reefer', 'Flatbed', 'Power only'].map(f => ({ label: f.toUpperCase(), bg: eq === f ? '#16181B' : '#FFFFFF', fg: eq === f ? '#F7F7F5' : '#16181B', border: eq === f ? '1.5px solid #16181B' : '1.5px solid #DEDFDB', pick: () => this.setState({ eq: f }) })),
+      rowCols: mobile ? 'minmax(0,1fr) auto' : 'minmax(0,2.2fr) minmax(0,1fr) minmax(0,1.2fr) 80px 130px 110px',
+      rowGap: mobile ? '10px 12px' : '16px', nameSpan: mobile ? '1 / -1' : 'auto',
+      rows: shown.map((c, k) => ({ ...c, border: k ? '1px solid #ECEDEA' : '0', bbg: B[c.status][0], bfg: B[c.status][1], bdot: B[c.status][2], hc: hc(c.score), hfg: c.score >= 60 && c.score < 80 ? '#16181B' : '#F7F7F5', ht: c.score >= 80 ? '#0E5C3A' : c.score >= 60 ? '#7A5300' : '#B42318', label: c.score >= 80 ? 'GOOD' : c.score >= 60 ? 'WATCH' : 'RISK', mobileMeta: mobile ? ` · ${c.eq} · ${c.trucks} trucks` : '' })),
+      showing: `Showing ${shown.length} of 48,210 · sample data`,
+    };
+  }
+}
+</script>
+</body>
+</html>

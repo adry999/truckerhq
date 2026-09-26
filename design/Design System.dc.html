@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><style>body{margin:0;background:#F7F7F5;font-family:Inter,sans-serif;color:#16181B}a{color:#0E5C3A}a:hover{color:#16181B}input::placeholder{color:#6B7280}</style></helmet>
+<div style="max-width:1200px;margin:0 auto;padding:48px 24px 96px;display:flex;flex-direction:column;gap:64px;">
+<header style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px;">
+<div style="display:flex;flex-direction:column;gap:12px;">
+<dc-import name="Logo" direction="sign" size="{{ 40 }}" hint-size="220px,50px"></dc-import>
+<div style="font-family:'Barlow Condensed';font-weight:800;font-size:clamp(40px,6vw,64px);line-height:.95;text-transform:uppercase;">Design system</div>
+</div>
+<div style="font-size:15px;color:#4B5058;max-width:420px;line-height:1.5;">Highway-sign inspired. High contrast, big tap targets, data you can read from the cab. All text pairs meet WCAG AA.</div>
+</header>
+<div style="height:6px;background:repeating-linear-gradient(90deg,#F2A900 0 40px,transparent 40px 64px);"></div>
+
+<section style="display:flex;flex-direction:column;gap:20px;">
+<div style="font-family:'Barlow Condensed';font-weight:700;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:#6B7280;">01 · Color</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
+<sc-for list="{{ colors }}" as="c" hint-placeholder-count="6">
+<div style="background:#FFFFFF;border:1px solid #DEDFDB;border-radius:16px;overflow:hidden;">
+<div style="height:120px;background:{{ c.hex }};display:flex;align-items:flex-end;padding:12px;box-sizing:border-box;"><span style="font-family:'Barlow Condensed';font-weight:800;font-size:28px;color:{{ c.on }};">Aa</span></div>
+<div style="padding:14px 16px;display:flex;flex-direction:column;gap:4px;">
+<div style="font-weight:600;font-size:15px;">{{ c.name }}</div>
+<div style="font-family:ui-monospace,monospace;font-size:13px;color:#4B5058;">{{ c.hex }}</div>
+<div style="font-size:13px;color:#6B7280;line-height:1.4;">{{ c.use }}</div>
+</div>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px;">
+<div style="font-family:'Barlow Condensed';font-weight:700;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:#6B7280;">02 · Type</div>
+<div style="background:#FFFFFF;border:1px solid #DEDFDB;border-radius:16px;">
+<sc-for list="{{ type }}" as="t" hint-placeholder-count="9">
+<div style="display:grid;grid-template-columns:minmax(120px,180px) minmax(0,1fr);gap:16px;align-items:baseline;padding:18px 24px;border-bottom:1px solid #ECEDEA;">
+<div style="font-family:ui-monospace,monospace;font-size:12px;color:#6B7280;line-height:1.5;">{{ t.label }}<br>{{ t.spec }}</div>
+<div style="font-family:{{ t.ff }};font-weight:{{ t.fw }};font-size:{{ t.fs }};line-height:{{ t.lh }};text-transform:{{ t.tt }};letter-spacing:{{ t.ls }};font-variant-numeric:tabular-nums;">{{ t.sample }}</div>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px;">
+<div style="font-family:'Barlow Condensed';font-weight:700;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:#6B7280;">03 · Buttons</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;">
+<div style="background:#FFFFFF;border:1px solid #DEDFDB;border-radius:16px;padding:24px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;">
+<button style="height:56px;padding:0 28px;border:0;border-radius:12px;background:#F2A900;color:#16181B;font-family:'Barlow Condensed';font-weight:800;font-size:22px;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;" style-hover="background:#FFBC1F;">Get started</button>
+<button style="height:56px;padding:0 28px;border:0;border-radius:12px;background:#0E5C3A;color:#F7F7F5;font-family:'Barlow Condensed';font-weight:800;font-size:22px;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;" style-hover="background:#0A4A2E;">Find loads</button>
+<button style="height:56px;padding:0 26px;border:2px solid #16181B;border-radius:12px;background:transparent;color:#16181B;font-family:'Barlow Condensed';font-weight:800;font-size:22px;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;" style-hover="background:#16181B;color:#F7F7F5;">See jobs</button>
+<button style="height:48px;padding:0 20px;border:0;border-radius:10px;background:#F2A900;color:#16181B;font-family:'Barlow Condensed';font-weight:800;font-size:19px;letter-spacing:.04em;text-transform:uppercase;">Medium</button>
+<button style="height:48px;padding:0 20px;border:0;border-radius:10px;background:#E3E4E0;color:#6B7280;font-family:'Barlow Condensed';font-weight:800;font-size:19px;letter-spacing:.04em;text-transform:uppercase;">Disabled</button>
+<div style="width:100%;font-size:13px;color:#6B7280;">Amber = the one main action per screen. Green = service actions. Large 56px, medium 48px. Never below 44px.</div>
+</div>
+<div style="background:#16181B;border-radius:16px;padding:24px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;">
+<button style="height:56px;padding:0 28px;border:0;border-radius:12px;background:#F2A900;color:#16181B;font-family:'Barlow Condensed';font-weight:800;font-size:22px;letter-spacing:.04em;text-transform:uppercase;">Get started</button>
+<button style="height:56px;padding:0 26px;border:2px solid #F7F7F5;border-radius:12px;background:transparent;color:#F7F7F5;font-family:'Barlow Condensed';font-weight:800;font-size:22px;letter-spacing:.04em;text-transform:uppercase;">Call dispatch</button>
+<a href="#" style="height:48px;display:flex;align-items:center;gap:8px;color:#F2A900;font-family:'Barlow Condensed';font-weight:700;font-size:20px;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;">Text link →</a>
+</div>
+</div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px;">
+<div style="font-family:'Barlow Condensed';font-weight:700;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:#6B7280;">04 · Inputs</div>
+<div style="background:#FFFFFF;border:1px solid #DEDFDB;border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:24px;">
+<div style="display:flex;background:#FFFFFF;border:3px solid #16181B;border-radius:14px;overflow:hidden;height:68px;">
+<input placeholder="Search any carrier by DOT, MC or name" style="flex:1;min-width:0;border:0;outline:none;padding:0 20px;font-family:Inter;font-size:18px;color:#16181B;background:transparent;">
+<button style="border:0;background:#F2A900;color:#16181B;padding:0 28px;font-family:'Barlow Condensed';font-weight:800;font-size:22px;letter-spacing:.04em;text-transform:uppercase;">Search</button>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;">
+<label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:14px;font-weight:600;">MC number</span><input value="MC 1284471" style="height:52px;border:1.5px solid #9CA0A8;border-radius:10px;padding:0 14px;font-family:Inter;font-size:16px;color:#16181B;"></label>
+<label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:14px;font-weight:600;">Focus</span><input value="Chicago, IL" style="height:52px;border:2px solid #0E5C3A;box-shadow:0 0 0 4px rgba(14,92,58,.15);border-radius:10px;padding:0 14px;font-family:Inter;font-size:16px;color:#16181B;outline:none;"></label>
+<label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:14px;font-weight:600;">Equipment</span><div style="height:52px;border:1.5px solid #9CA0A8;border-radius:10px;padding:0 14px;display:flex;align-items:center;justify-content:space-between;font-size:16px;">Dry van<span style="color:#6B7280;">▾</span></div></label>
+<label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:14px;font-weight:600;">DOT number</span><input value="12345" style="height:52px;border:2px solid #B42318;border-radius:10px;padding:0 14px;font-family:Inter;font-size:16px;color:#16181B;"><span style="font-size:13px;color:#B42318;font-weight:500;">DOT numbers have 6–8 digits.</span></label>
+</div>
+</div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px;">
+<div style="font-family:'Barlow Condensed';font-weight:700;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:#6B7280;">05 · Badges & Health Score</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;">
+<div style="background:#FFFFFF;border:1px solid #DEDFDB;border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:16px;">
+<div style="display:flex;flex-wrap:wrap;gap:10px;">
+<span style="display:inline-flex;align-items:center;gap:7px;height:30px;padding:0 12px;border-radius:8px;background:#E2F0E8;color:#0E5C3A;font-family:'Barlow Condensed';font-weight:800;font-size:16px;letter-spacing:.08em;"><span style="width:8px;height:8px;border-radius:50%;background:#0E5C3A;"></span>ACTIVE</span>
+<span style="display:inline-flex;align-items:center;gap:7px;height:30px;padding:0 12px;border-radius:8px;background:#FBE9E7;color:#B42318;font-family:'Barlow Condensed';font-weight:800;font-size:16px;letter-spacing:.08em;"><span style="width:8px;height:8px;border-radius:50%;background:#B42318;"></span>INACTIVE</span>
+<span style="display:inline-flex;align-items:center;gap:7px;height:30px;padding:0 12px;border-radius:8px;background:#FFF1CC;color:#7A5300;font-family:'Barlow Condensed';font-weight:800;font-size:16px;letter-spacing:.08em;"><span style="width:8px;height:8px;border-radius:50%;background:#F2A900;"></span>WARNING</span>
+<span style="display:inline-flex;align-items:center;height:30px;padding:0 12px;border-radius:8px;background:#16181B;color:#F2A900;font-family:'Barlow Condensed';font-weight:800;font-size:16px;letter-spacing:.08em;">FREE</span>
+</div>
+<div style="font-size:13px;color:#6B7280;line-height:1.5;">Always a dot plus a word. Color never carries meaning alone.</div>
+</div>
+<div style="background:#FFFFFF;border:1px solid #DEDFDB;border-radius:16px;padding:24px;display:flex;flex-wrap:wrap;gap:24px;align-items:center;">
+<sc-for list="{{ health }}" as="h" hint-placeholder-count="3">
+<div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+<div style="width:92px;height:92px;border-radius:50%;background:conic-gradient({{ h.color }} {{ h.pct }}, #E3E4E0 0);display:flex;align-items:center;justify-content:center;">
+<div style="width:74px;height:74px;border-radius:50%;background:#FFFFFF;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+<span style="font-family:'Barlow Condensed';font-weight:800;font-size:34px;line-height:1;">{{ h.score }}</span>
+<span style="font-size:10px;font-weight:600;color:#6B7280;letter-spacing:.08em;">/100</span>
+</div>
+</div>
+<span style="font-family:'Barlow Condensed';font-weight:800;font-size:15px;letter-spacing:.08em;color:{{ h.text }};">{{ h.label }}</span>
+</div>
+</sc-for>
+<div style="font-size:13px;color:#6B7280;line-height:1.5;flex:1;min-width:160px;">80–100 Good · 60–79 Watch · 0–59 Risk. Built from FMCSA authority, insurance, inspections and crash data.</div>
+</div>
+</div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px;">
+<div style="font-family:'Barlow Condensed';font-weight:700;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:#6B7280;">06 · Cards</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;">
+<div style="background:#0E5C3A;border-radius:18px;padding:6px;">
+<div style="border:1.5px solid rgba(247,247,245,.7);border-radius:13px;padding:22px;display:flex;flex-direction:column;gap:12px;color:#F7F7F5;min-height:200px;box-sizing:border-box;">
+<div style="font-family:'Barlow Condensed';font-weight:700;font-size:14px;letter-spacing:.14em;color:#F2A900;">SIGN PANEL · SERVICE</div>
+<div style="font-family:'Barlow Condensed';font-weight:800;font-size:34px;line-height:1;text-transform:uppercase;">Dispatch</div>
+<div style="font-size:15px;line-height:1.5;">Primary service cards. Green panel, reflective inner border.</div>
+</div>
+</div>
+<div style="background:#FFFFFF;border:1.5px solid #DEDFDB;border-radius:18px;padding:24px;display:flex;flex-direction:column;gap:12px;min-height:200px;box-sizing:border-box;">
+<div style="font-family:'Barlow Condensed';font-weight:700;font-size:14px;letter-spacing:.14em;color:#6B7280;">LIGHT · CONTENT</div>
+<div style="font-family:'Barlow Condensed';font-weight:800;font-size:34px;line-height:1;text-transform:uppercase;">Profit per mile</div>
+<div style="font-size:15px;line-height:1.5;color:#4B5058;">Tools, jobs, FAQ. White on off-white with a thin border.</div>
+</div>
+<div style="background:#16181B;border-radius:18px;padding:24px;display:flex;flex-direction:column;gap:12px;color:#F7F7F5;min-height:200px;box-sizing:border-box;box-shadow:inset 0 0 0 1.5px rgba(247,247,245,.18);">
+<div style="font-family:'Barlow Condensed';font-weight:700;font-size:14px;letter-spacing:.14em;color:#F2A900;">DARK · NIGHT SECTION</div>
+<div style="font-family:'Barlow Condensed';font-weight:800;font-size:34px;line-height:1;text-transform:uppercase;">$XXX / week</div>
+<div style="font-size:15px;line-height:1.5;color:#C9CBCF;">Pricing and callouts on asphalt sections.</div>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px;">
+<div style="font-size:13px;color:#6B7280;">Road-line dividers</div>
+<div style="height:6px;background:repeating-linear-gradient(90deg,#F2A900 0 40px,transparent 40px 64px);"></div>
+<div style="height:4px;background:repeating-linear-gradient(90deg,#16181B 0 28px,transparent 28px 48px);opacity:.25;"></div>
+</div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px;">
+<div style="font-family:'Barlow Condensed';font-weight:700;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:#6B7280;">07 · Data table</div>
+<div style="background:#FFFFFF;border:1px solid #DEDFDB;border-radius:16px;overflow-x:auto;">
+<table style="width:100%;border-collapse:collapse;min-width:760px;font-size:15px;font-variant-numeric:tabular-nums;">
+<thead><tr style="background:#16181B;color:#F7F7F5;text-align:left;">
+<th style="padding:14px 18px;font-family:'Barlow Condensed';font-weight:700;font-size:15px;letter-spacing:.1em;">CARRIER</th>
+<th style="padding:14px 18px;font-family:'Barlow Condensed';font-weight:700;font-size:15px;letter-spacing:.1em;">DOT</th>
+<th style="padding:14px 18px;font-family:'Barlow Condensed';font-weight:700;font-size:15px;letter-spacing:.1em;">MC</th>
+<th style="padding:14px 18px;font-family:'Barlow Condensed';font-weight:700;font-size:15px;letter-spacing:.1em;">TRUCKS</th>
+<th style="padding:14px 18px;font-family:'Barlow Condensed';font-weight:700;font-size:15px;letter-spacing:.1em;">AUTHORITY</th>
+<th style="padding:14px 18px;font-family:'Barlow Condensed';font-weight:700;font-size:15px;letter-spacing:.1em;text-align:right;">HEALTH</th>
+</tr></thead>
+<tbody>
+<sc-for list="{{ rows }}" as="r" hint-placeholder-count="5">
+<tr style="border-top:1px solid #ECEDEA;" style-hover="background:#F7F7F5;">
+<td style="padding:16px 18px;"><div style="font-weight:600;">{{ r.name }}</div><div style="font-size:13px;color:#6B7280;">{{ r.city }}</div></td>
+<td style="padding:16px 18px;">{{ r.dot }}</td>
+<td style="padding:16px 18px;">{{ r.mc }}</td>
+<td style="padding:16px 18px;">{{ r.trucks }}</td>
+<td style="padding:16px 18px;"><span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 10px;border-radius:8px;background:{{ r.bbg }};color:{{ r.bfg }};font-family:'Barlow Condensed';font-weight:800;font-size:15px;letter-spacing:.08em;"><span style="width:8px;height:8px;border-radius:50%;background:{{ r.dot2 }};"></span>{{ r.status }}</span></td>
+<td style="padding:16px 18px;text-align:right;"><span style="display:inline-flex;align-items:center;justify-content:center;min-width:44px;height:32px;border-radius:8px;border:2px solid {{ r.hc }};font-family:'Barlow Condensed';font-weight:800;font-size:19px;">{{ r.score }}</span></td>
+</tr>
+</sc-for>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    const hc = s => s >= 80 ? '#0E5C3A' : s >= 60 ? '#F2A900' : '#B42318';
+    const ht = s => s >= 80 ? '#0E5C3A' : s >= 60 ? '#7A5300' : '#B42318';
+    const hl = s => s >= 80 ? 'GOOD' : s >= 60 ? 'WATCH' : 'RISK';
+    const B = { ACTIVE: ['#E2F0E8', '#0E5C3A', '#0E5C3A'], INACTIVE: ['#FBE9E7', '#B42318', '#B42318'], WARNING: ['#FFF1CC', '#7A5300', '#F2A900'] };
+    const rows = [
+      ['Carpathian Freight LLC', 'Des Plaines, IL', '3412897', 'MC 1182044', 4, 'ACTIVE', 91],
+      ['Moldova Express Inc', 'Sacramento, CA', '3890122', 'MC 1420876', 2, 'WARNING', 68],
+      ['Volga Line Transport', 'Jacksonville, FL', '2987410', 'MC 1003318', 7, 'ACTIVE', 84],
+      ['Danube Road Corp', 'Charlotte, NC', '3561209', 'MC 1256910', 1, 'INACTIVE', 37],
+      ['Iron Horse Hauling', 'Phoenix, AZ', '4012653', 'MC 1511240', 3, 'ACTIVE', 79],
+    ].map(([name, city, dot, mc, trucks, status, score]) => ({ name, city, dot, mc, trucks, status, score, bbg: B[status][0], bfg: B[status][1], dot2: B[status][2], hc: hc(score) }));
+    const IN = "Inter", BC = "'Barlow Condensed'";
+    return {
+      colors: [
+        { name: 'Highway green', hex: '#0E5C3A', on: '#F7F7F5', use: 'Primary. Sign panels, service cards, ACTIVE.' },
+        { name: 'Caution amber', hex: '#F2A900', on: '#16181B', use: 'CTAs and accents. Asphalt text only on amber.' },
+        { name: 'Asphalt', hex: '#16181B', on: '#F7F7F5', use: 'Text, header, dark night sections.' },
+        { name: 'Off-white', hex: '#F7F7F5', on: '#16181B', use: 'Page background.' },
+        { name: 'Road grey', hex: '#6B7280', on: '#F7F7F5', use: 'Secondary text, captions. 4.6:1 on off-white.' },
+        { name: 'Stop red', hex: '#B42318', on: '#F7F7F5', use: 'INACTIVE, errors, Health 0–59.' },
+      ],
+      type: [
+        { label: 'Display', spec: 'Barlow Cond 800 · 72/0.92', ff: BC, fw: 800, fs: 'clamp(44px,7vw,72px)', lh: .92, tt: 'uppercase', ls: '0', sample: 'Your HQ on the road.' },
+        { label: 'H1', spec: 'Barlow Cond 800 · 52/1', ff: BC, fw: 800, fs: 'clamp(36px,5vw,52px)', lh: 1, tt: 'uppercase', ls: '0', sample: 'Flat weekly dispatch' },
+        { label: 'H2', spec: 'Barlow Cond 800 · 36/1.05', ff: BC, fw: 800, fs: '36px', lh: 1.05, tt: 'uppercase', ls: '0', sample: 'Free carrier tools' },
+        { label: 'H3', spec: 'Barlow Cond 700 · 26/1.1', ff: BC, fw: 700, fs: '26px', lh: 1.1, tt: 'uppercase', ls: '.01em', sample: 'Profit per mile calculator' },
+        { label: 'Eyebrow', spec: 'Barlow Cond 700 · 14 · +14%', ff: BC, fw: 700, fs: '14px', lh: 1.2, tt: 'uppercase', ls: '.14em', sample: 'Trucker HQ Dispatch' },
+        { label: 'Body L', spec: 'Inter 400 · 18/1.55', ff: IN, fw: 400, fs: '18px', lh: 1.55, tt: 'none', ls: '0', sample: 'We find the loads, fight for the rate and handle the paperwork. You drive.' },
+        { label: 'Body', spec: 'Inter 400 · 16/1.55', ff: IN, fw: 400, fs: '16px', lh: 1.55, tt: 'none', ls: '0', sample: 'One flat price every week. No percentage of your gross.' },
+        { label: 'Small', spec: 'Inter 500 · 14/1.45', ff: IN, fw: 500, fs: '14px', lh: 1.45, tt: 'none', ls: '0', sample: 'Updated from FMCSA data every 24 hours.' },
+        { label: 'Data', spec: 'Inter 600 · 15 · tabular', ff: IN, fw: 600, fs: '15px', lh: 1.4, tt: 'none', ls: '0', sample: 'DOT 3412897 · MC 1182044 · $2.41/mi' },
+      ],
+      health: [94, 72, 41].map(s => ({ score: s, pct: s + '%', color: hc(s), text: ht(s), label: hl(s) })),
+      rows,
+    };
+  }
+}
+</script>
+</body>
+</html>

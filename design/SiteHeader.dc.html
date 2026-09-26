@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<header style="background:#16181B;border-bottom:1px solid rgba(247,247,245,.12);font-family:Inter,sans-serif;">
+<div style="max-width:1280px;margin:0 auto;height:72px;padding:0 clamp(16px,4vw,40px);display:flex;align-items:center;gap:24px;">
+<a href="Homepage.dc.html" style="display:flex;text-decoration:none;"><dc-import name="Logo" direction="sign" theme="dark" size="{{ logoSize }}" hint-size="170px,40px"></dc-import></a>
+<sc-if value="{{ desktop }}" hint-placeholder-val="{{ true }}">
+<nav style="display:flex;gap:4px;margin-left:12px;">
+<sc-for list="{{ nav }}" as="n" hint-placeholder-count="5"><a href="{{ n.href }}" style="height:44px;display:flex;align-items:center;padding:0 12px;border-radius:8px;color:{{ n.fg }};background:{{ n.bg }};text-decoration:none;font-weight:500;font-size:15px;" style-hover="background:rgba(247,247,245,.08);color:#F2A900;">{{ n.label }}</a></sc-for>
+</nav>
+</sc-if>
+<div style="margin-left:auto;display:flex;align-items:center;gap:12px;">
+<div style="position:relative;">
+<button onClick="{{ toggleLang }}" aria-label="Language" style="height:48px;padding:0 12px 0 14px;border:1px solid rgba(247,247,245,.3);border-radius:10px;background:transparent;color:#F7F7F5;display:flex;align-items:center;gap:8px;font-family:'Barlow Condensed';font-weight:800;font-size:18px;letter-spacing:.06em;cursor:pointer;" style-hover="border-color:#F2A900;">{{ langCode }}<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F2A900" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></button>
+<sc-if value="{{ langOpen }}">
+<div style="position:absolute;right:0;top:54px;min-width:160px;background:#FFFFFF;border-radius:12px;padding:6px;box-shadow:0 10px 30px rgba(0,0,0,.3);display:flex;flex-direction:column;gap:2px;z-index:30;">
+<sc-for list="{{ langs }}" as="l"><button onClick="{{ l.pick }}" style="height:48px;padding:0 12px;border:0;border-radius:8px;background:{{ l.bg }};color:#16181B;display:flex;align-items:center;justify-content:space-between;gap:12px;font-family:Inter;font-size:16px;font-weight:{{ l.fw }};cursor:pointer;" style-hover="background:#F7F7F5;">{{ l.name }}<span style="font-family:'Barlow Condensed';font-weight:800;font-size:15px;color:#6B7280;letter-spacing:.06em;">{{ l.code }}</span></button></sc-for>
+</div>
+</sc-if>
+</div>
+<a href="tel:+1XXXXXXXXXX" aria-label="Call dispatch 24/7" style="height:48px;min-width:48px;display:flex;align-items:center;justify-content:center;gap:8px;padding:0 12px;border-radius:10px;border:1px solid rgba(247,247,245,.3);color:#F2A900;text-decoration:none;font-weight:600;font-size:15px;font-variant-numeric:tabular-nums;" style-hover="border-color:#F2A900;color:#F2A900;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg><sc-if value="{{ phoneText }}" hint-placeholder-val="{{ true }}"><span style="color:#F7F7F5;">(XXX) XXX-XXXX</span></sc-if></a>
+<sc-if value="{{ desktop }}" hint-placeholder-val="{{ true }}">
+<a href="Dispatch.dc.html" style="height:48px;display:flex;align-items:center;padding:0 22px;border-radius:10px;background:#F2A900;color:#16181B;text-decoration:none;font-family:'Barlow Condensed';font-weight:800;font-size:19px;letter-spacing:.05em;text-transform:uppercase;" style-hover="background:#FFBC1F;color:#16181B;">Get started</a>
+</sc-if>
+<sc-if value="{{ mobile }}">
+<button onClick="{{ toggleMenu }}" aria-label="Menu" style="width:48px;height:48px;border:1px solid rgba(247,247,245,.3);border-radius:10px;background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F7F7F5" stroke-width="2.5" stroke-linecap="round"><path d="M4 6h16"></path><path d="M4 12h16"></path><path d="M4 18h16"></path></svg></button>
+</sc-if>
+</div>
+</div>
+<sc-if value="{{ menuShown }}">
+<div style="padding:8px 16px 20px;display:flex;flex-direction:column;gap:4px;border-top:1px solid rgba(247,247,245,.12);">
+<sc-for list="{{ nav }}" as="n"><a href="{{ n.href }}" style="height:52px;display:flex;align-items:center;padding:0 8px;color:{{ n.mfg }};text-decoration:none;font-family:'Barlow Condensed';font-weight:700;font-size:24px;text-transform:uppercase;border-bottom:1px solid rgba(247,247,245,.08);">{{ n.label }}</a></sc-for>
+<a href="Dispatch.dc.html" style="margin-top:12px;height:56px;display:flex;align-items:center;justify-content:center;border-radius:12px;background:#F2A900;color:#16181B;text-decoration:none;font-family:'Barlow Condensed';font-weight:800;font-size:22px;letter-spacing:.05em;text-transform:uppercase;">Get started</a>
+<a href="tel:+1XXXXXXXXXX" style="height:56px;display:flex;align-items:center;justify-content:center;gap:10px;border-radius:12px;border:2px solid #F7F7F5;color:#F7F7F5;text-decoration:none;font-family:'Barlow Condensed';font-weight:800;font-size:22px;letter-spacing:.05em;text-transform:uppercase;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>Call 24/7 · (XXX) XXX-XXXX</a>
+</div>
+</sc-if>
+</header>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:72},&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;&quot;,&quot;Dispatch&quot;,&quot;Jobs&quot;,&quot;Hire Drivers&quot;,&quot;Tools&quot;,&quot;Resources&quot;],&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { w: typeof window !== 'undefined' ? window.innerWidth : 1280, menu: false, lang: 'EN', langOpen: false };
+  componentDidMount() { this.onR = () => this.setState({ w: window.innerWidth }); window.addEventListener('resize', this.onR); this.onR(); }
+  componentWillUnmount() { window.removeEventListener('resize', this.onR); }
+  renderVals() {
+    const mobile = this.state.w < 960, active = this.props.active ?? '';
+    const items = [['Dispatch', 'Dispatch.dc.html'], ['Jobs', 'Jobs.dc.html'], ['Hire Drivers', 'Hire Drivers.dc.html'], ['Tools', 'Tools.dc.html'], ['Resources', '#']];
+    return {
+      desktop: !mobile, mobile, phoneText: this.state.w >= 1240, menuShown: mobile && this.state.menu, logoSize: mobile ? 26 : 30,
+      toggleMenu: () => this.setState(s => ({ menu: !s.menu })),
+      nav: items.map(([label, href]) => ({ label, href, fg: label === active ? '#F2A900' : '#F7F7F5', mfg: label === active ? '#F2A900' : '#F7F7F5', bg: label === active ? 'rgba(242,169,0,.1)' : 'transparent' })),
+      langCode: this.state.lang, langOpen: this.state.langOpen,
+      toggleLang: () => this.setState(s => ({ langOpen: !s.langOpen })),
+      langs: [['EN', 'English'], ['RU', 'Русский']].map(([code, name]) => ({ code, name, bg: code === this.state.lang ? '#FFF1CC' : 'transparent', fw: code === this.state.lang ? 700 : 500, pick: () => this.setState({ lang: code, langOpen: false }) })),
+    };
+  }
+}
+</script>
+</body>
+</html>
