@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 
 const TOPICS = ["Dispatch", "Driver job", "Hiring drivers", "Something else"];
 const LANGUAGES = ["EN", "RU"] as const;
@@ -41,7 +41,31 @@ function Segmented({
 export default function AboutContactForm() {
   const [topic, setTopic] = useState("Dispatch");
   const [lang, setLang] = useState<(typeof LANGUAGES)[number]>("EN");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [message, setMessage] = useState("");
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState(false);
+
+  async function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+    setSubmitting(true);
+    setError(false);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ topic, name, phone, message, language: lang }),
+      });
+      if (!res.ok) throw new Error("request failed");
+      setSent(true);
+    } catch {
+      setError(true);
+    } finally {
+      setSubmitting(false);
+    }
+  }
 
   if (sent) {
     return (
@@ -64,10 +88,7 @@ export default function AboutContactForm() {
 
   return (
     <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        setSent(true);
-      }}
+      onSubmit={handleSubmit}
       className="flex flex-col gap-[18px] rounded-lg border-[1.5px] border-border bg-offwhite p-6"
     >
       <h3 className="font-display text-3xl font-extrabold uppercase">
@@ -84,6 +105,8 @@ export default function AboutContactForm() {
         <input
           required
           type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
           placeholder="Your name"
           className="h-[54px] rounded-[10px] border-[1.5px] border-[#9CA0A8] bg-white px-3.5 font-sans text-base outline-none"
         />
@@ -94,6 +117,8 @@ export default function AboutContactForm() {
         <input
           required
           type="tel"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
           placeholder="(XXX) XXX-XXXX"
           className="h-[54px] rounded-[10px] border-[1.5px] border-[#9CA0A8] bg-white px-3.5 font-sans text-base outline-none"
         />
@@ -103,6 +128,8 @@ export default function AboutContactForm() {
         <span className="text-sm font-semibold">Anything we should know?</span>
         <textarea
           rows={3}
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
           placeholder="Truck, lanes, MC number"
           className="rounded-[10px] border-[1.5px] border-[#9CA0A8] bg-white p-3.5 font-sans text-base outline-none"
         />
@@ -115,10 +142,16 @@ export default function AboutContactForm() {
 
       <button
         type="submit"
-        className="h-[60px] rounded-xl bg-amber font-display text-2xl font-extrabold uppercase tracking-[.05em] text-asphalt hover:bg-amber-hover"
+        disabled={submitting}
+        className="h-[60px] rounded-xl bg-amber font-display text-2xl font-extrabold uppercase tracking-[.05em] text-asphalt hover:bg-amber-hover disabled:cursor-not-allowed disabled:opacity-60"
       >
-        Call me back
+        {submitting ? "Sending..." : "Call me back"}
       </button>
+      {error && (
+        <span className="text-[13px] font-semibold text-red">
+          Something went wrong. Try again in a moment.
+        </span>
+      )}
       <span className="text-[13px] text-grey">
         We call back within 15 minutes, day or night.
       </span>

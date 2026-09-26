@@ -1,10 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 
 const POSITIONS = ["OTR", "Regional", "Local", "Team", "Owner-op"];
 const EQUIPMENT = ["Dry van", "Reefer", "Flatbed", "Power only"];
 const LANGUAGES = ["Any", "English", "Russian"];
+
+const FIELDS = [
+  ["companyName", "Company name", "Your company", "text"],
+  ["dotNumber", "DOT number", "6–8 digits", "text"],
+  ["contactName", "Your name", "Who we call", "text"],
+  ["phone", "Phone", "(555) 555-5555", "tel"],
+  ["pay", "Pay", "e.g. $0.70/mi or $1,800/wk", "text"],
+  ["homeBase", "Home base", "City, state", "text"],
+] as const;
+
+type FieldKey = (typeof FIELDS)[number][0];
 
 function Segmented({
   options,
@@ -36,10 +47,44 @@ function Segmented({
 }
 
 export default function HireDriversForm() {
+  const [fields, setFields] = useState<Record<FieldKey, string>>({
+    companyName: "",
+    dotNumber: "",
+    contactName: "",
+    phone: "",
+    pay: "",
+    homeBase: "",
+  });
   const [pos, setPos] = useState("OTR");
   const [eq, setEq] = useState("Dry van");
   const [lang, setLang] = useState("Any");
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState(false);
+
+  async function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+    setSubmitting(true);
+    setError(false);
+    try {
+      const res = await fetch("/api/hire-drivers", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...fields,
+          position: pos,
+          equipment: eq,
+          driverLanguage: lang,
+        }),
+      });
+      if (!res.ok) throw new Error("request failed");
+      setSent(true);
+    } catch {
+      setError(true);
+    } finally {
+      setSubmitting(false);
+    }
+  }
 
   if (sent) {
     return (
@@ -56,27 +101,16 @@ export default function HireDriversForm() {
   }
 
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        setSent(true);
-      }}
-      className="flex flex-col gap-[18px]"
-    >
+    <form onSubmit={handleSubmit} className="flex flex-col gap-[18px]">
       <div className="grid gap-4 sm:grid-cols-2">
-        {[
-          ["Company name", "Your company", "text"],
-          ["DOT number", "6–8 digits", "text"],
-          ["Your name", "Who we call", "text"],
-          ["Phone", "(555) 555-5555", "tel"],
-          ["Pay", "e.g. $0.70/mi or $1,800/wk", "text"],
-          ["Home base", "City, state", "text"],
-        ].map(([label, ph, type]) => (
-          <label key={label} className="flex flex-col gap-1.5">
+        {FIELDS.map(([key, label, ph, type]) => (
+          <label key={key} className="flex flex-col gap-1.5">
             <span className="text-sm font-semibold">{label}</span>
             <input
               required
               type={type}
+              value={fields[key]}
+              onChange={(e) => setFields((f) => ({ ...f, [key]: e.target.value }))}
               placeholder={ph}
               className="h-[54px] rounded-[10px] border-[1.5px] border-[#9CA0A8] px-3.5 font-sans text-base outline-none"
             />
@@ -99,10 +133,16 @@ export default function HireDriversForm() {
 
       <button
         type="submit"
-        className="h-[60px] rounded-xl bg-amber font-display text-2xl font-extrabold uppercase tracking-[.05em] text-asphalt hover:bg-amber-hover"
+        disabled={submitting}
+        className="h-[60px] rounded-xl bg-amber font-display text-2xl font-extrabold uppercase tracking-[.05em] text-asphalt hover:bg-amber-hover disabled:cursor-not-allowed disabled:opacity-60"
       >
-        Send job
+        {submitting ? "Sending..." : "Send job"}
       </button>
+      {error && (
+        <span className="text-[13px] font-semibold text-red">
+          Something went wrong. Try again in a moment.
+        </span>
+      )}
       <span className="text-[13px] text-grey">
         We check your DOT and call you to confirm before the job goes live.
       </span>

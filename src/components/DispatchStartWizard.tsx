@@ -141,14 +141,47 @@ export default function DispatchStartWizard() {
   const [phone, setPhone] = useState("");
   const [bestTime, setBestTime] = useState("Today");
   const [language, setLanguage] = useState("English");
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
 
   const toggleLane = (lane: string) => {
     setLanes((prev) => (prev.includes(lane) ? prev.filter((l) => l !== lane) : [...prev, lane]));
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setStep((s) => Math.min(4, s + 1));
+    if (step < 3) {
+      setStep((s) => Math.min(4, s + 1));
+      return;
+    }
+    setSubmitting(true);
+    setSubmitError(false);
+    try {
+      const res = await fetch("/api/dispatch-start", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          trailerType: trailer,
+          trucks,
+          driverType: driver,
+          homeBase,
+          lanes,
+          homeTime,
+          authority,
+          mcNumber,
+          name,
+          phone,
+          bestTime,
+          language,
+        }),
+      });
+      if (!res.ok) throw new Error("request failed");
+      setStep(4);
+    } catch {
+      setSubmitError(true);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const languageName = language === "English" ? "English" : "Russian";
@@ -403,11 +436,17 @@ export default function DispatchStartWizard() {
                   )}
                   <button
                     type="submit"
-                    className="flex h-14 items-center justify-center rounded-xl bg-amber px-7 font-display text-xl font-extrabold uppercase tracking-[.05em] text-asphalt hover:bg-amber-hover"
+                    disabled={submitting}
+                    className="flex h-14 items-center justify-center rounded-xl bg-amber px-7 font-display text-xl font-extrabold uppercase tracking-[.05em] text-asphalt hover:bg-amber-hover disabled:cursor-not-allowed disabled:opacity-60"
                   >
-                    {step === 3 ? "Request my call" : "Next"}
+                    {step === 3 ? (submitting ? "Sending..." : "Request my call") : "Next"}
                   </button>
                 </div>
+                {submitError && (
+                  <p className="text-sm font-semibold text-red">
+                    Something went wrong. Try again, or call us directly.
+                  </p>
+                )}
               </form>
             )}
           </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 
 const WATCH_ITEMS: [string, string, string][] = [
   ["auth", "Operating authority", "Active, pending, revoked or inactive"],
@@ -25,6 +25,27 @@ export default function ComplianceAlertsForm() {
     oos: true,
     insp: false,
   });
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState(false);
+
+  async function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+    setSubmitting(true);
+    setError(false);
+    try {
+      const res = await fetch("/api/compliance-alerts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ dot, phone, language: lang, watch }),
+      });
+      if (!res.ok) throw new Error("request failed");
+      setDone(true);
+    } catch {
+      setError(true);
+    } finally {
+      setSubmitting(false);
+    }
+  }
 
   const found = dot.replace(/\D/g, "").length >= 6;
   const count = Object.values(watch).filter(Boolean).length;
@@ -70,10 +91,7 @@ export default function ComplianceAlertsForm() {
         </div>
       ) : (
         <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            setDone(true);
-          }}
+          onSubmit={handleSubmit}
           className="flex flex-col gap-[22px] rounded-lg border border-border bg-white p-[22px]"
         >
           <label className="flex flex-col gap-1.5">
@@ -160,10 +178,16 @@ export default function ComplianceAlertsForm() {
 
           <button
             type="submit"
-            className="h-[60px] rounded-xl bg-amber font-display text-2xl font-extrabold uppercase tracking-[.05em] text-asphalt hover:bg-amber-hover"
+            disabled={submitting}
+            className="h-[60px] rounded-xl bg-amber font-display text-2xl font-extrabold uppercase tracking-[.05em] text-asphalt hover:bg-amber-hover disabled:cursor-not-allowed disabled:opacity-60"
           >
-            Turn on alerts
+            {submitting ? "Sending..." : "Turn on alerts"}
           </button>
+          {error && (
+            <span className="text-[13px] font-semibold text-red">
+              Something went wrong. Try again in a moment.
+            </span>
+          )}
           <span className="text-[13px] leading-relaxed text-grey">
             By turning on alerts you agree to receive texts from Trucker HQ
             about this DOT number. Free, usually 1–3 texts a year. Msg & data

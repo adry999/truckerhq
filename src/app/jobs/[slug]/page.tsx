@@ -181,7 +181,7 @@ export default async function JobDetailPage({
             <span className="font-display text-2xl font-extrabold uppercase">Apply now</span>
             <span className="text-[13px] text-[#AEB2B8]">2 minutes</span>
           </div>
-          <ApplyForm company={job.company} />
+          <ApplyForm company={job.company} jobSlug={job.slug} />
         </aside>
       </section>
 
