@@ -7,11 +7,11 @@ import { JOBS, healthColor, CARRIERS } from "@/lib/data";
 import { CITY_DIRECTORY } from "@/lib/cities";
 
 export const metadata: Metadata = {
-  title: "CDL Jobs with Pay Posted Up Front",
+  title: "Работа CDL с указанной оплатой",
   description:
-    "OTR, regional and local CDL-A jobs. Every job shows pay, home time and the carrier Health Score. Apply in English or Russian.",
+    "OTR, региональные и локальные вакансии CDL-A. В каждой вакансии — оплата, время дома и Health Score перевозчика. Отклик на английском или русском.",
   alternates: {
-    canonical: "/jobs",
+    canonical: "/ru/jobs",
     languages: { en: "/jobs", ru: "/ru/jobs", "x-default": "/jobs" },
   },
 };
@@ -23,7 +23,7 @@ function scoreFor(carrierSlug: string) {
   return CARRIERS.find((c) => c.slug === carrierSlug)?.score ?? 75;
 }
 
-export default async function JobsPage({
+export default async function JobsRuPage({
   searchParams,
 }: {
   searchParams: Promise<{ type?: string; equip?: string; q?: string }>;
@@ -48,34 +48,34 @@ export default async function JobsPage({
       else sp.set(k, v);
     });
     const qs = sp.toString();
-    return qs ? `/jobs?${qs}` : "/jobs";
+    return qs ? `/ru/jobs?${qs}` : "/ru/jobs";
   };
 
   return (
     <div className="flex min-h-screen flex-col">
-      <SiteHeader />
+      <SiteHeader lang="RU" enHref="/jobs" ruHref="/ru/jobs" />
 
       <section className="bg-asphalt text-offwhite">
         <div className="mx-auto flex max-w-6xl flex-col gap-[18px] px-4 py-10 sm:px-6 md:py-20">
           <Logo theme="dark" size={28} sub="JOBS" />
           <h1 className="font-display text-5xl font-extrabold uppercase leading-[0.9] sm:text-6xl md:text-7xl">
-            CDL jobs.
+            Работа CDL.
             <br />
-            <span className="text-amber">Pay posted up front.</span>
+            <span className="text-amber">Оплата указана сразу.</span>
           </h1>
           <p className="max-w-xl text-lg leading-relaxed text-[#D4D6DA]">
-            Every job shows the pay and home time. Every carrier shows its
-            Health Score. Apply in English or Russian.
+            В каждой вакансии — оплата и время дома. У каждого перевозчика —
+            Health Score. Отклик на английском или русском.
           </p>
           <form
-            action="/jobs"
+            action="/ru/jobs"
             className="flex max-w-3xl flex-col gap-1.5 rounded-lg border-[3px] border-amber bg-white p-1.5 sm:flex-row"
           >
             <input
               name="q"
               defaultValue={q}
-              aria-label="Search jobs"
-              placeholder="City, state or company"
+              aria-label="Поиск вакансий"
+              placeholder="Город, штат или компания"
               className="min-h-[58px] flex-1 border-0 bg-transparent px-3.5 font-sans text-lg text-asphalt outline-none"
             />
             <button
@@ -83,7 +83,7 @@ export default async function JobsPage({
               className="min-h-[58px] rounded px-8 font-display text-xl font-extrabold uppercase tracking-[.05em] text-asphalt"
               style={{ background: "var(--color-amber)" }}
             >
-              Find jobs
+              Найти работу
             </button>
           </form>
         </div>
@@ -94,7 +94,7 @@ export default async function JobsPage({
         <div className="flex flex-col gap-3">
           <div className="flex items-center gap-2 overflow-x-auto pb-0.5">
             <span className="w-[92px] shrink-0 font-display text-sm font-bold tracking-[.12em] text-grey">
-              JOB TYPE
+              ТИП РАБОТЫ
             </span>
             {TYPES.map((t) => (
               <Link
@@ -112,7 +112,7 @@ export default async function JobsPage({
           </div>
           <div className="flex items-center gap-2 overflow-x-auto pb-0.5">
             <span className="w-[92px] shrink-0 font-display text-sm font-bold tracking-[.12em] text-grey">
-              EQUIPMENT
+              ОБОРУДОВАНИЕ
             </span>
             {EQUIPMENT.map((e) => (
               <Link
@@ -132,9 +132,9 @@ export default async function JobsPage({
 
         <div className="flex flex-wrap items-baseline justify-between gap-3">
           <h2 className="font-display text-3xl font-extrabold md:text-4xl">
-            {filtered.length} job{filtered.length === 1 ? "" : "s"}
+            {filtered.length} ваканси{filtered.length === 1 ? "я" : filtered.length >= 2 && filtered.length <= 4 ? "и" : "й"}
           </h2>
-          <span className="text-sm text-grey">Newest first</span>
+          <span className="text-sm text-grey">Сначала новые</span>
         </div>
 
         <div className="grid gap-4 md:grid-cols-2">
@@ -186,7 +186,7 @@ export default async function JobsPage({
                   </span>
                   {j.russian && (
                     <span className="flex h-7 items-center rounded-md border border-[#9CA0A8] px-2.5 font-display text-[15px] font-extrabold tracking-[.06em] text-[#3F444B]">
-                      RU SPOKEN
+                      ГОВОРИМ ПО-РУССКИ
                     </span>
                   )}
                 </div>
@@ -195,7 +195,7 @@ export default async function JobsPage({
                     {j.posted} · {j.experience}
                   </span>
                   <span className="font-display text-[17px] font-bold tracking-[.05em] text-green">
-                    VIEW JOB →
+                    СМОТРЕТЬ →
                   </span>
                 </div>
               </Link>
@@ -205,13 +205,13 @@ export default async function JobsPage({
 
         {filtered.length === 0 && (
           <div className="rounded-lg border border-border bg-white p-10 text-center text-base text-[#4B5058]">
-            No jobs match these filters. Try fewer filters.
+            Нет вакансий по этим фильтрам. Попробуйте убрать часть фильтров.
           </div>
         )}
 
         <div className="mt-4 flex flex-col gap-3.5">
           <h3 className="font-display text-2xl font-extrabold uppercase">
-            Browse jobs by city
+            Вакансии по городам
           </h3>
           <div className="flex flex-wrap gap-2">
             {CITY_DIRECTORY.map((c) => (
@@ -231,17 +231,17 @@ export default async function JobsPage({
           <div className="flex flex-wrap items-center justify-between gap-[18px] p-6 text-offwhite">
             <div className="flex flex-col gap-1.5">
               <span className="font-display text-[15px] font-bold tracking-[.14em] text-amber">
-                CARRIERS
+                ПЕРЕВОЗЧИКАМ
               </span>
               <span className="font-display text-[32px] font-extrabold uppercase leading-none">
-                Need a driver? Post a job here.
+                Нужен водитель? Разместите вакансию здесь.
               </span>
             </div>
             <Link
               href="/hire-drivers"
               className="flex h-14 items-center rounded-xl bg-amber px-[26px] font-display text-xl font-extrabold uppercase tracking-[.05em] text-asphalt hover:bg-amber-hover"
             >
-              Hire drivers
+              Нанять водителей
             </Link>
           </div>
         </div>

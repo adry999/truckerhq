@@ -35,7 +35,7 @@ const DISPATCH_ITEMS = [
 const SMALL_SERVICES = [
   {
     title: "Работа водителям",
-    href: "/jobs",
+    href: "/ru/jobs",
     cta: "Смотреть вакансии",
     line: "В каждой вакансии указаны оплата и время дома. Откликайтесь по-русски или по-английски, вам перезвонит человек.",
   },
@@ -458,7 +458,7 @@ export default function HomePageRU() {
             Свежие вакансии CDL
           </h2>
           <Link
-            href="/jobs"
+            href="/ru/jobs"
             className="flex h-11 items-center font-display text-lg font-bold uppercase tracking-[.04em]"
           >
             Все вакансии →
@@ -468,7 +468,7 @@ export default function HomePageRU() {
           {JOBS.map((j, i) => (
             <Link
               key={j.title + j.co}
-              href="/jobs"
+              href="/ru/jobs"
               className={`flex flex-wrap items-center gap-x-6 gap-y-2.5 px-5 py-[18px] hover:bg-offwhite ${
                 i ? "border-t border-[#ECEDEA]" : ""
               }`}

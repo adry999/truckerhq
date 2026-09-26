@@ -9,92 +9,92 @@ import JsonLd from "@/components/JsonLd";
 import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Truck Dispatch Service, Flat Weekly Rate",
+  title: "Диспетчинг для дальнобойщиков, фиксированная цена в неделю",
   description:
-    "Dispatch for owner-operators and small fleets. One flat price per truck per week, 24/7 dispatchers, broker checks, paperwork included.",
+    "Диспетчинг для owner-operator и небольших автопарков. Одна фиксированная цена за грузовик в неделю, диспетчеры 24/7, проверка брокеров, документы включены.",
   alternates: {
-    canonical: "/dispatch",
+    canonical: "/ru/dispatch",
     languages: { en: "/dispatch", ru: "/ru/dispatch", "x-default": "/dispatch" },
   },
 };
 
 const INCLUDED = [
-  { t: "24/7 dispatcher", d: "A real person on your time zone, day or night. English or Russian." },
-  { t: "Load boards", d: "We search DAT, Truckstop and direct broker lists so you do not have to." },
-  { t: "Rate negotiation", d: "We push every broker for more. We check the lane average before we say yes." },
-  { t: "Broker vetting", d: "Credit, days-to-pay and authority checked on every broker before booking." },
-  { t: "Fuel discounts", d: "Fuel card savings at major truck stop chains across the US." },
-  { t: "Paperwork", d: "Rate cons, BOLs, invoices and factoring packets handled for you." },
-  { t: "Compliance reminders", d: "We watch your insurance, UCR, IFTA and authority dates." },
-  { t: "Online visibility", d: "A simple website and a Google Business profile so brokers and shippers find you." },
+  { t: "Диспетчер 24/7", d: "Живой человек в вашем часовом поясе, днём и ночью. По-английски или по-русски." },
+  { t: "Биржи грузов", d: "Мы ищем на DAT, Truckstop и у прямых брокеров, чтобы вам не пришлось." },
+  { t: "Торг за ставку", d: "Давим на каждого брокера за более высокую цену. Сверяем со средней по маршруту, прежде чем согласиться." },
+  { t: "Проверка брокера", d: "Кредитная история, скорость оплаты и статус авторизации проверяются перед каждой бронью." },
+  { t: "Скидки на топливо", d: "Скидки по топливной карте на крупных сетях заправок по всей стране." },
+  { t: "Документы", d: "Rate con, BOL, инвойсы и пакеты для факторинга — всё оформляем за вас." },
+  { t: "Напоминания по комплаенсу", d: "Следим за страховкой, UCR, IFTA и датами по авторизации." },
+  { t: "Присутствие онлайн", d: "Простой сайт и профиль Google Business, чтобы брокеры и грузоотправители находили вас." },
 ];
 
 const PACKAGES = [
   {
-    who: "MC UNDER 6 MONTHS",
+    who: "MC МОЛОЖЕ 6 МЕСЯЦЕВ",
     name: "Starter MC",
-    unit: "/ week",
-    desc: "For new authorities that need their first brokers and first loads.",
-    items: ["Full dispatch service", "Broker setup packets", "Brokers that accept new MCs", "New MC Checklist walkthrough", "Compliance reminders"],
-    cta: "Start Starter MC",
+    unit: "/ неделя",
+    desc: "Для новых авторизаций, которым нужны первые брокеры и первые грузы.",
+    items: ["Полный диспетчинг", "Пакеты для оформления у брокеров", "Брокеры, работающие с новыми MC", "Разбор New MC Checklist", "Напоминания по комплаенсу"],
+    cta: "Начать Starter MC",
     featured: false,
   },
   {
-    who: "1–3 TRUCKS",
+    who: "1–3 ГРУЗОВИКА",
     name: "Owner-Operator Flat",
-    unit: "/ week per truck",
-    desc: "Everything included. One price, every week.",
-    items: ["24/7 dispatcher on your time zone", "Rate negotiation on every load", "Broker vetting", "Paperwork and invoicing", "Fuel card discounts"],
-    cta: "Start dispatch",
+    unit: "/ неделя за грузовик",
+    desc: "Всё включено. Одна цена, каждую неделю.",
+    items: ["Диспетчер 24/7 в вашем поясе", "Торг за ставку на каждый груз", "Проверка брокеров", "Документы и инвойсы", "Скидки по топливной карте"],
+    cta: "Начать диспетчинг",
     featured: true,
     popular: true,
   },
   {
-    who: "3–10 TRUCKS",
+    who: "3–10 ГРУЗОВИКОВ",
     name: "Fleet",
-    unit: "/ week per truck",
-    desc: "Lower per-truck price and one dispatcher who knows your whole fleet.",
-    items: ["Everything in Owner-Operator", "Dedicated dispatcher", "Weekly fleet report", "Driver hiring support", "Website and Google profile included"],
-    cta: "Talk to us",
+    unit: "/ неделя за грузовик",
+    desc: "Цена ниже за грузовик и один диспетчер, знающий весь ваш парк.",
+    items: ["Всё из Owner-Operator", "Персональный диспетчер", "Еженедельный отчёт по парку", "Помощь в найме водителей", "Сайт и профиль Google включены"],
+    cta: "Поговорить с нами",
     featured: false,
   },
   {
-    who: "ANY CARRIER",
+    who: "ЛЮБОЙ ПЕРЕВОЗЧИК",
     name: "Web & Brand",
-    unit: "one-time",
-    desc: "Look like a real company to brokers and shippers.",
-    items: ["One-page company website", "Google Business profile", "Email on your domain", "Logo and truck door lettering file", "Add to any dispatch package"],
-    cta: "Get online",
+    unit: "разовый платёж",
+    desc: "Выглядите как настоящая компания для брокеров и грузоотправителей.",
+    items: ["Одностраничный сайт компании", "Профиль Google Business", "Почта на вашем домене", "Файл логотипа и надписи на дверь", "Добавляется к любому пакету диспетчинга"],
+    cta: "Выйти онлайн",
     featured: false,
   },
 ];
 
 const STEPS = [
-  { n: "1", title: "Call or sign up", desc: "Tell us your truck, equipment, lanes and home time. Send your MC, W-9 and insurance." },
-  { n: "2", title: "We book the loads", desc: "We search the boards, check the broker and negotiate. You approve every load." },
-  { n: "3", title: "You drive, we do paper", desc: "Rate cons, check calls, invoices and factoring. You get paid, we get the same flat price." },
+  { n: "1", title: "Звоните или регистрируйтесь", desc: "Расскажите про грузовик, оборудование, маршруты и время дома. Пришлите MC, W-9 и страховку." },
+  { n: "2", title: "Мы бронируем грузы", desc: "Ищем на биржах, проверяем брокера и торгуемся. Вы одобряете каждый груз." },
+  { n: "3", title: "Вы едете, мы делаем бумаги", desc: "Rate con, check calls, инвойсы и факторинг. Вам платят, мы получаем ту же фиксированную цену." },
 ];
 
 const FAQ = [
-  { q: "What does the flat weekly price include?", a: "Everything on this page: load search, rate negotiation, broker vetting, paperwork, invoicing, fuel discounts and 24/7 support. No extra fees per load." },
-  { q: "Is there a contract?", a: "No long contract. Dispatch runs week to week. Give us one week notice and you are free to go." },
-  { q: "Do you force loads on me?", a: "Never. We bring you options with the rate and the lane. You say yes or no. It is your truck." },
-  { q: "My MC is new. Will brokers work with me?", a: "Some will not, and we know which ones will. Starter MC covers broker setup packets and lanes that accept new authorities." },
-  { q: "Do you work with factoring companies?", a: "Yes. We send rate cons, BOLs and invoices to your factoring company, or invoice brokers directly if you do not factor." },
-  { q: "What equipment do you dispatch?", a: "Dry van, reefer, flatbed, step deck, power only and box trucks." },
+  { q: "Что входит в фиксированную недельную цену?", a: "Всё на этой странице: поиск грузов, торг за ставку, проверка брокеров, документы, инвойсы, скидки на топливо и поддержка 24/7. Никаких доплат за груз." },
+  { q: "Есть ли долгосрочный контракт?", a: "Долгого контракта нет. Диспетчинг работает неделя за неделей. Предупредите за неделю — и вы свободны." },
+  { q: "Вы навязываете мне грузы?", a: "Никогда. Мы приносим вам варианты со ставкой и маршрутом. Вы говорите да или нет. Это ваш грузовик." },
+  { q: "У меня новый MC. Брокеры будут со мной работать?", a: "Некоторые нет, и мы знаем, кто будет. Starter MC включает пакеты для оформления у брокеров и маршруты, принимающие новые авторизации." },
+  { q: "Вы работаете с факторинговыми компаниями?", a: "Да. Мы отправляем rate con, BOL и инвойсы в вашу факторинговую компанию, либо выставляем счета брокерам напрямую, если вы не факторите." },
+  { q: "Какое оборудование вы диспетчерите?", a: "Dry van, reefer, flatbed, step deck, power only и box truck." },
 ];
 
-export default function DispatchPage() {
+export default function DispatchRuPage() {
   return (
     <div className="flex min-h-screen flex-col">
       <JsonLd data={faqSchema(FAQ)} />
-      <SiteHeader />
+      <SiteHeader lang="RU" enHref="/dispatch" ruHref="/ru/dispatch" />
 
       <section className="relative overflow-hidden bg-asphalt text-offwhite">
         <div className="absolute inset-0">
           <Image
             src="https://images.unsplash.com/photo-1783247007596-cca4a61a16f5?fm=jpg&q=70&w=2000&auto=format&fit=crop"
-            alt="Driver in the cab at a truck stop, dawn"
+            alt="Водитель в кабине на стоянке для дальнобойщиков, рассвет"
             fill
             priority
             className="object-cover"
@@ -104,57 +104,57 @@ export default function DispatchPage() {
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[rgba(22,24,27,.94)] via-[rgba(22,24,27,.7)] to-[rgba(22,24,27,.35)]" />
         <div className="relative mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-2 md:items-center md:py-28">
           <div className="flex flex-col gap-5">
-            <Logo theme="dark" size={30} sub="DISPATCH" />
+            <Logo theme="dark" size={30} sub="ДИСПЕТЧИНГ" />
             <h1 className="font-display text-5xl font-extrabold uppercase leading-[0.9] sm:text-6xl md:text-7xl lg:text-8xl">
-              Flat weekly dispatch.
+              Фиксированная цена в неделю.
               <br />
-              <span className="text-amber">No percentage.</span>
+              <span className="text-amber">Без процентов.</span>
             </h1>
             <p className="max-w-lg text-lg leading-relaxed text-[#D4D6DA] md:text-xl">
-              We find the loads, push for the rate and do the paperwork. You
-              pay one price every week, no matter how much you gross.
+              Мы находим грузы, торгуемся за ставку и делаем документы. Вы
+              платите одну цену каждую неделю, независимо от вашей выручки.
             </p>
             <div className="flex flex-wrap gap-3">
               <a
                 href="#pricing"
                 className="flex h-14 items-center rounded-xl bg-amber px-7 font-display text-xl font-extrabold uppercase tracking-[.05em] text-asphalt hover:bg-amber-hover"
               >
-                See packages
+                Смотреть пакеты
               </a>
               <a
                 href="tel:+1XXXXXXXXXX"
                 className="flex h-14 items-center rounded-xl border-2 border-offwhite px-6 font-display text-xl font-extrabold uppercase tracking-[.05em] text-offwhite hover:bg-offwhite hover:text-asphalt"
               >
-                Call (XXX) XXX-XXXX
+                Звонок (XXX) XXX-XXXX
               </a>
             </div>
           </div>
           <div className="justify-self-end w-full max-w-[420px] rounded-[10px] bg-green p-1.5">
             <div className="flex flex-col gap-3.5 rounded-md border-[1.5px] border-white/70 p-6">
               <div className="font-display text-[15px] font-bold tracking-[.14em] text-amber">
-                ONE TRUCK · ONE PRICE
+                ОДИН ГРУЗОВИК · ОДНА ЦЕНА
               </div>
               <div className="flex items-baseline gap-2">
                 <span className="font-display text-8xl font-extrabold">$XXX</span>
-                <span className="text-[17px] text-[#DCE6E0]">/ week</span>
+                <span className="text-[17px] text-[#DCE6E0]">/ неделя</span>
               </div>
               <div className="h-1 bg-[repeating-linear-gradient(90deg,#F2A900_0_24px,transparent_24px_40px)]" />
               <div className="grid grid-cols-2 gap-3.5">
                 <div>
                   <div className="font-display text-3xl font-extrabold">24/7</div>
-                  <div className="text-sm text-[#DCE6E0]">every US time zone</div>
+                  <div className="text-sm text-[#DCE6E0]">все пояса США</div>
                 </div>
                 <div>
                   <div className="font-display text-3xl font-extrabold">0%</div>
-                  <div className="text-sm text-[#DCE6E0]">of your gross</div>
+                  <div className="text-sm text-[#DCE6E0]">от вашей выручки</div>
                 </div>
                 <div>
                   <div className="font-display text-3xl font-extrabold">EN · RU</div>
-                  <div className="text-sm text-[#DCE6E0]">dispatchers</div>
+                  <div className="text-sm text-[#DCE6E0]">диспетчеры</div>
                 </div>
                 <div>
-                  <div className="font-display text-3xl font-extrabold">1 WEEK</div>
-                  <div className="text-sm text-[#DCE6E0]">notice to stop</div>
+                  <div className="font-display text-3xl font-extrabold">1 НЕДЕЛЯ</div>
+                  <div className="text-sm text-[#DCE6E0]">на выход</div>
                 </div>
               </div>
             </div>
@@ -165,7 +165,7 @@ export default function DispatchPage() {
 
       <section className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-4 py-14 sm:px-6 md:py-24">
         <h2 className="font-display text-4xl font-extrabold md:text-5xl">
-          Everything a dispatcher should do
+          Всё, что должен делать диспетчер
         </h2>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {INCLUDED.map((i) => (
@@ -186,11 +186,11 @@ export default function DispatchPage() {
         <div className="mx-auto flex max-w-6xl flex-col gap-8 px-4 py-14 sm:px-6 md:py-24">
           <div className="flex flex-col gap-2">
             <h2 className="font-display text-4xl font-extrabold md:text-5xl">
-              Pick your lane
+              Выберите свой вариант
             </h2>
             <p className="max-w-2xl text-lg leading-relaxed text-[#4B5058]">
-              Every dispatch package is a flat weekly price. Week to week, no
-              long contract.
+              Каждый пакет диспетчинга — фиксированная цена в неделю. Неделя
+              за неделей, без долгого контракта.
             </p>
           </div>
           <div className="grid items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -218,7 +218,7 @@ export default function DispatchPage() {
                     </span>
                     {p.popular && (
                       <span className="flex h-7 items-center rounded-md bg-amber px-2.5 font-display text-sm font-extrabold tracking-[.08em] text-asphalt">
-                        MOST POPULAR
+                        ПОПУЛЯРНЫЙ
                       </span>
                     )}
                   </div>
@@ -262,7 +262,7 @@ export default function DispatchPage() {
 
       <section className="mx-auto flex w-full max-w-6xl flex-col gap-10 px-4 py-14 sm:px-6 md:py-24">
         <h2 className="font-display text-4xl font-extrabold md:text-5xl">
-          Rolling in 3 steps
+          Старт за 3 шага
         </h2>
         <div className="relative grid gap-8 md:grid-cols-3">
           <div className="absolute left-7 right-7 top-[27px] hidden h-1 bg-[repeating-linear-gradient(90deg,#F2A900_0_32px,transparent_32px_52px)] md:block" />
@@ -284,19 +284,19 @@ export default function DispatchPage() {
         <div className="mx-auto flex max-w-6xl flex-col gap-9 px-4 py-14 sm:px-6 md:py-24">
           <div className="flex flex-col gap-2">
             <div className="font-display text-[15px] font-bold tracking-[.16em] text-amber">
-              FLAT FEE VS PERCENTAGE
+              ФИКСИРОВАННАЯ ЦЕНА ПРОТИВ ПРОЦЕНТА
             </div>
             <h2 className="font-display text-4xl font-extrabold md:text-5xl">
-              See what a percentage costs you
+              Сколько вам стоит процент
             </h2>
           </div>
-          <GrossComparison />
+          <GrossComparison lang="RU" />
         </div>
       </section>
 
       <section className="mx-auto flex w-full max-w-2xl flex-col gap-7 px-4 py-14 sm:px-6 md:py-24">
         <h2 className="font-display text-4xl font-extrabold md:text-5xl">
-          Dispatch questions
+          Вопросы о диспетчинге
         </h2>
         <div className="flex flex-col border-t-2 border-asphalt">
           {FAQ.map((f) => (
@@ -319,13 +319,14 @@ export default function DispatchPage() {
           <div className="flex flex-wrap items-center justify-between gap-7 rounded-xl border-2 border-white/75 px-6 py-10 text-offwhite sm:px-12 sm:py-14">
             <div className="flex max-w-xl flex-col gap-3">
               <div className="font-display text-[15px] font-bold tracking-[.16em] text-amber">
-                NEXT EXIT · YOUR FIRST LOAD
+                СЛЕДУЮЩИЙ ВЫЕЗД · ВАШ ПЕРВЫЙ ГРУЗ
               </div>
               <h2 className="font-display text-5xl font-extrabold leading-[0.95] md:text-6xl">
-                Ready to roll?
+                Готовы стартовать?
               </h2>
               <p className="text-lg leading-relaxed text-[#E3EAE6]">
-                Ten minutes on the phone. We can book your first load today.
+                Десять минут по телефону. Мы можем забронировать ваш первый
+                груз уже сегодня.
               </p>
             </div>
             <div className="flex min-w-[280px] flex-col gap-3">
@@ -333,13 +334,13 @@ export default function DispatchPage() {
                 href="/dispatch/start"
                 className="flex h-[60px] items-center justify-center rounded-xl bg-amber px-7 font-display text-2xl font-extrabold uppercase tracking-[.05em] text-asphalt hover:bg-amber-hover"
               >
-                Start dispatch
+                Начать диспетчинг
               </Link>
               <a
                 href="tel:+1XXXXXXXXXX"
                 className="flex h-[60px] items-center justify-center rounded-xl border-2 border-offwhite px-6 font-display text-2xl font-extrabold uppercase tracking-[.05em] text-offwhite hover:bg-offwhite hover:text-asphalt"
               >
-                Call (XXX) XXX-XXXX
+                Звонок (XXX) XXX-XXXX
               </a>
             </div>
           </div>

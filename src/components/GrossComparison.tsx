@@ -6,20 +6,41 @@ function money(n: number) {
   return "$" + Math.round(n).toLocaleString("en-US");
 }
 
-export default function GrossComparison() {
+export default function GrossComparison({ lang = "EN" }: { lang?: "EN" | "RU" }) {
   const [gross, setGross] = useState(8000);
+  const ru = lang === "RU";
 
   const rows = [
-    { name: "10% dispatcher", week: money(gross * 0.1), year: money(gross * 0.1 * 50) },
-    { name: "8% dispatcher", week: money(gross * 0.08), year: money(gross * 0.08 * 50) },
+    { name: ru ? "Диспетчер за 10%" : "10% dispatcher", week: money(gross * 0.1), year: money(gross * 0.1 * 50) },
+    { name: ru ? "Диспетчер за 8%" : "8% dispatcher", week: money(gross * 0.08), year: money(gross * 0.08 * 50) },
   ];
+
+  const tableRows: [string, string, string][] = ru
+    ? [
+        ["Сколько платите", "8–10% с каждого груза", "Одна цена каждую неделю"],
+        ["Хорошая неделя", "Платите больше", "Вы оставляете себе больше"],
+        ["Цель диспетчера", "Больше выручки, любые мили", "Грузы, которые приносят вам деньги"],
+        ["Контракт", "Часто 3–12 месяцев", "Неделя за неделей"],
+        ["Проверка брокера", "Иногда", "На каждый груз"],
+        ["Язык", "Английский", "Английский и русский"],
+      ]
+    : [
+        ["What you pay", "8–10% of every load", "Same price every week"],
+        ["Good week", "You pay more", "You keep more"],
+        ["Dispatcher goal", "Bigger gross, any miles", "Loads that make you money"],
+        ["Contract", "Often 3–12 months", "Week to week"],
+        ["Broker checks", "Sometimes", "Every load"],
+        ["Language", "English", "English and Russian"],
+      ];
 
   return (
     <div className="grid gap-6 md:grid-cols-2">
       <div className="flex flex-col gap-[22px] rounded-[10px] bg-[#1F2226] p-6 shadow-[inset_0_0_0_1.5px_rgba(247,247,245,.14)]">
         <label className="flex flex-col gap-3">
           <span className="flex items-baseline justify-between gap-3">
-            <span className="text-base font-semibold">Your weekly gross</span>
+            <span className="text-base font-semibold">
+              {ru ? "Ваша выручка в неделю" : "Your weekly gross"}
+            </span>
             <span className="font-display text-4xl font-extrabold tabular-nums text-amber">
               {money(gross)}
             </span>
@@ -40,13 +61,13 @@ export default function GrossComparison() {
         </label>
         <div className="grid grid-cols-[1.3fr_1fr_1fr] tabular-nums">
           <div className="py-2.5 font-display text-sm font-bold tracking-[.12em] text-[#8A8F98]">
-            DISPATCHER
+            {ru ? "ДИСПЕТЧЕР" : "DISPATCHER"}
           </div>
           <div className="py-2.5 text-right font-display text-sm font-bold tracking-[.12em] text-[#8A8F98]">
-            PER WEEK
+            {ru ? "В НЕДЕЛЮ" : "PER WEEK"}
           </div>
           <div className="py-2.5 text-right font-display text-sm font-bold tracking-[.12em] text-[#8A8F98]">
-            PER YEAR
+            {ru ? "В ГОД" : "PER YEAR"}
           </div>
           {rows.map((r) => (
             <Fragment key={r.name}>
@@ -61,7 +82,9 @@ export default function GrossComparison() {
               </div>
             </Fragment>
           ))}
-          <div className="border-t border-white/14 py-3.5 text-base font-bold">Trucker HQ flat</div>
+          <div className="border-t border-white/14 py-3.5 text-base font-bold">
+            {ru ? "Trucker HQ фикс" : "Trucker HQ flat"}
+          </div>
           <div className="border-t border-white/14 py-3.5 text-right font-display text-[28px] font-extrabold text-amber">
             $XXX
           </div>
@@ -70,8 +93,9 @@ export default function GrossComparison() {
           </div>
         </div>
         <div className="text-sm leading-relaxed text-[#AEB2B8]">
-          Per year = 50 working weeks. The flat price stays the same on a good
-          week and a bad week.
+          {ru
+            ? "В году = 50 рабочих недель. Фиксированная цена не меняется — ни в хорошую неделю, ни в плохую."
+            : "Per year = 50 working weeks. The flat price stays the same on a good week and a bad week."}
         </div>
       </div>
 
@@ -79,19 +103,12 @@ export default function GrossComparison() {
         <div className="grid grid-cols-[1.1fr_1fr_1fr]">
           <div className="bg-[#EEEFEC] p-4" />
           <div className="bg-[#EEEFEC] p-4 font-display text-[17px] font-extrabold tracking-[.06em]">
-            PERCENTAGE
+            {ru ? "ПРОЦЕНТ" : "PERCENTAGE"}
           </div>
           <div className="bg-green p-4 font-display text-[17px] font-extrabold tracking-[.06em] text-offwhite">
             TRUCKER HQ
           </div>
-          {[
-            ["What you pay", "8–10% of every load", "Same price every week"],
-            ["Good week", "You pay more", "You keep more"],
-            ["Dispatcher goal", "Bigger gross, any miles", "Loads that make you money"],
-            ["Contract", "Often 3–12 months", "Week to week"],
-            ["Broker checks", "Sometimes", "Every load"],
-            ["Language", "English", "English and Russian"],
-          ].map(([k, a, b]) => (
+          {tableRows.map(([k, a, b]) => (
             <Fragment key={k}>
               <div className="border-t border-[#ECEDEA] p-4 text-sm font-semibold">
                 {k}

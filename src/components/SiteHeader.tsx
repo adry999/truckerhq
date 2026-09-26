@@ -33,6 +33,11 @@ export default function SiteHeader({
   const startHref = ru ? "/ru/dispatch/start" : "/dispatch/start";
   const t = (en: string, ruText: string) => (ru ? ruText : en);
 
+  // Only Dispatch and Jobs have RU pages so far; everything else falls
+  // back to the English route.
+  const RU_ROUTES: Record<string, string> = { "/dispatch": "/ru/dispatch", "/jobs": "/ru/jobs" };
+  const hrefFor = (href: string) => (ru ? (RU_ROUTES[href] ?? href) : href);
+
   return (
     <header className="sticky top-0 z-20 border-b border-white/10 bg-asphalt font-sans">
       <div className="mx-auto flex h-[60px] max-w-6xl items-center gap-2 px-3 sm:h-[72px] sm:gap-6 sm:px-6">
@@ -43,11 +48,11 @@ export default function SiteHeader({
 
         <nav className="ml-3 hidden gap-1 lg:flex">
           {NAV.map((item) => {
-            const active = pathname === item.href;
+            const active = pathname === hrefFor(item.href);
             return (
               <Link
                 key={item.href}
-                href={item.href}
+                href={hrefFor(item.href)}
                 className={`flex h-11 items-center rounded-lg px-3 text-[15px] font-medium hover:bg-white/8 hover:text-amber ${
                   active ? "bg-amber/10 text-amber" : "text-offwhite"
                 }`}
@@ -140,11 +145,11 @@ export default function SiteHeader({
       {menuOpen && (
         <div className="flex flex-col gap-1 border-t border-white/10 px-4 pb-5 pt-2 lg:hidden">
           {NAV.map((item) => {
-            const active = pathname === item.href;
+            const active = pathname === hrefFor(item.href);
             return (
               <Link
                 key={item.href}
-                href={item.href}
+                href={hrefFor(item.href)}
                 onClick={() => setMenuOpen(false)}
                 className={`flex h-[48px] items-center border-b border-white/8 px-2 font-display text-xl font-bold uppercase ${
                   active ? "text-amber" : "text-offwhite"
