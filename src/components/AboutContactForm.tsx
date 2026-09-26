@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { trackEvent } from "@/lib/analytics";
 
 const TOPICS = ["Dispatch", "Driver job", "Hiring drivers", "Something else"];
 const LANGUAGES = ["EN", "RU"] as const;
@@ -59,6 +60,7 @@ export default function AboutContactForm() {
         body: JSON.stringify({ topic, name, phone, message, language: lang }),
       });
       if (!res.ok) throw new Error("request failed");
+      trackEvent("contact_message", { topic });
       setSent(true);
     } catch {
       setError(true);

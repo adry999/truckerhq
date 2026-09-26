@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { trackEvent } from "@/lib/analytics";
 
 const POSITIONS = ["OTR", "Regional", "Local", "Team", "Owner-op"];
 const EQUIPMENT = ["Dry van", "Reefer", "Flatbed", "Power only"];
@@ -78,6 +79,7 @@ export default function HireDriversForm() {
         }),
       });
       if (!res.ok) throw new Error("request failed");
+      trackEvent("hire_driver_post", { position: pos });
       setSent(true);
     } catch {
       setError(true);

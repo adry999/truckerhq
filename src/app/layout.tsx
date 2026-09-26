@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Barlow_Condensed, Inter, Overpass, Roboto_Condensed } from "next/font/google";
 import JsonLd from "@/components/JsonLd";
+import Analytics from "@/components/Analytics";
 import "./globals.css";
 
 const barlowCondensed = Barlow_Condensed({
@@ -56,6 +57,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full flex flex-col font-sans">
         <JsonLd data={ORGANIZATION_SCHEMA} />
+        <Analytics />
         {children}
       </body>
     </html>

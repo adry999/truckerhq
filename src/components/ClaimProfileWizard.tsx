@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { healthColor } from "@/lib/data";
+import { trackEvent } from "@/lib/analytics";
 
 const CARRIER = {
   name: "Carpathian Freight LLC",
@@ -73,6 +74,7 @@ export default function ClaimProfileWizard() {
       return;
     }
     if (step === 1) {
+      trackEvent("carrier_profile_claimed", { dot: CARRIER.dot });
       setStep(2);
       return;
     }

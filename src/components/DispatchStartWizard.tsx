@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
+import { trackEvent } from "@/lib/analytics";
 
 const TRAILER_TYPES = ["Dry van", "Reefer", "Flatbed", "Step deck", "Power only"];
 const DRIVER_TYPES = ["I drive", "Company driver", "Team"];
@@ -176,6 +177,7 @@ export default function DispatchStartWizard() {
         }),
       });
       if (!res.ok) throw new Error("request failed");
+      trackEvent("dispatch_start_request", { trucks, authority });
       setStep(4);
     } catch {
       setSubmitError(true);

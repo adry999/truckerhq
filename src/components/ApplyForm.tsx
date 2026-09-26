@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { trackEvent } from "@/lib/analytics";
 
 export default function ApplyForm({ company, jobSlug }: { company: string; jobSlug: string }) {
   const [fullName, setFullName] = useState("");
@@ -23,6 +24,7 @@ export default function ApplyForm({ company, jobSlug }: { company: string; jobSl
         body: JSON.stringify({ jobSlug, fullName, phone, cdlClass, experience, language }),
       });
       if (!res.ok) throw new Error("request failed");
+      trackEvent("job_application", { job_slug: jobSlug });
       setSent(true);
     } catch {
       setError(true);

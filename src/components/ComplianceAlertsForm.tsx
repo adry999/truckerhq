@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
+import { trackEvent } from "@/lib/analytics";
 
 const WATCH_ITEMS: [string, string, string][] = [
   ["auth", "Operating authority", "Active, pending, revoked or inactive"],
@@ -39,6 +40,7 @@ export default function ComplianceAlertsForm() {
         body: JSON.stringify({ dot, phone, language: lang, watch }),
       });
       if (!res.ok) throw new Error("request failed");
+      trackEvent("compliance_alert_signup");
       setDone(true);
     } catch {
       setError(true);
