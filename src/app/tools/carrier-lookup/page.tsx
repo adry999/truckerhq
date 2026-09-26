@@ -29,13 +29,13 @@ const FACTORS = [
 
 const STATES = [
   ["Texas", "48,210", "/carriers/texas"],
-  ["California", "41,905", "#"],
-  ["Florida", "29,340", "#"],
-  ["Illinois", "22,118", "#"],
-  ["Georgia", "17,602", "#"],
-  ["New Jersey", "14,977", "#"],
-  ["Ohio", "13,450", "#"],
-  ["Pennsylvania", "12,806", "#"],
+  ["California", "71,400", "/carriers/california"],
+  ["Florida", "38,900", "/carriers/florida"],
+  ["Illinois", "34,600", "/carriers/illinois"],
+  ["Georgia", "29,800", "/carriers/georgia"],
+  ["New Jersey", "19,300", "/carriers/new-jersey"],
+  ["Ohio", "27,500", "/carriers/ohio"],
+  ["Pennsylvania", "26,100", "/carriers/pennsylvania"],
 ];
 
 export default async function CarrierLookupPage({
