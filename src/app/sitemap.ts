@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { JOBS } from "@/lib/data";
 import { GUIDES } from "@/lib/guides";
+import { STATE_DIRECTORY } from "@/lib/states";
 
 const BASE_URL = "https://truckerhq.com";
 
@@ -21,14 +22,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/tools/profit-per-mile`, changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE_URL}/tools/compliance-alerts`, changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE_URL}/tools/new-mc-checklist`, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${BASE_URL}/carriers/texas`, changeFrequency: "weekly", priority: 0.7 },
-    { url: `${BASE_URL}/carriers/california`, changeFrequency: "weekly", priority: 0.7 },
-    { url: `${BASE_URL}/carriers/florida`, changeFrequency: "weekly", priority: 0.7 },
-    { url: `${BASE_URL}/carriers/illinois`, changeFrequency: "weekly", priority: 0.7 },
-    { url: `${BASE_URL}/carriers/georgia`, changeFrequency: "weekly", priority: 0.7 },
-    { url: `${BASE_URL}/carriers/new-jersey`, changeFrequency: "weekly", priority: 0.7 },
-    { url: `${BASE_URL}/carriers/ohio`, changeFrequency: "weekly", priority: 0.7 },
-    { url: `${BASE_URL}/carriers/pennsylvania`, changeFrequency: "weekly", priority: 0.7 },
     { url: `${BASE_URL}/guides`, changeFrequency: "weekly", priority: 0.7 },
     { url: `${BASE_URL}/about`, changeFrequency: "monthly", priority: 0.5 },
     { url: `${BASE_URL}/privacy`, changeFrequency: "yearly", priority: 0.2 },
@@ -48,5 +41,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.5,
   }));
 
-  return [...staticRoutes, ...jobRoutes, ...guideRoutes];
+  const stateRoutes: MetadataRoute.Sitemap = STATE_DIRECTORY.map((s) => ({
+    url: `${BASE_URL}/carriers/${s.slug}`,
+    changeFrequency: "weekly",
+    priority: 0.7,
+  }));
+
+  return [...staticRoutes, ...jobRoutes, ...guideRoutes, ...stateRoutes];
 }

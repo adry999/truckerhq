@@ -10,6 +10,7 @@ import {
   healthLabel,
 } from "@/lib/data";
 import { searchFmcsaCarriers, fmcsaEnabled } from "@/lib/fmcsa";
+import { STATE_DIRECTORY } from "@/lib/states";
 
 export const metadata: Metadata = {
   title: "Carrier Lookup by DOT or MC Number",
@@ -25,17 +26,6 @@ const FACTORS = [
   { t: "Insurance", w: "25 pts", d: "Liability and cargo on file, and how soon it expires." },
   { t: "Inspections", w: "30 pts", d: "Out-of-service rates compared to the national average." },
   { t: "Crashes", w: "15 pts", d: "Reportable crashes in the last 24 months." },
-];
-
-const STATES = [
-  ["Texas", "48,210", "/carriers/texas"],
-  ["California", "71,400", "/carriers/california"],
-  ["Florida", "38,900", "/carriers/florida"],
-  ["Illinois", "34,600", "/carriers/illinois"],
-  ["Georgia", "29,800", "/carriers/georgia"],
-  ["New Jersey", "19,300", "/carriers/new-jersey"],
-  ["Ohio", "27,500", "/carriers/ohio"],
-  ["Pennsylvania", "26,100", "/carriers/pennsylvania"],
 ];
 
 export default async function CarrierLookupPage({
@@ -203,14 +193,14 @@ export default async function CarrierLookupPage({
               Browse carriers by state
             </h3>
             <div className="flex flex-wrap gap-2">
-              {STATES.map(([name, count, href]) => (
+              {STATE_DIRECTORY.map((s) => (
                 <Link
-                  key={name}
-                  href={href}
+                  key={s.slug}
+                  href={`/carriers/${s.slug}`}
                   className="flex h-11 items-center gap-2 rounded-[10px] border-[1.5px] border-border bg-white px-3.5 text-[15px] font-semibold hover:border-green"
                 >
-                  {name}
-                  <span className="text-[13px] font-medium text-grey">{count}</span>
+                  {s.name}
+                  <span className="text-[13px] font-medium text-grey">{s.count}</span>
                 </Link>
               ))}
             </div>
