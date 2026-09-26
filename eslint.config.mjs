@@ -12,8 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
-    // Reference copy of the original Claude Design prototype, not part of the app:
-    "design/**",
+    // Reference copies of the original Claude Design prototype, not part of the app:
+    "docs/design/**",
+    "Trucker HQ brand identity/**",
   ]),
 ]);
 

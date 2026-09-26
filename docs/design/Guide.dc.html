@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><script src="./image-slot.js"></script><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Roboto+Condensed:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><style>body{margin:0;background:#F7F7F5;font-family:Inter,sans-serif;color:#16181B;-webkit-font-smoothing:antialiased}a{color:#0E5C3A}a:hover{color:#16181B}*{box-sizing:border-box}</style></helmet>
+<div style="min-height:100vh;display:flex;flex-direction:column;">
+<dc-import name="SiteHeader" active="Guides" hint-size="100%,60px" style="position:sticky;top:0;z-index:20;display:block;"></dc-import>
+
+<article style="max-width:760px;width:100%;margin:0 auto;padding:clamp(28px,5vw,56px) clamp(20px,4vw,24px) 40px;display:flex;flex-direction:column;gap:22px;">
+<div style="display:flex;flex-wrap:wrap;gap:8px;font-size:14px;color:#6B7280;"><a href="Resources.dc.html">Guides</a><span>/</span><span>Rates</span></div>
+<h1 style="margin:0;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:clamp(36px,6vw,60px);line-height:.95;">How to tell if a load pays enough</h1>
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;font-size:14px;color:#4B5058;">
+<image-slot id="guide-author" shape="circle" placeholder="" style="width:40px;height:40px;flex:none;"></image-slot>
+<span><b style="color:#16181B;">Dispatcher Name</b> · Trucker HQ dispatch</span><span>6 min read</span><span>Updated Oct 2026</span>
+</div>
+<div style="aspect-ratio:16/9;position:relative;"><image-slot id="guide-hero" shape="rounded" radius="8" placeholder="Photo: a truck at a shipper's dock, or a rate con on a phone"></image-slot></div>
+
+<p style="margin:0;font-size:19px;line-height:1.65;">A load that looks good on the board can lose money once you count the miles to pick it up and what your truck costs to run. Before you call the broker, you need one number: the lowest rate per mile you will take.</p>
+
+<h2 style="margin:12px 0 0;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:clamp(26px,4vw,34px);line-height:1.05;">1. Know your cost per mile</h2>
+<p style="margin:0;font-size:17px;line-height:1.7;color:#2B2F34;">Add up a normal month: truck payment, insurance, fuel, maintenance, tolls, permits, phone, ELD and your own pay. Divide by the miles you drove that month, loaded and empty. That is what every mile costs you, whether or not a load is on the trailer.</p>
+
+<div style="background:#16181B;color:#F7F7F5;border-radius:8px;padding:22px 24px;display:flex;flex-direction:column;gap:12px;">
+<span style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:.1em;color:#F2A900;">EXAMPLE MONTH</span>
+<sc-for list="{{ costs }}" as="c"><div style="display:flex;justify-content:space-between;gap:12px;font-size:16px;font-variant-numeric:tabular-nums;border-bottom:1px solid rgba(247,247,245,.14);padding-bottom:8px;"><span style="color:#D4D6DA;">{{ c.k }}</span><span style="font-weight:600;">{{ c.v }}</span></div></sc-for>
+<div style="display:flex;justify-content:space-between;gap:12px;font-size:18px;font-weight:700;font-variant-numeric:tabular-nums;"><span>÷ 10,000 miles</span><span style="color:#F2A900;">$1.78 per mile</span></div>
+</div>
+
+<h2 style="margin:12px 0 0;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:clamp(26px,4vw,34px);line-height:1.05;">2. Count the deadhead</h2>
+<p style="margin:0;font-size:17px;line-height:1.7;color:#2B2F34;">Brokers quote the rate on loaded miles. If the pickup is 80 miles away, you drive those miles for free. Divide the total pay by loaded plus empty miles to see the real rate.</p>
+<div style="background:#FFFFFF;border:1px solid #DEDFDB;border-radius:8px;padding:18px 20px;font-size:16px;line-height:1.7;font-variant-numeric:tabular-nums;">
+$2,100 for 800 loaded miles looks like <b>$2.63/mi</b>.<br>Add 80 miles to the pickup: $2,100 ÷ 880 = <b>$2.39/mi</b>.
+</div>
+
+<h2 style="margin:12px 0 0;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:clamp(26px,4vw,34px);line-height:1.05;">3. Set your walk-away number</h2>
+<p style="margin:0;font-size:17px;line-height:1.7;color:#2B2F34;">Take your cost per mile and add the profit you need. If your cost is $1.78 and you want at least 40 cents a mile, anything under $2.18 all-in is a no. Write it down before you call, so the broker's pitch doesn't move you.</p>
+
+<h2 style="margin:12px 0 0;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:clamp(26px,4vw,34px);line-height:1.05;">4. Look at where the load leaves you</h2>
+<p style="margin:0;font-size:17px;line-height:1.7;color:#2B2F34;">A high rate into a market with no freight out can cost you a day and a long deadhead. Sometimes a lower rate into a busy lane pays more over the week. Check what loads are posted out of the delivery city before you say yes.</p>
+
+<div style="background:#0E5C3A;color:#F7F7F5;border-radius:8px;padding:24px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;margin-top:8px;">
+<div style="display:flex;flex-direction:column;gap:4px;max-width:420px;"><span style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:26px;text-transform:uppercase;">Run your own numbers</span><span style="font-size:15px;line-height:1.5;color:#E3EAE6;">The Profit per mile calculator does this math for any load.</span></div>
+<a href="Profit Calculator.dc.html" style="height:52px;display:flex;align-items:center;padding:0 22px;border-radius:10px;background:#F2A900;color:#16181B;text-decoration:none;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:19px;letter-spacing:.04em;text-transform:uppercase;" style-hover="background:#FFBC1F;color:#16181B;">Open calculator</a>
+</div>
+</article>
+
+<section style="max-width:760px;width:100%;margin:0 auto;padding:16px clamp(20px,4vw,24px) 88px;display:flex;flex-direction:column;gap:14px;">
+<h2 style="margin:0;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:26px;">Read next</h2>
+<div style="background:#FFFFFF;border:1px solid #DEDFDB;border-radius:8px;overflow:hidden;">
+<sc-for list="{{ next }}" as="n"><a href="Resources.dc.html" style="display:flex;justify-content:space-between;gap:16px;padding:16px 20px;border-top:{{ n.bt }};text-decoration:none;color:#16181B;" style-hover="background:#F7F7F5;color:#16181B;"><span style="font-weight:600;font-size:16px;">{{ n.t }}</span><span style="font-size:14px;color:#6B7280;white-space:nowrap;">{{ n.m }} min</span></a></sc-for>
+</div>
+</section>
+
+<div style="margin-top:auto;"><dc-import name="SiteFooter" hint-size="100%,360px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      costs: [['Truck payment', '$2,400'], ['Insurance', '$1,300'], ['Fuel', '$7,200'], ['Maintenance and tires', '$1,500'], ['Tolls, permits, ELD, phone', '$900'], ['Your pay', '$4,500']].map(([k, v]) => ({ k, v })),
+      next: [['Rate per mile vs. all-in rate: what brokers mean', 3], ['When to turn down a load', 4], ['Detention pay: how to get it on the rate con', 4]].map(([t, m], i) => ({ t, m, bt: i ? '1px solid #ECEDEA' : '0' })),
+    };
+  }
+}
+</script>
+</body>
+</html>

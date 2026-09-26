@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><script src="./image-slot.js"></script><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Roboto+Condensed:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><style>body{margin:0;background:#F7F7F5;font-family:Inter,sans-serif;color:#16181B;-webkit-font-smoothing:antialiased}a{color:#0E5C3A}a:hover{color:#16181B}*{box-sizing:border-box}input::placeholder,textarea::placeholder{color:#6B7280}</style></helmet>
+<div style="min-height:100vh;display:flex;flex-direction:column;">
+<dc-import name="SiteHeader" hint-size="100%,60px" style="position:sticky;top:0;z-index:20;display:block;"></dc-import>
+
+<section style="background:#16181B;color:#F7F7F5;">
+<div style="max-width:1280px;margin:0 auto;padding:clamp(36px,6vw,80px) clamp(20px,4vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:40px;align-items:center;">
+<div style="display:flex;flex-direction:column;gap:18px;">
+<h1 style="margin:0;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:clamp(36px,7vw,88px);line-height:.9;text-transform:uppercase;">A small team that knows trucking</h1>
+<p style="margin:0;font-size:clamp(17px,2vw,19px);line-height:1.55;color:#D4D6DA;max-width:560px;text-wrap:pretty;">Trucker HQ started in 20XX in City, ST. [Two or three sentences in your own words: who started it, why, and who you work with today.]</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px 24px;margin-top:8px;">
+<sc-for list="{{ facts }}" as="f" hint-placeholder-count="4">
+<div style="display:flex;flex-direction:column;gap:2px;border-top:1px solid rgba(247,247,245,.2);padding-top:10px;"><span style="font-size:13px;color:#AEB2B8;">{{ f.k }}</span><span style="font-size:16px;font-weight:600;font-variant-numeric:tabular-nums;">{{ f.v }}</span></div>
+</sc-for>
+</div>
+</div>
+<div style="aspect-ratio:4/3;position:relative;"><image-slot id="about-team" shape="rounded" radius="8" placeholder="Photo: the whole team at the office"></image-slot></div>
+</div>
+<div style="height:6px;background:repeating-linear-gradient(90deg,#F2A900 0 48px,transparent 48px 80px);"></div>
+</section>
+
+<section style="max-width:1280px;width:100%;margin:0 auto;padding:clamp(36px,8vw,96px) clamp(20px,4vw,40px);display:flex;flex-direction:column;gap:28px;">
+<h2 style="margin:0;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:clamp(28px,5vw,56px);line-height:1;">Who you'll talk to</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:20px;">
+<sc-for list="{{ team }}" as="p" hint-placeholder-count="4">
+<div style="display:flex;flex-direction:column;gap:12px;">
+<div style="aspect-ratio:4/5;position:relative;"><image-slot id="about-team-{{ $index }}" shape="rounded" radius="8" placeholder="Photo"></image-slot></div>
+<div style="display:flex;flex-direction:column;gap:3px;"><span style="font-weight:700;font-size:18px;">{{ p.name }}</span><span style="font-size:15px;color:#4B5058;">{{ p.role }}</span><span style="font-size:14px;color:#6B7280;">{{ p.note }}</span></div>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section id="contact" style="background:#FFFFFF;border-top:1px solid #DEDFDB;">
+<div style="max-width:1280px;margin:0 auto;padding:clamp(36px,8vw,96px) clamp(20px,4vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:40px;align-items:start;">
+<div style="display:flex;flex-direction:column;gap:24px;">
+<h2 style="margin:0;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:clamp(28px,5vw,56px);line-height:1;">Contact</h2>
+<div style="display:flex;flex-direction:column;border-top:2px solid #16181B;">
+<sc-for list="{{ contacts }}" as="c" hint-placeholder-count="4">
+<a href="{{ c.href }}" style="min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 2px;border-bottom:1px solid #DEDFDB;text-decoration:none;color:#16181B;" style-hover="color:#0E5C3A;">
+<span style="display:flex;flex-direction:column;gap:2px;"><span style="font-size:13px;color:#6B7280;">{{ c.k }}</span><span style="font-size:clamp(18px,2.2vw,22px);font-weight:700;font-variant-numeric:tabular-nums;">{{ c.v }}</span></span>
+<span style="font-size:14px;color:#4B5058;text-align:right;">{{ c.note }}</span>
+</a>
+</sc-for>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px;">
+<span style="font-weight:700;font-size:16px;">Office</span>
+<span style="font-size:16px;line-height:1.5;color:#3F444B;">Street address<br>City, ST 00000</span>
+<span style="font-size:14px;color:#6B7280;">Office Mon–Fri 9–6 CT. Dispatch line open 24/7.</span>
+</div>
+<div style="aspect-ratio:16/9;position:relative;"><image-slot id="about-office" shape="rounded" radius="8" placeholder="Photo of the office entrance, or a map screenshot"></image-slot></div>
+</div>
+
+<sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+<form onSubmit="{{ submit }}" style="background:#F7F7F5;border:1px solid #DEDFDB;border-radius:8px;padding:clamp(20px,3vw,28px);display:flex;flex-direction:column;gap:16px;">
+<div style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:28px;text-transform:uppercase;">Ask us to call you</div>
+<div style="display:flex;flex-wrap:wrap;gap:8px;">
+<sc-for list="{{ topics }}" as="t"><button type="button" onClick="{{ t.pick }}" style="min-height:44px;padding:0 14px;border-radius:6px;border:1.5px solid {{ t.bd }};background:{{ t.bg }};color:{{ t.fg }};font-family:Inter;font-size:15px;font-weight:600;cursor:pointer;">{{ t.name }}</button></sc-for>
+</div>
+<label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:14px;font-weight:600;">Name</span><input style="height:54px;border:1.5px solid #9CA0A8;border-radius:8px;padding:0 14px;font-family:Inter;font-size:17px;outline:none;background:#FFFFFF;" style-focus="border-color:#0E5C3A;"></label>
+<label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:14px;font-weight:600;">Phone</span><input type="tel" placeholder="(XXX) XXX-XXXX" style="height:54px;border:1.5px solid #9CA0A8;border-radius:8px;padding:0 14px;font-family:Inter;font-size:17px;outline:none;background:#FFFFFF;" style-focus="border-color:#0E5C3A;"></label>
+<label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:14px;font-weight:600;">Anything we should know? <span style="font-weight:400;color:#6B7280;">Optional</span></span><textarea rows="3" placeholder="Truck, lanes, MC number" style="border:1.5px solid #9CA0A8;border-radius:8px;padding:12px 14px;font-family:Inter;font-size:16px;outline:none;resize:vertical;background:#FFFFFF;" style-focus="border-color:#0E5C3A;"></textarea></label>
+<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;"><span style="font-size:14px;font-weight:600;">Call me in</span>
+<sc-for list="{{ langs }}" as="l"><button type="button" onClick="{{ l.pick }}" style="min-height:44px;padding:0 14px;border-radius:6px;border:1.5px solid {{ l.bd }};background:{{ l.bg }};color:{{ l.fg }};font-family:Inter;font-size:15px;font-weight:600;cursor:pointer;">{{ l.name }}</button></sc-for>
+</div>
+<button type="submit" style="height:clamp(48px,12vw,58px);border:0;border-radius:10px;background:#F2A900;color:#16181B;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:clamp(17px,4.2vw,22px);letter-spacing:.04em;text-transform:uppercase;cursor:pointer;" style-hover="background:#FFBC1F;">Call me back</button>
+<span style="font-size:13px;color:#6B7280;">We call back within 15 minutes, day or night.</span>
+</form>
+</sc-if>
+<sc-if value="{{ sent }}">
+<div style="background:#F7F7F5;border:1px solid #DEDFDB;border-radius:8px;padding:28px;display:flex;flex-direction:column;gap:12px;">
+<div style="width:52px;height:52px;border-radius:50%;background:#0E5C3A;display:flex;align-items:center;justify-content:center;"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#F2A900" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></div>
+<div style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:32px;text-transform:uppercase;">Got it</div>
+<p style="margin:0;font-size:16px;line-height:1.55;color:#3F444B;">Someone from the team will call you in {{ langName }} shortly.</p>
+</div>
+</sc-if>
+</div>
+</section>
+
+<div style="margin-top:auto;"><dc-import name="SiteFooter" hint-size="100%,360px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { topic: 'Dispatch', lang: 'EN', sent: false };
+  renderVals() {
+    const s = this.state;
+    const chip = (on) => ({ bd: on ? '#16181B' : '#DEDFDB', bg: on ? '#16181B' : '#FFFFFF', fg: on ? '#F7F7F5' : '#16181B' });
+    return {
+      facts: [{ k: 'Founded', v: '20XX' }, { k: 'USDOT', v: 'XXXXXXX' }, { k: 'MC', v: 'XXXXXXX' }, { k: 'Languages', v: 'English · Русский' }],
+      team: [
+        { name: 'Name Surname', role: 'Founder', note: 'EN · RU' },
+        { name: 'Dispatcher Name', role: 'Dispatcher · Dry van, reefer', note: 'EN · RU · Nights, Central' },
+        { name: 'Dispatcher Name', role: 'Dispatcher · Flatbed', note: 'EN · RU · Days, Eastern' },
+        { name: 'Name Surname', role: 'Driver recruiting', note: 'EN · RU · Days, Central' },
+      ],
+      contacts: [
+        { k: 'Dispatch, 24/7', v: '(XXX) XXX-XXXX', note: 'Call or text', href: 'tel:+1XXXXXXXXXX' },
+        { k: 'Office', v: '(XXX) XXX-XXXX', note: 'Mon–Fri 9–6 CT', href: 'tel:+1XXXXXXXXXX' },
+        { k: 'Email', v: 'hello@truckerhq.com', note: 'Reply same day', href: 'mailto:hello@truckerhq.com' },
+        { k: 'Telegram / WhatsApp', v: '@truckerhq', note: 'EN · RU', href: '#' },
+      ],
+      topics: ['Dispatch', 'Driver job', 'Hiring drivers', 'Something else'].map(n => ({ name: n, ...chip(s.topic === n), pick: () => this.setState({ topic: n }) })),
+      langs: [['EN', 'English'], ['RU', 'Русский']].map(([c, name]) => ({ name, ...chip(s.lang === c), pick: () => this.setState({ lang: c }) })),
+      langName: s.lang === 'RU' ? 'Russian' : 'English',
+      sent: s.sent, notSent: !s.sent,
+      submit: e => { e.preventDefault(); this.setState({ sent: true }); },
+    };
+  }
+}
+</script>
+</body>
+</html>

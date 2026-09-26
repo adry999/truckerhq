@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><meta name="design_doc_mode" content="canvas"><link href="https://fonts.googleapis.com/css2?family=Overpass:wght@600;800;900&family=Barlow+Condensed:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><style>body{margin:0;background:#E9EAE6;font-family:Inter,sans-serif;color:#16181B}a{color:#0E5C3A}a:hover{color:#16181B}</style></helmet>
+<section style="padding:48px;display:flex;flex-direction:column;gap:32px;">
+<div style="display:flex;flex-direction:column;gap:6px;max-width:760px;">
+<div style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:32px;text-transform:uppercase;">Brand materials</div>
+<div style="font-size:15px;line-height:1.5;color:#3F444B;">Logo 3c applied to the things people see outside the website. Numbers and names are placeholders.</div>
+</div>
+
+<div id="4a" style="display:flex;flex-direction:column;gap:12px;">
+<div style="display:flex;align-items:center;gap:10px;"><span style="background:#16181B;color:#F2A900;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:16px;padding:3px 8px;border-radius:4px;">4a</span><span style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:22px;text-transform:uppercase;">Truck door decal</span><span style="font-size:14px;color:#6B7280;">About 24 × 18 in. White cab shown.</span></div>
+<div style="display:flex;gap:24px;flex-wrap:wrap;">
+<div style="width:640px;height:480px;border-radius:14px;background:linear-gradient(180deg,#FFFFFF,#EEEFEC);border:1px solid #CFD1CC;position:relative;overflow:hidden;">
+<div style="position:absolute;left:0;right:0;top:0;height:120px;background:linear-gradient(180deg,#C9D3DA,#E3E8EB);border-bottom:6px solid #B8BCC2;"></div>
+<div style="position:absolute;right:36px;top:170px;width:60px;height:14px;border-radius:7px;background:#B8BCC2;"></div>
+<div style="position:absolute;left:0;right:0;top:170px;display:flex;flex-direction:column;align-items:center;gap:22px;">
+<dc-import name="Logo" direction="sign" size="{{ 58 }}" hint-size="380px,70px"></dc-import>
+<div style="font-family:Overpass,sans-serif;font-weight:800;font-size:22px;letter-spacing:.06em;color:#16181B;text-align:center;line-height:1.45;">USDOT XXXXXXX<br>MC XXXXXXX</div>
+<div style="font-family:Overpass,sans-serif;font-weight:600;font-size:16px;color:#3F444B;">City, ST</div>
+</div>
+</div>
+<div style="max-width:300px;font-size:14px;line-height:1.55;color:#3F444B;display:flex;flex-direction:column;gap:8px;">
+<span>FMCSA requires the legal name (or a single trade name), and the USDOT number on both sides of the power unit, readable from 50 ft in daylight, in a color that contrasts with the cab.</span>
+<span>On a dark cab, the green panel keeps its white border so it still reads. Use the same layout, with the numbers in white.</span>
+</div>
+</div>
+</div>
+
+<div id="4b" style="display:flex;flex-direction:column;gap:12px;">
+<div style="display:flex;align-items:center;gap:10px;"><span style="background:#16181B;color:#F2A900;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:16px;padding:3px 8px;border-radius:4px;">4b</span><span style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:22px;text-transform:uppercase;">Business card</span><span style="font-size:14px;color:#6B7280;">3.5 × 2 in, front and back.</span></div>
+<div style="display:flex;gap:24px;flex-wrap:wrap;">
+<div style="width:420px;height:240px;border-radius:8px;background:#0E5C3A;box-shadow:0 6px 18px rgba(0,0,0,.15);display:flex;align-items:center;justify-content:center;position:relative;">
+<div style="position:absolute;inset:10px;border:2px solid rgba(247,247,245,.8);border-radius:5px;"></div>
+<dc-import name="Logo" direction="sign" mark="{{ true }}" size="{{ 110 }}" hint-size="102px,110px"></dc-import>
+</div>
+<div style="width:420px;height:240px;border-radius:8px;background:#FFFFFF;box-shadow:0 6px 18px rgba(0,0,0,.15);padding:26px 28px;display:flex;flex-direction:column;justify-content:space-between;">
+<dc-import name="Logo" direction="sign" size="{{ 26 }}" hint-size="170px,32px"></dc-import>
+<div style="display:flex;flex-direction:column;gap:2px;">
+<span style="font-family:Overpass,sans-serif;font-weight:800;font-size:20px;">Name Surname</span>
+<span style="font-size:13px;color:#4B5058;">Dispatcher · English, Русский</span>
+</div>
+<div style="display:flex;justify-content:space-between;align-items:flex-end;gap:12px;font-size:13px;line-height:1.5;color:#16181B;font-variant-numeric:tabular-nums;">
+<span><b>(XXX) XXX-XXXX</b> · 24/7<br>name@truckerhq.com</span>
+<span style="text-align:right;color:#4B5058;">truckerhq.com<br>MC XXXXXXX</span>
+</div>
+</div>
+</div>
+</div>
+
+<div id="4c" style="display:flex;flex-direction:column;gap:12px;">
+<div style="display:flex;align-items:center;gap:10px;"><span style="background:#16181B;color:#F2A900;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:16px;padding:3px 8px;border-radius:4px;">4c</span><span style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:22px;text-transform:uppercase;">Social profiles</span><span style="font-size:14px;color:#6B7280;">Profile picture for Facebook, Instagram, Telegram, WhatsApp, and a Facebook cover.</span></div>
+<div style="display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start;">
+<div style="display:flex;flex-direction:column;gap:12px;align-items:center;">
+<div style="width:180px;height:180px;border-radius:50%;background:#16181B;display:flex;align-items:center;justify-content:center;"><dc-import name="Logo" direction="sign" mark="{{ true }}" size="{{ 110 }}" hint-size="102px,110px"></dc-import></div>
+<div style="display:flex;gap:12px;align-items:center;">
+<div style="width:56px;height:56px;border-radius:50%;background:#16181B;display:flex;align-items:center;justify-content:center;"><dc-import name="Logo" direction="sign" mark="{{ true }}" size="{{ 34 }}" hint-size="32px,34px"></dc-import></div>
+<div style="width:32px;height:32px;border-radius:50%;background:#16181B;display:flex;align-items:center;justify-content:center;"><dc-import name="Logo" direction="sign" mark="{{ true }}" size="{{ 20 }}" hint-size="19px,20px"></dc-import></div>
+</div>
+<span style="font-size:13px;color:#6B7280;">Shield on charcoal, safe in a circle crop</span>
+</div>
+<div style="width:820px;height:312px;border-radius:8px;background:#16181B;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:18px;padding:0 56px;">
+<div style="position:absolute;left:0;right:0;bottom:0;height:8px;background:repeating-linear-gradient(90deg,#F2A900 0 60px,transparent 60px 100px);"></div>
+<dc-import name="Logo" direction="sign" theme="dark" size="{{ 46 }}" hint-size="300px,56px"></dc-import>
+<div style="font-family:Overpass,sans-serif;font-weight:800;font-size:30px;line-height:1.15;color:#F7F7F5;max-width:560px;">Flat-rate dispatch, 24/7.<br><span style="color:#F2A900;">English · Русский</span></div>
+<div style="font-family:Overpass,sans-serif;font-weight:600;font-size:18px;color:#C9CBCF;font-variant-numeric:tabular-nums;">(XXX) XXX-XXXX · truckerhq.com</div>
+</div>
+</div>
+</div>
+
+<div id="4d" style="display:flex;flex-direction:column;gap:12px;">
+<div style="display:flex;align-items:center;gap:10px;"><span style="background:#16181B;color:#F2A900;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:16px;padding:3px 8px;border-radius:4px;">4d</span><span style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:22px;text-transform:uppercase;">Email signature</span></div>
+<div style="width:560px;background:#FFFFFF;border-radius:8px;padding:24px;display:flex;gap:18px;align-items:center;">
+<dc-import name="Logo" direction="sign" mark="{{ true }}" size="{{ 56 }}" hint-size="52px,56px"></dc-import>
+<div style="display:flex;flex-direction:column;gap:3px;border-left:2px solid #F2A900;padding-left:18px;font-size:14px;line-height:1.45;font-variant-numeric:tabular-nums;">
+<span style="font-weight:700;font-size:16px;">Name Surname</span>
+<span style="color:#4B5058;">Dispatcher, Trucker HQ</span>
+<span>(XXX) XXX-XXXX · 24/7 · <a href="#">truckerhq.com</a></span>
+<span style="color:#6B7280;">MC XXXXXXX · USDOT XXXXXXX</span>
+</div>
+</div>
+</div>
+</section>
+</x-dc>
+</body>
+</html>

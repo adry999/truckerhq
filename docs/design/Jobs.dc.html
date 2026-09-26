@@ -7,20 +7,21 @@
 </head>
 <body>
 <x-dc>
-<helmet><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><style>body{margin:0;background:#F7F7F5;font-family:Inter,sans-serif;color:#16181B;-webkit-font-smoothing:antialiased}a{color:#0E5C3A}a:hover{color:#16181B}*{box-sizing:border-box}input::placeholder{color:#6B7280}</style></helmet>
+<helmet><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Roboto+Condensed:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><style>body{margin:0;background:#F7F7F5;font-family:Inter,sans-serif;color:#16181B;-webkit-font-smoothing:antialiased}a{color:#0E5C3A}a:hover{color:#16181B}*{box-sizing:border-box}input::placeholder{color:#6B7280}</style></helmet>
 <div style="min-height:100vh;display:flex;flex-direction:column;">
-<dc-import name="SiteHeader" active="Jobs" hint-size="100%,72px" style="position:sticky;top:0;z-index:20;display:block;"></dc-import>
+<dc-import name="SiteHeader" active="Jobs" hint-size="100%,60px" style="position:sticky;top:0;z-index:20;display:block;"></dc-import>
 
 <sc-if value="{{ isList }}" hint-placeholder-val="{{ true }}">
 <section style="background:#16181B;color:#F7F7F5;">
-<div style="max-width:1280px;margin:0 auto;padding:clamp(40px,6vw,80px) clamp(20px,4vw,40px);display:flex;flex-direction:column;gap:18px;">
+<div style="max-width:1280px;margin:0 auto;padding:clamp(36px,6vw,80px) clamp(20px,4vw,40px);display:flex;flex-direction:column;gap:18px;">
 <dc-import name="Logo" direction="sign" theme="dark" sub="JOBS" size="{{ 28 }}" hint-size="220px,38px"></dc-import>
-<h1 style="margin:0;font-family:'Barlow Condensed';font-weight:800;font-size:clamp(48px,7vw,88px);line-height:.9;text-transform:uppercase;">CDL jobs.<br><span style="color:#F2A900;">Pay posted up front.</span></h1>
+<h1 style="margin:0;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:clamp(36px,7vw,88px);line-height:.9;text-transform:uppercase;">CDL jobs.<br><span style="color:#F2A900;">Pay posted up front.</span></h1>
 <p style="margin:0;font-size:clamp(17px,2vw,19px);line-height:1.5;color:#D4D6DA;max-width:600px;">Every job shows the pay and home time. Every carrier shows its Health Score. Apply in English or Russian.</p>
 <div style="display:flex;flex-direction:{{ searchDir }};gap:6px;background:#FFFFFF;border:3px solid #F2A900;border-radius:8px;padding:6px;max-width:820px;">
-<input aria-label="Search jobs" value="{{ q }}" onChange="{{ setQ }}" placeholder="City, state or company" style="flex:1;min-width:0;min-height:58px;border:0;outline:none;padding:0 14px;font-family:Inter;font-size:18px;color:#16181B;background:transparent;">
-<button style="min-height:58px;padding:0 30px;border:0;border-radius:5px;background:#F2A900;color:#16181B;font-family:'Barlow Condensed';font-weight:800;font-size:23px;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;">Find jobs</button>
+<input aria-label="Search jobs" value="{{ q }}" onChange="{{ setQ }}" placeholder="City, state or company" style="flex:1;min-width:0;min-height:clamp(48px,12vw,58px);border:0;outline:none;padding:0 14px;font-family:Inter;font-size:18px;color:#16181B;background:transparent;">
+<button style="min-height:clamp(48px,12vw,58px);padding:0 30px;border:0;border-radius:5px;background:#F2A900;color:#16181B;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:clamp(17px,4.2vw,23px);letter-spacing:.04em;text-transform:uppercase;cursor:pointer;">Find jobs</button>
 </div>
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;font-size:14px;color:#AEB2B8;"><span>Popular:</span><a href="Jobs Chicago.dc.html" style="color:#F7F7F5;">Chicago</a><a href="#" style="color:#F7F7F5;">Dallas</a><a href="#" style="color:#F7F7F5;">Atlanta</a><a href="#" style="color:#F7F7F5;">Jacksonville</a><a href="#" style="color:#F7F7F5;">Sacramento</a></div>
 </div>
 <div style="height:6px;background:repeating-linear-gradient(90deg,#F2A900 0 48px,transparent 48px 80px);"></div>
 </section>
@@ -28,38 +29,38 @@
 <div style="display:flex;flex-direction:column;gap:12px;">
 <sc-for list="{{ filterRows }}" as="fr" hint-placeholder-count="2">
 <div style="display:flex;align-items:center;gap:8px;overflow-x:auto;padding-bottom:2px;">
-<span style="flex:none;width:92px;font-family:'Barlow Condensed';font-weight:700;font-size:14px;letter-spacing:.12em;color:#6B7280;">{{ fr.t }}</span>
-<sc-for list="{{ fr.opts }}" as="o"><button onClick="{{ o.pick }}" style="flex:none;height:44px;padding:0 14px;border-radius:10px;border:{{ o.border }};background:{{ o.bg }};color:{{ o.fg }};font-family:'Barlow Condensed';font-weight:800;font-size:16px;letter-spacing:.06em;cursor:pointer;">{{ o.label }}</button></sc-for>
+<span style="flex:none;width:92px;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:700;font-size:14px;letter-spacing:.12em;color:#6B7280;">{{ fr.t }}</span>
+<sc-for list="{{ fr.opts }}" as="o"><button onClick="{{ o.pick }}" style="flex:none;height:44px;padding:0 14px;border-radius:10px;border:{{ o.border }};background:{{ o.bg }};color:{{ o.fg }};font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:16px;letter-spacing:.06em;cursor:pointer;">{{ o.label }}</button></sc-for>
 </div>
 </sc-for>
 </div>
 <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;">
-<h2 style="margin:0;font-family:'Barlow Condensed';font-weight:800;font-size:clamp(28px,4vw,38px);">{{ countLabel }}</h2>
+<h2 style="margin:0;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:clamp(24px,4vw,38px);">{{ countLabel }}</h2>
 <span style="font-size:14px;color:#6B7280;">Newest first</span>
 </div>
 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,380px),1fr));gap:16px;">
 <sc-for list="{{ jobs }}" as="j" hint-placeholder-count="6">
 <button onClick="{{ j.open }}" style="text-align:left;cursor:pointer;background:#FFFFFF;border:1.5px solid #DEDFDB;border-radius:8px;padding:20px;display:flex;flex-direction:column;gap:14px;font-family:Inter;color:#16181B;" style-hover="border-color:#0E5C3A;">
 <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;">
-<div style="display:flex;flex-direction:column;gap:4px;min-width:0;"><span style="font-family:'Barlow Condensed';font-weight:800;font-size:26px;line-height:1.05;text-transform:uppercase;">{{ j.title }}</span><span style="font-size:14px;color:#4B5058;">{{ j.co }} · {{ j.loc }}</span></div>
-<span style="flex:none;display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 8px 0 3px;border-radius:16px;border:1.5px solid #DEDFDB;"><span style="width:26px;height:26px;border-radius:50%;background:{{ j.hc }};color:{{ j.hfg }};display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed';font-weight:800;font-size:15px;">{{ j.score }}</span><span style="font-size:11px;font-weight:600;color:#4B5058;">Health</span></span>
+<div style="display:flex;flex-direction:column;gap:4px;min-width:0;"><span style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:26px;line-height:1.05;text-transform:uppercase;">{{ j.title }}</span><span style="font-size:14px;color:#4B5058;">{{ j.co }} · {{ j.loc }}</span></div>
+<span style="flex:none;display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 8px 0 3px;border-radius:16px;border:1.5px solid #DEDFDB;"><span style="width:26px;height:26px;border-radius:50%;background:{{ j.hc }};color:{{ j.hfg }};display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:15px;">{{ j.score }}</span><span style="font-size:11px;font-weight:600;color:#4B5058;">Health</span></span>
 </div>
-<div style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;"><span style="font-family:'Barlow Condensed';font-weight:800;font-size:34px;line-height:1;color:#0E5C3A;font-variant-numeric:tabular-nums;">{{ j.pay }}</span><span style="font-size:14px;color:#4B5058;">{{ j.payNote }}</span></div>
+<div style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;"><span style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:34px;line-height:1;color:#0E5C3A;font-variant-numeric:tabular-nums;">{{ j.pay }}</span><span style="font-size:14px;color:#4B5058;">{{ j.payNote }}</span></div>
 <div style="display:flex;flex-wrap:wrap;gap:6px;">
-<span style="height:28px;display:inline-flex;align-items:center;padding:0 10px;border-radius:7px;background:#E2F0E8;color:#0E5C3A;font-family:'Barlow Condensed';font-weight:800;font-size:15px;letter-spacing:.08em;">{{ j.type }}</span>
-<span style="height:28px;display:inline-flex;align-items:center;padding:0 10px;border-radius:7px;background:#EEEFEC;color:#3F444B;font-family:'Barlow Condensed';font-weight:700;font-size:15px;letter-spacing:.06em;">{{ j.equipU }}</span>
-<span style="height:28px;display:inline-flex;align-items:center;padding:0 10px;border-radius:7px;background:#EEEFEC;color:#3F444B;font-family:'Barlow Condensed';font-weight:700;font-size:15px;letter-spacing:.06em;">{{ j.homeU }}</span>
-<sc-if value="{{ j.ru }}"><span style="height:28px;display:inline-flex;align-items:center;padding:0 10px;border-radius:7px;border:1px solid #9CA0A8;color:#3F444B;font-family:'Barlow Condensed';font-weight:800;font-size:15px;letter-spacing:.06em;">RU SPOKEN</span></sc-if>
+<span style="height:28px;display:inline-flex;align-items:center;padding:0 10px;border-radius:7px;background:#E2F0E8;color:#0E5C3A;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:15px;letter-spacing:.08em;">{{ j.type }}</span>
+<span style="height:28px;display:inline-flex;align-items:center;padding:0 10px;border-radius:7px;background:#EEEFEC;color:#3F444B;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:.06em;">{{ j.equipU }}</span>
+<span style="height:28px;display:inline-flex;align-items:center;padding:0 10px;border-radius:7px;background:#EEEFEC;color:#3F444B;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:.06em;">{{ j.homeU }}</span>
+<sc-if value="{{ j.ru }}"><span style="height:28px;display:inline-flex;align-items:center;padding:0 10px;border-radius:7px;border:1px solid #9CA0A8;color:#3F444B;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:15px;letter-spacing:.06em;">RU SPOKEN</span></sc-if>
 </div>
-<div style="display:flex;justify-content:space-between;align-items:center;font-size:13px;color:#6B7280;border-top:1px solid #ECEDEA;padding-top:12px;"><span>{{ j.posted }} · {{ j.exp }}</span><span style="font-family:'Barlow Condensed';font-weight:700;font-size:17px;letter-spacing:.05em;color:#0E5C3A;">VIEW JOB →</span></div>
+<div style="display:flex;justify-content:space-between;align-items:center;font-size:13px;color:#6B7280;border-top:1px solid #ECEDEA;padding-top:12px;"><span>{{ j.posted }} · {{ j.exp }}</span><span style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:700;font-size:17px;letter-spacing:.05em;color:#0E5C3A;">VIEW JOB →</span></div>
 </button>
 </sc-for>
 </div>
 <sc-if value="{{ noJobs }}"><div style="padding:40px 20px;text-align:center;background:#FFFFFF;border:1px solid #DEDFDB;border-radius:8px;font-size:16px;color:#4B5058;">No jobs match these filters. Try fewer filters.</div></sc-if>
 <div style="background:#0E5C3A;border-radius:8px;padding:0;margin-top:16px;">
 <div style="border:0;border-radius:8px;padding:24px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:18px;color:#F7F7F5;">
-<div style="display:flex;flex-direction:column;gap:6px;"><span style="font-family:'Barlow Condensed';font-weight:700;font-size:15px;letter-spacing:.14em;color:#F2A900;">CARRIERS</span><span style="font-family:'Barlow Condensed';font-weight:800;font-size:32px;line-height:1;text-transform:uppercase;">Need a driver? Post a job here.</span></div>
-<a href="Hire Drivers.dc.html" style="height:56px;display:flex;align-items:center;padding:0 26px;border-radius:12px;background:#F2A900;color:#16181B;text-decoration:none;font-family:'Barlow Condensed';font-weight:800;font-size:20px;letter-spacing:.05em;text-transform:uppercase;" style-hover="background:#FFBC1F;color:#16181B;">Hire drivers</a>
+<div style="display:flex;flex-direction:column;gap:6px;"><span style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:.14em;color:#F2A900;">CARRIERS</span><span style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:32px;line-height:1;text-transform:uppercase;">Need a driver? Post a job here.</span></div>
+<a href="Hire Drivers.dc.html" style="height:clamp(48px,12vw,56px);display:flex;align-items:center;padding:0 26px;border-radius:12px;background:#F2A900;color:#16181B;text-decoration:none;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:clamp(17px,4.2vw,20px);letter-spacing:.04em;text-transform:uppercase;" style-hover="background:#FFBC1F;color:#16181B;">Hire drivers</a>
 </div>
 </div>
 </section>
@@ -68,13 +69,13 @@
 <sc-if value="{{ isDetail }}">
 <section style="background:#16181B;color:#F7F7F5;">
 <div style="max-width:1280px;margin:0 auto;padding:24px clamp(16px,4vw,40px) 40px;display:flex;flex-direction:column;gap:16px;">
-<button onClick="{{ back }}" style="align-self:flex-start;min-height:44px;padding:0;border:0;background:transparent;color:#F2A900;font-family:'Barlow Condensed';font-weight:700;font-size:17px;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;">← All jobs</button>
+<button onClick="{{ back }}" style="align-self:flex-start;min-height:44px;padding:0;border:0;background:transparent;color:#F2A900;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:700;font-size:17px;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;">← All jobs</button>
 <div style="display:flex;flex-wrap:wrap;gap:6px;">
-<span style="height:30px;display:inline-flex;align-items:center;padding:0 12px;border-radius:8px;background:#F2A900;color:#16181B;font-family:'Barlow Condensed';font-weight:800;font-size:16px;letter-spacing:.08em;">{{ d.type }}</span>
-<span style="height:30px;display:inline-flex;align-items:center;padding:0 12px;border-radius:8px;border:1px solid rgba(247,247,245,.35);font-family:'Barlow Condensed';font-weight:700;font-size:16px;letter-spacing:.08em;">{{ d.equipU }}</span>
-<sc-if value="{{ d.ru }}"><span style="height:30px;display:inline-flex;align-items:center;padding:0 12px;border-radius:8px;border:1px solid rgba(247,247,245,.35);font-family:'Barlow Condensed';font-weight:700;font-size:16px;letter-spacing:.08em;">RU SPOKEN</span></sc-if>
+<span style="height:30px;display:inline-flex;align-items:center;padding:0 12px;border-radius:8px;background:#F2A900;color:#16181B;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:16px;letter-spacing:.08em;">{{ d.type }}</span>
+<span style="height:30px;display:inline-flex;align-items:center;padding:0 12px;border-radius:8px;border:1px solid rgba(247,247,245,.35);font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:700;font-size:16px;letter-spacing:.08em;">{{ d.equipU }}</span>
+<sc-if value="{{ d.ru }}"><span style="height:30px;display:inline-flex;align-items:center;padding:0 12px;border-radius:8px;border:1px solid rgba(247,247,245,.35);font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:700;font-size:16px;letter-spacing:.08em;">RU SPOKEN</span></sc-if>
 </div>
-<h1 style="margin:0;font-family:'Barlow Condensed';font-weight:800;font-size:clamp(40px,6vw,72px);line-height:.92;text-transform:uppercase;">{{ d.title }}</h1>
+<h1 style="margin:0;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:clamp(32px,6vw,72px);line-height:.92;text-transform:uppercase;">{{ d.title }}</h1>
 <div style="font-size:17px;color:#D4D6DA;">{{ d.co }} · {{ d.loc }} · Posted {{ d.postedL }}</div>
 </div>
 </section>
@@ -83,54 +84,54 @@
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));background:#FFFFFF;border:1px solid #DEDFDB;border-radius:8px;overflow:hidden;">
 <sc-for list="{{ d.facts }}" as="f" hint-placeholder-count="6">
 <div style="padding:18px 20px;border-right:1px solid #ECEDEA;border-bottom:1px solid #ECEDEA;display:flex;flex-direction:column;gap:4px;">
-<span style="font-family:'Barlow Condensed';font-weight:700;font-size:14px;letter-spacing:.12em;color:#6B7280;">{{ f.k }}</span>
-<span style="font-family:'Barlow Condensed';font-weight:800;font-size:26px;line-height:1.05;color:{{ f.c }};font-variant-numeric:tabular-nums;">{{ f.v }}</span>
+<span style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:700;font-size:14px;letter-spacing:.12em;color:#6B7280;">{{ f.k }}</span>
+<span style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:26px;line-height:1.05;color:{{ f.c }};font-variant-numeric:tabular-nums;">{{ f.v }}</span>
 </div>
 </sc-for>
 </div>
 <sc-for list="{{ d.sections }}" as="s" hint-placeholder-count="3">
 <div style="background:#FFFFFF;border:1px solid #DEDFDB;border-radius:8px;padding:22px 24px;display:flex;flex-direction:column;gap:12px;">
-<h2 style="margin:0;font-family:'Barlow Condensed';font-weight:800;font-size:26px;text-transform:uppercase;">{{ s.t }}</h2>
+<h2 style="margin:0;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:26px;text-transform:uppercase;">{{ s.t }}</h2>
 <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px;">
 <sc-for list="{{ s.items }}" as="it"><li style="display:flex;gap:10px;font-size:16px;line-height:1.45;"><span style="flex:none;width:10px;height:10px;margin-top:6px;background:#F2A900;border-radius:2px;"></span>{{ it }}</li></sc-for>
 </ul>
 </div>
 </sc-for>
 <a href="Carrier Lookup.dc.html" style="background:#FFFFFF;border:1.5px solid #DEDFDB;border-radius:8px;padding:20px 24px;display:flex;align-items:center;gap:18px;text-decoration:none;color:#16181B;" style-hover="border-color:#0E5C3A;color:#16181B;">
-<div style="width:72px;height:72px;border-radius:50%;background:conic-gradient({{ d.hc }} {{ d.pct }}, #E3E4E0 0);display:flex;align-items:center;justify-content:center;flex:none;"><div style="width:58px;height:58px;border-radius:50%;background:#FFFFFF;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed';font-weight:800;font-size:28px;">{{ d.score }}</div></div>
-<div style="display:flex;flex-direction:column;gap:4px;flex:1;min-width:0;"><span style="font-family:'Barlow Condensed';font-weight:700;font-size:14px;letter-spacing:.12em;color:#6B7280;">ABOUT THE CARRIER</span><span style="font-weight:700;font-size:18px;">{{ d.co }}</span><span style="font-size:14px;color:#4B5058;">DOT {{ d.dot }} · {{ d.trucks }} trucks · Health Score {{ d.score }}</span></div>
-<span style="font-family:'Barlow Condensed';font-weight:700;font-size:17px;letter-spacing:.05em;color:#0E5C3A;">PROFILE →</span>
+<div style="width:72px;height:72px;border-radius:50%;background:conic-gradient({{ d.hc }} {{ d.pct }}, #E3E4E0 0);display:flex;align-items:center;justify-content:center;flex:none;"><div style="width:58px;height:clamp(48px,12vw,58px);border-radius:50%;background:#FFFFFF;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:28px;">{{ d.score }}</div></div>
+<div style="display:flex;flex-direction:column;gap:4px;flex:1;min-width:0;"><span style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:700;font-size:14px;letter-spacing:.12em;color:#6B7280;">ABOUT THE CARRIER</span><span style="font-weight:700;font-size:18px;">{{ d.co }}</span><span style="font-size:14px;color:#4B5058;">DOT {{ d.dot }} · {{ d.trucks }} trucks · Health Score {{ d.score }}</span></div>
+<span style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:700;font-size:17px;letter-spacing:.05em;color:#0E5C3A;">PROFILE →</span>
 </a>
 </div>
 <aside id="apply" style="position:sticky;top:92px;background:#FFFFFF;border:2px solid #16181B;border-radius:10px;overflow:hidden;">
-<div style="background:#16181B;color:#F7F7F5;padding:18px 22px;display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-family:'Barlow Condensed';font-weight:800;font-size:26px;text-transform:uppercase;">Apply now</span><span style="font-size:13px;color:#AEB2B8;">2 minutes</span></div>
+<div style="background:#16181B;color:#F7F7F5;padding:18px 22px;display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:26px;text-transform:uppercase;">Apply now</span><span style="font-size:13px;color:#AEB2B8;">2 minutes</span></div>
 <sc-if value="{{ notApplied }}" hint-placeholder-val="{{ true }}">
 <form onSubmit="{{ apply }}" style="padding:20px 22px;display:flex;flex-direction:column;gap:14px;">
 <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:14px;font-weight:600;">Full name</span><input required placeholder="Your name" style="height:52px;border:1.5px solid #9CA0A8;border-radius:10px;padding:0 14px;font-family:Inter;font-size:16px;"></label>
 <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:14px;font-weight:600;">Phone</span><input required type="tel" placeholder="(555) 555-5555" style="height:52px;border:1.5px solid #9CA0A8;border-radius:10px;padding:0 14px;font-family:Inter;font-size:16px;"></label>
 <sc-for list="{{ applySegs }}" as="sg">
 <div style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:14px;font-weight:600;">{{ sg.t }}</span>
-<div style="display:flex;gap:6px;"><sc-for list="{{ sg.opts }}" as="o"><button type="button" onClick="{{ o.pick }}" style="flex:1;height:48px;border-radius:10px;border:{{ o.border }};background:{{ o.bg }};color:{{ o.fg }};font-family:'Barlow Condensed';font-weight:800;font-size:17px;letter-spacing:.05em;cursor:pointer;">{{ o.label }}</button></sc-for></div>
+<div style="display:flex;gap:6px;"><sc-for list="{{ sg.opts }}" as="o"><button type="button" onClick="{{ o.pick }}" style="flex:1;height:48px;border-radius:10px;border:{{ o.border }};background:{{ o.bg }};color:{{ o.fg }};font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:17px;letter-spacing:.05em;cursor:pointer;">{{ o.label }}</button></sc-for></div>
 </div>
 </sc-for>
-<button type="submit" style="margin-top:4px;height:58px;border:0;border-radius:12px;background:#F2A900;color:#16181B;font-family:'Barlow Condensed';font-weight:800;font-size:22px;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;" style-hover="background:#FFBC1F;">Send application</button>
+<button type="submit" style="margin-top:4px;height:clamp(48px,12vw,58px);border:0;border-radius:12px;background:#F2A900;color:#16181B;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:clamp(17px,4.2vw,22px);letter-spacing:.04em;text-transform:uppercase;cursor:pointer;" style-hover="background:#FFBC1F;">Send application</button>
 <span style="font-size:13px;color:#6B7280;line-height:1.45;">A recruiter calls you back within one business day. We never share your number without asking.</span>
 </form>
 </sc-if>
 <sc-if value="{{ applied }}">
 <div style="padding:28px 22px;display:flex;flex-direction:column;gap:12px;">
-<span style="display:inline-flex;align-self:flex-start;align-items:center;gap:7px;height:30px;padding:0 12px;border-radius:8px;background:#E2F0E8;color:#0E5C3A;font-family:'Barlow Condensed';font-weight:800;font-size:16px;letter-spacing:.08em;"><span style="width:8px;height:8px;border-radius:50%;background:#0E5C3A;"></span>SENT</span>
-<span style="font-family:'Barlow Condensed';font-weight:800;font-size:30px;line-height:1;text-transform:uppercase;">Application sent</span>
+<span style="display:inline-flex;align-self:flex-start;align-items:center;gap:7px;height:30px;padding:0 12px;border-radius:8px;background:#E2F0E8;color:#0E5C3A;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:16px;letter-spacing:.08em;"><span style="width:8px;height:8px;border-radius:50%;background:#0E5C3A;"></span>SENT</span>
+<span style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:30px;line-height:1;text-transform:uppercase;">Application sent</span>
 <span style="font-size:15px;line-height:1.5;color:#4B5058;">{{ d.co }} will call you within one business day. Keep your phone on.</span>
-<button onClick="{{ back }}" style="height:48px;border-radius:10px;border:2px solid #16181B;background:transparent;font-family:'Barlow Condensed';font-weight:800;font-size:18px;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;">More jobs</button>
+<button onClick="{{ back }}" style="height:48px;border-radius:10px;border:2px solid #16181B;background:transparent;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:18px;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;">More jobs</button>
 </div>
 </sc-if>
 </aside>
 </section>
 <sc-if value="{{ mobileApply }}">
-<a href="#apply" style="position:fixed;left:12px;right:12px;bottom:12px;z-index:25;height:64px;border-radius:14px;background:#F2A900;color:#16181B;text-decoration:none;display:flex;align-items:center;justify-content:space-between;padding:0 20px;box-shadow:0 8px 24px rgba(0,0,0,.3);">
-<span style="font-family:'Barlow Condensed';font-weight:800;font-size:22px;letter-spacing:.05em;text-transform:uppercase;">Apply now</span>
-<span style="font-family:'Barlow Condensed';font-weight:800;font-size:22px;font-variant-numeric:tabular-nums;">{{ d.pay }}</span>
+<a href="#apply" style="position:fixed;left:12px;right:12px;bottom:12px;z-index:25;height:clamp(48px,12vw,64px);border-radius:14px;background:#F2A900;color:#16181B;text-decoration:none;display:flex;align-items:center;justify-content:space-between;padding:0 20px;box-shadow:0 8px 24px rgba(0,0,0,.3);">
+<span style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:clamp(17px,4.2vw,22px);letter-spacing:.04em;text-transform:uppercase;">Apply now</span>
+<span style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:22px;font-variant-numeric:tabular-nums;">{{ d.pay }}</span>
 </a>
 </sc-if>
 </sc-if>

@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { CARRIERS, JOBS } from "@/lib/data";
+import { JOBS } from "@/lib/data";
 import { GUIDES } from "@/lib/guides";
 
 const BASE_URL = "https://truckerhq.com";
@@ -35,17 +35,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  const carrierRoutes: MetadataRoute.Sitemap = CARRIERS.map((c) => ({
-    url: `${BASE_URL}/tools/carrier-lookup/${c.slug}`,
-    changeFrequency: "weekly",
-    priority: 0.5,
-  }));
-
   const guideRoutes: MetadataRoute.Sitemap = GUIDES.map((g) => ({
     url: `${BASE_URL}/guides/${g.slug}`,
     changeFrequency: "monthly",
     priority: 0.5,
   }));
 
-  return [...staticRoutes, ...jobRoutes, ...carrierRoutes, ...guideRoutes];
+  return [...staticRoutes, ...jobRoutes, ...guideRoutes];
 }

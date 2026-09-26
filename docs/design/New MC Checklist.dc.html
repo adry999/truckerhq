@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Roboto+Condensed:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><style>body{margin:0;background:#F7F7F5;font-family:Inter,sans-serif;color:#16181B;-webkit-font-smoothing:antialiased}a{color:#0E5C3A}a:hover{color:#16181B}*{box-sizing:border-box}</style></helmet>
+<div style="min-height:100vh;display:flex;flex-direction:column;">
+<dc-import name="SiteHeader" active="Tools" hint-size="100%,60px" style="position:sticky;top:0;z-index:20;display:block;"></dc-import>
+
+<section style="background:#16181B;color:#F7F7F5;">
+<div style="max-width:1280px;margin:0 auto;padding:clamp(36px,6vw,72px) clamp(20px,4vw,40px);display:flex;flex-direction:column;gap:16px;">
+<div style="display:flex;flex-wrap:wrap;gap:8px;font-size:14px;color:#AEB2B8;"><a href="Tools.dc.html" style="color:#F7F7F5;">Tools</a><span>/</span><span>New MC Checklist</span></div>
+<h1 style="margin:0;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:clamp(36px,7vw,88px);line-height:.9;text-transform:uppercase;">Your first 6 months with a new MC</h1>
+<p style="margin:0;font-size:clamp(17px,2vw,19px);line-height:1.5;color:#D4D6DA;max-width:640px;text-wrap:pretty;">Every filing and setup step, in the order you'll need it. Tick them off as you go. Your progress is saved on this device.</p>
+</div>
+<div style="height:6px;background:repeating-linear-gradient(90deg,#F2A900 0 48px,transparent 48px 80px);"></div>
+</section>
+
+<section style="position:sticky;top:{{ barTop }};z-index:10;background:#FFFFFF;border-bottom:1px solid #DEDFDB;">
+<div style="max-width:1280px;margin:0 auto;padding:14px clamp(16px,4vw,40px);display:flex;align-items:center;gap:16px;">
+<span style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:22px;font-variant-numeric:tabular-nums;white-space:nowrap;">{{ doneCount }} of {{ total }} done</span>
+<div style="flex:1;height:10px;border-radius:5px;background:#E3E4E0;overflow:hidden;"><div style="height:100%;width:{{ pct }};background:#0E5C3A;border-radius:5px;transition:width .2s;"></div></div>
+<button onClick="{{ resetAll }}" style="min-height:44px;padding:0 6px;border:0;background:transparent;color:#4B5058;font-family:Inter;font-size:14px;cursor:pointer;text-decoration:underline;">Reset</button>
+</div>
+</section>
+
+<section style="max-width:1280px;width:100%;margin:0 auto;padding:32px clamp(16px,4vw,40px) 96px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:24px;align-items:start;">
+<div style="grid-column:{{ mainSpan }};display:flex;flex-direction:column;gap:28px;min-width:0;">
+<sc-for list="{{ phases }}" as="ph" hint-placeholder-count="4">
+<div style="display:flex;flex-direction:column;gap:12px;">
+<div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+<h2 style="margin:0;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:clamp(24px,3.5vw,36px);line-height:1;">{{ ph.t }}</h2>
+<span style="font-size:14px;color:#6B7280;font-variant-numeric:tabular-nums;">{{ ph.when }} · {{ ph.done }}/{{ ph.n }}</span>
+</div>
+<div style="background:#FFFFFF;border:1px solid #DEDFDB;border-radius:8px;overflow:hidden;">
+<sc-for list="{{ ph.items }}" as="it">
+<button onClick="{{ it.toggle }}" style="width:100%;min-height:clamp(48px,12vw,64px);display:flex;align-items:flex-start;gap:14px;padding:16px 18px;border:0;border-top:{{ it.bt }};background:{{ it.bg }};text-align:left;cursor:pointer;font-family:Inter;color:#16181B;" style-hover="background:#F7F7F5;">
+<span style="width:26px;height:26px;flex:none;margin-top:1px;border-radius:5px;border:2px solid {{ it.boxBd }};background:{{ it.boxBg }};display:flex;align-items:center;justify-content:center;"><sc-if value="{{ it.on }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></sc-if></span>
+<span style="display:flex;flex-direction:column;gap:3px;flex:1;min-width:0;">
+<span style="font-weight:600;font-size:16px;color:{{ it.fg }};text-decoration:{{ it.deco }};">{{ it.t }}</span>
+<span style="font-size:14px;line-height:1.5;color:#4B5058;text-wrap:pretty;">{{ it.d }}</span>
+</span>
+</button>
+</sc-for>
+</div>
+</div>
+</sc-for>
+<p style="margin:0;font-size:13px;line-height:1.5;color:#6B7280;">General guide, not legal advice. Requirements depend on your state, equipment and what you haul. Check FMCSA and your state DOT for the current rules.</p>
+</div>
+<aside style="position:sticky;top:152px;display:flex;flex-direction:column;gap:16px;">
+<div style="background:#0E5C3A;border-radius:8px;padding:24px 22px;display:flex;flex-direction:column;gap:12px;color:#F7F7F5;">
+<div style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:30px;line-height:.95;text-transform:uppercase;">Stuck on a step?</div>
+<div style="font-size:15px;line-height:1.5;color:#E3EAE6;">We help new authorities every week: broker packets, factoring, and lanes that take new MCs. In English or Russian.</div>
+<a href="Dispatch Onboarding.dc.html" style="height:54px;display:flex;align-items:center;justify-content:center;border-radius:10px;background:#F2A900;color:#16181B;text-decoration:none;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:clamp(17px,4.2vw,20px);letter-spacing:.04em;text-transform:uppercase;" style-hover="background:#FFBC1F;color:#16181B;">Talk to dispatch</a>
+</div>
+<a href="Compliance Alerts.dc.html" style="background:#FFFFFF;border:1.5px solid #DEDFDB;border-radius:8px;padding:20px;display:flex;flex-direction:column;gap:6px;text-decoration:none;color:#16181B;" style-hover="border-color:#0E5C3A;color:#16181B;">
+<span style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:22px;text-transform:uppercase;">Get deadline texts</span>
+<span style="font-size:14px;line-height:1.5;color:#4B5058;">We'll text you before UCR is due and if your insurance filing changes.</span>
+</a>
+</aside>
+</section>
+
+<div style="margin-top:auto;"><dc-import name="SiteFooter" hint-size="100%,360px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const PHASES = [
+  { t: 'Before your authority is active', when: 'Weeks 1–4', items: [
+    ['usdot', 'USDOT number and MC authority', 'Apply through the FMCSA Unified Registration System. Keep your PIN and confirmation.'],
+    ['ins', 'Insurance filed with FMCSA', 'Your agent files BIPD liability (form BMC-91 or 91X). Cargo coverage is what most brokers will ask for.'],
+    ['boc3', 'BOC-3 process agent', 'Name a process agent for every state. Most carriers use a blanket agent company.'],
+    ['wait', 'Protest period', 'After filing, there is a waiting period before the authority becomes active. Check status on SAFER.'],
+    ['ucr', 'UCR registration', 'Unified Carrier Registration, renewed every year.'],
+  ]},
+  { t: 'Before your first load', when: 'Weeks 3–6', items: [
+    ['drug', 'Drug and alcohol program', 'Join a consortium, register in the FMCSA Clearinghouse, and run a pre-employment test for every driver, including yourself.'],
+    ['dq', 'Driver qualification file', 'Application, MVR, medical card, road test or CDL copy, and previous employer checks.'],
+    ['eld', 'ELD installed', 'Use a device from the FMCSA registered list. Keep the instruction card in the cab.'],
+    ['irp', 'IRP plates and IFTA', 'Apportioned plates and a fuel tax account if you run in more than one state.'],
+    ['2290', 'Form 2290 (HVUT)', 'Heavy vehicle use tax for trucks 55,000 lbs and up. Keep the stamped Schedule 1.'],
+  ]},
+  { t: 'Getting loads', when: 'Month 2', items: [
+    ['packet', 'Broker setup packet', 'MC authority letter, W-9, certificate of insurance, and a voided check or factoring notice in one PDF.'],
+    ['factor', 'Factoring or payment terms', 'Decide how you get paid. New MCs often factor to cover the first 30–60 days.'],
+    ['boards', 'Load board accounts', 'Many brokers and boards filter out authorities under 90 days. Ask for new-MC-friendly brokers.'],
+  ]},
+  { t: 'Stay compliant', when: 'Months 3–6', items: [
+    ['audit', 'New entrant safety audit', 'FMCSA audits new carriers in the first 12 months. Keep DQ files, logs, maintenance and drug testing records ready.'],
+    ['maint', 'Maintenance records and annual inspection', 'Keep records for every truck and trailer, and a current annual inspection sticker.'],
+    ['ifta', 'Quarterly IFTA returns', 'File every quarter, even if you owe nothing.'],
+    ['mcs150', 'MCS-150 updates', 'Update your USDOT record every two years, or whenever your address, fleet size or mileage changes.'],
+  ]},
+];
+class Component extends DCLogic {
+  state = { w: typeof window !== 'undefined' ? window.innerWidth : 1280, on: {} };
+  componentDidMount() {
+    this.onR = () => this.setState({ w: window.innerWidth }); window.addEventListener('resize', this.onR);
+    try { const v = JSON.parse(localStorage.getItem('thq-mc-checklist') || '{}'); this.setState({ on: v }); } catch (e) {}
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this.onR); }
+  save(on) { this.setState({ on }); try { localStorage.setItem('thq-mc-checklist', JSON.stringify(on)); } catch (e) {} }
+  renderVals() {
+    const on = this.state.on, wide = this.state.w >= 1000;
+    const total = PHASES.reduce((a, p) => a + p.items.length, 0);
+    const doneCount = PHASES.reduce((a, p) => a + p.items.filter(i => on[i[0]]).length, 0);
+    return {
+      total, doneCount, pct: Math.round(doneCount / total * 100) + '%',
+      mainSpan: wide ? 'span 2' : 'auto', barTop: this.state.w < 960 ? '60px' : '72px',
+      resetAll: () => this.save({}),
+      phases: PHASES.map(p => ({
+        t: p.t, when: p.when, n: p.items.length, done: p.items.filter(i => on[i[0]]).length,
+        items: p.items.map(([k, t, d], i) => { const v = !!on[k]; return { t, d, on: v, bt: i ? '1px solid #ECEDEA' : '0', bg: v ? '#F4F8F5' : '#FFFFFF', boxBd: v ? '#0E5C3A' : '#9CA0A8', boxBg: v ? '#0E5C3A' : '#FFFFFF', fg: v ? '#4B5058' : '#16181B', deco: v ? 'line-through' : 'none', toggle: () => this.save({ ...on, [k]: !v }) }; }),
+      })),
+    };
+  }
+}
+</script>
+</body>
+</html>

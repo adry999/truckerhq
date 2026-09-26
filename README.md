@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Trucker HQ
 
-## Getting Started
+Flat-rate truck dispatch, CDL driver jobs, driver hiring and free carrier
+tools (FMCSA data) for owner-operators and small fleets. Next.js 16 (App
+Router), TypeScript, Tailwind v4, React 19. English and Russian (`/ru`).
 
-First, run the development server:
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `npm run dev` — dev server
+- `npm run build` — production build
+- `npm run start` — run the production build
+- `npm run lint` — ESLint
 
-## Learn More
+## Structure
 
-To learn more about Next.js, take a look at the following resources:
+- `src/app` — routes (App Router). Most pages are server components;
+  interactive pieces (calculators, wizards, forms) are isolated
+  `"use client"` components under `src/components`.
+- `src/lib/data.ts` — sample carrier/job data used across Carrier Lookup,
+  Jobs and the homepage.
+- `src/lib/guides.ts`, `src/lib/seo.ts` — guide metadata and JSON-LD helpers.
+- `src/app/sitemap.ts`, `src/app/robots.ts` — SEO metadata routes.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Design source
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Design specs and the current handoff notes live in `docs/design/` — see
+[`docs/design/README.md`](docs/design/README.md). The `.dc.html` files
+there are design references (open in a browser, not production code); the
+Next.js app in `src/` is the real implementation.
 
-## Deploy on Vercel
+## Placeholders
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Sample data, `$XXX` prices, `(XXX) XXX-XXXX` phone numbers and stock
+photos are intentional placeholders until the client supplies real data.

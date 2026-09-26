@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Roboto+Condensed:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><style>body{margin:0;background:#F7F7F5;font-family:Inter,sans-serif;color:#16181B;-webkit-font-smoothing:antialiased}a{color:#0E5C3A}a:hover{color:#16181B}*{box-sizing:border-box}</style></helmet>
+<div style="min-height:100vh;display:flex;flex-direction:column;">
+<dc-import name="SiteHeader" hint-size="100%,60px" style="position:sticky;top:0;z-index:20;display:block;"></dc-import>
+<div style="max-width:760px;width:100%;margin:0 auto;padding:clamp(28px,5vw,56px) clamp(20px,4vw,24px) 88px;display:flex;flex-direction:column;gap:22px;">
+<h1 style="margin:0;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:clamp(34px,6vw,52px);line-height:.95;">{{ title }}</h1>
+<span style="font-size:14px;color:#6B7280;">Last updated: Month DD, 20XX</span>
+<div style="background:#FFF7E0;border-radius:8px;padding:14px 16px;font-size:14px;line-height:1.5;color:#3F444B;">Outline only. The final text must be written or reviewed by a lawyer before launch.</div>
+<sc-for list="{{ sections }}" as="s" hint-placeholder-count="5">
+<div style="display:flex;flex-direction:column;gap:8px;">
+<h2 style="margin:0;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:24px;">{{ s.h }}</h2>
+<p style="margin:0;font-size:16px;line-height:1.65;color:#2B2F34;">{{ s.p }}</p>
+</div>
+</sc-for>
+<div style="display:flex;flex-wrap:wrap;gap:8px 20px;border-top:1px solid #DEDFDB;padding-top:18px;font-size:15px;"><sc-for list="{{ others }}" as="o"><a href="{{ o.href }}" style="font-weight:600;">{{ o.name }} →</a></sc-for></div>
+<p style="margin:8px 0 0;font-size:15px;line-height:1.6;color:#4B5058;">Questions: hello@truckerhq.com · Trucker HQ, Street address, City, ST 00000</p>
+</div>
+<div style="margin-top:auto;"><dc-import name="SiteFooter" hint-size="100%,360px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const DOCS = {
+  privacy: ['Privacy policy', [
+    ['What we collect', 'Name, phone, email, MC/DOT number and truck details you enter in our forms. Carrier data shown in Carrier Lookup comes from public FMCSA records.'],
+    ['How we use it', 'To call you back, run dispatch, send the alerts you asked for, and match drivers with jobs.'],
+    ['Who we share it with', 'Carriers see a driver application only when the driver applies. We do not sell personal information.'],
+    ['Your choices', 'Ask us to update or delete your information at any time by email or phone.'],
+    ['Cookies and analytics', '[Which analytics and ad tools the site uses, if any.]'],
+  ]],
+  terms: ['Terms of use', [
+    ['Using the site', 'The free tools are for information only. Check official FMCSA records before making business decisions.'],
+    ['Health Score', 'The Health Score is our summary of public data, not an official FMCSA safety rating.'],
+    ['Dispatch services', 'Dispatch is covered by a separate service agreement signed before the first load.'],
+    ['Job listings', 'Carriers are responsible for the accuracy of the jobs they post.'],
+    ['Limits of liability', '[To be written by your lawyer.]'],
+  ]],
+  sms: ['SMS terms', [
+    ['What you get', 'Compliance alerts, job alerts and call-back texts you signed up for. Message frequency varies, usually a few texts a year for compliance alerts.'],
+    ['Cost', 'Message and data rates may apply.'],
+    ['Stop or get help', 'Reply STOP to cancel or HELP for help at any time.'],
+    ['Consent', 'Consent to receive texts is not a condition of any purchase.'],
+    ['Privacy', 'Your phone number is used only for the texts you asked for. See the privacy policy.'],
+  ]],
+};
+class Component extends DCLogic {
+  state = { tab: 'terms' };
+  renderVals() {
+    const d = DOCS[this.state.tab];
+    return {
+      title: d[0], sections: d[1].map(([h, p]) => ({ h, p })),
+      others: [['privacy', 'Privacy.dc.html'], ['terms', 'Terms.dc.html'], ['sms', 'SMS Terms.dc.html']].filter(([x]) => x !== this.state.tab).map(([x, href]) => ({ name: DOCS[x][0], href })),
+    };
+  }
+}
+</script>
+</body>
+</html>

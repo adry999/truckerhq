@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Barlow_Condensed, Inter, Overpass } from "next/font/google";
+import { Barlow_Condensed, Inter, Overpass, Roboto_Condensed } from "next/font/google";
 import JsonLd from "@/components/JsonLd";
 import "./globals.css";
 
@@ -9,10 +9,16 @@ const barlowCondensed = Barlow_Condensed({
   subsets: ["latin"],
 });
 
+const robotoCondensed = Roboto_Condensed({
+  variable: "--font-roboto-condensed",
+  weight: ["700", "800"],
+  subsets: ["latin", "cyrillic"],
+});
+
 const inter = Inter({
   variable: "--font-inter",
   weight: ["400", "500", "600", "700"],
-  subsets: ["latin"],
+  subsets: ["latin", "cyrillic"],
 });
 
 const overpass = Overpass({
@@ -46,7 +52,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${barlowCondensed.variable} ${inter.variable} ${overpass.variable} h-full antialiased`}
+      className={`${barlowCondensed.variable} ${robotoCondensed.variable} ${inter.variable} ${overpass.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">
         <JsonLd data={ORGANIZATION_SCHEMA} />

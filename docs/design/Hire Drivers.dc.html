@@ -7,20 +7,20 @@
 </head>
 <body>
 <x-dc>
-<helmet><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><script src="./image-slot.js"></script><style>body{margin:0;background:#F7F7F5;font-family:Inter,sans-serif;color:#16181B;-webkit-font-smoothing:antialiased}a{color:#0E5C3A}a:hover{color:#16181B}*{box-sizing:border-box}input::placeholder{color:#6B7280}</style></helmet>
+<helmet><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Roboto+Condensed:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><script src="./image-slot.js"></script><style>body{margin:0;background:#F7F7F5;font-family:Inter,sans-serif;color:#16181B;-webkit-font-smoothing:antialiased}a{color:#0E5C3A}a:hover{color:#16181B}*{box-sizing:border-box}input::placeholder{color:#6B7280}</style></helmet>
 <div style="min-height:100vh;display:flex;flex-direction:column;">
-<dc-import name="SiteHeader" active="Hire Drivers" hint-size="100%,72px" style="position:sticky;top:0;z-index:20;display:block;"></dc-import>
+<dc-import name="SiteHeader" active="Hire Drivers" hint-size="100%,60px" style="position:sticky;top:0;z-index:20;display:block;"></dc-import>
 
 <section style="position:relative;background:#16181B;color:#F7F7F5;overflow:hidden;">
 <div style="position:absolute;inset:0;"><image-slot id="hire-hero" shape="rect" src="https://images.unsplash.com/photo-1724556271642-e9acaf03ac23?fm=jpg&amp;q=70&amp;w=2000&amp;auto=format&amp;fit=crop" credit="Photo by Alex Kalinin on Unsplash" credit-href="https://unsplash.com/@loaldesign" placeholder="Your own photo"></image-slot></div>
 <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(22,24,27,.94) 0%,rgba(22,24,27,.7) 55%,rgba(22,24,27,.35) 100%);"></div>
-<div style="position:relative;max-width:1280px;margin:0 auto;padding:clamp(56px,9vw,112px) clamp(20px,4vw,40px);display:flex;flex-direction:column;gap:22px;">
+<div style="position:relative;max-width:1280px;margin:0 auto;padding:clamp(36px,9vw,112px) clamp(20px,4vw,40px);display:flex;flex-direction:column;gap:22px;">
 <dc-import name="Logo" direction="sign" theme="dark" sub="JOBS" size="{{ 28 }}" hint-size="220px,38px"></dc-import>
-<h1 style="margin:0;font-family:'Barlow Condensed';font-weight:800;font-size:clamp(52px,8vw,100px);line-height:.9;text-transform:uppercase;max-width:900px;">A parked truck<br><span style="color:#F2A900;">makes no money.</span></h1>
+<h1 style="margin:0;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:clamp(36px,8vw,100px);line-height:.9;text-transform:uppercase;max-width:900px;">A parked truck<br><span style="color:#F2A900;">makes no money.</span></h1>
 <p style="margin:0;font-size:clamp(17px,2vw,20px);line-height:1.5;color:#D4D6DA;max-width:600px;">Post a driver job and get checked CDL drivers calling you. English and Russian-speaking drivers, solo and team.</p>
 <div style="display:flex;flex-wrap:wrap;gap:12px;">
-<a href="#post" style="height:56px;display:flex;align-items:center;padding:0 28px;border-radius:12px;background:#F2A900;color:#16181B;text-decoration:none;font-family:'Barlow Condensed';font-weight:800;font-size:21px;letter-spacing:.05em;text-transform:uppercase;" style-hover="background:#FFBC1F;color:#16181B;">Post a driver job</a>
-<a href="#" style="height:56px;display:flex;align-items:center;padding:0 26px;border-radius:12px;border:2px solid #F7F7F5;color:#F7F7F5;text-decoration:none;font-family:'Barlow Condensed';font-weight:800;font-size:21px;letter-spacing:.05em;text-transform:uppercase;" style-hover="background:#F7F7F5;color:#16181B;">Call (XXX) XXX-XXXX</a>
+<a href="#post" style="height:clamp(48px,12vw,56px);display:flex;align-items:center;padding:0 28px;border-radius:12px;background:#F2A900;color:#16181B;text-decoration:none;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:clamp(17px,4.2vw,21px);letter-spacing:.04em;text-transform:uppercase;" style-hover="background:#FFBC1F;color:#16181B;">Post a driver job</a>
+<a href="tel:+1XXXXXXXXXX" style="height:clamp(48px,12vw,56px);display:flex;align-items:center;padding:0 26px;border-radius:12px;border:2px solid #F7F7F5;color:#F7F7F5;text-decoration:none;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:clamp(17px,4.2vw,21px);letter-spacing:.04em;text-transform:uppercase;" style-hover="background:#F7F7F5;color:#16181B;">Call (XXX) XXX-XXXX</a>
 </div>
 </div>
 <div style="position:relative;height:6px;background:repeating-linear-gradient(90deg,#F2A900 0 48px,transparent 48px 80px);"></div>
@@ -29,21 +29,21 @@
 <section style="background:#FFFFFF;border-bottom:1px solid #DEDFDB;">
 <div style="max-width:1280px;margin:0 auto;padding:28px clamp(20px,4vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:20px 32px;">
 <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
-<div style="display:flex;flex-direction:column;gap:4px;"><div style="font-family:'Barlow Condensed';font-weight:800;font-size:40px;line-height:1;color:#0E5C3A;">{{ s.big }}</div><div style="font-size:15px;color:#3F444B;line-height:1.35;">{{ s.small }}</div></div>
+<div style="display:flex;flex-direction:column;gap:4px;"><div style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:40px;line-height:1;color:#0E5C3A;">{{ s.big }}</div><div style="font-size:15px;color:#3F444B;line-height:1.35;">{{ s.small }}</div></div>
 </sc-for>
 </div>
 </section>
 
-<section style="max-width:1280px;width:100%;margin:0 auto;padding:clamp(56px,8vw,96px) clamp(20px,4vw,40px);display:flex;flex-direction:column;gap:40px;">
+<section style="max-width:1280px;width:100%;margin:0 auto;padding:clamp(36px,8vw,96px) clamp(20px,4vw,40px);display:flex;flex-direction:column;gap:40px;">
 <div style="display:flex;flex-direction:column;gap:8px;">
-<h2 style="margin:0;font-family:'Barlow Condensed';font-weight:800;font-size:clamp(36px,5vw,56px);line-height:1;">From job post to driver in the seat</h2>
+<h2 style="margin:0;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:clamp(28px,5vw,56px);line-height:1;">From job post to driver in the seat</h2>
 </div>
 <div style="position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:32px;">
 <div style="position:absolute;left:28px;right:28px;top:27px;height:4px;background:repeating-linear-gradient(90deg,#F2A900 0 32px,transparent 32px 52px);"></div>
 <sc-for list="{{ steps }}" as="s" hint-placeholder-count="3">
 <div style="position:relative;display:flex;flex-direction:column;gap:14px;">
-<div style="width:58px;height:58px;border-radius:6px;background:#16181B;color:#F2A900;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed';font-weight:800;font-size:28px;box-shadow:0 0 0 6px #F7F7F5;">{{ s.n }}</div>
-<div style="font-family:'Barlow Condensed';font-weight:800;font-size:30px;line-height:1;text-transform:uppercase;">{{ s.title }}</div>
+<div style="width:58px;height:clamp(48px,12vw,58px);border-radius:6px;background:#16181B;color:#F2A900;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:28px;box-shadow:0 0 0 6px #F7F7F5;">{{ s.n }}</div>
+<div style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:30px;line-height:1;text-transform:uppercase;">{{ s.title }}</div>
 <div style="font-size:16px;line-height:1.55;color:#3F444B;max-width:340px;">{{ s.desc }}</div>
 </div>
 </sc-for>
@@ -51,16 +51,16 @@
 </section>
 
 <section style="background:#16181B;color:#F7F7F5;">
-<div style="max-width:1280px;margin:0 auto;padding:clamp(56px,8vw,96px) clamp(20px,4vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:40px;align-items:start;">
+<div style="max-width:1280px;margin:0 auto;padding:clamp(36px,8vw,96px) clamp(20px,4vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:40px;align-items:start;">
 <div style="display:flex;flex-direction:column;gap:18px;">
-<div style="font-family:'Barlow Condensed';font-weight:700;font-size:15px;letter-spacing:.16em;color:#F2A900;">WHAT WE CHECK</div>
-<h2 style="margin:0;font-family:'Barlow Condensed';font-weight:800;font-size:clamp(36px,5vw,56px);line-height:1;">You only talk to drivers who pass</h2>
+<div style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:.16em;color:#F2A900;">WHAT WE CHECK</div>
+<h2 style="margin:0;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:clamp(28px,5vw,56px);line-height:1;">You only talk to drivers who pass</h2>
 <p style="margin:0;font-size:17px;line-height:1.55;color:#C9CBCF;max-width:520px;">Every driver we send has been screened. You still make the final call.</p>
 </div>
 <div style="background:#FFFFFF;color:#16181B;border-radius:10px;overflow:hidden;">
 <sc-for list="{{ checks }}" as="c" hint-placeholder-count="6">
 <div style="display:flex;align-items:center;gap:14px;padding:16px 20px;border-top:{{ c.border }};">
-<span style="flex:none;display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 10px;border-radius:8px;background:#E2F0E8;color:#0E5C3A;font-family:'Barlow Condensed';font-weight:800;font-size:15px;letter-spacing:.08em;"><span style="width:8px;height:8px;border-radius:50%;background:#0E5C3A;"></span>CHECKED</span>
+<span style="flex:none;display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 10px;border-radius:8px;background:#E2F0E8;color:#0E5C3A;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:15px;letter-spacing:.08em;"><span style="width:8px;height:8px;border-radius:50%;background:#0E5C3A;"></span>CHECKED</span>
 <span style="display:flex;flex-direction:column;gap:2px;"><span style="font-weight:700;font-size:16px;">{{ c.t }}</span><span style="font-size:14px;color:#6B7280;">{{ c.d }}</span></span>
 </div>
 </sc-for>
@@ -68,38 +68,38 @@
 </div>
 </section>
 
-<section style="max-width:1280px;width:100%;margin:0 auto;padding:clamp(56px,8vw,96px) clamp(20px,4vw,40px);display:flex;flex-direction:column;gap:28px;">
+<section style="max-width:1280px;width:100%;margin:0 auto;padding:clamp(36px,8vw,96px) clamp(20px,4vw,40px);display:flex;flex-direction:column;gap:28px;">
 <div style="display:flex;flex-direction:column;gap:8px;">
-<h2 style="margin:0;font-family:'Barlow Condensed';font-weight:800;font-size:clamp(36px,5vw,56px);line-height:1;">Two ways to hire</h2>
+<h2 style="margin:0;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:clamp(28px,5vw,56px);line-height:1;">Two ways to hire</h2>
 </div>
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:16px;">
 <div style="background:#FFFFFF;border:1.5px solid #DEDFDB;border-radius:10px;padding:26px 24px;display:flex;flex-direction:column;gap:14px;">
-<div style="font-family:'Barlow Condensed';font-weight:700;font-size:15px;letter-spacing:.14em;color:#6B7280;">DO IT YOURSELF</div>
-<div style="font-family:'Barlow Condensed';font-weight:800;font-size:36px;line-height:1;text-transform:uppercase;">Job post</div>
-<div style="display:flex;align-items:baseline;gap:6px;"><span style="font-family:'Barlow Condensed';font-weight:800;font-size:56px;line-height:1;">$XXX</span><span style="font-size:15px;color:#4B5058;">/ 30 days</span></div>
+<div style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:.14em;color:#6B7280;">DO IT YOURSELF</div>
+<div style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:36px;line-height:1;text-transform:uppercase;">Job post</div>
+<div style="display:flex;align-items:baseline;gap:6px;"><span style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:56px;line-height:1;">$XXX</span><span style="font-size:15px;color:#4B5058;">/ 30 days</span></div>
 <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px;flex:1;">
 <sc-for list="{{ planA }}" as="it"><li style="display:flex;gap:10px;font-size:15px;line-height:1.4;"><span style="flex:none;width:10px;height:10px;margin-top:5px;background:#F2A900;border-radius:2px;"></span>{{ it }}</li></sc-for>
 </ul>
-<a href="#post" style="height:56px;display:flex;align-items:center;justify-content:center;border-radius:12px;border:2px solid #16181B;color:#16181B;text-decoration:none;font-family:'Barlow Condensed';font-weight:800;font-size:20px;letter-spacing:.05em;text-transform:uppercase;" style-hover="background:#16181B;color:#F7F7F5;">Post a job</a>
+<a href="#post" style="height:clamp(48px,12vw,56px);display:flex;align-items:center;justify-content:center;border-radius:12px;border:2px solid #16181B;color:#16181B;text-decoration:none;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:clamp(17px,4.2vw,20px);letter-spacing:.04em;text-transform:uppercase;" style-hover="background:#16181B;color:#F7F7F5;">Post a job</a>
 </div>
 <div style="background:#0E5C3A;border-radius:10px;padding:6px;display:flex;">
 <div style="flex:1;border:1.5px solid rgba(247,247,245,.7);border-radius:6px;padding:24px 22px;display:flex;flex-direction:column;gap:14px;color:#F7F7F5;">
-<div style="font-family:'Barlow Condensed';font-weight:700;font-size:15px;letter-spacing:.14em;color:#F2A900;">WE DO IT FOR YOU</div>
-<div style="font-family:'Barlow Condensed';font-weight:800;font-size:36px;line-height:1;text-transform:uppercase;">Full recruiting</div>
-<div style="display:flex;align-items:baseline;gap:6px;"><span style="font-family:'Barlow Condensed';font-weight:800;font-size:56px;line-height:1;">$XXX</span><span style="font-size:15px;color:#DCE6E0;">per driver hired</span></div>
+<div style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:.14em;color:#F2A900;">WE DO IT FOR YOU</div>
+<div style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:36px;line-height:1;text-transform:uppercase;">Full recruiting</div>
+<div style="display:flex;align-items:baseline;gap:6px;"><span style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:56px;line-height:1;">$XXX</span><span style="font-size:15px;color:#DCE6E0;">per driver hired</span></div>
 <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px;flex:1;">
 <sc-for list="{{ planB }}" as="it"><li style="display:flex;gap:10px;font-size:15px;line-height:1.4;"><span style="flex:none;width:10px;height:10px;margin-top:5px;background:#F2A900;border-radius:2px;"></span>{{ it }}</li></sc-for>
 </ul>
-<a href="#post" style="height:56px;display:flex;align-items:center;justify-content:center;border-radius:12px;background:#F2A900;color:#16181B;text-decoration:none;font-family:'Barlow Condensed';font-weight:800;font-size:20px;letter-spacing:.05em;text-transform:uppercase;" style-hover="background:#FFBC1F;color:#16181B;">Start recruiting</a>
+<a href="#post" style="height:clamp(48px,12vw,56px);display:flex;align-items:center;justify-content:center;border-radius:12px;background:#F2A900;color:#16181B;text-decoration:none;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:clamp(17px,4.2vw,20px);letter-spacing:.04em;text-transform:uppercase;" style-hover="background:#FFBC1F;color:#16181B;">Start recruiting</a>
 </div>
 </div>
 </div>
 </section>
 
 <section id="post" style="background:#FFFFFF;border-top:1px solid #DEDFDB;border-bottom:1px solid #DEDFDB;">
-<div style="max-width:900px;margin:0 auto;padding:clamp(56px,8vw,96px) clamp(20px,4vw,40px);display:flex;flex-direction:column;gap:24px;">
+<div style="max-width:900px;margin:0 auto;padding:clamp(36px,8vw,96px) clamp(20px,4vw,40px);display:flex;flex-direction:column;gap:24px;">
 <div style="display:flex;flex-direction:column;gap:8px;">
-<h2 style="margin:0;font-family:'Barlow Condensed';font-weight:800;font-size:clamp(36px,5vw,52px);line-height:1;">Tell us who you need</h2>
+<h2 style="margin:0;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:clamp(28px,5vw,52px);line-height:1;">Tell us who you need</h2>
 </div>
 <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
 <form onSubmit="{{ send }}" style="display:flex;flex-direction:column;gap:18px;">
@@ -110,24 +110,24 @@
 </div>
 <sc-for list="{{ segs }}" as="sg">
 <div style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:14px;font-weight:600;">{{ sg.t }}</span>
-<div style="display:flex;flex-wrap:wrap;gap:6px;"><sc-for list="{{ sg.opts }}" as="o"><button type="button" onClick="{{ o.pick }}" style="flex:1 1 110px;height:50px;border-radius:10px;border:{{ o.border }};background:{{ o.bg }};color:{{ o.fg }};font-family:'Barlow Condensed';font-weight:800;font-size:17px;letter-spacing:.05em;cursor:pointer;">{{ o.label }}</button></sc-for></div>
+<div style="display:flex;flex-wrap:wrap;gap:6px;"><sc-for list="{{ sg.opts }}" as="o"><button type="button" onClick="{{ o.pick }}" style="flex:1 1 110px;height:50px;border-radius:10px;border:{{ o.border }};background:{{ o.bg }};color:{{ o.fg }};font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:17px;letter-spacing:.05em;cursor:pointer;">{{ o.label }}</button></sc-for></div>
 </div>
 </sc-for>
-<button type="submit" style="height:60px;border:0;border-radius:12px;background:#F2A900;color:#16181B;font-family:'Barlow Condensed';font-weight:800;font-size:23px;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;" style-hover="background:#FFBC1F;">Send job</button>
+<button type="submit" style="height:clamp(48px,12vw,60px);border:0;border-radius:12px;background:#F2A900;color:#16181B;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:clamp(17px,4.2vw,23px);letter-spacing:.04em;text-transform:uppercase;cursor:pointer;" style-hover="background:#FFBC1F;">Send job</button>
 <span style="font-size:13px;color:#6B7280;">We check your DOT and call you to confirm before the job goes live.</span>
 </form>
 </sc-if>
 <sc-if value="{{ sent }}">
 <div style="background:#E2F0E8;border:1.5px solid #0E5C3A;border-radius:8px;padding:28px 24px;display:flex;flex-direction:column;gap:10px;">
-<span style="font-family:'Barlow Condensed';font-weight:800;font-size:32px;line-height:1;text-transform:uppercase;color:#0E5C3A;">Job received</span>
+<span style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:32px;line-height:1;text-transform:uppercase;color:#0E5C3A;">Job received</span>
 <span style="font-size:16px;line-height:1.5;">We will call you within one business day to confirm the details and put your job live.</span>
 </div>
 </sc-if>
 </div>
 </section>
 
-<section style="max-width:900px;width:100%;margin:0 auto;padding:clamp(56px,8vw,96px) clamp(20px,4vw,40px);display:flex;flex-direction:column;gap:28px;">
-<h2 style="margin:0;font-family:'Barlow Condensed';font-weight:800;font-size:clamp(36px,5vw,56px);line-height:1;">Hiring questions</h2>
+<section style="max-width:900px;width:100%;margin:0 auto;padding:clamp(36px,8vw,96px) clamp(20px,4vw,40px);display:flex;flex-direction:column;gap:28px;">
+<h2 style="margin:0;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:clamp(28px,5vw,56px);line-height:1;">Hiring questions</h2>
 <div style="display:flex;flex-direction:column;border-top:2px solid #16181B;">
 <sc-for list="{{ faq }}" as="f" hint-placeholder-count="4">
 <div style="border-bottom:1px solid #DEDFDB;">

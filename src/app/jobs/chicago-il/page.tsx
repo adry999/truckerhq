@@ -4,11 +4,7 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import { healthColor } from "@/lib/data";
 
-export const metadata: Metadata = {
-  title: "CDL Jobs in Chicago, IL: 148 Openings",
-  description:
-    "Truck driving jobs near Chicago. Pay and home time on every listing. Updated daily.",
-};
+const MIN_JOBS_TO_INDEX = 5;
 
 const STATS = [
   { big: "148", small: "Open jobs" },
@@ -92,6 +88,16 @@ const CHICAGO_JOBS: ChicagoJob[] = [
     posted: "3 days ago",
   },
 ];
+
+export const metadata: Metadata = {
+  title: "CDL Jobs in Chicago, IL: 148 Openings",
+  description:
+    "Truck driving jobs near Chicago. Pay and home time on every listing. Updated daily.",
+  robots:
+    CHICAGO_JOBS.length >= MIN_JOBS_TO_INDEX
+      ? undefined
+      : { index: false, follow: true },
+};
 
 const HIRING_CARRIERS = [
   { name: "Carpathian Freight", score: 86, jobs: 12 },

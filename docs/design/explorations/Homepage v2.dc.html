@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet"><style>body{margin:0;background:#1D1F22;font-family:Inter,sans-serif;color:#F4F3EE;-webkit-font-smoothing:antialiased}a{color:#F2A900}a:hover{color:#FFFFFF}*{box-sizing:border-box}input::placeholder{color:#6B7280}</style></helmet>
+<div style="min-height:100vh;display:flex;flex-direction:column;background:#1D1F22;">
+
+<header style="position:sticky;top:0;z-index:20;background:#1D1F22;border-bottom:1px solid #3A3D42;">
+<div style="max-width:1280px;margin:0 auto;height:76px;padding:0 clamp(16px,4vw,48px);display:flex;align-items:center;gap:28px;">
+<a href="Homepage v2.dc.html" style="display:flex;text-decoration:none;"><dc-import name="Logo" direction="sign" theme="dark" size="{{ logoSize }}" hint-size="170px,40px"></dc-import></a>
+<sc-if value="{{ desktop }}" hint-placeholder-val="{{ true }}">
+<nav style="display:flex;gap:4px;">
+<sc-for list="{{ nav }}" as="n" hint-placeholder-count="5"><a href="{{ n.href }}" style="height:44px;display:flex;align-items:center;padding:0 12px;color:#F4F3EE;text-decoration:none;font-weight:500;font-size:15px;" style-hover="color:#F2A900;">{{ n.label }}</a></sc-for>
+</nav>
+</sc-if>
+<div style="margin-left:auto;display:flex;align-items:center;gap:16px;">
+<sc-if value="{{ desktop }}" hint-placeholder-val="{{ true }}"><a href="tel:" style="font-family:'Barlow Condensed';font-weight:700;font-size:21px;color:#F2A900;text-decoration:none;">(XXX) XXX-XXXX</a></sc-if>
+<div style="position:relative;">
+<button onClick="{{ toggleLang }}" aria-label="Language" style="height:44px;padding:0 12px;border:2px solid #6B7078;background:transparent;color:#F4F3EE;display:flex;align-items:center;gap:8px;font-family:'Barlow Condensed';font-weight:800;font-size:18px;letter-spacing:.06em;cursor:pointer;" style-hover="border-color:#F2A900;">{{ langCode }}<span style="font-size:11px;color:#F2A900;">▼</span></button>
+<sc-if value="{{ langOpen }}">
+<div style="position:absolute;right:0;top:50px;min-width:170px;background:#F4F3EE;border:3px solid #16181B;outline:2px solid #F4F3EE;display:flex;flex-direction:column;z-index:30;">
+<sc-for list="{{ langs }}" as="l"><button onClick="{{ l.pick }}" style="height:48px;padding:0 14px;border:0;border-bottom:1px solid #D6D5CF;background:{{ l.bg }};color:#16181B;display:flex;align-items:center;justify-content:space-between;gap:12px;font-family:Inter;font-size:16px;font-weight:600;cursor:pointer;text-align:left;">{{ l.name }}<span style="font-family:'IBM Plex Mono';font-size:13px;">{{ l.code }}</span></button></sc-for>
+</div>
+</sc-if>
+</div>
+<sc-if value="{{ mobile }}">
+<button onClick="{{ toggleMenu }}" aria-label="Menu" style="width:48px;height:48px;border:2px solid #6B7078;background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;"><span style="width:22px;height:3px;background:#F4F3EE;"></span><span style="width:22px;height:3px;background:#F4F3EE;"></span><span style="width:22px;height:3px;background:#F2A900;"></span></button>
+</sc-if>
+</div>
+</div>
+<sc-if value="{{ menuShown }}">
+<div style="padding:4px 16px 20px;display:flex;flex-direction:column;border-top:1px solid #3A3D42;">
+<sc-for list="{{ nav }}" as="n"><a href="{{ n.href }}" style="height:56px;display:flex;align-items:center;color:#F4F3EE;text-decoration:none;font-family:'Barlow Condensed';font-weight:800;font-size:26px;text-transform:uppercase;border-bottom:1px solid #3A3D42;">{{ n.label }}</a></sc-for>
+<a href="tel:" style="margin-top:16px;height:56px;display:flex;align-items:center;justify-content:center;background:#F2A900;color:#16181B;text-decoration:none;font-family:'Barlow Condensed';font-weight:800;font-size:22px;text-transform:uppercase;">Call dispatch 24/7</a>
+</div>
+</sc-if>
+</header>
+
+<section style="max-width:1280px;width:100%;margin:0 auto;padding:clamp(48px,8vw,88px) clamp(20px,4vw,48px) clamp(32px,5vw,48px);display:flex;flex-direction:column;gap:20px;">
+<h1 style="margin:0;font-family:'Barlow Condensed';font-weight:800;font-size:clamp(64px,11vw,140px);line-height:.85;text-transform:uppercase;text-wrap:balance;">Your HQ on the road.</h1>
+<p style="margin:0;font-size:clamp(17px,2vw,20px);line-height:1.5;color:#C9CBCF;max-width:620px;">Dispatch, driver jobs and free carrier tools for owner-operators, small fleets and CDL drivers. English and Russian, 24/7.</p>
+</section>
+
+<section style="padding-top:16px;">
+<div style="height:14px;background:#6B7078;border-top:2px solid #85898F;"></div>
+<div style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,4vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:24px;">
+<sc-for list="{{ services }}" as="s" hint-placeholder-count="3">
+<a href="{{ s.href }}" style="display:flex;flex-direction:column;text-decoration:none;color:#F4F3EE;">
+<div style="display:flex;justify-content:space-around;padding:0 20%;"><span style="width:6px;height:28px;background:#6B7078;"></span><span style="width:6px;height:28px;background:#6B7078;"></span></div>
+<div style="align-self:flex-end;margin-right:6px;background:#0E5C3A;border:3px solid #F4F3EE;border-bottom:0;padding:4px 12px 2px;font-family:'Barlow Condensed';font-weight:800;font-size:17px;letter-spacing:.06em;">EXIT {{ s.n }}</div>
+<div style="background:#0E5C3A;border:3px solid #F4F3EE;box-shadow:0 0 0 6px #0E5C3A;margin:0 6px 6px;padding:24px 22px 20px;display:flex;flex-direction:column;gap:12px;min-height:250px;" style-hover="background:#11693F;">
+<span style="font-family:'Barlow Condensed';font-weight:800;font-size:clamp(44px,5vw,56px);line-height:.9;text-transform:uppercase;">{{ s.title }}</span>
+<span style="font-size:17px;line-height:1.4;font-weight:500;">{{ s.line }}</span>
+<span style="font-size:14px;line-height:1.5;color:#CFE0D6;flex:1;">{{ s.list }}</span>
+<span style="font-family:'Barlow Condensed';font-weight:800;font-size:22px;text-transform:uppercase;color:#F2A900;">{{ s.cta }} {{ s.arrow }}</span>
+</div>
+</a>
+</sc-for>
+</div>
+</section>
+
+<section style="max-width:1280px;width:100%;margin:0 auto;padding:clamp(64px,9vw,96px) clamp(20px,4vw,48px) 0;">
+<div style="background:#F4F3EE;color:#16181B;border:4px solid #16181B;box-shadow:0 0 0 3px #F4F3EE;padding:clamp(20px,3vw,36px);display:flex;flex-direction:column;gap:16px;">
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px;"><h2 style="margin:0;font-family:'Barlow Condensed';font-weight:800;font-size:clamp(32px,4vw,44px);line-height:1;text-transform:uppercase;">Check any carrier</h2><span style="font-family:'IBM Plex Mono';font-size:12px;">FREE · PUBLIC FMCSA DATA</span></div>
+<div style="display:flex;flex-direction:{{ searchDir }};border:3px solid #16181B;background:#FFFFFF;">
+<input aria-label="Search carriers" placeholder="DOT, MC or company name" style="flex:1;min-width:0;border:0;outline:none;padding:0 18px;height:64px;font-size:20px;font-family:Inter;background:transparent;color:#16181B;">
+<a href="Carrier Lookup.dc.html" style="display:flex;align-items:center;justify-content:center;min-height:60px;border-left:{{ btnBorderL }};border-top:{{ btnBorderT }};background:#F2A900;color:#16181B;text-decoration:none;font-family:'Barlow Condensed';font-weight:800;font-size:24px;text-transform:uppercase;padding:0 36px;" style-hover="background:#FFBC1F;color:#16181B;">Search</a>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:8px 16px;font-size:14px;color:#3F444B;"><span>Try:</span><a href="Carrier Lookup.dc.html" style="color:#0E5C3A;font-family:'IBM Plex Mono';">DOT 3412897</a><a href="Carrier Lookup.dc.html" style="color:#0E5C3A;font-family:'IBM Plex Mono';">MC 1182044</a><a href="Carrier Lookup.dc.html" style="color:#0E5C3A;">Carpathian Freight</a></div>
+<div style="border-top:2px solid #16181B;margin-top:4px;">
+<sc-for list="{{ tools }}" as="t" hint-placeholder-count="4">
+<a href="{{ t.href }}" style="display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 20px;padding:14px 0;border-bottom:1px solid #D6D5CF;text-decoration:none;color:#16181B;" style-hover="color:#0E5C3A;">
+<span style="flex:0 0 200px;font-weight:700;font-size:17px;">{{ t.name }}</span>
+<span style="flex:1 1 280px;font-size:15px;color:#3F444B;">{{ t.desc }}</span>
+<span style="font-family:'IBM Plex Mono';font-size:13px;color:#0E5C3A;">OPEN →</span>
+</a>
+</sc-for>
+</div>
+</div>
+</section>
+
+<section style="max-width:1280px;width:100%;margin:0 auto;padding:clamp(64px,9vw,96px) clamp(20px,4vw,48px) 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:48px;align-items:center;">
+<div style="display:flex;flex-direction:column;gap:16px;">
+<h2 style="margin:0;font-family:'Barlow Condensed';font-weight:800;font-size:clamp(48px,6vw,72px);line-height:.9;text-transform:uppercase;">One flat price.<br>No percentage.</h2>
+<p style="margin:0;font-size:18px;line-height:1.55;color:#C9CBCF;max-width:440px;">Posted like diesel at the pump. Good week or bad week, the price stays the same. The more you haul, the more you keep.</p>
+<div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:8px;">
+<a href="Dispatch.dc.html" style="height:56px;display:flex;align-items:center;padding:0 28px;background:#F2A900;color:#16181B;text-decoration:none;font-family:'Barlow Condensed';font-weight:800;font-size:21px;text-transform:uppercase;" style-hover="background:#FFBC1F;color:#16181B;">Start dispatch</a>
+<a href="Profit Calculator.dc.html" style="height:56px;display:flex;align-items:center;padding:0 24px;border:2px solid #F4F3EE;color:#F4F3EE;text-decoration:none;font-family:'Barlow Condensed';font-weight:800;font-size:21px;text-transform:uppercase;" style-hover="background:#F4F3EE;color:#16181B;">Run your numbers</a>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;align-items:stretch;">
+<div style="background:#0B0C0D;border:6px solid #3A3D42;padding:20px 24px;display:flex;flex-direction:column;">
+<div style="font-family:'Barlow Condensed';font-weight:700;font-size:16px;letter-spacing:.14em;color:#9CA0A8;padding-bottom:10px;border-bottom:2px solid #3A3D42;">DISPATCH FEE · $8,000 WEEK</div>
+<sc-for list="{{ compare }}" as="r" hint-placeholder-count="3"><div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 0;border-bottom:{{ r.border }};"><span style="font-family:'Barlow Condensed';font-weight:700;font-size:clamp(20px,2.4vw,26px);text-transform:uppercase;color:{{ r.labelFg }};">{{ r.who }}</span><span style="font-family:'IBM Plex Mono';font-weight:600;font-size:clamp(32px,4vw,44px);color:{{ r.digitFg }};background:#16110A;padding:0 10px;">{{ r.fee }}</span></div></sc-for>
+</div>
+<div style="align-self:center;width:14px;height:48px;background:#3A3D42;"></div>
+</div>
+</section>
+
+<div style="margin-top:clamp(64px,9vw,96px);height:6px;background:repeating-linear-gradient(90deg,#F2A900 0 56px,transparent 56px 100px);"></div>
+
+<section style="max-width:1280px;width:100%;margin:0 auto;padding:clamp(56px,8vw,80px) clamp(20px,4vw,48px);">
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:12px;"><h2 style="margin:0;font-family:'Barlow Condensed';font-weight:800;font-size:clamp(40px,5vw,56px);text-transform:uppercase;">CDL jobs</h2><a href="Jobs.dc.html" style="font-weight:600;">See all jobs →</a></div>
+<sc-for list="{{ jobs }}" as="j" hint-placeholder-count="5"><a href="Jobs.dc.html" style="display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 24px;padding:18px 0;border-top:1px solid #3A3D42;text-decoration:none;color:#F4F3EE;" style-hover="color:#F2A900;">
+<span style="flex:1 1 280px;font-size:19px;font-weight:600;">{{ j.title }}</span>
+<span style="flex:1 1 240px;font-size:15px;color:#AEB2B8;">{{ j.co }} · {{ j.loc }}</span>
+<span style="flex:0 0 150px;font-family:'Barlow Condensed';font-weight:700;font-size:17px;letter-spacing:.06em;color:#C9CBCF;">{{ j.type }} · {{ j.equip }}</span>
+<span style="flex:0 0 160px;font-family:'Barlow Condensed';font-weight:800;font-size:26px;text-align:{{ payAlign }};color:#F2A900;">{{ j.pay }}</span>
+</a></sc-for>
+<div style="border-top:1px solid #3A3D42;"></div>
+</section>
+
+<section style="background:#F4F3EE;color:#16181B;">
+<div style="max-width:1280px;margin:0 auto;padding:clamp(56px,8vw,88px) clamp(20px,4vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:40px;">
+<sc-for list="{{ quotes }}" as="q" hint-placeholder-count="3">
+<figure style="margin:0;display:flex;flex-direction:column;gap:16px;border-top:4px solid #16181B;padding-top:20px;">
+<blockquote style="margin:0;font-size:20px;line-height:1.45;font-weight:500;flex:1;">“{{ q.text }}”</blockquote>
+<figcaption style="font-size:14px;color:#4B5058;">{{ q.name }} · {{ q.role }}</figcaption>
+</figure>
+</sc-for>
+</div>
+</section>
+
+<section style="max-width:900px;width:100%;margin:0 auto;padding:clamp(56px,8vw,96px) clamp(20px,4vw,48px);display:flex;flex-direction:column;gap:24px;">
+<h2 style="margin:0;font-family:'Barlow Condensed';font-weight:800;font-size:clamp(40px,5vw,56px);line-height:1;text-transform:uppercase;">Questions</h2>
+<div style="border-top:2px solid #F4F3EE;">
+<sc-for list="{{ faq }}" as="f" hint-placeholder-count="5">
+<div style="border-bottom:1px solid #3A3D42;">
+<button onClick="{{ f.toggle }}" style="width:100%;min-height:68px;padding:16px 0;background:transparent;border:0;display:flex;justify-content:space-between;align-items:center;gap:16px;text-align:left;cursor:pointer;font-family:Inter;font-size:18px;font-weight:600;color:#F4F3EE;">{{ f.q }}<span style="flex:none;font-family:'IBM Plex Mono';font-size:22px;color:#F2A900;width:24px;text-align:center;">{{ f.icon }}</span></button>
+<sc-if value="{{ f.open }}"><div style="padding:0 40px 22px 0;font-size:16px;line-height:1.6;color:#C9CBCF;">{{ f.a }}</div></sc-if>
+</div>
+</sc-for>
+</div>
+</section>
+
+<footer style="border-top:1px solid #3A3D42;margin-top:auto;">
+<div style="max-width:1280px;margin:0 auto;padding:48px clamp(20px,4vw,48px) 28px;display:flex;flex-direction:column;gap:36px;">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:32px;">
+<dc-import name="Logo" direction="sign" theme="dark" size="{{ 30 }}" hint-size="170px,40px"></dc-import>
+<sc-for list="{{ footCols }}" as="col" hint-placeholder-count="3">
+<div style="display:flex;flex-direction:column;gap:2px;">
+<div style="font-family:'IBM Plex Mono';font-size:12px;color:#9CA0A8;margin-bottom:8px;">{{ col.h }}</div>
+<sc-for list="{{ col.links }}" as="l"><a href="{{ l.href }}" style="color:#F4F3EE;text-decoration:none;font-size:15px;min-height:36px;display:flex;align-items:center;" style-hover="color:#F2A900;">{{ l.label }}</a></sc-for>
+</div>
+</sc-for>
+</div>
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:13px;color:#9CA0A8;border-top:1px solid #3A3D42;padding-top:20px;"><span>© 2026 Trucker HQ · Carrier data from public FMCSA records</span><span>English / Русский</span></div>
+</div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { w: typeof window !== 'undefined' ? window.innerWidth : 1280, menu: false, lang: 'EN', faq: 0 };
+  componentDidMount() { this.onR = () => this.setState({ w: window.innerWidth }); window.addEventListener('resize', this.onR); this.onR(); }
+  componentWillUnmount() { window.removeEventListener('resize', this.onR); }
+  renderVals() {
+    const mobile = this.state.w < 960, narrow = this.state.w < 600;
+    const L = (label, href) => ({ label, href });
+    const faq = [
+      ['How is a flat weekly rate better than a percentage?', 'A percentage dispatcher earns more when you haul more. We charge the same every week, so the extra money from a good week stays with you.'],
+      ['Do I need to sign a long contract?', 'No. Dispatch is week to week. Stop any time with one week notice.'],
+      ['I just got my MC. Can you work with me?', 'Yes. We help new authorities from day one: broker setup packets, the New MC Checklist, and lanes that accept new carriers.'],
+      ['Can I talk to someone in Russian?', 'Yes. Our dispatchers speak English and Russian, 24/7 on every US time zone.'],
+      ['Where does the Carrier Lookup data come from?', 'Public FMCSA records: authority, insurance, inspections and crash history. The Health Score sums it up from 0 to 100.'],
+    ];
+    return {
+      desktop: !mobile, mobile, menuShown: mobile && this.state.menu, logoSize: mobile ? 26 : 30,
+      toggleMenu: () => this.setState(s => ({ menu: !s.menu })),
+      nav: [L('Dispatch', 'Dispatch.dc.html'), L('Jobs', 'Jobs.dc.html'), L('Hire Drivers', 'Hire Drivers.dc.html'), L('Carrier Lookup', 'Carrier Lookup.dc.html'), L('Profit Calculator', 'Profit Calculator.dc.html')],
+      langCode: this.state.lang, langOpen: !!this.state.langOpen, toggleLang: () => this.setState(s => ({ langOpen: !s.langOpen })),
+      langs: [['EN', 'English'], ['RU', 'Русский']].map(([code, name]) => ({ code, name, bg: code === this.state.lang ? '#FFE3A0' : 'transparent', pick: () => this.setState({ lang: code, langOpen: false }) })),
+      searchDir: narrow ? 'column' : 'row', btnBorderL: narrow ? '0' : '3px solid #16181B', btnBorderT: narrow ? '3px solid #16181B' : '0',
+      payAlign: mobile ? 'left' : 'right',
+      services: [
+        { title: 'Dispatch', line: 'Flat weekly rate. No percentage.', list: '24/7 on US time zones · Rate negotiation · Broker vetting · Paperwork', cta: 'Start dispatch', href: 'Dispatch.dc.html' },
+        { title: 'Driver jobs', line: 'CDL jobs with the pay posted up front.', list: 'OTR, regional and local · Company and lease · Apply in English or Russian', cta: 'Browse jobs', href: 'Jobs.dc.html' },
+        { title: 'Hire drivers', line: 'A truck sitting still makes no money.', list: 'Post a job in minutes · We check CDL, MVR and experience · Solo and team', cta: 'Hire drivers', href: 'Hire Drivers.dc.html' },
+      ].map((s, i) => ({ ...s, n: String(i + 1), arrow: ['↑', '↗', '→'][i] })),
+      tools: [
+        { name: 'Carrier Lookup', desc: 'Authority, insurance, safety and a Health Score for any DOT or MC.', href: 'Carrier Lookup.dc.html' },
+        { name: 'Profit per Mile', desc: 'Fuel, insurance, truck payment. See what a load really pays.', href: 'Profit Calculator.dc.html' },
+        { name: 'State carrier lists', desc: 'Every active carrier in a state, with filters. Starting with Texas.', href: 'State Texas.dc.html' },
+        { name: 'New MC Checklist', desc: 'Every step for your first 6 months, from BOC-3 to first load.', href: '#' },
+      ],
+      compare: [['10% dispatcher', '$800'], ['8% dispatcher', '$640'], ['Trucker HQ', '$XXX']].map(([who, fee], i) => {
+        const us = i === 2;
+        return { who, fee, labelFg: us ? '#F2A900' : '#F4F3EE', digitFg: us ? '#F2A900' : '#E0463A', border: us ? '0' : '2px solid #3A3D42' };
+      }),
+      jobs: [
+        { title: 'OTR Company Driver', co: 'Carpathian Freight', loc: 'Des Plaines, IL', type: 'OTR', equip: 'DRY VAN', pay: '$0.68–0.72/mi' },
+        { title: 'Regional Driver, home weekly', co: 'Volga Line Transport', loc: 'Jacksonville, FL', type: 'REGIONAL', equip: 'REEFER', pay: '$1,800/wk' },
+        { title: 'Team Drivers', co: 'Iron Horse Hauling', loc: 'Phoenix, AZ', type: 'OTR', equip: 'DRY VAN', pay: '$0.90/mi' },
+        { title: 'Local Flatbed Driver', co: 'Danube Road Corp', loc: 'Charlotte, NC', type: 'LOCAL', equip: 'FLATBED', pay: '$28/hr' },
+        { title: 'Lease Purchase, Owner-Op', co: 'Moldova Express', loc: 'Sacramento, CA', type: 'OTR', equip: 'REEFER', pay: '88% of load' },
+      ],
+      quotes: [
+        { text: 'Same price every week. Last month I ran hard and kept all of it. With my old dispatcher that was $700 gone.', name: 'Ion R.', role: 'Owner-operator, 2 trucks · IL' },
+        { text: 'My MC was 3 months old and nobody wanted me. They found brokers that work with new carriers and got me moving.', name: 'Sergei M.', role: 'New carrier · FL' },
+        { text: 'I check every broker in Carrier Lookup before I say yes. Takes ten seconds from the cab.', name: 'Mike D.', role: 'Owner-operator · TX' },
+      ],
+      faq: faq.map(([q, a], i) => { const open = this.state.faq === i; return { q, a, open, icon: open ? '−' : '+', toggle: () => this.setState({ faq: open ? -1 : i }) }; }),
+      footCols: [
+        { h: 'SERVICES', links: [L('Dispatch', 'Dispatch.dc.html'), L('Driver Jobs', 'Jobs.dc.html'), L('Hire Drivers', 'Hire Drivers.dc.html')] },
+        { h: 'FREE TOOLS', links: [L('Carrier Lookup', 'Carrier Lookup.dc.html'), L('Profit per Mile', 'Profit Calculator.dc.html'), L('Texas carriers', 'State Texas.dc.html')] },
+        { h: 'CONTACT', links: [L('(XXX) XXX-XXXX · 24/7', 'tel:'), L('hello@truckerhq.com', 'mailto:hello@truckerhq.com')] },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

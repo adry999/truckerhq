@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     "Диспетчинг за фиксированную цену в неделю, без процентов. Диспетчеры говорят по-английски и по-русски, 24/7. Работа для CDL и бесплатная проверка перевозчиков.",
   alternates: {
     canonical: "/ru",
-    languages: { en: "/", ru: "/ru" },
+    languages: { en: "/", ru: "/ru", "x-default": "/" },
   },
 };
 

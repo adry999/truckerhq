@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Roboto+Condensed:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><style>body{margin:0;background:#F7F7F5;font-family:Inter,sans-serif;color:#16181B;-webkit-font-smoothing:antialiased}a{color:#0E5C3A}a:hover{color:#16181B}*{box-sizing:border-box}</style></helmet>
+<div style="min-height:100vh;display:flex;flex-direction:column;">
+<dc-import name="SiteHeader" active="Jobs" hint-size="100%,60px" style="position:sticky;top:0;z-index:20;display:block;"></dc-import>
+
+<section style="background:#16181B;color:#F7F7F5;">
+<div style="max-width:1280px;margin:0 auto;padding:clamp(28px,5vw,64px) clamp(20px,4vw,40px);display:flex;flex-direction:column;gap:16px;">
+<nav aria-label="Breadcrumb" style="display:flex;flex-wrap:wrap;gap:8px;font-size:14px;color:#AEB2B8;"><a href="Jobs.dc.html" style="color:#F7F7F5;">CDL jobs</a><span>/</span><span style="color:#F7F7F5;">Illinois</span><span>/</span><span>Chicago</span></nav>
+<h1 style="margin:0;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:clamp(36px,7vw,80px);line-height:.92;text-transform:uppercase;">CDL jobs in Chicago, IL</h1>
+<p style="margin:0;font-size:clamp(16px,2vw,18px);line-height:1.55;color:#D4D6DA;max-width:680px;text-wrap:pretty;">{{ count }} truck driving jobs within 50 miles of Chicago, updated today. Chicago is one of the largest freight hubs in the US, with steady dry van and intermodal work out of the I-55 and I-80 corridors.</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px 28px;margin-top:6px;">
+<sc-for list="{{ stats }}" as="s" hint-placeholder-count="4"><div style="display:flex;flex-direction:column;gap:2px;border-top:1px solid rgba(247,247,245,.2);padding-top:10px;"><span style="font-size:13px;color:#AEB2B8;">{{ s.k }}</span><span style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:28px;font-variant-numeric:tabular-nums;">{{ s.v }}</span></div></sc-for>
+</div>
+</div>
+<div style="height:6px;background:repeating-linear-gradient(90deg,#F2A900 0 48px,transparent 48px 80px);"></div>
+</section>
+
+<section style="max-width:1280px;width:100%;margin:0 auto;padding:24px clamp(16px,4vw,40px) 0;display:flex;flex-wrap:wrap;gap:8px;">
+<sc-for list="{{ filters }}" as="f" hint-placeholder-count="5"><button onClick="{{ f.pick }}" style="min-height:44px;padding:0 16px;border-radius:6px;border:1.5px solid {{ f.bd }};background:{{ f.bg }};color:{{ f.fg }};font-family:Inter;font-size:15px;font-weight:600;cursor:pointer;">{{ f.name }}</button></sc-for>
+</section>
+
+<section style="max-width:1280px;width:100%;margin:0 auto;padding:20px clamp(16px,4vw,40px) 64px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:24px;align-items:start;">
+<div style="grid-column:{{ mainSpan }};display:flex;flex-direction:column;gap:12px;min-width:0;">
+<sc-for list="{{ jobs }}" as="j" hint-placeholder-count="6">
+<a href="Jobs.dc.html" style="background:#FFFFFF;border:1.5px solid #DEDFDB;border-radius:8px;padding:18px 20px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 20px;text-decoration:none;color:#16181B;" style-hover="border-color:#0E5C3A;color:#16181B;">
+<div style="flex:1 1 260px;display:flex;flex-direction:column;gap:4px;min-width:0;"><span style="font-weight:700;font-size:17px;">{{ j.title }}</span><span style="font-size:14px;color:#6B7280;">{{ j.co }} · {{ j.loc }} · {{ j.home }}</span></div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;"><span style="height:28px;display:inline-flex;align-items:center;padding:0 10px;border-radius:5px;background:#E2F0E8;color:#0E5C3A;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:15px;letter-spacing:.06em;">{{ j.type }}</span><span style="height:28px;display:inline-flex;align-items:center;padding:0 10px;border-radius:5px;background:#EEEFEC;color:#3F444B;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:.06em;">{{ j.equip }}</span></div>
+<div style="flex:0 0 140px;display:flex;flex-direction:column;gap:2px;"><span style="font-weight:700;font-size:17px;font-variant-numeric:tabular-nums;">{{ j.pay }}</span><span style="font-size:13px;color:#6B7280;">{{ j.posted }}</span></div>
+</a>
+</sc-for>
+<sc-if value="{{ none }}"><div style="background:#FFFFFF;border:1px solid #DEDFDB;border-radius:8px;padding:28px;text-align:center;font-size:15px;color:#4B5058;">No {{ filterName }} jobs in Chicago right now. Try all jobs, or set up a job alert.</div></sc-if>
+
+<div style="display:flex;flex-direction:column;gap:12px;margin-top:28px;">
+<h2 style="margin:0;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:clamp(26px,4vw,36px);line-height:1;">Driving jobs in Chicago: what to know</h2>
+<sc-for list="{{ faq }}" as="q" hint-placeholder-count="3">
+<div style="background:#FFFFFF;border:1px solid #DEDFDB;border-radius:8px;padding:18px 20px;display:flex;flex-direction:column;gap:6px;"><h3 style="margin:0;font-size:17px;font-weight:700;">{{ q.q }}</h3><p style="margin:0;font-size:15px;line-height:1.6;color:#3F444B;">{{ q.a }}</p></div>
+</sc-for>
+</div>
+</div>
+
+<aside style="display:flex;flex-direction:column;gap:16px;">
+<div style="background:#FFFFFF;border:1px solid #DEDFDB;border-radius:8px;padding:20px;display:flex;flex-direction:column;gap:12px;">
+<h2 style="margin:0;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:22px;text-transform:uppercase;">Hiring in Chicago</h2>
+<sc-for list="{{ carriers }}" as="c"><a href="Carrier Lookup.dc.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:#16181B;" style-hover="color:#0E5C3A;"><span style="width:34px;height:34px;border-radius:50%;background:{{ c.hc }};color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:15px;flex:none;">{{ c.score }}</span><span style="flex:1;font-weight:600;font-size:15px;">{{ c.name }}</span><span style="font-size:13px;color:#6B7280;">{{ c.n }} jobs</span></a></sc-for>
+</div>
+<div style="background:#FFFFFF;border:1px solid #DEDFDB;border-radius:8px;padding:20px;display:flex;flex-direction:column;gap:10px;">
+<h2 style="margin:0;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:22px;text-transform:uppercase;">Nearby cities</h2>
+<div style="display:flex;flex-wrap:wrap;gap:8px;"><sc-for list="{{ nearby }}" as="n"><a href="#" style="min-height:40px;display:inline-flex;align-items:center;padding:0 12px;border-radius:6px;border:1.5px solid #DEDFDB;color:#16181B;text-decoration:none;font-size:14px;font-weight:600;" style-hover="border-color:#0E5C3A;color:#0E5C3A;">{{ n.name }} <span style="color:#6B7280;font-weight:400;margin-left:6px;">{{ n.n }}</span></a></sc-for></div>
+</div>
+<a href="Hire Drivers.dc.html" style="background:#0E5C3A;color:#F7F7F5;border-radius:8px;padding:20px;display:flex;flex-direction:column;gap:6px;text-decoration:none;" style-hover="background:#0B4F31;color:#F7F7F5;"><span style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:22px;text-transform:uppercase;">Hiring drivers in Chicago?</span><span style="font-size:14px;line-height:1.5;color:#E3EAE6;">Post a job and reach local CDL drivers.</span></a>
+</aside>
+</section>
+
+<div style="margin-top:auto;"><dc-import name="SiteFooter" hint-size="100%,360px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const J = [
+  ['OTR Company Driver', 'Carpathian Freight', 'Des Plaines, IL', 'OTR', 'DRY VAN', '$0.68–0.72/mi', 'Home every 2 weeks', 'Today'],
+  ['Local Intermodal Driver', 'Lakeshore Drayage', 'Chicago, IL', 'LOCAL', 'CONTAINER', '$1,500/wk', 'Home daily', 'Today'],
+  ['Regional Reefer Driver', 'Volga Line Transport', 'Joliet, IL', 'REGIONAL', 'REEFER', '$1,750/wk', 'Home weekly', '1 day ago'],
+  ['Team Drivers, Coast to Coast', 'Iron Horse Hauling', 'Elk Grove Village, IL', 'OTR', 'DRY VAN', '$0.90/mi split', 'Out 3 weeks', '1 day ago'],
+  ['Local Flatbed, Steel Coils', 'Prairie Steel Logistics', 'Gary, IN', 'LOCAL', 'FLATBED', '$30/hr', 'Home daily', '2 days ago'],
+  ['Regional Dry Van, Midwest', 'Danube Road Corp', 'Bolingbrook, IL', 'REGIONAL', 'DRY VAN', '$0.66/mi', 'Home weekends', '3 days ago'],
+];
+class Component extends DCLogic {
+  state = { w: typeof window !== 'undefined' ? window.innerWidth : 1280, f: 'All' };
+  componentDidMount() { this.onR = () => this.setState({ w: window.innerWidth }); window.addEventListener('resize', this.onR); }
+  componentWillUnmount() { window.removeEventListener('resize', this.onR); }
+  renderVals() {
+    const f = this.state.f;
+    const list = J.filter(j => f === 'All' || j[3] === f.toUpperCase());
+    const hc = s => s >= 80 ? '#0E5C3A' : s >= 60 ? '#B07A00' : '#B42318';
+    return {
+      mainSpan: this.state.w >= 1000 ? 'span 2' : 'auto',
+      count: 148,
+      stats: [{ k: 'Open jobs', v: '148' }, { k: 'Local jobs', v: '41' }, { k: 'Typical OTR pay', v: '$0.62–0.74/mi' }, { k: 'Typical local pay', v: '$26–32/hr' }],
+      filters: ['All', 'Local', 'Regional', 'OTR'].map(n => { const on = n === f; return { name: n, bd: on ? '#16181B' : '#DEDFDB', bg: on ? '#16181B' : '#FFFFFF', fg: on ? '#F7F7F5' : '#16181B', pick: () => this.setState({ f: n }) }; }),
+      filterName: f.toLowerCase(), none: list.length === 0,
+      jobs: list.map(([title, co, loc, type, equip, pay, home, posted]) => ({ title, co, loc, type, equip, pay, home, posted })),
+      carriers: [['Carpathian Freight', 86, 12], ['Lakeshore Drayage', 81, 9], ['Volga Line Transport', 74, 7], ['Iron Horse Hauling', 68, 5]].map(([name, score, n]) => ({ name, score, n, hc: hc(score) })),
+      nearby: [['Joliet', 34], ['Aurora', 22], ['Naperville', 18], ['Elgin', 15], ['Gary, IN', 19], ['Rockford', 21], ['Milwaukee, WI', 57]].map(([name, n]) => ({ name, n })),
+      faq: [
+        { q: 'How much do truck drivers make in Chicago?', a: 'On current Trucker HQ listings, OTR company drivers out of Chicago are offered $0.62 to $0.74 per mile, and local drivers $26 to $32 per hour. Team and specialized jobs pay more.' },
+        { q: 'Are there local CDL jobs with home time every night?', a: 'Yes. Most local work around Chicago is intermodal drayage from the rail yards, flatbed out of Northwest Indiana, and food distribution. Filter by Local to see only those.' },
+        { q: 'Can I apply in Russian?', a: 'Yes. Every application form works in English and Russian, and a recruiter calls you back in your language.' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

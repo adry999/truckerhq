@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Roboto+Condensed:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><style>body{margin:0;background:#F7F7F5;font-family:Inter,sans-serif;color:#16181B;-webkit-font-smoothing:antialiased}a{color:#0E5C3A}a:hover{color:#16181B}*{box-sizing:border-box}code{font-family:ui-monospace,monospace;font-size:.92em}</style></helmet>
+<div style="max-width:1200px;margin:0 auto;padding:clamp(28px,5vw,56px) clamp(16px,4vw,32px) 96px;display:flex;flex-direction:column;gap:40px;">
+<header style="display:flex;flex-direction:column;gap:10px;">
+<dc-import name="Logo" direction="sign" size="{{ 30 }}" hint-size="190px,36px"></dc-import>
+<h1 style="margin:8px 0 0;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:clamp(36px,6vw,56px);line-height:.95;text-transform:uppercase;">SEO plan</h1>
+<p style="margin:0;font-size:16px;line-height:1.55;color:#3F444B;max-width:720px;">For the developer. Page list with URLs, titles and descriptions, structured data per template, EN/RU setup, and the technical, local and tracking checklists. Public carrier profile pages are out of scope for now.</p>
+</header>
+
+<section style="display:flex;flex-direction:column;gap:14px;">
+<h2 style="margin:0;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:32px;">1. Pages, URLs and meta</h2>
+<p style="margin:0;font-size:14px;color:#4B5058;">Titles under 60 characters, descriptions under 155. Russian pages live under <code>/ru/</code> with the same slugs.</p>
+<div style="background:#FFFFFF;border:1px solid #DEDFDB;border-radius:8px;overflow-x:auto;">
+<table style="width:100%;min-width:980px;border-collapse:collapse;font-size:14px;line-height:1.45;">
+<thead><tr style="background:#16181B;color:#F7F7F5;text-align:left;"><th style="padding:12px 14px;font-weight:600;">URL</th><th style="padding:12px 14px;font-weight:600;">Title</th><th style="padding:12px 14px;font-weight:600;">Description</th><th style="padding:12px 14px;font-weight:600;">Schema</th></tr></thead>
+<tbody>
+<sc-for list="{{ pages }}" as="p" hint-placeholder-count="12">
+<tr style="border-top:1px solid #ECEDEA;vertical-align:top;background:{{ p.bg }};">
+<td style="padding:12px 14px;white-space:nowrap;"><code>{{ p.url }}</code><div style="font-size:12px;color:#6B7280;margin-top:3px;">{{ p.note }}</div></td>
+<td style="padding:12px 14px;font-weight:600;">{{ p.title }}<div style="font-size:12px;font-weight:400;color:{{ p.tc }};margin-top:3px;">{{ p.tl }} chars</div></td>
+<td style="padding:12px 14px;color:#3F444B;">{{ p.desc }}<div style="font-size:12px;color:{{ p.dc }};margin-top:3px;">{{ p.dl }} chars</div></td>
+<td style="padding:12px 14px;color:#3F444B;">{{ p.schema }}</td>
+</tr>
+</sc-for>
+</tbody>
+</table>
+</div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:14px;">
+<h2 style="margin:0;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:32px;">2. Page templates that scale</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:16px;">
+<sc-for list="{{ templates }}" as="t" hint-placeholder-count="4">
+<div style="background:#FFFFFF;border:1px solid #DEDFDB;border-radius:8px;padding:22px;display:flex;flex-direction:column;gap:10px;">
+<div style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:24px;text-transform:uppercase;">{{ t.name }}</div>
+<code style="color:#0E5C3A;">{{ t.url }}</code>
+<span style="font-size:14px;line-height:1.5;color:#3F444B;">{{ t.what }}</span>
+<span style="font-size:13px;line-height:1.5;color:#6B7280;"><b style="color:#16181B;">Rule:</b> {{ t.rule }}</span>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:16px;">
+<sc-for list="{{ lists }}" as="l" hint-placeholder-count="4">
+<div style="background:#FFFFFF;border:1px solid #DEDFDB;border-radius:8px;padding:22px;display:flex;flex-direction:column;gap:12px;">
+<h2 style="margin:0;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:26px;">{{ l.h }}</h2>
+<sc-for list="{{ l.items }}" as="i"><div style="display:flex;gap:10px;font-size:14px;line-height:1.5;color:#2B2F34;"><span style="flex:none;width:8px;height:8px;margin-top:6px;background:#F2A900;border-radius:2px;"></span><span>{{ i }}</span></div></sc-for>
+</div>
+</sc-for>
+</section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const P = [
+  ['/', 'Home', 'Trucker HQ: Flat-Rate Truck Dispatch, CDL Jobs, Carrier Tools', 'Truck dispatch for a flat weekly fee, never a percentage. English and Russian-speaking dispatchers 24/7. CDL jobs and free carrier lookup.', 'Organization, LocalBusiness, WebSite (search)'],
+  ['/dispatch', '', 'Truck Dispatch Service, Flat Weekly Rate | Trucker HQ', 'Dispatch for owner-operators and small fleets. One flat price per truck per week, 24/7 dispatchers, broker checks, paperwork included.', 'Service, FAQPage, Offer'],
+  ['/dispatch/start', 'noindex', 'Start Dispatch | Trucker HQ', 'Tell us about your truck and lanes. A dispatcher calls you back.', '—'],
+  ['/jobs', '', 'CDL Jobs with Pay Posted Up Front | Trucker HQ', 'OTR, regional and local CDL-A jobs. Every job shows pay, home time and the carrier Health Score. Apply in English or Russian.', 'ItemList, BreadcrumbList'],
+  ['/jobs/{city-st}', 'template', 'CDL Jobs in {City}, {ST}: {count} Openings | Trucker HQ', 'Truck driving jobs near {City}. Pay and home time on every listing. Updated daily.', 'ItemList, BreadcrumbList'],
+  ['/jobs/{id}-{slug}', 'template', '{Job title}, {City} {ST}, {Pay} | Trucker HQ', '{Company} is hiring a {job type} driver in {City}. {Pay}, {home time}. Apply in minutes.', 'JobPosting, BreadcrumbList'],
+  ['/hire-drivers', '', 'Hire CDL Drivers, Pre-Screened | Trucker HQ', 'Post a driver job. We check CDL, MVR and experience before a driver reaches you. Solo and team drivers.', 'Service, FAQPage'],
+  ['/tools', '', 'Free Trucking Tools, No Sign-Up | Trucker HQ', 'Carrier lookup, profit per mile calculator, compliance alerts and a new MC checklist. Built on FMCSA data.', 'ItemList'],
+  ['/tools/carrier-lookup', '', 'Carrier Lookup by DOT or MC Number | Trucker HQ', 'Check any carrier or broker: authority, insurance, inspections and crashes, summed up in one Health Score.', 'WebApplication'],
+  ['/tools/profit-per-mile', '', 'Trucking Profit per Mile Calculator | Trucker HQ', 'Enter the load and your costs. See your real profit and the lowest rate per mile worth taking.', 'WebApplication'],
+  ['/tools/compliance-alerts', '', 'FMCSA Compliance Alerts by Text | Trucker HQ', 'Get a text when your authority, insurance filing, UCR or safety status changes. Free.', 'WebApplication'],
+  ['/tools/new-mc-checklist', '', 'New MC Authority Checklist: First 6 Months | Trucker HQ', 'Every filing and setup step for a new trucking authority, from BOC-3 to the new entrant audit.', 'HowTo'],
+  ['/carriers/{state}', 'template', 'Trucking Companies in {State}: Carrier Stats | Trucker HQ', 'Active carriers, fleet sizes and safety data for {State}, from public FMCSA records.', 'ItemList, BreadcrumbList'],
+  ['/guides', '', 'Trucking Guides for Owner-Operators | Trucker HQ', 'Practical answers on rates, brokers, paperwork and starting your authority, from our dispatchers.', 'Blog, ItemList'],
+  ['/guides/{slug}', 'template', '{Guide title} | Trucker HQ', '{First sentence of the guide, under 155 characters.}', 'Article, BreadcrumbList, FAQPage if Q&A'],
+  ['/about', '', 'About Trucker HQ: Dispatch Team, Contact', 'Who we are, who answers the phone, and how to reach us 24/7. English and Russian.', 'Organization, ContactPoint'],
+  ['/claim', 'noindex', 'Claim Your Carrier Profile | Trucker HQ', 'Verify your company and add your contact details.', '—'],
+  ['/privacy, /terms, /sms-terms', '', 'Privacy Policy | Trucker HQ', '—', '—'],
+];
+class Component extends DCLogic {
+  renderVals() {
+    const len = s => s.replace(/\{[^}]+\}/g, 'xxxxxxxx').length;
+    return {
+      pages: P.map(([url, note, title, desc, schema], i) => { const tl = len(title), dl = len(desc); return { url, note, title, desc, schema, tl, dl, tc: tl > 60 ? '#B42318' : '#6B7280', dc: dl > 155 ? '#B42318' : '#6B7280', bg: note === 'template' ? '#F4F8F5' : '#FFFFFF' }; }),
+      templates: [
+        { name: 'City jobs', url: '/jobs/chicago-il', what: 'Jobs within 50 miles of the city, local pay ranges, top hiring carriers, nearby cities.', rule: 'Publish a city only when it has 5 or more live jobs. Otherwise noindex, so Google never sees thin pages.' },
+        { name: 'Job detail', url: '/jobs/48213-otr-company-driver-des-plaines-il', what: 'One page per job with pay, home time, requirements, carrier Health Score and apply form.', rule: 'Mark up with JobPosting including validThrough. When a job closes, keep the page for 30 days with "closed" and links to similar jobs, then 301 to the city page.' },
+        { name: 'State carriers', url: '/carriers/texas', what: 'Carrier counts, fleet sizes, safety averages, top cities, list of carriers.', rule: 'All 50 states at launch. Unique intro paragraph per state, not just swapped names.' },
+        { name: 'Guide', url: '/guides/how-to-tell-if-a-load-pays-enough', what: 'Article with author, date, examples and a link to the matching tool.', rule: '2–4 guides a month. Each one published in EN and RU, written by a real dispatcher, with their name and photo.' },
+      ],
+      lists: [
+        { h: '3. English and Russian', items: ['Separate URLs: /dispatch and /ru/dispatch. Never switch language on the same URL.', 'hreflang="en" and hreflang="ru" on every pair, plus x-default pointing to English.', 'Translate titles, descriptions, slugs stay the same.', 'The EN/RU switch links to the matching page, not the homepage.', 'Russian copy written by a native speaker, not machine-translated.'] },
+        { h: '4. Technical', items: ['Server-rendered HTML for every indexable page. Tools can load data after, but the text and headings must be in the HTML.', 'XML sitemap split by type: pages, jobs, cities, states, guides. Jobs sitemap updated daily.', 'robots.txt blocks /dispatch/start, /claim and search result URLs with parameters.', 'One H1 per page. Canonical tag on every page.', 'Core Web Vitals green on mobile: LCP under 2.5 s, images in WebP/AVIF with width and height set.', 'HTTPS everywhere, 301 from www to non-www (or the other way), custom 404.', 'Open Graph and Twitter images for every template, using the brand panel.'] },
+        { h: '5. Local and trust', items: ['Google Business Profile with the real office address, hours, photos, and service areas.', 'Same name, address and phone everywhere: site footer, Google, Facebook, Yelp, trucking directories.', 'Ask every happy client for a Google review. Reply to all reviews.', 'Show MC and USDOT numbers in the footer and About page.', 'Get listed and linked from trucking forums, Facebook groups and Russian-speaking trucker communities.'] },
+        { h: '6. Measurement', items: ['Google Search Console for EN and RU, sitemaps submitted.', 'Google Analytics 4 with these events: call click, start dispatch submit, job apply, hire drivers submit, carrier search, alerts signup.', 'Call tracking number on the site to know which calls came from Google.', 'Monthly report: top pages, search queries, calls and form leads per source.'] },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

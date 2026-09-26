@@ -165,8 +165,17 @@ export default function ComplianceAlertsForm() {
             Turn on alerts
           </button>
           <span className="text-[13px] leading-relaxed text-grey">
-            Free. About 1–3 texts a year for most carriers. Reply STOP any
-            time.
+            By turning on alerts you agree to receive texts from Trucker HQ
+            about this DOT number. Free, usually 1–3 texts a year. Msg & data
+            rates may apply. Reply STOP to cancel, HELP for help. See our{" "}
+            <Link href="/sms-terms" className="underline hover:text-asphalt">
+              SMS terms
+            </Link>{" "}
+            and{" "}
+            <Link href="/privacy" className="underline hover:text-asphalt">
+              Privacy policy
+            </Link>
+            .
           </span>
         </form>
       )}

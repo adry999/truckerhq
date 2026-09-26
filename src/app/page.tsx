@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     "Truck dispatch for a flat weekly fee, never a percentage. English and Russian-speaking dispatchers 24/7. CDL jobs and free carrier lookup.",
   alternates: {
     canonical: "/",
-    languages: { en: "/", ru: "/ru" },
+    languages: { en: "/", ru: "/ru", "x-default": "/" },
   },
 };
 

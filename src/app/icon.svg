@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 108">
+  <defs>
+    <clipPath id="thq-shield">
+      <path d="M8 6 C30 14 70 14 92 6 C100 40 96 78 50 104 C4 78 0 40 8 6 Z" />
+    </clipPath>
+  </defs>
+  <path
+    d="M8 6 C30 14 70 14 92 6 C100 40 96 78 50 104 C4 78 0 40 8 6 Z"
+    fill="#0E5C3A"
+  />
+  <rect x="0" y="0" width="100" height="32" fill="#F2A900" clip-path="url(#thq-shield)" />
+  <path
+    d="M8 6 C30 14 70 14 92 6 C100 40 96 78 50 104 C4 78 0 40 8 6 Z"
+    fill="none"
+    stroke="#F7F7F5"
+    stroke-width="5"
+  />
+  <text
+    x="50"
+    y="72"
+    text-anchor="middle"
+    font-family="Arial, Helvetica, sans-serif"
+    font-weight="900"
+    font-size="34"
+    fill="#F7F7F5"
+  >HQ</text>
+</svg>

@@ -20,7 +20,7 @@
   --color-grey: var(--color-grey);
   --color-red: var(--color-red);
   --color-border: var(--color-border);
-  --font-display: var(--font-barlow-condensed);
+  --font-display: var(--font-barlow-condensed), var(--font-roboto-condensed), sans-serif;
   --font-sans: var(--font-inter);
   --font-logo: var(--font-overpass);
 }
