@@ -6,9 +6,9 @@ import JsonLd from "@/components/JsonLd";
 import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "New MC Checklist — First 6 Months",
+  title: "New MC Authority Checklist: First 6 Months",
   description:
-    "Every step from getting your USDOT and MC number to passing the FMCSA new entrant safety audit. BOC-3, UCR, BMC-91X, Clearinghouse and the mistakes that get new authorities shut down.",
+    "Every filing and setup step for a new trucking authority, from BOC-3 to the new entrant audit.",
 };
 
 const BEFORE_YOU_HAUL = [

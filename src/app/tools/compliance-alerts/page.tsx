@@ -4,9 +4,9 @@ import SiteFooter from "@/components/SiteFooter";
 import ComplianceAlertsForm from "@/components/ComplianceAlertsForm";
 
 export const metadata: Metadata = {
-  title: "Compliance Alerts — Free FMCSA Text Alerts",
+  title: "FMCSA Compliance Alerts by Text",
   description:
-    "We check your FMCSA record every day. Get a text the same day if your authority, insurance filing or safety status changes. Free, in English or Russian.",
+    "Get a text when your authority, insurance filing, UCR or safety status changes. Free.",
 };
 
 export default function ComplianceAlertsPage() {

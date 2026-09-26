@@ -7,43 +7,43 @@ import JsonLd from "@/components/JsonLd";
 import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Trucker HQ: Flat-Rate Truck Dispatch, CDL Jobs, Carrier Tools",
+  title: "Trucker HQ: диспетчинг, работа CDL и бесплатные инструменты",
   description:
-    "Truck dispatch for a flat weekly fee, never a percentage. English and Russian-speaking dispatchers 24/7. CDL jobs and free carrier lookup.",
+    "Диспетчинг за фиксированную цену в неделю, без процентов. Диспетчеры говорят по-английски и по-русски, 24/7. Работа для CDL и бесплатная проверка перевозчиков.",
   alternates: {
-    canonical: "/",
+    canonical: "/ru",
     languages: { en: "/", ru: "/ru" },
   },
 };
 
 const FACTS = [
-  { k: "In business since", v: "20XX · City, ST" },
-  { k: "Dispatch line, 24/7", v: "(XXX) XXX-XXXX" },
-  { k: "We speak", v: "English · Русский" },
-  { k: "Office hours", v: "Mon–Sun, all US time zones" },
+  { k: "Работаем с", v: "20XX · City, ST" },
+  { k: "Диспетчерская, 24/7", v: "(XXX) XXX-XXXX" },
+  { k: "Говорим на", v: "English · Русский" },
+  { k: "Часы работы", v: "Пн–Вс, все пояса США" },
 ];
 
 const DISPATCH_ITEMS = [
-  "Loads booked day and night",
-  "Rate negotiation on every load",
-  "Broker checked before you say yes",
-  "Rate cons, invoices, factoring",
-  "Fuel card discounts",
-  "Your website and Google profile",
+  "Грузы днём и ночью",
+  "Торг за каждый груз",
+  "Брокер проверен до вашего «да»",
+  "Rate con, инвойсы, факторинг",
+  "Скидки по топливной карте",
+  "Ваш сайт и профиль в Google",
 ];
 
 const SMALL_SERVICES = [
   {
-    title: "Driver jobs",
+    title: "Работа водителям",
     href: "/jobs",
-    cta: "Browse jobs",
-    line: "Pay and home time are posted on every job. Apply in English or Russian and a person calls you back.",
+    cta: "Смотреть вакансии",
+    line: "В каждой вакансии указаны оплата и время дома. Откликайтесь по-русски или по-английски, вам перезвонит человек.",
   },
   {
-    title: "Hire drivers",
+    title: "Найм водителей",
     href: "/hire-drivers",
-    cta: "Hire drivers",
-    line: "Post a job. We check CDL, MVR and experience before a driver reaches you.",
+    cta: "Найти водителя",
+    line: "Разместите вакансию. Мы проверим CDL, MVR и опыт, прежде чем водитель придёт к вам.",
   },
 ];
 
@@ -51,25 +51,25 @@ const TOOLS = [
   {
     name: "Carrier Lookup",
     href: "/tools/carrier-lookup",
-    desc: "Search by DOT or MC. Authority, insurance, safety and a Health Score.",
+    desc: "Поиск по DOT или MC. Лицензия, страховка, безопасность и Health Score.",
     hasScore: true,
   },
   {
-    name: "Profit per Mile",
+    name: "Прибыль за милю",
     href: "/tools/profit-per-mile",
-    desc: "Fuel, insurance, truck payment. See what a load really pays.",
+    desc: "Топливо, страховка, платёж за трак. Сколько на самом деле платит груз.",
     hasScore: false,
   },
   {
     name: "Compliance Alerts",
     href: "/tools/compliance-alerts",
-    desc: "Get a text before your insurance, UCR or authority status changes.",
+    desc: "SMS, если меняется статус страховки, UCR или лицензии.",
     hasScore: false,
   },
   {
-    name: "New MC Checklist",
+    name: "Чек-лист нового MC",
     href: "/tools/new-mc-checklist",
-    desc: "Every step for your first 6 months, from BOC-3 to first load.",
+    desc: "Все шаги первых 6 месяцев, от BOC-3 до первого груза.",
     hasScore: false,
   },
 ];
@@ -77,46 +77,46 @@ const TOOLS = [
 const STEPS = [
   {
     n: "1",
-    title: "Call or sign up",
-    desc: "Tell us your truck, your lanes and when you want to be home. Ten minutes on the phone.",
+    title: "Позвоните или оставьте заявку",
+    desc: "Расскажите про трак, направления и когда хотите быть дома. Десять минут по телефону.",
   },
   {
     n: "2",
-    title: "We book the loads",
-    desc: "We search the boards, check every broker and push for the best rate. You say yes or no.",
+    title: "Мы находим грузы",
+    desc: "Ищем на бордах, проверяем каждого брокера и торгуемся за лучшую цену. Решаете вы.",
   },
   {
     n: "3",
-    title: "You drive",
-    desc: "Rate cons, invoices, factoring paperwork. We handle it so you can focus on the road.",
+    title: "Вы едете",
+    desc: "Rate con, инвойсы, бумаги для факторинга берём на себя. Вам остаётся дорога.",
   },
 ];
 
 const JOBS = [
-  { title: "OTR Company Driver", co: "Carpathian Freight", loc: "Des Plaines, IL", type: "OTR", equip: "DRY VAN", pay: "$0.68–0.72/mi", posted: "Today" },
-  { title: "Regional Driver, home weekly", co: "Volga Line Transport", loc: "Jacksonville, FL", type: "REGIONAL", equip: "REEFER", pay: "$1,800/wk", posted: "Today" },
-  { title: "Team Drivers", co: "Iron Horse Hauling", loc: "Phoenix, AZ", type: "OTR", equip: "DRY VAN", pay: "$0.90/mi split", posted: "1 day ago" },
-  { title: "Local Flatbed Driver", co: "Danube Road Corp", loc: "Charlotte, NC", type: "LOCAL", equip: "FLATBED", pay: "$28/hr", posted: "2 days ago" },
-  { title: "Lease Purchase, Owner-Op", co: "Moldova Express", loc: "Sacramento, CA", type: "OTR", equip: "REEFER", pay: "88% of load", posted: "3 days ago" },
+  { title: "Водитель OTR в компанию", co: "Carpathian Freight", loc: "Des Plaines, IL", type: "OTR", equip: "DRY VAN", pay: "$0.68–0.72/mi", posted: "Сегодня" },
+  { title: "Региональный водитель, дома каждую неделю", co: "Volga Line Transport", loc: "Jacksonville, FL", type: "REGIONAL", equip: "REEFER", pay: "$1,800/wk", posted: "Сегодня" },
+  { title: "Командные водители", co: "Iron Horse Hauling", loc: "Phoenix, AZ", type: "OTR", equip: "DRY VAN", pay: "$0.90/ми на двоих", posted: "1 день назад" },
+  { title: "Локальный водитель, flatbed", co: "Danube Road Corp", loc: "Charlotte, NC", type: "LOCAL", equip: "FLATBED", pay: "$28/hr", posted: "2 дня назад" },
+  { title: "Lease purchase, owner-operator", co: "Moldova Express", loc: "Sacramento, CA", type: "OTR", equip: "REEFER", pay: "88% от груза", posted: "3 дня назад" },
 ];
 
 const TEAM = [
-  { name: "Dispatcher Name", role: "Dispatcher · Dry van, reefer", note: "EN · RU · Nights, Central time" },
-  { name: "Dispatcher Name", role: "Dispatcher · Flatbed", note: "EN · RU · Days, Eastern time" },
-  { name: "Dispatcher Name", role: "New MC onboarding", note: "EN · RU · Days, Pacific time" },
+  { name: "Dispatcher Name", role: "Диспетчер · Dry van, reefer", note: "EN · RU · Ночи, Central" },
+  { name: "Dispatcher Name", role: "Диспетчер · Flatbed", note: "EN · RU · Дни, Eastern" },
+  { name: "Dispatcher Name", role: "Старт нового MC", note: "EN · RU · Дни, Pacific" },
 ];
 
 const QUOTES = [
   {
-    text: "Same price every week. Last month I ran hard and kept all of it. With my old dispatcher that was $700 gone.",
+    text: "Одна цена каждую неделю. В прошлом месяце я много откатал, и всё осталось мне. Со старым диспетчером ушло бы $700.",
     name: "Ion R.",
-    role: "Owner-operator, 2 trucks · IL",
+    role: "Owner-operator, 2 трака · IL",
     lang: "RU",
   },
   {
-    text: "My MC was 3 months old and nobody wanted me. They found brokers that work with new carriers and got me moving.",
+    text: "Моему MC было 3 месяца, и никто не хотел со мной работать. Они нашли брокеров, которые берут новых перевозчиков, и я поехал.",
     name: "Sergei M.",
-    role: "New carrier · FL",
+    role: "Новый перевозчик · FL",
     lang: "RU",
   },
   {
@@ -129,38 +129,38 @@ const QUOTES = [
 
 const FAQ = [
   {
-    q: "How is a flat weekly rate better than a percentage?",
-    a: "A percentage dispatcher earns more when you haul more. We charge the same every week, so the extra money from a good week stays with you.",
+    q: "Чем фиксированная цена лучше процента?",
+    a: "Диспетчер на проценте зарабатывает больше, когда больше возите вы. Мы берём одинаково каждую неделю, поэтому деньги с хорошей недели остаются у вас.",
   },
   {
-    q: "Do I need to sign a long contract?",
-    a: "No. Dispatch is week to week. Stop any time with one week notice.",
+    q: "Нужно подписывать долгий контракт?",
+    a: "Нет. Работаем понедельно. Можно остановиться в любой момент, предупредив за неделю.",
   },
   {
-    q: "I just got my MC. Can you work with me?",
-    a: "Yes. We help new authorities from day one: broker setup packets, the New MC Checklist, and lanes that accept new carriers.",
+    q: "Я только получил MC. Будете со мной работать?",
+    a: "Да. Помогаем новым компаниям с первого дня: пакеты для брокеров, чек-лист для нового MC и направления, где берут новых перевозчиков.",
   },
   {
-    q: "Can I talk to someone in Russian?",
-    a: "Yes. Our dispatchers speak English and Russian, 24/7 on every US time zone.",
+    q: "Можно говорить по-русски?",
+    a: "Да. Наши диспетчеры говорят по-английски и по-русски, 24/7 во всех часовых поясах США.",
   },
   {
-    q: "Where does the Carrier Lookup data come from?",
-    a: "Public FMCSA records: authority, insurance, inspections and crash history. The Health Score sums it up from 0 to 100.",
+    q: "Откуда данные в Carrier Lookup?",
+    a: "Из открытых записей FMCSA: лицензия, страховка, инспекции и аварии. Health Score сводит всё в оценку от 0 до 100.",
   },
 ];
 
-export default function HomePage() {
+export default function HomePageRU() {
   return (
     <div className="flex min-h-screen flex-col">
       <JsonLd data={faqSchema(FAQ)} />
-      <SiteHeader />
+      <SiteHeader lang="RU" enHref="/" ruHref="/ru" />
 
       <section className="relative overflow-hidden bg-asphalt text-offwhite">
         <div className="absolute inset-0 hidden md:block md:left-[52%]">
           <Image
             src="https://images.unsplash.com/photo-1720811559395-3ed8d1b16649?fm=jpg&q=70&w=2000&auto=format&fit=crop"
-            alt="One of Trucker HQ's trucks on the road"
+            alt="Один из траков Trucker HQ на дороге"
             fill
             priority
             className="object-cover"
@@ -171,15 +171,15 @@ export default function HomePage() {
 
         <div className="relative mx-auto flex max-w-6xl flex-col gap-6 px-4 py-14 sm:px-6 md:py-24">
           <div className="font-display text-base font-bold uppercase tracking-[.12em] text-amber">
-            Dispatch · CDL jobs · Free carrier tools
+            Диспетчинг · Работа CDL · Бесплатные инструменты
           </div>
           <h1 className="max-w-3xl font-display text-5xl font-extrabold uppercase leading-[0.9] sm:text-6xl md:text-7xl lg:text-8xl">
-            Dispatch that picks up at 3 a.m.
+            Диспетчер, который ответит в 3 часа ночи
           </h1>
           <p className="max-w-xl text-lg leading-relaxed text-[#D4D6DA] md:text-xl">
-            Flat weekly rate, never a percentage. English and Russian-speaking
-            dispatchers on every US time zone. CDL jobs and free carrier checks
-            on the same site.
+            Фиксированная цена в неделю, никаких процентов. Диспетчеры говорят
+            по-английски и по-русски, во всех часовых поясах США. Работа для
+            водителей CDL и бесплатная проверка перевозчиков на одном сайте.
           </p>
 
           <form
@@ -194,8 +194,8 @@ export default function HomePage() {
               </svg>
               <input
                 name="q"
-                aria-label="Search carriers"
-                placeholder="Check a broker or carrier: DOT, MC or name"
+                aria-label="Поиск перевозчиков"
+                placeholder="Проверить брокера или перевозчика: DOT, MC или название"
                 className="min-w-0 flex-1 border-0 bg-transparent font-sans text-lg text-asphalt outline-none"
               />
             </div>
@@ -204,7 +204,7 @@ export default function HomePage() {
               className="min-h-[60px] rounded px-8 font-display text-2xl font-extrabold uppercase tracking-[.05em] text-asphalt"
               style={{ background: "var(--color-amber)" }}
             >
-              Check
+              Проверить
             </button>
           </form>
 
@@ -212,10 +212,10 @@ export default function HomePage() {
             href="/tools/carrier-lookup"
             className="flex max-w-3xl flex-wrap items-center gap-2 rounded-md border border-white/16 bg-white/7 px-4 py-3 text-offwhite hover:border-amber"
           >
-            <span className="text-[13px] text-[#AEB2B8]">Last checked 2 min ago</span>
+            <span className="text-[13px] text-[#AEB2B8]">Проверен 2 мин назад</span>
             <span className="text-[15px] font-semibold">Carpathian Freight</span>
             <span className="text-sm tabular-nums text-[#C9CBCF]">
-              DOT 3412897 · Authorized · Insured
+              DOT 3412897 · Лицензия активна · Застрахован
             </span>
             <span className="ml-auto flex items-center gap-2 text-[13px] text-[#C9CBCF]">
               <span className="flex h-[30px] w-[30px] items-center justify-center rounded-full bg-green font-display text-base font-extrabold text-offwhite">
@@ -228,7 +228,7 @@ export default function HomePage() {
           <div className="relative mt-1.5 aspect-video overflow-hidden rounded-lg md:hidden">
             <Image
               src="https://images.unsplash.com/photo-1720811559395-3ed8d1b16649?fm=jpg&q=70&w=2000&auto=format&fit=crop"
-              alt="One of Trucker HQ's trucks on the road"
+              alt="Один из траков Trucker HQ на дороге"
               fill
               className="object-cover"
               sizes="100vw"
@@ -251,14 +251,14 @@ export default function HomePage() {
 
       <section className="mx-auto flex w-full max-w-6xl flex-col gap-7 px-4 py-14 sm:px-6 md:py-24">
         <h2 className="font-display text-4xl font-extrabold md:text-5xl">
-          Dispatch, jobs and hiring
+          Диспетчинг, работа и найм
         </h2>
         <div className="grid gap-4 md:grid-cols-[1.35fr_1fr]">
           <div className="row-span-2 flex flex-col overflow-hidden rounded-lg bg-green text-offwhite">
             <div className="relative h-[220px]">
               <Image
                 src="https://images.unsplash.com/photo-1631914730551-1cfbcdf6f603?fm=jpg&q=70&w=2000&auto=format&fit=crop"
-                alt="Trucker HQ dispatch office"
+                alt="Диспетчерская Trucker HQ"
                 fill
                 className="object-cover"
                 sizes="(min-width: 768px) 60vw, 100vw"
@@ -266,10 +266,11 @@ export default function HomePage() {
             </div>
             <div className="flex flex-1 flex-col gap-4 p-7">
               <div className="font-display text-5xl font-extrabold uppercase leading-[0.95]">
-                Dispatch
+                Диспетчинг
               </div>
               <div className="max-w-md text-lg font-medium leading-snug">
-                One flat price a week. You keep everything you haul above it.
+                Одна фиксированная цена в неделю. Всё, что заработаете сверх
+                неё, остаётся вам.
               </div>
               <ul className="grid flex-1 grid-cols-1 gap-x-5 gap-y-2.5 sm:grid-cols-2">
                 {DISPATCH_ITEMS.map((it) => (
@@ -282,10 +283,10 @@ export default function HomePage() {
                 ))}
               </ul>
               <Link
-                href="/dispatch"
+                href="/dispatch/start"
                 className="mt-2 flex h-14 w-fit items-center rounded-[10px] bg-amber px-7 font-display text-xl font-extrabold uppercase tracking-[.05em] text-asphalt hover:bg-amber-hover"
               >
-                Start dispatch
+                Начать работу
               </Link>
             </div>
           </div>
@@ -319,21 +320,21 @@ export default function HomePage() {
             <div className="flex flex-col gap-2">
               <div className="flex items-center gap-2.5">
                 <span className="flex h-7 items-center rounded-md bg-asphalt px-2.5 font-display text-[15px] font-extrabold tracking-[.08em] text-amber">
-                  FREE
+                  БЕСПЛАТНО
                 </span>
                 <span className="font-display text-[15px] font-bold tracking-[.16em] text-grey">
-                  TRUCKER HQ TOOLS
+                  ИНСТРУМЕНТЫ TRUCKER HQ
                 </span>
               </div>
               <h2 className="font-display text-3xl font-extrabold md:text-4xl">
-                Free tools. No sign-up.
+                Бесплатные инструменты. Без регистрации.
               </h2>
             </div>
             <Link
               href="/tools"
               className="flex h-11 items-center font-display text-lg font-bold uppercase tracking-[.04em]"
             >
-              All tools →
+              Все инструменты →
             </Link>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -358,7 +359,7 @@ export default function HomePage() {
                   </span>
                 )}
                 <div className="font-display text-[17px] font-bold uppercase tracking-[.05em] text-green">
-                  Open →
+                  Открыть →
                 </div>
               </Link>
             ))}
@@ -368,7 +369,7 @@ export default function HomePage() {
 
       <section className="mx-auto flex w-full max-w-6xl flex-col gap-10 px-4 py-14 sm:px-6 md:py-24">
         <h2 className="font-display text-4xl font-extrabold md:text-5xl">
-          How dispatch works
+          Как работает диспетчинг
         </h2>
         <div className="relative grid gap-8 md:grid-cols-3">
           <div className="absolute left-7 right-7 top-[27px] hidden h-1 bg-[repeating-linear-gradient(90deg,#F2A900_0_32px,transparent_32px_52px)] md:block" />
@@ -392,50 +393,50 @@ export default function HomePage() {
         <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-2 md:py-24">
           <div className="flex flex-col gap-5">
             <div className="font-display text-[15px] font-bold tracking-[.16em] text-amber">
-              DISPATCH PRICING
+              ЦЕНА ДИСПЕТЧИНГА
             </div>
             <h2 className="font-display text-4xl font-extrabold leading-[0.95] md:text-6xl">
-              One flat price.
+              Одна цена.
               <br />
-              No percentage.
+              Никаких процентов.
             </h2>
             <div className="flex items-baseline gap-2.5">
               <span className="font-display text-6xl font-extrabold text-amber md:text-8xl">
                 $XXX
               </span>
-              <span className="text-lg text-[#C9CBCF]">/ week per truck</span>
+              <span className="text-lg text-[#C9CBCF]">/ неделя за трак</span>
             </div>
             <p className="max-w-lg text-lg leading-relaxed text-[#D4D6DA]">
-              Includes a dispatcher on your time zone, rate negotiation on
-              every load, broker checks, fuel card discounts, invoicing, and
-              your own website and Google profile.
+              Включено: диспетчер в вашем часовом поясе, торг за каждый груз,
+              проверка брокеров, скидки по топливной карте, выставление
+              счетов, ваш сайт и профиль в Google.
             </p>
             <div className="mt-2 flex flex-wrap gap-3">
               <Link
-                href="/dispatch"
+                href="/dispatch/start"
                 className="flex h-14 items-center rounded-xl bg-amber px-7 font-display text-xl font-extrabold uppercase tracking-[.05em] text-asphalt hover:bg-amber-hover"
               >
-                Start dispatch
+                Начать работу
               </Link>
               <a
                 href="tel:+1XXXXXXXXXX"
                 className="flex h-14 items-center rounded-xl border-2 border-offwhite px-6 font-display text-xl font-extrabold uppercase tracking-[.05em] text-offwhite hover:bg-offwhite hover:text-asphalt"
               >
-                Call us 24/7
+                Звоните 24/7
               </a>
             </div>
           </div>
           <div className="rounded-[10px] bg-green p-1.5">
             <div className="flex flex-col gap-[18px] rounded-md border-[1.5px] border-white/70 p-6">
               <div className="font-display text-[15px] font-bold tracking-[.14em] text-amber">
-                EXAMPLE · $8,000 GROSS A WEEK
+                ПРИМЕР · $8 000 GROSS В НЕДЕЛЮ
               </div>
               <div className="flex items-baseline justify-between gap-3 border-b border-white/25 pb-4">
-                <span className="text-base">10% dispatcher</span>
+                <span className="text-base">Диспетчер за 10%</span>
                 <span className="font-display text-4xl font-extrabold tabular-nums">$800</span>
               </div>
               <div className="flex items-baseline justify-between gap-3 border-b border-white/25 pb-4">
-                <span className="text-base">8% dispatcher</span>
+                <span className="text-base">Диспетчер за 8%</span>
                 <span className="font-display text-4xl font-extrabold tabular-nums">$640</span>
               </div>
               <div className="flex items-baseline justify-between gap-3">
@@ -443,8 +444,8 @@ export default function HomePage() {
                 <span className="font-display text-4xl font-extrabold text-amber">$XXX</span>
               </div>
               <div className="text-sm leading-relaxed text-[#DCE6E0]">
-                Good week or bad week, the price stays the same. The more you
-                haul, the more you keep.
+                Хорошая неделя или плохая, цена не меняется. Чем больше
+                возите, тем больше остаётся вам.
               </div>
             </div>
           </div>
@@ -454,13 +455,13 @@ export default function HomePage() {
       <section className="mx-auto flex w-full max-w-6xl flex-col gap-7 px-4 py-14 sm:px-6 md:py-24">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <h2 className="font-display text-4xl font-extrabold md:text-5xl">
-            Latest CDL jobs
+            Свежие вакансии CDL
           </h2>
           <Link
             href="/jobs"
             className="flex h-11 items-center font-display text-lg font-bold uppercase tracking-[.04em]"
           >
-            See all jobs →
+            Все вакансии →
           </Link>
         </div>
         <div className="overflow-hidden rounded-lg border border-border bg-white">
@@ -498,11 +499,11 @@ export default function HomePage() {
       <section className="mx-auto flex w-full max-w-6xl flex-col gap-7 px-4 py-14 sm:px-6 md:py-24">
         <div className="flex max-w-xl flex-col gap-2.5">
           <h2 className="font-display text-4xl font-extrabold md:text-5xl">
-            The people who answer the phone
+            Люди, которые берут трубку
           </h2>
           <p className="text-lg leading-relaxed text-[#3F444B]">
-            You get one dispatcher who learns your truck, your lanes and when
-            you need to be home.
+            У вас один диспетчер, который знает ваш трак, ваши направления и
+            когда вам нужно быть дома.
           </p>
         </div>
         <div className="grid gap-5 sm:grid-cols-2 md:grid-cols-3">
@@ -522,7 +523,7 @@ export default function HomePage() {
       <section className="border-y border-border bg-white">
         <div className="mx-auto flex max-w-6xl flex-col gap-8 px-4 py-14 sm:px-6 md:py-24">
           <h2 className="font-display text-4xl font-extrabold md:text-5xl">
-            From the drivers
+            Отзывы водителей
           </h2>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {QUOTES.map((q) => (
@@ -532,7 +533,7 @@ export default function HomePage() {
               >
                 <div className="h-1.5 w-10 rounded-sm bg-amber" />
                 <blockquote className="flex-1 text-lg leading-relaxed">
-                  &ldquo;{q.text}&rdquo;
+                  &laquo;{q.text}&raquo;
                 </blockquote>
                 <figcaption className="flex items-center gap-3">
                   <div className="h-12 w-12 shrink-0 rounded-full bg-border" />
@@ -552,7 +553,7 @@ export default function HomePage() {
 
       <section className="mx-auto flex w-full max-w-2xl flex-col gap-7 px-4 py-14 sm:px-6 md:py-24">
         <h2 className="font-display text-4xl font-extrabold md:text-5xl">
-          Questions
+          Вопросы
         </h2>
         <div className="flex flex-col border-t-2 border-asphalt">
           {FAQ.map((f) => (

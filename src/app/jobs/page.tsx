@@ -6,9 +6,9 @@ import Logo from "@/components/Logo";
 import { JOBS, healthColor, CARRIERS } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: "CDL Jobs — Pay Posted Up Front",
+  title: "CDL Jobs with Pay Posted Up Front",
   description:
-    "OTR, regional, local and owner-operator CDL driving jobs. Every job shows the pay and home time. Every carrier shows its Health Score. Apply in English or Russian.",
+    "OTR, regional and local CDL-A jobs. Every job shows pay, home time and the carrier Health Score. Apply in English or Russian.",
 };
 
 const TYPES = ["All", "OTR", "REGIONAL", "LOCAL", "TEAM", "OWNER-OP"] as const;

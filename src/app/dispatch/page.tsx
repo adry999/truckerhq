@@ -9,9 +9,9 @@ import JsonLd from "@/components/JsonLd";
 import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Flat-Rate Truck Dispatch — No Percentage",
+  title: "Truck Dispatch Service, Flat Weekly Rate",
   description:
-    "Flat weekly dispatch price, never a percentage of your gross. 24/7 dispatchers, rate negotiation on every load, broker vetting, fuel discounts. Starter MC, Owner-Operator and Fleet packages.",
+    "Dispatch for owner-operators and small fleets. One flat price per truck per week, 24/7 dispatchers, broker checks, paperwork included.",
 };
 
 const INCLUDED = [
@@ -240,7 +240,7 @@ export default function DispatchPage() {
                     ))}
                   </ul>
                   <Link
-                    href="#"
+                    href="/dispatch/start"
                     className={`mt-1.5 flex h-14 items-center justify-center rounded-xl font-display text-xl font-extrabold uppercase tracking-[.05em] ${
                       p.featured
                         ? "bg-amber text-asphalt hover:bg-amber-hover"
@@ -325,12 +325,12 @@ export default function DispatchPage() {
               </p>
             </div>
             <div className="flex min-w-[280px] flex-col gap-3">
-              <a
-                href="#pricing"
+              <Link
+                href="/dispatch/start"
                 className="flex h-[60px] items-center justify-center rounded-xl bg-amber px-7 font-display text-2xl font-extrabold uppercase tracking-[.05em] text-asphalt hover:bg-amber-hover"
               >
                 Start dispatch
-              </a>
+              </Link>
               <a
                 href="tel:+1XXXXXXXXXX"
                 className="flex h-[60px] items-center justify-center rounded-xl border-2 border-offwhite px-6 font-display text-2xl font-extrabold uppercase tracking-[.05em] text-offwhite hover:bg-offwhite hover:text-asphalt"

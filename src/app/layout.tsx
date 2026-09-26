@@ -24,11 +24,11 @@ const overpass = Overpass({
 export const metadata: Metadata = {
   metadataBase: new URL("https://truckerhq.com"),
   title: {
-    default: "Trucker HQ — Flat-Rate Dispatch, CDL Jobs & Free Carrier Tools",
+    default: "Trucker HQ: Flat-Rate Truck Dispatch, CDL Jobs, Carrier Tools",
     template: "%s | Trucker HQ",
   },
   description:
-    "Flat weekly dispatch, no percentage. CDL jobs with pay posted up front. Free carrier tools: DOT/MC lookup, profit-per-mile calculator, compliance alerts. English and Russian, 24/7.",
+    "Truck dispatch for a flat weekly fee, never a percentage. English and Russian-speaking dispatchers 24/7. CDL jobs and free carrier lookup.",
 };
 
 const ORGANIZATION_SCHEMA = {

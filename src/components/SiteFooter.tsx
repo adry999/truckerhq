@@ -15,7 +15,7 @@ const COLUMNS: { h: string; links: { t: string; href?: string }[] }[] = [
     links: [
       { t: "All tools", href: "/tools" },
       { t: "Carrier Lookup", href: "/tools/carrier-lookup" },
-      { t: "Profit per Mile", href: "/tools/profit-calculator" },
+      { t: "Profit per Mile", href: "/tools/profit-per-mile" },
       { t: "Compliance Alerts", href: "/tools/compliance-alerts" },
       { t: "New MC Checklist", href: "/tools/new-mc-checklist" },
       { t: "Texas carriers", href: "/carriers/texas" },
@@ -25,10 +25,17 @@ const COLUMNS: { h: string; links: { t: string; href?: string }[] }[] = [
     h: "CONTACT",
     links: [
       { t: "(XXX) XXX-XXXX · 24/7" },
-      { t: "hello@truckerhq.com" },
-      { t: "About us" },
+      { t: "hello@truckerhq.com", href: "/about#contact" },
+      { t: "Guides", href: "/guides" },
+      { t: "About us", href: "/about" },
     ],
   },
+];
+
+const LEGAL = [
+  { t: "Privacy", href: "/privacy" },
+  { t: "Terms", href: "/terms" },
+  { t: "SMS terms", href: "/sms-terms" },
 ];
 
 export default function SiteFooter() {
@@ -71,7 +78,14 @@ export default function SiteFooter() {
         </div>
         <div className="flex flex-wrap justify-between gap-3 border-t border-white/12 pt-6 text-[13px] text-[#8A8F98]">
           <span>© 2026 Trucker HQ. Carrier data from public FMCSA records.</span>
-          <span>English · Русский</span>
+          <span className="flex flex-wrap gap-x-4 gap-y-1.5">
+            {LEGAL.map((l) => (
+              <Link key={l.t} href={l.href} className="text-[#AEB2B8] hover:text-amber">
+                {l.t}
+              </Link>
+            ))}
+            <span>English · Русский</span>
+          </span>
         </div>
       </div>
     </footer>

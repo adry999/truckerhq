@@ -4,9 +4,9 @@ import SiteFooter from "@/components/SiteFooter";
 import ProfitCalculator from "@/components/ProfitCalculator";
 
 export const metadata: Metadata = {
-  title: "Profit per Mile Calculator",
+  title: "Trucking Profit per Mile Calculator",
   description:
-    "Put in the load and your costs. See what you really make per mile, and the lowest rate you should take. Free trucking profit calculator.",
+    "Enter the load and your costs. See your real profit and the lowest rate per mile worth taking.",
 };
 
 export default function ProfitCalculatorPage() {

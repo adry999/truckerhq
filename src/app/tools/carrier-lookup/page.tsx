@@ -11,9 +11,9 @@ import {
 } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: "Carrier Lookup — Free DOT/MC Search",
+  title: "Carrier Lookup by DOT or MC Number",
   description:
-    "Search any carrier by DOT, MC or name. Authority, insurance, inspections and crashes from public FMCSA data, summed up in one Health Score.",
+    "Check any carrier or broker: authority, insurance, inspections and crashes, summed up in one Health Score.",
 };
 
 const MODES = ["All", "DOT", "MC", "Name"] as const;

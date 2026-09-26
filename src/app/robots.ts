@@ -5,6 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
+      disallow: ["/dispatch/start", "/claim", "/*?*"],
     },
     sitemap: "https://truckerhq.com/sitemap.xml",
   };

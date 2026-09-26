@@ -17,14 +17,14 @@
 </div>
 <sc-for list="{{ cols }}" as="col" hint-placeholder-count="3">
 <div style="display:flex;flex-direction:column;gap:4px;">
-<div style="font-family:'Barlow Condensed';font-weight:700;font-size:15px;letter-spacing:.14em;color:#F2A900;margin-bottom:6px;">{{ col.h }}</div>
+<div style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:.14em;color:#F2A900;margin-bottom:6px;">{{ col.h }}</div>
 <sc-for list="{{ col.links }}" as="l"><a href="{{ l.href }}" style="color:#E4E6E9;text-decoration:none;font-size:15px;min-height:36px;display:flex;align-items:center;" style-hover="color:#F2A900;">{{ l.t }}</a></sc-for>
 </div>
 </sc-for>
 </div>
 <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:13px;color:#8A8F98;border-top:1px solid rgba(247,247,245,.12);padding-top:24px;">
 <span>© 2026 Trucker HQ. Carrier data from public FMCSA records.</span>
-<span>English · Русский</span>
+<span style="display:flex;flex-wrap:wrap;gap:6px 16px;"><a href="Privacy.dc.html" style="color:#AEB2B8;">Privacy</a><a href="Terms.dc.html" style="color:#AEB2B8;">Terms</a><a href="SMS Terms.dc.html" style="color:#AEB2B8;">SMS terms</a><span>English · Русский</span></span>
 </div>
 </div>
 </footer>
@@ -36,7 +36,7 @@ class Component extends DCLogic {
     return { cols: [
       { h: 'SERVICES', links: [L('Dispatch', 'Dispatch.dc.html'), L('Driver Jobs', 'Jobs.dc.html'), L('Hire Drivers', 'Hire Drivers.dc.html')] },
       { h: 'FREE TOOLS', links: [L('All tools', 'Tools.dc.html'), L('Carrier Lookup', 'Carrier Lookup.dc.html'), L('Profit per Mile', 'Profit Calculator.dc.html'), L('Compliance Alerts', 'Compliance Alerts.dc.html'), L('New MC Checklist', 'New MC Checklist.dc.html'), L('Texas carriers', 'State Texas.dc.html')] },
-      { h: 'CONTACT', links: [L('(XXX) XXX-XXXX · 24/7'), L('hello@truckerhq.com'), L('Resources'), L('About us')] },
+      { h: 'CONTACT', links: [L('(XXX) XXX-XXXX · 24/7'), L('hello@truckerhq.com', 'About.dc.html#contact'), L('Guides', 'Resources.dc.html'), L('About us', 'About.dc.html')] },
     ] };
   }
 }

@@ -247,9 +247,12 @@ export default async function CarrierProfilePage({
               brokers you are real. Free.
             </span>
           </div>
-          <button className="flex h-[52px] items-center rounded-xl bg-asphalt px-6 font-display text-xl font-extrabold uppercase tracking-[.05em] text-offwhite hover:bg-green">
+          <Link
+            href="/claim"
+            className="flex h-[52px] items-center rounded-xl bg-asphalt px-6 font-display text-xl font-extrabold uppercase tracking-[.05em] text-offwhite hover:bg-green"
+          >
             Claim profile
-          </button>
+          </Link>
         </div>
       </section>
 

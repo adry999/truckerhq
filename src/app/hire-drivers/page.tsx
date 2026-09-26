@@ -8,9 +8,9 @@ import JsonLd from "@/components/JsonLd";
 import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Hire CDL Drivers — Post a Job",
+  title: "Hire CDL Drivers, Pre-Screened",
   description:
-    "Post a driver job and get checked CDL drivers calling you. CDL, MVR, PSP and Clearinghouse screened. English and Russian-speaking drivers, solo and team.",
+    "Post a driver job. We check CDL, MVR and experience before a driver reaches you. Solo and team drivers.",
 };
 
 const STATS = [

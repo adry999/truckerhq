@@ -4,15 +4,15 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 
 export const metadata: Metadata = {
-  title: "Free Carrier Tools",
+  title: "Free Trucking Tools, No Sign-Up",
   description:
-    "Check a broker before you haul, see what a load really pays, and keep your authority out of trouble. Carrier Lookup, Profit per Mile, Compliance Alerts and the New MC Checklist. Built on public FMCSA data.",
+    "Carrier lookup, profit per mile calculator, compliance alerts and a new MC checklist. Built on FMCSA data.",
 };
 
 const TOOLS = [
   {
     name: "Profit per mile",
-    href: "/tools/profit-calculator",
+    href: "/tools/profit-per-mile",
     cta: "Run the numbers",
     desc: "Fuel, insurance, truck payment. See your real cost per mile and the lowest rate worth taking.",
   },
