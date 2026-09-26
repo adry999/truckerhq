@@ -2,6 +2,8 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import JsonLd from "@/components/JsonLd";
+import { guidesListSchema } from "@/lib/seo";
 import { GUIDES, findGuide, type GuideCategory } from "@/lib/guides";
 
 export const metadata: Metadata = {
@@ -36,6 +38,7 @@ export default async function GuidesPage({
 
   return (
     <div className="flex min-h-screen flex-col">
+      <JsonLd data={guidesListSchema(GUIDES, "https://truckerhq.com")} />
       <SiteHeader />
 
       <section className="bg-asphalt text-offwhite">

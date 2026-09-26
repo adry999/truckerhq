@@ -2,12 +2,21 @@ import type { Metadata } from "next";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import AboutContactForm from "@/components/AboutContactForm";
+import JsonLd from "@/components/JsonLd";
+import { contactPageSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "About Trucker HQ: Dispatch Team, Contact",
   description:
     "Who we are, who answers the phone, and how to reach us 24/7. English and Russian.",
 };
+
+const CONTACT_SCHEMA = contactPageSchema({
+  name: "About Trucker HQ",
+  url: "https://truckerhq.com/about",
+  telephone: "+1-XXX-XXX-XXXX",
+  email: "hello@truckerhq.com",
+});
 
 const FACTS = [
   { k: "Founded", v: "20XX" },
@@ -65,6 +74,7 @@ const CONTACTS = [
 export default function AboutPage() {
   return (
     <div className="flex min-h-screen flex-col">
+      <JsonLd data={CONTACT_SCHEMA} />
       <SiteHeader />
 
       <section className="bg-asphalt text-offwhite">
