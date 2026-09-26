@@ -17,6 +17,7 @@ const COLUMNS: { h: string; links: { t: string; href?: string }[] }[] = [
       { t: "Carrier Lookup", href: "/tools/carrier-lookup" },
       { t: "Profit per Mile", href: "/tools/profit-calculator" },
       { t: "Compliance Alerts", href: "/tools/compliance-alerts" },
+      { t: "New MC Checklist", href: "/tools/new-mc-checklist" },
       { t: "Texas carriers", href: "/carriers/texas" },
     ],
   },

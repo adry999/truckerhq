@@ -4,6 +4,8 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import Logo from "@/components/Logo";
 import HireDriversForm from "@/components/HireDriversForm";
+import JsonLd from "@/components/JsonLd";
+import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Hire CDL Drivers — Post a Job",
@@ -58,6 +60,7 @@ const FAQ = [
 export default function HireDriversPage() {
   return (
     <div className="flex min-h-screen flex-col">
+      <JsonLd data={faqSchema(FAQ)} />
       <SiteHeader />
 
       <section className="relative overflow-hidden bg-asphalt text-offwhite">

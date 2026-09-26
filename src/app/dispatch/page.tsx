@@ -5,6 +5,8 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import Logo from "@/components/Logo";
 import GrossComparison from "@/components/GrossComparison";
+import JsonLd from "@/components/JsonLd";
+import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Flat-Rate Truck Dispatch — No Percentage",
@@ -81,6 +83,7 @@ const FAQ = [
 export default function DispatchPage() {
   return (
     <div className="flex min-h-screen flex-col">
+      <JsonLd data={faqSchema(FAQ)} />
       <SiteHeader />
 
       <section className="relative overflow-hidden bg-asphalt text-offwhite">

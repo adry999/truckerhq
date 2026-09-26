@@ -4,6 +4,8 @@ import type { Metadata } from "next";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import ApplyForm from "@/components/ApplyForm";
+import JsonLd from "@/components/JsonLd";
+import { jobPostingSchema } from "@/lib/seo";
 import { JOBS, findJob, findCarrier, healthColor } from "@/lib/data";
 
 export function generateStaticParams() {
@@ -81,6 +83,7 @@ export default async function JobDetailPage({
 
   return (
     <div className="flex min-h-screen flex-col">
+      <JsonLd data={jobPostingSchema(job)} />
       <SiteHeader />
 
       <section className="bg-asphalt text-offwhite">
