@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { JOBS } from "@/lib/data";
 import { GUIDES } from "@/lib/guides";
 import { STATE_DIRECTORY } from "@/lib/states";
+import { CITY_DIRECTORY } from "@/lib/cities";
 
 const BASE_URL = "https://truckerhq.com";
 
@@ -15,7 +16,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     { url: `${BASE_URL}/dispatch`, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE_URL}/jobs`, changeFrequency: "daily", priority: 0.9 },
-    { url: `${BASE_URL}/jobs/chicago-il`, changeFrequency: "daily", priority: 0.7 },
     { url: `${BASE_URL}/hire-drivers`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE_URL}/tools`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE_URL}/tools/carrier-lookup`, changeFrequency: "weekly", priority: 0.8 },
@@ -47,5 +47,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticRoutes, ...jobRoutes, ...guideRoutes, ...stateRoutes];
+  const cityRoutes: MetadataRoute.Sitemap = CITY_DIRECTORY.map((c) => ({
+    url: `${BASE_URL}/jobs/${c.slug}`,
+    changeFrequency: "daily",
+    priority: 0.7,
+  }));
+
+  return [...staticRoutes, ...jobRoutes, ...guideRoutes, ...stateRoutes, ...cityRoutes];
 }

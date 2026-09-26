@@ -4,6 +4,7 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import Logo from "@/components/Logo";
 import { JOBS, healthColor, CARRIERS } from "@/lib/data";
+import { CITY_DIRECTORY } from "@/lib/cities";
 
 export const metadata: Metadata = {
   title: "CDL Jobs with Pay Posted Up Front",
@@ -203,6 +204,24 @@ export default async function JobsPage({
             No jobs match these filters. Try fewer filters.
           </div>
         )}
+
+        <div className="mt-4 flex flex-col gap-3.5">
+          <h3 className="font-display text-2xl font-extrabold uppercase">
+            Browse jobs by city
+          </h3>
+          <div className="flex flex-wrap gap-2">
+            {CITY_DIRECTORY.map((c) => (
+              <Link
+                key={c.slug}
+                href={`/jobs/${c.slug}`}
+                className="flex h-11 items-center gap-2 rounded-[10px] border-[1.5px] border-border bg-white px-3.5 text-[15px] font-semibold hover:border-green"
+              >
+                {c.name}
+                <span className="text-[13px] font-medium text-grey">{c.count}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
 
         <div className="mt-4 rounded-lg bg-green">
           <div className="flex flex-wrap items-center justify-between gap-[18px] p-6 text-offwhite">
