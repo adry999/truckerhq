@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Roboto+Condensed:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><style>body{margin:0;background:#F7F7F5;font-family:Inter,sans-serif;color:#16181B;-webkit-font-smoothing:antialiased}a{color:#0E5C3A}a:hover{color:#16181B}*{box-sizing:border-box}input::placeholder,textarea::placeholder{color:#6B7280}</style></helmet>
+<div style="min-height:100vh;display:flex;flex-direction:column;">
+<header style="background:#16181B;color:#F7F7F5;">
+<div style="max-width:1200px;margin:0 auto;padding:0 clamp(12px,4vw,32px);min-height:64px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+<a href="Homepage.dc.html" style="display:flex;"><dc-import name="Logo" direction="sign" theme="dark" size="{{ 22 }}" hint-size="140px,26px"></dc-import></a>
+<span style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:16px;letter-spacing:.08em;color:#F2A900;">CARRIER PANEL</span>
+<div style="margin-left:auto;display:flex;align-items:center;gap:10px;"><span style="width:34px;height:34px;border-radius:50%;background:conic-gradient(#0E5C3A 86%,#3A3D42 0);display:flex;align-items:center;justify-content:center;"><span style="width:26px;height:26px;border-radius:50%;background:#16181B;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;">86</span></span><span style="font-size:14px;font-weight:600;">Carpathian Freight LLC</span></div>
+</div>
+<nav style="max-width:1200px;margin:0 auto;padding:0 clamp(12px,4vw,32px);display:flex;gap:4px;overflow-x:auto;">
+<sc-for list="{{ tabs }}" as="t" hint-placeholder-count="4"><button onClick="{{ t.pick }}" style="min-height:48px;padding:0 14px;border:0;border-bottom:4px solid {{ t.line }};background:transparent;color:{{ t.fg }};font-family:Inter;font-size:15px;font-weight:600;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:8px;">{{ t.name }}<sc-if value="{{ t.hasBadge }}"><span style="min-width:22px;height:22px;padding:0 6px;border-radius:11px;background:#F2A900;color:#16181B;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;">{{ t.badge }}</span></sc-if></button></sc-for>
+</nav>
+</header>
+
+<main style="max-width:1200px;width:100%;margin:0 auto;padding:28px clamp(12px,4vw,32px) 80px;display:flex;flex-direction:column;gap:20px;">
+
+<sc-if value="{{ tJobs }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;"><h1 style="margin:0;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:clamp(30px,5vw,40px);text-transform:uppercase;">Your jobs</h1><button onClick="{{ goPost }}" style="height:48px;padding:0 20px;border:0;border-radius:10px;background:#F2A900;color:#16181B;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:18px;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;" style-hover="background:#FFBC1F;">+ Post a job</button></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;">
+<sc-for list="{{ stats }}" as="s" hint-placeholder-count="4"><div style="background:#FFFFFF;border:1px solid #DEDFDB;border-radius:8px;padding:14px 16px;display:flex;flex-direction:column;gap:2px;"><span style="font-size:13px;color:#6B7280;">{{ s.k }}</span><span style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:30px;font-variant-numeric:tabular-nums;">{{ s.v }}</span></div></sc-for>
+</div>
+<div style="background:#FFFFFF;border:1px solid #DEDFDB;border-radius:8px;overflow:hidden;">
+<sc-for list="{{ jobs }}" as="j" hint-placeholder-count="4">
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px 20px;padding:16px 18px;border-top:{{ j.bt }};">
+<div style="flex:1 1 260px;display:flex;flex-direction:column;gap:3px;min-width:0;"><span style="font-weight:700;font-size:16px;">{{ j.title }}</span><span style="font-size:13px;color:#6B7280;">{{ j.loc }} · {{ j.pay }} · posted {{ j.posted }}</span></div>
+<span style="height:26px;display:inline-flex;align-items:center;padding:0 10px;border-radius:5px;background:{{ j.sBg }};color:{{ j.sFg }};font-size:12px;font-weight:700;">{{ j.status }}</span>
+<button onClick="{{ j.openApps }}" style="min-height:40px;padding:0 12px;border-radius:6px;border:1.5px solid #DEDFDB;background:#FFFFFF;font-family:Inter;font-size:14px;font-weight:600;cursor:pointer;color:#16181B;"><b style="font-variant-numeric:tabular-nums;">{{ j.apps }}</b> applicants<sc-if value="{{ j.hasNew }}"> · <span style="color:#B07A00;">{{ j.newApps }} new</span></sc-if></button>
+<button onClick="{{ j.toggle }}" style="min-height:40px;padding:0 12px;border-radius:6px;border:0;background:transparent;font-family:Inter;font-size:14px;font-weight:600;cursor:pointer;color:#0E5C3A;text-decoration:underline;">{{ j.toggleLabel }}</button>
+</div>
+</sc-for>
+</div>
+<span style="font-size:13px;color:#6B7280;">Jobs close on their own after 30 days. Paused jobs stay hidden from search until you resume them.</span>
+</sc-if>
+
+<sc-if value="{{ tApps }}">
+<h1 style="margin:0;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:clamp(30px,5vw,40px);text-transform:uppercase;">Applicants</h1>
+<div style="display:flex;flex-wrap:wrap;gap:8px;"><sc-for list="{{ appFilters }}" as="f"><button onClick="{{ f.pick }}" style="min-height:40px;padding:0 14px;border-radius:6px;border:1.5px solid {{ f.bd }};background:{{ f.bg }};color:{{ f.fg }};font-family:Inter;font-size:14px;font-weight:600;cursor:pointer;">{{ f.name }}</button></sc-for></div>
+<div style="display:flex;flex-direction:column;gap:10px;">
+<sc-for list="{{ apps }}" as="a" hint-placeholder-count="4">
+<div style="background:#FFFFFF;border:1px solid {{ a.bd }};border-radius:8px;padding:16px 18px;display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;">
+<div style="flex:1 1 240px;display:flex;flex-direction:column;gap:3px;min-width:0;"><span style="font-weight:700;font-size:16px;">{{ a.name }}<sc-if value="{{ a.isNew }}"> <span style="font-size:11px;font-weight:700;background:#FFF1CC;color:#7A5200;padding:2px 6px;border-radius:4px;vertical-align:middle;">NEW</span></sc-if></span><span style="font-size:13px;color:#6B7280;">{{ a.job }} · applied {{ a.when }}</span></div>
+<span style="flex:0 1 220px;font-size:14px;color:#3F444B;">{{ a.exp }}</span>
+<span style="font-size:13px;font-weight:600;color:#4B5058;">{{ a.lang }}</span>
+<div style="display:flex;gap:8px;flex-wrap:wrap;">
+<a href="tel:" style="min-height:40px;display:flex;align-items:center;padding:0 14px;border-radius:6px;background:#0E5C3A;color:#F7F7F5;text-decoration:none;font-size:14px;font-weight:600;" style-hover="background:#0B4F31;color:#F7F7F5;">Call</a>
+<select onChange="{{ a.setStatus }}" value="{{ a.status }}" aria-label="Status" style="min-height:40px;padding:0 10px;border-radius:6px;border:1.5px solid #DEDFDB;background:#FFFFFF;font-family:Inter;font-size:14px;color:#16181B;"><option>New</option><option>Called</option><option>Hired</option><option>Not a fit</option></select>
+</div>
+</div>
+</sc-for>
+<sc-if value="{{ noApps }}"><div style="background:#FFFFFF;border:1px solid #DEDFDB;border-radius:8px;padding:28px;text-align:center;color:#4B5058;">No applicants with this status.</div></sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ tPost }}">
+<h1 style="margin:0;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:clamp(30px,5vw,40px);text-transform:uppercase;">Post a job</h1>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:20px;align-items:start;">
+<div style="background:#FFFFFF;border:1px solid #DEDFDB;border-radius:8px;padding:clamp(18px,3vw,26px);display:flex;flex-direction:column;gap:16px;">
+<label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:14px;font-weight:600;">Job title</span><input value="{{ f.title }}" onChange="{{ setTitle }}" placeholder="OTR Company Driver" style="height:50px;border:1.5px solid #9CA0A8;border-radius:8px;padding:0 14px;font-family:Inter;font-size:16px;outline:none;" style-focus="border-color:#0E5C3A;"></label>
+<label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:14px;font-weight:600;">Base city</span><input value="{{ f.city }}" onChange="{{ setCity }}" placeholder="Des Plaines, IL" style="height:50px;border:1.5px solid #9CA0A8;border-radius:8px;padding:0 14px;font-family:Inter;font-size:16px;outline:none;" style-focus="border-color:#0E5C3A;"></label>
+<div style="display:flex;flex-direction:column;gap:8px;"><span style="font-size:14px;font-weight:600;">Type</span><div style="display:flex;flex-wrap:wrap;gap:8px;"><sc-for list="{{ typeOpts }}" as="o"><button onClick="{{ o.pick }}" style="min-height:42px;padding:0 14px;border-radius:6px;border:1.5px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.fg }};font-family:Inter;font-size:14px;font-weight:600;cursor:pointer;">{{ o.name }}</button></sc-for></div></div>
+<div style="display:flex;flex-direction:column;gap:8px;"><span style="font-size:14px;font-weight:600;">Equipment</span><div style="display:flex;flex-wrap:wrap;gap:8px;"><sc-for list="{{ eqOpts }}" as="o"><button onClick="{{ o.pick }}" style="min-height:42px;padding:0 14px;border-radius:6px;border:1.5px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.fg }};font-family:Inter;font-size:14px;font-weight:600;cursor:pointer;">{{ o.name }}</button></sc-for></div></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+<label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:14px;font-weight:600;">Pay</span><input value="{{ f.pay }}" onChange="{{ setPay }}" placeholder="$0.70/mi" style="height:50px;border:1.5px solid #9CA0A8;border-radius:8px;padding:0 14px;font-family:Inter;font-size:16px;outline:none;min-width:0;" style-focus="border-color:#0E5C3A;"></label>
+<label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:14px;font-weight:600;">Home time</span><input value="{{ f.home }}" onChange="{{ setHome }}" placeholder="Every 2 weeks" style="height:50px;border:1.5px solid #9CA0A8;border-radius:8px;padding:0 14px;font-family:Inter;font-size:16px;outline:none;min-width:0;" style-focus="border-color:#0E5C3A;"></label>
+</div>
+<label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:14px;font-weight:600;">Requirements <span style="font-weight:400;color:#6B7280;">Optional</span></span><textarea rows="3" placeholder="CDL-A, 1 year experience, clean MVR" style="border:1.5px solid #9CA0A8;border-radius:8px;padding:12px 14px;font-family:Inter;font-size:15px;outline:none;resize:vertical;" style-focus="border-color:#0E5C3A;"></textarea></label>
+<span style="font-size:13px;color:#6B7280;">Pay and home time are required. Jobs without them get far fewer applicants.</span>
+<button onClick="{{ publish }}" style="height:54px;border:0;border-radius:10px;background:{{ pubBg }};color:#16181B;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:20px;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;">{{ pubLabel }}</button>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px;position:sticky;top:20px;">
+<span style="font-size:12px;font-weight:700;letter-spacing:.08em;color:#6B7280;">HOW DRIVERS WILL SEE IT</span>
+<div style="background:#FFFFFF;border:1.5px solid #DEDFDB;border-radius:8px;padding:18px 20px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;">
+<div style="flex:1 1 220px;display:flex;flex-direction:column;gap:4px;min-width:0;"><span style="font-weight:700;font-size:17px;">{{ pv.title }}</span><span style="font-size:14px;color:#6B7280;">Carpathian Freight · {{ pv.city }} · {{ pv.home }}</span></div>
+<div style="display:flex;gap:8px;"><span style="height:28px;display:inline-flex;align-items:center;padding:0 10px;border-radius:5px;background:#E2F0E8;color:#0E5C3A;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:15px;letter-spacing:.06em;">{{ pv.type }}</span><span style="height:28px;display:inline-flex;align-items:center;padding:0 10px;border-radius:5px;background:#EEEFEC;color:#3F444B;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:.06em;">{{ pv.eq }}</span></div>
+<span style="font-weight:700;font-size:17px;font-variant-numeric:tabular-nums;">{{ pv.pay }}</span>
+</div>
+<span style="font-size:13px;line-height:1.5;color:#4B5058;">Your Health Score (86) and "Verified owner" badge show on the job page.</span>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ tProfile }}">
+<h1 style="margin:0;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:clamp(30px,5vw,40px);text-transform:uppercase;">Company profile</h1>
+<div style="background:#FFFFFF;border:1px solid #DEDFDB;border-radius:8px;padding:22px;display:flex;flex-direction:column;gap:10px;max-width:640px;">
+<sc-for list="{{ profile }}" as="r"><div style="display:flex;justify-content:space-between;gap:16px;font-size:15px;border-bottom:1px solid #ECEDEA;padding-bottom:10px;"><span style="color:#6B7280;">{{ r.k }}</span><span style="font-weight:600;text-align:right;">{{ r.v }}</span></div></sc-for>
+<div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:6px;"><a href="Claim Profile.dc.html" style="min-height:44px;display:flex;align-items:center;padding:0 16px;border-radius:8px;border:2px solid #16181B;color:#16181B;text-decoration:none;font-weight:600;font-size:15px;">Edit details</a><a href="Compliance Alerts.dc.html" style="min-height:44px;display:flex;align-items:center;padding:0 6px;font-weight:600;font-size:15px;">Compliance Alerts →</a></div>
+<span style="font-size:13px;color:#6B7280;">Authority, insurance and inspections come from FMCSA and update on their own.</span>
+</div>
+</sc-if>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { tab: 'jobs', appF: 'All', paused: {}, status: { 0: 'New', 1: 'New', 2: 'Called', 3: 'Hired', 4: 'Not a fit' }, f: { title: '', city: '', pay: '', home: '', type: 'OTR', eq: 'Dry van' }, published: false };
+  renderVals() {
+    const s = this.state;
+    const chip = on => ({ bd: on ? '#0E5C3A' : '#DEDFDB', bg: on ? '#0E5C3A' : '#FFFFFF', fg: on ? '#F7F7F5' : '#16181B' });
+    const J = [['OTR Company Driver', 'Des Plaines, IL', '$0.68–0.72/mi', '3 days ago', 14, 2], ['Regional Reefer, home weekly', 'Joliet, IL', '$1,750/wk', '1 week ago', 9, 0], ['Local Intermodal', 'Chicago, IL', '$1,500/wk', '2 weeks ago', 6, 0], ['Team Drivers', 'Elk Grove Village, IL', '$0.90/mi split', '32 days ago', 11, 0]];
+    const A = [['Viktor P.', 'OTR Company Driver', '2 h ago', '6 yrs · CDL-A · Hazmat', 'RU'], ['James T.', 'OTR Company Driver', '5 h ago', '3 yrs · CDL-A', 'EN'], ['Andrei M.', 'Regional Reefer', '2 days ago', '9 yrs · CDL-A · Tanker', 'RU · EN'], ['Carlos R.', 'Local Intermodal', '4 days ago', '4 yrs · CDL-A · TWIC', 'EN'], ['Dmitri K.', 'Team Drivers', '1 week ago', '1 yr · CDL-A', 'RU']];
+    const newCount = Object.values(s.status).filter(v => v === 'New').length;
+    const setF = k => e => this.setState({ f: { ...s.f, [k]: e.target.value }, published: false });
+    const apps = A.map((a, i) => ({ i, name: a[0], job: a[1], when: a[2], exp: a[3], lang: a[4], status: s.status[i] })).filter(a => s.appF === 'All' || a.status === s.appF);
+    return {
+      tJobs: s.tab === 'jobs', tApps: s.tab === 'apps', tPost: s.tab === 'post', tProfile: s.tab === 'profile',
+      tabs: [['jobs', 'Jobs', 0], ['apps', 'Applicants', newCount], ['post', 'Post a job', 0], ['profile', 'Profile', 0]].map(([k, name, b]) => ({ name, hasBadge: b > 0, badge: b, line: s.tab === k ? '#F2A900' : 'transparent', fg: s.tab === k ? '#F7F7F5' : '#AEB2B8', pick: () => this.setState({ tab: k }) })),
+      goPost: () => this.setState({ tab: 'post' }),
+      stats: [{ k: 'Active jobs', v: J.filter((j, i) => i < 3 && !s.paused[i]).length }, { k: 'Applicants, 30 days', v: 40 }, { k: 'New, not called', v: newCount }, { k: 'Hired', v: 3 }],
+      jobs: J.map(([title, loc, pay, posted, n, nn], i) => { const closed = i === 3, paused = !!s.paused[i]; const st = closed ? ['Closed', '#EEEFEC', '#4B5058'] : paused ? ['Paused', '#FFF1CC', '#7A5200'] : ['Live', '#E2F0E8', '#0E5C3A']; return { title, loc, pay, posted, apps: n, newApps: nn, hasNew: nn > 0, status: st[0], sBg: st[1], sFg: st[2], bt: i ? '1px solid #ECEDEA' : '0', toggleLabel: closed ? 'Repost' : paused ? 'Resume' : 'Pause', toggle: () => this.setState(p => ({ paused: { ...p.paused, [i]: !p.paused[i] } })), openApps: () => this.setState({ tab: 'apps', appF: 'All' }) }; }),
+      appFilters: ['All', 'New', 'Called', 'Hired', 'Not a fit'].map(n => ({ name: n, ...chip(s.appF === n), pick: () => this.setState({ appF: n }) })),
+      apps: apps.map(a => ({ ...a, isNew: a.status === 'New', bd: a.status === 'New' ? '#F2A900' : '#DEDFDB', setStatus: e => this.setState(p => ({ status: { ...p.status, [a.i]: e.target.value } })) })),
+      noApps: apps.length === 0,
+      f: s.f, setTitle: setF('title'), setCity: setF('city'), setPay: setF('pay'), setHome: setF('home'),
+      typeOpts: ['OTR', 'Regional', 'Local', 'Owner-op'].map(n => ({ name: n, ...chip(s.f.type === n), pick: () => this.setState({ f: { ...s.f, type: n } }) })),
+      eqOpts: ['Dry van', 'Reefer', 'Flatbed', 'Tanker', 'Container'].map(n => ({ name: n, ...chip(s.f.eq === n), pick: () => this.setState({ f: { ...s.f, eq: n } }) })),
+      pv: { title: s.f.title || 'OTR Company Driver', city: s.f.city || 'Des Plaines, IL', pay: s.f.pay || '$0.70/mi', home: s.f.home || 'Every 2 weeks', type: s.f.type.toUpperCase(), eq: s.f.eq.toUpperCase() },
+      publish: () => this.setState({ published: true }),
+      pubLabel: s.published ? 'Published ✓' : 'Publish job', pubBg: s.published ? '#A8D8BE' : '#F2A900',
+      profile: [['Company', 'Carpathian Freight LLC'], ['DOT / MC', '3412897 · 1182044'], ['Dispatch phone', '(XXX) XXX-XXXX'], ['Equipment', 'Dry van, Reefer'], ['Lanes', 'Midwest, Northeast'], ['Notes', 'Speaks Russian · Hiring drivers'], ['Status', 'Verified owner']].map(([k, v]) => ({ k, v })),
+    };
+  }
+}
+</script>
+</body>
+</html>

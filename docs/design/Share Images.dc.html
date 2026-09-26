@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><meta name="design_doc_mode" content="canvas"><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Roboto+Condensed:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><style>body{margin:0;background:#E9EAE6;font-family:Inter,sans-serif;color:#16181B;-webkit-font-smoothing:antialiased}a{color:#0E5C3A}a:hover{color:#16181B}*{box-sizing:border-box}</style></helmet>
+<section style="padding:48px;display:flex;flex-direction:column;gap:28px;">
+<div style="display:flex;flex-direction:column;gap:6px;max-width:860px;">
+<div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;"><span style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:34px;text-transform:uppercase;">Imagini pentru share · 1200 × 630</span><a href="Project Hub.dc.html" style="font-size:14px;font-weight:600;">← Project Hub</a></div>
+<div style="font-size:15px;line-height:1.5;color:#3F444B;">Imaginea care apare când cineva trimite un link pe Facebook, WhatsApp, Telegram sau LinkedIn. Afișate la jumătate. Șabloanele cu {acolade} se generează automat în cod pentru fiecare job, ghid sau stat (Next.js <code>opengraph-image.tsx</code>). Textul important stă în mijloc: WhatsApp și unele aplicații taie marginile sau arată imaginea mică.</div>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start;">
+<sc-for list="{{ cards }}" as="c" hint-placeholder-count="6">
+<div id="{{ c.id }}" style="display:flex;flex-direction:column;gap:8px;">
+<div style="display:flex;justify-content:space-between;gap:12px;width:600px;"><span style="font-size:13px;font-weight:700;">{{ c.id }} · {{ c.label }}</span><span style="font-family:ui-monospace,monospace;font-size:12px;color:#4B5058;">{{ c.route }}</span></div>
+<div data-om-raster="" style="width:600px;height:315px;background:{{ c.bg }};color:{{ c.fg }};position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:30px 36px 32px;">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;"><dc-import name="Logo" direction="sign" theme="{{ c.logoTheme }}" sub="{{ c.sub }}" size="{{ 22 }}" hint-size="150px,26px"></dc-import><span style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:15px;letter-spacing:.08em;color:{{ c.accent }};">{{ c.kicker }}</span></div>
+<div style="display:flex;flex-direction:column;gap:10px;max-width:470px;">
+<span style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:{{ c.hs }};line-height:.92;text-transform:uppercase;text-wrap:balance;">{{ c.h }}</span>
+<span style="font-size:16px;line-height:1.4;font-weight:500;color:{{ c.subFg }};">{{ c.p }}</span>
+</div>
+<div style="display:flex;align-items:center;gap:14px;font-size:14px;font-weight:600;color:{{ c.subFg }};"><span style="color:{{ c.accent }};">{{ c.big }}</span><span>truckerhq.com</span></div>
+<div style="position:absolute;left:0;right:0;bottom:0;height:6px;background:repeating-linear-gradient(90deg,#F2A900 0 40px,transparent 40px 66px);"></div>
+<sc-if value="{{ c.shield }}"><div style="position:absolute;right:36px;top:92px;opacity:{{ c.shieldOp }};"><dc-import name="Logo" direction="sign" mark="{{ true }}" size="{{ 120 }}" hint-size="112px,120px"></dc-import></div></sc-if>
+</div>
+<span style="font-size:13px;color:#4B5058;width:600px;">{{ c.note }}</span>
+</div>
+</sc-for>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px;max-width:640px;">
+<span style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:22px;text-transform:uppercase;">Cum arată în chat</span>
+<div style="background:#DCF8C6;border-radius:10px;padding:6px;max-width:360px;display:flex;flex-direction:column;gap:6px;">
+<div style="background:#F0F0F0;border-radius:8px;overflow:hidden;display:flex;flex-direction:column;">
+<div data-om-raster="" style="height:188px;background:#0E5C3A;color:#F7F7F5;padding:18px 20px;display:flex;flex-direction:column;justify-content:space-between;position:relative;"><dc-import name="Logo" direction="sign" theme="dark" size="{{ 14 }}" hint-size="90px,18px"></dc-import><span style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:34px;line-height:.92;text-transform:uppercase;">One flat price.<br>No percentage.</span><span style="font-size:11px;font-weight:600;">truckerhq.com</span></div>
+<div style="padding:8px 10px;display:flex;flex-direction:column;gap:2px;font-size:13px;"><b>Truck Dispatch Service, Flat Weekly Rate | Trucker HQ</b><span style="color:#4B5058;">Dispatch for owner-operators and small fleets. One flat price per truck per week…</span><span style="color:#6B7280;font-size:12px;">truckerhq.com</span></div>
+</div>
+<span style="font-size:14px;padding:0 6px 4px;">truckerhq.com/dispatch</span>
+</div>
+</div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    const dark = { bg: '#16181B', fg: '#F7F7F5', subFg: '#D4D6DA', accent: '#F2A900', logoTheme: 'dark' };
+    const green = { bg: '#0E5C3A', fg: '#F7F7F5', subFg: '#E3EAE6', accent: '#F2A900', logoTheme: 'dark' };
+    const light = { bg: '#F7F7F5', fg: '#16181B', subFg: '#3F444B', accent: '#0E5C3A', logoTheme: 'light' };
+    return {
+      cards: [
+        { id: 'OG1', label: 'Implicit / Homepage', route: '/  ·  /about  ·  restul', ...dark, sub: '', kicker: 'DISPATCH · JOBS · TOOLS', h: 'Your HQ on the road', hs: '60px', p: 'Flat-rate dispatch, CDL jobs and free carrier tools. English & Russian, 24/7.', big: '(XXX) XXX-XXXX', shield: true, shieldOp: 1, note: 'Folosită pentru orice pagină care nu are imaginea ei.' },
+        { id: 'OG2', label: 'Dispatch', route: '/dispatch', ...green, sub: '', kicker: 'TRUCK DISPATCH · 24/7', h: 'One flat price. No percentage.', hs: '58px', p: '$XXX per truck per week. Dispatchers on every US time zone.', big: '$XXX / week', shield: false, note: 'Cea mai trimisă pagină. Prețul real apare automat când e pus pe site.' },
+        { id: 'OG3', label: 'Pagina unui job', route: '/jobs/{slug}', ...light, sub: 'JOBS', kicker: '{TYPE} · {EQUIPMENT}', h: '{Job title}', hs: '56px', p: '{Company} · {City}, {ST} · {Home time}', big: '{Pay}', shield: false, note: 'Generată pentru fiecare job. Titlurile lungi trec pe 2 rânduri; peste 50 de caractere se taie cu „…”.' },
+        { id: 'OG4', label: 'Joburi pe oraș', route: '/jobs/{city-st}', ...dark, sub: 'JOBS', kicker: '{COUNT} OPEN JOBS', h: 'CDL jobs in {City}, {ST}', hs: '54px', p: 'Pay and home time on every listing. Apply in English or Russian.', big: 'Updated daily', shield: false, note: '' },
+        { id: 'OG5', label: 'Ghid', route: '/guides/{slug}', ...light, sub: '', kicker: 'GUIDE · {MIN} MIN READ', h: '{Guide title}', hs: '50px', p: 'By {Author}, Trucker HQ dispatch', big: 'Free guide', shield: true, shieldOp: .9, note: '' },
+        { id: 'OG6', label: 'Unelte', route: '/tools/*', ...green, sub: '', kicker: 'FREE · NO SIGN-UP', h: '{Tool name}', hs: '60px', p: '{One-line tool description from the SEO plan}', big: 'Built on FMCSA data', shield: false, note: 'Același șablon pentru Carrier Lookup, Profit per Mile, Compliance Alerts, New MC Checklist și statele.' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

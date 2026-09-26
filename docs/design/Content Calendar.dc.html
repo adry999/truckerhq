@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Roboto+Condensed:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><style>body{margin:0;background:#F7F7F5;font-family:Inter,sans-serif;color:#16181B;-webkit-font-smoothing:antialiased}a{color:#0E5C3A}a:hover{color:#16181B}*{box-sizing:border-box}</style></helmet>
+<div style="max-width:1200px;margin:0 auto;padding:clamp(24px,5vw,56px) clamp(16px,4vw,32px) 96px;display:flex;flex-direction:column;gap:24px;">
+
+<header style="display:flex;flex-direction:column;gap:10px;">
+<div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;"><dc-import name="Logo" direction="sign" size="{{ 28 }}" hint-size="180px,34px"></dc-import><a href="Project Hub.dc.html" style="font-size:14px;font-weight:600;">← Project Hub</a></div>
+<h1 style="margin:6px 0 0;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:clamp(34px,6vw,54px);line-height:.95;text-transform:uppercase;">Calendar de conținut · 4 săptămâni</h1>
+<p style="margin:0;font-size:16px;line-height:1.55;color:#3F444B;max-width:780px;text-wrap:pretty;">20 de postări pentru owner-operatori, 5 pe săptămână, în engleză. Fiecare are textul de pe imagine, descrierea gata de copiat și, unde e cazul, scenele pentru un video scurt din text și poze. Aceeași postare merge pe Facebook, Instagram, TikTok și Telegram.</p>
+</header>
+
+<section style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;">
+<sc-for list="{{ rhythm }}" as="r" hint-placeholder-count="5">
+<div style="background:#FFFFFF;border:1px solid #DEDFDB;border-radius:8px;padding:12px 16px;display:flex;flex-direction:column;gap:2px;"><span style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:20px;text-transform:uppercase;">{{ r.day }}</span><span style="font-size:14px;color:#3F444B;">{{ r.what }}</span></div>
+</sc-for>
+</section>
+
+<section style="background:#FFFFFF;border:1px solid #DEDFDB;border-radius:8px;padding:18px 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:14px 28px;">
+<sc-for list="{{ notes }}" as="n" hint-placeholder-count="4"><div style="display:flex;flex-direction:column;gap:4px;"><span style="font-weight:700;font-size:15px;">{{ n.h }}</span><span style="font-size:14px;line-height:1.5;color:#3F444B;">{{ n.p }}</span></div></sc-for>
+</section>
+
+<section style="position:sticky;top:0;z-index:5;background:#F7F7F5;padding:10px 0;display:flex;flex-direction:column;gap:8px;border-bottom:1px solid #DEDFDB;">
+<div style="display:flex;flex-wrap:wrap;gap:8px;"><sc-for list="{{ weekChips }}" as="c" hint-placeholder-count="5"><button onClick="{{ c.pick }}" style="min-height:40px;padding:0 14px;border-radius:6px;border:1.5px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }};font-family:Inter;font-size:14px;font-weight:600;cursor:pointer;">{{ c.name }}</button></sc-for></div>
+<div style="display:flex;flex-wrap:wrap;gap:8px;"><sc-for list="{{ typeChips }}" as="c" hint-placeholder-count="8"><button onClick="{{ c.pick }}" style="min-height:34px;padding:0 12px;border-radius:6px;border:1.5px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }};font-family:Inter;font-size:13px;font-weight:600;cursor:pointer;">{{ c.name }}</button></sc-for></div>
+</section>
+
+<sc-for list="{{ weeks }}" as="w" hint-placeholder-count="1">
+<section style="display:flex;flex-direction:column;gap:14px;">
+<div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 16px;"><h2 style="margin:0;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:32px;text-transform:uppercase;">{{ w.name }}</h2><span style="font-size:15px;color:#4B5058;">{{ w.dates }} · {{ w.theme }}</span></div>
+<sc-for list="{{ w.posts }}" as="p" hint-placeholder-count="3">
+<article style="background:#FFFFFF;border:1px solid #DEDFDB;border-radius:8px;padding:clamp(14px,2.5vw,22px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:20px;">
+<div style="display:flex;flex-direction:column;gap:10px;">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;"><span style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:18px;text-transform:uppercase;">{{ p.day }}</span><span style="font-size:13px;color:#6B7280;">{{ p.format }}</span></div>
+<div style="aspect-ratio:1/1;border-radius:6px;background:{{ p.tileBg }};color:{{ p.tileFg }};padding:clamp(18px,3vw,26px);display:flex;flex-direction:column;justify-content:space-between;gap:12px;overflow:hidden;">
+<span style="align-self:flex-start;background:{{ p.tagBg }};color:{{ p.tagFg }};font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:14px;letter-spacing:.08em;padding:3px 8px;border-radius:4px;">{{ p.tag }}</span>
+<div style="display:flex;flex-direction:column;gap:10px;">
+<span style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:clamp(28px,3.4vw,40px);line-height:.95;text-transform:uppercase;text-wrap:balance;">{{ p.head }}</span>
+<span style="font-size:15px;line-height:1.4;opacity:.9;">{{ p.sub }}</span>
+</div>
+<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;"><dc-import name="Logo" direction="sign" theme="dark" size="{{ 18 }}" hint-size="110px,22px"></dc-import><span style="font-size:12px;font-weight:600;opacity:.8;">truckerhq.com</span></div>
+</div>
+<span style="font-size:13px;line-height:1.45;color:#4B5058;"><b style="color:#16181B;">Imagine:</b> {{ p.visual }}</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;min-width:0;">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><span style="font-size:12px;font-weight:700;letter-spacing:.08em;color:#6B7280;">DESCRIERE</span><button onClick="{{ p.copy }}" style="min-height:36px;padding:0 12px;border-radius:6px;border:1.5px solid {{ p.copyBd }};background:{{ p.copyBg }};color:{{ p.copyFg }};font-family:Inter;font-size:13px;font-weight:600;cursor:pointer;">{{ p.copyLabel }}</button></div>
+<div style="font-size:15px;line-height:1.6;white-space:pre-line;">{{ p.caption }}</div>
+<div style="font-size:14px;color:#0E5C3A;font-weight:500;">{{ p.tags }}</div>
+<sc-if value="{{ p.hasVideo }}">
+<div style="background:#F7F7F5;border-radius:6px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;">
+<span style="font-size:12px;font-weight:700;letter-spacing:.08em;color:#6B7280;">VIDEO 9:16 · TIKTOK / REELS · {{ p.len }}</span>
+<sc-for list="{{ p.scenes }}" as="s"><div style="display:flex;gap:10px;font-size:14px;line-height:1.45;"><span style="flex:none;width:42px;font-weight:700;font-variant-numeric:tabular-nums;color:#4B5058;">{{ s.t }}</span><span>{{ s.d }}</span></div></sc-for>
+</div>
+</sc-if>
+<sc-if value="{{ p.hasNote }}"><span style="font-size:13px;line-height:1.45;color:#7A5200;background:#FFF1CC;border-radius:6px;padding:8px 12px;">{{ p.note }}</span></sc-if>
+</div>
+</article>
+</sc-for>
+</section>
+</sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const T = {
+  tip: ['SFAT', '#16181B', '#F7F7F5', '#F2A900', '#16181B'],
+  offer: ['OFERTĂ', '#0E5C3A', '#F7F7F5', '#F2A900', '#16181B'],
+  compare: ['COMPARAȚIE', '#0E5C3A', '#F7F7F5', '#F7F7F5', '#0E5C3A'],
+  jobs: ['JOBURI', '#16181B', '#F7F7F5', '#F7F7F5', '#16181B'],
+  review: ['RECENZIE', '#F2A900', '#16181B', '#16181B', '#F2A900'],
+  fmcsa: ['FMCSA', '#16181B', '#F7F7F5', '#E0463A', '#FFFFFF'],
+  meme: ['MEME', '#F7F7F5', '#16181B', '#16181B', '#F7F7F5'],
+};
+const TAGS = { tip: '#owneroperator #truckinglife #truckdispatch', offer: '#truckdispatch #owneroperator #flatrate', compare: '#truckdispatch #owneroperator #truckingbusiness', jobs: '#cdljobs #truckdriverjobs #cdla', review: '#owneroperator #truckdispatch', fmcsa: '#fmcsa #trucking #compliance', meme: '#truckermemes #truckinglife #owneroperator' };
+const V = (len, ...s) => ({ len, scenes: s.map(([t, d]) => ({ t, d })) });
+const W = [
+  { name: 'Săptămâna 1', dates: '5–9 oct', theme: 'Cine suntem și cât costă', posts: [
+    ['Luni', 'tip', 'Know your number before you call the broker', 'Cost per mile + profit you need = your walk-away rate.', 'Carusel, 4 slide-uri', 'Slide 1 titlul; 2–4 câte un pas din ghid, cu exemplul $1.78/mi.', "Most loads don't lose money on the rate. They lose it on the math you skipped.\n\n1. Add up a normal month: truck, insurance, fuel, maintenance, your pay.\n2. Divide by all miles, loaded and empty.\n3. Add the profit you need.\n\nThat's your walk-away number. Anything under it is a no.\n\nFull guide + free calculator: truckerhq.com/guides", null, null],
+    ['Marți', 'offer', 'One flat price. No percentage.', 'Dispatch for owner-operators. $XXX a week per truck.', 'Imagine pătrată + video', 'Fundal verde, prețul mare în amber.', "Good week or bad week, you pay the same.\n\nWhat's included:\n• A dispatcher on your time zone, 24/7\n• Rate negotiation on every load\n• Broker checked before you say yes\n• Rate cons, invoices, factoring paperwork\n\nWeek to week. No long contract.\n\nCall (XXX) XXX-XXXX or start at truckerhq.com/dispatch", V('15 s', ['0–3', 'Text mare: "Your dispatcher takes 10%?"'], ['3–7', '"On an $8,000 week that\'s $800."'], ['7–11', '"We charge $XXX. Every week. Same price."'], ['11–15', 'Logo + "truckerhq.com · (XXX) XXX-XXXX"'])],
+    ['Miercuri', 'jobs', 'CDL jobs with the pay posted up front', 'OTR, regional, local. Apply in English or Russian.', 'Imagine pătrată', 'Listă cu 3 joburi: titlu, oraș, plată.', "This week on Trucker HQ:\n\n• OTR Company Driver · Des Plaines, IL · $0.68–0.72/mi\n• Regional, home weekly · Jacksonville, FL · $1,800/wk\n• Local Flatbed · Charlotte, NC · $28/hr\n\nEvery job shows pay and home time. A real person calls you back.\n\nAll jobs: truckerhq.com/jobs", null, 'Joburile sunt exemple. Înlocuiți cu joburile reale din săptămâna respectivă.'],
+    ['Joi', 'fmcsa', 'UCR for 2027: register before Dec 31', 'Every interstate carrier, every year. Late = fines at roadside.', 'Imagine pătrată', 'Fundal închis, data în roșu.', "Reminder for every interstate carrier: UCR registration for 2027 is due by December 31.\n\nNo UCR on file can mean a fine at a roadside inspection, and some brokers check it.\n\nWant a text before deadlines like this? Free Compliance Alerts: truckerhq.com/tools/compliance-alerts", null, 'Verificați data și sumele pe site-ul oficial UCR înainte de postare.'],
+    ['Vineri', 'meme', 'Broker: "It\'s a quick load"', 'The load: 6 hours at the shipper.', 'Imagine pătrată', 'Text mare pe fundal alb, fără poză. Sau o poză stock cu un camion la rampă.', "Detention pay should be on the rate con. Every time.\n\nTag a driver who's been \"quick loaded\" this week.", null, null],
+  ] },
+  { name: 'Săptămâna 2', dates: '12–16 oct', theme: 'Brokeri și bani', posts: [
+    ['Luni', 'tip', 'Deadhead is not free miles', '$2,100 ÷ 800 mi = $2.63. Add 80 empty miles: $2.39.', 'Carusel, 3 slide-uri', 'Calculul pe 2 slide-uri, apoi linkul spre calculator.', "Brokers quote the rate on loaded miles. The 80 miles to the pickup are on you.\n\n$2,100 for 800 loaded miles looks like $2.63/mi.\nAdd 80 miles of deadhead: $2,100 ÷ 880 = $2.39/mi.\n\nAlways divide by total miles.\n\nFree Profit per Mile calculator: truckerhq.com/tools/profit-per-mile", V('20 s', ['0–4', '"This load pays $2.63 a mile. Or does it?"'], ['4–10', 'Harta: 80 mi goale până la pickup, apoi 800 mi încărcat.'], ['10–16', 'Calculul pe ecran: $2,100 ÷ 880 = $2.39.'], ['16–20', '"Run your numbers free · truckerhq.com"'])],
+    ['Marți', 'compare', '10% vs 8% vs flat', 'On an $8,000 week: $800 · $640 · $XXX', 'Imagine pătrată + video', 'Panoul de preț ca la motorină, ca pe site.', "Same $8,000 week, three dispatchers:\n\n10% dispatcher → $800\n8% dispatcher → $640\nTrucker HQ → $XXX, flat\n\nThe better your week, the bigger the difference.\n\ntruckerhq.com/dispatch", V('12 s', ['0–4', 'Rândul 1 apare: "10% → $800"'], ['4–8', 'Rândul 2: "8% → $640"'], ['8–12', 'Rândul 3 în amber: "Trucker HQ → $XXX". Logo.'])],
+    ['Miercuri', 'jobs', 'Hiring: team drivers, $0.90/mi split', 'OTR dry van, Phoenix, AZ.', 'Imagine pătrată', 'Un singur job mare, cu plata în amber.', "Team drivers wanted, coast to coast.\n\n• Dry van, out 3 weeks\n• $0.90/mi split\n• Based in Phoenix, AZ\n\nApply in 2 minutes, in English or Russian: truckerhq.com/jobs", null, 'Job de exemplu. Folosiți un job real.'],
+    ['Joi', 'review', '"Same price every week."', 'Ion R. · Owner-operator, 2 trucks · IL', 'Imagine pătrată', 'Citatul mare pe fundal amber, poza șoferului mică, rotundă.', "\"Same price every week. Last month I ran hard and kept all of it. With my old dispatcher that was $700 gone.\"\n\nIon R., owner-operator with 2 trucks in Illinois.\n\nWant the same? truckerhq.com/dispatch", null, 'Recenzie de exemplu. Postați doar recenzii reale, cu acordul șoferului.'],
+    ['Vineri', 'meme', 'Me checking the broker before I say yes', 'Authority age · bond · Health Score · 10 seconds.', 'Video scurt sau imagine', 'Screenshot din Carrier Lookup pe telefon.', "Ten seconds in Carrier Lookup beats ten days chasing a payment.\n\nCheck any broker by MC or DOT, free: truckerhq.com/tools/carrier-lookup", V('10 s', ['0–3', 'Text: "Broker offers $3/mi on a load nobody wants"'], ['3–7', 'Ecran telefon: căutare în Carrier Lookup, apare Health Score.'], ['7–10', '"Check first. Free. truckerhq.com"'])],
+  ] },
+  { name: 'Săptămâna 3', dates: '19–23 oct', theme: 'MC nou și acte', posts: [
+    ['Luni', 'tip', 'New MC? 5 things before your first load', 'Insurance on file · BOC-3 · UCR · Drug program · Broker packet', 'Carusel, 6 slide-uri', 'Câte un pas pe slide, din New MC Checklist.', "Just got your authority? Before the first load:\n\n1. Insurance filed with FMCSA\n2. BOC-3 process agent\n3. UCR registration\n4. Drug and alcohol program + Clearinghouse\n5. Broker setup packet: authority letter, W-9, COI\n\nAll 17 steps for your first 6 months, free: truckerhq.com/tools/new-mc-checklist", null, null],
+    ['Marți', 'offer', 'New MC? We work with you from day one.', 'Brokers that take new authorities. Setup packets done.', 'Imagine pătrată + video', 'Fundal verde, text mare.', "Most brokers won't touch an MC under 90 days. Some will, and we know them.\n\nWe help new authorities with:\n• Broker setup packets\n• Lanes that accept new carriers\n• Rate negotiation from load one\n\nFlat weekly price. Call (XXX) XXX-XXXX", V('15 s', ['0–4', '"MC is 30 days old. Nobody gives you loads?"'], ['4–10', '"We know which brokers work with new carriers."'], ['10–15', '"Flat price, 24/7 · truckerhq.com"'])],
+    ['Miercuri', 'jobs', 'Local jobs: home every night', 'Intermodal, flatbed, food distribution.', 'Imagine pătrată', '3 joburi locale.', "Home every night:\n\n• Local Intermodal · Chicago, IL · $1,500/wk\n• Local Flatbed · Gary, IN · $30/hr\n• Local Flatbed · Charlotte, NC · $28/hr\n\nMore local jobs: truckerhq.com/jobs", null, 'Joburi de exemplu.'],
+    ['Joi', 'fmcsa', 'IFTA Q3 is due Oct 31', 'Even if you owe nothing, file.', 'Imagine pătrată', 'Fundal închis, data în roșu.', "Running in more than one state? Your IFTA return for July–September is due October 31.\n\nFile it even if you owe nothing. Late filing means penalties and interest.\n\nStep-by-step guide: truckerhq.com/guides", null, 'Verificați data pe site-ul statului vostru de bază înainte de postare.'],
+    ['Vineri', 'meme', 'Types of dispatchers', '1. Never answers at 3 a.m.  2. Books you into Canada with no passport.  3. Us.', 'Carusel, 4 slide-uri', 'Un tip de dispecer pe slide, text mare.', "Which one did you have before?\n\nWe answer at 3 a.m. That's the whole pitch.", null, null],
+  ] },
+  { name: 'Săptămâna 4', dates: '26–30 oct', theme: 'Încredere și rezultate', posts: [
+    ['Luni', 'tip', 'Get detention on the rate con', 'Before you haul, not after.', 'Carusel, 3 slide-uri', 'Exemplu de rând de detention pe un rate con.', "Detention you didn't write down is detention you don't get paid.\n\nBefore you accept:\n• Ask for free time (usually 2 hours)\n• Ask for the hourly rate after that\n• Make sure it's written on the rate con\n\nWe do this on every load we book.", null, null],
+    ['Marți', 'compare', 'What $XXX a week includes', '24/7 dispatcher · rate negotiation · broker checks · paperwork', 'Imagine pătrată', 'Listă cu bife pe fundal verde.', "What you get for one flat weekly price:\n\n✓ Dispatcher on your time zone, 24/7\n✓ Rate negotiation on every load\n✓ Broker checked before you say yes\n✓ Rate cons, invoices, factoring paperwork\n✓ Fuel card discounts\n\nNo percentage. No long contract.\n\ntruckerhq.com/dispatch", null, null],
+    ['Miercuri', 'jobs', 'Owner-operators: lease on, 88% of load', 'Reefer, OTR, Sacramento, CA.', 'Imagine pătrată', 'Un job mare.', "Owner-operator? Lease on:\n\n• Reefer, OTR\n• 88% of the load\n• Based in Sacramento, CA\n\nApply: truckerhq.com/jobs", null, 'Job de exemplu.'],
+    ['Joi', 'review', '"They found brokers that work with new carriers."', 'Sergei M. · New carrier · FL', 'Imagine pătrată + video', 'Citat pe amber.', "\"My MC was 3 months old and nobody wanted me. They found brokers that work with new carriers and got me moving.\"\n\nSergei M., new carrier in Florida.\n\ntruckerhq.com/dispatch", V('12 s', ['0–4', 'Citatul apare rând cu rând.'], ['4–9', 'Poza șoferului sau a camionului lui.'], ['9–12', 'Logo + "truckerhq.com"'])],
+    ['Vineri', 'meme', 'Fuel prices vs. my rate per mile', 'One goes up. Guess which.', 'Imagine pătrată', 'Două săgeți: una sus, una jos.', "When fuel goes up, your walk-away rate goes up too.\n\nUpdate your numbers: truckerhq.com/tools/profit-per-mile", null, null],
+  ] },
+];
+class Component extends DCLogic {
+  state = { week: 'all', type: 'all', copied: '' };
+  copy(id, text) { try { navigator.clipboard.writeText(text); } catch (e) {} this.setState({ copied: id }); clearTimeout(this.t); this.t = setTimeout(() => this.setState({ copied: '' }), 1500); }
+  renderVals() {
+    const s = this.state;
+    const chip = (on) => ({ bd: on ? '#16181B' : '#DEDFDB', bg: on ? '#16181B' : '#FFFFFF', fg: on ? '#F7F7F5' : '#16181B' });
+    return {
+      rhythm: [['Luni', 'Sfat / mini-ghid'], ['Marți', 'Ofertă sau comparație'], ['Miercuri', 'Joburi CDL'], ['Joi', 'FMCSA sau recenzie'], ['Vineri', 'Meme']].map(([day, what]) => ({ day, what })),
+      notes: [
+        { h: 'Ore de postare', p: 'Dimineața 6–8 și seara 19–21, ora Central. Atunci șoferii sunt în pauză.' },
+        { h: 'Video fără filmare', p: 'Scenele sunt text mare peste poze sau fundal de brand, 9:16. Se fac în CapCut sau Canva.' },
+        { h: 'Facebook grupuri', p: 'În grupuri postați doar sfaturile și meme-urile, fără ofertă directă. Oferta doar pe pagină.' },
+        { h: 'Telegram', p: 'Descrierea întreagă + imaginea. Joburile merg și într-un canal separat, dacă îl faceți.' },
+      ],
+      weekChips: [['all', 'Toate'], ...W.map((w, i) => [String(i), w.name])].map(([k, name]) => ({ name, ...chip(s.week === k), pick: () => this.setState({ week: k }) })),
+      typeChips: [['all', 'Toate tipurile'], ...Object.entries(T).map(([k, v]) => [k, v[0].charAt(0) + v[0].slice(1).toLowerCase()])].map(([k, name]) => ({ name, ...chip(s.type === k), pick: () => this.setState({ type: k }) })),
+      weeks: W.map((w, wi) => ({ ...w, posts: w.posts.filter(p => s.type === 'all' || p[1] === s.type).map(([day, type, head, sub, format, visual, caption, video, note], pi) => {
+        const t = T[type], id = wi + '-' + pi, on = s.copied === id, tags = TAGS[type];
+        return { day, head, sub, format, visual, caption, tags, tag: t[0], tileBg: t[1], tileFg: t[2], tagBg: t[3], tagFg: t[4], hasVideo: !!video, len: video ? video.len : '', scenes: video ? video.scenes : [], hasNote: !!note, note: note || '', copyLabel: on ? 'Copiat' : 'Copiază', copyBd: on ? '#0E5C3A' : '#DEDFDB', copyBg: on ? '#E2F0E8' : '#FFFFFF', copyFg: on ? '#0E5C3A' : '#16181B', copy: () => this.copy(id, caption + '\n\n' + tags) };
+      }) })).filter((w, i) => (s.week === 'all' || s.week === String(i)) && w.posts.length),
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><meta name="design_doc_mode" content="canvas"><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Roboto+Condensed:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><style>body{margin:0;background:#E9EAE6;font-family:Inter,sans-serif;color:#16181B;-webkit-font-smoothing:antialiased}a{color:#0E5C3A}a:hover{color:#16181B}*{box-sizing:border-box}</style></helmet>
+<section style="padding:48px;display:flex;flex-direction:column;gap:32px;">
+<div style="display:flex;flex-direction:column;gap:6px;max-width:820px;">
+<div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;"><span style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:34px;text-transform:uppercase;">Profiluri pe rețele</span><a href="Project Hub.dc.html" style="font-size:14px;font-weight:600;">← Project Hub</a><a href="Brand Materials.dc.html#4c" style="font-size:14px;font-weight:600;">Poză profil + copertă FB</a></div>
+<div style="font-size:15px;line-height:1.5;color:#3F444B;">Textele gata de copiat pentru fiecare platformă, cu limita de caractere verificată. Numele de cont <b>@truckerhq</b> e propus: verificați dacă e liber pe toate 4 și folosiți același peste tot.</div>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,520px),1fr));gap:24px;align-items:start;">
+<sc-for list="{{ platforms }}" as="pl" hint-placeholder-count="4">
+<div id="{{ pl.id }}" style="background:#FFFFFF;border-radius:8px;padding:24px;display:flex;flex-direction:column;gap:16px;">
+<div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;"><span style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:28px;text-transform:uppercase;">{{ pl.name }}</span><span style="font-size:13px;color:#6B7280;">{{ pl.handle }}</span></div>
+<sc-for list="{{ pl.fields }}" as="f">
+<div style="display:flex;flex-direction:column;gap:6px;border-top:1px solid #ECEDEA;padding-top:12px;">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><span style="font-size:12px;font-weight:700;letter-spacing:.06em;color:#6B7280;">{{ f.k }}</span><div style="display:flex;align-items:center;gap:10px;"><span style="font-size:12px;font-variant-numeric:tabular-nums;color:{{ f.cc }};">{{ f.count }}</span><button onClick="{{ f.copy }}" style="min-height:32px;padding:0 10px;border-radius:6px;border:1.5px solid {{ f.bd }};background:{{ f.bg }};color:{{ f.fg }};font-family:Inter;font-size:12px;font-weight:600;cursor:pointer;">{{ f.label }}</button></div></div>
+<div style="font-size:15px;line-height:1.55;white-space:pre-line;">{{ f.v }}</div>
+</div>
+</sc-for>
+</div>
+</sc-for>
+</div>
+
+<div id="hl" style="background:#FFFFFF;border-radius:8px;padding:24px;display:flex;flex-direction:column;gap:18px;">
+<div style="display:flex;flex-direction:column;gap:4px;"><span style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:28px;text-transform:uppercase;">Instagram highlights</span><span style="font-size:14px;color:#4B5058;">Coperți 1080 × 1920, cu iconița în centru ca să iasă bine în cerc. Afișate la mărimea din profil.</span></div>
+<div style="display:flex;flex-wrap:wrap;gap:24px;">
+<sc-for list="{{ highlights }}" as="h" hint-placeholder-count="5">
+<div style="display:flex;flex-direction:column;align-items:center;gap:8px;width:88px;">
+<div data-om-raster="" style="width:80px;height:80px;border-radius:50%;background:{{ h.bg }};border:3px solid #FFFFFF;box-shadow:0 0 0 2px #DEDFDB;display:flex;align-items:center;justify-content:center;">
+<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="{{ h.fg }}" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="{{ h.d1 }}"></path><path d="{{ h.d2 }}"></path></svg>
+</div>
+<span style="font-size:13px;font-weight:600;text-align:center;">{{ h.name }}</span>
+</div>
+</sc-for>
+</div>
+<span style="font-size:13px;color:#6B7280;">Ce puneți în fiecare: Dispatch = oferta + comparația; Jobs = joburile săptămânii; Tools = Carrier Lookup și calculatorul; Reviews = recenzii reale; FAQ = întrebările de pe site.</span>
+</div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const P = [
+  { id: 'fb', name: 'Facebook Page', handle: 'facebook.com/truckerhq · categorie: Transportation Service', fields: [
+    ['NUME PAGINĂ', 'Trucker HQ', 75],
+    ['INTRO (BIO)', 'Flat-rate truck dispatch, 24/7. No percentage. English & Russian. CDL jobs + free carrier tools.', 101],
+    ['DESPRE (ABOUT)', "Trucker HQ is a truck dispatch service for owner-operators and small fleets. One flat price per truck per week, never a percentage. Our dispatchers speak English and Russian and work every US time zone, 24/7.\n\nWe also post CDL jobs with the pay up front and run free tools built on public FMCSA data: Carrier Lookup, Profit per Mile, Compliance Alerts and a New MC Checklist.\n\nUSDOT XXXXXXX · MC XXXXXXX", 2000],
+    ['BUTON', 'Call Now → (XXX) XXX-XXXX', 0],
+    ['GRUPURI DE URMĂRIT', 'Intrați ca pagină în 10–15 grupuri de owner-operatori și grupuri de trucking vorbitoare de rusă. Postați acolo doar sfaturi și meme-uri; oferta doar pe pagină.', 0],
+  ] },
+  { id: 'ig', name: 'Instagram', handle: '@truckerhq · cont Business, categorie: Transportation Service', fields: [
+    ['NUME', 'Trucker HQ · Truck Dispatch', 30],
+    ['BIO', 'Flat-rate truck dispatch, 24/7\nNo percentage. EN · RU\nCDL jobs + free carrier tools\n↓ Start dispatch', 150],
+    ['LINK', 'truckerhq.com/dispatch', 0],
+    ['BUTOANE', 'Call · Email', 0],
+  ] },
+  { id: 'tt', name: 'TikTok', handle: '@truckerhq · cont Business', fields: [
+    ['NUME', 'Trucker HQ', 30],
+    ['BIO', 'Flat-rate truck dispatch 24/7. No %. Tips for owner-operators ↓', 80],
+    ['LINK', 'truckerhq.com', 0],
+  ] },
+  { id: 'tg', name: 'Telegram', handle: 't.me/truckerhq · canal public', fields: [
+    ['NUME CANAL', 'Trucker HQ · Dispatch & CDL Jobs', 128],
+    ['DESCRIERE', 'Flat-rate truck dispatch, 24/7, English & Russian. Tips for owner-operators, CDL jobs with pay posted, FMCSA reminders.\n\nDispatch: (XXX) XXX-XXXX\ntruckerhq.com', 255],
+    ['MESAJ FIXAT', "Welcome to Trucker HQ.\n\nWhat you'll get here:\n• Dispatcher tips, 2–3 a week\n• CDL jobs with pay and home time\n• FMCSA deadlines before they hit\n\nNeed a dispatcher? One flat price per week, no percentage. Call (XXX) XXX-XXXX or write @truckerhq_dispatch", 0],
+  ] },
+];
+class Component extends DCLogic {
+  state = { copied: '' };
+  copy(id, text) { try { navigator.clipboard.writeText(text); } catch (e) {} this.setState({ copied: id }); clearTimeout(this.t); this.t = setTimeout(() => this.setState({ copied: '' }), 1500); }
+  renderVals() {
+    return {
+      platforms: P.map(p => ({ ...p, fields: p.fields.map(([k, v, max], i) => { const id = p.id + i, on = this.state.copied === id, n = [...v].length; return { k, v, count: max ? n + ' / ' + max : '', cc: max && n > max ? '#B42318' : '#6B7280', label: on ? 'Copiat' : 'Copiază', bd: on ? '#0E5C3A' : '#DEDFDB', bg: on ? '#E2F0E8' : '#FFFFFF', fg: on ? '#0E5C3A' : '#16181B', copy: () => this.copy(id, v) }; }) })),
+      highlights: [
+        ['Dispatch', '#0E5C3A', '#F2A900', 'M3 12h13', 'm12 5 7 7-7 7'],
+        ['Jobs', '#16181B', '#F2A900', 'M4 7h16v12H4z', 'M9 7V5h6v2'],
+        ['Tools', '#F2A900', '#16181B', 'm21 21-4.3-4.3', 'M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14z'],
+        ['Reviews', '#0E5C3A', '#F7F7F5', 'M4 5h16v11H9l-5 4z', 'M8 10h8'],
+        ['FAQ', '#16181B', '#F7F7F5', 'M9.1 9a3 3 0 0 1 5.8 1c0 2-3 2.5-3 4.5', 'M12 18h.01'],
+      ].map(([name, bg, fg, d1, d2]) => ({ name, bg, fg, d1, d2 })),
+    };
+  }
+}
+</script>
+</body>
+</html>

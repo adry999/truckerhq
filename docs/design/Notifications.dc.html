@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><meta name="design_doc_mode" content="canvas"><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Roboto+Condensed:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><style>body{margin:0;background:#E9EAE6;font-family:Inter,sans-serif;color:#16181B;-webkit-font-smoothing:antialiased}a{color:#0E5C3A}a:hover{color:#16181B}*{box-sizing:border-box}</style></helmet>
+<section style="padding:48px;display:flex;flex-direction:column;gap:28px;">
+<div style="display:flex;flex-direction:column;gap:6px;max-width:880px;">
+<div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;"><span style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:34px;text-transform:uppercase;">Emailuri și SMS-uri automate</span><a href="Project Hub.dc.html" style="font-size:14px;font-weight:600;">← Project Hub</a></div>
+<div style="font-size:15px;line-height:1.5;color:#3F444B;">Ce primește omul după fiecare formular de pe site. Emailurile au 600 px lățime, un singur buton și textul important sus, pentru că se citesc pe telefon. SMS-urile au sub 160 de caractere și STOP la final. Câmpurile {în acolade} se completează automat. Toate au și variantă RU, la traducere.</div>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:36px;align-items:flex-start;">
+<sc-for list="{{ items }}" as="m" hint-placeholder-count="6">
+<div id="{{ m.id }}" style="display:flex;flex-direction:column;gap:10px;width:600px;">
+<div style="display:flex;flex-direction:column;gap:2px;"><span style="font-size:13px;font-weight:700;">{{ m.id }} · {{ m.label }}</span><span style="font-size:13px;color:#4B5058;"><b>Când:</b> {{ m.when }} · <b>Către:</b> {{ m.to }}</span></div>
+<div style="background:#FFFFFF;border-radius:8px;padding:12px 16px;display:flex;flex-direction:column;gap:2px;font-size:13px;border:1px solid #DEDFDB;"><span><b>Subiect:</b> {{ m.subject }}</span><span style="color:#6B7280;"><b style="color:#16181B;">Preview:</b> {{ m.preheader }}</span></div>
+<div style="background:#F7F7F5;border:1px solid #DEDFDB;border-radius:8px;overflow:hidden;">
+<div style="background:#16181B;padding:18px 28px;display:flex;align-items:center;justify-content:space-between;"><dc-import name="Logo" direction="sign" theme="dark" sub="{{ m.sub }}" size="{{ 20 }}" hint-size="130px,24px"></dc-import><span style="font-size:12px;color:#AEB2B8;font-weight:600;">(XXX) XXX-XXXX · 24/7</span></div>
+<div style="height:5px;background:repeating-linear-gradient(90deg,#F2A900 0 36px,transparent 36px 60px);background-color:#16181B;"></div>
+<div style="background:#FFFFFF;padding:30px 28px;display:flex;flex-direction:column;gap:16px;">
+<span style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:34px;line-height:.95;text-transform:uppercase;">{{ m.h }}</span>
+<span style="font-size:16px;line-height:1.6;white-space:pre-line;">{{ m.body }}</span>
+<sc-if value="{{ m.hasBox }}"><div style="background:#F7F7F5;border-radius:6px;padding:14px 16px;display:flex;flex-direction:column;gap:6px;"><sc-for list="{{ m.box }}" as="r"><div style="display:flex;justify-content:space-between;gap:16px;font-size:14px;"><span style="color:#6B7280;">{{ r.k }}</span><span style="font-weight:600;text-align:right;">{{ r.v }}</span></div></sc-for></div></sc-if>
+<sc-if value="{{ m.hasCode }}"><div style="align-self:flex-start;border:3px solid #16181B;padding:10px 22px;font-size:36px;font-weight:700;letter-spacing:.3em;font-variant-numeric:tabular-nums;">{{ m.code }}</div></sc-if>
+<span style="align-self:flex-start;background:{{ m.btnBg }};color:#16181B;border-radius:10px;padding:14px 24px;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:19px;letter-spacing:.04em;text-transform:uppercase;">{{ m.btn }}</span>
+<span style="font-size:14px;line-height:1.5;color:#4B5058;">{{ m.after }}</span>
+</div>
+<div style="padding:18px 28px;font-size:12px;line-height:1.6;color:#6B7280;">Trucker HQ · Street address, City, ST 00000 · USDOT XXXXXXX · MC XXXXXXX<br>{{ m.foot }}</div>
+</div>
+<sc-if value="{{ m.hasSms }}">
+<div style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:12px;font-weight:700;letter-spacing:.06em;color:#6B7280;">SMS · {{ m.smsLen }} CARACTERE</span>
+<div style="align-self:flex-start;max-width:340px;background:#FFFFFF;border:1px solid #DEDFDB;border-radius:16px 16px 16px 4px;padding:12px 14px;font-size:15px;line-height:1.45;">{{ m.sms }}</div></div>
+</sc-if>
+</div>
+</sc-for>
+</div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const M = [
+  { id: 'N1', label: 'Cerere de dispatch primită', when: 'după Start dispatch', to: 'owner-operator', sub: '', subject: 'We got your request. A dispatcher will call you soon.', preheader: 'Expect a call from (XXX) XXX-XXXX within 15 minutes.', h: "Got it, {First name}", body: "A dispatcher will call you within 15 minutes from (XXX) XXX-XXXX. Save the number so you know it's us.\n\nOn the call we'll go over your truck, your lanes and when you want to be home. About 10 minutes.", box: [['Truck', '{Equipment}'], ['Lanes', '{Lanes}'], ['MC', '{MC number}'], ['Language', '{English / Русский}']], btn: 'Call us now', btnBg: '#F2A900', after: "Can't talk now? Reply to this email with a better time.", foot: "You're getting this because you asked us to call you at truckerhq.com.", sms: 'Trucker HQ: got your dispatch request. A dispatcher will call you from (XXX) XXX-XXXX within 15 min. Reply STOP to opt out.' },
+  { id: 'N2', label: 'Aplicare la job trimisă', when: 'după ApplyForm', to: 'șofer', sub: 'JOBS', subject: 'Application sent: {Job title}, {City}', preheader: '{Company} will call you. Here is what you applied for.', h: 'Application sent', body: '{Company} got your application. A recruiter usually calls within 1–2 business days, in English or Russian.', box: [['Job', '{Job title}'], ['Company', '{Company} · Health Score {Score}'], ['Pay', '{Pay}'], ['Home time', '{Home time}']], btn: 'See similar jobs', btnBg: '#F2A900', after: 'Check the carrier before you sign anything: open their Health Score in Carrier Lookup.', foot: 'You applied through truckerhq.com/jobs.', sms: 'Trucker HQ: your application for {Job title} went to {Company}. Expect a call in 1-2 business days. Reply STOP to opt out.' },
+  { id: 'N3', label: 'Aplicant nou', when: 'după ApplyForm', to: 'carrier', sub: 'JOBS', subject: 'New applicant: {Driver first name}, {Years} yrs, CDL-{Class}', preheader: 'For {Job title}. Call while they are still looking.', h: 'New applicant', body: 'For {Job title} in {City}, {ST}. Drivers who get a call the same day are much more likely to take the job.', box: [['Name', '{Driver name}'], ['Experience', '{Years} years · CDL-{Class}'], ['Endorsements', '{Endorsements}'], ['Phone', '{Phone}'], ['Language', '{English / Русский}']], btn: 'Call {Driver first name}', btnBg: '#F2A900', after: 'CDL, MVR and experience are checked when you use Hire Drivers with screening.', foot: 'You get these because you posted a job on truckerhq.com.', sms: '' },
+  { id: 'N4', label: 'Alerte pornite', when: 'după Compliance Alerts', to: 'carrier', sub: '', subject: "Alerts are on for DOT {DOT}", preheader: "We check your FMCSA record every day. Here's what we watch.", h: 'Alerts are on', body: "We check the FMCSA record for DOT {DOT} every day and text {Phone} the same day anything changes.", box: [['Watching', '{List of items}'], ['Carrier', '{Carrier name}'], ['Texts in', '{English / Русский}']], btn: 'Open my Health Score', btnBg: '#F2A900', after: 'To change what we watch or stop alerts, reply to this email or text STOP.', foot: 'You turned on free Compliance Alerts at truckerhq.com.', sms: 'Trucker HQ: alerts are on for DOT {DOT}. We text you the same day your FMCSA record changes. Msg&data rates may apply. Reply STOP to cancel, HELP for help.' },
+  { id: 'N5', label: 'Alertă: schimbare FMCSA', when: 'când se schimbă ceva în FMCSA', to: 'carrier', sub: '', subject: 'Action needed: insurance cancellation filed for DOT {DOT}', preheader: 'Effective {Date}. Call your agent today to keep your authority active.', h: 'Insurance cancellation filed', body: 'FMCSA shows an insurance cancellation for DOT {DOT}, effective {Date}. If a new filing is not on record by then, your authority can be revoked and brokers will stop booking you.', box: [['What changed', 'BIPD insurance · cancellation filed'], ['Effective', '{Date}'], ['Seen', '{Today}, 7:02 AM']], btn: 'See my FMCSA record', btnBg: '#F2A900', after: 'Next step: call your insurance agent and ask them to file a new BMC-91X.', foot: 'Compliance Alerts for DOT {DOT}. Reply STOP to the SMS to stop alerts.', sms: 'Trucker HQ: insurance cancellation filed for DOT {DOT}, effective {Date}. Call your agent today to keep your authority. Reply STOP to opt out.' },
+  { id: 'N6', label: 'Cod pentru Claim profile', when: 'la pasul Verify', to: 'contactul din FMCSA', sub: '', subject: 'Your Trucker HQ code: {Code}', preheader: 'Use it to claim the profile for {Carrier name}. Expires in 10 minutes.', h: 'Your code', body: 'Enter this code to claim the Trucker HQ profile for {Carrier name}, DOT {DOT}. It expires in 10 minutes.', code: '482 913', btn: 'Back to claim', btnBg: '#DEDFDB', after: "Didn't ask for this? Ignore it. Nobody can claim your profile without this code.", foot: 'Sent to the contact on your FMCSA record.', sms: 'Trucker HQ code: 482913. Use it to claim the profile for DOT {DOT}. Expires in 10 min. Not you? Ignore this.' },
+];
+class Component extends DCLogic {
+  renderVals() {
+    return { items: M.map(m => ({ ...m, hasBox: !!m.box, box: (m.box || []).map(([k, v]) => ({ k, v })), hasCode: !!m.code, code: m.code || '', hasSms: !!m.sms, smsLen: m.sms.length })) };
+  }
+}
+</script>
+</body>
+</html>

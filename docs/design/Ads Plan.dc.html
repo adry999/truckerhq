@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Roboto+Condensed:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><style>body{margin:0;background:#F7F7F5;font-family:Inter,sans-serif;color:#16181B;-webkit-font-smoothing:antialiased}a{color:#0E5C3A}a:hover{color:#16181B}*{box-sizing:border-box}</style></helmet>
+<div style="max-width:1200px;margin:0 auto;padding:clamp(24px,5vw,56px) clamp(16px,4vw,32px) 96px;display:flex;flex-direction:column;gap:32px;">
+
+<header style="display:flex;flex-direction:column;gap:10px;">
+<div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;"><dc-import name="Logo" direction="sign" size="{{ 28 }}" hint-size="180px,34px"></dc-import><a href="Project Hub.dc.html" style="font-size:14px;font-weight:600;">← Project Hub</a></div>
+<h1 style="margin:6px 0 0;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:clamp(34px,6vw,54px);line-height:.95;text-transform:uppercase;">Reclame · plan de test, 30 de zile</h1>
+<p style="margin:0;font-size:16px;line-height:1.55;color:#3F444B;max-width:780px;text-wrap:pretty;">Scop: apeluri și cereri „Start dispatch” de la owner-operatori. Totul trimite pe <b>truckerhq.com/dispatch</b>. Bugetul e propunerea mea pentru prima lună; după 30 de zile păstrăm doar ce aduce apeluri.</p>
+</header>
+
+<section style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;">
+<sc-for list="{{ budget }}" as="b" hint-placeholder-count="4">
+<div style="background:{{ b.bg }};color:{{ b.fg }};border-radius:8px;padding:16px 18px;display:flex;flex-direction:column;gap:4px;"><span style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;">{{ b.k }}</span><span style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:34px;line-height:1;">{{ b.v }}</span><span style="font-size:13px;">{{ b.n }}</span></div>
+</sc-for>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:14px;">
+<h2 style="margin:0;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:32px;">1. Google Search</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:16px;align-items:start;">
+<div style="background:#FFFFFF;border:1px solid #DEDFDB;border-radius:8px;padding:20px;display:flex;flex-direction:column;gap:12px;">
+<span style="font-size:12px;font-weight:700;letter-spacing:.08em;color:#6B7280;">PREVIZUALIZARE</span>
+<div style="display:flex;flex-direction:column;gap:4px;font-family:Arial,sans-serif;">
+<span style="font-size:13px;color:#202124;font-weight:700;">Sponsored</span>
+<span style="font-size:13px;color:#4D5156;">truckerhq.com › dispatch</span>
+<span style="font-size:20px;line-height:1.3;color:#1A0DAB;">{{ preview.h }}</span>
+<span style="font-size:14px;line-height:1.5;color:#4D5156;">{{ preview.d }}</span>
+</div>
+<button onClick="{{ shuffle }}" style="align-self:flex-start;min-height:36px;padding:0 12px;border-radius:6px;border:1.5px solid #DEDFDB;background:#FFFFFF;font-family:Inter;font-size:13px;font-weight:600;cursor:pointer;">Altă combinație</button>
+<span style="font-size:13px;line-height:1.5;color:#4B5058;">Google combină singur titlurile și descrierile. Extensii: apel (XXX) XXX-XXXX; linkuri spre Pricing, How it works, New MC, About.</span>
+</div>
+<div style="background:#FFFFFF;border:1px solid #DEDFDB;border-radius:8px;padding:20px;display:flex;flex-direction:column;gap:10px;">
+<span style="font-size:12px;font-weight:700;letter-spacing:.08em;color:#6B7280;">GRUPURI DE ANUNȚURI ȘI CUVINTE CHEIE</span>
+<sc-for list="{{ groups }}" as="g" hint-placeholder-count="3">
+<div style="display:flex;flex-direction:column;gap:6px;border-top:1px solid #ECEDEA;padding-top:10px;"><span style="font-weight:700;font-size:15px;">{{ g.name }} <span style="font-weight:400;color:#6B7280;font-size:13px;">· {{ g.share }}</span></span><div style="display:flex;flex-wrap:wrap;gap:6px;"><sc-for list="{{ g.kw }}" as="k"><span style="font-size:13px;padding:4px 8px;border-radius:5px;background:#EEF6F1;color:#0E5C3A;font-weight:500;">{{ k }}</span></sc-for></div></div>
+</sc-for>
+<div style="display:flex;flex-direction:column;gap:6px;border-top:1px solid #ECEDEA;padding-top:10px;"><span style="font-weight:700;font-size:15px;">Cuvinte excluse</span><div style="display:flex;flex-wrap:wrap;gap:6px;"><sc-for list="{{ negatives }}" as="k"><span style="font-size:13px;padding:4px 8px;border-radius:5px;background:#FBE3E1;color:#B42318;font-weight:500;">−{{ k }}</span></sc-for></div><span style="font-size:13px;color:#4B5058;">Fără ele, bugetul se duce pe oameni care caută job de dispecer sau cursuri.</span></div>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:16px;">
+<sc-for list="{{ lists }}" as="l" hint-placeholder-count="2">
+<div style="background:#FFFFFF;border:1px solid #DEDFDB;border-radius:8px;padding:20px;display:flex;flex-direction:column;gap:6px;">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:4px;"><span style="font-size:12px;font-weight:700;letter-spacing:.08em;color:#6B7280;">{{ l.title }}</span><button onClick="{{ l.copy }}" style="min-height:32px;padding:0 10px;border-radius:6px;border:1.5px solid {{ l.bd }};background:{{ l.bg }};color:{{ l.fg }};font-family:Inter;font-size:12px;font-weight:600;cursor:pointer;">{{ l.label }}</button></div>
+<sc-for list="{{ l.items }}" as="i"><div style="display:flex;justify-content:space-between;gap:12px;font-size:14px;line-height:1.45;padding:5px 0;border-bottom:1px solid #F1F1EE;"><span>{{ i.t }}</span><span style="flex:none;font-size:12px;font-variant-numeric:tabular-nums;color:{{ i.c }};">{{ i.n }}</span></div></sc-for>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:14px;">
+<h2 style="margin:0;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:32px;">2. Facebook + Instagram (Meta)</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:16px;align-items:start;">
+<sc-for list="{{ metaAds }}" as="a" hint-placeholder-count="3">
+<div style="background:#FFFFFF;border:1px solid #DEDFDB;border-radius:8px;padding:20px;display:flex;flex-direction:column;gap:10px;">
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px;"><span style="font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:22px;text-transform:uppercase;">{{ a.name }}</span><a href="{{ a.href }}" style="font-size:13px;font-weight:600;">{{ a.creative }}</a></div>
+<span style="font-size:14px;color:#4B5058;"><b style="color:#16181B;">Public:</b> {{ a.aud }}</span>
+<div style="background:#F7F7F5;border-radius:6px;padding:12px 14px;display:flex;flex-direction:column;gap:6px;">
+<span style="font-size:14px;line-height:1.5;white-space:pre-line;">{{ a.text }}</span>
+<span style="font-weight:700;font-size:15px;">{{ a.head }}</span>
+<span style="align-self:flex-start;font-size:13px;font-weight:700;padding:6px 12px;border-radius:5px;background:#DEDFDB;">{{ a.cta }}</span>
+</div>
+<span style="font-size:13px;color:#6B7280;">{{ a.share }}</span>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:16px;">
+<sc-for list="{{ checks }}" as="c" hint-placeholder-count="3">
+<div style="background:#FFFFFF;border:1px solid #DEDFDB;border-radius:8px;padding:20px;display:flex;flex-direction:column;gap:10px;">
+<h2 style="margin:0;font-family:'Barlow Condensed','Roboto Condensed',sans-serif;font-weight:800;font-size:24px;">{{ c.h }}</h2>
+<sc-for list="{{ c.items }}" as="i"><div style="display:flex;gap:10px;font-size:14px;line-height:1.5;color:#2B2F34;"><span style="flex:none;width:8px;height:8px;margin-top:6px;background:#F2A900;border-radius:2px;"></span><span>{{ i }}</span></div></sc-for>
+</div>
+</sc-for>
+</section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const H = ['Flat-Rate Truck Dispatch', 'No Percentage. Flat Weekly', 'Dispatch for Owner-Operators', '24/7 Dispatchers, EN & RU', 'Keep Your Whole Good Week', 'New MC? We Book Loads', 'Broker Checked Every Load', 'One Price Per Truck Per Week', 'Russian-Speaking Dispatch', 'Week to Week, No Contract', 'Call a Dispatcher Now', 'Rate Negotiation Included', 'Stop Paying 10% to Dispatch', 'Paperwork Handled For You', 'Trucker HQ Dispatch'];
+const D = ['One flat price per truck per week. No percentage, no long contract. Call 24/7.', 'Dispatchers on every US time zone. Rate negotiation and broker checks on every load.', 'New authority? We know brokers that work with new MCs. Setup packets included.', 'English and Russian-speaking dispatchers. Rate cons, invoices and factoring done.'];
+class Component extends DCLogic {
+  state = { i: 0, copied: '' };
+  copy(id, text) { try { navigator.clipboard.writeText(text); } catch (e) {} this.setState({ copied: id }); clearTimeout(this.t); this.t = setTimeout(() => this.setState({ copied: '' }), 1500); }
+  renderVals() {
+    const i = this.state.i;
+    const lst = (id, title, arr, max) => { const on = this.state.copied === id; return { title, items: arr.map(t => ({ t, n: t.length + '/' + max, c: t.length > max ? '#B42318' : '#6B7280' })), label: on ? 'Copiat' : 'Copiază tot', bd: on ? '#0E5C3A' : '#DEDFDB', bg: on ? '#E2F0E8' : '#FFFFFF', fg: on ? '#0E5C3A' : '#16181B', copy: () => this.copy(id, arr.join('\n')) }; };
+    return {
+      budget: [
+        { k: 'Total lună de test', v: '$1,000', n: 'propunere, se poate scala', bg: '#16181B', fg: '#F7F7F5' },
+        { k: 'Google Search', v: '$600', n: '≈ $20 / zi', bg: '#0E5C3A', fg: '#F7F7F5' },
+        { k: 'Facebook + Instagram', v: '$400', n: '≈ $13 / zi', bg: '#F2A900', fg: '#16181B' },
+        { k: 'Ce măsurăm', v: 'Cost / lead', n: 'lead = apel ≥ 60 s sau cerere trimisă', bg: '#FFFFFF', fg: '#16181B' },
+      ],
+      preview: { h: [H[i % 15], H[(i + 4) % 15], H[(i + 9) % 15]].join(' | '), d: D[i % 4] + ' ' + D[(i + 1) % 4] },
+      shuffle: () => this.setState(s => ({ i: s.i + 1 })),
+      groups: [
+        { name: 'Dispatch service', share: '60% din buget', kw: ['"truck dispatch service"', '"truck dispatcher for owner operators"', '"owner operator dispatch"', '"flat rate truck dispatch"', '"dispatch services for trucking"', '"truck dispatch company"'] },
+        { name: 'New MC', share: '25%', kw: ['"dispatch for new authority"', '"new mc dispatch"', '"new trucking authority loads"', '"dispatcher for new carriers"'] },
+        { name: 'Russian-speaking', share: '15%', kw: ['"russian truck dispatch"', '"russian speaking dispatcher"', '"диспетчер траков"', '"диспетчер для овнер оператора"'] },
+      ],
+      negatives: ['jobs', 'job', 'salary', 'hiring', 'course', 'training', 'school', 'certification', 'how to become', 'free', 'remote', 'work from home', 'software', 'app'],
+      lists: [lst('h', 'TITLURI (MAX 30)', H, 30), lst('d', 'DESCRIERI (MAX 90)', D, 90)],
+      metaAds: [
+        { name: 'Comparație', creative: 'Șablon T3 →', href: 'Social Templates.dc.html#t3', aud: 'SUA, 25–60, interese: owner-operator, trucking, load boards, freight broker. Plasare: Feed + Reels.', text: 'Same $8,000 week.\n10% dispatcher: $800. 8%: $640. Us: $XXX, flat.\nThe better your week, the more you keep.', head: 'Flat-rate dispatch, 24/7', cta: 'Call Now', share: '40% din bugetul Meta' },
+        { name: 'Reel 15 s', creative: 'Cadre R1–R4 →', href: 'Social Templates.dc.html#r1', aud: 'Același public. Doar Reels și Stories.', text: 'Your dispatcher takes 10%? We charge one flat price per week. English & Russian, every US time zone.', head: 'Start dispatch this week', cta: 'Learn More', share: '40% din bugetul Meta' },
+        { name: 'Retargeting', creative: 'Șablon T5 →', href: 'Social Templates.dc.html#t5', aud: 'Vizitatori truckerhq.com din ultimele 30 de zile care nu au trimis cererea.', text: '"Same price every week. Last month I ran hard and kept all of it."\nIon R., owner-operator, 2 trucks.', head: 'Talk to a dispatcher', cta: 'Call Now', share: '20% · pornește după ~500 vizitatori' },
+      ],
+      checks: [
+        { h: 'Înainte de start', items: ['Google Ads + Google Analytics 4 legate; conversii: apel din anunț, click pe telefon, cerere Start dispatch.', 'Meta Pixel pe site, cu aceleași 3 evenimente.', 'Număr de telefon de urmărire pe site, ca să știm ce apel vine din reclamă.', 'Pagina /dispatch cu prețul real, nu $XXX.', 'Recenzia din retargeting doar dacă e reală și aprobată.'] },
+        { h: 'În fiecare săptămână', items: ['Google: citiți termenii căutați și adăugați la excluse ce nu e client.', 'Opriți titlurile și reclamele cu cel mai slab click-rate după ~1.000 de afișări.', 'Notați câte lead-uri au devenit clienți, nu doar câte au venit.'] },
+        { h: 'După 30 de zile', items: ['Păstrați canalul cu cel mai mic cost pe client, nu pe click.', 'Mutați bugetul spre grupul de cuvinte cu cele mai multe apeluri.', 'Adăugați public Lookalike din clienții reali pe Meta.'] },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>
