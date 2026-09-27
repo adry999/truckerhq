@@ -71,8 +71,12 @@ export default function SiteHeader({
     <header className="sticky top-0 z-20 border-b border-white/10 bg-asphalt font-sans">
       <div className="mx-auto flex h-[60px] max-w-6xl items-center gap-2 px-3 sm:h-[72px] sm:gap-6 sm:px-6">
         <Link href={homeHref} className="flex shrink-0">
-          <Logo theme="dark" size={26} className="sm:hidden" />
-          <Logo theme="dark" size={30} className="hidden sm:inline-flex" />
+          <span className="sm:hidden">
+            <Logo theme="dark" size={26} />
+          </span>
+          <span className="hidden sm:inline-flex">
+            <Logo theme="dark" size={30} />
+          </span>
         </Link>
 
         <nav className="ml-3 hidden gap-1 lg:flex">

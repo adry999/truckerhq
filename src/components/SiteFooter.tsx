@@ -44,7 +44,7 @@ export default function SiteFooter() {
       <div className="road-line h-1.5" />
       <div className="mx-auto flex max-w-6xl flex-col gap-10 px-4 pb-8 pt-14 sm:px-6">
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
-          <div className="flex flex-col gap-4">
+          <div className="col-span-2 flex flex-col gap-4 sm:col-span-1">
             <Logo theme="dark" size={32} />
             <p className="text-sm leading-relaxed">
               Dispatch, jobs and tools for US truckers.
