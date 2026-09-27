@@ -64,21 +64,28 @@ export type HomeCopy = {
   faq: { q: string; a: string }[];
 };
 
-// RU homepage historically showed a separate hand-written set of job cards
-// (not the real JOBS data) with translated titles; best-effort matched to a
-// real job slug by company name so the cards link somewhere real.
-function ruJobSlugFor(company: string): string {
-  const hit = REAL_JOBS.find((j) => j.company.startsWith(company));
-  return hit ? `/jobs/${hit.slug}` : "/ru/jobs";
-}
+// RU homepage previously showed a separate hand-written job list that didn't
+// match the real JOBS data. Now it pulls the same real jobs as EN, with just
+// the title and relative-date text translated (company/location/pay are
+// data, not prose, so they stay as-is — same convention as /ru/jobs).
+const RU_JOB_TITLES: Record<string, string> = {
+  "otr-company-driver-carpathian": "Водитель OTR в компанию",
+  "regional-reefer-driver-lone-star": "Региональный водитель, reefer",
+  "team-drivers-iron-horse": "Командные водители",
+  "local-flatbed-driver-bluebonnet": "Локальный водитель, flatbed",
+  "owner-operator-power-only-volga": "Owner-operator, power only",
+  "otr-reefer-solo-moldova": "OTR, reefer, соло",
+  "regional-dry-van-laredo": "Региональный водитель, dry van",
+};
 
-const RU_JOBS_RAW = [
-  { title: "Водитель OTR в компанию", co: "Carpathian Freight", loc: "Des Plaines, IL", type: "OTR", equip: "DRY VAN", pay: "$0.68–0.72/mi", posted: "Сегодня" },
-  { title: "Региональный водитель, дома каждую неделю", co: "Volga Line Transport", loc: "Jacksonville, FL", type: "REGIONAL", equip: "REEFER", pay: "$1,800/wk", posted: "Сегодня" },
-  { title: "Командные водители", co: "Iron Horse Hauling", loc: "Phoenix, AZ", type: "OTR", equip: "DRY VAN", pay: "$0.90/ми на двоих", posted: "1 день назад" },
-  { title: "Локальный водитель, flatbed", co: "Danube Road Corp", loc: "Charlotte, NC", type: "LOCAL", equip: "FLATBED", pay: "$28/hr", posted: "2 дня назад" },
-  { title: "Lease purchase, owner-operator", co: "Moldova Express", loc: "Sacramento, CA", type: "OTR", equip: "REEFER", pay: "88% от груза", posted: "3 дня назад" },
-];
+function ruPostedLabel(posted: string): string {
+  if (/today/i.test(posted)) return "Сегодня";
+  const m = /(\d+)\s*day/i.exec(posted);
+  if (!m) return posted;
+  const n = Number(m[1]);
+  const word = n === 1 ? "день" : n >= 2 && n <= 4 ? "дня" : "дней";
+  return `${n} ${word} назад`;
+}
 
 export const HOME_COPY: Record<"EN" | "RU", HomeCopy> = {
   EN: {
@@ -333,15 +340,15 @@ export const HOME_COPY: Record<"EN" | "RU", HomeCopy> = {
     latestJobsHeading: "Свежие вакансии CDL",
     seeAllJobsHref: "/ru/jobs",
     seeAllJobsLabel: "Все вакансии →",
-    jobs: RU_JOBS_RAW.map((j) => ({
-      title: j.title,
-      company: j.co,
+    jobs: REAL_JOBS.map((j) => ({
+      title: RU_JOB_TITLES[j.slug] ?? j.title,
+      company: j.company,
       loc: j.loc,
       type: j.type,
-      equip: j.equip,
+      equip: j.equipment.toUpperCase(),
       pay: j.pay,
-      posted: j.posted,
-      href: ruJobSlugFor(j.co),
+      posted: ruPostedLabel(j.posted),
+      href: `/jobs/${j.slug}`,
     })),
     teamHeading: "Люди, которые берут трубку",
     teamBody: "У вас один диспетчер, который знает ваш трак, ваши направления и когда вам нужно быть дома.",
