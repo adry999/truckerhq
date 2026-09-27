@@ -24,7 +24,7 @@ const COLUMNS: { h: string; links: { t: string; href?: string }[] }[] = [
   {
     h: "CONTACT",
     links: [
-      { t: "(XXX) XXX-XXXX · 24/7" },
+      { t: "(XXX) XXX-XXXX · 24/7", href: "tel:+1XXXXXXXXXX" },
       { t: "hello@truckerhq.com", href: "/about#contact" },
       { t: "Guides", href: "/guides" },
       { t: "About us", href: "/about" },
@@ -60,14 +60,14 @@ export default function SiteFooter() {
                   <Link
                     key={l.t}
                     href={l.href}
-                    className="flex min-h-9 items-center text-[15px] text-[#E4E6E9] hover:text-amber"
+                    className="flex min-h-11 items-center text-[15px] text-[#E4E6E9] hover:text-amber"
                   >
                     {l.t}
                   </Link>
                 ) : (
                   <span
                     key={l.t}
-                    className="flex min-h-9 items-center text-[15px] text-[#E4E6E9]"
+                    className="flex min-h-11 items-center text-[15px] text-[#E4E6E9]"
                   >
                     {l.t}
                   </span>

@@ -5,6 +5,7 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import JsonLd from "@/components/JsonLd";
 import { faqSchema } from "@/lib/seo";
+import { JOBS as REAL_JOBS } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Trucker HQ: диспетчинг, работа CDL и бесплатные инструменты",
@@ -99,6 +100,13 @@ const JOBS = [
   { title: "Локальный водитель, flatbed", co: "Danube Road Corp", loc: "Charlotte, NC", type: "LOCAL", equip: "FLATBED", pay: "$28/hr", posted: "2 дня назад" },
   { title: "Lease purchase, owner-operator", co: "Moldova Express", loc: "Sacramento, CA", type: "OTR", equip: "REEFER", pay: "88% от груза", posted: "3 дня назад" },
 ];
+
+// Best-effort match to a real job slug by company name, so these cards link
+// somewhere real instead of the generic /ru/jobs listing when a match exists.
+function jobSlugFor(company: string): string {
+  const hit = REAL_JOBS.find((j) => j.company.startsWith(company));
+  return hit ? `/jobs/${hit.slug}` : "/ru/jobs";
+}
 
 const TEAM = [
   { name: "Dispatcher Name", role: "Диспетчер · Dry van, reefer", note: "EN · RU · Ночи, Central" },
@@ -468,7 +476,7 @@ export default function HomePageRU() {
           {JOBS.map((j, i) => (
             <Link
               key={j.title + j.co}
-              href="/ru/jobs"
+              href={jobSlugFor(j.co)}
               className={`flex flex-wrap items-center gap-x-6 gap-y-2.5 px-5 py-[18px] hover:bg-offwhite ${
                 i ? "border-t border-[#ECEDEA]" : ""
               }`}

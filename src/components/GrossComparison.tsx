@@ -52,7 +52,7 @@ export default function GrossComparison({ lang = "EN" }: { lang?: "EN" | "RU" })
             step={250}
             value={gross}
             onChange={(e) => setGross(Number(e.target.value))}
-            className="h-8 w-full accent-amber"
+            className="h-11 w-full accent-amber [&::-webkit-slider-thumb]:h-7 [&::-webkit-slider-thumb]:w-7 [&::-moz-range-thumb]:h-7 [&::-moz-range-thumb]:w-7"
           />
           <span className="flex justify-between text-[13px] text-[#8A8F98]">
             <span>$3,000</span>

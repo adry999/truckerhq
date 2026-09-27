@@ -5,6 +5,7 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import JsonLd from "@/components/JsonLd";
 import { faqSchema } from "@/lib/seo";
+import { JOBS } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Trucker HQ: Flat-Rate Truck Dispatch, CDL Jobs, Carrier Tools",
@@ -90,14 +91,6 @@ const STEPS = [
     title: "You drive",
     desc: "Rate cons, invoices, factoring paperwork. We handle it so you can focus on the road.",
   },
-];
-
-const JOBS = [
-  { title: "OTR Company Driver", co: "Carpathian Freight", loc: "Des Plaines, IL", type: "OTR", equip: "DRY VAN", pay: "$0.68–0.72/mi", posted: "Today" },
-  { title: "Regional Driver, home weekly", co: "Volga Line Transport", loc: "Jacksonville, FL", type: "REGIONAL", equip: "REEFER", pay: "$1,800/wk", posted: "Today" },
-  { title: "Team Drivers", co: "Iron Horse Hauling", loc: "Phoenix, AZ", type: "OTR", equip: "DRY VAN", pay: "$0.90/mi split", posted: "1 day ago" },
-  { title: "Local Flatbed Driver", co: "Danube Road Corp", loc: "Charlotte, NC", type: "LOCAL", equip: "FLATBED", pay: "$28/hr", posted: "2 days ago" },
-  { title: "Lease Purchase, Owner-Op", co: "Moldova Express", loc: "Sacramento, CA", type: "OTR", equip: "REEFER", pay: "88% of load", posted: "3 days ago" },
 ];
 
 const TEAM = [
@@ -466,8 +459,8 @@ export default function HomePage() {
         <div className="overflow-hidden rounded-lg border border-border bg-white">
           {JOBS.map((j, i) => (
             <Link
-              key={j.title + j.co}
-              href="/jobs"
+              key={j.slug}
+              href={`/jobs/${j.slug}`}
               className={`flex flex-wrap items-center gap-x-6 gap-y-2.5 px-5 py-[18px] hover:bg-offwhite ${
                 i ? "border-t border-[#ECEDEA]" : ""
               }`}
@@ -475,7 +468,7 @@ export default function HomePage() {
               <div className="flex flex-1 basis-64 flex-col gap-1">
                 <div className="text-[17px] font-bold">{j.title}</div>
                 <div className="text-sm text-grey">
-                  {j.co} · {j.loc}
+                  {j.company} · {j.loc}
                 </div>
               </div>
               <div className="flex flex-wrap gap-2">
@@ -483,7 +476,7 @@ export default function HomePage() {
                   {j.type}
                 </span>
                 <span className="flex h-7 items-center rounded-md bg-[#EEEFEC] px-2.5 font-display text-[15px] font-bold tracking-[.06em] text-[#3F444B]">
-                  {j.equip}
+                  {j.equipment.toUpperCase()}
                 </span>
               </div>
               <div className="flex basis-36 flex-col items-start gap-0.5">

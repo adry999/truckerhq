@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import { STATE_DIRECTORY } from "@/lib/states";
 
 export const metadata: Metadata = {
   title: "Free Trucking Tools, No Sign-Up",
@@ -34,11 +35,6 @@ const TOOLS = [
     cta: "Check a broker",
     desc: "Look up the broker on the rate con. Authority age, bond and any red flags.",
   },
-];
-
-const STATES = [
-  "Texas", "California", "Illinois", "Florida", "Georgia", "Ohio",
-  "Pennsylvania", "North Carolina", "Tennessee", "Indiana", "New Jersey", "Arizona",
 ];
 
 export default function ToolsPage() {
@@ -124,13 +120,13 @@ export default function ToolsPage() {
             Carriers by state
           </h2>
           <div className="flex flex-wrap gap-2">
-            {STATES.map((s) => (
+            {STATE_DIRECTORY.map((s) => (
               <Link
-                key={s}
-                href={s === "Texas" ? "/carriers/texas" : "#"}
+                key={s.slug}
+                href={`/carriers/${s.slug}`}
                 className="flex h-11 items-center rounded-md border-[1.5px] border-border bg-offwhite px-3.5 text-[15px] font-semibold hover:border-green hover:text-green"
               >
-                {s}
+                {s.name}
               </Link>
             ))}
           </div>

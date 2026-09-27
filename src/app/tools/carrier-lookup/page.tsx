@@ -244,7 +244,7 @@ export default async function CarrierLookupPage({
           <div className="flex flex-col gap-1.5">
             <Link
               href="/tools/carrier-lookup"
-              className="flex min-h-9 w-fit items-center font-display text-[17px] font-bold uppercase tracking-[.04em] text-green"
+              className="flex min-h-11 w-fit items-center font-display text-[17px] font-bold uppercase tracking-[.04em] text-green"
             >
               ← New search
             </Link>

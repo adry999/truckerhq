@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { insertRow } from "@/lib/supabase";
 import { guardLeadRoute, str, isHoneypotTripped } from "@/lib/api-guard";
+import { notifyDispatchStart } from "@/lib/notifications";
 
 function sanitizeLanes(value: unknown): string[] {
   if (!Array.isArray(value)) return [];
@@ -39,5 +40,6 @@ export async function POST(req: Request) {
   });
 
   if (!ok) return NextResponse.json({ error: "Could not save request" }, { status: 502 });
+  await notifyDispatchStart(phone);
   return NextResponse.json({ ok: true });
 }

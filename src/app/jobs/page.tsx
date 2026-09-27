@@ -165,7 +165,7 @@ export default async function JobsPage({
                     >
                       {score}
                     </span>
-                    <span className="text-[11px] font-semibold text-[#4B5058]">Health</span>
+                    <span className="text-[13px] font-semibold text-[#4B5058]">Health</span>
                   </span>
                 </div>
                 <div className="flex flex-wrap items-baseline gap-2">

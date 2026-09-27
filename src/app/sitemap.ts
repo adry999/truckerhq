@@ -19,6 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/jobs`, changeFrequency: "daily", priority: 0.9 },
     { url: `${BASE_URL}/ru/jobs`, changeFrequency: "daily", priority: 0.8 },
     { url: `${BASE_URL}/hire-drivers`, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE_URL}/carriers`, changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE_URL}/tools`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE_URL}/tools/carrier-lookup`, changeFrequency: "weekly", priority: 0.8 },
     { url: `${BASE_URL}/tools/profit-per-mile`, changeFrequency: "monthly", priority: 0.7 },

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { healthColor } from "@/lib/data";
 import { trackEvent } from "@/lib/analytics";
 
@@ -57,14 +57,20 @@ export default function ClaimProfileWizard() {
     direct: true,
   });
 
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
+  const honeypotRef = useRef<HTMLInputElement>(null);
+
   const selectedAlsoShow = ALSO_SHOW.filter(([k]) => alsoShow[k]).map(([, label]) => label);
 
-  const primaryLabel = step === 0 ? (codeSent ? "Verify code" : "Send code") : "Publish profile";
+  const primaryLabel =
+    step === 0 ? (codeSent ? "Verify code" : "Send code") : submitting ? "Publishing..." : "Publish profile";
   const primaryDisabled =
     (step === 0 && !codeSent && !contactMethod) ||
-    (step === 0 && codeSent && code.replace(/\D/g, "").length < 6);
+    (step === 0 && codeSent && code.replace(/\D/g, "").length < 6) ||
+    (step === 1 && submitting);
 
-  function handlePrimaryClick() {
+  async function handlePrimaryClick() {
     if (step === 0) {
       if (!codeSent) {
         setCodeSent(true);
@@ -74,8 +80,31 @@ export default function ClaimProfileWizard() {
       return;
     }
     if (step === 1) {
-      trackEvent("carrier_profile_claimed", { dot: CARRIER.dot });
-      setStep(2);
+      setSubmitting(true);
+      setSubmitError(false);
+      try {
+        const res = await fetch("/api/claim", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            dot: CARRIER.dot,
+            carrierSlug: CARRIER.slug,
+            contactMethod,
+            phone,
+            equipment,
+            lanes,
+            alsoShow: selectedAlsoShow,
+            website: honeypotRef.current?.value,
+          }),
+        });
+        if (!res.ok) throw new Error("request failed");
+        trackEvent("carrier_profile_claimed", { dot: CARRIER.dot });
+        setStep(2);
+      } catch {
+        setSubmitError(true);
+      } finally {
+        setSubmitting(false);
+      }
       return;
     }
   }
@@ -354,6 +383,20 @@ export default function ClaimProfileWizard() {
                 </button>
               </div>
             )}
+            {submitError && (
+              <p role="alert" className="text-sm font-semibold text-red">
+                Something went wrong. Try again in a moment.
+              </p>
+            )}
+            <input
+              ref={honeypotRef}
+              type="text"
+              name="website"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              className="hidden"
+            />
           </div>
         </div>
 

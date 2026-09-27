@@ -219,7 +219,7 @@ export default async function CityJobsPage({
                   const slug = CITY_NAME_TO_SLUG[c.name];
                   const label = `${c.name} (${c.count})`;
                   const className =
-                    "flex h-9 items-center rounded-[10px] border-[1.5px] border-border bg-white px-3 text-sm font-semibold text-asphalt";
+                    "flex h-11 items-center rounded-[10px] border-[1.5px] border-border bg-white px-3 text-sm font-semibold text-asphalt";
                   return slug ? (
                     <Link
                       key={c.name}

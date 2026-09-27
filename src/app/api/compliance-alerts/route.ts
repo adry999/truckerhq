@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { insertRow } from "@/lib/supabase";
 import { guardLeadRoute, str, isHoneypotTripped } from "@/lib/api-guard";
+import { notifyComplianceAlertsOn } from "@/lib/notifications";
 
 function sanitizeWatch(value: unknown): Record<string, boolean> {
   if (!value || typeof value !== "object") return {};
@@ -33,5 +34,6 @@ export async function POST(req: Request) {
   });
 
   if (!ok) return NextResponse.json({ error: "Could not save signup" }, { status: 502 });
+  await notifyComplianceAlertsOn(phone, dot);
   return NextResponse.json({ ok: true });
 }
