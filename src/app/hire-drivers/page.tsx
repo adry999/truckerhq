@@ -2,7 +2,6 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import Logo from "@/components/Logo";
 import HireDriversForm from "@/components/HireDriversForm";
 import JsonLd from "@/components/JsonLd";
 import { faqSchema } from "@/lib/seo";
@@ -76,7 +75,6 @@ export default function HireDriversPage() {
         </div>
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[rgba(22,24,27,.94)] via-[rgba(22,24,27,.7)] to-[rgba(22,24,27,.35)]" />
         <div className="relative mx-auto flex max-w-6xl flex-col gap-[22px] px-4 py-16 sm:px-6 md:py-28">
-          <Logo theme="dark" size={28} sub="JOBS" />
           <h1 className="max-w-3xl font-display text-5xl font-extrabold uppercase leading-[0.9] sm:text-6xl md:text-7xl lg:text-8xl">
             A parked truck
             <br />

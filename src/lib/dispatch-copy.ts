@@ -1,6 +1,5 @@
 export type DispatchCopy = {
   heroAlt: string;
-  logoSub: string;
   h1Line1: string;
   h1Line2: string;
   heroBody: string;
@@ -43,7 +42,6 @@ export type DispatchCopy = {
 export const DISPATCH_COPY: Record<"EN" | "RU", DispatchCopy> = {
   EN: {
     heroAlt: "Driver in the cab at a truck stop, dawn",
-    logoSub: "DISPATCH",
     h1Line1: "Flat weekly dispatch.",
     h1Line2: "No percentage.",
     heroBody:
@@ -134,7 +132,6 @@ export const DISPATCH_COPY: Record<"EN" | "RU", DispatchCopy> = {
   },
   RU: {
     heroAlt: "Водитель в кабине на стоянке для дальнобойщиков, рассвет",
-    logoSub: "ДИСПЕТЧИНГ",
     h1Line1: "Фиксированная цена в неделю.",
     h1Line2: "Без процентов.",
     heroBody:

@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import Logo from "@/components/Logo";
 import GrossComparison from "@/components/GrossComparison";
 import JsonLd from "@/components/JsonLd";
 import { faqSchema } from "@/lib/seo";
@@ -31,7 +30,6 @@ export default function DispatchPageContent({ lang }: { lang: "EN" | "RU" }) {
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[rgba(22,24,27,.94)] via-[rgba(22,24,27,.7)] to-[rgba(22,24,27,.35)]" />
         <div className="relative mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-2 md:items-center md:py-28">
           <div className="flex flex-col gap-5">
-            <Logo theme="dark" size={30} sub={c.logoSub} />
             <h1 className="font-display text-5xl font-extrabold uppercase leading-[0.9] sm:text-6xl md:text-7xl lg:text-8xl">
               {c.h1Line1}
               <br />

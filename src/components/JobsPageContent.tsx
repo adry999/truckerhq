@@ -1,7 +1,6 @@
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import Logo from "@/components/Logo";
 import { JOBS, healthColor, CARRIERS } from "@/lib/data";
 import { CITY_DIRECTORY } from "@/lib/cities";
 import { JOBS_COPY } from "@/lib/jobs-copy";
@@ -51,7 +50,6 @@ export default function JobsPageContent({
 
       <section className="bg-asphalt text-offwhite">
         <div className="mx-auto flex max-w-6xl flex-col gap-[18px] px-4 py-10 sm:px-6 md:py-20">
-          <Logo theme="dark" size={28} sub="JOBS" />
           <h1 className="font-display text-5xl font-extrabold uppercase leading-[0.9] sm:text-6xl md:text-7xl">
             {c.h1Line1}
             <br />
