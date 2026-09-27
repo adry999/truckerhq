@@ -1,4 +1,4 @@
-import type { StateCarrierRow } from "@/components/StateCarriersPage";
+import type { StateCarrierRow } from "@/lib/data";
 
 export const ILLINOIS_CARRIERS: StateCarrierRow[] = [
   { name: "Windy City Freight Co", city: "Chicago", dot: "5312048", equipment: "Power only", trucks: 8, status: "ACTIVE", score: 87 },

@@ -13,15 +13,16 @@ export default function ApplyForm({ company, jobSlug }: { company: string; jobSl
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(false);
 
-  async function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setSubmitting(true);
     setError(false);
+    const website = new FormData(e.currentTarget).get("website");
     try {
       const res = await fetch("/api/apply", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ jobSlug, fullName, phone, cdlClass, experience, language }),
+        body: JSON.stringify({ jobSlug, fullName, phone, cdlClass, experience, language, website }),
       });
       if (!res.ok) throw new Error("request failed");
       trackEvent("job_application", { job_slug: jobSlug });
@@ -52,10 +53,20 @@ export default function ApplyForm({ company, jobSlug }: { company: string; jobSl
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-3.5 p-5">
+      <input
+        type="text"
+        name="website"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="hidden"
+      />
       <label className="flex flex-col gap-1.5">
-        <span className="text-sm font-semibold">Full name</span>
+        <span className="text-sm font-semibold">Full name (required)</span>
         <input
           required
+          name="fullName"
+          autoComplete="name"
           value={fullName}
           onChange={(e) => setFullName(e.target.value)}
           placeholder="Your name"
@@ -63,10 +74,12 @@ export default function ApplyForm({ company, jobSlug }: { company: string; jobSl
         />
       </label>
       <label className="flex flex-col gap-1.5">
-        <span className="text-sm font-semibold">Phone</span>
+        <span className="text-sm font-semibold">Phone (required)</span>
         <input
           required
           type="tel"
+          name="phone"
+          autoComplete="tel"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
           placeholder="(555) 555-5555"
@@ -116,13 +129,22 @@ export default function ApplyForm({ company, jobSlug }: { company: string; jobSl
         {submitting ? "Sending..." : "Send application"}
       </button>
       {error && (
-        <span className="text-[13px] font-semibold text-red">
+        <span role="alert" className="text-[13px] font-semibold text-red">
           Something went wrong. Try again in a moment.
         </span>
       )}
       <span className="text-[13px] leading-relaxed text-grey">
-        A recruiter calls you back within one business day. We never share
-        your number without asking.
+        A recruiter calls you back within one business day. By submitting,
+        you agree to receive a call and text about your application at this
+        number. Msg &amp; data rates may apply. Reply STOP to opt out. See{" "}
+        <a href="/sms-terms" className="underline">
+          SMS terms
+        </a>{" "}
+        and{" "}
+        <a href="/privacy" className="underline">
+          Privacy
+        </a>
+        .
       </span>
     </form>
   );

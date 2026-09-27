@@ -1,4 +1,4 @@
-import type { StateCarrierRow } from "@/components/StateCarriersPage";
+import type { StateCarrierRow } from "@/lib/data";
 
 export const INDIANA_CARRIERS: StateCarrierRow[] = [
   {

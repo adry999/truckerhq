@@ -1,4 +1,4 @@
-import type { StateCarrierRow } from "@/components/StateCarriersPage";
+import type { StateCarrierRow } from "@/lib/data";
 
 export const FLORIDA_CARRIERS: StateCarrierRow[] = [
   { name: "Sunshine State Logistics", city: "Miami", dot: "5214087", equipment: "Reefer", trucks: 8, status: "ACTIVE", score: 87 },

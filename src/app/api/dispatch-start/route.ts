@@ -1,28 +1,41 @@
 import { NextResponse } from "next/server";
 import { insertRow } from "@/lib/supabase";
+import { guardLeadRoute, str, isHoneypotTripped } from "@/lib/api-guard";
+
+function sanitizeLanes(value: unknown): string[] {
+  if (!Array.isArray(value)) return [];
+  return value.slice(0, 10).map((v) => str(v, 60)).filter(Boolean);
+}
 
 export async function POST(req: Request) {
+  const guarded = guardLeadRoute(req);
+  if (guarded) return guarded;
+
   const body = await req.json().catch(() => null);
-  if (!body || typeof body.name !== "string" || typeof body.phone !== "string") {
-    return NextResponse.json({ error: "Missing name or phone" }, { status: 400 });
-  }
-  if (!body.name.trim() || !body.phone.trim()) {
+  if (isHoneypotTripped(body)) return NextResponse.json({ ok: true });
+
+  const name = str(body?.name, 100);
+  const phone = str(body?.phone, 30);
+  if (!name || !phone) {
     return NextResponse.json({ error: "Missing name or phone" }, { status: 400 });
   }
 
+  const trucksRaw = Number(body?.trucks);
+  const trucks = Number.isFinite(trucksRaw) ? Math.min(Math.max(trucksRaw, 1), 500) : 1;
+
   const ok = await insertRow("dispatch_requests", {
-    trailer_type: String(body.trailerType ?? ""),
-    trucks: Number(body.trucks) || 1,
-    driver_type: String(body.driverType ?? ""),
-    home_base: String(body.homeBase ?? ""),
-    lanes: Array.isArray(body.lanes) ? body.lanes.map(String) : [],
-    home_time: String(body.homeTime ?? ""),
-    authority: String(body.authority ?? ""),
-    mc_number: String(body.mcNumber ?? ""),
-    name: body.name.trim(),
-    phone: body.phone.trim(),
-    best_time: String(body.bestTime ?? ""),
-    language: String(body.language ?? "English"),
+    trailer_type: str(body?.trailerType, 60),
+    trucks,
+    driver_type: str(body?.driverType, 60),
+    home_base: str(body?.homeBase, 100),
+    lanes: sanitizeLanes(body?.lanes),
+    home_time: str(body?.homeTime, 60),
+    authority: str(body?.authority, 60),
+    mc_number: str(body?.mcNumber, 20),
+    name,
+    phone,
+    best_time: str(body?.bestTime, 60),
+    language: str(body?.language, 20) || "English",
   });
 
   if (!ok) return NextResponse.json({ error: "Could not save request" }, { status: 502 });

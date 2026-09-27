@@ -7,18 +7,10 @@ import {
   healthColor,
   healthTextColor,
   healthLabel,
-  type CarrierStatus,
+  type StateCarrierRow,
 } from "@/lib/data";
 
-export type StateCarrierRow = {
-  name: string;
-  city: string;
-  dot: string;
-  equipment: string;
-  trucks: number;
-  status: CarrierStatus;
-  score: number;
-};
+export type { StateCarrierRow };
 
 export type StateCarriersPageProps = {
   stateAbbr: string;
@@ -94,7 +86,9 @@ export default async function StateCarriersPage({
               Carrier Lookup
             </Link>
             <span>/</span>
-            <span>States</span>
+            <Link href="/carriers" className="text-offwhite">
+              States
+            </Link>
             <span>/</span>
             <span className="text-amber">{stateName}</span>
           </div>
@@ -220,7 +214,7 @@ export default async function StateCarriersPage({
             return (
               <Link
                 key={c.dot}
-                href="/tools/carrier-lookup"
+                href={`/tools/carrier-lookup?q=${c.dot}&mode=DOT`}
                 className={`grid grid-cols-[1fr_auto] items-center gap-3 px-5 py-[18px] tabular-nums hover:bg-offwhite md:grid-cols-[2.2fr_1fr_1.2fr_80px_130px_110px] md:gap-4 ${
                   i ? "border-t border-[#ECEDEA]" : ""
                 }`}

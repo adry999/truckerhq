@@ -84,7 +84,15 @@ export default function SiteFooter() {
                 {l.t}
               </Link>
             ))}
-            <span>English · Русский</span>
+            <span>
+              <Link href="/" className="text-[#AEB2B8] hover:text-amber">
+                English
+              </Link>
+              {" · "}
+              <Link href="/ru" className="text-[#AEB2B8] hover:text-amber">
+                Русский
+              </Link>
+            </span>
           </span>
         </div>
       </div>

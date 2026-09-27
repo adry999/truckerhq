@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import { trackEvent } from "@/lib/analytics";
+import { Segmented } from "@/components/ui/Segmented";
 
 const TRAILER_TYPES = ["Dry van", "Reefer", "Flatbed", "Step deck", "Power only"];
 const DRIVER_TYPES = ["I drive", "Company driver", "Team"];
@@ -44,39 +45,6 @@ function CheckIcon({ stroke = "#FFFFFF" }: { stroke?: string }) {
   );
 }
 
-function Segmented({
-  options,
-  value,
-  onChange,
-  containerClassName = "flex flex-wrap gap-2",
-  buttonClassName = "h-[50px] flex-1 basis-[130px]",
-}: {
-  options: string[];
-  value: string;
-  onChange: (v: string) => void;
-  containerClassName?: string;
-  buttonClassName?: string;
-}) {
-  return (
-    <div className={containerClassName}>
-      {options.map((o) => (
-        <button
-          key={o}
-          type="button"
-          onClick={() => onChange(o)}
-          className={`${buttonClassName} rounded-[10px] px-3 font-sans text-[15px] font-semibold ${
-            value === o
-              ? "border-[1.5px] border-green bg-green text-offwhite"
-              : "border-[1.5px] border-[#9CA0A8] bg-white text-asphalt"
-          }`}
-        >
-          {o}
-        </button>
-      ))}
-    </div>
-  );
-}
-
 function Stepper({
   value,
   onChange,
@@ -89,7 +57,7 @@ function Stepper({
   max?: number;
 }) {
   return (
-    <div className="flex items-center gap-3">
+    <div role="group" aria-labelledby="trucks-label" className="flex items-center gap-3">
       <button
         type="button"
         onClick={() => onChange(Math.max(min, value - 1))}
@@ -99,9 +67,12 @@ function Stepper({
       >
         −
       </button>
-      <span className="flex h-[50px] w-[70px] items-center justify-center rounded-[10px] border-[1.5px] border-border bg-white font-display text-2xl font-extrabold tabular-nums">
+      <output
+        aria-live="polite"
+        className="flex h-[50px] w-[70px] items-center justify-center rounded-[10px] border-[1.5px] border-border bg-white font-display text-2xl font-extrabold tabular-nums"
+      >
         {value}
-      </span>
+      </output>
       <button
         type="button"
         onClick={() => onChange(Math.min(max, value + 1))}
@@ -149,7 +120,7 @@ export default function DispatchStartWizard() {
     setLanes((prev) => (prev.includes(lane) ? prev.filter((l) => l !== lane) : [...prev, lane]));
   };
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (step < 3) {
       setStep((s) => Math.min(4, s + 1));
@@ -157,6 +128,7 @@ export default function DispatchStartWizard() {
     }
     setSubmitting(true);
     setSubmitError(false);
+    const website = new FormData(e.currentTarget).get("website");
     try {
       const res = await fetch("/api/dispatch-start", {
         method: "POST",
@@ -174,6 +146,7 @@ export default function DispatchStartWizard() {
           phone,
           bestTime,
           language,
+          website,
         }),
       });
       if (!res.ok) throw new Error("request failed");
@@ -193,13 +166,17 @@ export default function DispatchStartWizard() {
     <>
       <section className="bg-asphalt text-offwhite">
         <div className="mx-auto flex max-w-6xl flex-col gap-5 px-4 pb-10 pt-6 sm:px-6 md:pb-14">
-          <div className="flex gap-2">
+          <ol className="flex gap-2">
             {STEP_LABELS.map((label, i) => {
               const isFuture = i > step;
               const isPast = i < step;
               const clickable = isPast && step < 4;
               return (
-                <div key={label} className="flex flex-1 flex-col gap-2">
+                <li
+                  key={label}
+                  aria-current={i === step ? "step" : undefined}
+                  className="flex flex-1 flex-col gap-2"
+                >
                   <div className={`h-1.5 rounded-full ${isFuture ? "bg-white/20" : "bg-amber"}`} />
                   {clickable ? (
                     <button
@@ -212,16 +189,16 @@ export default function DispatchStartWizard() {
                   ) : (
                     <span
                       className={`font-display text-sm font-bold uppercase tracking-[.08em] ${
-                        isFuture ? "text-white/40" : "text-amber"
+                        isFuture ? "text-[#AEB2B8]" : "text-amber"
                       }`}
                     >
                       {label}
                     </span>
                   )}
-                </div>
+                </li>
               );
             })}
-          </div>
+          </ol>
         </div>
       </section>
 
@@ -267,20 +244,42 @@ export default function DispatchStartWizard() {
                 onSubmit={handleSubmit}
                 className="flex flex-col gap-7 rounded-lg border border-border bg-white p-[22px] sm:p-7"
               >
+                <input
+                  type="text"
+                  name="website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  className="hidden"
+                />
                 {step === 0 && (
                   <div className="flex flex-col gap-7">
                     <h2 className="font-display text-3xl font-extrabold uppercase">Your truck</h2>
                     <div className="flex flex-col gap-2">
                       <span className="text-sm font-semibold">Trailer type</span>
-                      <Segmented options={TRAILER_TYPES} value={trailer} onChange={setTrailer} />
+                      <Segmented
+                        options={TRAILER_TYPES}
+                        value={trailer}
+                        onChange={setTrailer}
+                        label="Trailer type"
+                        buttonClassName="h-[50px] flex-1 basis-[130px] px-3 font-sans text-[15px] font-semibold"
+                      />
                     </div>
                     <div className="flex flex-col gap-2">
-                      <span className="text-sm font-semibold">How many trucks?</span>
+                      <span id="trucks-label" className="text-sm font-semibold">
+                        How many trucks?
+                      </span>
                       <Stepper value={trucks} onChange={setTrucks} />
                     </div>
                     <div className="flex flex-col gap-2">
                       <span className="text-sm font-semibold">Who drives?</span>
-                      <Segmented options={DRIVER_TYPES} value={driver} onChange={setDriver} />
+                      <Segmented
+                        options={DRIVER_TYPES}
+                        value={driver}
+                        onChange={setDriver}
+                        label="Who drives?"
+                        buttonClassName="h-[50px] flex-1 basis-[130px] px-3 font-sans text-[15px] font-semibold"
+                      />
                     </div>
                   </div>
                 )}
@@ -303,13 +302,19 @@ export default function DispatchStartWizard() {
                       <span className="text-sm font-semibold">
                         Where do you want to run? (Pick any)
                       </span>
-                      <div className="flex flex-wrap gap-2">
+                      <div
+                        role="group"
+                        aria-label="Where do you want to run?"
+                        className="flex flex-wrap gap-2"
+                      >
                         {REGIONS.map((region) => {
                           const on = lanes.includes(region);
                           return (
                             <button
                               key={region}
                               type="button"
+                              role="checkbox"
+                              aria-checked={on}
                               onClick={() => toggleLane(region)}
                               className={`h-[46px] rounded-[10px] px-4 font-sans text-[15px] font-semibold ${
                                 on
@@ -325,7 +330,13 @@ export default function DispatchStartWizard() {
                     </div>
                     <div className="flex flex-col gap-2">
                       <span className="text-sm font-semibold">How often home?</span>
-                      <Segmented options={HOME_TIME_OPTIONS} value={homeTime} onChange={setHomeTime} />
+                      <Segmented
+                        options={HOME_TIME_OPTIONS}
+                        value={homeTime}
+                        onChange={setHomeTime}
+                        label="How often home?"
+                        buttonClassName="h-[50px] flex-1 basis-[130px] px-3 font-sans text-[15px] font-semibold"
+                      />
                     </div>
                   </div>
                 )}
@@ -335,11 +346,13 @@ export default function DispatchStartWizard() {
                     <h2 className="font-display text-3xl font-extrabold uppercase">
                       Your authority
                     </h2>
-                    <div className="flex flex-col gap-2.5">
+                    <div role="radiogroup" aria-label="Your authority" className="flex flex-col gap-2.5">
                       {AUTHORITY_OPTIONS.map((a) => (
                         <button
                           key={a}
                           type="button"
+                          role="radio"
+                          aria-checked={authority === a}
                           onClick={() => setAuthority(a)}
                           className={`flex h-[60px] items-center rounded-[10px] px-5 text-left font-sans text-base font-semibold ${
                             authority === a
@@ -386,9 +399,11 @@ export default function DispatchStartWizard() {
                     </h2>
                     <div className="grid gap-4 sm:grid-cols-2">
                       <label className="flex flex-col gap-1.5">
-                        <span className="text-sm font-semibold">Name</span>
+                        <span className="text-sm font-semibold">Name (required)</span>
                         <input
                           required
+                          name="name"
+                          autoComplete="name"
                           value={name}
                           onChange={(e) => setName(e.target.value)}
                           placeholder="Your name"
@@ -396,10 +411,12 @@ export default function DispatchStartWizard() {
                         />
                       </label>
                       <label className="flex flex-col gap-1.5">
-                        <span className="text-sm font-semibold">Phone</span>
+                        <span className="text-sm font-semibold">Phone (required)</span>
                         <input
                           required
                           type="tel"
+                          name="phone"
+                          autoComplete="tel"
                           value={phone}
                           onChange={(e) => setPhone(e.target.value)}
                           placeholder="(555) 555-5555"
@@ -409,7 +426,13 @@ export default function DispatchStartWizard() {
                     </div>
                     <div className="flex flex-col gap-2">
                       <span className="text-sm font-semibold">Best time</span>
-                      <Segmented options={BEST_TIME_OPTIONS} value={bestTime} onChange={setBestTime} />
+                      <Segmented
+                        options={BEST_TIME_OPTIONS}
+                        value={bestTime}
+                        onChange={setBestTime}
+                        label="Best time"
+                        buttonClassName="h-[50px] flex-1 basis-[130px] px-3 font-sans text-[15px] font-semibold"
+                      />
                     </div>
                     <div className="flex flex-col gap-2">
                       <span className="text-sm font-semibold">Language</span>
@@ -417,10 +440,24 @@ export default function DispatchStartWizard() {
                         options={LANGUAGE_OPTIONS}
                         value={language}
                         onChange={setLanguage}
+                        label="Language"
                         containerClassName="grid max-w-[340px] grid-cols-2 gap-2"
-                        buttonClassName="h-[50px]"
+                        buttonClassName="h-[50px] px-3 font-sans text-[15px] font-semibold"
                       />
                     </div>
+                    <p className="text-[13px] leading-relaxed text-grey">
+                      By requesting a call, you agree to receive a call and
+                      text from Trucker HQ about this request. Msg &amp; data
+                      rates may apply. Reply STOP to opt out. See{" "}
+                      <Link href="/sms-terms" className="underline">
+                        SMS terms
+                      </Link>{" "}
+                      and{" "}
+                      <Link href="/privacy" className="underline">
+                        Privacy
+                      </Link>
+                      .
+                    </p>
                   </div>
                 )}
 
@@ -445,7 +482,7 @@ export default function DispatchStartWizard() {
                   </button>
                 </div>
                 {submitError && (
-                  <p className="text-sm font-semibold text-red">
+                  <p role="alert" className="text-sm font-semibold text-red">
                     Something went wrong. Try again, or call us directly.
                   </p>
                 )}

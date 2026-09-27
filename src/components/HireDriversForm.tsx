@@ -2,50 +2,22 @@
 
 import { useState, type FormEvent } from "react";
 import { trackEvent } from "@/lib/analytics";
+import { Segmented } from "@/components/ui/Segmented";
 
 const POSITIONS = ["OTR", "Regional", "Local", "Team", "Owner-op"];
 const EQUIPMENT = ["Dry van", "Reefer", "Flatbed", "Power only"];
 const LANGUAGES = ["Any", "English", "Russian"];
 
 const FIELDS = [
-  ["companyName", "Company name", "Your company", "text"],
-  ["dotNumber", "DOT number", "6–8 digits", "text"],
-  ["contactName", "Your name", "Who we call", "text"],
-  ["phone", "Phone", "(555) 555-5555", "tel"],
-  ["pay", "Pay", "e.g. $0.70/mi or $1,800/wk", "text"],
-  ["homeBase", "Home base", "City, state", "text"],
+  ["companyName", "Company name", "Your company", "text", "organization"],
+  ["dotNumber", "DOT number", "6–8 digits", "text", "off"],
+  ["contactName", "Your name", "Who we call", "text", "name"],
+  ["phone", "Phone", "(555) 555-5555", "tel", "tel"],
+  ["pay", "Pay", "e.g. $0.70/mi or $1,800/wk", "text", "off"],
+  ["homeBase", "Home base", "City, state", "text", "address-level2"],
 ] as const;
 
 type FieldKey = (typeof FIELDS)[number][0];
-
-function Segmented({
-  options,
-  value,
-  onChange,
-}: {
-  options: string[];
-  value: string;
-  onChange: (v: string) => void;
-}) {
-  return (
-    <div className="flex flex-wrap gap-1.5">
-      {options.map((o) => (
-        <button
-          key={o}
-          type="button"
-          onClick={() => onChange(o)}
-          className={`h-[50px] flex-1 basis-[110px] rounded-[10px] font-display text-[17px] font-extrabold tracking-[.05em] ${
-            value === o
-              ? "border-[1.5px] border-green bg-green text-offwhite"
-              : "border-[1.5px] border-[#9CA0A8] bg-white text-asphalt"
-          }`}
-        >
-          {o.toUpperCase()}
-        </button>
-      ))}
-    </div>
-  );
-}
 
 export default function HireDriversForm() {
   const [fields, setFields] = useState<Record<FieldKey, string>>({
@@ -63,10 +35,11 @@ export default function HireDriversForm() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(false);
 
-  async function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setSubmitting(true);
     setError(false);
+    const website = new FormData(e.currentTarget).get("website");
     try {
       const res = await fetch("/api/hire-drivers", {
         method: "POST",
@@ -76,6 +49,7 @@ export default function HireDriversForm() {
           position: pos,
           equipment: eq,
           driverLanguage: lang,
+          website,
         }),
       });
       if (!res.ok) throw new Error("request failed");
@@ -104,13 +78,23 @@ export default function HireDriversForm() {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-[18px]">
+      <input
+        type="text"
+        name="website"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="hidden"
+      />
       <div className="grid gap-4 sm:grid-cols-2">
-        {FIELDS.map(([key, label, ph, type]) => (
+        {FIELDS.map(([key, label, ph, type, autoComplete]) => (
           <label key={key} className="flex flex-col gap-1.5">
-            <span className="text-sm font-semibold">{label}</span>
+            <span className="text-sm font-semibold">{label} (required)</span>
             <input
               required
               type={type}
+              name={key}
+              autoComplete={autoComplete}
               value={fields[key]}
               onChange={(e) => setFields((f) => ({ ...f, [key]: e.target.value }))}
               placeholder={ph}
@@ -122,15 +106,15 @@ export default function HireDriversForm() {
 
       <div className="flex flex-col gap-1.5">
         <span className="text-sm font-semibold">Position</span>
-        <Segmented options={POSITIONS} value={pos} onChange={setPos} />
+        <Segmented options={POSITIONS} value={pos} onChange={setPos} label="Position" uppercase />
       </div>
       <div className="flex flex-col gap-1.5">
         <span className="text-sm font-semibold">Equipment</span>
-        <Segmented options={EQUIPMENT} value={eq} onChange={setEq} />
+        <Segmented options={EQUIPMENT} value={eq} onChange={setEq} label="Equipment" uppercase />
       </div>
       <div className="flex flex-col gap-1.5">
         <span className="text-sm font-semibold">Driver language</span>
-        <Segmented options={LANGUAGES} value={lang} onChange={setLang} />
+        <Segmented options={LANGUAGES} value={lang} onChange={setLang} label="Driver language" uppercase />
       </div>
 
       <button
@@ -141,12 +125,23 @@ export default function HireDriversForm() {
         {submitting ? "Sending..." : "Send job"}
       </button>
       {error && (
-        <span className="text-[13px] font-semibold text-red">
+        <span role="alert" className="text-[13px] font-semibold text-red">
           Something went wrong. Try again in a moment.
         </span>
       )}
       <span className="text-[13px] text-grey">
         We check your DOT and call you to confirm before the job goes live.
+        By submitting, you agree to receive a call and text about this job
+        post at this number. Msg &amp; data rates may apply. Reply STOP to
+        opt out. See{" "}
+        <a href="/sms-terms" className="underline">
+          SMS terms
+        </a>{" "}
+        and{" "}
+        <a href="/privacy" className="underline">
+          Privacy
+        </a>
+        .
       </span>
     </form>
   );

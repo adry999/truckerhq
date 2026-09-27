@@ -1,4 +1,4 @@
-import type { StateCarrierRow } from "@/components/StateCarriersPage";
+import type { StateCarrierRow } from "@/lib/data";
 
 export const PENNSYLVANIA_CARRIERS: StateCarrierRow[] = [
   { name: "Keystone Freight Lines", city: "Harrisburg", dot: "5734182", equipment: "Dry van", trucks: 8, status: "ACTIVE", score: 87 },

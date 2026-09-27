@@ -5,11 +5,13 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import ApplyForm from "@/components/ApplyForm";
 import JsonLd from "@/components/JsonLd";
-import { jobPostingSchema } from "@/lib/seo";
+import CityJobsPage from "@/components/CityJobsPage";
+import { jobPostingSchema, faqSchema, breadcrumbSchema } from "@/lib/seo";
 import { JOBS, findJob, findCarrier, healthColor } from "@/lib/data";
+import { CITY_CONTENT, CITY_SLUGS, MIN_JOBS_TO_INDEX } from "@/lib/city-content";
 
 export function generateStaticParams() {
-  return JOBS.map((j) => ({ slug: j.slug }));
+  return [...JOBS.map((j) => ({ slug: j.slug })), ...CITY_SLUGS.map((slug) => ({ slug }))];
 }
 
 export async function generateMetadata({
@@ -18,20 +20,66 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
+
+  const city = CITY_CONTENT[slug];
+  if (city) {
+    return {
+      title: city.title,
+      description: city.description,
+      alternates: { canonical: `/jobs/${slug}` },
+      robots:
+        city.jobs.length >= MIN_JOBS_TO_INDEX
+          ? undefined
+          : { index: false, follow: true },
+    };
+  }
+
   const job = findJob(slug);
   if (!job) return {};
   return {
     title: `${job.title} — ${job.company}`,
     description: `${job.title} at ${job.company}, ${job.loc}. ${job.pay} ${job.payNote}. ${job.home}.`,
+    alternates: { canonical: `/jobs/${slug}` },
   };
 }
 
-export default async function JobDetailPage({
+export default async function JobsSlugPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<{ type?: string }>;
 }) {
   const { slug } = await params;
+
+  const city = CITY_CONTENT[slug];
+  if (city) {
+    return (
+      <>
+        <JsonLd data={faqSchema(city.faqs)} />
+        <JsonLd
+          data={breadcrumbSchema([
+            { name: "CDL jobs", path: "/jobs" },
+            { name: city.stateName, path: "/jobs" },
+            { name: city.cityName, path: `/jobs/${slug}` },
+          ])}
+        />
+        <CityJobsPage
+          cityName={city.cityName}
+          stateName={city.stateName}
+          heroIntro={city.heroIntro}
+          stats={city.stats}
+          jobs={city.jobs}
+          faqs={city.faqs}
+          hiringCarriers={city.hiringCarriers}
+          nearbyCities={city.nearbyCities}
+          basePath={`/jobs/${slug}`}
+          searchParams={searchParams}
+        />
+      </>
+    );
+  }
+
   const job = findJob(slug);
   if (!job) notFound();
 

@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { trackEvent } from "@/lib/analytics";
+import { Segmented } from "@/components/ui/Segmented";
 
 const TOPICS = ["Dispatch", "Driver job", "Hiring drivers", "Something else"];
 const LANGUAGES = ["EN", "RU"] as const;
@@ -9,35 +10,6 @@ const LANGUAGE_NAMES: Record<(typeof LANGUAGES)[number], string> = {
   EN: "English",
   RU: "Russian",
 };
-
-function Segmented({
-  options,
-  value,
-  onChange,
-}: {
-  options: readonly string[];
-  value: string;
-  onChange: (v: string) => void;
-}) {
-  return (
-    <div className="flex flex-wrap gap-1.5">
-      {options.map((o) => (
-        <button
-          key={o}
-          type="button"
-          onClick={() => onChange(o)}
-          className={`h-[50px] flex-1 basis-[110px] rounded-[10px] font-display text-[17px] font-extrabold tracking-[.05em] ${
-            value === o
-              ? "border-[1.5px] border-green bg-green text-offwhite"
-              : "border-[1.5px] border-[#9CA0A8] bg-white text-asphalt"
-          }`}
-        >
-          {o.toUpperCase()}
-        </button>
-      ))}
-    </div>
-  );
-}
 
 export default function AboutContactForm() {
   const [topic, setTopic] = useState("Dispatch");
@@ -49,15 +21,16 @@ export default function AboutContactForm() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(false);
 
-  async function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setSubmitting(true);
     setError(false);
+    const website = new FormData(e.currentTarget).get("website");
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ topic, name, phone, message, language: lang }),
+        body: JSON.stringify({ topic, name, phone, message, language: lang, website }),
       });
       if (!res.ok) throw new Error("request failed");
       trackEvent("contact_message", { topic });
@@ -93,20 +66,30 @@ export default function AboutContactForm() {
       onSubmit={handleSubmit}
       className="flex flex-col gap-[18px] rounded-lg border-[1.5px] border-border bg-offwhite p-6"
     >
+      <input
+        type="text"
+        name="website"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="hidden"
+      />
       <h3 className="font-display text-3xl font-extrabold uppercase">
         Ask us to call you
       </h3>
 
       <div className="flex flex-col gap-1.5">
         <span className="text-sm font-semibold">Topic</span>
-        <Segmented options={TOPICS} value={topic} onChange={setTopic} />
+        <Segmented options={TOPICS} value={topic} onChange={setTopic} label="Topic" uppercase />
       </div>
 
       <label className="flex flex-col gap-1.5">
-        <span className="text-sm font-semibold">Name</span>
+        <span className="text-sm font-semibold">Name (required)</span>
         <input
           required
           type="text"
+          name="name"
+          autoComplete="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Your name"
@@ -115,10 +98,12 @@ export default function AboutContactForm() {
       </label>
 
       <label className="flex flex-col gap-1.5">
-        <span className="text-sm font-semibold">Phone</span>
+        <span className="text-sm font-semibold">Phone (required)</span>
         <input
           required
           type="tel"
+          name="phone"
+          autoComplete="tel"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
           placeholder="(XXX) XXX-XXXX"
@@ -130,6 +115,7 @@ export default function AboutContactForm() {
         <span className="text-sm font-semibold">Anything we should know?</span>
         <textarea
           rows={3}
+          maxLength={2000}
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Truck, lanes, MC number"
@@ -139,7 +125,13 @@ export default function AboutContactForm() {
 
       <div className="flex flex-col gap-1.5">
         <span className="text-sm font-semibold">Call me in</span>
-        <Segmented options={LANGUAGES} value={lang} onChange={(v) => setLang(v as (typeof LANGUAGES)[number])} />
+        <Segmented
+          options={LANGUAGES}
+          value={lang}
+          onChange={(v) => setLang(v as (typeof LANGUAGES)[number])}
+          label="Call me in"
+          uppercase
+        />
       </div>
 
       <button
@@ -150,12 +142,22 @@ export default function AboutContactForm() {
         {submitting ? "Sending..." : "Call me back"}
       </button>
       {error && (
-        <span className="text-[13px] font-semibold text-red">
+        <span role="alert" className="text-[13px] font-semibold text-red">
           Something went wrong. Try again in a moment.
         </span>
       )}
       <span className="text-[13px] text-grey">
-        We call back within 15 minutes, day or night.
+        We call back within 15 minutes, day or night. By submitting, you
+        agree to receive a call and text about your request at this number.
+        Msg &amp; data rates may apply. Reply STOP to opt out. See{" "}
+        <a href="/sms-terms" className="underline">
+          SMS terms
+        </a>{" "}
+        and{" "}
+        <a href="/privacy" className="underline">
+          Privacy
+        </a>
+        .
       </span>
     </form>
   );

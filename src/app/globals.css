@@ -30,6 +30,19 @@ body {
   color: var(--color-asphalt);
 }
 
+/* Visible keyboard-focus indicator. Wins over any `outline-none` utility
+   because these selectors carry an extra type selector, so they always
+   apply once an element is keyboard-focused (WCAG 2.4.7). */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+button:focus-visible,
+a:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--color-green);
+  outline-offset: 2px;
+}
+
 .road-line {
   background-image: repeating-linear-gradient(
     90deg,

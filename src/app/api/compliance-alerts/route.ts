@@ -1,20 +1,35 @@
 import { NextResponse } from "next/server";
 import { insertRow } from "@/lib/supabase";
+import { guardLeadRoute, str, isHoneypotTripped } from "@/lib/api-guard";
+
+function sanitizeWatch(value: unknown): Record<string, boolean> {
+  if (!value || typeof value !== "object") return {};
+  const entries = Object.entries(value as Record<string, unknown>).slice(0, 10);
+  const out: Record<string, boolean> = {};
+  for (const [key, v] of entries) {
+    if (typeof key === "string" && key.length <= 40) out[key] = Boolean(v);
+  }
+  return out;
+}
 
 export async function POST(req: Request) {
+  const guarded = guardLeadRoute(req);
+  if (guarded) return guarded;
+
   const body = await req.json().catch(() => null);
-  if (!body || typeof body.dot !== "string" || typeof body.phone !== "string") {
-    return NextResponse.json({ error: "Missing DOT or phone" }, { status: 400 });
-  }
-  if (!body.dot.trim() || !body.phone.trim()) {
+  if (isHoneypotTripped(body)) return NextResponse.json({ ok: true });
+
+  const dot = str(body?.dot, 20);
+  const phone = str(body?.phone, 30);
+  if (!dot || !phone) {
     return NextResponse.json({ error: "Missing DOT or phone" }, { status: 400 });
   }
 
   const ok = await insertRow("compliance_alert_signups", {
-    dot: body.dot.trim(),
-    phone: body.phone.trim(),
-    language: String(body.language ?? "EN"),
-    watch: body.watch && typeof body.watch === "object" ? body.watch : {},
+    dot,
+    phone,
+    language: str(body?.language, 20) || "EN",
+    watch: sanitizeWatch(body?.watch),
   });
 
   if (!ok) return NextResponse.json({ error: "Could not save signup" }, { status: 502 });

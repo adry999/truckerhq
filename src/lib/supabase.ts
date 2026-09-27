@@ -22,8 +22,13 @@ export async function insertRow(table: string, row: Record<string, unknown>): Pr
       },
       body: JSON.stringify(row),
     });
+    if (!res.ok) {
+      const detail = await res.text().catch(() => "");
+      console.error(`insertRow(${table}) failed: ${res.status} ${detail.slice(0, 500)}`);
+    }
     return res.ok;
-  } catch {
+  } catch (err) {
+    console.error(`insertRow(${table}) threw:`, err);
     return false;
   }
 }

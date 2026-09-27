@@ -17,6 +17,7 @@ export default function ComplianceAlertsForm() {
   const [dot, setDot] = useState("");
   const [phone, setPhone] = useState("");
   const [lang, setLang] = useState<"EN" | "RU">("EN");
+  const [consent, setConsent] = useState(false);
   const [done, setDone] = useState(false);
   const [watch, setWatch] = useState<Record<string, boolean>>({
     auth: true,
@@ -29,15 +30,16 @@ export default function ComplianceAlertsForm() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(false);
 
-  async function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setSubmitting(true);
     setError(false);
+    const website = new FormData(e.currentTarget).get("website");
     try {
       const res = await fetch("/api/compliance-alerts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ dot, phone, language: lang, watch }),
+        body: JSON.stringify({ dot, phone, language: lang, watch, website }),
       });
       if (!res.ok) throw new Error("request failed");
       trackEvent("compliance_alert_signup");
@@ -96,15 +98,25 @@ export default function ComplianceAlertsForm() {
           onSubmit={handleSubmit}
           className="flex flex-col gap-[22px] rounded-lg border border-border bg-white p-[22px]"
         >
+          <input
+            type="text"
+            name="website"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            className="hidden"
+          />
           <label className="flex flex-col gap-1.5">
             <span className="font-display text-xl font-extrabold uppercase">
-              1. Your DOT or MC number
+              1. Your DOT or MC number (required)
             </span>
             <input
+              required
               value={dot}
               onChange={(e) => setDot(e.target.value)}
               placeholder="DOT 3412897"
               inputMode="numeric"
+              autoComplete="off"
               className="h-14 rounded-[10px] border-[1.5px] border-[#9CA0A8] px-3.5 font-sans text-lg font-semibold tabular-nums outline-none focus:border-green"
             />
             {found && (
@@ -117,7 +129,7 @@ export default function ComplianceAlertsForm() {
             )}
           </label>
 
-          <div className="flex flex-col gap-2.5">
+          <div role="group" aria-label="What to watch" className="flex flex-col gap-2.5">
             <span className="font-display text-xl font-extrabold uppercase">2. What to watch</span>
             {WATCH_ITEMS.map(([k, t, d]) => {
               const on = !!watch[k];
@@ -125,12 +137,15 @@ export default function ComplianceAlertsForm() {
                 <button
                   key={k}
                   type="button"
+                  role="checkbox"
+                  aria-checked={on}
                   onClick={() => setWatch((w) => ({ ...w, [k]: !w[k] }))}
                   className={`flex min-h-[60px] items-center gap-3.5 rounded-lg border-[1.5px] px-3.5 py-2.5 text-left ${
                     on ? "border-green bg-[#EEF6F1]" : "border-border bg-white"
                   }`}
                 >
                   <span
+                    aria-hidden="true"
                     className={`flex h-[26px] w-[26px] shrink-0 items-center justify-center rounded-md border-2 ${
                       on ? "border-green bg-green" : "border-[#9CA0A8] bg-white"
                     }`}
@@ -154,18 +169,26 @@ export default function ComplianceAlertsForm() {
             <span className="font-display text-xl font-extrabold uppercase">3. Where to text you</span>
             <div className="grid gap-3 sm:grid-cols-2">
               <input
+                required
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 type="tel"
                 placeholder="(XXX) XXX-XXXX"
-                aria-label="Mobile phone"
+                aria-label="Mobile phone (required)"
+                autoComplete="tel"
                 className="h-14 rounded-[10px] border-[1.5px] border-[#9CA0A8] px-3.5 font-sans text-lg tabular-nums outline-none focus:border-green"
               />
-              <div className="flex h-14 overflow-hidden rounded-[10px] border-[1.5px] border-[#9CA0A8]">
+              <div
+                role="radiogroup"
+                aria-label="Text language"
+                className="flex h-14 overflow-hidden rounded-[10px] border-[1.5px] border-[#9CA0A8]"
+              >
                 {(["EN", "RU"] as const).map((code) => (
                   <button
                     key={code}
                     type="button"
+                    role="radio"
+                    aria-checked={lang === code}
                     onClick={() => setLang(code)}
                     className={`flex-1 text-base font-semibold ${
                       lang === code ? "bg-asphalt text-offwhite" : "bg-white text-asphalt"
@@ -178,22 +201,9 @@ export default function ComplianceAlertsForm() {
             </div>
           </div>
 
-          <button
-            type="submit"
-            disabled={submitting}
-            className="h-[60px] rounded-xl bg-amber font-display text-2xl font-extrabold uppercase tracking-[.05em] text-asphalt hover:bg-amber-hover disabled:cursor-not-allowed disabled:opacity-60"
-          >
-            {submitting ? "Sending..." : "Turn on alerts"}
-          </button>
-          {error && (
-            <span className="text-[13px] font-semibold text-red">
-              Something went wrong. Try again in a moment.
-            </span>
-          )}
           <span className="text-[13px] leading-relaxed text-grey">
-            By turning on alerts you agree to receive texts from Trucker HQ
-            about this DOT number. Free, usually 1–3 texts a year. Msg & data
-            rates may apply. Reply STOP to cancel, HELP for help. See our{" "}
+            Free, usually 1–3 texts a year. Msg &amp; data rates may apply.
+            Reply STOP to cancel, HELP for help. See our{" "}
             <Link href="/sms-terms" className="underline hover:text-asphalt">
               SMS terms
             </Link>{" "}
@@ -203,6 +213,31 @@ export default function ComplianceAlertsForm() {
             </Link>
             .
           </span>
+
+          <label className="flex items-start gap-2.5 text-[13px] leading-relaxed text-grey">
+            <input
+              required
+              type="checkbox"
+              checked={consent}
+              onChange={(e) => setConsent(e.target.checked)}
+              className="mt-0.5 h-4 w-4 shrink-0"
+            />
+            I agree to receive text alerts from Trucker HQ about this DOT
+            number.
+          </label>
+
+          <button
+            type="submit"
+            disabled={submitting || !consent}
+            className="h-[60px] rounded-xl bg-amber font-display text-2xl font-extrabold uppercase tracking-[.05em] text-asphalt hover:bg-amber-hover disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            {submitting ? "Sending..." : "Turn on alerts"}
+          </button>
+          {error && (
+            <span role="alert" className="text-[13px] font-semibold text-red">
+              Something went wrong. Try again in a moment.
+            </span>
+          )}
         </form>
       )}
 

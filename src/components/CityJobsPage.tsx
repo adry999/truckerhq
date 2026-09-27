@@ -2,6 +2,7 @@ import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import { healthColor } from "@/lib/data";
+import { CITY_NAME_TO_SLUG } from "@/lib/city-slugs";
 
 export type CityJob = {
   title: string;
@@ -183,7 +184,7 @@ export default async function CityJobsPage({
                 {hiringCarriers.map((c) => (
                   <Link
                     key={c.name}
-                    href="/tools/carrier-lookup"
+                    href={`/tools/carrier-lookup?q=${encodeURIComponent(c.name)}&mode=Name`}
                     className="flex items-center justify-between gap-3 border-t border-[#ECEDEA] pt-3 first:border-t-0 first:pt-0 hover:opacity-80"
                   >
                     <span className="flex items-center gap-2.5">
@@ -214,15 +215,25 @@ export default async function CityJobsPage({
                 Nearby cities
               </h2>
               <div className="flex flex-wrap gap-1.5">
-                {nearbyCities.map((c) => (
-                  <Link
-                    key={c.name}
-                    href="#"
-                    className="flex h-9 items-center rounded-[10px] border-[1.5px] border-border bg-white px-3 text-sm font-semibold text-asphalt hover:border-green"
-                  >
-                    {c.name} ({c.count})
-                  </Link>
-                ))}
+                {nearbyCities.map((c) => {
+                  const slug = CITY_NAME_TO_SLUG[c.name];
+                  const label = `${c.name} (${c.count})`;
+                  const className =
+                    "flex h-9 items-center rounded-[10px] border-[1.5px] border-border bg-white px-3 text-sm font-semibold text-asphalt";
+                  return slug ? (
+                    <Link
+                      key={c.name}
+                      href={`/jobs/${slug}`}
+                      className={`${className} hover:border-green`}
+                    >
+                      {label}
+                    </Link>
+                  ) : (
+                    <span key={c.name} className={className}>
+                      {label}
+                    </span>
+                  );
+                })}
               </div>
             </div>
 

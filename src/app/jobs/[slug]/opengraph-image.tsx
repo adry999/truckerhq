@@ -1,4 +1,5 @@
 import { findJob } from "@/lib/data";
+import { CITY_CONTENT } from "@/lib/city-content";
 import { ogImageSize, ogImageContentType, renderOgImage } from "@/lib/og";
 
 export const size = ogImageSize;
@@ -10,6 +11,20 @@ export default async function OpengraphImage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+
+  const city = CITY_CONTENT[slug];
+  if (city) {
+    return renderOgImage({
+      theme: "dark",
+      sub: "JOBS",
+      kicker: `${city.stats[0]?.big ?? ""} Open Jobs`,
+      heading: `CDL jobs in ${city.cityName}`,
+      headingSize: 108,
+      paragraph: "Pay and home time on every listing. Apply in English or Russian.",
+      big: "Updated daily",
+    });
+  }
+
   const job = findJob(slug);
 
   return renderOgImage({

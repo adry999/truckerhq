@@ -116,13 +116,15 @@ export default function ClaimProfileWizard() {
                   </p>
                 </div>
 
-                <div className="flex flex-col gap-2.5">
+                <div role="radiogroup" aria-label="Verification method" className="flex flex-col gap-2.5">
                   {CONTACT_METHODS.map((m) => {
                     const on = contactMethod === m.id;
                     return (
                       <button
                         key={m.id}
                         type="button"
+                        role="radio"
+                        aria-checked={on}
                         onClick={() => setContactMethod(m.id)}
                         className={`flex min-h-[64px] items-center gap-3.5 rounded-lg border-[1.5px] px-3.5 py-2.5 text-left ${
                           on ? "border-green bg-[#EEF6F1]" : "border-border bg-white"
@@ -191,13 +193,15 @@ export default function ClaimProfileWizard() {
 
                 <div className="flex flex-col gap-2.5">
                   <span className="font-display text-xl font-extrabold uppercase">Equipment</span>
-                  <div className="flex flex-wrap gap-2">
+                  <div role="group" aria-label="Equipment" className="flex flex-wrap gap-2">
                     {EQUIPMENT_OPTIONS.map((opt) => {
                       const on = equipment.includes(opt);
                       return (
                         <button
                           key={opt}
                           type="button"
+                          role="checkbox"
+                          aria-checked={on}
                           onClick={() => setEquipment((e) => toggleInArray(e, opt))}
                           className={`flex h-11 items-center rounded-full border-[1.5px] px-4 text-sm font-semibold ${
                             on
@@ -216,13 +220,15 @@ export default function ClaimProfileWizard() {
                   <span className="font-display text-xl font-extrabold uppercase">
                     Lanes you run
                   </span>
-                  <div className="flex flex-wrap gap-2">
+                  <div role="group" aria-label="Lanes you run" className="flex flex-wrap gap-2">
                     {LANE_OPTIONS.map((opt) => {
                       const on = lanes.includes(opt);
                       return (
                         <button
                           key={opt}
                           type="button"
+                          role="checkbox"
+                          aria-checked={on}
                           onClick={() => setLanes((l) => toggleInArray(l, opt))}
                           className={`flex h-11 items-center rounded-full border-[1.5px] px-4 text-sm font-semibold ${
                             on
@@ -238,13 +244,18 @@ export default function ClaimProfileWizard() {
                 </div>
 
                 <div className="flex flex-col gap-2.5">
-                  <span className="font-display text-xl font-extrabold uppercase">Also show</span>
+                  <span id="also-show-label" className="font-display text-xl font-extrabold uppercase">
+                    Also show
+                  </span>
+                  <div role="group" aria-labelledby="also-show-label" className="contents">
                   {ALSO_SHOW.map(([k, label]) => {
                     const on = !!alsoShow[k];
                     return (
                       <button
                         key={k}
                         type="button"
+                        role="checkbox"
+                        aria-checked={on}
                         onClick={() => setAlsoShow((s) => ({ ...s, [k]: !s[k] }))}
                         className={`flex min-h-[52px] items-center gap-3.5 rounded-lg border-[1.5px] px-3.5 py-2.5 text-left ${
                           on ? "border-green bg-[#EEF6F1]" : "border-border bg-white"
@@ -274,6 +285,7 @@ export default function ClaimProfileWizard() {
                       </button>
                     );
                   })}
+                  </div>
                 </div>
               </div>
             )}

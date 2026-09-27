@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Logo from "./Logo";
 
 const NAV = [
@@ -27,11 +27,40 @@ export default function SiteHeader({
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
+  const langMenuRef = useRef<HTMLDivElement>(null);
+  const langButtonRef = useRef<HTMLButtonElement>(null);
 
   const ru = lang === "RU";
   const homeHref = ru ? "/ru" : "/";
-  const startHref = ru ? "/ru/dispatch/start" : "/dispatch/start";
+  // No RU dispatch-start wizard exists yet; send everyone to the EN one
+  // rather than 404 on the primary CTA.
+  const startHref = "/dispatch/start";
   const t = (en: string, ruText: string) => (ru ? ruText : en);
+
+  useEffect(() => {
+    if (!langOpen) return;
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") {
+        setLangOpen(false);
+        langButtonRef.current?.focus();
+      }
+    }
+    function onPointerDown(e: PointerEvent) {
+      if (
+        langMenuRef.current &&
+        !langMenuRef.current.contains(e.target as Node) &&
+        !langButtonRef.current?.contains(e.target as Node)
+      ) {
+        setLangOpen(false);
+      }
+    }
+    document.addEventListener("keydown", onKeyDown);
+    document.addEventListener("pointerdown", onPointerDown);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.removeEventListener("pointerdown", onPointerDown);
+    };
+  }, [langOpen]);
 
   // Only Dispatch and Jobs have RU pages so far; everything else falls
   // back to the English route.
@@ -70,8 +99,12 @@ export default function SiteHeader({
         <div className="ml-auto flex items-center gap-1.5 sm:gap-3">
           <div className="relative">
             <button
+              ref={langButtonRef}
               onClick={() => setLangOpen((v) => !v)}
-              aria-label="Language"
+              aria-label={`Language: ${ru ? "Russian" : "English"}`}
+              aria-haspopup="menu"
+              aria-expanded={langOpen}
+              aria-controls="lang-menu"
               className="flex h-11 items-center gap-2 rounded-[10px] border border-white/30 px-2.5 font-display text-lg font-extrabold tracking-[.06em] text-offwhite hover:border-amber sm:h-12 sm:px-3"
             >
               {ru ? "RU" : "EN"}
@@ -79,33 +112,39 @@ export default function SiteHeader({
                 <path d="m6 9 6 6 6-6" />
               </svg>
             </button>
-            {langOpen && (
-              <div className="absolute right-0 top-[calc(100%+6px)] z-30 flex min-w-[160px] flex-col gap-0.5 rounded-xl bg-white p-1.5 shadow-2xl">
-                {(
-                  [
-                    ["EN", "English", enHref],
-                    ["RU", "Русский", ruHref],
-                  ] as const
-                ).map(([code, name, href]) => {
-                  const cur = (ru ? "RU" : "EN") === code;
-                  return (
-                    <Link
-                      key={code}
-                      href={href}
-                      onClick={() => setLangOpen(false)}
-                      className={`flex h-12 items-center justify-between rounded-lg px-3 text-base text-asphalt hover:bg-offwhite ${
-                        cur ? "bg-[#FFF1CC] font-bold" : "font-medium"
-                      }`}
-                    >
-                      {name}
-                      <span className="font-display text-[15px] font-extrabold tracking-[.06em] text-grey">
-                        {code}
-                      </span>
-                    </Link>
-                  );
-                })}
-              </div>
-            )}
+            <div
+              id="lang-menu"
+              ref={langMenuRef}
+              role="menu"
+              className={`absolute right-0 top-[calc(100%+6px)] z-30 flex min-w-[160px] flex-col gap-0.5 rounded-xl bg-white p-1.5 shadow-2xl ${
+                langOpen ? "flex" : "hidden"
+              }`}
+            >
+              {(
+                [
+                  ["EN", "English", enHref],
+                  ["RU", "Русский", ruHref],
+                ] as const
+              ).map(([code, name, href]) => {
+                const cur = (ru ? "RU" : "EN") === code;
+                return (
+                  <Link
+                    key={code}
+                    href={href}
+                    role="menuitem"
+                    onClick={() => setLangOpen(false)}
+                    className={`flex h-12 items-center justify-between rounded-lg px-3 text-base text-asphalt hover:bg-offwhite ${
+                      cur ? "bg-[#FFF1CC] font-bold" : "font-medium"
+                    }`}
+                  >
+                    {name}
+                    <span className="font-display text-[15px] font-extrabold tracking-[.06em] text-grey">
+                      {code}
+                    </span>
+                  </Link>
+                );
+              })}
+            </div>
           </div>
 
           <a
@@ -131,6 +170,9 @@ export default function SiteHeader({
           <button
             onClick={() => setMenuOpen((v) => !v)}
             aria-label="Menu"
+            aria-haspopup="true"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
             className="flex h-11 w-11 items-center justify-center rounded-[10px] border border-white/30 lg:hidden"
           >
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F7F7F5" strokeWidth="2.5" strokeLinecap="round">
@@ -143,7 +185,11 @@ export default function SiteHeader({
       </div>
 
       {menuOpen && (
-        <div className="flex flex-col gap-1 border-t border-white/10 px-4 pb-5 pt-2 lg:hidden">
+        <nav
+          id="mobile-menu"
+          aria-label="Mobile"
+          className="flex flex-col gap-1 border-t border-white/10 px-4 pb-5 pt-2 lg:hidden"
+        >
           {NAV.map((item) => {
             const active = pathname === hrefFor(item.href);
             return (
@@ -176,7 +222,7 @@ export default function SiteHeader({
           >
             {t("Call 24/7", "Звонок 24/7")} · (XXX) XXX-XXXX
           </a>
-        </div>
+        </nav>
       )}
     </header>
   );

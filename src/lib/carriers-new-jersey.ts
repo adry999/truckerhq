@@ -1,4 +1,4 @@
-import type { StateCarrierRow } from "@/components/StateCarriersPage";
+import type { StateCarrierRow } from "@/lib/data";
 
 export const NEW_JERSEY_CARRIERS: StateCarrierRow[] = [
   { name: "Port Newark Drayage Co", city: "Newark", dot: "5512087", equipment: "Dry van", trucks: 11, status: "ACTIVE", score: 89 },
