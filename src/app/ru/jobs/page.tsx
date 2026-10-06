@@ -11,18 +11,6 @@ export const metadata: Metadata = buildMetadata({
   languages: { en: "/jobs", ru: "/ru/jobs", "x-default": "/jobs" },
 });
 
-export default async function JobsRuPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ type?: string; equip?: string; q?: string }>;
-}) {
-  const params = await searchParams;
-  return (
-    <JobsPageContent
-      lang="RU"
-      type={params.type ?? "All"}
-      equip={params.equip ?? "All"}
-      q={(params.q ?? "").trim().toLowerCase()}
-    />
-  );
+export default function JobsRuPage() {
+  return <JobsPageContent lang="RU" />;
 }

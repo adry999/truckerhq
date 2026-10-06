@@ -27,10 +27,8 @@ export async function generateMetadata({
 
 export default async function StateCarriersRoute({
   params,
-  searchParams,
 }: {
   params: Promise<{ state: string }>;
-  searchParams: Promise<{ equip?: string }>;
 }) {
   const { state } = await params;
   const entry = STATE_CONTENT[state];
@@ -62,7 +60,6 @@ export default async function StateCarriersRoute({
         dispatchCtaBody={entry.dispatchCtaBody}
         hireCtaBody={entry.hireCtaBody}
         basePath={`/carriers/${state}`}
-        searchParams={searchParams}
       />
     </>
   );

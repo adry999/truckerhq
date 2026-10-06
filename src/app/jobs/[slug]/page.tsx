@@ -46,10 +46,8 @@ export async function generateMetadata({
 
 export default async function JobsSlugPage({
   params,
-  searchParams,
 }: {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ type?: string }>;
 }) {
   const { slug } = await params;
 
@@ -75,7 +73,6 @@ export default async function JobsSlugPage({
           hiringCarriers={city.hiringCarriers}
           nearbyCities={city.nearbyCities}
           basePath={`/jobs/${slug}`}
-          searchParams={searchParams}
         />
       </>
     );

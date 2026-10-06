@@ -1,19 +1,14 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import { healthColor } from "@/lib/data";
 import { CITY_NAME_TO_SLUG } from "@/lib/city-slugs";
+import CityTypeChips from "@/components/CityTypeChips";
+import CityJobsList, { type CityJob } from "@/components/CityJobsList";
+import { CityTypeChipsFromUrl, CityJobsListFromUrl } from "@/components/CityJobsFromUrl";
 
-export type CityJob = {
-  title: string;
-  company: string;
-  loc: string;
-  type: "OTR" | "LOCAL" | "REGIONAL";
-  equipment: string;
-  pay: string;
-  home: string;
-  posted: string;
-};
+export type { CityJob };
 
 export type CityJobsPageProps = {
   cityName: string;
@@ -25,12 +20,9 @@ export type CityJobsPageProps = {
   hiringCarriers: { name: string; score: number; jobs: number }[];
   nearbyCities: { name: string; count: number }[];
   basePath: string;
-  searchParams: Promise<{ type?: string }>;
 };
 
-const TYPE_FILTERS = ["All", "Local", "Regional", "OTR"] as const;
-
-export default async function CityJobsPage({
+export default function CityJobsPage({
   cityName,
   stateName,
   heroIntro,
@@ -40,23 +32,7 @@ export default async function CityJobsPage({
   hiringCarriers,
   nearbyCities,
   basePath,
-  searchParams,
 }: CityJobsPageProps) {
-  const params = await searchParams;
-  const type = params.type ?? "All";
-
-  const filtered = jobs.filter((j) => {
-    if (type === "All") return true;
-    return j.type === type.toUpperCase();
-  });
-
-  const chipHref = (t: string) => {
-    const sp = new URLSearchParams();
-    if (t !== "All") sp.set("type", t);
-    const qs = sp.toString();
-    return qs ? `${basePath}?${qs}` : basePath;
-  };
-
   return (
     <div className="flex min-h-screen flex-col">
       <SiteHeader />
@@ -95,63 +71,15 @@ export default async function CityJobsPage({
       </section>
 
       <section className="mx-auto flex w-full max-w-6xl flex-col gap-5 px-4 py-7 sm:px-6 md:pb-10">
-        <div className="flex items-center gap-2 overflow-x-auto pb-0.5">
-          {TYPE_FILTERS.map((t) => (
-            <Link
-              key={t}
-              href={chipHref(t)}
-              className={`flex h-11 shrink-0 items-center rounded-[10px] px-3.5 font-display text-base font-extrabold tracking-[.06em] ${
-                type === t
-                  ? "bg-asphalt text-offwhite"
-                  : "border-[1.5px] border-border bg-white text-asphalt"
-              }`}
-            >
-              {t.toUpperCase()}
-            </Link>
-          ))}
-        </div>
+        <Suspense fallback={<CityTypeChips basePath={basePath} type="All" />}>
+          <CityTypeChipsFromUrl basePath={basePath} />
+        </Suspense>
 
         <div className="grid gap-8 md:grid-cols-3">
           <div className="flex flex-col gap-8 md:col-span-2">
-            <div className="flex flex-col gap-4">
-              {filtered.map((j) => (
-                <Link
-                  key={`${j.title}-${j.company}`}
-                  href="/jobs"
-                  className="flex flex-col gap-3.5 rounded-lg border-[1.5px] border-border bg-white p-5 hover:border-green"
-                >
-                  <div className="flex flex-col gap-1">
-                    <span className="font-display text-[26px] font-extrabold uppercase leading-tight">
-                      {j.title}
-                    </span>
-                    <span className="text-sm text-[#4B5058]">
-                      {j.company} · {j.loc} · {j.home}
-                    </span>
-                  </div>
-                  <div className="flex flex-wrap gap-1.5">
-                    <span className="flex h-7 items-center rounded-md bg-[#E2F0E8] px-2.5 font-display text-[15px] font-extrabold tracking-[.08em] text-green">
-                      {j.type}
-                    </span>
-                    <span className="flex h-7 items-center rounded-md bg-[#EEEFEC] px-2.5 font-display text-[15px] font-bold tracking-[.06em] text-[#3F444B]">
-                      {j.equipment}
-                    </span>
-                  </div>
-                  <div className="flex flex-wrap items-baseline justify-between gap-2 border-t border-[#ECEDEA] pt-3">
-                    <span className="font-display text-2xl font-extrabold tabular-nums text-green">
-                      {j.pay}
-                    </span>
-                    <span className="text-[13px] text-grey">{j.posted}</span>
-                  </div>
-                </Link>
-              ))}
-
-              {filtered.length === 0 && (
-                <div className="rounded-lg border border-border bg-white p-10 text-center text-base text-[#4B5058]">
-                  No {type} jobs in {cityName} right now. Try all jobs, or
-                  set up a job alert.
-                </div>
-              )}
-            </div>
+            <Suspense fallback={<CityJobsList jobs={jobs} cityName={cityName} type="All" />}>
+              <CityJobsListFromUrl jobs={jobs} cityName={cityName} />
+            </Suspense>
 
             <div className="flex flex-col gap-4">
               <h2 className="font-display text-3xl font-extrabold uppercase md:text-4xl">
