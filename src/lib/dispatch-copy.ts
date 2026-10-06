@@ -1,3 +1,4 @@
+import { PHONE_DISPLAY } from "@/lib/contact";
 export type DispatchCopy = {
   heroAlt: string;
   h1Line1: string;
@@ -47,7 +48,7 @@ export const DISPATCH_COPY: Record<"EN" | "RU", DispatchCopy> = {
     heroBody:
       "We find the loads, push for the rate and do the paperwork. You pay one price every week, no matter how much you gross.",
     ctaSeePackages: "See packages",
-    ctaCall: "Call (XXX) XXX-XXXX",
+    ctaCall: `Call ${PHONE_DISPLAY}`,
     cardEyebrow: "ONE TRUCK · ONE PRICE",
     cardUnit: "/ week",
     statTimezone: "every US time zone",
@@ -137,7 +138,7 @@ export const DISPATCH_COPY: Record<"EN" | "RU", DispatchCopy> = {
     heroBody:
       "Мы находим грузы, торгуемся за ставку и делаем документы. Вы платите одну цену каждую неделю, независимо от вашей выручки.",
     ctaSeePackages: "Смотреть пакеты",
-    ctaCall: "Звонок (XXX) XXX-XXXX",
+    ctaCall: `Звонок ${PHONE_DISPLAY}`,
     cardEyebrow: "ОДИН ГРУЗОВИК · ОДНА ЦЕНА",
     cardUnit: "/ неделя",
     statTimezone: "все пояса США",

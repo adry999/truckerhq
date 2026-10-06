@@ -1,3 +1,4 @@
+import { PHONE_HREF } from "@/lib/contact";
 import Image from "next/image";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
@@ -243,7 +244,7 @@ export default function HomePageContent({ lang }: { lang: "EN" | "RU" }) {
                 {c.pricingCtaLabel}
               </Link>
               <a
-                href="tel:+1XXXXXXXXXX"
+                href={PHONE_HREF}
                 className="flex h-14 items-center rounded-xl border-2 border-offwhite px-6 font-display text-xl font-extrabold uppercase tracking-[.05em] text-offwhite hover:bg-offwhite hover:text-asphalt"
               >
                 {c.callLabel}

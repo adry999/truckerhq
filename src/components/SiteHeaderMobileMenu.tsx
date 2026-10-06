@@ -1,5 +1,6 @@
 "use client";
 
+import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/contact";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { createContext, useContext, useState } from "react";
@@ -84,10 +85,10 @@ export function SiteHeaderMobileMenuPanel({
         {startLabel}
       </Link>
       <a
-        href="tel:+1XXXXXXXXXX"
+        href={PHONE_HREF}
         className="flex h-14 items-center justify-center gap-2 rounded-xl border-2 border-offwhite font-display text-[22px] font-extrabold uppercase tracking-[.05em] text-offwhite"
       >
-        {callLabel} · (XXX) XXX-XXXX
+        {callLabel} · {PHONE_DISPLAY}
       </a>
     </nav>
   );

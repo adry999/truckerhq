@@ -1,3 +1,4 @@
+import { PHONE_DISPLAY } from "@/lib/contact";
 import { ogImageSize, ogImageContentType, renderOgImage } from "@/lib/og";
 
 export const size = ogImageSize;
@@ -11,7 +12,7 @@ export default function OpengraphImage() {
     headingSize: 120,
     paragraph:
       "Flat-rate dispatch, CDL jobs and free carrier tools. English & Russian, 24/7.",
-    big: "(XXX) XXX-XXXX",
+    big: PHONE_DISPLAY,
     shield: true,
     shieldOpacity: 1,
   });

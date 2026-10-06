@@ -1,3 +1,4 @@
+import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/contact";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
@@ -55,10 +56,10 @@ export default function NotFoundContent() {
         </div>
 
         <a
-          href="tel:+1XXXXXXXXXX"
+          href={PHONE_HREF}
           className="mt-8 text-base font-semibold text-amber hover:underline"
         >
-          Or call dispatch 24/7: (XXX) XXX-XXXX
+          Or call dispatch 24/7: {PHONE_DISPLAY}
         </a>
       </section>
 

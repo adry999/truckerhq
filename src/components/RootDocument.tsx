@@ -5,14 +5,17 @@ import "@/app/globals.css";
 
 const barlowCondensed = Barlow_Condensed({
   variable: "--font-barlow-condensed",
-  weight: ["600", "700", "800"],
+  weight: ["700", "800"],
   subsets: ["latin"],
 });
 
+// Display fallback for Cyrillic glyphs only (Barlow has none). Not preloaded:
+// its unicode-range means EN pages never fetch it, RU pages fetch it on use.
 const robotoCondensed = Roboto_Condensed({
   variable: "--font-roboto-condensed",
   weight: ["700", "800"],
-  subsets: ["latin", "cyrillic"],
+  subsets: ["cyrillic"],
+  preload: false,
 });
 
 const inter = Inter({

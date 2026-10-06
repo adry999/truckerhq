@@ -1,3 +1,4 @@
+import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/contact";
 import Image from "next/image";
 import type { Metadata } from "next";
 import { buildMetadata } from "@/lib/metadata";
@@ -95,10 +96,10 @@ export default function HireDriversPage() {
               Post a driver job
             </a>
             <a
-              href="tel:+1XXXXXXXXXX"
+              href={PHONE_HREF}
               className="flex h-14 items-center rounded-xl border-2 border-offwhite px-6 font-display text-xl font-extrabold uppercase tracking-[.05em] text-offwhite hover:bg-offwhite hover:text-asphalt"
             >
-              Call (XXX) XXX-XXXX
+              Call {PHONE_DISPLAY}
             </a>
           </div>
         </div>

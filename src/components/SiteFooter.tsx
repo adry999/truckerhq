@@ -1,3 +1,4 @@
+import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/contact";
 import Link from "next/link";
 import Logo from "./Logo";
 
@@ -24,7 +25,7 @@ const COLUMNS: { h: string; links: { t: string; href?: string }[] }[] = [
   {
     h: "CONTACT",
     links: [
-      { t: "(XXX) XXX-XXXX · 24/7", href: "tel:+1XXXXXXXXXX" },
+      { t: `${PHONE_DISPLAY} · 24/7`, href: PHONE_HREF },
       { t: "hello@truckerhq.com", href: "/about#contact" },
       { t: "Guides", href: "/guides" },
       { t: "About us", href: "/about" },

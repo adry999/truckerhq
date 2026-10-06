@@ -1,3 +1,4 @@
+import { PHONE_DISPLAY } from "@/lib/contact";
 import "server-only";
 import { sendSms } from "@/lib/sms";
 import { findJob } from "@/lib/data";
@@ -16,7 +17,7 @@ import { findJob } from "@/lib/data";
 export async function notifyDispatchStart(phone: string): Promise<void> {
   await sendSms(
     phone,
-    "Trucker HQ: got your dispatch request. A dispatcher will call you from (XXX) XXX-XXXX within 15 min. Reply STOP to opt out.",
+    `Trucker HQ: got your dispatch request. A dispatcher will call you from ${PHONE_DISPLAY} within 15 min. Reply STOP to opt out.`,
   );
 }
 
