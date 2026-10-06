@@ -18,6 +18,7 @@ export const metadata: Metadata = buildMetadata({
   description:
     "Check any carrier or broker: authority, insurance, inspections and crashes, summed up in one Health Score.",
   path: "/tools/carrier-lookup",
+  ogImage: false,
 });
 
 const MODES = ["All", "DOT", "MC", "Name"] as const;

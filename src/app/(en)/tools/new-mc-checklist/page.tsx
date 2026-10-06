@@ -11,6 +11,7 @@ export const metadata: Metadata = buildMetadata({
   description:
     "Every filing and setup step for a new trucking authority, from BOC-3 to the new entrant audit.",
   path: "/tools/new-mc-checklist",
+  ogImage: false,
 });
 
 const BEFORE_YOU_HAUL = [

@@ -7,6 +7,7 @@ export const metadata: Metadata = buildMetadata({
   description:
     "Диспетчинг для owner-operator и небольших автопарков. Одна фиксированная цена за грузовик в неделю, диспетчеры 24/7, проверка брокеров, документы включены.",
   path: "/ru/dispatch",
+  ogImage: "/ru/opengraph-image",
   locale: "ru_RU",
   languages: { en: "/dispatch", ru: "/ru/dispatch", "x-default": "/dispatch" },
 });

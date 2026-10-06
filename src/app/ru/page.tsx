@@ -7,6 +7,7 @@ export const metadata: Metadata = buildMetadata({
   description:
     "Диспетчинг за фиксированную цену в неделю, без процентов. Диспетчеры говорят по-английски и по-русски, 24/7. Работа для CDL и бесплатная проверка перевозчиков.",
   path: "/ru",
+  ogImage: false,
   locale: "ru_RU",
   languages: { en: "/", ru: "/ru", "x-default": "/" },
 });

@@ -10,6 +10,7 @@ export const metadata: Metadata = buildMetadata({
   description:
     "Browse for-hire interstate carriers by state, from public FMCSA data. Search DOT and MC numbers and check any carrier's Health Score.",
   path: "/carriers",
+  ogImage: false,
 });
 
 export default function CarriersIndexPage() {

@@ -22,6 +22,7 @@ export async function generateMetadata({
     title: entry.title,
     description: entry.description,
     path: `/carriers/${state}`,
+    ogImage: "/opengraph-image",
   });
 }
 

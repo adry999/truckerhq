@@ -27,6 +27,7 @@ export async function generateMetadata({
     title: `${c.name} — DOT ${c.dot} Health Score ${c.score}`,
     description: `${c.name} in ${c.city}, ${c.st}. DOT ${c.dot}, ${c.mc}. Authority ${c.status}, ${c.trucks} trucks. Health Score ${c.score}/100 from public FMCSA data.`,
     path: `/tools/carrier-lookup/${slug}`,
+    ogImage: "/opengraph-image",
     robots: { index: false, follow: true },
   });
 }

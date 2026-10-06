@@ -9,6 +9,7 @@ export const metadata: Metadata = buildMetadata({
   description:
     "Enter the load and your costs. See your real profit and the lowest rate per mile worth taking.",
   path: "/tools/profit-per-mile",
+  ogImage: false,
 });
 
 export default function ProfitCalculatorPage() {

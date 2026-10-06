@@ -1,8 +1,7 @@
-import type { Metadata } from "next";
 import { Barlow_Condensed, Inter, Overpass, Roboto_Condensed } from "next/font/google";
 import JsonLd from "@/components/JsonLd";
 import Analytics from "@/components/Analytics";
-import "./globals.css";
+import "@/app/globals.css";
 
 const barlowCondensed = Barlow_Condensed({
   variable: "--font-barlow-condensed",
@@ -28,23 +27,6 @@ const overpass = Overpass({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://truckerhq.com"),
-  title: {
-    default: "Trucker HQ: Flat-Rate Truck Dispatch, CDL Jobs, Carrier Tools",
-    template: "%s | Trucker HQ",
-  },
-  description:
-    "Truck dispatch for a flat weekly fee, never a percentage. English and Russian-speaking dispatchers 24/7. CDL jobs and free carrier lookup.",
-  openGraph: {
-    siteName: "Trucker HQ",
-    type: "website",
-    locale: "en_US",
-    url: "/",
-  },
-  twitter: { card: "summary_large_image" },
-};
-
 const ORGANIZATION_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "Organization",
@@ -56,10 +38,16 @@ const ORGANIZATION_SCHEMA = {
   availableLanguage: ["English", "Russian"],
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootDocument({
+  lang,
+  children,
+}: {
+  lang: "en" | "ru";
+  children: React.ReactNode;
+}) {
   return (
     <html
-      lang="en"
+      lang={lang}
       className={`${barlowCondensed.variable} ${robotoCondensed.variable} ${inter.variable} ${overpass.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">

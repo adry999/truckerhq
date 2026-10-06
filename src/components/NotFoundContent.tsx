@@ -9,7 +9,7 @@ const EXITS = [
   { label: "Carrier Lookup", href: "/tools/carrier-lookup" },
 ];
 
-export default function NotFound() {
+export default function NotFoundContent() {
   return (
     <div className="flex min-h-screen flex-col">
       <SiteHeader />

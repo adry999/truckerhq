@@ -10,6 +10,7 @@ export const metadata: Metadata = buildMetadata({
   description:
     "Carrier lookup, profit per mile calculator, compliance alerts and a new MC checklist. Built on FMCSA data.",
   path: "/tools",
+  ogImage: false,
 });
 
 const TOOLS = [

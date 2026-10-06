@@ -7,6 +7,7 @@ export const metadata: Metadata = buildMetadata({
   description:
     "Dispatch for owner-operators and small fleets. One flat price per truck per week, 24/7 dispatchers, broker checks, paperwork included.",
   path: "/dispatch",
+  ogImage: false,
   languages: { en: "/dispatch", ru: "/ru/dispatch", "x-default": "/dispatch" },
 });
 

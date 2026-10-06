@@ -9,6 +9,7 @@ export const metadata: Metadata = buildMetadata({
   description:
     "Get a text when your authority, insurance filing, UCR or safety status changes. Free.",
   path: "/tools/compliance-alerts",
+  ogImage: false,
 });
 
 export default function ComplianceAlertsPage() {

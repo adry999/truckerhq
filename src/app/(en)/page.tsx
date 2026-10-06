@@ -7,6 +7,7 @@ export const metadata: Metadata = buildMetadata({
   description:
     "Truck dispatch for a flat weekly fee, never a percentage. English and Russian-speaking dispatchers 24/7. CDL jobs and free carrier lookup.",
   path: "/",
+  ogImage: false,
   languages: { en: "/", ru: "/ru", "x-default": "/" },
 });
 

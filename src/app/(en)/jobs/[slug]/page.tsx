@@ -28,6 +28,7 @@ export async function generateMetadata({
       title: city.title,
       description: city.description,
       path: `/jobs/${slug}`,
+      ogImage: false,
       robots:
         city.jobs.length >= MIN_JOBS_TO_INDEX
           ? undefined
@@ -41,6 +42,7 @@ export async function generateMetadata({
     title: `${job.title} — ${job.company}`,
     description: `${job.title} at ${job.company}, ${job.loc}. ${job.pay} ${job.payNote}. ${job.home}.`,
     path: `/jobs/${slug}`,
+    ogImage: false,
   });
 }
 
