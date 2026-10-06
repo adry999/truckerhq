@@ -1,6 +1,7 @@
 import { PHONE_DISPLAY, PHONE_HREF, PHONE_SCHEMA } from "@/lib/contact";
 import type { Metadata } from "next";
 import { buildMetadata } from "@/lib/metadata";
+import { SITE_URL } from "@/lib/site";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import AboutContactForm from "@/components/AboutContactForm";
@@ -16,7 +17,7 @@ export const metadata: Metadata = buildMetadata({
 
 const CONTACT_SCHEMA = contactPageSchema({
   name: "About Trucker HQ",
-  url: "https://truckerhq.com/about",
+  url: `${SITE_URL}/about`,
   telephone: PHONE_SCHEMA,
   email: "hello@truckerhq.com",
 });

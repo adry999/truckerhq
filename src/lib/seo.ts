@@ -1,3 +1,5 @@
+import { SITE_URL } from "@/lib/site";
+
 function daysAgo(posted: string): number {
   if (/today/i.test(posted)) return 0;
   const m = /(\d+)\s*day/i.exec(posted);
@@ -108,7 +110,7 @@ export function breadcrumbSchema(items: { name: string; path: string }[]) {
       "@type": "ListItem",
       position: i + 1,
       name: item.name,
-      item: `https://truckerhq.com${item.path}`,
+      item: `${SITE_URL}${item.path}`,
     })),
   };
 }

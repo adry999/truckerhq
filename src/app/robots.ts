@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { INDEXABLE, SITE_URL } from "@/lib/site";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -9,6 +10,7 @@ export default function robots(): MetadataRoute.Robots {
       // carrier lookup is blocked, since each ?q= hits the live FMCSA API.
       disallow: ["/dispatch/start", "/claim", "/tools/carrier-lookup?"],
     },
-    sitemap: "https://truckerhq.com/sitemap.xml",
+    // Pages are noindex off the real domain, so don't advertise a sitemap there.
+    ...(INDEXABLE ? { sitemap: `${SITE_URL}/sitemap.xml` } : {}),
   };
 }
