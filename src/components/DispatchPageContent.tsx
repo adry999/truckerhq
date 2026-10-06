@@ -1,3 +1,4 @@
+import { PHONE_HREF } from "@/lib/contact";
 import Image from "next/image";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
@@ -22,7 +23,8 @@ export default function DispatchPageContent({ lang }: { lang: "EN" | "RU" }) {
             src="https://images.unsplash.com/photo-1783247007596-cca4a61a16f5?fm=jpg&q=70&w=2000&auto=format&fit=crop"
             alt={c.heroAlt}
             fill
-            priority
+            loading="eager"
+            fetchPriority="high"
             className="object-cover"
             sizes="100vw"
           />
@@ -44,7 +46,7 @@ export default function DispatchPageContent({ lang }: { lang: "EN" | "RU" }) {
                 {c.ctaSeePackages}
               </a>
               <a
-                href="tel:+1XXXXXXXXXX"
+                href={PHONE_HREF}
                 className="flex h-14 items-center rounded-xl border-2 border-offwhite px-6 font-display text-xl font-extrabold uppercase tracking-[.05em] text-offwhite hover:bg-offwhite hover:text-asphalt"
               >
                 {c.ctaCall}
@@ -231,7 +233,7 @@ export default function DispatchPageContent({ lang }: { lang: "EN" | "RU" }) {
                 {c.ctaStart}
               </Link>
               <a
-                href="tel:+1XXXXXXXXXX"
+                href={PHONE_HREF}
                 className="flex h-[60px] items-center justify-center rounded-xl border-2 border-offwhite px-6 font-display text-2xl font-extrabold uppercase tracking-[.05em] text-offwhite hover:bg-offwhite hover:text-asphalt"
               >
                 {c.ctaCall}

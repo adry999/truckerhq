@@ -3,21 +3,28 @@ import { JOBS } from "@/lib/data";
 import { GUIDES } from "@/lib/guides";
 import { STATE_DIRECTORY } from "@/lib/states";
 import { CITY_DIRECTORY } from "@/lib/cities";
+import { CITY_CONTENT, MIN_JOBS_TO_INDEX } from "@/lib/city-content";
 
 const BASE_URL = "https://truckerhq.com";
 
+// hreflang pairs, mirrored from each page's alternates.languages.
+const pair = (en: string, ru: string) => ({
+  languages: { en: `${BASE_URL}${en}`, ru: `${BASE_URL}${ru}`, "x-default": `${BASE_URL}${en}` },
+});
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
-    { url: `${BASE_URL}/`, changeFrequency: "weekly", priority: 1 },
+    { url: `${BASE_URL}/`, changeFrequency: "weekly", priority: 1, alternates: pair("/", "/ru") },
     {
       url: `${BASE_URL}/ru`,
       changeFrequency: "weekly",
       priority: 0.9,
+      alternates: pair("/", "/ru"),
     },
-    { url: `${BASE_URL}/dispatch`, changeFrequency: "monthly", priority: 0.9 },
-    { url: `${BASE_URL}/ru/dispatch`, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${BASE_URL}/jobs`, changeFrequency: "daily", priority: 0.9 },
-    { url: `${BASE_URL}/ru/jobs`, changeFrequency: "daily", priority: 0.8 },
+    { url: `${BASE_URL}/dispatch`, changeFrequency: "monthly", priority: 0.9, alternates: pair("/dispatch", "/ru/dispatch") },
+    { url: `${BASE_URL}/ru/dispatch`, changeFrequency: "monthly", priority: 0.8, alternates: pair("/dispatch", "/ru/dispatch") },
+    { url: `${BASE_URL}/jobs`, changeFrequency: "daily", priority: 0.9, alternates: pair("/jobs", "/ru/jobs") },
+    { url: `${BASE_URL}/ru/jobs`, changeFrequency: "daily", priority: 0.8, alternates: pair("/jobs", "/ru/jobs") },
     { url: `${BASE_URL}/hire-drivers`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE_URL}/carriers`, changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE_URL}/tools`, changeFrequency: "monthly", priority: 0.8 },
@@ -40,6 +47,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const guideRoutes: MetadataRoute.Sitemap = GUIDES.map((g) => ({
     url: `${BASE_URL}/guides/${g.slug}`,
+    lastModified: g.date,
     changeFrequency: "monthly",
     priority: 0.5,
   }));
@@ -50,7 +58,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  const cityRoutes: MetadataRoute.Sitemap = CITY_DIRECTORY.map((c) => ({
+  // Thin city pages are noindex (see jobs/[slug]); keep them out of the sitemap too.
+  const cityRoutes: MetadataRoute.Sitemap = CITY_DIRECTORY.filter(
+    (c) => CITY_CONTENT[c.slug].jobs.length >= MIN_JOBS_TO_INDEX,
+  ).map((c) => ({
     url: `${BASE_URL}/jobs/${c.slug}`,
     changeFrequency: "daily",
     priority: 0.7,

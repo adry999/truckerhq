@@ -18,6 +18,9 @@ const CSP = [
 ].join("; ");
 
 const nextConfig: NextConfig = {
+  experimental: {
+    globalNotFound: true,
+  },
   poweredByHeader: false,
   images: {
     remotePatterns: [

@@ -1,3 +1,4 @@
+import { PHONE_DISPLAY } from "@/lib/contact";
 import { JOBS as REAL_JOBS } from "@/lib/data";
 
 export type HomeJobRow = {
@@ -101,7 +102,7 @@ export const HOME_COPY: Record<"EN" | "RU", HomeCopy> = {
     carrierStatusLine: "DOT 3412897 · Authorized · Insured",
     facts: [
       { k: "In business since", v: "20XX · City, ST" },
-      { k: "Dispatch line, 24/7", v: "(XXX) XXX-XXXX" },
+      { k: "Dispatch line, 24/7", v: PHONE_DISPLAY },
       { k: "We speak", v: "English · Русский" },
       { k: "Office hours", v: "Mon–Sun, all US time zones" },
     ],
@@ -256,7 +257,7 @@ export const HOME_COPY: Record<"EN" | "RU", HomeCopy> = {
     carrierStatusLine: "DOT 3412897 · Лицензия активна · Застрахован",
     facts: [
       { k: "Работаем с", v: "20XX · City, ST" },
-      { k: "Диспетчерская, 24/7", v: "(XXX) XXX-XXXX" },
+      { k: "Диспетчерская, 24/7", v: PHONE_DISPLAY },
       { k: "Говорим на", v: "English · Русский" },
       { k: "Часы работы", v: "Пн–Вс, все пояса США" },
     ],

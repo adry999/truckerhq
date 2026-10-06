@@ -1,14 +1,15 @@
+import { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import StateEquipmentChips from "@/components/StateEquipmentChips";
+import StateCarriersList from "@/components/StateCarriersList";
 import {
-  STATUS_COLORS,
-  healthColor,
-  healthTextColor,
-  healthLabel,
-  type StateCarrierRow,
-} from "@/lib/data";
+  StateEquipmentChipsFromUrl,
+  StateCarriersListFromUrl,
+} from "@/components/StateCarriersFromUrl";
+import type { StateCarrierRow } from "@/lib/data";
 
 export type { StateCarrierRow };
 
@@ -29,10 +30,9 @@ export type StateCarriersPageProps = {
   dispatchCtaBody: string;
   hireCtaBody: string;
   basePath: string;
-  searchParams: Promise<{ equip?: string }>;
 };
 
-export default async function StateCarriersPage({
+export default function StateCarriersPage({
   stateAbbr,
   stateName,
   heroImage,
@@ -49,20 +49,8 @@ export default async function StateCarriersPage({
   dispatchCtaBody,
   hireCtaBody,
   basePath,
-  searchParams,
 }: StateCarriersPageProps) {
-  const params = await searchParams;
-  const equip = params.equip ?? "All";
   const maxPct = Math.max(...equipmentBreakdown.map((e) => e.pct));
-
-  const shown = carriers.filter((c) => equip === "All" || c.equipment === equip);
-
-  const chipHref = (e: string) => {
-    const sp = new URLSearchParams();
-    if (e !== "All") sp.set("equip", e);
-    const qs = sp.toString();
-    return qs ? `${basePath}?${qs}` : basePath;
-  };
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -74,7 +62,8 @@ export default async function StateCarriersPage({
             src={heroImage}
             alt={heroAlt}
             fill
-            priority
+            loading="eager"
+            fetchPriority="high"
             className="object-cover"
             sizes="100vw"
           />
@@ -184,115 +173,34 @@ export default async function StateCarriersPage({
             {stateName} carrier list
           </h2>
           <div className="flex flex-wrap gap-1.5">
-            {equipmentOptions.map((e) => (
-              <Link
-                key={e}
-                href={chipHref(e)}
-                className={`flex h-11 items-center rounded-[10px] px-3.5 font-display text-base font-extrabold tracking-[.06em] ${
-                  equip === e
-                    ? "border-[1.5px] border-asphalt bg-asphalt text-offwhite"
-                    : "border-[1.5px] border-border bg-white text-asphalt"
-                }`}
-              >
-                {e.toUpperCase()}
-              </Link>
-            ))}
+            <Suspense
+              fallback={
+                <StateEquipmentChips equipmentOptions={equipmentOptions} basePath={basePath} equip="All" />
+              }
+            >
+              <StateEquipmentChipsFromUrl equipmentOptions={equipmentOptions} basePath={basePath} />
+            </Suspense>
           </div>
         </div>
 
-        <div className="overflow-hidden rounded-lg border border-border bg-white">
-          <div className="hidden grid-cols-[2.2fr_1fr_1.2fr_80px_130px_110px] gap-4 bg-asphalt px-5 py-3.5 font-display text-[15px] font-bold tracking-[.1em] text-offwhite md:grid">
-            <span>CARRIER</span>
-            <span>DOT</span>
-            <span>EQUIPMENT</span>
-            <span>TRUCKS</span>
-            <span>AUTHORITY</span>
-            <span className="text-right">HEALTH</span>
-          </div>
-          {shown.map((c, i) => {
-            const sc = STATUS_COLORS[c.status];
-            return (
-              <Link
-                key={c.dot}
-                href={`/tools/carrier-lookup?q=${c.dot}&mode=DOT`}
-                className={`grid grid-cols-[1fr_auto] items-center gap-3 px-5 py-[18px] tabular-nums hover:bg-offwhite md:grid-cols-[2.2fr_1fr_1.2fr_80px_130px_110px] md:gap-4 ${
-                  i ? "border-t border-[#ECEDEA]" : ""
-                }`}
-              >
-                <span className="col-span-2 flex flex-col gap-0.5 md:col-span-1">
-                  <span className="text-[17px] font-bold">{c.name}</span>
-                  <span className="text-sm text-grey">
-                    {c.city}, {stateAbbr}
-                    <span className="md:hidden">
-                      {" "}
-                      · {c.equipment} · {c.trucks} truck
-                      {c.trucks === 1 ? "" : "s"}
-                    </span>
-                  </span>
-                </span>
-                <span className="hidden text-[15px] md:block">{c.dot}</span>
-                <span className="hidden text-[15px] md:block">
-                  {c.equipment}
-                </span>
-                <span className="hidden text-[15px] md:block">
-                  {c.trucks}
-                </span>
-                <span>
-                  <span
-                    className="flex items-center gap-1.5 rounded-lg px-2.5 py-1 font-display text-[15px] font-extrabold tracking-[.08em]"
-                    style={{ background: sc.bg, color: sc.fg }}
-                  >
-                    <span
-                      className="h-2 w-2 rounded-full"
-                      style={{ background: sc.dot }}
-                    />
-                    {c.status}
-                  </span>
-                </span>
-                <span className="flex justify-end">
-                  <span className="flex items-center gap-1.5 rounded-[10px] border-[1.5px] border-border py-0.5 pl-1 pr-1.5">
-                    <span
-                      className="flex h-7 w-7 items-center justify-center rounded-full font-display text-base font-extrabold"
-                      style={{
-                        background: healthColor(c.score),
-                        color:
-                          c.score >= 60 && c.score < 80
-                            ? "#16181B"
-                            : "#F7F7F5",
-                      }}
-                    >
-                      {c.score}
-                    </span>
-                    <span
-                      className="pr-1 font-display text-sm font-extrabold tracking-[.06em]"
-                      style={{ color: healthTextColor(c.score) }}
-                    >
-                      {healthLabel(c.score)}
-                    </span>
-                  </span>
-                </span>
-              </Link>
-            );
-          })}
-          {shown.length === 0 && (
-            <div className="p-10 text-center text-base text-[#4B5058]">
-              No {stateName} carriers match this filter. Try a different
-              equipment type.
-            </div>
-          )}
-        </div>
-
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <span className="text-sm text-grey">
-            Showing {shown.length} of {totalCount} · sample data
-          </span>
-          <Link
-            href="/tools/carrier-lookup"
-            className="flex h-12 items-center rounded-[10px] border-2 border-asphalt px-5 font-display text-lg font-extrabold uppercase tracking-[.05em] text-asphalt hover:bg-asphalt hover:text-offwhite"
-          >
-            Search all {stateName} carriers
-          </Link>
-        </div>
+        <Suspense
+          fallback={
+            <StateCarriersList
+              stateAbbr={stateAbbr}
+              stateName={stateName}
+              carriers={carriers}
+              totalCount={totalCount}
+              equip="All"
+            />
+          }
+        >
+          <StateCarriersListFromUrl
+            stateAbbr={stateAbbr}
+            stateName={stateName}
+            carriers={carriers}
+            totalCount={totalCount}
+          />
+        </Suspense>
       </section>
 
       <section className="mx-auto grid w-full max-w-6xl gap-5 px-4 py-8 sm:px-6 md:py-14">

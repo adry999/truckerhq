@@ -1,5 +1,6 @@
 "use client";
 
+import { PHONE_HREF } from "@/lib/contact";
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import { trackEvent } from "@/lib/analytics";
@@ -233,7 +234,7 @@ export default function DispatchStartWizard() {
                   </ul>
                 </div>
                 <a
-                  href="tel:+1XXXXXXXXXX"
+                  href={PHONE_HREF}
                   className="mt-1.5 flex h-14 items-center justify-center rounded-xl border-2 border-asphalt px-7 font-display text-xl font-extrabold uppercase tracking-[.05em] hover:bg-asphalt hover:text-offwhite"
                 >
                   Can&apos;t wait? Call now
