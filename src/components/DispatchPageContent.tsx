@@ -126,7 +126,7 @@ export default function DispatchPageContent({ lang }: { lang: "EN" | "RU" }) {
                   <div className="flex min-h-7 items-center justify-between gap-2">
                     <span
                       className={`font-display text-[15px] font-bold tracking-[.14em] ${
-                        p.featured ? "text-amber" : "text-grey"
+                        p.featured ? "text-amber-on-green" : "text-grey"
                       }`}
                     >
                       {p.who}
