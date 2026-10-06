@@ -61,7 +61,7 @@ export default function JobsPageContent({ lang }: { lang: "EN" | "RU" }) {
         <div className="mt-4 rounded-lg bg-green">
           <div className="flex flex-wrap items-center justify-between gap-[18px] p-6 text-offwhite">
             <div className="flex flex-col gap-1.5">
-              <span className="font-display text-[15px] font-bold tracking-[.14em] text-amber">
+              <span className="font-display text-[15px] font-bold tracking-[.14em] text-amber-on-green">
                 {c.carriersEyebrow}
               </span>
               <span className="font-display text-[32px] font-extrabold uppercase leading-none">

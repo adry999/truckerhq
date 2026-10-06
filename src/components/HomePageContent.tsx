@@ -253,7 +253,7 @@ export default function HomePageContent({ lang }: { lang: "EN" | "RU" }) {
           </div>
           <div className="rounded-[10px] bg-green p-1.5">
             <div className="flex flex-col gap-[18px] rounded-md border-[1.5px] border-white/70 p-6">
-              <div className="font-display text-[15px] font-bold tracking-[.14em] text-amber">{c.exampleEyebrow}</div>
+              <div className="font-display text-[15px] font-bold tracking-[.14em] text-amber-on-green">{c.exampleEyebrow}</div>
               <div className="flex items-baseline justify-between gap-3 border-b border-white/25 pb-4">
                 <span className="text-base">{c.example10Label}</span>
                 <span className="font-display text-4xl font-extrabold tabular-nums">$800</span>

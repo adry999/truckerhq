@@ -198,7 +198,7 @@ export default function ProfitCalculator() {
             ))}
           </div>
           <div className="flex flex-col gap-1 bg-green px-6 py-5">
-            <div className="font-display text-[15px] font-bold tracking-[.14em] text-amber">
+            <div className="font-display text-[15px] font-bold tracking-[.14em] text-amber-on-green">
               BREAK-EVEN RATE
             </div>
             <div className="flex flex-wrap items-baseline gap-2.5 tabular-nums">

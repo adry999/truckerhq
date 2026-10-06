@@ -202,7 +202,7 @@ export default function HireDriversPage() {
           </div>
           <div className="flex rounded-[10px] bg-green p-1.5">
             <div className="flex flex-1 flex-col gap-3.5 rounded-md border-[1.5px] border-white/70 p-6 text-offwhite">
-              <div className="font-display text-[15px] font-bold tracking-[.14em] text-amber">
+              <div className="font-display text-[15px] font-bold tracking-[.14em] text-amber-on-green">
                 WE DO IT FOR YOU
               </div>
               <div className="font-display text-4xl font-extrabold uppercase">Full recruiting</div>

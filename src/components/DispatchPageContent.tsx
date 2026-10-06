@@ -55,7 +55,7 @@ export default function DispatchPageContent({ lang }: { lang: "EN" | "RU" }) {
           </div>
           <div className="justify-self-end w-full max-w-[420px] rounded-[10px] bg-green p-1.5">
             <div className="flex flex-col gap-3.5 rounded-md border-[1.5px] border-white/70 p-6">
-              <div className="font-display text-[15px] font-bold tracking-[.14em] text-amber">
+              <div className="font-display text-[15px] font-bold tracking-[.14em] text-amber-on-green">
                 {c.cardEyebrow}
               </div>
               <div className="flex items-baseline gap-2">
@@ -221,7 +221,7 @@ export default function DispatchPageContent({ lang }: { lang: "EN" | "RU" }) {
         <div className="mx-auto max-w-5xl rounded-[24px] bg-green p-2">
           <div className="flex flex-wrap items-center justify-between gap-7 rounded-xl border-2 border-white/75 px-6 py-10 text-offwhite sm:px-12 sm:py-14">
             <div className="flex max-w-xl flex-col gap-3">
-              <div className="font-display text-[15px] font-bold tracking-[.16em] text-amber">{c.ctaEyebrow}</div>
+              <div className="font-display text-[15px] font-bold tracking-[.16em] text-amber-on-green">{c.ctaEyebrow}</div>
               <h2 className="font-display text-5xl font-extrabold leading-[0.95] md:text-6xl">{c.ctaHeading}</h2>
               <p className="text-lg leading-relaxed text-[#E3EAE6]">{c.ctaBody}</p>
             </div>

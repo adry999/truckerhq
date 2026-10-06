@@ -310,7 +310,7 @@ export default async function CarrierProfilePage({
         <aside className="flex flex-col gap-4">
           <div className="overflow-hidden rounded-lg bg-green">
             <div className="flex flex-col gap-3.5 p-6 text-offwhite">
-              <div className="font-display text-[15px] font-bold tracking-[.14em] text-amber">
+              <div className="font-display text-[15px] font-bold tracking-[.14em] text-amber-on-green">
                 {cta.eyebrow}
               </div>
               <div className="font-display text-[34px] font-extrabold uppercase leading-[0.95]">
