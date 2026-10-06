@@ -44,7 +44,7 @@ export default function GuidesPage() {
 
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="flex flex-col gap-3 rounded-lg bg-green p-6 text-offwhite">
-            <span className="font-display text-[15px] font-bold tracking-[.14em] text-amber">
+            <span className="font-display text-[15px] font-bold tracking-[.14em] text-amber-on-green">
               NEW MC CHECKLIST
             </span>
             <span className="font-display text-2xl font-extrabold uppercase leading-tight">

@@ -5,10 +5,19 @@ export const ogImageContentType = "image/png";
 
 type OgTheme = "dark" | "green" | "light";
 
+const ARIAL = "Arial, Helvetica, sans-serif";
+
 const THEME: Record<OgTheme, { bg: string; fg: string; subFg: string; accent: string }> = {
   dark: { bg: "#16181B", fg: "#F7F7F5", subFg: "#D4D6DA", accent: "#F2A900" },
   green: { bg: "#0E5C3A", fg: "#F7F7F5", subFg: "#E3EAE6", accent: "#F2A900" },
   light: { bg: "#F7F7F5", fg: "#16181B", subFg: "#3F444B", accent: "#0E5C3A" },
+};
+
+export type OgFont = {
+  name: string;
+  data: ArrayBuffer;
+  weight: 500 | 600 | 800;
+  style: "normal";
 };
 
 export type OgCardConfig = {
@@ -21,6 +30,10 @@ export type OgCardConfig = {
   big: string;
   shield?: boolean;
   shieldOpacity?: number;
+  // Overrides for non-Latin cards: the default font has no Cyrillic glyphs.
+  fonts?: OgFont[];
+  displayFont?: string;
+  bodyFont?: string;
 };
 
 function RoadLine() {
@@ -76,7 +89,7 @@ function Shield({ size, opacity }: { size: number; opacity: number }) {
   );
 }
 
-function LogoLockup({ sub }: { sub?: string }) {
+function LogoLockup({ sub, font }: { sub?: string; font: string }) {
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
       <div
@@ -126,7 +139,7 @@ function LogoLockup({ sub }: { sub?: string }) {
             color: "#16181B",
             borderRadius: 8,
             padding: "6px 14px",
-            fontFamily: "Arial, Helvetica, sans-serif",
+            fontFamily: font,
             fontWeight: 800,
             fontSize: 18,
             letterSpacing: 1,
@@ -141,6 +154,8 @@ function LogoLockup({ sub }: { sub?: string }) {
 
 export function renderOgImage(c: OgCardConfig) {
   const t = THEME[c.theme];
+  const display = c.displayFont ?? ARIAL;
+  const body = c.bodyFont ?? ARIAL;
   return new ImageResponse(
     (
       <div
@@ -156,11 +171,11 @@ export function renderOgImage(c: OgCardConfig) {
         }}
       >
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 24 }}>
-          <LogoLockup sub={c.sub} />
+          <LogoLockup sub={c.sub} font={display} />
           <div
             style={{
               display: "flex",
-              fontFamily: "Arial, Helvetica, sans-serif",
+              fontFamily: display,
               fontWeight: 800,
               fontSize: 30,
               letterSpacing: 4,
@@ -176,7 +191,7 @@ export function renderOgImage(c: OgCardConfig) {
           <div
             style={{
               display: "flex",
-              fontFamily: "Arial, Helvetica, sans-serif",
+              fontFamily: display,
               fontWeight: 900,
               fontSize: c.headingSize,
               lineHeight: 0.95,
@@ -189,7 +204,7 @@ export function renderOgImage(c: OgCardConfig) {
           <div
             style={{
               display: "flex",
-              fontFamily: "Arial, Helvetica, sans-serif",
+              fontFamily: body,
               fontWeight: 500,
               fontSize: 32,
               lineHeight: 1.4,
@@ -204,7 +219,7 @@ export function renderOgImage(c: OgCardConfig) {
           <div
             style={{
               display: "flex",
-              fontFamily: "Arial, Helvetica, sans-serif",
+              fontFamily: body,
               fontWeight: 600,
               fontSize: 28,
               color: t.accent,
@@ -215,7 +230,7 @@ export function renderOgImage(c: OgCardConfig) {
           <div
             style={{
               display: "flex",
-              fontFamily: "Arial, Helvetica, sans-serif",
+              fontFamily: body,
               fontWeight: 600,
               fontSize: 28,
               color: t.subFg,
@@ -234,6 +249,6 @@ export function renderOgImage(c: OgCardConfig) {
         <RoadLine />
       </div>
     ),
-    ogImageSize,
+    c.fonts ? { ...ogImageSize, fonts: c.fonts } : ogImageSize,
   );
 }

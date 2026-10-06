@@ -6,6 +6,8 @@
   --color-green: #0e5c3a;
   --color-amber: #f2a900;
   --color-amber-hover: #ffbc1f;
+  /* Lighter amber for small text on green: #f2a900 only reaches 4.0:1 there (AA needs 4.5). */
+  --color-amber-on-green: #ffc233;
   --color-grey: #6b7280;
   --color-red: #b42318;
   --color-border: #dedfdb;
@@ -17,6 +19,7 @@
   --color-green: var(--color-green);
   --color-amber: var(--color-amber);
   --color-amber-hover: var(--color-amber-hover);
+  --color-amber-on-green: var(--color-amber-on-green);
   --color-grey: var(--color-grey);
   --color-red: var(--color-red);
   --color-border: var(--color-border);

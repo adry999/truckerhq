@@ -207,7 +207,7 @@ export default function StateCarriersPage({
         <div className="grid gap-5 md:grid-cols-2">
           <div className="rounded-[10px] bg-green p-1.5">
             <div className="flex h-full flex-col gap-3.5 rounded-md border-[1.5px] border-white/70 p-6 text-offwhite">
-              <div className="font-display text-[15px] font-bold tracking-[.14em] text-amber">
+              <div className="font-display text-[15px] font-bold tracking-[.14em] text-amber-on-green">
                 {dispatchCtaEyebrow}
               </div>
               <div className="font-display text-4xl font-extrabold uppercase leading-[0.95]">

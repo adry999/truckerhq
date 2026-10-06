@@ -17,7 +17,7 @@ export default function Error({
 
       <section className="flex flex-1 flex-col items-center justify-center bg-asphalt px-4 py-20 text-center text-offwhite sm:px-6">
         <div className="flex flex-col items-center gap-3 rounded-2xl border-2 border-white/75 bg-green px-10 py-8 sm:px-16">
-          <div className="font-display text-[15px] font-bold tracking-[.16em] text-amber">
+          <div className="font-display text-[15px] font-bold tracking-[.16em] text-amber-on-green">
             SOMETHING BROKE DOWN
           </div>
           <h1 className="font-display text-5xl font-extrabold uppercase leading-[0.9] sm:text-6xl">
