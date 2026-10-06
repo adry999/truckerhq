@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/metadata";
 import JobsPageContent from "@/components/JobsPageContent";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "Работа CDL с указанной оплатой",
   description:
     "OTR, региональные и локальные вакансии CDL-A. В каждой вакансии — оплата, время дома и Health Score перевозчика. Отклик на английском или русском.",
-  alternates: {
-    canonical: "/ru/jobs",
-    languages: { en: "/jobs", ru: "/ru/jobs", "x-default": "/jobs" },
-  },
-};
+  path: "/ru/jobs",
+  locale: "ru_RU",
+  languages: { en: "/jobs", ru: "/ru/jobs", "x-default": "/jobs" },
+});
 
 export default async function JobsRuPage({
   searchParams,

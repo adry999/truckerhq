@@ -1,16 +1,18 @@
 import Image from "next/image";
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/metadata";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import HireDriversForm from "@/components/HireDriversForm";
 import JsonLd from "@/components/JsonLd";
 import { faqSchema } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "Hire CDL Drivers, Pre-Screened",
   description:
     "Post a driver job. We check CDL, MVR and experience before a driver reaches you. Solo and team drivers.",
-};
+  path: "/hire-drivers",
+});
 
 const STATS = [
   { big: "EN · RU", small: "Drivers who speak your language" },
@@ -68,7 +70,8 @@ export default function HireDriversPage() {
             src="https://images.unsplash.com/photo-1724556271642-e9acaf03ac23?fm=jpg&q=70&w=2000&auto=format&fit=crop"
             alt="Driver walking to a truck in a yard, morning"
             fill
-            priority
+            loading="eager"
+            fetchPriority="high"
             className="object-cover"
             sizes="100vw"
           />

@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import { STATE_DIRECTORY } from "@/lib/states";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "Carrier Directory by State",
   description:
     "Browse for-hire interstate carriers by state, from public FMCSA data. Search DOT and MC numbers and check any carrier's Health Score.",
-  alternates: { canonical: "/carriers" },
-};
+  path: "/carriers",
+});
 
 export default function CarriersIndexPage() {
   return (

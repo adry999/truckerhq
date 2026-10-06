@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/metadata";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import ComplianceAlertsForm from "@/components/ComplianceAlertsForm";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "FMCSA Compliance Alerts by Text",
   description:
     "Get a text when your authority, insurance filing, UCR or safety status changes. Free.",
-};
+  path: "/tools/compliance-alerts",
+});
 
 export default function ComplianceAlertsPage() {
   return (

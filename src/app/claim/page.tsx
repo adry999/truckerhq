@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import ClaimProfileWizard from "@/components/ClaimProfileWizard";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "Claim Your Carrier Profile",
   description: "Verify your company and add your contact details.",
+  path: "/claim",
   robots: { index: false, follow: false },
-};
+});
 
 export default function ClaimPage() {
   return (

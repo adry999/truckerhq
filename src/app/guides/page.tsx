@@ -1,16 +1,18 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/metadata";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import JsonLd from "@/components/JsonLd";
 import { guidesListSchema } from "@/lib/seo";
 import { GUIDES, findGuide, type GuideCategory } from "@/lib/guides";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "Trucking Guides for Owner-Operators",
   description:
     "Practical answers on rates, brokers, paperwork and starting your authority, from our dispatchers.",
-};
+  path: "/guides",
+});
 
 const CATEGORIES = ["All", "Rates", "Brokers", "Paperwork", "Money", "Starting out"] as const;
 

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/metadata";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import {
@@ -12,11 +13,12 @@ import {
 import { searchFmcsaCarriers, fmcsaEnabled } from "@/lib/fmcsa";
 import { STATE_DIRECTORY } from "@/lib/states";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "Carrier Lookup by DOT or MC Number",
   description:
     "Check any carrier or broker: authority, insurance, inspections and crashes, summed up in one Health Score.",
-};
+  path: "/tools/carrier-lookup",
+});
 
 const MODES = ["All", "DOT", "MC", "Name"] as const;
 const STATUSES = ["All", "ACTIVE", "WARNING", "INACTIVE"] as const;

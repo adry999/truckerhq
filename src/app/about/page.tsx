@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/metadata";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import AboutContactForm from "@/components/AboutContactForm";
 import JsonLd from "@/components/JsonLd";
 import { contactPageSchema } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "About Trucker HQ: Dispatch Team, Contact",
   description:
     "Who we are, who answers the phone, and how to reach us 24/7. English and Russian.",
-};
+  path: "/about",
+});
 
 const CONTACT_SCHEMA = contactPageSchema({
   name: "About Trucker HQ",

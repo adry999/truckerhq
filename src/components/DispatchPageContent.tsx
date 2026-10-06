@@ -22,7 +22,8 @@ export default function DispatchPageContent({ lang }: { lang: "EN" | "RU" }) {
             src="https://images.unsplash.com/photo-1783247007596-cca4a61a16f5?fm=jpg&q=70&w=2000&auto=format&fit=crop"
             alt={c.heroAlt}
             fill
-            priority
+            loading="eager"
+            fetchPriority="high"
             className="object-cover"
             sizes="100vw"
           />

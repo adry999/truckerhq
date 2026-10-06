@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/metadata";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import JsonLd from "@/components/JsonLd";
@@ -37,10 +38,11 @@ export async function generateMetadata({
       ? "Work out your cost per mile, add deadhead, and know your walk-away number before you call the broker."
       : `A ${guide.category.toLowerCase()} guide for owner-operators from Trucker HQ dispatch. ${guide.minutes} min read.`;
 
-  return {
+  return buildMetadata({
     title: guide.title,
     description,
-  };
+    path: `/guides/${slug}`,
+  });
 }
 
 export default async function GuideDetailPage({

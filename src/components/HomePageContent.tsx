@@ -17,11 +17,13 @@ export default function HomePageContent({ lang }: { lang: "EN" | "RU" }) {
 
       <section className="relative overflow-hidden bg-asphalt text-offwhite">
         <div className="absolute inset-0 hidden md:block md:left-[52%]">
+          {/* lazy: display:none on mobile skips the fetch; in viewport on desktop so it loads at once */}
           <Image
             src="https://images.unsplash.com/photo-1720811559395-3ed8d1b16649?fm=jpg&q=70&w=2000&auto=format&fit=crop"
             alt={c.heroImageAlt}
             fill
-            priority
+            loading="lazy"
+            fetchPriority="high"
             className="object-cover"
             sizes="48vw"
           />
@@ -83,6 +85,7 @@ export default function HomePageContent({ lang }: { lang: "EN" | "RU" }) {
               src="https://images.unsplash.com/photo-1720811559395-3ed8d1b16649?fm=jpg&q=70&w=2000&auto=format&fit=crop"
               alt={c.heroImageAlt}
               fill
+              fetchPriority="high"
               className="object-cover"
               sizes="100vw"
             />

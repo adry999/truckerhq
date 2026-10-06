@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/metadata";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import ProfitCalculator from "@/components/ProfitCalculator";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "Trucking Profit per Mile Calculator",
   description:
     "Enter the load and your costs. See your real profit and the lowest rate per mile worth taking.",
-};
+  path: "/tools/profit-per-mile",
+});
 
 export default function ProfitCalculatorPage() {
   return (

@@ -1,15 +1,17 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/metadata";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import JsonLd from "@/components/JsonLd";
 import { faqSchema } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "New MC Authority Checklist: First 6 Months",
   description:
     "Every filing and setup step for a new trucking authority, from BOC-3 to the new entrant audit.",
-};
+  path: "/tools/new-mc-checklist",
+});
 
 const BEFORE_YOU_HAUL = [
   {

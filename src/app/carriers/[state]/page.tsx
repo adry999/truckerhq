@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/metadata";
 import { notFound } from "next/navigation";
 import StateCarriersPage from "@/components/StateCarriersPage";
 import JsonLd from "@/components/JsonLd";
@@ -17,11 +18,11 @@ export async function generateMetadata({
   const { state } = await params;
   const entry = STATE_CONTENT[state];
   if (!entry) return {};
-  return {
+  return buildMetadata({
     title: entry.title,
     description: entry.description,
-    alternates: { canonical: `/carriers/${state}` },
-  };
+    path: `/carriers/${state}`,
+  });
 }
 
 export default async function StateCarriersRoute({

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/metadata";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import ApplyForm from "@/components/ApplyForm";
@@ -23,24 +24,24 @@ export async function generateMetadata({
 
   const city = CITY_CONTENT[slug];
   if (city) {
-    return {
+    return buildMetadata({
       title: city.title,
       description: city.description,
-      alternates: { canonical: `/jobs/${slug}` },
+      path: `/jobs/${slug}`,
       robots:
         city.jobs.length >= MIN_JOBS_TO_INDEX
           ? undefined
           : { index: false, follow: true },
-    };
+    });
   }
 
   const job = findJob(slug);
   if (!job) return {};
-  return {
+  return buildMetadata({
     title: `${job.title} — ${job.company}`,
     description: `${job.title} at ${job.company}, ${job.loc}. ${job.pay} ${job.payNote}. ${job.home}.`,
-    alternates: { canonical: `/jobs/${slug}` },
-  };
+    path: `/jobs/${slug}`,
+  });
 }
 
 export default async function JobsSlugPage({

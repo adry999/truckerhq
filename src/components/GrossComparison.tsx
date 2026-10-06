@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useState } from "react";
+import { Fragment, useDeferredValue, useState } from "react";
 
 function money(n: number) {
   return "$" + Math.round(n).toLocaleString("en-US");
@@ -8,11 +8,12 @@ function money(n: number) {
 
 export default function GrossComparison({ lang = "EN" }: { lang?: "EN" | "RU" }) {
   const [gross, setGross] = useState(8000);
+  const deferredGross = useDeferredValue(gross);
   const ru = lang === "RU";
 
   const rows = [
-    { name: ru ? "Диспетчер за 10%" : "10% dispatcher", week: money(gross * 0.1), year: money(gross * 0.1 * 50) },
-    { name: ru ? "Диспетчер за 8%" : "8% dispatcher", week: money(gross * 0.08), year: money(gross * 0.08 * 50) },
+    { name: ru ? "Диспетчер за 10%" : "10% dispatcher", week: money(deferredGross * 0.1), year: money(deferredGross * 0.1 * 50) },
+    { name: ru ? "Диспетчер за 8%" : "8% dispatcher", week: money(deferredGross * 0.08), year: money(deferredGross * 0.08 * 50) },
   ];
 
   const tableRows: [string, string, string][] = ru

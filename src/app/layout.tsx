@@ -36,6 +36,13 @@ export const metadata: Metadata = {
   },
   description:
     "Truck dispatch for a flat weekly fee, never a percentage. English and Russian-speaking dispatchers 24/7. CDL jobs and free carrier lookup.",
+  openGraph: {
+    siteName: "Trucker HQ",
+    type: "website",
+    locale: "en_US",
+    url: "/",
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 const ORGANIZATION_SCHEMA = {

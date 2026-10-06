@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/metadata";
 import LegalDocLayout from "@/components/LegalDocLayout";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "Privacy Policy",
-};
+  path: "/privacy",
+});
 
 const SECTIONS = [
   {

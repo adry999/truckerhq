@@ -74,7 +74,8 @@ export default async function StateCarriersPage({
             src={heroImage}
             alt={heroAlt}
             fill
-            priority
+            loading="eager"
+            fetchPriority="high"
             className="object-cover"
             sizes="100vw"
           />

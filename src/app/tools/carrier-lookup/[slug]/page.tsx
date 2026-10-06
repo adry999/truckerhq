@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/metadata";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import {
@@ -22,11 +23,12 @@ export async function generateMetadata({
   const { slug } = await params;
   const c = findCarrier(slug);
   if (!c) return {};
-  return {
+  return buildMetadata({
     title: `${c.name} — DOT ${c.dot} Health Score ${c.score}`,
     description: `${c.name} in ${c.city}, ${c.st}. DOT ${c.dot}, ${c.mc}. Authority ${c.status}, ${c.trucks} trucks. Health Score ${c.score}/100 from public FMCSA data.`,
+    path: `/tools/carrier-lookup/${slug}`,
     robots: { index: false, follow: true },
-  };
+  });
 }
 
 export default async function CarrierProfilePage({
