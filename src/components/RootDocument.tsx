@@ -2,6 +2,7 @@ import { Barlow_Condensed, Inter, Overpass, Roboto_Condensed } from "next/font/g
 import JsonLd from "@/components/JsonLd";
 import Analytics from "@/components/Analytics";
 import "@/app/globals.css";
+import { SITE_URL } from "@/lib/site";
 
 const barlowCondensed = Barlow_Condensed({
   variable: "--font-barlow-condensed",
@@ -34,7 +35,7 @@ const ORGANIZATION_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "Trucker HQ",
-  url: "https://truckerhq.com",
+  url: SITE_URL,
   description:
     "Flat-rate truck dispatch, CDL driver jobs and free carrier tools built on public FMCSA data.",
   areaServed: "US",

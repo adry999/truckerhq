@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { buildMetadata } from "@/lib/metadata";
+import { SITE_URL } from "@/lib/site";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import JsonLd from "@/components/JsonLd";
@@ -20,7 +21,7 @@ export const metadata: Metadata = buildMetadata({
 export default function GuidesPage() {
   return (
     <div className="flex min-h-screen flex-col">
-      <JsonLd data={guidesListSchema(GUIDES, "https://truckerhq.com")} />
+      <JsonLd data={guidesListSchema(GUIDES, SITE_URL)} />
       <SiteHeader />
 
       <section className="bg-asphalt text-offwhite">

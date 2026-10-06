@@ -1,9 +1,15 @@
 import "server-only";
 import { NextResponse } from "next/server";
+import { SITE_URL } from "@/lib/site";
 
 const ALLOWED_ORIGINS = new Set([
   "https://truckerhq.com",
   "https://www.truckerhq.com",
+  SITE_URL,
+  // This deployment's own URLs, so forms also work on preview deployments.
+  ...[process.env.VERCEL_URL, process.env.VERCEL_BRANCH_URL]
+    .filter(Boolean)
+    .map((h) => `https://${h}`),
 ]);
 
 const MAX_BODY_BYTES = 16_000;

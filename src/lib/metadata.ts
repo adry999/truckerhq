@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { INDEXABLE, SITE_URL } from "@/lib/site";
 
 const BRAND = "Trucker HQ";
 
@@ -49,7 +50,7 @@ export function buildMetadata({
 }
 
 export const rootMetadata: Metadata = {
-  metadataBase: new URL("https://truckerhq.com"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Trucker HQ: Flat-Rate Truck Dispatch, CDL Jobs, Carrier Tools",
     template: "%s | Trucker HQ",
@@ -63,4 +64,5 @@ export const rootMetadata: Metadata = {
     url: "/",
   },
   twitter: { card: "summary_large_image" },
+  ...(INDEXABLE ? {} : { robots: { index: false, follow: false } }),
 };

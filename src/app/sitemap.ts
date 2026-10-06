@@ -1,11 +1,12 @@
 import type { MetadataRoute } from "next";
+import { SITE_URL } from "@/lib/site";
 import { JOBS } from "@/lib/data";
 import { GUIDES } from "@/lib/guides";
 import { STATE_DIRECTORY } from "@/lib/states";
 import { CITY_DIRECTORY } from "@/lib/cities";
 import { CITY_CONTENT, MIN_JOBS_TO_INDEX } from "@/lib/city-content";
 
-const BASE_URL = "https://truckerhq.com";
+const BASE_URL = SITE_URL;
 
 // hreflang pairs, mirrored from each page's alternates.languages.
 const pair = (en: string, ru: string) => ({
