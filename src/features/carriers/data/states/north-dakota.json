@@ -1,0 +1,37 @@
+{
+  "stateAbbr": "ND",
+  "stateName": "North Dakota",
+  "heroImage": "https://images.unsplash.com/photo-1720811559395-3ed8d1b16649?fm=jpg&q=70&w=2000&auto=format&fit=crop",
+  "heroAlt": "North Dakota highway with a semi truck at dusk",
+  "stats": ["6,200", "148", "73", "2.6"],
+  "equipmentBreakdown": [
+    { "t": "Flatbed", "pct": 34 },
+    { "t": "Power only", "pct": 22 },
+    { "t": "Dry van", "pct": 16 },
+    { "t": "Reefer", "pct": 10 },
+    { "t": "Tanker", "pct": 9 },
+    { "t": "Step deck", "pct": 6 },
+    { "t": "Box truck", "pct": 3 }
+  ],
+  "topCities": [
+    { "t": "Fargo", "count": "980" },
+    { "t": "Bismarck", "count": "740" },
+    { "t": "Grand Forks", "count": "410" },
+    { "t": "Minot", "count": "385" },
+    { "t": "Williston", "count": "340" },
+    { "t": "West Fargo", "count": "210" }
+  ],
+  "equipmentOptions": ["All", "Flatbed", "Power only", "Dry van", "Reefer", "Tanker"],
+  "dispatchCtaBody": "We know the I-94 corridor across the state and the oil-patch tanker and flatbed freight moving through the Bakken around Williston. One flat price per week.",
+  "hireCtaBody": "Post a job and reach drivers in Fargo, Bismarck and Williston. We check CDL and MVR before you call.",
+  "carriers": [
+    { "name": "Red River Freight Co", "city": "Fargo", "dot": "8801234", "equipment": "Dry van", "trucks": 8, "status": "ACTIVE", "score": 90 },
+    { "name": "Capital City Carriers", "city": "Bismarck", "dot": "8812456", "equipment": "Flatbed", "trucks": 5, "status": "ACTIVE", "score": 84 },
+    { "name": "Bakken Basin Tank Lines", "city": "Williston", "dot": "8823789", "equipment": "Tanker", "trucks": 4, "status": "ACTIVE", "score": 78 },
+    { "name": "Volga Line Transport ND", "city": "Minot", "dot": "8834012", "equipment": "Flatbed", "trucks": 3, "status": "ACTIVE", "score": 82 },
+    { "name": "Northern Lights Logistics", "city": "Grand Forks", "dot": "8845321", "equipment": "Power only", "trucks": 2, "status": "ACTIVE", "score": 75 },
+    { "name": "Sheyenne Valley Trucking", "city": "West Fargo", "dot": "8856789", "equipment": "Reefer", "trucks": 6, "status": "ACTIVE", "score": 95 },
+    { "name": "Oil Patch Power Haulers", "city": "Williston", "dot": "8867123", "equipment": "Power only", "trucks": 1, "status": "WARNING", "score": 61 },
+    { "name": "Dakota Plains Freight", "city": "Fargo", "dot": "8878456", "equipment": "Flatbed", "trucks": 2, "status": "INACTIVE", "score": 41 }
+  ]
+}

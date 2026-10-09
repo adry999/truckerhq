@@ -1,0 +1,37 @@
+{
+  "stateAbbr": "CA",
+  "stateName": "California",
+  "heroImage": "https://images.unsplash.com/photo-1720811559395-3ed8d1b16649?fm=jpg&q=70&w=2000&auto=format&fit=crop",
+  "heroAlt": "California highway with a semi truck at sunset",
+  "stats": ["71,400", "2,110", "78", "2.9"],
+  "equipmentBreakdown": [
+    { "t": "Dry van", "pct": 38 },
+    { "t": "Reefer", "pct": 24 },
+    { "t": "Flatbed", "pct": 14 },
+    { "t": "Power only", "pct": 11 },
+    { "t": "Step deck", "pct": 5 },
+    { "t": "Box truck", "pct": 5 },
+    { "t": "Tanker", "pct": 3 }
+  ],
+  "topCities": [
+    { "t": "Los Angeles", "count": "14,820" },
+    { "t": "Long Beach", "count": "8,340" },
+    { "t": "Fresno", "count": "5,910" },
+    { "t": "Oakland", "count": "4,675" },
+    { "t": "Sacramento", "count": "3,980" },
+    { "t": "San Diego", "count": "3,412" }
+  ],
+  "equipmentOptions": ["All", "Dry van", "Reefer", "Flatbed", "Power only"],
+  "dispatchCtaBody": "We know the port drayage out of LA and Long Beach, the Central Valley ag freight up and down the I-5 corridor. One flat price per week.",
+  "hireCtaBody": "Post a job and reach drivers in Los Angeles, Long Beach and Fresno. We check CDL and MVR before you call.",
+  "carriers": [
+    { "name": "Pacific Rim Logistics", "city": "Los Angeles", "dot": "5104217", "equipment": "Dry van", "trucks": 8, "status": "ACTIVE", "score": 89 },
+    { "name": "Dniester Bay Transport", "city": "Long Beach", "dot": "5112893", "equipment": "Reefer", "trucks": 5, "status": "ACTIVE", "score": 82 },
+    { "name": "Central Valley Cold Chain", "city": "Fresno", "dot": "5123456", "equipment": "Reefer", "trucks": 10, "status": "ACTIVE", "score": 91 },
+    { "name": "Golden State Flatbed Co", "city": "Bakersfield", "dot": "5134502", "equipment": "Flatbed", "trucks": 4, "status": "ACTIVE", "score": 76 },
+    { "name": "Moldova Pacific Express", "city": "Oakland", "dot": "5141870", "equipment": "Dry van", "trucks": 3, "status": "ACTIVE", "score": 79 },
+    { "name": "Delta Stockton Carriers", "city": "Stockton", "dot": "5152049", "equipment": "Power only", "trucks": 2, "status": "WARNING", "score": 61 },
+    { "name": "Harbor City Trucking", "city": "San Diego", "dot": "5163315", "equipment": "Dry van", "trucks": 6, "status": "ACTIVE", "score": 85 },
+    { "name": "Sacramento River Freight", "city": "Sacramento", "dot": "5178624", "equipment": "Flatbed", "trucks": 1, "status": "INACTIVE", "score": 38 }
+  ]
+}

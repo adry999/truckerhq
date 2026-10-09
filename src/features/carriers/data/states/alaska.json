@@ -1,0 +1,37 @@
+{
+  "stateAbbr": "AK",
+  "stateName": "Alaska",
+  "heroImage": "https://images.unsplash.com/photo-1631914730551-1cfbcdf6f603?fm=jpg&q=70&w=2000&auto=format&fit=crop",
+  "heroAlt": "Alaska highway with a semi truck at dusk",
+  "stats": ["2,100", "38", "71", "2.4"],
+  "equipmentBreakdown": [
+    { "t": "Dry van", "pct": 34 },
+    { "t": "Flatbed", "pct": 24 },
+    { "t": "Power only", "pct": 18 },
+    { "t": "Step deck", "pct": 8 },
+    { "t": "Reefer", "pct": 6 },
+    { "t": "Box truck", "pct": 6 },
+    { "t": "Tanker", "pct": 4 }
+  ],
+  "topCities": [
+    { "t": "Anchorage", "count": "890" },
+    { "t": "Fairbanks", "count": "410" },
+    { "t": "Wasilla", "count": "265" },
+    { "t": "Juneau", "count": "190" },
+    { "t": "Kenai", "count": "145" },
+    { "t": "Sitka", "count": "95" }
+  ],
+  "equipmentOptions": ["All", "Dry van", "Flatbed", "Power only", "Reefer"],
+  "dispatchCtaBody": "We know the barge-to-truck resupply runs out of the Port of Anchorage and the ice-road realities of hauling the Dalton Highway up to Prudhoe Bay. One flat price per week.",
+  "hireCtaBody": "Post a job and reach drivers in Anchorage, Fairbanks and Wasilla. We check CDL and MVR before you call.",
+  "carriers": [
+    { "name": "Northern Lights Freight Co", "city": "Anchorage", "dot": "6104521", "equipment": "Dry van", "trucks": 6, "status": "ACTIVE", "score": 91 },
+    { "name": "Dalton Highway Hauling", "city": "Fairbanks", "dot": "6112873", "equipment": "Flatbed", "trucks": 4, "status": "ACTIVE", "score": 84 },
+    { "name": "Mat-Su Valley Trucking", "city": "Wasilla", "dot": "6127390", "equipment": "Dry van", "trucks": 3, "status": "ACTIVE", "score": 78 },
+    { "name": "Southeast Alaska Freight Lines", "city": "Juneau", "dot": "6138204", "equipment": "Power only", "trucks": 2, "status": "ACTIVE", "score": 88 },
+    { "name": "Kenai Peninsula Logistics", "city": "Kenai", "dot": "6145617", "equipment": "Flatbed", "trucks": 5, "status": "ACTIVE", "score": 73 },
+    { "name": "Baranof Island Transport", "city": "Sitka", "dot": "6156932", "equipment": "Dry van", "trucks": 1, "status": "WARNING", "score": 62 },
+    { "name": "Volga Line Transport AK", "city": "Anchorage", "dot": "6163408", "equipment": "Dry van", "trucks": 3, "status": "ACTIVE", "score": 95 },
+    { "name": "Interior Freight & Supply", "city": "Fairbanks", "dot": "6171755", "equipment": "Reefer", "trucks": 2, "status": "INACTIVE", "score": 34 }
+  ]
+}

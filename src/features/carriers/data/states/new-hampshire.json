@@ -1,0 +1,37 @@
+{
+  "stateAbbr": "NH",
+  "stateName": "New Hampshire",
+  "heroImage": "https://images.unsplash.com/photo-1720811559395-3ed8d1b16649?fm=jpg&q=70&w=2000&auto=format&fit=crop",
+  "heroAlt": "New Hampshire highway with a semi truck at dusk",
+  "stats": ["6,900", "184", "75", "2.6"],
+  "equipmentBreakdown": [
+    { "t": "Dry van", "pct": 52 },
+    { "t": "Reefer", "pct": 15 },
+    { "t": "Power only", "pct": 12 },
+    { "t": "Flatbed", "pct": 8 },
+    { "t": "Box truck", "pct": 6 },
+    { "t": "Step deck", "pct": 4 },
+    { "t": "Tanker", "pct": 3 }
+  ],
+  "topCities": [
+    { "t": "Manchester", "count": "1,850" },
+    { "t": "Nashua", "count": "1,320" },
+    { "t": "Concord", "count": "890" },
+    { "t": "Derry", "count": "540" },
+    { "t": "Dover", "count": "415" },
+    { "t": "Rochester", "count": "310" }
+  ],
+  "equipmentOptions": ["All", "Dry van", "Reefer", "Power only"],
+  "dispatchCtaBody": "We know the I-93 run down to Boston and the I-95 lanes through the Seacoast, plus the distribution centers that stack up near Nashua and Salem to dodge the state's no sales tax border. One flat price per week.",
+  "hireCtaBody": "Post a job and reach drivers in Manchester, Nashua and Concord. We check CDL and MVR before you call.",
+  "carriers": [
+    { "name": "Manchester Freight Lines", "city": "Manchester", "dot": "8412047", "equipment": "Dry van", "trucks": 7, "status": "ACTIVE", "score": 88 },
+    { "name": "Granite State Carriers", "city": "Nashua", "dot": "8423981", "equipment": "Dry van", "trucks": 9, "status": "ACTIVE", "score": 92 },
+    { "name": "Merrimack Valley Transport", "city": "Concord", "dot": "8437652", "equipment": "Reefer", "trucks": 5, "status": "ACTIVE", "score": 79 },
+    { "name": "Volga Line Transport NH", "city": "Derry", "dot": "8441290", "equipment": "Dry van", "trucks": 3, "status": "ACTIVE", "score": 84 },
+    { "name": "Seacoast Distribution Co", "city": "Dover", "dot": "8456813", "equipment": "Power only", "trucks": 1, "status": "ACTIVE", "score": 71 },
+    { "name": "Lilac City Logistics", "city": "Rochester", "dot": "8462305", "equipment": "Dry van", "trucks": 4, "status": "ACTIVE", "score": 75 },
+    { "name": "Baltic Star Trucking", "city": "Manchester", "dot": "8478534", "equipment": "Reefer", "trucks": 6, "status": "WARNING", "score": 62 },
+    { "name": "Old Colony Freight Co", "city": "Nashua", "dot": "8489167", "equipment": "Dry van", "trucks": 2, "status": "INACTIVE", "score": 41 }
+  ]
+}

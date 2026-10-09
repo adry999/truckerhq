@@ -1,0 +1,37 @@
+{
+  "stateAbbr": "AZ",
+  "stateName": "Arizona",
+  "heroImage": "https://images.unsplash.com/photo-1779583074717-e60fa13131ce?fm=jpg&q=70&w=2000&auto=format&fit=crop",
+  "heroAlt": "Arizona highway with a semi truck at dusk",
+  "stats": ["24,700", "615", "75", "2.9"],
+  "equipmentBreakdown": [
+    { "t": "Dry van", "pct": 43 },
+    { "t": "Reefer", "pct": 18 },
+    { "t": "Flatbed", "pct": 15 },
+    { "t": "Power only", "pct": 10 },
+    { "t": "Step deck", "pct": 6 },
+    { "t": "Box truck", "pct": 5 },
+    { "t": "Tanker", "pct": 3 }
+  ],
+  "topCities": [
+    { "t": "Phoenix", "count": "8,940" },
+    { "t": "Tucson", "count": "4,215" },
+    { "t": "Mesa", "count": "2,680" },
+    { "t": "Chandler", "count": "1,950" },
+    { "t": "Yuma", "count": "1,340" },
+    { "t": "Flagstaff", "count": "915" }
+  ],
+  "equipmentOptions": ["All", "Dry van", "Reefer", "Flatbed", "Power only"],
+  "dispatchCtaBody": "We know the I-10/I-40 crossroads through Phoenix and the cross-border freight coming up from Nogales, Arizona's busiest port of entry for Mexican trailers. One flat price per week.",
+  "hireCtaBody": "Post a job and reach drivers in Phoenix, Tucson and Mesa. We check CDL and MVR before you call.",
+  "carriers": [
+    { "name": "Sonoran Freight Lines", "city": "Phoenix", "dot": "6213045", "equipment": "Dry van", "trucks": 12, "status": "ACTIVE", "score": 92 },
+    { "name": "Cactus Line Logistics", "city": "Tucson", "dot": "6224671", "equipment": "Reefer", "trucks": 7, "status": "ACTIVE", "score": 87 },
+    { "name": "Volga Line Transport AZ", "city": "Mesa", "dot": "6238190", "equipment": "Dry van", "trucks": 5, "status": "ACTIVE", "score": 81 },
+    { "name": "Desert Crossing Carriers", "city": "Yuma", "dot": "6241357", "equipment": "Flatbed", "trucks": 4, "status": "ACTIVE", "score": 78 },
+    { "name": "Grand Canyon Trucking Co", "city": "Flagstaff", "dot": "6255902", "equipment": "Power only", "trucks": 1, "status": "ACTIVE", "score": 74 },
+    { "name": "Chandler Crossroads Transport", "city": "Chandler", "dot": "6262418", "equipment": "Dry van", "trucks": 8, "status": "ACTIVE", "score": 95 },
+    { "name": "Border Gate Logistics", "city": "Tucson", "dot": "6271830", "equipment": "Reefer", "trucks": 3, "status": "WARNING", "score": 62 },
+    { "name": "Papago Freight Co", "city": "Phoenix", "dot": "6289564", "equipment": "Dry van", "trucks": 2, "status": "INACTIVE", "score": 41 }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "stateAbbr": "MS",
+  "stateName": "Mississippi",
+  "heroImage": "https://images.unsplash.com/photo-1631914730551-1cfbcdf6f603?fm=jpg&q=70&w=2000&auto=format&fit=crop",
+  "heroAlt": "Mississippi highway with a semi truck at dusk",
+  "stats": ["12,100", "318", "71", "2.5"],
+  "equipmentBreakdown": [
+    { "t": "Dry van", "pct": 39 },
+    { "t": "Flatbed", "pct": 22 },
+    { "t": "Reefer", "pct": 15 },
+    { "t": "Power only", "pct": 10 },
+    { "t": "Step deck", "pct": 6 },
+    { "t": "Box truck", "pct": 5 },
+    { "t": "Tanker", "pct": 3 }
+  ],
+  "topCities": [
+    { "t": "Jackson", "count": "3,240" },
+    { "t": "Gulfport", "count": "1,865" },
+    { "t": "Southaven", "count": "1,410" },
+    { "t": "Hattiesburg", "count": "980" },
+    { "t": "Biloxi", "count": "845" },
+    { "t": "Meridian", "count": "612" }
+  ],
+  "equipmentOptions": ["All", "Dry van", "Flatbed", "Reefer", "Power only"],
+  "dispatchCtaBody": "We know the I-55 run through Jackson and the I-20 freight lanes to the east, plus the container and chemical loads out of the Port of Gulfport. One flat price per week.",
+  "hireCtaBody": "Post a job and reach drivers in Jackson, Gulfport and Hattiesburg. We check CDL and MVR before you call.",
+  "carriers": [
+    { "name": "Magnolia State Freight", "city": "Jackson", "dot": "7912438", "equipment": "Dry van", "trucks": 9, "status": "ACTIVE", "score": 88 },
+    { "name": "Gulfport Harbor Carriers", "city": "Gulfport", "dot": "7934210", "equipment": "Flatbed", "trucks": 6, "status": "ACTIVE", "score": 84 },
+    { "name": "Volga Line Transport MS", "city": "Southaven", "dot": "7956092", "equipment": "Dry van", "trucks": 4, "status": "ACTIVE", "score": 79 },
+    { "name": "Pine Belt Hauling Co", "city": "Hattiesburg", "dot": "7967745", "equipment": "Flatbed", "trucks": 3, "status": "ACTIVE", "score": 75 },
+    { "name": "Biloxi Bay Logistics", "city": "Biloxi", "dot": "7923581", "equipment": "Reefer", "trucks": 5, "status": "ACTIVE", "score": 81 },
+    { "name": "Meridian Crossroads Trucking", "city": "Meridian", "dot": "7989164", "equipment": "Power only", "trucks": 2, "status": "ACTIVE", "score": 71 },
+    { "name": "Kaskil Freight Lines", "city": "Jackson", "dot": "7945327", "equipment": "Dry van", "trucks": 7, "status": "WARNING", "score": 63 },
+    { "name": "Delta Southern Carriers", "city": "Southaven", "dot": "7978603", "equipment": "Dry van", "trucks": 1, "status": "INACTIVE", "score": 41 }
+  ]
+}

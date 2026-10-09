@@ -1,0 +1,37 @@
+{
+  "stateAbbr": "WY",
+  "stateName": "Wyoming",
+  "heroImage": "https://images.unsplash.com/photo-1631914730551-1cfbcdf6f603?fm=jpg&q=70&w=2000&auto=format&fit=crop",
+  "heroAlt": "Wyoming highway with a semi truck at dusk",
+  "stats": ["4,700", "58", "81", "2.2"],
+  "equipmentBreakdown": [
+    { "t": "Flatbed", "pct": 34 },
+    { "t": "Power only", "pct": 24 },
+    { "t": "Dry van", "pct": 18 },
+    { "t": "Reefer", "pct": 10 },
+    { "t": "Tanker", "pct": 6 },
+    { "t": "Step deck", "pct": 5 },
+    { "t": "Box truck", "pct": 3 }
+  ],
+  "topCities": [
+    { "t": "Cheyenne", "count": "1,340" },
+    { "t": "Casper", "count": "980" },
+    { "t": "Gillette", "count": "650" },
+    { "t": "Laramie", "count": "540" },
+    { "t": "Rock Springs", "count": "410" },
+    { "t": "Sheridan", "count": "340" }
+  ],
+  "equipmentOptions": ["All", "Flatbed", "Power only", "Dry van", "Reefer"],
+  "dispatchCtaBody": "We know the I-80 corridor across the southern plains and the I-25 run past the Powder River Basin coal fields. One flat price per week, energy and coal freight included.",
+  "hireCtaBody": "Post a job and reach drivers in Cheyenne, Casper and Gillette. We check CDL and MVR before you call.",
+  "carriers": [
+    { "name": "Cheyenne Capitol Freight", "city": "Cheyenne", "dot": "10123456", "equipment": "Flatbed", "trucks": 6, "status": "ACTIVE", "score": 91 },
+    { "name": "Casper Basin Energy Haulers", "city": "Casper", "dot": "10134872", "equipment": "Power only", "trucks": 5, "status": "ACTIVE", "score": 84 },
+    { "name": "Laramie Plains Trucking", "city": "Laramie", "dot": "10145901", "equipment": "Dry van", "trucks": 3, "status": "ACTIVE", "score": 78 },
+    { "name": "Gillette Coal Country Carriers", "city": "Gillette", "dot": "10156234", "equipment": "Flatbed", "trucks": 7, "status": "ACTIVE", "score": 88 },
+    { "name": "Rock Springs Route 80 Transport", "city": "Rock Springs", "dot": "10167890", "equipment": "Power only", "trucks": 2, "status": "ACTIVE", "score": 73 },
+    { "name": "Sheridan Bighorn Freight", "city": "Sheridan", "dot": "10178345", "equipment": "Reefer", "trucks": 4, "status": "ACTIVE", "score": 80 },
+    { "name": "Volga Line Transport WY", "city": "Cheyenne", "dot": "10189012", "equipment": "Flatbed", "trucks": 3, "status": "WARNING", "score": 62 },
+    { "name": "Casper Frontier Hauling", "city": "Casper", "dot": "10192567", "equipment": "Dry van", "trucks": 1, "status": "INACTIVE", "score": 41 }
+  ]
+}

@@ -1,4 +1,4 @@
-import { STATE_CONTENT, STATE_SLUGS } from "@/features/carriers/data/state-content";
+import { STATE_CONTENT, STATE_SLUGS } from "@/features/carriers/data/states";
 
 export type StateDirectoryEntry = {
   name: string;

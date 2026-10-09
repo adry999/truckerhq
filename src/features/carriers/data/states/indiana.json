@@ -1,0 +1,37 @@
+{
+  "stateAbbr": "IN",
+  "stateName": "Indiana",
+  "heroImage": "https://images.unsplash.com/photo-1720811559395-3ed8d1b16649?fm=jpg&q=70&w=2000&auto=format&fit=crop",
+  "heroAlt": "Indiana highway with a semi truck at dusk",
+  "stats": ["30,200", "810", "73", "2.9"],
+  "equipmentBreakdown": [
+    { "t": "Dry van", "pct": 44 },
+    { "t": "Reefer", "pct": 18 },
+    { "t": "Flatbed", "pct": 15 },
+    { "t": "Power only", "pct": 9 },
+    { "t": "Step deck", "pct": 6 },
+    { "t": "Box truck", "pct": 5 },
+    { "t": "Tanker", "pct": 3 }
+  ],
+  "topCities": [
+    { "t": "Indianapolis", "count": "8,940" },
+    { "t": "Fort Wayne", "count": "3,215" },
+    { "t": "Evansville", "count": "2,180" },
+    { "t": "South Bend", "count": "1,760" },
+    { "t": "Carmel", "count": "1,340" },
+    { "t": "Fishers", "count": "1,125" }
+  ],
+  "equipmentOptions": ["All", "Dry van", "Reefer", "Flatbed", "Power only"],
+  "dispatchCtaBody": "We know the I-65/I-70/I-69 interchange that makes Indianapolis the busiest inland port in the country, and the freight that flows through it in every direction. One flat price per week.",
+  "hireCtaBody": "Post a job and reach drivers in Indianapolis, Fort Wayne and Evansville. We check CDL and MVR before you call.",
+  "carriers": [
+    { "name": "Hoosier Freight Lines", "city": "Indianapolis", "dot": "6901234", "equipment": "Dry van", "trucks": 8, "status": "ACTIVE", "score": 88 },
+    { "name": "Crossroads Carriers", "city": "South Bend", "dot": "6923456", "equipment": "Dry van", "trucks": 12, "status": "ACTIVE", "score": 91 },
+    { "name": "Meridian Transport", "city": "Carmel", "dot": "6934567", "equipment": "Power only", "trucks": 3, "status": "ACTIVE", "score": 95 },
+    { "name": "River City Logistics", "city": "Evansville", "dot": "6945678", "equipment": "Reefer", "trucks": 4, "status": "ACTIVE", "score": 79 },
+    { "name": "Volga Line Transport IN", "city": "Fort Wayne", "dot": "6956789", "equipment": "Flatbed", "trucks": 5, "status": "ACTIVE", "score": 82 },
+    { "name": "Lakeshore Freight", "city": "Fishers", "dot": "6967890", "equipment": "Dry van", "trucks": 6, "status": "ACTIVE", "score": 74 },
+    { "name": "Steel Horse Hauling", "city": "Indianapolis", "dot": "6978901", "equipment": "Flatbed", "trucks": 2, "status": "WARNING", "score": 61 },
+    { "name": "Blue Line Trucking", "city": "Fort Wayne", "dot": "6989012", "equipment": "Dry van", "trucks": 1, "status": "INACTIVE", "score": 38 }
+  ]
+}

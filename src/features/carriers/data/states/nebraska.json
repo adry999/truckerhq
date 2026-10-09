@@ -1,0 +1,37 @@
+{
+  "stateAbbr": "NE",
+  "stateName": "Nebraska",
+  "heroImage": "https://images.unsplash.com/photo-1631914730551-1cfbcdf6f603?fm=jpg&q=70&w=2000&auto=format&fit=crop",
+  "heroAlt": "Nebraska highway with a semi truck at dusk",
+  "stats": ["14,500", "356", "75", "2.6"],
+  "equipmentBreakdown": [
+    { "t": "Dry van", "pct": 44 },
+    { "t": "Flatbed", "pct": 20 },
+    { "t": "Reefer", "pct": 13 },
+    { "t": "Power only", "pct": 10 },
+    { "t": "Step deck", "pct": 6 },
+    { "t": "Tanker", "pct": 4 },
+    { "t": "Box truck", "pct": 3 }
+  ],
+  "topCities": [
+    { "t": "Omaha", "count": "4,860" },
+    { "t": "Lincoln", "count": "2,715" },
+    { "t": "Grand Island", "count": "1,140" },
+    { "t": "Bellevue", "count": "845" },
+    { "t": "Kearney", "count": "610" },
+    { "t": "Fremont", "count": "480" }
+  ],
+  "equipmentOptions": ["All", "Dry van", "Reefer", "Flatbed", "Power only"],
+  "dispatchCtaBody": "We know the I-80 corridor from Omaha to the Wyoming line and Nebraska's role as an ag and rail freight hub, from Union Pacific's Omaha yards to the grain elevators along the Platte. One flat price per week.",
+  "hireCtaBody": "Post a job and reach drivers in Omaha, Lincoln and Grand Island. We check CDL and MVR before you call.",
+  "carriers": [
+    { "name": "Missouri River Freight Co", "city": "Omaha", "dot": "8213045", "equipment": "Dry van", "trucks": 9, "status": "ACTIVE", "score": 91 },
+    { "name": "Cornhusker Bulk Carriers", "city": "Lincoln", "dot": "8224187", "equipment": "Flatbed", "trucks": 6, "status": "ACTIVE", "score": 84 },
+    { "name": "Prairie Rail Transfer", "city": "Grand Island", "dot": "8231902", "equipment": "Dry van", "trucks": 4, "status": "ACTIVE", "score": 78 },
+    { "name": "Volga Plains Logistics", "city": "Bellevue", "dot": "8245613", "equipment": "Dry van", "trucks": 3, "status": "ACTIVE", "score": 88 },
+    { "name": "Platte Valley Flatbed", "city": "Kearney", "dot": "8256734", "equipment": "Flatbed", "trucks": 5, "status": "ACTIVE", "score": 73 },
+    { "name": "Fremont Ag Haulers", "city": "Fremont", "dot": "8262048", "equipment": "Reefer", "trucks": 2, "status": "ACTIVE", "score": 95 },
+    { "name": "Steppe Route Carriers", "city": "Omaha", "dot": "8271395", "equipment": "Power only", "trucks": 1, "status": "WARNING", "score": 61 },
+    { "name": "Salt Creek Trucking", "city": "Lincoln", "dot": "8288460", "equipment": "Dry van", "trucks": 2, "status": "INACTIVE", "score": 42 }
+  ]
+}

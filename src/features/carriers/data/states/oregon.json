@@ -1,0 +1,37 @@
+{
+  "stateAbbr": "OR",
+  "stateName": "Oregon",
+  "heroImage": "https://images.unsplash.com/photo-1779583074717-e60fa13131ce?fm=jpg&q=70&w=2000&auto=format&fit=crop",
+  "heroAlt": "Oregon highway with a semi truck at dusk",
+  "stats": ["16,800", "398", "75", "2.6"],
+  "equipmentBreakdown": [
+    { "t": "Dry van", "pct": 38 },
+    { "t": "Flatbed", "pct": 22 },
+    { "t": "Reefer", "pct": 15 },
+    { "t": "Power only", "pct": 10 },
+    { "t": "Step deck", "pct": 7 },
+    { "t": "Box truck", "pct": 5 },
+    { "t": "Tanker", "pct": 3 }
+  ],
+  "topCities": [
+    { "t": "Portland", "count": "5,940" },
+    { "t": "Salem", "count": "2,215" },
+    { "t": "Eugene", "count": "1,780" },
+    { "t": "Hillsboro", "count": "1,340" },
+    { "t": "Gresham", "count": "1,065" },
+    { "t": "Bend", "count": "845" }
+  ],
+  "equipmentOptions": ["All", "Dry van", "Reefer", "Flatbed", "Power only"],
+  "dispatchCtaBody": "We know the I-5 corridor through the Willamette Valley and the I-84 freight lanes through the Gorge, plus the container and bulk traffic moving through the Port of Portland. One flat price per week.",
+  "hireCtaBody": "Post a job and reach drivers in Portland, Salem and Eugene. We check CDL and MVR before you call.",
+  "carriers": [
+    { "name": "Cascade Summit Logistics", "city": "Portland", "dot": "9012384", "equipment": "Dry van", "trucks": 9, "status": "ACTIVE", "score": 91 },
+    { "name": "Volga Line Transport OR", "city": "Hillsboro", "dot": "9034561", "equipment": "Dry van", "trucks": 4, "status": "ACTIVE", "score": 83 },
+    { "name": "Willamette Valley Freight", "city": "Salem", "dot": "9047823", "equipment": "Flatbed", "trucks": 6, "status": "ACTIVE", "score": 78 },
+    { "name": "Port of Portland Carriers", "city": "Portland", "dot": "9058902", "equipment": "Reefer", "trucks": 7, "status": "ACTIVE", "score": 88 },
+    { "name": "Emerald Eugene Trucking", "city": "Eugene", "dot": "9061247", "equipment": "Flatbed", "trucks": 3, "status": "ACTIVE", "score": 74 },
+    { "name": "High Desert Bend Haulers", "city": "Bend", "dot": "9073519", "equipment": "Power only", "trucks": 1, "status": "ACTIVE", "score": 70 },
+    { "name": "Gresham Gateway Transport", "city": "Gresham", "dot": "9082604", "equipment": "Dry van", "trucks": 5, "status": "WARNING", "score": 62 },
+    { "name": "Timber Country Trucking", "city": "Eugene", "dot": "9091356", "equipment": "Flatbed", "trucks": 2, "status": "INACTIVE", "score": 41 }
+  ]
+}

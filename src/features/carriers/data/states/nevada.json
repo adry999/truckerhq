@@ -1,0 +1,37 @@
+{
+  "stateAbbr": "NV",
+  "stateName": "Nevada",
+  "heroImage": "https://images.unsplash.com/photo-1779583074717-e60fa13131ce?fm=jpg&q=70&w=2000&auto=format&fit=crop",
+  "heroAlt": "Nevada desert highway with a semi truck at dusk",
+  "stats": ["13,700", "385", "73", "2.6"],
+  "equipmentBreakdown": [
+    { "t": "Dry van", "pct": 44 },
+    { "t": "Power only", "pct": 21 },
+    { "t": "Reefer", "pct": 12 },
+    { "t": "Flatbed", "pct": 10 },
+    { "t": "Step deck", "pct": 6 },
+    { "t": "Box truck", "pct": 4 },
+    { "t": "Tanker", "pct": 3 }
+  ],
+  "topCities": [
+    { "t": "Las Vegas", "count": "6,850" },
+    { "t": "Henderson", "count": "2,190" },
+    { "t": "Reno", "count": "1,980" },
+    { "t": "North Las Vegas", "count": "1,340" },
+    { "t": "Sparks", "count": "610" },
+    { "t": "Carson City", "count": "340" }
+  ],
+  "equipmentOptions": ["All", "Dry van", "Reefer", "Flatbed", "Power only"],
+  "dispatchCtaBody": "We run the I-15 corridor through Las Vegas and the I-80 lanes across Reno, where the fast-growing Tahoe-Reno Industrial Center has turned the area into one of the West's busiest warehouse and distribution hubs. One flat price per week.",
+  "hireCtaBody": "Post a job and reach drivers in Las Vegas, Henderson and Reno. We check CDL and MVR before you call.",
+  "carriers": [
+    { "name": "Silver State Freight Lines", "city": "Las Vegas", "dot": "8312045", "equipment": "Dry van", "trucks": 9, "status": "ACTIVE", "score": 88 },
+    { "name": "Henderson Logistics Co", "city": "Henderson", "dot": "8324891", "equipment": "Power only", "trucks": 5, "status": "ACTIVE", "score": 82 },
+    { "name": "Biggest Little Trucking", "city": "Reno", "dot": "8337612", "equipment": "Dry van", "trucks": 12, "status": "ACTIVE", "score": 91 },
+    { "name": "Volga Line Transport NV", "city": "North Las Vegas", "dot": "8341203", "equipment": "Dry van", "trucks": 4, "status": "ACTIVE", "score": 76 },
+    { "name": "Sparks Distribution Carriers", "city": "Sparks", "dot": "8356780", "equipment": "Power only", "trucks": 3, "status": "ACTIVE", "score": 79 },
+    { "name": "Carson Capital Freight", "city": "Carson City", "dot": "8362914", "equipment": "Flatbed", "trucks": 2, "status": "ACTIVE", "score": 71 },
+    { "name": "Desert Express Hauling", "city": "Las Vegas", "dot": "8371058", "equipment": "Reefer", "trucks": 6, "status": "WARNING", "score": 63 },
+    { "name": "Neon Line Transport", "city": "Las Vegas", "dot": "8389447", "equipment": "Dry van", "trucks": 1, "status": "INACTIVE", "score": 41 }
+  ]
+}
