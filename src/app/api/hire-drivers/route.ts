@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { insertRow } from "@/lib/supabase";
+import { toUsE164 } from "@/lib/phone";
 import { guardLeadRoute, str, isHoneypotTripped } from "@/lib/api-guard";
 
 export async function POST(req: Request) {
@@ -17,11 +18,14 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
   }
 
+  const e164 = toUsE164(phone);
+  if (!e164) return NextResponse.json({ error: "Enter a valid US phone number" }, { status: 400 });
+
   const ok = await insertRow("hire_driver_requests", {
     company_name: companyName,
     dot_number: dotNumber,
     contact_name: contactName,
-    phone,
+    phone: e164,
     pay: str(body?.pay, 100),
     home_base: str(body?.homeBase, 100),
     position: str(body?.position, 100),
