@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { trackEvent } from "@/lib/analytics";
-import { Segmented } from "@/components/ui/Segmented";
+import { Segmented } from "@/shared/ui/Segmented";
 
 const TOPICS = ["Dispatch", "Driver job", "Hiring drivers", "Something else"];
 const LANGUAGES = ["EN", "RU"] as const;

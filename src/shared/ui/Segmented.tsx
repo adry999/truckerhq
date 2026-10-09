@@ -27,7 +27,7 @@ export function Segmented({
           className={`${buttonClassName} rounded-[10px] ${
             value === o
               ? "border-[1.5px] border-green bg-green text-offwhite"
-              : "border-[1.5px] border-[#9CA0A8] bg-white text-asphalt"
+              : "border-[1.5px] border-input-border bg-white text-asphalt"
           }`}
         >
           {uppercase ? o.toUpperCase() : o}

@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { trackEvent } from "@/lib/analytics";
-import { Segmented } from "@/components/ui/Segmented";
+import { Segmented } from "@/shared/ui/Segmented";
 
 const POSITIONS = ["OTR", "Regional", "Local", "Team", "Owner-op"];
 const EQUIPMENT = ["Dry van", "Reefer", "Flatbed", "Power only"];

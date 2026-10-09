@@ -11,6 +11,15 @@
   --color-grey: #6b7280;
   --color-red: #b42318;
   --color-border: #dedfdb;
+  --color-ink-2: #4b5058;
+  --color-ink-3: #3f444b;
+  --color-input-border: #9ca0a8;
+  --color-green-tint: #e2f0e8;
+  --color-amber-tint: #fff7e0;
+  --color-divider: #ecedea;
+  --color-on-dark: #d4d6da;
+  --color-on-dark-muted: #aeb2b8;
+  --color-surface-muted: #eeefec;
 }
 
 @theme inline {
@@ -23,6 +32,15 @@
   --color-grey: var(--color-grey);
   --color-red: var(--color-red);
   --color-border: var(--color-border);
+  --color-ink-2: var(--color-ink-2);
+  --color-ink-3: var(--color-ink-3);
+  --color-input-border: var(--color-input-border);
+  --color-green-tint: var(--color-green-tint);
+  --color-amber-tint: var(--color-amber-tint);
+  --color-divider: var(--color-divider);
+  --color-on-dark: var(--color-on-dark);
+  --color-on-dark-muted: var(--color-on-dark-muted);
+  --color-surface-muted: var(--color-surface-muted);
   --font-display: var(--font-barlow-condensed), var(--font-roboto-condensed), sans-serif;
   --font-sans: var(--font-inter);
   --font-logo: var(--font-overpass);

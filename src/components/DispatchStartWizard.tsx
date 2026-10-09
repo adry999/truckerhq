@@ -4,7 +4,7 @@ import { PHONE_HREF } from "@/lib/contact";
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import { trackEvent } from "@/lib/analytics";
-import { Segmented } from "@/components/ui/Segmented";
+import { Segmented } from "@/shared/ui/Segmented";
 
 const TRAILER_TYPES = ["Dry van", "Reefer", "Flatbed", "Step deck", "Power only"];
 const DRIVER_TYPES = ["I drive", "Company driver", "Team"];

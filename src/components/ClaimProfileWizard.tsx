@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRef, useState } from "react";
 import { healthColor } from "@/lib/data";
 import { trackEvent } from "@/lib/analytics";
-import SampleDataNotice from "@/components/SampleDataNotice";
+import { Notice } from "@/shared/ui/Notice";
 
 const CARRIER = {
   name: "Carpathian Freight LLC",
@@ -123,10 +123,10 @@ export default function ClaimProfileWizard() {
 
       <section className="mx-auto grid w-full max-w-6xl gap-5 px-4 py-8 sm:px-6 md:grid-cols-3 md:py-12">
         <div className="flex min-w-0 flex-col gap-5 md:col-span-2">
-          <SampleDataNotice>
+          <Notice>
             Demo: the carrier shown is a sample. Ownership claims are verified
             manually by phone.
-          </SampleDataNotice>
+          </Notice>
           <div className="flex flex-col gap-5 rounded-lg border border-border bg-white p-[22px]">
             {step === 0 && (
               <div className="flex flex-col gap-5">
