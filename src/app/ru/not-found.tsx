@@ -1,1 +1,5 @@
-export { default } from "@/app/(en)/not-found";
+import NotFoundContent from "@/components/NotFoundContent";
+
+export default function NotFound() {
+  return <NotFoundContent lang="RU" />;
+}
