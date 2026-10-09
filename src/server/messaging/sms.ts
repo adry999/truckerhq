@@ -1,37 +1,28 @@
 import "server-only";
-
-const ACCOUNT_SID = process.env.TWILIO_ACCOUNT_SID;
-const AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN;
-const FROM = process.env.TWILIO_FROM;
+import { serverEnv } from "@/server/env";
+import { httpRequest } from "@/server/http/http-request";
 
 const mask = (phone: string) => `***${phone.slice(-4)}`;
 
 /** Sends an SMS via Twilio; never throws, and no-ops when Twilio isn't configured. */
 export async function sendSms(to: string, body: string): Promise<void> {
-  if (!ACCOUNT_SID || !AUTH_TOKEN || !FROM) {
+  const { TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_FROM } = serverEnv();
+  if (!TWILIO_ACCOUNT_SID || !TWILIO_AUTH_TOKEN || !TWILIO_FROM) {
     console.log(`[sms] skipped (Twilio not configured): to=${mask(to)}`);
     return;
   }
 
-  try {
-    const auth = Buffer.from(`${ACCOUNT_SID}:${AUTH_TOKEN}`).toString("base64");
-    const res = await fetch(
-      `https://api.twilio.com/2010-04-01/Accounts/${ACCOUNT_SID}/Messages.json`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Basic ${auth}`,
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: new URLSearchParams({ From: FROM, To: to, Body: body }),
-        signal: AbortSignal.timeout(5000),
+  const auth = Buffer.from(`${TWILIO_ACCOUNT_SID}:${TWILIO_AUTH_TOKEN}`).toString("base64");
+  await httpRequest(
+    "sms",
+    `https://api.twilio.com/2010-04-01/Accounts/${TWILIO_ACCOUNT_SID}/Messages.json`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Basic ${auth}`,
+        "Content-Type": "application/x-www-form-urlencoded",
       },
-    );
-    if (!res.ok) {
-      const detail = await res.text().catch(() => "");
-      console.error(`[sms] Twilio send failed: ${res.status} ${detail.slice(0, 500)}`);
-    }
-  } catch (err) {
-    console.error("[sms] Twilio send threw:", err);
-  }
+      body: new URLSearchParams({ From: TWILIO_FROM, To: to, Body: body }),
+    },
+  );
 }
