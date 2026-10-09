@@ -1,19 +1,28 @@
 "use client";
 
 import Link from "next/link";
-import { useState, type FormEvent } from "react";
+import { useState } from "react";
 import { trackEvent } from "@/lib/analytics";
+import { useFormSubmit } from "@/shared/hooks/useFormSubmit";
+import { Button } from "@/shared/ui/Button";
+import { CheckCard, ChoiceGroup } from "@/shared/ui/choices";
+import { Field, TextInput } from "@/shared/ui/Field";
+import { FormError, Honeypot } from "@/shared/ui/form-bits";
+import { CheckIcon } from "@/shared/ui/icons";
+import { Segmented } from "@/shared/ui/Segmented";
 
-const WATCH_ITEMS: [string, string, string][] = [
-  ["auth", "Operating authority", "Active, pending, revoked or inactive"],
-  ["ins", "Insurance filing", "BIPD and cargo on file, cancellation notices"],
-  ["ucr", "UCR registration", "Reminder before the yearly deadline"],
-  ["boc", "BOC-3 process agent", "Filing missing or removed"],
-  ["oos", "Out-of-service order", "Any new OOS order on your DOT"],
-  ["insp", "New inspections and crashes", "Every roadside inspection that hits your record"],
-];
+const WATCH_ITEMS = [
+  { key: "auth", title: "Operating authority", description: "Active, pending, revoked or inactive" },
+  { key: "ins", title: "Insurance filing", description: "BIPD and cargo on file, cancellation notices" },
+  { key: "ucr", title: "UCR registration", description: "Reminder before the yearly deadline" },
+  { key: "boc", title: "BOC-3 process agent", description: "Filing missing or removed" },
+  { key: "oos", title: "Out-of-service order", description: "Any new OOS order on your DOT" },
+  { key: "insp", title: "New inspections and crashes", description: "Every roadside inspection that hits your record" },
+] as const;
 
-const DEFAULT_WATCH: Record<string, boolean> = {
+type WatchKey = (typeof WATCH_ITEMS)[number]["key"];
+
+const DEFAULT_WATCH: Record<WatchKey, boolean> = {
   auth: true,
   ins: true,
   ucr: true,
@@ -22,75 +31,61 @@ const DEFAULT_WATCH: Record<string, boolean> = {
   insp: false,
 };
 
+type Language = "EN" | "RU";
+const LANGUAGE_LABELS = { EN: "English", RU: "Русский" } as const;
+const LANGUAGE_OPTIONS = [LANGUAGE_LABELS.EN, LANGUAGE_LABELS.RU];
+
+const SAMPLES: Record<Language, string> = {
+  EN: "Trucker HQ: Insurance cancellation filed for DOT 3412897, effective Oct 14. Call your agent to keep your authority active.",
+  RU: "Trucker HQ: страховой полис DOT 3412897 будет отменён 14 окт. Позвоните агенту, чтобы избежать отзыва MC.",
+};
+
+const HEADING = "font-display text-xl font-extrabold uppercase";
+
 export default function ComplianceAlertsForm() {
   const [dot, setDot] = useState("");
   const [phone, setPhone] = useState("");
-  const [lang, setLang] = useState<"EN" | "RU">("EN");
+  const [lang, setLang] = useState<Language>("EN");
   const [consent, setConsent] = useState(false);
-  const [done, setDone] = useState(false);
   const [watch, setWatch] = useState(DEFAULT_WATCH);
-  const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState(false);
 
-  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setSubmitting(true);
-    setError(false);
-    const website = new FormData(e.currentTarget).get("website");
-    try {
-      const res = await fetch("/api/compliance-alerts", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ dot, phone, language: lang, watch, website, smsConsent: consent }),
-      });
-      if (!res.ok) throw new Error("request failed");
-      trackEvent("compliance_alert_signup");
-      setDone(true);
-    } catch {
-      setError(true);
-    } finally {
-      setSubmitting(false);
-    }
-  }
+  const { status, error, onSubmit, reset } = useFormSubmit({
+    endpoint: "/api/compliance-alerts",
+    buildBody: () => ({ dot, phone, language: lang, watch, smsConsent: consent }),
+    onSuccess: () => trackEvent("compliance_alert_signup"),
+  });
 
   const count = Object.values(watch).filter(Boolean).length;
 
-  const sample =
-    lang === "RU"
-      ? "Trucker HQ: страховой полис DOT 3412897 будет отменён 14 окт. Позвоните агенту, чтобы избежать отзыва MC."
-      : "Trucker HQ: Insurance cancellation filed for DOT 3412897, effective Oct 14. Call your agent to keep your authority active.";
+  function watchAnother() {
+    reset();
+    setDot("");
+    setPhone("");
+    setConsent(false);
+    setWatch(DEFAULT_WATCH);
+  }
 
   return (
     <div className="grid gap-6 lg:grid-cols-[1fr_1fr]">
-      {done ? (
+      {status === "sent" ? (
         <div className="flex flex-col gap-3.5 rounded-lg border border-border bg-white p-7">
-          <div className="flex h-[52px] w-[52px] items-center justify-center rounded-full bg-green">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#F2A900" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M20 6 9 17l-5-5" />
-            </svg>
+          <div className="flex h-[52px] w-[52px] items-center justify-center rounded-full bg-green text-amber">
+            <CheckIcon size={26} />
           </div>
           <h2 className="font-display text-4xl font-extrabold uppercase leading-tight">
             Alerts are on
           </h2>
-          <p className="text-base leading-relaxed text-[#3F444B]">
+          <p className="text-base leading-relaxed text-ink-3">
             We&apos;re watching {count} items for {dot || "DOT 3412897"}. A
             confirmation text is on its way.
           </p>
           <div className="mt-1.5 flex flex-wrap gap-3">
-            <Link
-              href="/tools/new-mc-checklist"
-              className="flex h-[52px] items-center rounded-[10px] border-2 border-asphalt px-[22px] font-display text-lg font-extrabold uppercase tracking-[.05em] hover:bg-asphalt hover:text-offwhite"
-            >
+            <Button href="/tools/new-mc-checklist" variant="outline">
               New MC Checklist
-            </Link>
+            </Button>
             <button
-              onClick={() => {
-                setDone(false);
-                setDot("");
-                setPhone("");
-                setConsent(false);
-                setWatch(DEFAULT_WATCH);
-              }}
+              type="button"
+              onClick={watchAnother}
               className="flex h-[52px] items-center px-2 font-sans text-[15px] font-semibold text-green underline"
             >
               Watch another carrier
@@ -99,103 +94,58 @@ export default function ComplianceAlertsForm() {
         </div>
       ) : (
         <form
-          onSubmit={handleSubmit}
+          onSubmit={onSubmit}
           className="flex flex-col gap-[22px] rounded-lg border border-border bg-white p-[22px]"
         >
-          <input
-            type="text"
-            name="website"
-            tabIndex={-1}
-            autoComplete="off"
-            aria-hidden="true"
-            className="hidden"
-          />
+          <Honeypot />
           <label className="flex flex-col gap-1.5">
-            <span className="font-display text-xl font-extrabold uppercase">
-              1. Your DOT or MC number (required)
-            </span>
-            <input
+            <span className={HEADING}>1. Your DOT or MC number (required)</span>
+            <TextInput
               required
               value={dot}
               onChange={(e) => setDot(e.target.value)}
               placeholder="DOT 3412897"
               inputMode="numeric"
               autoComplete="off"
-              className="h-14 rounded-[10px] border-[1.5px] border-[#9CA0A8] px-3.5 font-sans text-lg font-semibold tabular-nums outline-none focus:border-green"
+              className="text-lg font-semibold tabular-nums"
             />
           </label>
 
-          <div role="group" aria-label="What to watch" className="flex flex-col gap-2.5">
-            <span className="font-display text-xl font-extrabold uppercase">2. What to watch</span>
-            {WATCH_ITEMS.map(([k, t, d]) => {
-              const on = !!watch[k];
-              return (
-                <button
-                  key={k}
-                  type="button"
-                  role="checkbox"
-                  aria-checked={on}
-                  onClick={() => setWatch((w) => ({ ...w, [k]: !w[k] }))}
-                  className={`flex min-h-[60px] items-center gap-3.5 rounded-lg border-[1.5px] px-3.5 py-2.5 text-left ${
-                    on ? "border-green bg-[#EEF6F1]" : "border-border bg-white"
-                  }`}
-                >
-                  <span
-                    aria-hidden="true"
-                    className={`flex h-[26px] w-[26px] shrink-0 items-center justify-center rounded-md border-2 ${
-                      on ? "border-green bg-green" : "border-[#9CA0A8] bg-white"
-                    }`}
-                  >
-                    {on && (
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M20 6 9 17l-5-5" />
-                      </svg>
-                    )}
-                  </span>
-                  <span className="flex flex-col gap-0.5">
-                    <span className="text-base font-semibold">{t}</span>
-                    <span className="text-sm text-[#4B5058]">{d}</span>
-                  </span>
-                </button>
-              );
-            })}
-          </div>
+          <ChoiceGroup legend={<span className={HEADING}>2. What to watch</span>}>
+            {WATCH_ITEMS.map((item) => (
+              <CheckCard
+                key={item.key}
+                name={item.key}
+                title={item.title}
+                description={item.description}
+                checked={watch[item.key]}
+                onChange={(on) => setWatch((w) => ({ ...w, [item.key]: on }))}
+              />
+            ))}
+          </ChoiceGroup>
 
           <div className="flex flex-col gap-2.5">
-            <span className="font-display text-xl font-extrabold uppercase">3. Where to text you</span>
+            <span className={HEADING}>3. Where to text you</span>
             <div className="grid gap-3 sm:grid-cols-2">
-              <label className="flex flex-col gap-1.5">
-                <span className="text-sm font-semibold">Mobile number</span>
-                <input
+              <Field label="Mobile number">
+                <TextInput
                   required
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   type="tel"
                   placeholder="(XXX) XXX-XXXX"
                   autoComplete="tel"
-                  className="h-14 rounded-[10px] border-[1.5px] border-[#9CA0A8] px-3.5 font-sans text-lg tabular-nums outline-none focus:border-green"
+                  className="text-lg tabular-nums"
                 />
-              </label>
-              <div
-                role="radiogroup"
-                aria-label="Text language"
-                className="flex h-14 overflow-hidden rounded-[10px] border-[1.5px] border-[#9CA0A8]"
-              >
-                {(["EN", "RU"] as const).map((code) => (
-                  <button
-                    key={code}
-                    type="button"
-                    role="radio"
-                    aria-checked={lang === code}
-                    onClick={() => setLang(code)}
-                    className={`flex-1 text-base font-semibold ${
-                      lang === code ? "bg-asphalt text-offwhite" : "bg-white text-asphalt"
-                    }`}
-                  >
-                    {code === "EN" ? "English" : "Русский"}
-                  </button>
-                ))}
-              </div>
+              </Field>
+              <Segmented
+                options={LANGUAGE_OPTIONS}
+                value={LANGUAGE_LABELS[lang]}
+                onChange={(v) => setLang(v === LANGUAGE_LABELS.RU ? "RU" : "EN")}
+                label="Text language"
+                containerClassName="grid grid-cols-2 gap-1.5 sm:self-end"
+                buttonClassName="h-[52px] text-base font-semibold"
+              />
             </div>
           </div>
 
@@ -224,18 +174,15 @@ export default function ComplianceAlertsForm() {
             number.
           </label>
 
-          <button
+          <Button
             type="submit"
-            disabled={submitting || !consent}
-            className="h-[60px] rounded-xl bg-amber font-display text-2xl font-extrabold uppercase tracking-[.05em] text-asphalt hover:bg-amber-hover disabled:cursor-not-allowed disabled:opacity-60"
+            size="lg"
+            disabled={status === "submitting" || !consent}
+            className="w-full"
           >
-            {submitting ? "Sending..." : "Turn on alerts"}
-          </button>
-          {error && (
-            <span role="alert" className="text-[13px] font-semibold text-red">
-              Something went wrong. Try again in a moment.
-            </span>
-          )}
+            {status === "submitting" ? "Sending..." : "Turn on alerts"}
+          </Button>
+          <FormError message={error} />
         </form>
       )}
 
@@ -245,13 +192,13 @@ export default function ComplianceAlertsForm() {
             WHAT A TEXT LOOKS LIKE
           </span>
           <div className="max-w-[340px] rounded-2xl rounded-bl-md bg-[#2A2D32] p-4 text-[15px] leading-relaxed">
-            {sample}
+            {SAMPLES[lang]}
           </div>
-          <span className="text-[13px] text-[#AEB2B8]">Trucker HQ · today, 7:02 AM</span>
+          <span className="text-[13px] text-on-dark-muted">Trucker HQ · today, 7:02 AM</span>
         </div>
         <div className="flex flex-col gap-2.5 rounded-lg border border-border bg-white p-[22px]">
           <h2 className="font-display text-2xl font-extrabold">Why this matters</h2>
-          <p className="text-[15px] leading-relaxed text-[#3F444B]">
+          <p className="text-[15px] leading-relaxed text-ink-3">
             If your insurance filing lapses, FMCSA can revoke your authority,
             and brokers stop tendering loads. Most carriers find out when a
             load gets cancelled. A text the same day gives you time to call
