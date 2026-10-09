@@ -83,7 +83,8 @@ Wizards: one reducer in `model/` (`{ step, data }`), one component per step, `St
 ## Workspace
 
 - The repo lives in `D:\CODE\TruckerHQ\main`. `D:\CODE\TruckerHQ` is a plain container.
-- Manual worktrees are siblings: `git worktree add ..\wt-<branch> <branch>`, then `npm ci` and copy `.env.local`.
+- **Nothing project-related is written outside `D:\CODE\TruckerHQ`.** Temporary files, logs and snapshots go to `D:\CODE\TruckerHQ\.tmp\`, not the system temp dir or a session scratchpad. No worktree goes to a home-directory location (e.g. `~/.config/superpowers/worktrees`).
+- Manual worktrees are siblings: `git worktree add ..\wt-<branch> <branch>`, then `npm ci` and copy `.env.local`. Claude Code's own worktrees (started from `main\`) land in `main\.claude\worktrees\`.
 - `.claude/skills/` is tracked; `.claude/worktrees/`, `.claude/settings.local.json` and `.worktrees/` are ignored.
 
 ## Decision log
