@@ -1,49 +1,50 @@
-import { NextResponse, after } from "next/server";
-import { insertRow } from "@/server/db/insert-row";
-import { toUsE164 } from "@/lib/phone";
-import { guardLeadRoute, str, isHoneypotTripped } from "@/server/http/api-guard";
+import { z } from "zod";
 import { notifyDispatchStart } from "@/lib/notifications";
+import { createLeadHandler } from "@/server/leads/create-lead-handler";
+import { anyInput, requiredText, text, textList, usPhone, withChecks } from "@/server/leads/fields";
 
-function sanitizeLanes(value: unknown): string[] {
-  if (!Array.isArray(value)) return [];
-  return value.slice(0, 10).map((v) => str(v, 60)).filter(Boolean);
-}
+const MISSING = "Missing name or phone";
 
-export async function POST(req: Request) {
-  const guarded = guardLeadRoute(req);
-  if (guarded) return guarded;
+const trucks = anyInput.transform((value) => {
+  const n = Number(value);
+  return Number.isFinite(n) ? Math.min(Math.max(n, 1), 500) : 1;
+});
 
-  const body = await req.json().catch(() => null);
-  if (isHoneypotTripped(body)) return NextResponse.json({ ok: true });
-
-  const name = str(body?.name, 100);
-  const phone = str(body?.phone, 30);
-  if (!name || !phone) {
-    return NextResponse.json({ error: "Missing name or phone" }, { status: 400 });
-  }
-
-  const e164 = toUsE164(phone);
-  if (!e164) return NextResponse.json({ error: "Enter a valid US phone number" }, { status: 400 });
-
-  const trucksRaw = Number(body?.trucks);
-  const trucks = Number.isFinite(trucksRaw) ? Math.min(Math.max(trucksRaw, 1), 500) : 1;
-
-  const ok = await insertRow("dispatch_requests", {
-    trailer_type: str(body?.trailerType, 60),
+const schema = withChecks(
+  z.object({
+    name: requiredText(100, MISSING),
+    phone: requiredText(30, MISSING),
+    trailerType: text(60),
     trucks,
-    driver_type: str(body?.driverType, 60),
-    home_base: str(body?.homeBase, 100),
-    lanes: sanitizeLanes(body?.lanes),
-    home_time: str(body?.homeTime, 60),
-    authority: str(body?.authority, 60),
-    mc_number: str(body?.mcNumber, 20),
-    name,
-    phone: e164,
-    best_time: str(body?.bestTime, 60),
-    language: str(body?.language, 20) || "English",
-  });
+    driverType: text(60),
+    homeBase: text(100),
+    lanes: textList(10, 60),
+    homeTime: text(60),
+    authority: text(60),
+    mcNumber: text(20),
+    bestTime: text(60),
+    language: text(20),
+  }),
+  { phone: usPhone() },
+);
 
-  if (!ok) return NextResponse.json({ error: "Could not save request" }, { status: 502 });
-  after(() => notifyDispatchStart(e164));
-  return NextResponse.json({ ok: true });
-}
+export const POST = createLeadHandler({
+  schema,
+  table: "dispatch_requests",
+  toRow: (d) => ({
+    trailer_type: d.trailerType,
+    trucks: d.trucks,
+    driver_type: d.driverType,
+    home_base: d.homeBase,
+    lanes: d.lanes,
+    home_time: d.homeTime,
+    authority: d.authority,
+    mc_number: d.mcNumber,
+    name: d.name,
+    phone: d.phone,
+    best_time: d.bestTime,
+    language: d.language || "English",
+  }),
+  notify: (d) => notifyDispatchStart(d.phone),
+  saveError: "Could not save request",
+});

@@ -1,40 +1,31 @@
-import { NextResponse } from "next/server";
-import { insertRow } from "@/server/db/insert-row";
-import { toUsE164 } from "@/lib/phone";
-import { guardLeadRoute, str, isHoneypotTripped } from "@/server/http/api-guard";
+import { z } from "zod";
+import { createLeadHandler } from "@/server/leads/create-lead-handler";
+import { optionalUsPhone, requiredText, text, textList, withChecks } from "@/server/leads/fields";
 
-function sanitizeList(value: unknown, maxItems: number, maxLen: number): string[] {
-  if (!Array.isArray(value)) return [];
-  return value.slice(0, maxItems).map((v) => str(v, maxLen)).filter(Boolean);
-}
+const schema = withChecks(
+  z.object({
+    dot: requiredText(20, "Missing carrier"),
+    carrierSlug: requiredText(100, "Missing carrier"),
+    contactMethod: text(20),
+    phone: text(30),
+    equipment: textList(10, 40),
+    lanes: textList(10, 40),
+    alsoShow: textList(10, 60),
+  }),
+  { phone: optionalUsPhone() },
+);
 
-export async function POST(req: Request) {
-  const guarded = guardLeadRoute(req);
-  if (guarded) return guarded;
-
-  const body = await req.json().catch(() => null);
-  if (isHoneypotTripped(body)) return NextResponse.json({ ok: true });
-
-  const dot = str(body?.dot, 20);
-  const carrierSlug = str(body?.carrierSlug, 100);
-  if (!dot || !carrierSlug) {
-    return NextResponse.json({ error: "Missing carrier" }, { status: 400 });
-  }
-
-  const phone = str(body?.phone, 30);
-  const e164 = phone ? toUsE164(phone) : "";
-  if (e164 === null) return NextResponse.json({ error: "Enter a valid US phone number" }, { status: 400 });
-
-  const ok = await insertRow("claims", {
-    dot,
-    carrier_slug: carrierSlug,
-    contact_method: str(body?.contactMethod, 20),
-    phone: e164,
-    equipment: sanitizeList(body?.equipment, 10, 40),
-    lanes: sanitizeList(body?.lanes, 10, 40),
-    also_show: sanitizeList(body?.alsoShow, 10, 60),
-  });
-
-  if (!ok) return NextResponse.json({ error: "Could not save claim" }, { status: 502 });
-  return NextResponse.json({ ok: true });
-}
+export const POST = createLeadHandler({
+  schema,
+  table: "claims",
+  toRow: (c) => ({
+    dot: c.dot,
+    carrier_slug: c.carrierSlug,
+    contact_method: c.contactMethod,
+    phone: c.phone,
+    equipment: c.equipment,
+    lanes: c.lanes,
+    also_show: c.alsoShow,
+  }),
+  saveError: "Could not save claim",
+});
