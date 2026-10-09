@@ -1,3 +1,4 @@
+import type { Locale } from "@/shared/i18n/locale";
 import { PHONE_DISPLAY } from "@/shared/config/contact";
 
 export type HomeCopy = {
@@ -52,7 +53,7 @@ export type HomeCopy = {
   faq: { q: string; a: string }[];
 };
 
-export const HOME_COPY: Record<"EN" | "RU", HomeCopy> = {
+export const HOME_COPY: Record<Locale, HomeCopy> = {
   EN: {
     eyebrow: "Dispatch · CDL jobs · Free carrier tools",
     h1: "Dispatch that picks up at 3 a.m.",

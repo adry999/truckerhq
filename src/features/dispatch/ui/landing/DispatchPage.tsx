@@ -1,3 +1,4 @@
+import { getCopy, type Locale } from "@/shared/i18n/locale";
 import { DISPATCH_COPY } from "@/features/dispatch/data/dispatch-copy";
 import { DispatchHero } from "./DispatchHero";
 import { DispatchIncluded } from "./DispatchIncluded";
@@ -7,8 +8,8 @@ import { DispatchGross } from "./DispatchGross";
 import { DispatchFaq } from "./DispatchFaq";
 import { DispatchCta } from "./DispatchCta";
 
-export function DispatchPage({ lang }: { lang: "EN" | "RU" }) {
-  const c = DISPATCH_COPY[lang];
+export function DispatchPage({ lang }: { lang: Locale }) {
+  const c = getCopy(DISPATCH_COPY, lang);
 
   return (
     <>

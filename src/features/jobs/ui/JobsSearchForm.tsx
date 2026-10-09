@@ -1,10 +1,11 @@
 "use client";
 
+import { getCopy, type Locale } from "@/shared/i18n/locale";
 import { JOBS_COPY } from "@/features/jobs/data/jobs-copy";
 import { useSearchParam } from "@/shared/hooks/useSearchParam";
 
-export function JobsSearchFormView({ lang, q }: { lang: "EN" | "RU"; q: string }) {
-  const c = JOBS_COPY[lang];
+export function JobsSearchFormView({ lang, q }: { lang: Locale; q: string }) {
+  const c = getCopy(JOBS_COPY, lang);
 
   return (
     <form
@@ -28,6 +29,6 @@ export function JobsSearchFormView({ lang, q }: { lang: "EN" | "RU"; q: string }
   );
 }
 
-export default function JobsSearchForm({ lang }: { lang: "EN" | "RU" }) {
+export default function JobsSearchForm({ lang }: { lang: Locale }) {
   return <JobsSearchFormView lang={lang} q={useSearchParam("q", "").trim().toLowerCase()} />;
 }

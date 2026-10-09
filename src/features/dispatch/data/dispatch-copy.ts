@@ -1,3 +1,4 @@
+import type { Locale } from "@/shared/i18n/locale";
 import { PHONE_DISPLAY } from "@/shared/config/contact";
 export type DispatchCopy = {
   heroAlt: string;
@@ -40,7 +41,7 @@ export type DispatchCopy = {
   ctaStart: string;
 };
 
-export const DISPATCH_COPY: Record<"EN" | "RU", DispatchCopy> = {
+export const DISPATCH_COPY: Record<Locale, DispatchCopy> = {
   EN: {
     heroAlt: "Driver in the cab at a truck stop, dawn",
     h1Line1: "Flat weekly dispatch.",

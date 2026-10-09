@@ -1,3 +1,4 @@
+import type { Locale } from "@/shared/i18n/locale";
 export type HomeJobRow = {
   title: string;
   company: string;
@@ -42,7 +43,7 @@ function ruPostedLabel(posted: string): string {
   return `${n} ${word} назад`;
 }
 
-export function homeJobRows(lang: "EN" | "RU", jobs: readonly HomeJobSource[]): HomeJobRow[] {
+export function homeJobRows(lang: Locale, jobs: readonly HomeJobSource[]): HomeJobRow[] {
   const ru = lang === "RU";
   return jobs.map((j) => ({
     title: ru ? (RU_JOB_TITLES[j.slug] ?? j.title) : j.title,

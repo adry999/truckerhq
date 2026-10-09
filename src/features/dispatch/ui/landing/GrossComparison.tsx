@@ -1,38 +1,22 @@
 "use client";
 
+import { getCopy, type Locale } from "@/shared/i18n/locale";
 import { Fragment, useDeferredValue, useState } from "react";
+import { GROSS_COMPARISON_COPY } from "@/features/dispatch/data/gross-comparison-copy";
 
 function money(n: number) {
   return "$" + Math.round(n).toLocaleString("en-US");
 }
 
-export function GrossComparison({ lang = "EN" }: { lang?: "EN" | "RU" }) {
+export function GrossComparison({ lang = "EN" }: { lang?: Locale }) {
   const [gross, setGross] = useState(8000);
   const deferredGross = useDeferredValue(gross);
-  const ru = lang === "RU";
+  const c = getCopy(GROSS_COMPARISON_COPY, lang);
 
   const rows = [
-    { name: ru ? "Диспетчер за 10%" : "10% dispatcher", week: money(deferredGross * 0.1), year: money(deferredGross * 0.1 * 50) },
-    { name: ru ? "Диспетчер за 8%" : "8% dispatcher", week: money(deferredGross * 0.08), year: money(deferredGross * 0.08 * 50) },
+    { name: c.tenPercent, week: money(deferredGross * 0.1), year: money(deferredGross * 0.1 * 50) },
+    { name: c.eightPercent, week: money(deferredGross * 0.08), year: money(deferredGross * 0.08 * 50) },
   ];
-
-  const tableRows: [string, string, string][] = ru
-    ? [
-        ["Сколько платите", "8–10% с каждого груза", "Одна цена каждую неделю"],
-        ["Хорошая неделя", "Платите больше", "Вы оставляете себе больше"],
-        ["Цель диспетчера", "Больше выручки, любые мили", "Грузы, которые приносят вам деньги"],
-        ["Контракт", "Часто 3–12 месяцев", "Неделя за неделей"],
-        ["Проверка брокера", "Иногда", "На каждый груз"],
-        ["Язык", "Английский", "Английский и русский"],
-      ]
-    : [
-        ["What you pay", "8–10% of every load", "Same price every week"],
-        ["Good week", "You pay more", "You keep more"],
-        ["Dispatcher goal", "Bigger gross, any miles", "Loads that make you money"],
-        ["Contract", "Often 3–12 months", "Week to week"],
-        ["Broker checks", "Sometimes", "Every load"],
-        ["Language", "English", "English and Russian"],
-      ];
 
   return (
     <div className="grid gap-6 md:grid-cols-2">
@@ -40,7 +24,7 @@ export function GrossComparison({ lang = "EN" }: { lang?: "EN" | "RU" }) {
         <label className="flex flex-col gap-3">
           <span className="flex items-baseline justify-between gap-3">
             <span className="text-base font-semibold">
-              {ru ? "Ваша выручка в неделю" : "Your weekly gross"}
+              {c.weeklyGross}
             </span>
             <span className="font-display text-4xl font-extrabold tabular-nums text-amber">
               {money(gross)}
@@ -62,13 +46,13 @@ export function GrossComparison({ lang = "EN" }: { lang?: "EN" | "RU" }) {
         </label>
         <div className="grid grid-cols-[1.3fr_1fr_1fr] tabular-nums">
           <div className="py-2.5 font-display text-sm font-bold tracking-[.12em] text-[#8A8F98]">
-            {ru ? "ДИСПЕТЧЕР" : "DISPATCHER"}
+            {c.dispatcherHead}
           </div>
           <div className="py-2.5 text-right font-display text-sm font-bold tracking-[.12em] text-[#8A8F98]">
-            {ru ? "В НЕДЕЛЮ" : "PER WEEK"}
+            {c.perWeekHead}
           </div>
           <div className="py-2.5 text-right font-display text-sm font-bold tracking-[.12em] text-[#8A8F98]">
-            {ru ? "В ГОД" : "PER YEAR"}
+            {c.perYearHead}
           </div>
           {rows.map((r) => (
             <Fragment key={r.name}>
@@ -84,7 +68,7 @@ export function GrossComparison({ lang = "EN" }: { lang?: "EN" | "RU" }) {
             </Fragment>
           ))}
           <div className="border-t border-white/14 py-3.5 text-base font-bold">
-            {ru ? "Trucker HQ фикс" : "Trucker HQ flat"}
+            {c.flat}
           </div>
           <div className="border-t border-white/14 py-3.5 text-right font-display text-[28px] font-extrabold text-amber">
             $XXX
@@ -94,9 +78,7 @@ export function GrossComparison({ lang = "EN" }: { lang?: "EN" | "RU" }) {
           </div>
         </div>
         <div className="text-sm leading-relaxed text-[#AEB2B8]">
-          {ru
-            ? "В году = 50 рабочих недель. Фиксированная цена не меняется — ни в хорошую неделю, ни в плохую."
-            : "Per year = 50 working weeks. The flat price stays the same on a good week and a bad week."}
+          {c.footnote}
         </div>
       </div>
 
@@ -104,12 +86,12 @@ export function GrossComparison({ lang = "EN" }: { lang?: "EN" | "RU" }) {
         <div className="grid grid-cols-[1.1fr_1fr_1fr]">
           <div className="bg-[#EEEFEC] p-4" />
           <div className="bg-[#EEEFEC] p-4 font-display text-[17px] font-extrabold tracking-[.06em]">
-            {ru ? "ПРОЦЕНТ" : "PERCENTAGE"}
+            {c.percentageHead}
           </div>
           <div className="bg-green p-4 font-display text-[17px] font-extrabold tracking-[.06em] text-offwhite">
             TRUCKER HQ
           </div>
-          {tableRows.map(([k, a, b]) => (
+          {c.rows.map(([k, a, b]) => (
             <Fragment key={k}>
               <div className="border-t border-[#ECEDEA] p-4 text-sm font-semibold">
                 {k}

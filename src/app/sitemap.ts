@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { sitemapAlternates } from "@/shared/i18n/alternates";
 import { SITE_URL } from "@/shared/config/site";
 import { GUIDES } from "@/features/guides";
 import { STATE_DIRECTORY } from "@/features/carriers";
@@ -6,24 +7,19 @@ import { CITY_DIRECTORY, CITY_CONTENT, MIN_JOBS_TO_INDEX } from "@/features/jobs
 
 const BASE_URL = SITE_URL;
 
-// hreflang pairs, mirrored from each page's alternates.languages.
-const pair = (en: string, ru: string) => ({
-  languages: { en: `${BASE_URL}${en}`, ru: `${BASE_URL}${ru}`, "x-default": `${BASE_URL}${en}` },
-});
-
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
-    { url: `${BASE_URL}/`, changeFrequency: "weekly", priority: 1, alternates: pair("/", "/ru") },
+    { url: `${BASE_URL}/`, changeFrequency: "weekly", priority: 1, alternates: sitemapAlternates("/") },
     {
       url: `${BASE_URL}/ru`,
       changeFrequency: "weekly",
       priority: 0.9,
-      alternates: pair("/", "/ru"),
+      alternates: sitemapAlternates("/"),
     },
-    { url: `${BASE_URL}/dispatch`, changeFrequency: "monthly", priority: 0.9, alternates: pair("/dispatch", "/ru/dispatch") },
-    { url: `${BASE_URL}/ru/dispatch`, changeFrequency: "monthly", priority: 0.8, alternates: pair("/dispatch", "/ru/dispatch") },
-    { url: `${BASE_URL}/jobs`, changeFrequency: "daily", priority: 0.9, alternates: pair("/jobs", "/ru/jobs") },
-    { url: `${BASE_URL}/ru/jobs`, changeFrequency: "daily", priority: 0.8, alternates: pair("/jobs", "/ru/jobs") },
+    { url: `${BASE_URL}/dispatch`, changeFrequency: "monthly", priority: 0.9, alternates: sitemapAlternates("/dispatch") },
+    { url: `${BASE_URL}/ru/dispatch`, changeFrequency: "monthly", priority: 0.8, alternates: sitemapAlternates("/dispatch") },
+    { url: `${BASE_URL}/jobs`, changeFrequency: "daily", priority: 0.9, alternates: sitemapAlternates("/jobs") },
+    { url: `${BASE_URL}/ru/jobs`, changeFrequency: "daily", priority: 0.8, alternates: sitemapAlternates("/jobs") },
     { url: `${BASE_URL}/hire-drivers`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE_URL}/carriers`, changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE_URL}/tools`, changeFrequency: "monthly", priority: 0.8 },

@@ -1,3 +1,4 @@
+import { languageAlternates } from "@/shared/i18n/alternates";
 import type { Metadata } from "next";
 import { buildMetadata } from "@/shared/seo/metadata";
 import SiteHeader from "@/components/SiteHeader";
@@ -14,7 +15,7 @@ export const metadata: Metadata = buildMetadata({
   path: "/ru",
   ogImage: false,
   locale: "ru_RU",
-  languages: { en: "/", ru: "/ru", "x-default": "/" },
+  languages: languageAlternates("/"),
 });
 
 export default function HomePageRU() {

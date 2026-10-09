@@ -1,5 +1,6 @@
 "use client";
 
+import { getCopy, type Locale } from "@/shared/i18n/locale";
 import { filterJobsByType } from "@/features/jobs/model/job-filters";
 import type { JobWithScore } from "@/features/jobs/model/jobs.types";
 import { JOBS_COPY } from "@/features/jobs/data/jobs-copy";
@@ -12,7 +13,7 @@ const TYPES = ["All", "OTR", "REGIONAL", "LOCAL", "TEAM", "OWNER-OP"] as const;
 const EQUIPMENT = ["All", "Dry van", "Reefer", "Flatbed", "Power only"] as const;
 
 type JobsResultsProps = {
-  lang: "EN" | "RU";
+  lang: Locale;
   jobs: JobWithScore[];
 };
 
@@ -23,7 +24,7 @@ export function JobsResultsView({
   equip,
   q,
 }: JobsResultsProps & { type: string; equip: string; q: string }) {
-  const c = JOBS_COPY[lang];
+  const c = getCopy(JOBS_COPY, lang);
 
   const filtered = filterJobsByType(jobs, type).filter((j) => {
     if (equip !== "All" && j.equipment !== equip) return false;

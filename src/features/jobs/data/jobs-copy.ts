@@ -1,3 +1,4 @@
+import type { Locale } from "@/shared/i18n/locale";
 export type JobsCopy = {
   h1Line1: string;
   h1Line2: string;
@@ -19,7 +20,7 @@ export type JobsCopy = {
   basePath: string;
 };
 
-export const JOBS_COPY: Record<"EN" | "RU", JobsCopy> = {
+export const JOBS_COPY: Record<Locale, JobsCopy> = {
   EN: {
     h1Line1: "CDL jobs.",
     h1Line2: "Pay posted up front.",

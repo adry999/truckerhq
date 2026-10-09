@@ -1,5 +1,6 @@
 "use client";
 
+import { LOCALES, type Locale } from "@/shared/i18n/locale";
 import { useState } from "react";
 import { trackEvent } from "@/shared/client/analytics";
 import { useFormSubmit } from "@/shared/hooks/useFormSubmit";
@@ -10,16 +11,14 @@ import { CheckIcon } from "@/shared/ui/icons";
 import { Segmented } from "@/shared/ui/Segmented";
 
 const TOPICS = ["Dispatch", "Driver job", "Hiring drivers", "Something else"];
-const LANGUAGES = ["EN", "RU"] as const;
-type Language = (typeof LANGUAGES)[number];
-const LANGUAGE_NAMES: Record<Language, string> = {
+const LANGUAGE_NAMES: Record<Locale, string> = {
   EN: "English",
   RU: "Russian",
 };
 
 export default function AboutContactForm() {
   const [topic, setTopic] = useState("Dispatch");
-  const [lang, setLang] = useState<Language>("EN");
+  const [lang, setLang] = useState<Locale>("EN");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
@@ -95,9 +94,9 @@ export default function AboutContactForm() {
       <div className="flex flex-col gap-1.5">
         <span className="text-sm font-semibold">Call me in</span>
         <Segmented
-          options={LANGUAGES}
+          options={LOCALES}
           value={lang}
-          onChange={(v) => setLang(v as Language)}
+          onChange={(v) => setLang(v as Locale)}
           label="Call me in"
           uppercase
         />

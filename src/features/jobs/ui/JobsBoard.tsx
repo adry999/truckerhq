@@ -1,3 +1,4 @@
+import { getCopy, type Locale } from "@/shared/i18n/locale";
 import { Suspense } from "react";
 import Link from "next/link";
 import { JOBS } from "@/features/jobs/data/jobs";
@@ -12,10 +13,10 @@ export function JobsBoard({
   lang,
   carrierScore,
 }: {
-  lang: "EN" | "RU";
+  lang: Locale;
   carrierScore: (carrierSlug: string) => number | undefined;
 }) {
-  const c = JOBS_COPY[lang];
+  const c = getCopy(JOBS_COPY, lang);
   const jobs = withCarrierScores(JOBS, carrierScore);
 
   return (
