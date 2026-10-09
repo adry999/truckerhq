@@ -1,4 +1,4 @@
-import { healthColor, healthOnColor } from "@/lib/data";
+import { healthColor, healthOnColor } from "@/shared/lib/health-score";
 import { cx } from "@/shared/ui/cx";
 
 const SIZES = {
@@ -6,7 +6,7 @@ const SIZES = {
   md: "h-7 w-7 text-base",
 } as const;
 
-export default function HealthBadge({
+export function HealthBadge({
   score,
   size = "md",
 }: {

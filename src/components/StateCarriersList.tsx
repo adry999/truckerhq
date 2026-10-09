@@ -1,11 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { STATUS_COLORS, healthLabel, healthTextColor, type StateCarrierRow } from "@/lib/data";
+import { STATUS_COLORS, type StateCarrierRow } from "@/lib/data";
+import { healthLabel, healthTextColor } from "@/shared/lib/health-score";
 import { useSearchParam } from "@/shared/hooks/useSearchParam";
 import { Button } from "@/shared/ui/Button";
 import { EmptyState } from "@/shared/ui/EmptyState";
-import HealthBadge from "@/components/HealthBadge";
+import { HealthBadge } from "@/shared/ui/HealthBadge";
 
 type StateCarriersListProps = {
   stateAbbr: string;

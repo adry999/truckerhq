@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Badge } from "@/shared/ui/Badge";
-import HealthBadge from "@/components/HealthBadge";
+import { HealthBadge } from "@/shared/ui/HealthBadge";
 
 type JobCardProps = {
   href: string;

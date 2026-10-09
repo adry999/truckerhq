@@ -5,12 +5,8 @@ import { buildMetadata } from "@/lib/metadata";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import { Notice } from "@/shared/ui/Notice";
-import {
-  CARRIERS,
-  findCarrier,
-  STATUS_COLORS,
-  healthColor,
-} from "@/lib/data";
+import { CARRIERS, findCarrier, STATUS_COLORS } from "@/lib/data";
+import { healthColor } from "@/shared/lib/health-score";
 
 export function generateStaticParams() {
   return CARRIERS.map((c) => ({ slug: c.slug }));

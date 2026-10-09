@@ -9,7 +9,8 @@ import JsonLd from "@/components/JsonLd";
 import CityJobsPage from "@/components/CityJobsPage";
 import { Notice } from "@/shared/ui/Notice";
 import { faqSchema, breadcrumbSchema } from "@/lib/seo";
-import { JOBS, findJob, findCarrier, healthColor } from "@/lib/data";
+import { JOBS, findJob, findCarrier } from "@/lib/data";
+import { healthColor } from "@/shared/lib/health-score";
 import { CITY_CONTENT, CITY_SLUGS, MIN_JOBS_TO_INDEX } from "@/lib/city-content";
 
 export function generateStaticParams() {

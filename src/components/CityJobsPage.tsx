@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import { healthColor } from "@/lib/data";
+import { healthColor } from "@/shared/lib/health-score";
 import { CITY_NAME_TO_SLUG } from "@/lib/city-slugs";
 import CityJobsList, { CityJobsListView, type CityJob } from "@/components/CityJobsList";
 import { FilterChips, UrlFilterChips } from "@/shared/ui/FilterChips";

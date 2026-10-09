@@ -1,4 +1,4 @@
-import { healthColor } from "@/lib/data";
+import { healthColor } from "@/shared/lib/health-score";
 import { Badge } from "@/shared/ui/Badge";
 import { Card } from "@/shared/ui/Card";
 import { CheckIcon } from "@/shared/ui/icons";

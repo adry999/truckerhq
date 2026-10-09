@@ -46,28 +46,6 @@ export function findCarrier(slug: string): Carrier | undefined {
   return CARRIERS.find((c) => c.slug === slug);
 }
 
-export function healthColor(score: number): string {
-  if (score >= 80) return "#0E5C3A";
-  if (score >= 60) return "#F2A900";
-  return "#B42318";
-}
-
-export function healthOnColor(score: number): string {
-  return score >= 60 && score < 80 ? "#16181B" : "#F7F7F5";
-}
-
-export function healthTextColor(score: number): string {
-  if (score >= 80) return "#0E5C3A";
-  if (score >= 60) return "#7A5300";
-  return "#B42318";
-}
-
-export function healthLabel(score: number): string {
-  if (score >= 80) return "GOOD";
-  if (score >= 60) return "WATCH";
-  return "RISK";
-}
-
 export const STATUS_COLORS: Record<CarrierStatus, { bg: string; fg: string; dot: string }> = {
   ACTIVE: { bg: "#E2F0E8", fg: "#0E5C3A", dot: "#0E5C3A" },
   WARNING: { bg: "#FFF1CC", fg: "#7A5300", dot: "#F2A900" },
