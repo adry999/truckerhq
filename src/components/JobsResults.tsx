@@ -85,7 +85,7 @@ export default function JobsResults({
       <h2 className="font-display text-3xl font-extrabold md:text-4xl">
         {c.countLabel(filtered.length)}
       </h2>
-      <span className="text-sm text-grey">{c.newestFirst}</span>
+      <span className="text-sm text-grey">{c.newestFirst} · {lang === "RU" ? "примеры вакансий" : "sample listings"}</span>
     </div>
 
     <div className="grid gap-4 md:grid-cols-2">
