@@ -1,4 +1,4 @@
-import { findGuide } from "@/lib/guides";
+import { findGuide } from "@/features/guides";
 import { ogImageSize, ogImageContentType, renderOgImage } from "@/lib/og";
 
 export const size = ogImageSize;

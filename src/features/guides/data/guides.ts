@@ -27,7 +27,3 @@ export const GUIDES: Guide[] = [
   { slug: "leasing-on-vs-running-your-own-authority", title: "Leasing on vs. running your own authority", category: "Starting out", minutes: 8, author: "Dispatcher Name", date: "2026-07-28" },
   { slug: "detention-pay-how-to-get-it-on-the-rate-con", title: "Detention pay: how to get it on the rate con", category: "Rates", minutes: 4, author: "Dispatcher Name", date: "2026-07-20" },
 ];
-
-export function findGuide(slug: string): Guide | undefined {
-  return GUIDES.find((g) => g.slug === slug);
-}
