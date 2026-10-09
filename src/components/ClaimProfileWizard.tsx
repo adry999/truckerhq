@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRef, useState } from "react";
 import { healthColor } from "@/lib/data";
 import { trackEvent } from "@/lib/analytics";
+import SampleDataNotice from "@/components/SampleDataNotice";
 
 const CARRIER = {
   name: "Carpathian Freight LLC",
@@ -13,7 +14,7 @@ const CARRIER = {
   slug: "carpathian-freight-3412897",
 };
 
-const STEPS = ["Verify", "Details", "Done"] as const;
+const STEPS = ["Contact", "Details", "Done"] as const;
 
 const CONTACT_METHODS = [
   {
@@ -45,8 +46,6 @@ export default function ClaimProfileWizard() {
   const [step, setStep] = useState<0 | 1 | 2>(0);
 
   const [contactMethod, setContactMethod] = useState<"phone" | "email" | null>(null);
-  const [codeSent, setCodeSent] = useState(false);
-  const [code, setCode] = useState("");
 
   const [phone, setPhone] = useState("");
   const [equipment, setEquipment] = useState<string[]>(["Dry van"]);
@@ -63,19 +62,11 @@ export default function ClaimProfileWizard() {
 
   const selectedAlsoShow = ALSO_SHOW.filter(([k]) => alsoShow[k]).map(([, label]) => label);
 
-  const primaryLabel =
-    step === 0 ? (codeSent ? "Verify code" : "Send code") : submitting ? "Publishing..." : "Publish profile";
-  const primaryDisabled =
-    (step === 0 && !codeSent && !contactMethod) ||
-    (step === 0 && codeSent && code.replace(/\D/g, "").length < 6) ||
-    (step === 1 && submitting);
+  const primaryLabel = step === 0 ? "Continue" : submitting ? "Submitting..." : "Submit claim";
+  const primaryDisabled = (step === 0 && !contactMethod) || (step === 1 && submitting);
 
   async function handlePrimaryClick() {
     if (step === 0) {
-      if (!codeSent) {
-        setCodeSent(true);
-        return;
-      }
       setStep(1);
       return;
     }
@@ -132,20 +123,24 @@ export default function ClaimProfileWizard() {
 
       <section className="mx-auto grid w-full max-w-6xl gap-5 px-4 py-8 sm:px-6 md:grid-cols-3 md:py-12">
         <div className="flex min-w-0 flex-col gap-5 md:col-span-2">
+          <SampleDataNotice>
+            Demo: the carrier shown is a sample. Ownership claims are verified
+            manually by phone.
+          </SampleDataNotice>
           <div className="flex flex-col gap-5 rounded-lg border border-border bg-white p-[22px]">
             {step === 0 && (
               <div className="flex flex-col gap-5">
                 <div className="flex flex-col gap-1.5">
                   <h2 className="font-display text-3xl font-extrabold uppercase leading-tight">
-                    Prove it&apos;s your company
+                    Choose how we reach you
                   </h2>
                   <p className="text-[15px] leading-relaxed text-[#3F444B]">
-                    We&apos;ll send a 6-digit code to the phone or email on your
-                    FMCSA record. Enter it here to prove you run this company.
+                    Pick the contact on your FMCSA record. We verify ownership
+                    by phone before any changes go live.
                   </p>
                 </div>
 
-                <div role="radiogroup" aria-label="Verification method" className="flex flex-col gap-2.5">
+                <div role="radiogroup" aria-label="Contact method" className="flex flex-col gap-2.5">
                   {CONTACT_METHODS.map((m) => {
                     const on = contactMethod === m.id;
                     return (
@@ -176,26 +171,6 @@ export default function ClaimProfileWizard() {
                     );
                   })}
                 </div>
-
-                {codeSent && (
-                  <label className="flex flex-col gap-2">
-                    <span className="font-display text-lg font-extrabold uppercase">
-                      Enter the 6-digit code
-                    </span>
-                    <input
-                      value={code}
-                      onChange={(e) => setCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
-                      inputMode="numeric"
-                      maxLength={6}
-                      placeholder="000000"
-                      className="h-16 w-full max-w-[240px] rounded-[10px] border-[1.5px] border-[#9CA0A8] pl-[.6em] text-center font-display text-3xl font-extrabold tracking-[.5em] tabular-nums outline-none focus:border-green"
-                    />
-                    <span className="text-[13px] leading-relaxed text-grey">
-                      Didn&apos;t get it? Wait a minute and resend. Your contact
-                      info is wrong on FMCSA? Update your MCS-150 first.
-                    </span>
-                  </label>
-                )}
               </div>
             )}
 
@@ -336,19 +311,18 @@ export default function ClaimProfileWizard() {
                   </svg>
                 </div>
                 <h2 className="font-display text-4xl font-extrabold uppercase leading-tight">
-                  Profile claimed
+                  Claim received
                 </h2>
                 <p className="max-w-lg text-base leading-relaxed text-[#3F444B]">
-                  Your profile now shows a &quot;Verified owner&quot; badge.
-                  FMCSA data like authority, insurance and inspections still
-                  comes from public records and updates on its own.
+                  We verify ownership by phone before any changes go live.
+                  Expect a call within 1-2 business days.
                 </p>
                 <div className="mt-1.5 flex flex-wrap gap-3">
                   <Link
                     href={`/tools/carrier-lookup/${CARRIER.slug}`}
                     className="flex h-14 items-center rounded-xl bg-amber px-6 font-display text-xl font-extrabold uppercase tracking-[.05em] text-asphalt hover:bg-amber-hover"
                   >
-                    View my profile
+                    View sample profile
                   </Link>
                   <Link
                     href="/tools/compliance-alerts"
@@ -437,7 +411,7 @@ export default function ClaimProfileWizard() {
                     >
                       <path d="M20 6 9 17l-5-5" />
                     </svg>
-                    Verified owner
+                    Pending verification
                   </span>
                 )}
               </div>
