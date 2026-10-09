@@ -1,3 +1,4 @@
+import { getCopy, type Locale } from "@/shared/i18n/locale";
 import { HOME_COPY } from "@/features/home/data/home-copy";
 import type { HomeJobRow } from "@/features/home/model/home-job-rows";
 import { HomeHero } from "./HomeHero";
@@ -11,8 +12,8 @@ import { HomeTeam } from "./HomeTeam";
 import { HomeQuotes } from "./HomeQuotes";
 import { HomeFaq } from "./HomeFaq";
 
-export function HomePage({ lang, jobRows }: { lang: "EN" | "RU"; jobRows: readonly HomeJobRow[] }) {
-  const c = HOME_COPY[lang];
+export function HomePage({ lang, jobRows }: { lang: Locale; jobRows: readonly HomeJobRow[] }) {
+  const c = getCopy(HOME_COPY, lang);
 
   return (
     <>

@@ -1,5 +1,6 @@
 "use client";
 
+import { getCopy, type Locale } from "@/shared/i18n/locale";
 import Link from "next/link";
 import { useState } from "react";
 import { trackEvent } from "@/shared/client/analytics";
@@ -31,11 +32,10 @@ const DEFAULT_WATCH: Record<WatchKey, boolean> = {
   insp: false,
 };
 
-type Language = "EN" | "RU";
 const LANGUAGE_LABELS = { EN: "English", RU: "Русский" } as const;
 const LANGUAGE_OPTIONS = [LANGUAGE_LABELS.EN, LANGUAGE_LABELS.RU];
 
-const SAMPLES: Record<Language, string> = {
+const SAMPLES: Record<Locale, string> = {
   EN: "Trucker HQ: Insurance cancellation filed for DOT 3412897, effective Oct 14. Call your agent to keep your authority active.",
   RU: "Trucker HQ: страховой полис DOT 3412897 будет отменён 14 окт. Позвоните агенту, чтобы избежать отзыва MC.",
 };
@@ -45,7 +45,7 @@ const HEADING = "font-display text-xl font-extrabold uppercase";
 export default function ComplianceAlertsForm() {
   const [dot, setDot] = useState("");
   const [phone, setPhone] = useState("");
-  const [lang, setLang] = useState<Language>("EN");
+  const [lang, setLang] = useState<Locale>("EN");
   const [consent, setConsent] = useState(false);
   const [watch, setWatch] = useState(DEFAULT_WATCH);
 
@@ -192,7 +192,7 @@ export default function ComplianceAlertsForm() {
             WHAT A TEXT LOOKS LIKE
           </span>
           <div className="max-w-[340px] rounded-2xl rounded-bl-md bg-[#2A2D32] p-4 text-[15px] leading-relaxed">
-            {SAMPLES[lang]}
+            {getCopy(SAMPLES, lang)}
           </div>
           <span className="text-[13px] text-on-dark-muted">Trucker HQ · today, 7:02 AM</span>
         </div>

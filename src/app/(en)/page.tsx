@@ -1,3 +1,4 @@
+import { languageAlternates } from "@/shared/i18n/alternates";
 import type { Metadata } from "next";
 import { buildMetadata } from "@/shared/seo/metadata";
 import SiteHeader from "@/components/SiteHeader";
@@ -13,7 +14,7 @@ export const metadata: Metadata = buildMetadata({
     "Truck dispatch for a flat weekly fee, never a percentage. English and Russian-speaking dispatchers 24/7. CDL jobs and free carrier lookup.",
   path: "/",
   ogImage: false,
-  languages: { en: "/", ru: "/ru", "x-default": "/" },
+  languages: languageAlternates("/"),
 });
 
 export default function Home() {

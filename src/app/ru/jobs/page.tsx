@@ -1,3 +1,4 @@
+import { languageAlternates } from "@/shared/i18n/alternates";
 import type { Metadata } from "next";
 import { buildMetadata } from "@/shared/seo/metadata";
 import SiteHeader from "@/components/SiteHeader";
@@ -12,7 +13,7 @@ export const metadata: Metadata = buildMetadata({
   path: "/ru/jobs",
   ogImage: false,
   locale: "ru_RU",
-  languages: { en: "/jobs", ru: "/ru/jobs", "x-default": "/jobs" },
+  languages: languageAlternates("/jobs"),
 });
 
 export default function JobsRuPage() {

@@ -1,3 +1,4 @@
+import { languageAlternates } from "@/shared/i18n/alternates";
 import type { Metadata } from "next";
 import { buildMetadata } from "@/shared/seo/metadata";
 import SiteHeader from "@/components/SiteHeader";
@@ -12,7 +13,7 @@ export const metadata: Metadata = buildMetadata({
     "Dispatch for owner-operators and small fleets. One flat price per truck per week, 24/7 dispatchers, broker checks, paperwork included.",
   path: "/dispatch",
   ogImage: false,
-  languages: { en: "/dispatch", ru: "/ru/dispatch", "x-default": "/dispatch" },
+  languages: languageAlternates("/dispatch"),
 });
 
 export default function Dispatch() {

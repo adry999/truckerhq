@@ -54,3 +54,15 @@ test("unknown route returns 404", async ({ page }) => {
   const res = await page.goto("/ru/no-such-page");
   expect(res?.status()).toBe(404);
 });
+
+test("unmatched /ru URL returns 404 with the Russian page, other URLs keep the English one", async ({ page }) => {
+  const ru = await page.goto("/ru/no-such-page");
+  expect(ru?.status()).toBe(404);
+  await expect(page.getByRole("heading", { level: 1, name: "Дорога закрыта" })).toBeVisible();
+  await expect(page.locator("html")).toHaveAttribute("lang", "ru");
+
+  const en = await page.goto("/no-such-page");
+  expect(en?.status()).toBe(404);
+  await expect(page.getByRole("heading", { level: 1, name: "Road closed" })).toBeVisible();
+  await expect(page.locator("html")).toHaveAttribute("lang", "en");
+});
