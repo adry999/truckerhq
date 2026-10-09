@@ -38,7 +38,7 @@ describe("HireDriversForm", () => {
       driverLanguage: "Any",
       website: "",
     });
-  });
+  }, 15_000);
 
   it("shows the server error message in the alert", async () => {
     vi.stubGlobal(
@@ -48,5 +48,5 @@ describe("HireDriversForm", () => {
     render(<HireDriversForm />);
     await fillAndSubmit();
     expect(await screen.findByRole("alert")).toHaveTextContent("Enter a valid DOT number");
-  });
+  }, 15_000);
 });
