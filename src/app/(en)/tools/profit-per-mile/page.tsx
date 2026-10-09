@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { buildMetadata } from "@/lib/metadata";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import ProfitCalculator from "@/components/ProfitCalculator";
+import { ProfitCalculator } from "@/features/profit";
 
 export const metadata: Metadata = buildMetadata({
   title: "Trucking Profit per Mile Calculator",
