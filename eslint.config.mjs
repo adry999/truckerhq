@@ -15,6 +15,9 @@ const eslintConfig = defineConfig([
     // Reference copies of the original Claude Design prototype, not part of the app:
     "docs/design/**",
     "Trucker HQ brand identity/**",
+    "test-results/**",
+    "playwright-report/**",
+    "coverage/**",
   ]),
 ]);
 
