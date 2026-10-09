@@ -3,13 +3,8 @@ import type { Metadata } from "next";
 import { buildMetadata } from "@/lib/metadata";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import {
-  CARRIERS,
-  STATUS_COLORS,
-  healthColor,
-  healthTextColor,
-  healthLabel,
-} from "@/lib/data";
+import { CARRIERS, STATUS_COLORS } from "@/lib/data";
+import { healthColor, healthTextColor, healthLabel } from "@/shared/lib/health-score";
 import { searchFmcsaCarriers, fmcsaEnabled } from "@/lib/fmcsa";
 import { STATE_DIRECTORY } from "@/lib/states";
 

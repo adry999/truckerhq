@@ -1,17 +1,14 @@
 import { Suspense } from "react";
 import Link from "next/link";
-import SiteHeader from "@/components/SiteHeader";
-import SiteFooter from "@/components/SiteFooter";
-import { healthColor } from "@/lib/data";
-import { CITY_NAME_TO_SLUG } from "@/lib/city-slugs";
-import CityJobsList, { CityJobsListView, type CityJob } from "@/components/CityJobsList";
+import { healthColor } from "@/shared/lib/health-score";
+import { CITY_NAME_TO_SLUG } from "@/features/jobs/data/city-slugs";
+import CityJobsList, { CityJobsListView } from "./CityJobsList";
+import type { CityJob } from "@/features/jobs/model/jobs.types";
 import { FilterChips, UrlFilterChips } from "@/shared/ui/FilterChips";
 
 const TYPE_FILTERS = ["All", "Local", "Regional", "OTR"] as const;
 
-export type { CityJob };
-
-export type CityJobsPageProps = {
+export type CityJobsViewProps = {
   cityName: string;
   stateName: string;
   heroIntro: string;
@@ -23,7 +20,7 @@ export type CityJobsPageProps = {
   basePath: string;
 };
 
-export default function CityJobsPage({
+export function CityJobsView({
   cityName,
   stateName,
   heroIntro,
@@ -33,11 +30,9 @@ export default function CityJobsPage({
   hiringCarriers,
   nearbyCities,
   basePath,
-}: CityJobsPageProps) {
+}: CityJobsViewProps) {
   return (
-    <div className="flex min-h-screen flex-col">
-      <SiteHeader />
-
+    <>
       <section className="bg-asphalt text-offwhite">
         <div className="mx-auto flex max-w-6xl flex-col gap-[18px] px-4 py-10 sm:px-6 md:py-20">
           <div className="flex flex-wrap gap-2 text-sm text-[#AEB2B8]">
@@ -196,8 +191,6 @@ export default function CityJobsPage({
           </div>
         </div>
       </section>
-
-      <SiteFooter />
-    </div>
+    </>
   );
 }

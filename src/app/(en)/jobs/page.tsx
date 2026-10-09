@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { buildMetadata } from "@/lib/metadata";
-import JobsPageContent from "@/components/JobsPageContent";
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
+import { JobsBoard } from "@/features/jobs";
+import { findCarrier } from "@/lib/data";
 
 export const metadata: Metadata = buildMetadata({
   title: "CDL Jobs with Pay Posted Up Front",
@@ -11,5 +14,11 @@ export const metadata: Metadata = buildMetadata({
 });
 
 export default function JobsPage() {
-  return <JobsPageContent lang="EN" />;
+  return (
+    <div className="flex min-h-screen flex-col">
+      <SiteHeader />
+      <JobsBoard lang="EN" carrierScore={(s) => findCarrier(s)?.score} />
+      <SiteFooter />
+    </div>
+  );
 }

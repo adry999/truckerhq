@@ -2,8 +2,7 @@ import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/site";
 import { GUIDES } from "@/lib/guides";
 import { STATE_DIRECTORY } from "@/lib/states";
-import { CITY_DIRECTORY } from "@/lib/cities";
-import { CITY_CONTENT, MIN_JOBS_TO_INDEX } from "@/lib/city-content";
+import { CITY_DIRECTORY, CITY_CONTENT, MIN_JOBS_TO_INDEX } from "@/features/jobs";
 
 const BASE_URL = SITE_URL;
 

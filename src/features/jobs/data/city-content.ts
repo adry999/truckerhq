@@ -1,19 +1,4 @@
-import type { CityJob } from "@/components/CityJobsPage";
-
-export const MIN_JOBS_TO_INDEX = 5;
-
-export type CityContentEntry = {
-  cityName: string;
-  stateName: string;
-  title: string;
-  description: string;
-  heroIntro: string;
-  stats: { big: string; small: string }[];
-  jobs: CityJob[];
-  hiringCarriers: { name: string; score: number; jobs: number }[];
-  nearbyCities: { name: string; count: number }[];
-  faqs: { q: string; a: string }[];
-};
+import type { CityContentEntry } from "@/features/jobs/model/jobs.types";
 
 export const CITY_CONTENT: Record<string, CityContentEntry> = {
   "atlanta-ga": {

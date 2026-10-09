@@ -1,4 +1,4 @@
-import { CITY_CONTENT, CITY_SLUGS } from "@/lib/city-content";
+import { CITY_CONTENT, CITY_SLUGS } from "@/features/jobs/data/city-content";
 
 export type CityDirectoryEntry = {
   name: string;

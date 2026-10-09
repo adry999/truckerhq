@@ -1,6 +1,6 @@
 "use client";
 
-import { JOBS_COPY } from "@/lib/jobs-copy";
+import { JOBS_COPY } from "@/features/jobs/data/jobs-copy";
 import { useSearchParam } from "@/shared/hooks/useSearchParam";
 
 export function JobsSearchFormView({ lang, q }: { lang: "EN" | "RU"; q: string }) {

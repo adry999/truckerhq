@@ -1,5 +1,5 @@
 import { PHONE_DISPLAY } from "@/lib/contact";
-import { JOBS as REAL_JOBS } from "@/lib/data";
+import { JOBS as REAL_JOBS } from "@/features/jobs";
 
 export type HomeJobRow = {
   title: string;

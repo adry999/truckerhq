@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
-import { CITY_CONTENT, CITY_SLUGS, MIN_JOBS_TO_INDEX } from "./city-content";
-import { CITY_DIRECTORY } from "./cities";
+import { CITY_CONTENT, CITY_SLUGS } from "./city-content";
+import { MIN_JOBS_TO_INDEX } from "@/features/jobs/model/jobs";
+import { CITY_DIRECTORY } from "@/features/jobs/model/cities";
 import { CITY_NAME_TO_SLUG } from "./city-slugs";
 
 describe("city content integrity", () => {

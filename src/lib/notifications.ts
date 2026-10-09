@@ -2,7 +2,7 @@ import "server-only";
 import { PHONE_DISPLAY, PHONE_IS_PLACEHOLDER } from "@/lib/contact";
 import { sendSms } from "@/server/messaging/sms";
 import { claimSmsSlot } from "@/server/messaging/sms-throttle";
-import { findJob } from "@/lib/data";
+import { findJob } from "@/features/jobs";
 
 // English-only until the Russian SMS copy is approved.
 
