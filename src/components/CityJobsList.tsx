@@ -28,6 +28,7 @@ export default function CityJobsList({
   return (
     <>
     <div className="flex flex-col gap-4">
+      <span className="text-sm text-grey">Sample listings</span>
       {filtered.map((j) => (
         <Link
           key={`${j.title}-${j.company}`}

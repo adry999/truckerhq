@@ -1,6 +1,5 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/site";
-import { JOBS } from "@/lib/data";
 import { GUIDES } from "@/lib/guides";
 import { STATE_DIRECTORY } from "@/lib/states";
 import { CITY_DIRECTORY } from "@/lib/cities";
@@ -40,12 +39,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/sms-terms`, changeFrequency: "yearly", priority: 0.2 },
   ];
 
-  const jobRoutes: MetadataRoute.Sitemap = JOBS.map((j) => ({
-    url: `${BASE_URL}/jobs/${j.slug}`,
-    changeFrequency: "weekly",
-    priority: 0.6,
-  }));
-
   const guideRoutes: MetadataRoute.Sitemap = GUIDES.map((g) => ({
     url: `${BASE_URL}/guides/${g.slug}`,
     lastModified: g.date,
@@ -68,5 +61,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticRoutes, ...jobRoutes, ...guideRoutes, ...stateRoutes, ...cityRoutes];
+  return [...staticRoutes, ...guideRoutes, ...stateRoutes, ...cityRoutes];
 }
