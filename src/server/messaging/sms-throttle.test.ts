@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from "vitest";
-import { claimSmsSlot, resetSmsThrottle } from "@/lib/sms-throttle";
+import { claimSmsSlot, resetSmsThrottle } from "@/server/messaging/sms-throttle";
 
 const T0 = 1_000_000;
 const MIN = 60_000;

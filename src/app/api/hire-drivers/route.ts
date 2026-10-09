@@ -1,38 +1,37 @@
-import { NextResponse } from "next/server";
-import { insertRow } from "@/lib/supabase";
-import { toUsE164 } from "@/lib/phone";
-import { guardLeadRoute, str, isHoneypotTripped } from "@/lib/api-guard";
+import { z } from "zod";
+import { createLeadHandler } from "@/server/leads/create-lead-handler";
+import { requiredText, text, usPhone, withChecks } from "@/server/leads/fields";
 
-export async function POST(req: Request) {
-  const guarded = guardLeadRoute(req);
-  if (guarded) return guarded;
+const MISSING = "Missing required fields";
 
-  const body = await req.json().catch(() => null);
-  if (isHoneypotTripped(body)) return NextResponse.json({ ok: true });
+const schema = withChecks(
+  z.object({
+    companyName: requiredText(150, MISSING),
+    dotNumber: requiredText(20, MISSING),
+    contactName: requiredText(100, MISSING),
+    phone: requiredText(30, MISSING),
+    pay: text(100),
+    homeBase: text(100),
+    position: text(100),
+    equipment: text(100),
+    driverLanguage: text(50),
+  }),
+  { phone: usPhone() },
+);
 
-  const companyName = str(body?.companyName, 150);
-  const dotNumber = str(body?.dotNumber, 20);
-  const contactName = str(body?.contactName, 100);
-  const phone = str(body?.phone, 30);
-  if (!companyName || !dotNumber || !contactName || !phone) {
-    return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
-  }
-
-  const e164 = toUsE164(phone);
-  if (!e164) return NextResponse.json({ error: "Enter a valid US phone number" }, { status: 400 });
-
-  const ok = await insertRow("hire_driver_requests", {
-    company_name: companyName,
-    dot_number: dotNumber,
-    contact_name: contactName,
-    phone: e164,
-    pay: str(body?.pay, 100),
-    home_base: str(body?.homeBase, 100),
-    position: str(body?.position, 100),
-    equipment: str(body?.equipment, 100),
-    driver_language: str(body?.driverLanguage, 50),
-  });
-
-  if (!ok) return NextResponse.json({ error: "Could not save job" }, { status: 502 });
-  return NextResponse.json({ ok: true });
-}
+export const POST = createLeadHandler({
+  schema,
+  table: "hire_driver_requests",
+  toRow: (h) => ({
+    company_name: h.companyName,
+    dot_number: h.dotNumber,
+    contact_name: h.contactName,
+    phone: h.phone,
+    pay: h.pay,
+    home_base: h.homeBase,
+    position: h.position,
+    equipment: h.equipment,
+    driver_language: h.driverLanguage,
+  }),
+  saveError: "Could not save job",
+});

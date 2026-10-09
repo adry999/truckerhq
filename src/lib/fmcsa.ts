@@ -1,5 +1,7 @@
 import "server-only";
 import type { Carrier, CarrierStatus } from "@/lib/data";
+import { serverEnv } from "@/server/env";
+import { httpRequest } from "@/server/http/http-request";
 
 // FMCSA QCMobile API. Needs FMCSA_WEBKEY (free, from
 // https://mobile.fmcsa.dot.gov/QCDevsite/docs/apiAccess). FMCSA publishes no
@@ -8,7 +10,7 @@ import type { Carrier, CarrierStatus } from "@/lib/data";
 const BASE_URL = "https://mobile.fmcsa.dot.gov/qc/services/carriers";
 
 export function fmcsaEnabled(): boolean {
-  return !!process.env.FMCSA_WEBKEY;
+  return !!serverEnv().FMCSA_WEBKEY;
 }
 
 type RawFmcsaCarrier = {
@@ -36,21 +38,23 @@ type FmcsaEnvelope =
   | { content?: { carrier?: RawFmcsaCarrier }[] };
 
 async function fmcsaFetch(path: string): Promise<FmcsaEnvelope | null> {
-  const webKey = process.env.FMCSA_WEBKEY;
+  const webKey = serverEnv().FMCSA_WEBKEY;
   if (!webKey) return null;
 
   const url = `${BASE_URL}${path}${path.includes("?") ? "&" : "?"}webKey=${encodeURIComponent(webKey)}`;
 
+  const res = await httpRequest("fmcsa", url, {
+    // FMCSA data doesn't change minute to minute; cache each unique
+    // lookup for an hour so repeat searches don't hammer the API.
+    next: { revalidate: 3600 },
+    timeoutMs: 8000,
+  });
+  if (!res.ok) return null;
+
   try {
-    const res = await fetch(url, {
-      // FMCSA data doesn't change minute to minute; cache each unique
-      // lookup for an hour so repeat searches don't hammer the API.
-      next: { revalidate: 3600 },
-      signal: AbortSignal.timeout(8000),
-    });
-    if (!res.ok) return null;
-    return (await res.json()) as FmcsaEnvelope;
+    return JSON.parse(res.text) as FmcsaEnvelope;
   } catch {
+    console.error("[fmcsa] response was not valid JSON");
     return null;
   }
 }

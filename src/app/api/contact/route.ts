@@ -1,32 +1,29 @@
-import { NextResponse } from "next/server";
-import { insertRow } from "@/lib/supabase";
-import { toUsE164 } from "@/lib/phone";
-import { guardLeadRoute, str, isHoneypotTripped } from "@/lib/api-guard";
+import { z } from "zod";
+import { createLeadHandler } from "@/server/leads/create-lead-handler";
+import { requiredText, text, usPhone, withChecks } from "@/server/leads/fields";
 
-export async function POST(req: Request) {
-  const guarded = guardLeadRoute(req);
-  if (guarded) return guarded;
+const MISSING = "Missing name or phone";
 
-  const body = await req.json().catch(() => null);
-  if (isHoneypotTripped(body)) return NextResponse.json({ ok: true });
+const schema = withChecks(
+  z.object({
+    name: requiredText(100, MISSING),
+    phone: requiredText(30, MISSING),
+    topic: text(60),
+    message: text(2000),
+    language: text(20),
+  }),
+  { phone: usPhone() },
+);
 
-  const name = str(body?.name, 100);
-  const phone = str(body?.phone, 30);
-  if (!name || !phone) {
-    return NextResponse.json({ error: "Missing name or phone" }, { status: 400 });
-  }
-
-  const e164 = toUsE164(phone);
-  if (!e164) return NextResponse.json({ error: "Enter a valid US phone number" }, { status: 400 });
-
-  const ok = await insertRow("contact_messages", {
-    topic: str(body?.topic, 60) || "Something else",
-    name,
-    phone: e164,
-    message: str(body?.message, 2000),
-    language: str(body?.language, 20) || "EN",
-  });
-
-  if (!ok) return NextResponse.json({ error: "Could not save message" }, { status: 502 });
-  return NextResponse.json({ ok: true });
-}
+export const POST = createLeadHandler({
+  schema,
+  table: "contact_messages",
+  toRow: (c) => ({
+    topic: c.topic || "Something else",
+    name: c.name,
+    phone: c.phone,
+    message: c.message,
+    language: c.language || "EN",
+  }),
+  saveError: "Could not save message",
+});
