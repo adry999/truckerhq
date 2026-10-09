@@ -5,6 +5,8 @@ const VARIANTS = {
   green: "bg-green-tint text-green",
   outline: "border-[1.5px] border-border bg-white text-ink-2",
   amber: "bg-amber-tint text-asphalt",
+  muted: "bg-surface-muted text-ink-3",
+  dark: "bg-asphalt text-amber",
 } as const;
 
 export function Badge({

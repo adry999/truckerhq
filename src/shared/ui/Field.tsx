@@ -17,16 +17,19 @@ export function Field({
   required?: boolean;
   children: ReactNode;
 }) {
+  // hint and error sit outside <label> so they don't become part of the control's accessible name.
   return (
-    <label className="flex flex-col gap-1.5">
-      <span className="text-sm font-semibold">
-        {label}
-        {required && " (required)"}
-      </span>
-      {children}
+    <div className="flex flex-col gap-1.5">
+      <label className="flex flex-col gap-1.5">
+        <span className="text-sm font-semibold">
+          {label}
+          {required && " (required)"}
+        </span>
+        {children}
+      </label>
       {hint}
       {error}
-    </label>
+    </div>
   );
 }
 
