@@ -69,7 +69,8 @@ describe("DispatchStartWizard", () => {
       language: "English",
       website: "",
     });
-  });
+    // The full four-step flow takes ~2s alone and can pass the 5s default under a parallel run.
+  }, 15_000);
 
   it("moves authority selection with the arrow keys", async () => {
     render(<DispatchStartWizard />);
