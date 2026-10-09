@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/contact";
+import { PHONE_DISPLAY, PHONE_HREF } from "@/shared/config/contact";
 import { HERO_IMAGE } from "@/features/hire-drivers/data/hire-drivers";
 
 export function HireDriversHero() {

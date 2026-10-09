@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { buildMetadata } from "@/lib/metadata";
-import { SITE_URL } from "@/lib/site";
+import { buildMetadata } from "@/shared/seo/metadata";
+import { SITE_URL } from "@/shared/config/site";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import JsonLd from "@/components/JsonLd";
-import { guidesListSchema } from "@/lib/seo";
+import { guidesListSchema } from "@/shared/seo/structured-data";
 import { GUIDES, GuidesIndex } from "@/features/guides";
 
 export const metadata: Metadata = buildMetadata({

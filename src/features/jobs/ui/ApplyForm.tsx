@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { trackEvent } from "@/lib/analytics";
+import { trackEvent } from "@/shared/client/analytics";
 import { useFormSubmit } from "@/shared/hooks/useFormSubmit";
 import { Badge } from "@/shared/ui/Badge";
 import { Button } from "@/shared/ui/Button";

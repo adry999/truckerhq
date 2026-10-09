@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import RootDocument from "@/components/RootDocument";
-import { rootMetadata } from "@/lib/metadata";
+import { rootMetadata } from "@/shared/seo/metadata";
 
 export const metadata: Metadata = {
   ...rootMetadata,

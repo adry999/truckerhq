@@ -1,8 +1,7 @@
 import "server-only";
-import { PHONE_DISPLAY, PHONE_IS_PLACEHOLDER } from "@/lib/contact";
+import { PHONE_DISPLAY, PHONE_IS_PLACEHOLDER } from "@/shared/config/contact";
 import { sendSms } from "@/server/messaging/sms";
 import { claimSmsSlot } from "@/server/messaging/sms-throttle";
-import { findJob } from "@/features/jobs";
 
 // English-only until the Russian SMS copy is approved.
 
@@ -22,11 +21,10 @@ export async function notifyDispatchStart(phone: string): Promise<void> {
   );
 }
 
-export async function notifyApplication(phone: string, jobSlug: string): Promise<void> {
-  const jobTitle = findJob(jobSlug)?.title ?? "your job";
+export async function notifyApplication(phone: string, jobTitle: string | undefined): Promise<void> {
   await send(
     phone,
-    `Trucker HQ: we got your application for ${jobTitle}. A recruiter will call you in 1-2 business days. Reply STOP to opt out.`,
+    `Trucker HQ: we got your application for ${jobTitle ?? "your job"}. A recruiter will call you in 1-2 business days. Reply STOP to opt out.`,
   );
 }
 

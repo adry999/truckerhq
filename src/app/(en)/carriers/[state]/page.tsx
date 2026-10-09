@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { buildMetadata } from "@/lib/metadata";
+import { buildMetadata } from "@/shared/seo/metadata";
 import { notFound } from "next/navigation";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import JsonLd from "@/components/JsonLd";
-import { breadcrumbSchema } from "@/lib/seo";
+import { breadcrumbSchema } from "@/shared/seo/structured-data";
 import { StateCarriersView, STATE_CONTENT, STATE_SLUGS } from "@/features/carriers";
 
 export function generateStaticParams() {

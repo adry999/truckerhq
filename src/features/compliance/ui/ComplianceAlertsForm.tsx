@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { trackEvent } from "@/lib/analytics";
+import { trackEvent } from "@/shared/client/analytics";
 import { useFormSubmit } from "@/shared/hooks/useFormSubmit";
 import { Button } from "@/shared/ui/Button";
 import { CheckCard, ChoiceGroup } from "@/shared/ui/choices";

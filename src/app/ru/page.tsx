@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { buildMetadata } from "@/lib/metadata";
+import { buildMetadata } from "@/shared/seo/metadata";
 import HomePageContent from "@/components/HomePageContent";
 
 export const metadata: Metadata = buildMetadata({

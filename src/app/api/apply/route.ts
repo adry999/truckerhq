@@ -1,5 +1,6 @@
 import { z } from "zod";
-import { notifyApplication } from "@/lib/notifications";
+import { notifyApplication } from "@/server/leads/notifications";
+import { findJob } from "@/features/jobs";
 import { createLeadHandler } from "@/server/leads/create-lead-handler";
 import { requiredText, text, usPhone, withChecks } from "@/server/leads/fields";
 
@@ -28,6 +29,6 @@ export const POST = createLeadHandler({
     experience: a.experience,
     language: a.language || "EN",
   }),
-  notify: (a) => notifyApplication(a.phone, a.jobSlug),
+  notify: (a) => notifyApplication(a.phone, findJob(a.jobSlug)?.title),
   saveError: "Could not save application",
 });

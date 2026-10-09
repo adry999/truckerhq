@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { buildMetadata } from "@/lib/metadata";
+import { buildMetadata } from "@/shared/seo/metadata";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import JsonLd from "@/components/JsonLd";
-import { faqSchema } from "@/lib/seo";
+import { faqSchema } from "@/shared/seo/structured-data";
 import { HIRE_FAQ, HireDrivers } from "@/features/hire-drivers";
 
 export const metadata: Metadata = buildMetadata({

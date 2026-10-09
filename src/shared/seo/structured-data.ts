@@ -1,4 +1,4 @@
-import { SITE_URL } from "@/lib/site";
+import { SITE_URL } from "@/shared/config/site";
 
 export function contactPageSchema(page: {
   name: string;

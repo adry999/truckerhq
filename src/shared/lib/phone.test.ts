@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { toUsE164 } from "@/lib/phone";
+import { toUsE164 } from "@/shared/lib/phone";
 
 describe("toUsE164", () => {
   it.each(["(312) 555-0123", "312.555.0123", "+1 312 555 0123", "13125550123"])(

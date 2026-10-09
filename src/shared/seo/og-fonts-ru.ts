@@ -1,6 +1,7 @@
+import "server-only";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
-import type { OgFont } from "@/lib/og";
+import type { OgFont } from "@/shared/seo/og";
 
 // The ImageResponse default font has no Cyrillic glyphs. These are the same
 // families the site uses for Russian pages (Roboto Condensed display, Inter

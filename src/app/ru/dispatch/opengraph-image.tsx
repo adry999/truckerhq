@@ -1,5 +1,5 @@
-import { ogImageSize, ogImageContentType, renderOgImage } from "@/lib/og";
-import { ruOgFontConfig } from "@/lib/og-ru";
+import { ogImageSize, ogImageContentType, renderOgImage } from "@/shared/seo/og";
+import { ruOgFontConfig } from "@/shared/seo/og-fonts-ru";
 
 export const alt = "Trucker HQ — диспетчинг: фиксированная цена в неделю, без процентов";
 export const size = ogImageSize;
