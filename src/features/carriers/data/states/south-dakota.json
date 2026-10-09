@@ -1,0 +1,37 @@
+{
+  "stateAbbr": "SD",
+  "stateName": "South Dakota",
+  "heroImage": "https://images.unsplash.com/photo-1779583074717-e60fa13131ce?fm=jpg&q=70&w=2000&auto=format&fit=crop",
+  "heroAlt": "South Dakota highway with a semi truck at dusk",
+  "stats": ["7,100", "168", "75", "2.6"],
+  "equipmentBreakdown": [
+    { "t": "Flatbed", "pct": 34 },
+    { "t": "Reefer", "pct": 24 },
+    { "t": "Dry van", "pct": 20 },
+    { "t": "Power only", "pct": 11 },
+    { "t": "Step deck", "pct": 6 },
+    { "t": "Livestock", "pct": 4 },
+    { "t": "Tanker", "pct": 1 }
+  ],
+  "topCities": [
+    { "t": "Sioux Falls", "count": "2,340" },
+    { "t": "Rapid City", "count": "1,415" },
+    { "t": "Aberdeen", "count": "620" },
+    { "t": "Watertown", "count": "395" },
+    { "t": "Brookings", "count": "310" },
+    { "t": "Mitchell", "count": "245" }
+  ],
+  "equipmentOptions": ["All", "Flatbed", "Reefer", "Dry van", "Power only"],
+  "dispatchCtaBody": "We know the I-90 run across the state and the I-29 corridor up to Fargo, plus the ag and livestock freight that moves through Sioux Falls and Aberdeen. One flat price per week.",
+  "hireCtaBody": "Post a job and reach drivers in Sioux Falls, Rapid City and Aberdeen. We check CDL and MVR before you call.",
+  "carriers": [
+    { "name": "Sioux Falls Flatbed Co", "city": "Sioux Falls", "dot": "9312047", "equipment": "Flatbed", "trucks": 9, "status": "ACTIVE", "score": 88 },
+    { "name": "Black Hills Reefer Line", "city": "Rapid City", "dot": "9327185", "equipment": "Reefer", "trucks": 6, "status": "ACTIVE", "score": 84 },
+    { "name": "Volga Line Transport", "city": "Brookings", "dot": "9338420", "equipment": "Dry van", "trucks": 4, "status": "ACTIVE", "score": 79 },
+    { "name": "Aberdeen Livestock Haulers", "city": "Aberdeen", "dot": "9351763", "equipment": "Flatbed", "trucks": 3, "status": "ACTIVE", "score": 75 },
+    { "name": "Glacial Lakes Trucking", "city": "Watertown", "dot": "9364298", "equipment": "Power only", "trucks": 1, "status": "ACTIVE", "score": 71 },
+    { "name": "Mitchell Corn Palace Freight", "city": "Mitchell", "dot": "9377531", "equipment": "Reefer", "trucks": 5, "status": "ACTIVE", "score": 92 },
+    { "name": "Dakota Steppe Express", "city": "Sioux Falls", "dot": "9385904", "equipment": "Dry van", "trucks": 7, "status": "WARNING", "score": 63 },
+    { "name": "Prairie Ridge Bulk Carriers", "city": "Rapid City", "dot": "9396817", "equipment": "Flatbed", "trucks": 2, "status": "INACTIVE", "score": 41 }
+  ]
+}

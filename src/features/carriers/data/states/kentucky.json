@@ -1,0 +1,37 @@
+{
+  "stateAbbr": "KY",
+  "stateName": "Kentucky",
+  "heroImage": "https://images.unsplash.com/photo-1720811559395-3ed8d1b16649?fm=jpg&q=70&w=2000&auto=format&fit=crop",
+  "heroAlt": "Kentucky highway with a semi truck at dusk",
+  "stats": ["19,700", "486", "73", "2.7"],
+  "equipmentBreakdown": [
+    { "t": "Dry van", "pct": 44 },
+    { "t": "Power only", "pct": 18 },
+    { "t": "Reefer", "pct": 15 },
+    { "t": "Flatbed", "pct": 12 },
+    { "t": "Step deck", "pct": 5 },
+    { "t": "Box truck", "pct": 4 },
+    { "t": "Tanker", "pct": 2 }
+  ],
+  "topCities": [
+    { "t": "Louisville", "count": "6,340" },
+    { "t": "Lexington", "count": "3,215" },
+    { "t": "Covington", "count": "1,980" },
+    { "t": "Bowling Green", "count": "1,540" },
+    { "t": "Owensboro", "count": "1,105" },
+    { "t": "Richmond", "count": "845" }
+  ],
+  "equipmentOptions": ["All", "Dry van", "Reefer", "Flatbed", "Power only"],
+  "dispatchCtaBody": "We know the UPS Worldport air-to-ground hub in Louisville and the freight that stacks up where I-64, I-65 and I-75 cross the state. One flat price per week.",
+  "hireCtaBody": "Post a job and reach drivers in Louisville, Lexington and Bowling Green. We check CDL and MVR before you call.",
+  "carriers": [
+    { "name": "Bluegrass Freight Lines", "city": "Louisville", "dot": "7204418", "equipment": "Dry van", "trucks": 10, "status": "ACTIVE", "score": 90 },
+    { "name": "Worldport Logistics Group", "city": "Louisville", "dot": "7218362", "equipment": "Power only", "trucks": 7, "status": "ACTIVE", "score": 86 },
+    { "name": "Volga Line Transport KY", "city": "Covington", "dot": "7261947", "equipment": "Dry van", "trucks": 5, "status": "ACTIVE", "score": 80 },
+    { "name": "Bourbon Trail Carriers", "city": "Lexington", "dot": "7233805", "equipment": "Flatbed", "trucks": 4, "status": "ACTIVE", "score": 76 },
+    { "name": "Bluegrass Reefer Express", "city": "Bowling Green", "dot": "7247519", "equipment": "Reefer", "trucks": 6, "status": "ACTIVE", "score": 73 },
+    { "name": "Ohio Valley Haulers", "city": "Owensboro", "dot": "7292630", "equipment": "Dry van", "trucks": 3, "status": "ACTIVE", "score": 71 },
+    { "name": "Richmond Ridge Trucking", "city": "Richmond", "dot": "7209174", "equipment": "Power only", "trucks": 2, "status": "WARNING", "score": 62 },
+    { "name": "Danube Freight Solutions", "city": "Lexington", "dot": "7276293", "equipment": "Dry van", "trucks": 2, "status": "INACTIVE", "score": 39 }
+  ]
+}

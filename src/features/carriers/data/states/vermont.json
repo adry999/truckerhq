@@ -1,0 +1,37 @@
+{
+  "stateAbbr": "VT",
+  "stateName": "Vermont",
+  "heroImage": "https://images.unsplash.com/photo-1779583074717-e60fa13131ce?fm=jpg&q=70&w=2000&auto=format&fit=crop",
+  "heroAlt": "Vermont highway with a semi truck at dusk",
+  "stats": ["3,900", "58", "77", "2.4"],
+  "equipmentBreakdown": [
+    { "t": "Dry van", "pct": 34 },
+    { "t": "Reefer", "pct": 27 },
+    { "t": "Flatbed", "pct": 14 },
+    { "t": "Power only", "pct": 10 },
+    { "t": "Step deck", "pct": 6 },
+    { "t": "Box truck", "pct": 6 },
+    { "t": "Tanker", "pct": 3 }
+  ],
+  "topCities": [
+    { "t": "Burlington", "count": "1,140" },
+    { "t": "South Burlington", "count": "640" },
+    { "t": "Rutland", "count": "490" },
+    { "t": "Barre", "count": "385" },
+    { "t": "Montpelier", "count": "310" },
+    { "t": "St. Albans", "count": "275" }
+  ],
+  "equipmentOptions": ["All", "Dry van", "Reefer", "Flatbed", "Power only"],
+  "dispatchCtaBody": "We know the I-89 corridor up to the Canadian border crossing at Highgate Springs and the I-91 dairy freight lanes through the Connecticut River Valley. One flat price per week.",
+  "hireCtaBody": "Post a job and reach drivers in Burlington, Rutland and Montpelier. We check CDL and MVR before you call.",
+  "carriers": [
+    { "name": "Green Mountain Freight Co", "city": "Burlington", "dot": "9612044", "equipment": "Dry van", "trucks": 7, "status": "ACTIVE", "score": 91 },
+    { "name": "Lake Champlain Logistics", "city": "South Burlington", "dot": "9634871", "equipment": "Reefer", "trucks": 5, "status": "ACTIVE", "score": 85 },
+    { "name": "Rutland Marble Transport", "city": "Rutland", "dot": "9648203", "equipment": "Flatbed", "trucks": 3, "status": "ACTIVE", "score": 78 },
+    { "name": "Volga Line Transport VT", "city": "Barre", "dot": "9601567", "equipment": "Dry van", "trucks": 4, "status": "ACTIVE", "score": 82 },
+    { "name": "Montpelier Capital Carriers", "city": "Montpelier", "dot": "9667932", "equipment": "Reefer", "trucks": 2, "status": "ACTIVE", "score": 74 },
+    { "name": "St. Albans Border Freight", "city": "St. Albans", "dot": "9623410", "equipment": "Dry van", "trucks": 6, "status": "ACTIVE", "score": 88 },
+    { "name": "Barre Granite Haulers", "city": "Barre", "dot": "9691285", "equipment": "Power only", "trucks": 1, "status": "WARNING", "score": 61 },
+    { "name": "Burlington Bay Trucking", "city": "Burlington", "dot": "9655719", "equipment": "Reefer", "trucks": 2, "status": "INACTIVE", "score": 41 }
+  ]
+}

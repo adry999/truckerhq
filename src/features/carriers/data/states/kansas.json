@@ -1,0 +1,37 @@
+{
+  "stateAbbr": "KS",
+  "stateName": "Kansas",
+  "heroImage": "https://images.unsplash.com/photo-1779583074717-e60fa13131ce?fm=jpg&q=70&w=2000&auto=format&fit=crop",
+  "heroAlt": "Kansas highway with a semi truck at dusk",
+  "stats": ["16,600", "418", "73", "2.6"],
+  "equipmentBreakdown": [
+    { "t": "Dry van", "pct": 39 },
+    { "t": "Flatbed", "pct": 27 },
+    { "t": "Reefer", "pct": 14 },
+    { "t": "Power only", "pct": 10 },
+    { "t": "Step deck", "pct": 5 },
+    { "t": "Box truck", "pct": 3 },
+    { "t": "Tanker", "pct": 2 }
+  ],
+  "topCities": [
+    { "t": "Wichita", "count": "3,940" },
+    { "t": "Kansas City", "count": "2,815" },
+    { "t": "Overland Park", "count": "2,260" },
+    { "t": "Topeka", "count": "1,585" },
+    { "t": "Olathe", "count": "1,120" },
+    { "t": "Lawrence", "count": "760" }
+  ],
+  "equipmentOptions": ["All", "Dry van", "Flatbed", "Reefer", "Power only"],
+  "dispatchCtaBody": "We know the I-70/I-35 crossroads through Wichita and Kansas City and the grain and ag freight moving out of the wheat belt every fall. One flat price per week.",
+  "hireCtaBody": "Post a job and reach drivers in Wichita, Overland Park and Topeka. We check CDL and MVR before you call.",
+  "carriers": [
+    { "name": "Sunflower State Freight", "city": "Wichita", "dot": "7104521", "equipment": "Dry van", "trucks": 8, "status": "ACTIVE", "score": 88 },
+    { "name": "Prairie Trail Logistics", "city": "Overland Park", "dot": "7112893", "equipment": "Flatbed", "trucks": 5, "status": "ACTIVE", "score": 82 },
+    { "name": "Volga Line Transport KS", "city": "Kansas City", "dot": "7126047", "equipment": "Dry van", "trucks": 3, "status": "ACTIVE", "score": 91 },
+    { "name": "Wheat State Carriers", "city": "Topeka", "dot": "7138215", "equipment": "Flatbed", "trucks": 12, "status": "ACTIVE", "score": 76 },
+    { "name": "Crossroads Trucking Co", "city": "Olathe", "dot": "7145690", "equipment": "Power only", "trucks": 2, "status": "ACTIVE", "score": 95 },
+    { "name": "Jayhawk Freight Systems", "city": "Lawrence", "dot": "7153382", "equipment": "Dry van", "trucks": 6, "status": "ACTIVE", "score": 79 },
+    { "name": "Kansas Plains Hauling", "city": "Wichita", "dot": "7161974", "equipment": "Reefer", "trucks": 4, "status": "WARNING", "score": 61 },
+    { "name": "Ural Star Trucking", "city": "Overland Park", "dot": "7178506", "equipment": "Flatbed", "trucks": 1, "status": "INACTIVE", "score": 38 }
+  ]
+}

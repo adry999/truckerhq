@@ -1,0 +1,37 @@
+{
+  "stateAbbr": "NC",
+  "stateName": "North Carolina",
+  "heroImage": "https://images.unsplash.com/photo-1631914730551-1cfbcdf6f603?fm=jpg&q=70&w=2000&auto=format&fit=crop",
+  "heroAlt": "North Carolina highway with a semi truck at dusk",
+  "stats": ["31,600", "815", "75", "2.9"],
+  "equipmentBreakdown": [
+    { "t": "Dry van", "pct": 44 },
+    { "t": "Reefer", "pct": 18 },
+    { "t": "Flatbed", "pct": 15 },
+    { "t": "Power only", "pct": 9 },
+    { "t": "Step deck", "pct": 6 },
+    { "t": "Box truck", "pct": 5 },
+    { "t": "Tanker", "pct": 3 }
+  ],
+  "topCities": [
+    { "t": "Charlotte", "count": "8,940" },
+    { "t": "Raleigh", "count": "5,610" },
+    { "t": "Greensboro", "count": "3,240" },
+    { "t": "Durham", "count": "2,780" },
+    { "t": "Winston-Salem", "count": "2,150" },
+    { "t": "Fayetteville", "count": "1,890" }
+  ],
+  "equipmentOptions": ["All", "Dry van", "Reefer", "Flatbed", "Power only"],
+  "dispatchCtaBody": "We know the I-85/I-95 corridor and Charlotte's role as a Southeast logistics hub, from intermodal ramps to the freight rolling out of the Piedmont. One flat price per week.",
+  "hireCtaBody": "Post a job and reach drivers in Charlotte, Raleigh and Greensboro. We check CDL and MVR before you call.",
+  "carriers": [
+    { "name": "Queen City Freight Lines", "city": "Charlotte", "dot": "8701234", "equipment": "Dry van", "trucks": 8, "status": "ACTIVE", "score": 88 },
+    { "name": "Piedmont Triad Logistics", "city": "Greensboro", "dot": "8712456", "equipment": "Dry van", "trucks": 6, "status": "ACTIVE", "score": 82 },
+    { "name": "Capital Carolina Transport", "city": "Raleigh", "dot": "8723789", "equipment": "Reefer", "trucks": 5, "status": "ACTIVE", "score": 77 },
+    { "name": "Bull City Hauling", "city": "Durham", "dot": "8734567", "equipment": "Flatbed", "trucks": 4, "status": "ACTIVE", "score": 91 },
+    { "name": "Volga Line Transport", "city": "Charlotte", "dot": "8745123", "equipment": "Power only", "trucks": 3, "status": "ACTIVE", "score": 73 },
+    { "name": "Fayetteville Freight Co", "city": "Fayetteville", "dot": "8756890", "equipment": "Dry van", "trucks": 12, "status": "ACTIVE", "score": 95 },
+    { "name": "Twin City Express", "city": "Winston-Salem", "dot": "8767234", "equipment": "Dry van", "trucks": 2, "status": "WARNING", "score": 61 },
+    { "name": "Carolina Crossroads Carriers", "city": "Charlotte", "dot": "8778901", "equipment": "Reefer", "trucks": 1, "status": "INACTIVE", "score": 38 }
+  ]
+}

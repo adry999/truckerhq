@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { STATE_CONTENT, STATE_SLUGS } from "@/features/carriers/data/state-content";
+import { STATE_CONTENT, STATE_SLUGS } from "@/features/carriers/data/states";
 import { STATE_DIRECTORY } from "./states";
 
 describe("state content integrity", () => {

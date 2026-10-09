@@ -1,0 +1,37 @@
+{
+  "stateAbbr": "MT",
+  "stateName": "Montana",
+  "heroImage": "https://images.unsplash.com/photo-1720811559395-3ed8d1b16649?fm=jpg&q=70&w=2000&auto=format&fit=crop",
+  "heroAlt": "Montana highway with a semi truck at dusk",
+  "stats": ["9,640", "186", "71", "2.4"],
+  "equipmentBreakdown": [
+    { "t": "Flatbed", "pct": 34 },
+    { "t": "Dry van", "pct": 28 },
+    { "t": "Power only", "pct": 14 },
+    { "t": "Reefer", "pct": 10 },
+    { "t": "Step deck", "pct": 6 },
+    { "t": "Tanker", "pct": 5 },
+    { "t": "Box truck", "pct": 3 }
+  ],
+  "topCities": [
+    { "t": "Billings", "count": "2,410" },
+    { "t": "Missoula", "count": "1,650" },
+    { "t": "Great Falls", "count": "1,280" },
+    { "t": "Bozeman", "count": "1,050" },
+    { "t": "Helena", "count": "780" },
+    { "t": "Butte", "count": "590" }
+  ],
+  "equipmentOptions": ["All", "Flatbed", "Dry van", "Reefer", "Power only"],
+  "dispatchCtaBody": "We know the long hauls across I-90 and I-15, where the nearest reload can be 300 miles away, plus the seasonal grain and livestock runs out of the Golden Triangle. One flat price per week.",
+  "hireCtaBody": "Post a job and reach drivers in Billings, Missoula and Great Falls. We check CDL and MVR before you call.",
+  "carriers": [
+    { "name": "Big Sky Freight Lines", "city": "Billings", "dot": "8102451", "equipment": "Flatbed", "trucks": 7, "status": "ACTIVE", "score": 91 },
+    { "name": "Missoula Mountain Movers", "city": "Missoula", "dot": "8113987", "equipment": "Dry van", "trucks": 4, "status": "ACTIVE", "score": 84 },
+    { "name": "Volga Line Transport MT", "city": "Great Falls", "dot": "8124630", "equipment": "Flatbed", "trucks": 3, "status": "ACTIVE", "score": 78 },
+    { "name": "Bozeman Peak Trucking", "city": "Bozeman", "dot": "8135802", "equipment": "Power only", "trucks": 2, "status": "ACTIVE", "score": 88 },
+    { "name": "Butte Copper Country Carriers", "city": "Butte", "dot": "8141275", "equipment": "Dry van", "trucks": 5, "status": "WARNING", "score": 62 },
+    { "name": "Helena Capital Freight", "city": "Helena", "dot": "8156390", "equipment": "Reefer", "trucks": 6, "status": "ACTIVE", "score": 95 },
+    { "name": "Carpathian Express Logistics", "city": "Billings", "dot": "8162748", "equipment": "Flatbed", "trucks": 1, "status": "INACTIVE", "score": 41 },
+    { "name": "Hi-Line Ag Haulers", "city": "Great Falls", "dot": "8179023", "equipment": "Flatbed", "trucks": 9, "status": "ACTIVE", "score": 73 }
+  ]
+}
