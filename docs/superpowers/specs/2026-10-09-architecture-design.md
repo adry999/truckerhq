@@ -54,6 +54,16 @@ Each step: moves in one commit, behaviour changes in another, lint + typecheck +
 | 6 | **Home and dispatch pages**: section components for `HomePageContent` and `DispatchPageContent`; `FaqList` shared. | Low. | Visual check EN + RU. |
 | 7 | **i18n**: one `Locale`, `getCopy()`, RU error/404. | Medium. | `/ru/<bad-path>` shows a Russian 404. |
 
+### Step 1 notes (inventory done 2026-10-09, nothing moved yet)
+
+- **Into `features/jobs`:** `components/{JobCard,JobsResults,JobsSearchForm,CityJobsList,CityJobsPage,JobsPageContent,ApplyForm}` → `ui/`; `lib/job-filters` → `model/`; `JOBS`, `Job`, `JobType`, `findJob` from `lib/data.ts`, plus `lib/{city-content,cities,city-slugs,jobs-copy}` → `data/`; `CityJob` → `jobs.types.ts`.
+- **Into `shared/`, not jobs:** `HealthBadge` and the health helpers in `lib/data.ts` (`healthColor`, `healthOnColor`, `healthTextColor`, `healthLabel`). Both jobs and carriers use them.
+- **Stays in `lib/data.ts` until step 2:** `CARRIERS`, `findCarrier`. The jobs pages read a carrier score from them; in step 2 that becomes a value passed in from `app/`, not a jobs → carriers import.
+- **Legacy importers of jobs:** `lib/home-copy.ts` and `lib/notifications.ts` use `JOBS`/`findJob`. After the move they import `@/features/jobs` (index only; lint allows it). `notifications.ts` moves to `server/leads` in step 5.
+- **Commit order:** (a) health helpers + `HealthBadge` to `shared/`, (b) pure move into `features/jobs` with import updates, (c) `resolveJobsSlug()` for `jobs/[slug]` as a separate behaviour commit.
+- **Regression check:** `D:\CODE\TruckerHQ\.tmp\before.txt` has the visible text, links, meta and JSON-LD of every prerendered page at `583bc9a`. After each commit: `npm run build`, then `node ../.tmp/snapshot.mjs .next/server/app ../.tmp/after.txt` and diff the two files. Pure moves must produce no diff.
+- **Per-commit gates:** `../.tmp/commit-verified.sh "<message>" <paths…>` stages the paths, sets the rest aside, runs typecheck + tests, and commits only if green. It uses `git stash` — don't run it while another session uses the stash.
+
 ## 4. Verification register
 
 | Check | Result |
