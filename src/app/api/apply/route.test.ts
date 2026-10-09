@@ -7,11 +7,12 @@ vi.mock("next/server", async (orig) => ({
   },
 }));
 vi.mock("@/server/db/insert-row", () => ({ insertRow: vi.fn() }));
-vi.mock("@/lib/notifications", () => ({ notifyApplication: vi.fn() }));
+vi.mock("@/server/leads/notifications", () => ({ notifyApplication: vi.fn() }));
 
 import { POST } from "./route";
 import { insertRow } from "@/server/db/insert-row";
-import { notifyApplication } from "@/lib/notifications";
+import { notifyApplication } from "@/server/leads/notifications";
+import { JOBS } from "@/features/jobs";
 
 let n = 0;
 function post(body: unknown, raw?: string) {
@@ -57,7 +58,17 @@ describe("POST /api/apply", () => {
       "job_applications",
       expect.objectContaining({ phone: "+13125550123" }),
     );
-    expect(notifyApplication).toHaveBeenCalledWith("+13125550123", "some-job");
+  });
+
+  it("passes the job title of a known slug to the notification", async () => {
+    const job = JOBS[0];
+    await post({ ...valid, jobSlug: job.slug });
+    expect(notifyApplication).toHaveBeenCalledWith("+13125550123", job.title);
+  });
+
+  it("passes no job title for an unknown slug", async () => {
+    await post(valid);
+    expect(notifyApplication).toHaveBeenCalledWith("+13125550123", undefined);
   });
 
   it("returns 502 and does not notify when saving fails", async () => {

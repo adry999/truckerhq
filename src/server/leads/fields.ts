@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { toUsE164 } from "@/lib/phone";
+import { toUsE164 } from "@/shared/lib/phone";
 
 // optional() so a missing key reaches the transform instead of failing as "nonoptional".
 export const anyInput = z.unknown().optional();

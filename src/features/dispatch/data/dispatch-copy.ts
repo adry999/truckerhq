@@ -1,4 +1,4 @@
-import { PHONE_DISPLAY } from "@/lib/contact";
+import { PHONE_DISPLAY } from "@/shared/config/contact";
 export type DispatchCopy = {
   heroAlt: string;
   h1Line1: string;

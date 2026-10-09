@@ -1,5 +1,5 @@
 import { resolveJobsSlug } from "@/features/jobs";
-import { ogImageSize, ogImageContentType, renderOgImage } from "@/lib/og";
+import { ogImageSize, ogImageContentType, renderOgImage } from "@/shared/seo/og";
 
 export const size = ogImageSize;
 export const contentType = ogImageContentType;

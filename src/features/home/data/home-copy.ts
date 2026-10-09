@@ -1,16 +1,4 @@
-import { PHONE_DISPLAY } from "@/lib/contact";
-import { JOBS as REAL_JOBS } from "@/features/jobs";
-
-export type HomeJobRow = {
-  title: string;
-  company: string;
-  loc: string;
-  type: string;
-  equip: string;
-  pay: string;
-  posted: string;
-  href: string;
-};
+import { PHONE_DISPLAY } from "@/shared/config/contact";
 
 export type HomeCopy = {
   eyebrow: string;
@@ -53,7 +41,6 @@ export type HomeCopy = {
   latestJobsHeading: string;
   seeAllJobsHref: string;
   seeAllJobsLabel: string;
-  jobs: HomeJobRow[];
   teamHeading: string;
   teamBody: string;
   team: { name: string; role: string; note: string }[];
@@ -64,26 +51,6 @@ export type HomeCopy = {
   faqHeading: string;
   faq: { q: string; a: string }[];
 };
-
-// Company, location and pay are data, not prose, so only titles are translated.
-const RU_JOB_TITLES: Record<string, string> = {
-  "otr-company-driver-carpathian": "Водитель OTR в компанию",
-  "regional-reefer-driver-lone-star": "Региональный водитель, reefer",
-  "team-drivers-iron-horse": "Командные водители",
-  "local-flatbed-driver-bluebonnet": "Локальный водитель, flatbed",
-  "owner-operator-power-only-volga": "Owner-operator, power only",
-  "otr-reefer-solo-moldova": "OTR, reefer, соло",
-  "regional-dry-van-laredo": "Региональный водитель, dry van",
-};
-
-function ruPostedLabel(posted: string): string {
-  if (/today/i.test(posted)) return "Сегодня";
-  const m = /(\d+)\s*day/i.exec(posted);
-  if (!m) return posted;
-  const n = Number(m[1]);
-  const word = n === 1 ? "день" : n >= 2 && n <= 4 ? "дня" : "дней";
-  return `${n} ${word} назад`;
-}
 
 export const HOME_COPY: Record<"EN" | "RU", HomeCopy> = {
   EN: {
@@ -183,16 +150,6 @@ export const HOME_COPY: Record<"EN" | "RU", HomeCopy> = {
     latestJobsHeading: "Latest CDL jobs",
     seeAllJobsHref: "/jobs",
     seeAllJobsLabel: "See all jobs →",
-    jobs: REAL_JOBS.map((j) => ({
-      title: j.title,
-      company: j.company,
-      loc: j.loc,
-      type: j.type,
-      equip: j.equipment.toUpperCase(),
-      pay: j.pay,
-      posted: j.posted,
-      href: `/jobs/${j.slug}`,
-    })),
     teamHeading: "The people who answer the phone",
     teamBody: "You get one dispatcher who learns your truck, your lanes and when you need to be home.",
     team: [
@@ -338,16 +295,6 @@ export const HOME_COPY: Record<"EN" | "RU", HomeCopy> = {
     latestJobsHeading: "Свежие вакансии CDL",
     seeAllJobsHref: "/ru/jobs",
     seeAllJobsLabel: "Все вакансии →",
-    jobs: REAL_JOBS.map((j) => ({
-      title: RU_JOB_TITLES[j.slug] ?? j.title,
-      company: j.company,
-      loc: j.loc,
-      type: j.type,
-      equip: j.equipment.toUpperCase(),
-      pay: j.pay,
-      posted: ruPostedLabel(j.posted),
-      href: `/jobs/${j.slug}`,
-    })),
     teamHeading: "Люди, которые берут трубку",
     teamBody: "У вас один диспетчер, который знает ваш трак, ваши направления и когда вам нужно быть дома.",
     team: [

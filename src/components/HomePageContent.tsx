@@ -1,11 +1,12 @@
-import { PHONE_HREF } from "@/lib/contact";
+import { PHONE_HREF } from "@/shared/config/contact";
 import Image from "next/image";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import JsonLd from "@/components/JsonLd";
-import { faqSchema } from "@/lib/seo";
-import { HOME_COPY } from "@/lib/home-copy";
+import { faqSchema } from "@/shared/seo/structured-data";
+import { HOME_COPY, homeJobRows } from "@/features/home";
+import { JOBS } from "@/features/jobs";
 
 export default function HomePageContent({ lang }: { lang: "EN" | "RU" }) {
   const c = HOME_COPY[lang];
@@ -283,7 +284,7 @@ export default function HomePageContent({ lang }: { lang: "EN" | "RU" }) {
           </Link>
         </div>
         <div className="overflow-hidden rounded-lg border border-border bg-white">
-          {c.jobs.map((j, i) => (
+          {homeJobRows(lang, JOBS).map((j, i) => (
             <Link
               key={j.title + j.company}
               href={j.href}

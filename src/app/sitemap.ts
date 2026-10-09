@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { SITE_URL } from "@/lib/site";
+import { SITE_URL } from "@/shared/config/site";
 import { GUIDES } from "@/features/guides";
 import { STATE_DIRECTORY } from "@/features/carriers";
 import { CITY_DIRECTORY, CITY_CONTENT, MIN_JOBS_TO_INDEX } from "@/features/jobs";

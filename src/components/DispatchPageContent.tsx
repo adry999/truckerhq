@@ -1,12 +1,12 @@
-import { PHONE_HREF } from "@/lib/contact";
+import { PHONE_HREF } from "@/shared/config/contact";
 import Image from "next/image";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import GrossComparison from "@/components/GrossComparison";
 import JsonLd from "@/components/JsonLd";
-import { faqSchema } from "@/lib/seo";
-import { DISPATCH_COPY } from "@/lib/dispatch-copy";
+import { faqSchema } from "@/shared/seo/structured-data";
+import { DISPATCH_COPY } from "@/features/dispatch";
 
 export default function DispatchPageContent({ lang }: { lang: "EN" | "RU" }) {
   const c = DISPATCH_COPY[lang];

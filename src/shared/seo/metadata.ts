@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { INDEXABLE, SITE_URL } from "@/lib/site";
+import { INDEXABLE, SITE_URL } from "@/shared/config/site";
 
 const BRAND = "Trucker HQ";
 

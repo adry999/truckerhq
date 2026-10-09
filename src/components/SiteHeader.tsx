@@ -1,4 +1,4 @@
-import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/contact";
+import { PHONE_DISPLAY, PHONE_HREF } from "@/shared/config/contact";
 import Link from "next/link";
 import Logo from "./Logo";
 import SiteHeaderLangSwitcher from "./SiteHeaderLangSwitcher";

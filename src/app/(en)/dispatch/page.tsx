@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { buildMetadata } from "@/lib/metadata";
+import { buildMetadata } from "@/shared/seo/metadata";
 import DispatchPageContent from "@/components/DispatchPageContent";
 
 export const metadata: Metadata = buildMetadata({

@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { faqSchema, breadcrumbSchema, contactPageSchema } from "./seo";
+import { faqSchema, breadcrumbSchema, contactPageSchema } from "./structured-data";
 
 describe("faqSchema", () => {
   it("wraps each Q/A pair as a schema.org Question", () => {
