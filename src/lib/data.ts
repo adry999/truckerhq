@@ -52,39 +52,6 @@ export const STATUS_COLORS: Record<CarrierStatus, { bg: string; fg: string; dot:
   INACTIVE: { bg: "#FBE9E7", fg: "#B42318", dot: "#B42318" },
 };
 
-export type JobType = "OTR" | "REGIONAL" | "LOCAL" | "TEAM" | "OWNER-OP";
-
-export type Job = {
-  slug: string;
-  title: string;
-  company: string;
-  carrierSlug: string;
-  loc: string;
-  type: JobType;
-  equipment: string;
-  home: string;
-  pay: string;
-  payNote: string;
-  posted: string;
-  experience: string;
-  russian: boolean;
-  milesPerWeek: string;
-};
-
-export const JOBS: Job[] = [
-  { slug: "otr-company-driver-carpathian", title: "OTR Company Driver", company: "Carpathian Freight LLC", carrierSlug: "carpathian-freight-3412897", loc: "Des Plaines, IL", type: "OTR", equipment: "Dry van", home: "Home every 2 wks", pay: "$0.70/mi", payNote: "$1,700–2,100 / week", posted: "Today", experience: "1+ yr", russian: true, milesPerWeek: "2,500–3,000" },
-  { slug: "regional-reefer-driver-lone-star", title: "Regional Reefer Driver", company: "Lone Star Freightways", carrierSlug: "lone-star-freightways-3702281", loc: "Dallas, TX", type: "REGIONAL", equipment: "Reefer", home: "Home weekly", pay: "$1,800/wk", payNote: "guaranteed", posted: "Today", experience: "2+ yrs", russian: false, milesPerWeek: "2,200" },
-  { slug: "team-drivers-iron-horse", title: "Team Drivers", company: "Iron Horse Hauling", carrierSlug: "iron-horse-hauling-4012653", loc: "Phoenix, AZ", type: "TEAM", equipment: "Dry van", home: "3 wks out / 1 home", pay: "$0.90/mi", payNote: "split, 5,000+ mi/wk", posted: "1 day ago", experience: "1+ yr", russian: false, milesPerWeek: "5,000–6,000" },
-  { slug: "local-flatbed-driver-bluebonnet", title: "Local Flatbed Driver", company: "Bluebonnet Carriers LLC", carrierSlug: "lone-star-freightways-3702281", loc: "San Antonio, TX", type: "LOCAL", equipment: "Flatbed", home: "Home daily", pay: "$28/hr", payNote: "overtime after 40", posted: "2 days ago", experience: "2+ yrs", russian: false, milesPerWeek: "Local" },
-  { slug: "owner-operator-power-only-volga", title: "Owner-Operator, Power Only", company: "Volga Line Transport", carrierSlug: "volga-line-transport-2987410", loc: "Houston, TX", type: "OWNER-OP", equipment: "Power only", home: "You choose", pay: "88%", payNote: "of every load", posted: "2 days ago", experience: "2+ yrs", russian: true, milesPerWeek: "Your call" },
-  { slug: "otr-reefer-solo-moldova", title: "OTR Reefer, Solo", company: "Moldova Express Inc", carrierSlug: "moldova-express-3890122", loc: "Sacramento, CA", type: "OTR", equipment: "Reefer", home: "Home every 3 wks", pay: "$0.72/mi", payNote: "$1,800–2,200 / week", posted: "3 days ago", experience: "1+ yr", russian: true, milesPerWeek: "2,800" },
-  { slug: "regional-dry-van-laredo", title: "Regional Dry Van", company: "Laredo Border Express", carrierSlug: "volga-line-transport-2987410", loc: "Laredo, TX", type: "REGIONAL", equipment: "Dry van", home: "Home weekends", pay: "$0.65/mi", payNote: "$1,500–1,800 / week", posted: "4 days ago", experience: "6+ mo", russian: false, milesPerWeek: "2,300" },
-];
-
-export function findJob(slug: string): Job | undefined {
-  return JOBS.find((j) => j.slug === slug);
-}
-
 export const TEXAS_CARRIERS: StateCarrierRow[] = [
   { name: "Lone Star Freightways", city: "Dallas", dot: "3702281", equipment: "Reefer", trucks: 9, status: "ACTIVE", score: 88 },
   { name: "Volga Line Transport", city: "Houston", dot: "2987410", equipment: "Dry van", trucks: 7, status: "ACTIVE", score: 84 },

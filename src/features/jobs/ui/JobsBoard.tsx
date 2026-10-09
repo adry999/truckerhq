@@ -1,27 +1,25 @@
 import { Suspense } from "react";
 import Link from "next/link";
-import SiteHeader from "@/components/SiteHeader";
-import SiteFooter from "@/components/SiteFooter";
-import { JOBS, CARRIERS } from "@/lib/data";
-import { CITY_DIRECTORY } from "@/lib/cities";
-import { JOBS_COPY } from "@/lib/jobs-copy";
-import JobsResults, { JobsResultsView } from "@/components/JobsResults";
-import JobsSearchForm, { JobsSearchFormView } from "@/components/JobsSearchForm";
+import { JOBS } from "@/features/jobs/data/jobs";
+import { CITY_DIRECTORY } from "@/features/jobs/model/cities";
+import { withCarrierScores } from "@/features/jobs/model/jobs";
+import { JOBS_COPY } from "@/features/jobs/data/jobs-copy";
+import JobsResults, { JobsResultsView } from "./JobsResults";
+import JobsSearchForm, { JobsSearchFormView } from "./JobsSearchForm";
 import { Button } from "@/shared/ui/Button";
 
-function scoreFor(carrierSlug: string) {
-  return CARRIERS.find((c) => c.slug === carrierSlug)?.score ?? 75;
-}
-
-export default function JobsPageContent({ lang }: { lang: "EN" | "RU" }) {
+export function JobsBoard({
+  lang,
+  carrierScore,
+}: {
+  lang: "EN" | "RU";
+  carrierScore: (carrierSlug: string) => number | undefined;
+}) {
   const c = JOBS_COPY[lang];
-  const ru = lang === "RU";
-  const jobs = JOBS.map((j) => ({ ...j, score: scoreFor(j.carrierSlug) }));
+  const jobs = withCarrierScores(JOBS, carrierScore);
 
   return (
-    <div className="flex min-h-screen flex-col">
-      {ru ? <SiteHeader lang="RU" enHref="/jobs" ruHref="/ru/jobs" /> : <SiteHeader />}
-
+    <>
       <section className="bg-asphalt text-offwhite">
         <div className="mx-auto flex max-w-6xl flex-col gap-[18px] px-4 py-10 sm:px-6 md:py-20">
           <h1 className="font-display text-5xl font-extrabold uppercase leading-[0.9] sm:text-6xl md:text-7xl">
@@ -74,8 +72,6 @@ export default function JobsPageContent({ lang }: { lang: "EN" | "RU" }) {
           </div>
         </div>
       </section>
-
-      <SiteFooter />
-    </div>
+    </>
   );
 }

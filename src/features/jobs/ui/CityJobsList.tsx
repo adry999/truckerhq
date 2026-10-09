@@ -1,20 +1,10 @@
 "use client";
 
-import JobCard from "@/components/JobCard";
-import { filterJobsByType } from "@/lib/job-filters";
+import { filterJobsByType } from "@/features/jobs/model/job-filters";
+import type { CityJob } from "@/features/jobs/model/jobs.types";
 import { useSearchParam } from "@/shared/hooks/useSearchParam";
 import { EmptyState } from "@/shared/ui/EmptyState";
-
-export type CityJob = {
-  title: string;
-  company: string;
-  loc: string;
-  type: "OTR" | "LOCAL" | "REGIONAL";
-  equipment: string;
-  pay: string;
-  home: string;
-  posted: string;
-};
+import JobCard from "./JobCard";
 
 type CityJobsListProps = {
   jobs: CityJob[];

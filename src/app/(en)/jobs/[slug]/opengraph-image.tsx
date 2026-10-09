@@ -1,5 +1,4 @@
-import { findJob } from "@/lib/data";
-import { CITY_CONTENT } from "@/lib/city-content";
+import { resolveJobsSlug } from "@/features/jobs";
 import { ogImageSize, ogImageContentType, renderOgImage } from "@/lib/og";
 
 export const size = ogImageSize;
@@ -12,8 +11,9 @@ export default async function OpengraphImage({
 }) {
   const { slug } = await params;
 
-  const city = CITY_CONTENT[slug];
-  if (city) {
+  const resolved = resolveJobsSlug(slug);
+  if (resolved.kind === "city") {
+    const { city } = resolved;
     return renderOgImage({
       theme: "dark",
       sub: "JOBS",
@@ -25,7 +25,7 @@ export default async function OpengraphImage({
     });
   }
 
-  const job = findJob(slug);
+  const job = resolved.kind === "job" ? resolved.job : undefined;
 
   return renderOgImage({
     theme: "light",

@@ -1,17 +1,15 @@
 "use client";
 
-import { type JOBS } from "@/lib/data";
-import { filterJobsByType } from "@/lib/job-filters";
-import { JOBS_COPY } from "@/lib/jobs-copy";
+import { filterJobsByType } from "@/features/jobs/model/job-filters";
+import type { JobWithScore } from "@/features/jobs/model/jobs.types";
+import { JOBS_COPY } from "@/features/jobs/data/jobs-copy";
 import { useSearchParam } from "@/shared/hooks/useSearchParam";
 import { EmptyState } from "@/shared/ui/EmptyState";
 import { FilterChips } from "@/shared/ui/FilterChips";
-import JobCard from "@/components/JobCard";
+import JobCard from "./JobCard";
 
 const TYPES = ["All", "OTR", "REGIONAL", "LOCAL", "TEAM", "OWNER-OP"] as const;
 const EQUIPMENT = ["All", "Dry van", "Reefer", "Flatbed", "Power only"] as const;
-
-export type JobWithScore = (typeof JOBS)[number] & { score: number };
 
 type JobsResultsProps = {
   lang: "EN" | "RU";
