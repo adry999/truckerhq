@@ -1,5 +1,5 @@
 import { Segmented } from "@/shared/ui/Segmented";
-import { DRIVER_TYPES, TRAILER_TYPES, setField } from "../../../model/dispatch-start";
+import { DRIVER_TYPES, TRAILER_TYPES, setField } from "@/features/dispatch/model/dispatch-start";
 import { SEGMENT_BUTTON, STEP_HEADING, type StepProps } from "../step-props";
 import { TruckCounter } from "../TruckCounter";
 

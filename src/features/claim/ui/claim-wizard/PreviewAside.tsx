@@ -2,7 +2,7 @@ import { healthColor } from "@/lib/data";
 import { Badge } from "@/shared/ui/Badge";
 import { Card } from "@/shared/ui/Card";
 import { CheckIcon } from "@/shared/ui/icons";
-import { CARRIER, DETAILS_STEP, alsoShowLabels, type ClaimData } from "../../model/claim";
+import { CARRIER, DETAILS_STEP, alsoShowLabels, type ClaimData } from "@/features/claim/model/claim";
 
 function PreviewRow({ label, value }: { label: string; value: string }) {
   return (

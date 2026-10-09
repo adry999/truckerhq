@@ -1,7 +1,7 @@
 import { Segmented } from "@/shared/ui/Segmented";
 import { CheckCard, ChoiceGroup } from "@/shared/ui/choices";
 import { Field, TextInput } from "@/shared/ui/Field";
-import { HOME_TIME_OPTIONS, REGIONS, setField } from "../../../model/dispatch-start";
+import { HOME_TIME_OPTIONS, REGIONS, setField } from "@/features/dispatch/model/dispatch-start";
 import { SEGMENT_BUTTON, STEP_HEADING, type StepProps } from "../step-props";
 
 export function LanesStep({ data, dispatch, headingRef }: StepProps) {

@@ -17,7 +17,7 @@ import {
   canAdvance,
   claimReducer,
   initialClaimState,
-} from "../../model/claim";
+} from "@/features/claim/model/claim";
 import { ContactStep } from "./ContactStep";
 import { DetailsStep } from "./DetailsStep";
 import { DoneStep } from "./DoneStep";

@@ -1,5 +1,5 @@
 import type { Dispatch, Ref } from "react";
-import type { ClaimAction, ClaimData } from "../../model/claim";
+import type { ClaimAction, ClaimData } from "@/features/claim/model/claim";
 
 export type StepProps = {
   data: ClaimData;

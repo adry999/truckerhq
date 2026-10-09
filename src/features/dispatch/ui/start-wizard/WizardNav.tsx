@@ -1,5 +1,5 @@
 import { Button } from "@/shared/ui/Button";
-import { CALL_STEP } from "../../model/dispatch-start";
+import { CALL_STEP } from "@/features/dispatch/model/dispatch-start";
 
 export function WizardNav({
   step,

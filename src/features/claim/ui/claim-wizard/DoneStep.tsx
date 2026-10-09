@@ -1,7 +1,7 @@
 import type { Ref } from "react";
 import { Button } from "@/shared/ui/Button";
 import { CheckIcon } from "@/shared/ui/icons";
-import { CARRIER } from "../../model/claim";
+import { CARRIER } from "@/features/claim/model/claim";
 
 export function DoneStep({ headingRef }: { headingRef: Ref<HTMLHeadingElement> }) {
   return (

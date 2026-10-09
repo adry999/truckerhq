@@ -2,7 +2,7 @@ import type { Ref } from "react";
 import { PHONE_HREF } from "@/lib/contact";
 import { Button } from "@/shared/ui/Button";
 import { CheckIcon } from "@/shared/ui/icons";
-import { callTimePhrase, languageName, type DispatchData } from "../../model/dispatch-start";
+import { callTimePhrase, languageName, type DispatchData } from "@/features/dispatch/model/dispatch-start";
 
 const READY_ITEMS = [
   "MC authority letter and W-9",

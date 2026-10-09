@@ -1,5 +1,5 @@
 import { Card } from "@/shared/ui/Card";
-import type { DispatchData } from "../../model/dispatch-start";
+import type { DispatchData } from "@/features/dispatch/model/dispatch-start";
 
 function SummaryRow({ label, value }: { label: string; value: string }) {
   return (

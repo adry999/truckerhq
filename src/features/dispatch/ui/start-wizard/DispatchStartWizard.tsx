@@ -14,7 +14,7 @@ import {
   canAdvance,
   dispatchReducer,
   initialDispatchState,
-} from "../../model/dispatch-start";
+} from "@/features/dispatch/model/dispatch-start";
 import { AuthorityStep } from "./steps/AuthorityStep";
 import { CallStep } from "./steps/CallStep";
 import { LanesStep } from "./steps/LanesStep";

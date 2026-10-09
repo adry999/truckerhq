@@ -1,5 +1,5 @@
 import type { Dispatch, Ref } from "react";
-import type { DispatchAction, DispatchData } from "../../model/dispatch-start";
+import type { DispatchAction, DispatchData } from "@/features/dispatch/model/dispatch-start";
 
 export type StepProps = {
   data: DispatchData;

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ChoiceGroup, RadioCard } from "@/shared/ui/choices";
 import { Field, TextInput } from "@/shared/ui/Field";
-import { AUTHORITY_OPTIONS, NO_AUTHORITY, setField } from "../../../model/dispatch-start";
+import { AUTHORITY_OPTIONS, NO_AUTHORITY, setField } from "@/features/dispatch/model/dispatch-start";
 import { STEP_HEADING, type StepProps } from "../step-props";
 
 export function AuthorityStep({ data, dispatch, headingRef }: StepProps) {

@@ -1,4 +1,4 @@
-import { MAX_TRUCKS } from "../../model/dispatch-start";
+import { MAX_TRUCKS } from "@/features/dispatch/model/dispatch-start";
 
 const BUTTON =
   "flex h-[50px] w-[50px] items-center justify-center rounded-[10px] border-[1.5px] border-input-border font-display text-2xl font-extrabold text-asphalt disabled:opacity-30";

@@ -1,5 +1,5 @@
 import { ChoiceGroup, RadioCard } from "@/shared/ui/choices";
-import { CONTACT_METHODS } from "../../model/claim";
+import { CONTACT_METHODS } from "@/features/claim/model/claim";
 import { STEP_HEADING, type StepProps } from "./step-props";
 
 export function ContactStep({ data, dispatch, headingRef }: StepProps) {

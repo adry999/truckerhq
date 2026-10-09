@@ -5,7 +5,7 @@ import {
   EQUIPMENT_OPTIONS,
   LANE_OPTIONS,
   type ToggleField,
-} from "../../model/claim";
+} from "@/features/claim/model/claim";
 import { STEP_HEADING, type StepProps } from "./step-props";
 
 const GROUP_LEGEND = "font-display text-xl font-extrabold uppercase";
