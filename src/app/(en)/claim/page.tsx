@@ -3,7 +3,7 @@ import { buildMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import ClaimProfileWizard from "@/components/ClaimProfileWizard";
+import { ClaimProfileWizard } from "@/features/claim";
 
 export const metadata: Metadata = buildMetadata({
   title: "Claim Your Carrier Profile",
@@ -19,7 +19,7 @@ export default function ClaimPage() {
 
       <section className="bg-asphalt text-offwhite">
         <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 pt-10 pb-6 sm:px-6 md:pt-14">
-          <div className="flex flex-wrap gap-2 text-sm text-[#AEB2B8]">
+          <div className="flex flex-wrap gap-2 text-sm text-on-dark-muted">
             <Link href="/tools/carrier-lookup" className="text-offwhite">
               Carrier Lookup
             </Link>
