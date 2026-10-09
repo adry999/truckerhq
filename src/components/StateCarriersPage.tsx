@@ -3,12 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import StateEquipmentChips from "@/components/StateEquipmentChips";
-import StateCarriersList from "@/components/StateCarriersList";
-import {
-  StateEquipmentChipsFromUrl,
-  StateCarriersListFromUrl,
-} from "@/components/StateCarriersFromUrl";
+import StateCarriersList, { StateCarriersListView } from "@/components/StateCarriersList";
+import { FilterChips, UrlFilterChips } from "@/shared/ui/FilterChips";
 import type { StateCarrierRow } from "@/lib/data";
 
 export type { StateCarrierRow };
@@ -172,20 +168,31 @@ export default function StateCarriersPage({
           <h2 className="font-display text-4xl font-extrabold uppercase md:text-5xl">
             {stateName} carrier list
           </h2>
-          <div className="flex flex-wrap gap-1.5">
-            <Suspense
-              fallback={
-                <StateEquipmentChips equipmentOptions={equipmentOptions} basePath={basePath} equip="All" />
-              }
-            >
-              <StateEquipmentChipsFromUrl equipmentOptions={equipmentOptions} basePath={basePath} />
-            </Suspense>
-          </div>
+          <Suspense
+            fallback={
+              <FilterChips
+                param="equip"
+                options={equipmentOptions}
+                current={{}}
+                basePath={basePath}
+                label="Equipment"
+                uppercase
+              />
+            }
+          >
+            <UrlFilterChips
+              param="equip"
+              options={equipmentOptions}
+              basePath={basePath}
+              label="Equipment"
+              uppercase
+            />
+          </Suspense>
         </div>
 
         <Suspense
           fallback={
-            <StateCarriersList
+            <StateCarriersListView
               stateAbbr={stateAbbr}
               stateName={stateName}
               carriers={carriers}
@@ -194,7 +201,7 @@ export default function StateCarriersPage({
             />
           }
         >
-          <StateCarriersListFromUrl
+          <StateCarriersList
             stateAbbr={stateAbbr}
             stateName={stateName}
             carriers={carriers}

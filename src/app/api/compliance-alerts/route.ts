@@ -1,39 +1,39 @@
-import { NextResponse } from "next/server";
-import { insertRow } from "@/lib/supabase";
-import { guardLeadRoute, str, isHoneypotTripped } from "@/lib/api-guard";
+import { z } from "zod";
 import { notifyComplianceAlertsOn } from "@/lib/notifications";
+import { createLeadHandler } from "@/server/leads/create-lead-handler";
+import { anyInput, dotNumber, requiredText, text, usPhone, withChecks } from "@/server/leads/fields";
 
-function sanitizeWatch(value: unknown): Record<string, boolean> {
-  if (!value || typeof value !== "object") return {};
-  const entries = Object.entries(value as Record<string, unknown>).slice(0, 10);
+const MISSING = "Missing DOT or phone";
+
+const watch = anyInput.transform((value) => {
   const out: Record<string, boolean> = {};
-  for (const [key, v] of entries) {
-    if (typeof key === "string" && key.length <= 40) out[key] = Boolean(v);
+  if (!value || typeof value !== "object") return out;
+  for (const [key, v] of Object.entries(value).slice(0, 10)) {
+    if (key.length <= 40) out[key] = Boolean(v);
   }
   return out;
-}
+});
 
-export async function POST(req: Request) {
-  const guarded = guardLeadRoute(req);
-  if (guarded) return guarded;
+const schema = withChecks(
+  z.object({
+    dot: requiredText(20, MISSING),
+    phone: requiredText(30, MISSING),
+    smsConsent: z.literal(true, { error: "SMS consent required" }),
+    language: text(20),
+    watch,
+  }),
+  { phone: usPhone(), dot: dotNumber() },
+);
 
-  const body = await req.json().catch(() => null);
-  if (isHoneypotTripped(body)) return NextResponse.json({ ok: true });
-
-  const dot = str(body?.dot, 20);
-  const phone = str(body?.phone, 30);
-  if (!dot || !phone) {
-    return NextResponse.json({ error: "Missing DOT or phone" }, { status: 400 });
-  }
-
-  const ok = await insertRow("compliance_alert_signups", {
-    dot,
-    phone,
-    language: str(body?.language, 20) || "EN",
-    watch: sanitizeWatch(body?.watch),
-  });
-
-  if (!ok) return NextResponse.json({ error: "Could not save signup" }, { status: 502 });
-  await notifyComplianceAlertsOn(phone, dot);
-  return NextResponse.json({ ok: true });
-}
+export const POST = createLeadHandler({
+  schema,
+  table: "compliance_alert_signups",
+  toRow: (s) => ({
+    dot: s.dot,
+    phone: s.phone,
+    language: s.language || "EN",
+    watch: s.watch,
+  }),
+  notify: (s) => notifyComplianceAlertsOn(s.phone, s.dot),
+  saveError: "Could not save signup",
+});

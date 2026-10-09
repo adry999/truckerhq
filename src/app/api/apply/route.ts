@@ -1,32 +1,33 @@
-import { NextResponse } from "next/server";
-import { insertRow } from "@/lib/supabase";
-import { guardLeadRoute, str, isHoneypotTripped } from "@/lib/api-guard";
+import { z } from "zod";
 import { notifyApplication } from "@/lib/notifications";
+import { createLeadHandler } from "@/server/leads/create-lead-handler";
+import { requiredText, text, usPhone, withChecks } from "@/server/leads/fields";
 
-export async function POST(req: Request) {
-  const guarded = guardLeadRoute(req);
-  if (guarded) return guarded;
+const MISSING = "Missing required fields";
 
-  const body = await req.json().catch(() => null);
-  if (isHoneypotTripped(body)) return NextResponse.json({ ok: true });
+const schema = withChecks(
+  z.object({
+    fullName: requiredText(100, MISSING),
+    phone: requiredText(30, MISSING),
+    jobSlug: requiredText(100, MISSING),
+    cdlClass: text(50),
+    experience: text(50),
+    language: text(20),
+  }),
+  { phone: usPhone() },
+);
 
-  const fullName = str(body?.fullName, 100);
-  const phone = str(body?.phone, 30);
-  const jobSlug = str(body?.jobSlug, 100);
-  if (!fullName || !phone || !jobSlug) {
-    return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
-  }
-
-  const ok = await insertRow("job_applications", {
-    job_slug: jobSlug,
-    full_name: fullName,
-    phone,
-    cdl_class: str(body?.cdlClass, 50),
-    experience: str(body?.experience, 50),
-    language: str(body?.language, 20) || "EN",
-  });
-
-  if (!ok) return NextResponse.json({ error: "Could not save application" }, { status: 502 });
-  await notifyApplication(phone, jobSlug);
-  return NextResponse.json({ ok: true });
-}
+export const POST = createLeadHandler({
+  schema,
+  table: "job_applications",
+  toRow: (a) => ({
+    job_slug: a.jobSlug,
+    full_name: a.fullName,
+    phone: a.phone,
+    cdl_class: a.cdlClass,
+    experience: a.experience,
+    language: a.language || "EN",
+  }),
+  notify: (a) => notifyApplication(a.phone, a.jobSlug),
+  saveError: "Could not save application",
+});

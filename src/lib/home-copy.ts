@@ -65,10 +65,7 @@ export type HomeCopy = {
   faq: { q: string; a: string }[];
 };
 
-// RU homepage previously showed a separate hand-written job list that didn't
-// match the real JOBS data. Now it pulls the same real jobs as EN, with just
-// the title and relative-date text translated (company/location/pay are
-// data, not prose, so they stay as-is — same convention as /ru/jobs).
+// Company, location and pay are data, not prose, so only titles are translated.
 const RU_JOB_TITLES: Record<string, string> = {
   "otr-company-driver-carpathian": "Водитель OTR в компанию",
   "regional-reefer-driver-lone-star": "Региональный водитель, reefer",

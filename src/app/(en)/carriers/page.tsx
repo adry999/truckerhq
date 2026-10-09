@@ -8,7 +8,7 @@ import { STATE_DIRECTORY } from "@/lib/states";
 export const metadata: Metadata = buildMetadata({
   title: "Carrier Directory by State",
   description:
-    "Browse for-hire interstate carriers by state, from public FMCSA data. Search DOT and MC numbers and check any carrier's Health Score.",
+    "Browse for-hire interstate carriers by state. Search DOT and MC numbers and check any carrier's Health Score.",
   path: "/carriers",
   ogImage: false,
 });
@@ -23,9 +23,9 @@ export default function CarriersIndexPage() {
             Carriers by state
           </h1>
           <p className="max-w-xl text-lg leading-relaxed text-[#D4D6DA]">
-            Every for-hire interstate carrier, from public FMCSA data. Pick a
-            state to search DOT and MC numbers, filter by equipment and check
-            any carrier&apos;s Health Score.
+            For-hire interstate carriers by state. Pick a state to search DOT
+            and MC numbers, filter by equipment and check any carrier&apos;s
+            Health Score.
           </p>
         </div>
       </section>
