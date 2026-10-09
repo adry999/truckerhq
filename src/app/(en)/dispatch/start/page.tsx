@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { buildMetadata } from "@/lib/metadata";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import DispatchStartWizard from "@/components/DispatchStartWizard";
+import { DispatchStartWizard } from "@/features/dispatch";
 
 export const metadata: Metadata = buildMetadata({
   title: "Start Dispatch",
