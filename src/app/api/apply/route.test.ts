@@ -6,11 +6,11 @@ vi.mock("next/server", async (orig) => ({
     void fn();
   },
 }));
-vi.mock("@/lib/supabase", () => ({ insertRow: vi.fn() }));
+vi.mock("@/server/db/insert-row", () => ({ insertRow: vi.fn() }));
 vi.mock("@/lib/notifications", () => ({ notifyApplication: vi.fn() }));
 
 import { POST } from "./route";
-import { insertRow } from "@/lib/supabase";
+import { insertRow } from "@/server/db/insert-row";
 import { notifyApplication } from "@/lib/notifications";
 
 let n = 0;

@@ -1,7 +1,7 @@
 import { NextResponse, after } from "next/server";
-import { insertRow } from "@/lib/supabase";
+import { insertRow } from "@/server/db/insert-row";
 import { toUsE164 } from "@/lib/phone";
-import { guardLeadRoute, str, isHoneypotTripped } from "@/lib/api-guard";
+import { guardLeadRoute, str, isHoneypotTripped } from "@/server/http/api-guard";
 import { notifyApplication } from "@/lib/notifications";
 
 export async function POST(req: Request) {
