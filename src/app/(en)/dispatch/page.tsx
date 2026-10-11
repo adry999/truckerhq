@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { buildMetadata } from "@/shared/seo/metadata";
-import DispatchPageContent from "@/components/DispatchPageContent";
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
+import JsonLd from "@/components/JsonLd";
+import { faqSchema } from "@/shared/seo/structured-data";
+import { DISPATCH_COPY, DispatchPage } from "@/features/dispatch";
 
 export const metadata: Metadata = buildMetadata({
   title: "Truck Dispatch Service, Flat Weekly Rate",
@@ -11,6 +15,13 @@ export const metadata: Metadata = buildMetadata({
   languages: { en: "/dispatch", ru: "/ru/dispatch", "x-default": "/dispatch" },
 });
 
-export default function DispatchPage() {
-  return <DispatchPageContent lang="EN" />;
+export default function Dispatch() {
+  return (
+    <div className="flex min-h-screen flex-col">
+      <JsonLd data={faqSchema(DISPATCH_COPY.EN.faq)} />
+      <SiteHeader />
+      <DispatchPage lang="EN" />
+      <SiteFooter />
+    </div>
+  );
 }

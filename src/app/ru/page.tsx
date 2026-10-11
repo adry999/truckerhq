@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import { buildMetadata } from "@/shared/seo/metadata";
-import HomePageContent from "@/components/HomePageContent";
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
+import JsonLd from "@/components/JsonLd";
+import { faqSchema } from "@/shared/seo/structured-data";
+import { HOME_COPY, HomePage, homeJobRows } from "@/features/home";
+import { JOBS } from "@/features/jobs";
 
 export const metadata: Metadata = buildMetadata({
   title: "Trucker HQ: диспетчинг, работа CDL и бесплатные инструменты",
@@ -13,5 +18,12 @@ export const metadata: Metadata = buildMetadata({
 });
 
 export default function HomePageRU() {
-  return <HomePageContent lang="RU" />;
+  return (
+    <div className="flex min-h-screen flex-col">
+      <JsonLd data={faqSchema(HOME_COPY.RU.faq)} />
+      <SiteHeader lang="RU" enHref="/" ruHref="/ru" />
+      <HomePage lang="RU" jobRows={homeJobRows("RU", JOBS)} />
+      <SiteFooter />
+    </div>
+  );
 }

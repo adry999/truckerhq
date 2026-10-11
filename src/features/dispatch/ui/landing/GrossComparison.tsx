@@ -6,7 +6,7 @@ function money(n: number) {
   return "$" + Math.round(n).toLocaleString("en-US");
 }
 
-export default function GrossComparison({ lang = "EN" }: { lang?: "EN" | "RU" }) {
+export function GrossComparison({ lang = "EN" }: { lang?: "EN" | "RU" }) {
   const [gross, setGross] = useState(8000);
   const deferredGross = useDeferredValue(gross);
   const ru = lang === "RU";
