@@ -4,8 +4,8 @@ import { CITY_DIRECTORY } from "./cities";
 import { CITY_NAME_TO_SLUG } from "./city-slugs";
 
 describe("city content integrity", () => {
-  it("has all 11 cities", () => {
-    expect(CITY_SLUGS).toHaveLength(11);
+  it("CITY_SLUGS lists every content entry", () => {
+    expect(CITY_SLUGS).toHaveLength(Object.keys(CITY_CONTENT).length);
   });
 
   it("every entry has jobs, hiring carriers, nearby cities and FAQs", () => {
@@ -15,14 +15,12 @@ describe("city content integrity", () => {
       expect(entry.hiringCarriers.length, `${slug} hiringCarriers`).toBeGreaterThan(0);
       expect(entry.nearbyCities.length, `${slug} nearbyCities`).toBeGreaterThan(0);
       expect(entry.faqs.length, `${slug} faqs`).toBeGreaterThan(0);
-      // Every city currently has enough jobs to stay indexed; if this ever
-      // drops below MIN_JOBS_TO_INDEX the route sets noindex automatically.
-      expect(entry.jobs.length).toBeGreaterThanOrEqual(0);
+      expect(entry.jobs.length, `${slug} indexable`).toBeGreaterThanOrEqual(MIN_JOBS_TO_INDEX);
     }
   });
 
   it("CITY_DIRECTORY has one entry per city, matching the 'Open jobs' stat", () => {
-    expect(CITY_DIRECTORY).toHaveLength(11);
+    expect(CITY_DIRECTORY).toHaveLength(Object.keys(CITY_CONTENT).length);
     for (const dir of CITY_DIRECTORY) {
       expect(CITY_CONTENT[dir.slug].cityName).toBe(dir.name);
       expect(CITY_CONTENT[dir.slug].stats[0]?.big).toBe(dir.count);
