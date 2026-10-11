@@ -1,0 +1,37 @@
+{
+  "stateAbbr": "ME",
+  "stateName": "Maine",
+  "heroImage": "https://images.unsplash.com/photo-1779583074717-e60fa13131ce?fm=jpg&q=70&w=2000&auto=format&fit=crop",
+  "heroAlt": "Maine highway with a semi truck at dusk",
+  "stats": ["7,820", "184", "73", "2.4"],
+  "equipmentBreakdown": [
+    { "t": "Dry van", "pct": 38 },
+    { "t": "Reefer", "pct": 24 },
+    { "t": "Flatbed", "pct": 15 },
+    { "t": "Power only", "pct": 10 },
+    { "t": "Step deck", "pct": 6 },
+    { "t": "Box truck", "pct": 4 },
+    { "t": "Tanker", "pct": 3 }
+  ],
+  "topCities": [
+    { "t": "Portland", "count": "1,410" },
+    { "t": "Bangor", "count": "845" },
+    { "t": "Lewiston", "count": "610" },
+    { "t": "South Portland", "count": "520" },
+    { "t": "Auburn", "count": "385" },
+    { "t": "Biddeford", "count": "340" }
+  ],
+  "equipmentOptions": ["All", "Dry van", "Reefer", "Flatbed", "Power only"],
+  "dispatchCtaBody": "We run I-95 from Kittery to Houlton and know the seafood reefer loads out of Portland and the paper-mill freight out of the North Woods. Border crossings into Canada at Calais and Houlton are second nature — one flat price per week.",
+  "hireCtaBody": "Post a job and reach drivers in Portland, Bangor and Lewiston. We check CDL and MVR before you call.",
+  "carriers": [
+    { "name": "Pine State Freight Co.", "city": "Portland", "dot": "7412083", "equipment": "Reefer", "trucks": 6, "status": "ACTIVE", "score": 88 },
+    { "name": "Katahdin Logistics", "city": "Bangor", "dot": "7423916", "equipment": "Flatbed", "trucks": 4, "status": "ACTIVE", "score": 82 },
+    { "name": "Casco Bay Transport", "city": "South Portland", "dot": "7431750", "equipment": "Dry van", "trucks": 9, "status": "ACTIVE", "score": 91 },
+    { "name": "Volga Line Transport", "city": "Lewiston", "dot": "7444298", "equipment": "Dry van", "trucks": 3, "status": "ACTIVE", "score": 76 },
+    { "name": "Androscoggin Hauling", "city": "Auburn", "dot": "7456621", "equipment": "Reefer", "trucks": 5, "status": "ACTIVE", "score": 79 },
+    { "name": "Biddeford Border Freight", "city": "Biddeford", "dot": "7462037", "equipment": "Power only", "trucks": 2, "status": "ACTIVE", "score": 95 },
+    { "name": "Downeast Seafood Carriers", "city": "Portland", "dot": "7478359", "equipment": "Reefer", "trucks": 7, "status": "WARNING", "score": 61 },
+    { "name": "Nezhinsky Cargo Lines", "city": "Bangor", "dot": "7489912", "equipment": "Flatbed", "trucks": 1, "status": "INACTIVE", "score": 38 }
+  ]
+}

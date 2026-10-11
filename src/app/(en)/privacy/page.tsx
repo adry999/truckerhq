@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { buildMetadata } from "@/lib/metadata";
+import { buildMetadata } from "@/shared/seo/metadata";
 import LegalDocLayout from "@/components/LegalDocLayout";
 
 export const metadata: Metadata = buildMetadata({

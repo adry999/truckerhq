@@ -1,6 +1,10 @@
+import { languageAlternates } from "@/shared/i18n/alternates";
 import type { Metadata } from "next";
-import { buildMetadata } from "@/lib/metadata";
-import JobsPageContent from "@/components/JobsPageContent";
+import { buildMetadata } from "@/shared/seo/metadata";
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
+import { JobsBoard } from "@/features/jobs";
+import { findCarrier } from "@/features/carriers";
 
 export const metadata: Metadata = buildMetadata({
   title: "Работа CDL с указанной оплатой",
@@ -9,9 +13,15 @@ export const metadata: Metadata = buildMetadata({
   path: "/ru/jobs",
   ogImage: false,
   locale: "ru_RU",
-  languages: { en: "/jobs", ru: "/ru/jobs", "x-default": "/jobs" },
+  languages: languageAlternates("/jobs"),
 });
 
 export default function JobsRuPage() {
-  return <JobsPageContent lang="RU" />;
+  return (
+    <div className="flex min-h-screen flex-col">
+      <SiteHeader lang="RU" enHref="/jobs" ruHref="/ru/jobs" />
+      <JobsBoard lang="RU" carrierScore={(s) => findCarrier(s)?.score} />
+      <SiteFooter />
+    </div>
+  );
 }

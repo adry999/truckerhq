@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { notifyDispatchStart } from "@/lib/notifications";
+import { notifyDispatchStart } from "@/server/leads/notifications";
 import { createLeadHandler } from "@/server/leads/create-lead-handler";
 import { anyInput, requiredText, text, textList, usPhone, withChecks } from "@/server/leads/fields";
 

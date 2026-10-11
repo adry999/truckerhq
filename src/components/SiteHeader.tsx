@@ -1,4 +1,5 @@
-import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/contact";
+import type { Locale } from "@/shared/i18n/locale";
+import { PHONE_DISPLAY, PHONE_HREF } from "@/shared/config/contact";
 import Link from "next/link";
 import Logo from "./Logo";
 import SiteHeaderLangSwitcher from "./SiteHeaderLangSwitcher";
@@ -30,7 +31,7 @@ const RU_LABELS: Record<string, string> = {
 const RU_ROUTES: Record<string, string> = { "/dispatch": "/ru/dispatch", "/jobs": "/ru/jobs" };
 
 type SiteHeaderProps = {
-  lang?: "EN" | "RU";
+  lang?: Locale;
   enHref?: string;
   ruHref?: string;
 };

@@ -14,7 +14,6 @@ export default defineConfig({
       include: ["src/**/*.{ts,tsx}"],
       exclude: [
         "src/**/*.test.{ts,tsx}",
-        "src/lib/carriers-*.ts",
         "src/app/**/opengraph-image.tsx",
       ],
       reporter: ["text-summary", "html"],

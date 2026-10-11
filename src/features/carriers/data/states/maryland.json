@@ -1,0 +1,37 @@
+{
+  "stateAbbr": "MD",
+  "stateName": "Maryland",
+  "heroImage": "https://images.unsplash.com/photo-1720811559395-3ed8d1b16649?fm=jpg&q=70&w=2000&auto=format&fit=crop",
+  "heroAlt": "Maryland highway with a semi truck at dusk",
+  "stats": ["17,900", "468", "75", "2.9"],
+  "equipmentBreakdown": [
+    { "t": "Dry van", "pct": 44 },
+    { "t": "Reefer", "pct": 18 },
+    { "t": "Flatbed", "pct": 14 },
+    { "t": "Power only", "pct": 10 },
+    { "t": "Step deck", "pct": 6 },
+    { "t": "Box truck", "pct": 5 },
+    { "t": "Tanker", "pct": 3 }
+  ],
+  "topCities": [
+    { "t": "Baltimore", "count": "6,240" },
+    { "t": "Frederick", "count": "1,815" },
+    { "t": "Rockville", "count": "1,390" },
+    { "t": "Gaithersburg", "count": "1,205" },
+    { "t": "Annapolis", "count": "890" },
+    { "t": "Bowie", "count": "645" }
+  ],
+  "equipmentOptions": ["All", "Dry van", "Reefer", "Flatbed", "Power only"],
+  "dispatchCtaBody": "We know the container freight moving through the Port of Baltimore and the I-95/I-70 corridor linking DC, Baltimore and the Northeast. One flat price per week.",
+  "hireCtaBody": "Post a job and reach drivers in Baltimore, Frederick and Rockville. We check CDL and MVR before you call.",
+  "carriers": [
+    { "name": "Baltimore Harbor Freight", "city": "Baltimore", "dot": "7512483", "equipment": "Dry van", "trucks": 9, "status": "ACTIVE", "score": 88 },
+    { "name": "Chesapeake Bay Carriers", "city": "Annapolis", "dot": "7524917", "equipment": "Reefer", "trucks": 5, "status": "ACTIVE", "score": 83 },
+    { "name": "Volga Line Transport MD", "city": "Rockville", "dot": "7536208", "equipment": "Dry van", "trucks": 3, "status": "ACTIVE", "score": 76 },
+    { "name": "Frederick Freight Lines", "city": "Frederick", "dot": "7541672", "equipment": "Flatbed", "trucks": 4, "status": "ACTIVE", "score": 91 },
+    { "name": "Patapsco Logistics Group", "city": "Baltimore", "dot": "7553019", "equipment": "Power only", "trucks": 2, "status": "ACTIVE", "score": 79 },
+    { "name": "Gaithersburg Express Trucking", "city": "Gaithersburg", "dot": "7561845", "equipment": "Dry van", "trucks": 6, "status": "WARNING", "score": 61 },
+    { "name": "Bowie Crossroads Carriers", "city": "Bowie", "dot": "7572390", "equipment": "Dry van", "trucks": 1, "status": "INACTIVE", "score": 41 },
+    { "name": "Danube Interstate Transport", "city": "Baltimore", "dot": "7589124", "equipment": "Reefer", "trucks": 7, "status": "ACTIVE", "score": 85 }
+  ]
+}

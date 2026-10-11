@@ -1,7 +1,7 @@
 "use client";
 
 import { useReducer, type FormEvent } from "react";
-import { trackEvent } from "@/lib/analytics";
+import { trackEvent } from "@/shared/client/analytics";
 import { postJson } from "@/shared/client/post-json";
 import { useStepFocus } from "@/shared/hooks/useStepFocus";
 import { FormError, Honeypot } from "@/shared/ui/form-bits";

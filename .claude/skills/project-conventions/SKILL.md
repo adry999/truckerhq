@@ -18,18 +18,17 @@ Next.js 16 App Router (read `node_modules/next/dist/docs/` before Next APIs, see
 src/
 ├── app/         routes and composition only; the only place that wires several features together
 ├── features/    one folder per business capability: index.ts + model/ + ui/ (+ server/, data/ when needed)
-├── shared/      used by 2+ features: ui/, hooks/, lib/, client/
+├── shared/      used by 2+ features: ui/, hooks/, lib/ (pure helpers), client/ (browser: analytics, consent, postJson), seo/ (metadata, structured data, OG), config/ (site, contact)
 ├── server/      server-only infrastructure: env, http, db, messaging, leads
-├── components/  LEGACY: site chrome and pages not yet moved to a feature
-└── lib/         LEGACY: content, static data, SEO and helpers not yet split
+└── components/  LEGACY: site chrome and pages not yet moved to a feature
 ```
 
-- No new files in `lib/` or `components/`. New code goes to a feature or to `shared/`; site chrome (header, footer, layout) may stay in `components/` until it gets its own home.
+- No new files in `components/`. New code goes to a feature or to `shared/`; site chrome (header, footer, layout) may stay in `components/` until it gets its own home.
 - A file has one responsibility. Split past ~250 lines or a second reason to change.
 
 ## Dependency rules (enforced by `eslint.config.mjs`)
 
-- Direction: `app → features → shared / server / lib`.
+- Direction: `app → features → shared / server`.
 - A feature never imports another feature. Cross-feature needs go through a port wired in `app/`, or the shared part moves to `shared/`.
 - Features do not import `components/` or `app/`.
 - `shared/` does not import features, `components/`, `app/` or `server/`.
@@ -56,7 +55,7 @@ Wizards: one reducer in `model/` (`{ step, data }`), one component per step, `St
 
 ## Server
 
-- Server config only through `server/env.ts` (validated, read at first use). The only other `process.env` reads are build-time public values that Next inlines literally: `lib/analytics.ts` (`NEXT_PUBLIC_*`) and `lib/site.ts` (`VERCEL_PROJECT_PRODUCTION_URL`).
+- Server config only through `server/env.ts` (validated, read at first use). The only other `process.env` reads are build-time public values that Next inlines literally: `shared/client/analytics.ts` (`NEXT_PUBLIC_*`) and `shared/config/site.ts` (`VERCEL_PROJECT_PRODUCTION_URL`).
 - Outbound HTTP through `server/http/http-request.ts`. Lead routes through `server/leads/create-lead-handler.ts` with a zod schema per route.
 - Modules that do I/O or read secrets start with `import "server-only"`. Pure validation (`server/leads/fields.ts`) doesn't need it.
 
@@ -94,6 +93,9 @@ Wizards: one reducer in `model/` (`{ step, data }`), one component per step, `St
 | 2026-10-09 | Keep the single `@/` alias instead of adding `@features/@shared/@server`. | Already used in 60+ files and configured once per runtime; the path after `@/` names the boundary just as clearly, and lint enforces it. |
 | 2026-10-09 | Cross-layer imports inside a feature use `@/features/<own>/…`; at most one `../`. | Deep relative paths hide which layer is imported and break on moves. |
 | 2026-10-09 | Boundary lint rules are generated from the `src/features/` folder list. | A new feature is guarded from its first commit without editing the config. |
-| 2026-10-09 | `lib/` and `components/` are legacy; features and `server/` may import `@/lib` until it is split. | Splitting `lib/` is its own migration step; blocking it now would stall feature moves. |
+| 2026-10-09 | `components/` is legacy (`lib/` is gone, see below). | Moving the site chrome is its own migration step. |
 | 2026-10-09 | The lead pipeline stays in `server/leads/`, not `features/leads/`. | It is infrastructure shared by six routes with no UI of its own. |
 | 2026-10-09 | Repo in `main\` with sibling worktrees. | Worktrees stay outside every tool's scan and out of `git status`. |
+| 2026-10-09 | `lib/` split into shared/{seo,config,client,lib}, server/leads/notifications and feature data; deleted. | The grab-bag blocked the layer rules (features and server/ had to import `@/lib`); each file now lives where its consumers' dependency direction allows. |
+| 2026-10-09 | Notifications take resolved values (job title) from the route, so server/ never imports a feature. | `server/` may not depend on features; the route lives in `app/`, which may, so it does the `findJob` lookup. |
+| 2026-10-09 | Home page job rows: `features/home` exports a pure `homeJobRows(lang, jobs)` over a structural job type; `HomePageContent` passes `JOBS`. | The copy used to import `JOBS` (feature to feature); the composing component may import both feature indexes. |

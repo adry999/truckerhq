@@ -1,0 +1,37 @@
+{
+  "stateAbbr": "SC",
+  "stateName": "South Carolina",
+  "heroImage": "https://images.unsplash.com/photo-1631914730551-1cfbcdf6f603?fm=jpg&q=70&w=2000&auto=format&fit=crop",
+  "heroAlt": "South Carolina highway with a semi truck at dusk",
+  "stats": ["17,200", "428", "73", "3.4"],
+  "equipmentBreakdown": [
+    { "t": "Dry van", "pct": 44 },
+    { "t": "Reefer", "pct": 18 },
+    { "t": "Flatbed", "pct": 15 },
+    { "t": "Power only", "pct": 9 },
+    { "t": "Step deck", "pct": 6 },
+    { "t": "Box truck", "pct": 5 },
+    { "t": "Tanker", "pct": 3 }
+  ],
+  "topCities": [
+    { "t": "Columbia", "count": "4,890" },
+    { "t": "Charleston", "count": "3,715" },
+    { "t": "North Charleston", "count": "2,940" },
+    { "t": "Greenville", "count": "2,410" },
+    { "t": "Rock Hill", "count": "1,325" },
+    { "t": "Mount Pleasant", "count": "980" }
+  ],
+  "equipmentOptions": ["All", "Dry van", "Reefer", "Flatbed", "Power only"],
+  "dispatchCtaBody": "We know the container freight rolling out of the Port of Charleston and the I-26/I-95 corridor linking the Lowcountry to the rest of the Southeast. One flat price per week.",
+  "hireCtaBody": "Post a job and reach drivers in Columbia, Charleston and Greenville. We check CDL and MVR before you call.",
+  "carriers": [
+    { "name": "Palmetto Freight Lines", "city": "Columbia", "dot": "9203417", "equipment": "Dry van", "trucks": 9, "status": "ACTIVE", "score": 88 },
+    { "name": "Charleston Harbor Carriers", "city": "Charleston", "dot": "9214856", "equipment": "Reefer", "trucks": 6, "status": "ACTIVE", "score": 82 },
+    { "name": "Volga Line Transport SC", "city": "North Charleston", "dot": "9227390", "equipment": "Dry van", "trucks": 4, "status": "ACTIVE", "score": 76 },
+    { "name": "Lowcountry Logistics", "city": "Mount Pleasant", "dot": "9238124", "equipment": "Flatbed", "trucks": 3, "status": "ACTIVE", "score": 79 },
+    { "name": "Rock Hill Express", "city": "Rock Hill", "dot": "9241067", "equipment": "Power only", "trucks": 2, "status": "ACTIVE", "score": 71 },
+    { "name": "Greenville Ridge Trucking", "city": "Greenville", "dot": "9256789", "equipment": "Dry van", "trucks": 7, "status": "ACTIVE", "score": 91 },
+    { "name": "Carpathian Freight Solutions", "city": "Columbia", "dot": "9263452", "equipment": "Dry van", "trucks": 5, "status": "WARNING", "score": 62 },
+    { "name": "Port City Hauling", "city": "North Charleston", "dot": "9271908", "equipment": "Reefer", "trucks": 1, "status": "INACTIVE", "score": 34 }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "stateAbbr": "CO",
+  "stateName": "Colorado",
+  "heroImage": "https://images.unsplash.com/photo-1631914730551-1cfbcdf6f603?fm=jpg&q=70&w=2000&auto=format&fit=crop",
+  "heroAlt": "Semi truck on a Colorado mountain highway at dusk",
+  "stats": ["23,900", "612", "73", "2.6"],
+  "equipmentBreakdown": [
+    { "t": "Dry van", "pct": 38 },
+    { "t": "Flatbed", "pct": 22 },
+    { "t": "Reefer", "pct": 14 },
+    { "t": "Power only", "pct": 10 },
+    { "t": "Step deck", "pct": 8 },
+    { "t": "Box truck", "pct": 5 },
+    { "t": "Tanker", "pct": 3 }
+  ],
+  "topCities": [
+    { "t": "Denver", "count": "8,450" },
+    { "t": "Colorado Springs", "count": "3,920" },
+    { "t": "Aurora", "count": "2,610" },
+    { "t": "Fort Collins", "count": "1,845" },
+    { "t": "Pueblo", "count": "1,290" },
+    { "t": "Grand Junction", "count": "980" }
+  ],
+  "equipmentOptions": ["All", "Dry van", "Flatbed", "Reefer", "Power only"],
+  "dispatchCtaBody": "We know the I-70 mountain corridor through the Eisenhower Tunnel and the I-25 freight run connecting Denver to Colorado Springs and Cheyenne. One flat price per week.",
+  "hireCtaBody": "Post a job and reach drivers in Denver, Colorado Springs and Fort Collins. We check CDL and MVR before you call.",
+  "carriers": [
+    { "name": "Rocky Mountain Freight Co", "city": "Denver", "dot": "6412087", "equipment": "Dry van", "trucks": 9, "status": "ACTIVE", "score": 91 },
+    { "name": "Front Range Hauling", "city": "Colorado Springs", "dot": "6423519", "equipment": "Flatbed", "trucks": 5, "status": "ACTIVE", "score": 84 },
+    { "name": "Volga Line Transport CO", "city": "Aurora", "dot": "6431742", "equipment": "Dry van", "trucks": 3, "status": "ACTIVE", "score": 78 },
+    { "name": "Mile High Logistics", "city": "Denver", "dot": "6445908", "equipment": "Reefer", "trucks": 6, "status": "ACTIVE", "score": 88 },
+    { "name": "Fort Collins Ag Carriers", "city": "Fort Collins", "dot": "6456273", "equipment": "Flatbed", "trucks": 2, "status": "WARNING", "score": 62 },
+    { "name": "Pueblo Steel & Freight", "city": "Pueblo", "dot": "6462814", "equipment": "Flatbed", "trucks": 4, "status": "ACTIVE", "score": 75 },
+    { "name": "Grand Mesa Trucking", "city": "Grand Junction", "dot": "6478350", "equipment": "Power only", "trucks": 1, "status": "INACTIVE", "score": 41 },
+    { "name": "Continental Divide Transport", "city": "Denver", "dot": "6489167", "equipment": "Dry van", "trucks": 12, "status": "ACTIVE", "score": 95 }
+  ]
+}

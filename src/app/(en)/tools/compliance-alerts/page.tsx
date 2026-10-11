@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { buildMetadata } from "@/lib/metadata";
+import { buildMetadata } from "@/shared/seo/metadata";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import ComplianceAlertsForm from "@/components/ComplianceAlertsForm";
+import { ComplianceAlertsForm } from "@/features/compliance";
 
 export const metadata: Metadata = buildMetadata({
   title: "FMCSA Compliance Alerts by Text",

@@ -1,6 +1,6 @@
 import "server-only";
 import { NextResponse } from "next/server";
-import { SITE_URL } from "@/lib/site";
+import { SITE_URL } from "@/shared/config/site";
 import { serverEnv } from "@/server/env";
 
 const MAX_BODY_BYTES = 16_000;

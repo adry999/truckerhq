@@ -1,0 +1,37 @@
+{
+  "stateAbbr": "OH",
+  "stateName": "Ohio",
+  "heroImage": "https://images.unsplash.com/photo-1779583074717-e60fa13131ce?fm=jpg&q=70&w=2000&auto=format&fit=crop",
+  "heroAlt": "Ohio highway with a semi truck at dusk",
+  "stats": ["27,500", "742", "74", "2.8"],
+  "equipmentBreakdown": [
+    { "t": "Dry van", "pct": 46 },
+    { "t": "Flatbed", "pct": 21 },
+    { "t": "Reefer", "pct": 14 },
+    { "t": "Power only", "pct": 8 },
+    { "t": "Step deck", "pct": 5 },
+    { "t": "Box truck", "pct": 4 },
+    { "t": "Tanker", "pct": 3 }
+  ],
+  "topCities": [
+    { "t": "Columbus", "count": "5,410" },
+    { "t": "Cincinnati", "count": "4,275" },
+    { "t": "Cleveland", "count": "3,960" },
+    { "t": "Toledo", "count": "2,180" },
+    { "t": "Dayton", "count": "1,845" },
+    { "t": "Akron", "count": "1,502" }
+  ],
+  "equipmentOptions": ["All", "Dry van", "Reefer", "Flatbed", "Power only"],
+  "dispatchCtaBody": "We know the I-70/I-71/I-75 crossroads and how Columbus puts you within a day's drive of most of the eastern US population. One flat price per week.",
+  "hireCtaBody": "Post a job and reach drivers in Columbus, Cincinnati and Cleveland. We check CDL and MVR before you call.",
+  "carriers": [
+    { "name": "Buckeye Freight Solutions", "city": "Columbus", "dot": "5601234", "equipment": "Dry van", "trucks": 8, "status": "ACTIVE", "score": 85 },
+    { "name": "Carpathian Steel Haulers", "city": "Cleveland", "dot": "5612456", "equipment": "Flatbed", "trucks": 5, "status": "ACTIVE", "score": 79 },
+    { "name": "Queen City Logistics", "city": "Cincinnati", "dot": "5623789", "equipment": "Dry van", "trucks": 10, "status": "ACTIVE", "score": 91 },
+    { "name": "Dnipro Transport LLC", "city": "Toledo", "dot": "5634012", "equipment": "Reefer", "trucks": 3, "status": "ACTIVE", "score": 74 },
+    { "name": "Miami Valley Carriers", "city": "Dayton", "dot": "5645678", "equipment": "Power only", "trucks": 2, "status": "ACTIVE", "score": 72 },
+    { "name": "Rust Belt Flatbed Co", "city": "Akron", "dot": "5656901", "equipment": "Flatbed", "trucks": 4, "status": "WARNING", "score": 61 },
+    { "name": "Tisza Line Express", "city": "Columbus", "dot": "5667234", "equipment": "Dry van", "trucks": 6, "status": "ACTIVE", "score": 88 },
+    { "name": "Great Lakes Reefer Inc", "city": "Cleveland", "dot": "5678567", "equipment": "Reefer", "trucks": 1, "status": "INACTIVE", "score": 35 }
+  ]
+}

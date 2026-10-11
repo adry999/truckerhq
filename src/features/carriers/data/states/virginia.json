@@ -1,0 +1,37 @@
+{
+  "stateAbbr": "VA",
+  "stateName": "Virginia",
+  "heroImage": "https://images.unsplash.com/photo-1720811559395-3ed8d1b16649?fm=jpg&q=70&w=2000&auto=format&fit=crop",
+  "heroAlt": "Virginia highway with a semi truck at dusk",
+  "stats": ["23,600", "612", "75", "2.9"],
+  "equipmentBreakdown": [
+    { "t": "Dry van", "pct": 44 },
+    { "t": "Reefer", "pct": 18 },
+    { "t": "Flatbed", "pct": 15 },
+    { "t": "Power only", "pct": 8 },
+    { "t": "Step deck", "pct": 6 },
+    { "t": "Box truck", "pct": 5 },
+    { "t": "Tanker", "pct": 4 }
+  ],
+  "topCities": [
+    { "t": "Norfolk", "count": "5,240" },
+    { "t": "Virginia Beach", "count": "4,180" },
+    { "t": "Chesapeake", "count": "3,315" },
+    { "t": "Richmond", "count": "3,020" },
+    { "t": "Newport News", "count": "2,140" },
+    { "t": "Alexandria", "count": "1,860" }
+  ],
+  "equipmentOptions": ["All", "Dry van", "Reefer", "Flatbed", "Power only"],
+  "dispatchCtaBody": "We know the container freight rolling out of the Port of Virginia in Norfolk and the I-95/I-64 corridor linking Richmond to Hampton Roads. One flat price per week.",
+  "hireCtaBody": "Post a job and reach drivers in Norfolk, Richmond and Virginia Beach. We check CDL and MVR before you call.",
+  "carriers": [
+    { "name": "Tidewater Dry Van Logistics", "city": "Norfolk", "dot": "9712340", "equipment": "Dry van", "trucks": 9, "status": "ACTIVE", "score": 88 },
+    { "name": "Chesapeake Bay Freight Co", "city": "Chesapeake", "dot": "9734521", "equipment": "Reefer", "trucks": 6, "status": "ACTIVE", "score": 82 },
+    { "name": "Volga Line Transport VA", "city": "Alexandria", "dot": "9756789", "equipment": "Dry van", "trucks": 4, "status": "ACTIVE", "score": 79 },
+    { "name": "Port of Virginia Carriers", "city": "Norfolk", "dot": "9723456", "equipment": "Flatbed", "trucks": 3, "status": "ACTIVE", "score": 91 },
+    { "name": "Richmond Capital Trucking", "city": "Richmond", "dot": "9745612", "equipment": "Dry van", "trucks": 12, "status": "ACTIVE", "score": 85 },
+    { "name": "Virginia Beach Freight Lines", "city": "Virginia Beach", "dot": "9767890", "equipment": "Power only", "trucks": 1, "status": "WARNING", "score": 61 },
+    { "name": "Newport News Shipping Transport", "city": "Newport News", "dot": "9778901", "equipment": "Dry van", "trucks": 2, "status": "INACTIVE", "score": 42 },
+    { "name": "Dnister Freight Solutions", "city": "Alexandria", "dot": "9789012", "equipment": "Dry van", "trucks": 7, "status": "ACTIVE", "score": 76 }
+  ]
+}

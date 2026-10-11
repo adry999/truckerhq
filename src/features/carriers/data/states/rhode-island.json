@@ -1,0 +1,37 @@
+{
+  "stateAbbr": "RI",
+  "stateName": "Rhode Island",
+  "heroImage": "https://images.unsplash.com/photo-1720811559395-3ed8d1b16649?fm=jpg&q=70&w=2000&auto=format&fit=crop",
+  "heroAlt": "Rhode Island highway with a semi truck at dusk",
+  "stats": ["3,400", "68", "77", "2.1"],
+  "equipmentBreakdown": [
+    { "t": "Dry van", "pct": 44 },
+    { "t": "Reefer", "pct": 21 },
+    { "t": "Power only", "pct": 13 },
+    { "t": "Flatbed", "pct": 10 },
+    { "t": "Step deck", "pct": 5 },
+    { "t": "Box truck", "pct": 4 },
+    { "t": "Tanker", "pct": 3 }
+  ],
+  "topCities": [
+    { "t": "Providence", "count": "1,180" },
+    { "t": "Warwick", "count": "612" },
+    { "t": "Cranston", "count": "498" },
+    { "t": "Pawtucket", "count": "355" },
+    { "t": "East Providence", "count": "287" },
+    { "t": "Woonsocket", "count": "204" }
+  ],
+  "equipmentOptions": ["All", "Dry van", "Reefer", "Flatbed", "Power only"],
+  "dispatchCtaBody": "We run the I-95 corridor from the Connecticut line to the Massachusetts border and know the container queues at the Port of Providence cold. Rhode Island's compact geography means tighter turnarounds and more loads per week — one flat price covers it.",
+  "hireCtaBody": "Post a job and reach drivers in Providence, Warwick and Cranston. We check CDL and MVR before you call.",
+  "carriers": [
+    { "name": "Ocean State Freight Lines", "city": "Providence", "dot": "9104217", "equipment": "Dry van", "trucks": 6, "status": "ACTIVE", "score": 88 },
+    { "name": "Narragansett Bay Trucking", "city": "Warwick", "dot": "9112583", "equipment": "Reefer", "trucks": 4, "status": "ACTIVE", "score": 91 },
+    { "name": "Volga Line Transport RI", "city": "Cranston", "dot": "9127940", "equipment": "Dry van", "trucks": 3, "status": "ACTIVE", "score": 79 },
+    { "name": "Blackstone Valley Carriers", "city": "Pawtucket", "dot": "9138462", "equipment": "Power only", "trucks": 2, "status": "ACTIVE", "score": 73 },
+    { "name": "Providence Port Logistics", "city": "Providence", "dot": "9145719", "equipment": "Reefer", "trucks": 5, "status": "ACTIVE", "score": 84 },
+    { "name": "East Bay Dry Van Co", "city": "East Providence", "dot": "9156083", "equipment": "Dry van", "trucks": 1, "status": "WARNING", "score": 62 },
+    { "name": "Woonsocket Flatbed & Freight", "city": "Woonsocket", "dot": "9163257", "equipment": "Flatbed", "trucks": 2, "status": "ACTIVE", "score": 76 },
+    { "name": "Little Rhody Hauling", "city": "Cranston", "dot": "9178904", "equipment": "Dry van", "trucks": 1, "status": "INACTIVE", "score": 41 }
+  ]
+}

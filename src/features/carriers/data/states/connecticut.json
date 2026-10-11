@@ -1,0 +1,37 @@
+{
+  "stateAbbr": "CT",
+  "stateName": "Connecticut",
+  "heroImage": "https://images.unsplash.com/photo-1779583074717-e60fa13131ce?fm=jpg&q=70&w=2000&auto=format&fit=crop",
+  "heroAlt": "Connecticut highway with a semi truck at dusk",
+  "stats": ["11,800", "318", "72", "2.4"],
+  "equipmentBreakdown": [
+    { "t": "Dry van", "pct": 49 },
+    { "t": "Reefer", "pct": 16 },
+    { "t": "Power only", "pct": 13 },
+    { "t": "Flatbed", "pct": 8 },
+    { "t": "Step deck", "pct": 6 },
+    { "t": "Box truck", "pct": 5 },
+    { "t": "Tanker", "pct": 3 }
+  ],
+  "topCities": [
+    { "t": "Hartford", "count": "2,940" },
+    { "t": "Bridgeport", "count": "2,215" },
+    { "t": "New Haven", "count": "1,980" },
+    { "t": "Stamford", "count": "1,540" },
+    { "t": "Waterbury", "count": "1,205" },
+    { "t": "Danbury", "count": "940" }
+  ],
+  "equipmentOptions": ["All", "Dry van", "Reefer", "Flatbed", "Power only"],
+  "dispatchCtaBody": "We know the I-95 corridor through Bridgeport and Stamford and the I-84 run through Hartford and Waterbury, plus the overflow freight spilling out of the NYC metro. One flat price per week.",
+  "hireCtaBody": "Post a job and reach drivers in Hartford, Bridgeport and New Haven. We check CDL and MVR before you call.",
+  "carriers": [
+    { "name": "Nutmeg State Freight Co", "city": "Hartford", "dot": "6512340", "equipment": "Dry van", "trucks": 9, "status": "ACTIVE", "score": 91 },
+    { "name": "Bridgeport Harbor Transport", "city": "Bridgeport", "dot": "6524871", "equipment": "Reefer", "trucks": 5, "status": "ACTIVE", "score": 84 },
+    { "name": "Volga Line Transport CT", "city": "New Haven", "dot": "6537902", "equipment": "Dry van", "trucks": 4, "status": "ACTIVE", "score": 77 },
+    { "name": "Stamford Metro Carriers", "city": "Stamford", "dot": "6548215", "equipment": "Power only", "trucks": 2, "status": "ACTIVE", "score": 88 },
+    { "name": "Naugatuck Valley Hauling", "city": "Waterbury", "dot": "6559634", "equipment": "Dry van", "trucks": 6, "status": "ACTIVE", "score": 73 },
+    { "name": "Danbury Ridge Logistics", "city": "Danbury", "dot": "6561178", "equipment": "Flatbed", "trucks": 3, "status": "ACTIVE", "score": 80 },
+    { "name": "Elm City Express", "city": "New Haven", "dot": "6573409", "equipment": "Dry van", "trucks": 7, "status": "WARNING", "score": 62 },
+    { "name": "Constitution State Trucking", "city": "Hartford", "dot": "6584922", "equipment": "Power only", "trucks": 1, "status": "INACTIVE", "score": 41 }
+  ]
+}

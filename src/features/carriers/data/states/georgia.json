@@ -1,0 +1,37 @@
+{
+  "stateAbbr": "GA",
+  "stateName": "Georgia",
+  "heroImage": "https://images.unsplash.com/photo-1720811559395-3ed8d1b16649?fm=jpg&q=70&w=2000&auto=format&fit=crop",
+  "heroAlt": "Georgia highway with a semi truck at dusk",
+  "stats": ["29,800", "742", "74", "2.8"],
+  "equipmentBreakdown": [
+    { "t": "Dry van", "pct": 46 },
+    { "t": "Reefer", "pct": 17 },
+    { "t": "Flatbed", "pct": 14 },
+    { "t": "Power only", "pct": 8 },
+    { "t": "Step deck", "pct": 5 },
+    { "t": "Box truck", "pct": 5 },
+    { "t": "Tanker", "pct": 3 }
+  ],
+  "topCities": [
+    { "t": "Atlanta", "count": "11,340" },
+    { "t": "Savannah", "count": "4,215" },
+    { "t": "Augusta", "count": "2,180" },
+    { "t": "Macon", "count": "1,760" },
+    { "t": "Columbus", "count": "1,425" },
+    { "t": "Marietta", "count": "1,190" }
+  ],
+  "equipmentOptions": ["All", "Dry van", "Reefer", "Flatbed", "Power only"],
+  "dispatchCtaBody": "We know the I-75/I-85 corridor through Atlanta and the container freight coming out of the Port of Savannah, the Southeast's busiest distribution hub. One flat price per week.",
+  "hireCtaBody": "Post a job and reach drivers in Atlanta, Savannah and Augusta. We check CDL and MVR before you call.",
+  "carriers": [
+    { "name": "Peachtree Logistics Group", "city": "Atlanta", "dot": "5412093", "equipment": "Dry van", "trucks": 11, "status": "ACTIVE", "score": 89 },
+    { "name": "Savannah Port Carriers", "city": "Savannah", "dot": "5433671", "equipment": "Reefer", "trucks": 6, "status": "ACTIVE", "score": 85 },
+    { "name": "Volga Line Transport GA", "city": "Marietta", "dot": "5461208", "equipment": "Dry van", "trucks": 4, "status": "ACTIVE", "score": 79 },
+    { "name": "Coastal Empire Freight", "city": "Savannah", "dot": "5477942", "equipment": "Flatbed", "trucks": 3, "status": "ACTIVE", "score": 74 },
+    { "name": "Moldova Express Southeast", "city": "Atlanta", "dot": "5405517", "equipment": "Dry van", "trucks": 8, "status": "WARNING", "score": 61 },
+    { "name": "Augusta Bulldog Trucking", "city": "Augusta", "dot": "5488365", "equipment": "Power only", "trucks": 1, "status": "ACTIVE", "score": 72 },
+    { "name": "Macon Midway Haulers", "city": "Macon", "dot": "5449830", "equipment": "Dry van", "trucks": 2, "status": "INACTIVE", "score": 36 },
+    { "name": "Columbus River Line", "city": "Columbus", "dot": "5493154", "equipment": "Reefer", "trucks": 5, "status": "ACTIVE", "score": 82 }
+  ]
+}

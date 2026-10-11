@@ -1,5 +1,5 @@
-import { PHONE_DISPLAY } from "@/lib/contact";
-import { ogImageSize, ogImageContentType, renderOgImage } from "@/lib/og";
+import { PHONE_DISPLAY } from "@/shared/config/contact";
+import { ogImageSize, ogImageContentType, renderOgImage } from "@/shared/seo/og";
 
 export const size = ogImageSize;
 export const contentType = ogImageContentType;

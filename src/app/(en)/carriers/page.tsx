@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { buildMetadata } from "@/lib/metadata";
+import { buildMetadata } from "@/shared/seo/metadata";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import { STATE_DIRECTORY } from "@/lib/states";
+import { STATE_DIRECTORY } from "@/features/carriers";
 
 export const metadata: Metadata = buildMetadata({
   title: "Carrier Directory by State",

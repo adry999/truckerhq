@@ -1,0 +1,37 @@
+{
+  "stateAbbr": "TN",
+  "stateName": "Tennessee",
+  "heroImage": "https://images.unsplash.com/photo-1720811559395-3ed8d1b16649?fm=jpg&q=70&w=2000&auto=format&fit=crop",
+  "heroAlt": "Tennessee highway with a semi truck at dusk",
+  "stats": ["28,400", "705", "75", "2.9"],
+  "equipmentBreakdown": [
+    { "t": "Dry van", "pct": 43 },
+    { "t": "Power only", "pct": 18 },
+    { "t": "Reefer", "pct": 15 },
+    { "t": "Flatbed", "pct": 12 },
+    { "t": "Step deck", "pct": 5 },
+    { "t": "Box truck", "pct": 4 },
+    { "t": "Tanker", "pct": 3 }
+  ],
+  "topCities": [
+    { "t": "Memphis", "count": "8,940" },
+    { "t": "Nashville", "count": "7,615" },
+    { "t": "Knoxville", "count": "3,280" },
+    { "t": "Chattanooga", "count": "2,745" },
+    { "t": "Murfreesboro", "count": "1,510" },
+    { "t": "Clarksville", "count": "1,185" }
+  ],
+  "equipmentOptions": ["All", "Dry van", "Reefer", "Flatbed", "Power only"],
+  "dispatchCtaBody": "Memphis is a national logistics super-hub anchored by FedEx's world hub, and I-40, I-24 and I-65 put you within a day's drive of half the country. One flat price per week.",
+  "hireCtaBody": "Post a job and reach drivers in Memphis, Nashville and Knoxville. We check CDL and MVR before you call.",
+  "carriers": [
+    { "name": "Music City Freight Lines", "city": "Nashville", "dot": "9412086", "equipment": "Dry van", "trucks": 9, "status": "ACTIVE", "score": 88 },
+    { "name": "Memphis Bluff Logistics", "city": "Memphis", "dot": "9433751", "equipment": "Power only", "trucks": 12, "status": "ACTIVE", "score": 91 },
+    { "name": "Volga Line Transport TN", "city": "Nashville", "dot": "9461204", "equipment": "Dry van", "trucks": 4, "status": "ACTIVE", "score": 80 },
+    { "name": "Scenic City Carriers", "city": "Chattanooga", "dot": "9477938", "equipment": "Flatbed", "trucks": 3, "status": "ACTIVE", "score": 76 },
+    { "name": "Odessa Freight Solutions", "city": "Memphis", "dot": "9405513", "equipment": "Dry van", "trucks": 7, "status": "WARNING", "score": 63 },
+    { "name": "Clarksville Crossing Trucking", "city": "Clarksville", "dot": "9488361", "equipment": "Power only", "trucks": 2, "status": "ACTIVE", "score": 71 },
+    { "name": "Murfreesboro Midway Haulers", "city": "Murfreesboro", "dot": "9449826", "equipment": "Dry van", "trucks": 2, "status": "INACTIVE", "score": 41 },
+    { "name": "Knoxville Ridge Reefer Co", "city": "Knoxville", "dot": "9493150", "equipment": "Reefer", "trucks": 5, "status": "ACTIVE", "score": 84 }
+  ]
+}

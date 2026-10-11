@@ -3,8 +3,8 @@
 import Script from "next/script";
 import { Suspense, useEffect, useRef, useSyncExternalStore } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
-import { GA_ID, META_PIXEL_ID } from "@/lib/analytics";
-import { getConsentSnapshot, getConsentServerSnapshot, subscribeConsent, setConsent, type Consent } from "@/lib/consent";
+import { GA_ID, META_PIXEL_ID } from "@/shared/client/analytics";
+import { getConsentSnapshot, getConsentServerSnapshot, subscribeConsent, setConsent, type Consent } from "@/shared/client/consent";
 import ConsentBanner from "./ConsentBanner";
 
 // Only these query params are safe to send to analytics — everything else

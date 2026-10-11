@@ -27,7 +27,7 @@ const boundaryRules = [
           },
           {
             group: ["@/components/*", "@/app/*", "@/app/**"],
-            message: "Features may depend only on shared/, server/ and lib/.",
+            message: "Features may depend only on shared/ and server/.",
           },
           {
             group: ["../../*", "../../**"],

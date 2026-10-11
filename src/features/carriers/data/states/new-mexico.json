@@ -1,0 +1,37 @@
+{
+  "stateAbbr": "NM",
+  "stateName": "New Mexico",
+  "heroImage": "https://images.unsplash.com/photo-1631914730551-1cfbcdf6f603?fm=jpg&q=70&w=2000&auto=format&fit=crop",
+  "heroAlt": "New Mexico desert highway with a semi truck at dusk",
+  "stats": ["10,300", "268", "73", "2.6"],
+  "equipmentBreakdown": [
+    { "t": "Dry van", "pct": 38 },
+    { "t": "Flatbed", "pct": 24 },
+    { "t": "Power only", "pct": 14 },
+    { "t": "Reefer", "pct": 11 },
+    { "t": "Step deck", "pct": 6 },
+    { "t": "Tanker", "pct": 4 },
+    { "t": "Box truck", "pct": 3 }
+  ],
+  "topCities": [
+    { "t": "Albuquerque", "count": "3,940" },
+    { "t": "Las Cruces", "count": "1,610" },
+    { "t": "Rio Rancho", "count": "1,085" },
+    { "t": "Santa Fe", "count": "845" },
+    { "t": "Farmington", "count": "612" },
+    { "t": "Roswell", "count": "498" }
+  ],
+  "equipmentOptions": ["All", "Dry van", "Reefer", "Flatbed", "Power only"],
+  "dispatchCtaBody": "We know the I-40 run through Albuquerque and the I-25 corridor down to Las Cruces, plus the cross-border freight moving through Santa Teresa and El Paso. One flat price per week.",
+  "hireCtaBody": "Post a job and reach drivers in Albuquerque, Las Cruces and Rio Rancho. We check CDL and MVR before you call.",
+  "carriers": [
+    { "name": "Sandia Peak Trucking LLC", "city": "Albuquerque", "dot": "8523671", "equipment": "Dry van", "trucks": 7, "status": "ACTIVE", "score": 91 },
+    { "name": "High Desert Carriers Inc.", "city": "Santa Fe", "dot": "8567395", "equipment": "Reefer", "trucks": 2, "status": "ACTIVE", "score": 94 },
+    { "name": "Rio Grande Freight Co.", "city": "Las Cruces", "dot": "8512340", "equipment": "Flatbed", "trucks": 5, "status": "ACTIVE", "score": 88 },
+    { "name": "Zia Line Logistics", "city": "Rio Rancho", "dot": "8534982", "equipment": "Dry van", "trucks": 4, "status": "ACTIVE", "score": 82 },
+    { "name": "Roswell Flatbed & Freight", "city": "Roswell", "dot": "8556804", "equipment": "Flatbed", "trucks": 6, "status": "ACTIVE", "score": 79 },
+    { "name": "Volga Line Transport", "city": "Albuquerque", "dot": "8545213", "equipment": "Power only", "trucks": 3, "status": "ACTIVE", "score": 76 },
+    { "name": "Four Corners Trucking", "city": "Farmington", "dot": "8578126", "equipment": "Dry van", "trucks": 8, "status": "WARNING", "score": 61 },
+    { "name": "Border Route Transport LLC", "city": "Las Cruces", "dot": "8589457", "equipment": "Flatbed", "trucks": 1, "status": "INACTIVE", "score": 38 }
+  ]
+}

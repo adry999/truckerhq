@@ -7,11 +7,11 @@ vi.mock("next/server", async (orig) => ({
   },
 }));
 vi.mock("@/server/db/insert-row", () => ({ insertRow: vi.fn() }));
-vi.mock("@/lib/notifications", () => ({ notifyComplianceAlertsOn: vi.fn() }));
+vi.mock("@/server/leads/notifications", () => ({ notifyComplianceAlertsOn: vi.fn() }));
 
 import { POST } from "./route";
 import { insertRow } from "@/server/db/insert-row";
-import { notifyComplianceAlertsOn } from "@/lib/notifications";
+import { notifyComplianceAlertsOn } from "@/server/leads/notifications";
 
 let n = 0;
 function post(body: unknown, raw?: string) {

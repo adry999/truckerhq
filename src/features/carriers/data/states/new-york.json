@@ -1,0 +1,37 @@
+{
+  "stateAbbr": "NY",
+  "stateName": "New York",
+  "heroImage": "https://images.unsplash.com/photo-1779583074717-e60fa13131ce?fm=jpg&q=70&w=2000&auto=format&fit=crop",
+  "heroAlt": "New York interstate with a semi truck at dusk",
+  "stats": ["42,300", "968", "75", "2.6"],
+  "equipmentBreakdown": [
+    { "t": "Dry van", "pct": 52 },
+    { "t": "Reefer", "pct": 14 },
+    { "t": "Power only", "pct": 12 },
+    { "t": "Flatbed", "pct": 8 },
+    { "t": "Step deck", "pct": 6 },
+    { "t": "Box truck", "pct": 5 },
+    { "t": "Tanker", "pct": 3 }
+  ],
+  "topCities": [
+    { "t": "New York City", "count": "14,850" },
+    { "t": "Buffalo", "count": "4,920" },
+    { "t": "Rochester", "count": "3,110" },
+    { "t": "Yonkers", "count": "2,340" },
+    { "t": "Syracuse", "count": "1,980" },
+    { "t": "Albany", "count": "1,640" }
+  ],
+  "equipmentOptions": ["All", "Dry van", "Reefer", "Flatbed", "Power only"],
+  "dispatchCtaBody": "We know the I-90 Thruway run to Buffalo, the I-87 Northway climb to the Canadian border at Champlain, and the dense metro freight grinding through the five boroughs. One flat price per week.",
+  "hireCtaBody": "Post a job and reach drivers in New York City, Buffalo and Rochester. We check CDL and MVR before you call.",
+  "carriers": [
+    { "name": "Empire State Freight Lines", "city": "New York City", "dot": "8612437", "equipment": "Dry van", "trucks": 9, "status": "ACTIVE", "score": 91 },
+    { "name": "Buffalo Bulk Carriers", "city": "Buffalo", "dot": "8623958", "equipment": "Flatbed", "trucks": 4, "status": "ACTIVE", "score": 84 },
+    { "name": "Volga Line Transport NY", "city": "Yonkers", "dot": "8634721", "equipment": "Dry van", "trucks": 3, "status": "ACTIVE", "score": 77 },
+    { "name": "Hudson Valley Haulers", "city": "Albany", "dot": "8645106", "equipment": "Reefer", "trucks": 6, "status": "ACTIVE", "score": 88 },
+    { "name": "Flower City Freight", "city": "Rochester", "dot": "8656289", "equipment": "Dry van", "trucks": 5, "status": "ACTIVE", "score": 73 },
+    { "name": "Five Boroughs Trucking", "city": "New York City", "dot": "8667043", "equipment": "Power only", "trucks": 2, "status": "ACTIVE", "score": 95 },
+    { "name": "Syracuse Salt City Lines", "city": "Syracuse", "dot": "8678514", "equipment": "Dry van", "trucks": 7, "status": "WARNING", "score": 62 },
+    { "name": "Carpathian Express Transport", "city": "Buffalo", "dot": "8689375", "equipment": "Dry van", "trucks": 1, "status": "INACTIVE", "score": 41 }
+  ]
+}

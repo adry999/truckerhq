@@ -2,7 +2,7 @@ import { Barlow_Condensed, Inter, Overpass, Roboto_Condensed } from "next/font/g
 import JsonLd from "@/components/JsonLd";
 import Analytics from "@/components/Analytics";
 import "@/app/globals.css";
-import { SITE_URL } from "@/lib/site";
+import { SITE_URL } from "@/shared/config/site";
 
 const barlowCondensed = Barlow_Condensed({
   variable: "--font-barlow-condensed",

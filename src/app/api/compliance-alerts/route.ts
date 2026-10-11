@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { notifyComplianceAlertsOn } from "@/lib/notifications";
+import { notifyComplianceAlertsOn } from "@/server/leads/notifications";
 import { createLeadHandler } from "@/server/leads/create-lead-handler";
 import { anyInput, dotNumber, requiredText, text, usPhone, withChecks } from "@/server/leads/fields";
 

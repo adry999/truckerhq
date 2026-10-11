@@ -1,0 +1,37 @@
+{
+  "stateAbbr": "MA",
+  "stateName": "Massachusetts",
+  "heroImage": "https://images.unsplash.com/photo-1631914730551-1cfbcdf6f603?fm=jpg&q=70&w=2000&auto=format&fit=crop",
+  "heroAlt": "Semi truck on a Massachusetts highway near Boston",
+  "stats": ["21,300", "612", "74", "2.8"],
+  "equipmentBreakdown": [
+    { "t": "Dry van", "pct": 46 },
+    { "t": "Reefer", "pct": 17 },
+    { "t": "Power only", "pct": 14 },
+    { "t": "Flatbed", "pct": 8 },
+    { "t": "Step deck", "pct": 6 },
+    { "t": "Box truck", "pct": 5 },
+    { "t": "Tanker", "pct": 4 }
+  ],
+  "topCities": [
+    { "t": "Boston", "count": "5,940" },
+    { "t": "Worcester", "count": "2,815" },
+    { "t": "Springfield", "count": "2,340" },
+    { "t": "Lowell", "count": "1,690" },
+    { "t": "Cambridge", "count": "1,205" },
+    { "t": "New Bedford", "count": "985" }
+  ],
+  "equipmentOptions": ["All", "Dry van", "Reefer", "Flatbed", "Power only"],
+  "dispatchCtaBody": "We work the I-90 and I-95 corridors and the container freight moving through the Port of Boston. One flat price per week, no per-load cut.",
+  "hireCtaBody": "Post a job and reach drivers in Boston, Worcester and Springfield. We check CDL and MVR before you call.",
+  "carriers": [
+    { "name": "Bay State Freight Lines", "city": "Boston", "dot": "7612048", "equipment": "Dry van", "trucks": 9, "status": "ACTIVE", "score": 90 },
+    { "name": "Worcester Crosstown Carriers", "city": "Worcester", "dot": "7634971", "equipment": "Dry van", "trucks": 6, "status": "ACTIVE", "score": 86 },
+    { "name": "Volga Line Transport New England", "city": "Springfield", "dot": "7658302", "equipment": "Reefer", "trucks": 4, "status": "ACTIVE", "score": 80 },
+    { "name": "Port of Boston Logistics", "city": "Boston", "dot": "7621459", "equipment": "Power only", "trucks": 3, "status": "ACTIVE", "score": 76 },
+    { "name": "Merrimack Valley Trucking", "city": "Lowell", "dot": "7647215", "equipment": "Dry van", "trucks": 5, "status": "WARNING", "score": 62 },
+    { "name": "Cambridge Turnpike Haulers", "city": "Cambridge", "dot": "7609834", "equipment": "Dry van", "trucks": 2, "status": "ACTIVE", "score": 73 },
+    { "name": "Odessa Coastal Freight", "city": "New Bedford", "dot": "7663527", "equipment": "Reefer", "trucks": 1, "status": "ACTIVE", "score": 71 },
+    { "name": "Whaling City Flatbed Co", "city": "New Bedford", "dot": "7691086", "equipment": "Flatbed", "trucks": 3, "status": "INACTIVE", "score": 44 }
+  ]
+}

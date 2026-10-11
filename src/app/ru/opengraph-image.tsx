@@ -1,6 +1,6 @@
-import { PHONE_DISPLAY } from "@/lib/contact";
-import { ogImageSize, ogImageContentType, renderOgImage } from "@/lib/og";
-import { ruOgFontConfig } from "@/lib/og-ru";
+import { PHONE_DISPLAY } from "@/shared/config/contact";
+import { ogImageSize, ogImageContentType, renderOgImage } from "@/shared/seo/og";
+import { ruOgFontConfig } from "@/shared/seo/og-fonts-ru";
 
 export const alt = "Trucker HQ — диспетчинг, работа CDL и бесплатные инструменты";
 export const size = ogImageSize;

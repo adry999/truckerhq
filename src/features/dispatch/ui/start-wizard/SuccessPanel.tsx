@@ -1,5 +1,5 @@
 import type { Ref } from "react";
-import { PHONE_HREF } from "@/lib/contact";
+import { PHONE_HREF } from "@/shared/config/contact";
 import { Button } from "@/shared/ui/Button";
 import { CheckIcon } from "@/shared/ui/icons";
 import { callTimePhrase, languageName, type DispatchData } from "@/features/dispatch/model/dispatch-start";
