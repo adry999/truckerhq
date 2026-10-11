@@ -3,7 +3,7 @@ import { buildMetadata } from "@/lib/metadata";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import { JobsBoard } from "@/features/jobs";
-import { findCarrier } from "@/lib/data";
+import { findCarrier } from "@/features/carriers";
 
 export const metadata: Metadata = buildMetadata({
   title: "Работа CDL с указанной оплатой",

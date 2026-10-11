@@ -5,7 +5,7 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import JsonLd from "@/components/JsonLd";
 import { faqSchema, breadcrumbSchema } from "@/lib/seo";
-import { findCarrier } from "@/lib/data";
+import { findCarrier } from "@/features/carriers";
 import {
   CityJobsView,
   JobDetail,
