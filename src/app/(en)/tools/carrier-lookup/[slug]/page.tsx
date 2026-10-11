@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { buildMetadata } from "@/lib/metadata";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import SampleDataNotice from "@/components/SampleDataNotice";
+import { Notice } from "@/shared/ui/Notice";
 import {
   CARRIERS,
   findCarrier,
@@ -263,7 +263,7 @@ export default async function CarrierProfilePage({
 
       <section className="mx-auto grid w-full max-w-6xl gap-5 px-4 py-8 sm:px-6 md:grid-cols-[2fr_1fr] md:py-10">
         <div className="flex min-w-0 flex-col gap-5">
-          <SampleDataNotice>
+          <Notice>
             Sample profile for demonstration. This is not a real carrier and the
             DOT/MC numbers, scores and records are illustrative. Search live
             FMCSA records in{" "}
@@ -271,7 +271,7 @@ export default async function CarrierProfilePage({
               Carrier Lookup
             </Link>
             .
-          </SampleDataNotice>
+          </Notice>
           <div className="flex flex-col gap-4 rounded-lg border border-border bg-white p-[22px]">
             <h2 className="font-display text-[28px] font-extrabold uppercase">
               Score breakdown

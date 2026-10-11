@@ -52,6 +52,10 @@ export function healthColor(score: number): string {
   return "#B42318";
 }
 
+export function healthOnColor(score: number): string {
+  return score >= 60 && score < 80 ? "#16181B" : "#F7F7F5";
+}
+
 export function healthTextColor(score: number): string {
   if (score >= 80) return "#0E5C3A";
   if (score >= 60) return "#7A5300";

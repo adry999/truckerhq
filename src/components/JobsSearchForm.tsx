@@ -1,6 +1,9 @@
-import { JOBS_COPY } from "@/lib/jobs-copy";
+"use client";
 
-export default function JobsSearchForm({ lang, q }: { lang: "EN" | "RU"; q: string }) {
+import { JOBS_COPY } from "@/lib/jobs-copy";
+import { useSearchParam } from "@/shared/hooks/useSearchParam";
+
+export function JobsSearchFormView({ lang, q }: { lang: "EN" | "RU"; q: string }) {
   const c = JOBS_COPY[lang];
 
   return (
@@ -17,11 +20,14 @@ export default function JobsSearchForm({ lang, q }: { lang: "EN" | "RU"; q: stri
       />
       <button
         type="submit"
-        className="min-h-[58px] rounded px-8 font-display text-xl font-extrabold uppercase tracking-[.05em] text-asphalt"
-        style={{ background: "var(--color-amber)" }}
+        className="min-h-[58px] rounded bg-amber px-8 font-display text-xl font-extrabold uppercase tracking-[.05em] text-asphalt"
       >
         {c.searchButton}
       </button>
     </form>
   );
+}
+
+export default function JobsSearchForm({ lang }: { lang: "EN" | "RU" }) {
+  return <JobsSearchFormView lang={lang} q={useSearchParam("q", "").trim().toLowerCase()} />;
 }

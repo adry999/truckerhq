@@ -5,9 +5,9 @@ import SiteFooter from "@/components/SiteFooter";
 import { JOBS, CARRIERS } from "@/lib/data";
 import { CITY_DIRECTORY } from "@/lib/cities";
 import { JOBS_COPY } from "@/lib/jobs-copy";
-import JobsResults from "@/components/JobsResults";
-import JobsSearchForm from "@/components/JobsSearchForm";
-import { JobsResultsFromUrl, JobsSearchFormFromUrl } from "@/components/JobsFromUrl";
+import JobsResults, { JobsResultsView } from "@/components/JobsResults";
+import JobsSearchForm, { JobsSearchFormView } from "@/components/JobsSearchForm";
+import { Button } from "@/shared/ui/Button";
 
 function scoreFor(carrierSlug: string) {
   return CARRIERS.find((c) => c.slug === carrierSlug)?.score ?? 75;
@@ -29,17 +29,17 @@ export default function JobsPageContent({ lang }: { lang: "EN" | "RU" }) {
             <br />
             <span className="text-amber">{c.h1Line2}</span>
           </h1>
-          <p className="max-w-xl text-lg leading-relaxed text-[#D4D6DA]">{c.heroBody}</p>
-          <Suspense fallback={<JobsSearchForm lang={lang} q="" />}>
-            <JobsSearchFormFromUrl lang={lang} />
+          <p className="max-w-xl text-lg leading-relaxed text-on-dark">{c.heroBody}</p>
+          <Suspense fallback={<JobsSearchFormView lang={lang} q="" />}>
+            <JobsSearchForm lang={lang} />
           </Suspense>
         </div>
         <div className="road-line h-1.5" />
       </section>
 
       <section className="mx-auto flex w-full max-w-6xl flex-col gap-5 px-4 py-7 sm:px-6 md:pb-20">
-        <Suspense fallback={<JobsResults lang={lang} jobs={jobs} type="All" equip="All" q="" />}>
-          <JobsResultsFromUrl lang={lang} jobs={jobs} />
+        <Suspense fallback={<JobsResultsView lang={lang} jobs={jobs} type="All" equip="All" q="" />}>
+          <JobsResults lang={lang} jobs={jobs} />
         </Suspense>
 
         <div className="mt-4 flex flex-col gap-3.5">
@@ -68,12 +68,9 @@ export default function JobsPageContent({ lang }: { lang: "EN" | "RU" }) {
                 {c.carriersHeading}
               </span>
             </div>
-            <Link
-              href="/hire-drivers"
-              className="flex h-14 items-center rounded-xl bg-amber px-[26px] font-display text-xl font-extrabold uppercase tracking-[.05em] text-asphalt hover:bg-amber-hover"
-            >
+            <Button href="/hire-drivers" size="lg">
               {c.hireDriversCta}
-            </Link>
+            </Button>
           </div>
         </div>
       </section>

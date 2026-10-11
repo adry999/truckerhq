@@ -4,9 +4,10 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import { healthColor } from "@/lib/data";
 import { CITY_NAME_TO_SLUG } from "@/lib/city-slugs";
-import CityTypeChips from "@/components/CityTypeChips";
-import CityJobsList, { type CityJob } from "@/components/CityJobsList";
-import { CityTypeChipsFromUrl, CityJobsListFromUrl } from "@/components/CityJobsFromUrl";
+import CityJobsList, { CityJobsListView, type CityJob } from "@/components/CityJobsList";
+import { FilterChips, UrlFilterChips } from "@/shared/ui/FilterChips";
+
+const TYPE_FILTERS = ["All", "Local", "Regional", "OTR"] as const;
 
 export type { CityJob };
 
@@ -71,14 +72,25 @@ export default function CityJobsPage({
       </section>
 
       <section className="mx-auto flex w-full max-w-6xl flex-col gap-5 px-4 py-7 sm:px-6 md:pb-10">
-        <Suspense fallback={<CityTypeChips basePath={basePath} type="All" />}>
-          <CityTypeChipsFromUrl basePath={basePath} />
+        <Suspense
+          fallback={
+            <FilterChips
+              param="type"
+              options={TYPE_FILTERS}
+              current={{}}
+              basePath={basePath}
+              label="Job type"
+              uppercase
+            />
+          }
+        >
+          <UrlFilterChips param="type" options={TYPE_FILTERS} basePath={basePath} label="Job type" uppercase />
         </Suspense>
 
         <div className="grid gap-8 md:grid-cols-3">
           <div className="flex flex-col gap-8 md:col-span-2">
-            <Suspense fallback={<CityJobsList jobs={jobs} cityName={cityName} type="All" />}>
-              <CityJobsListFromUrl jobs={jobs} cityName={cityName} />
+            <Suspense fallback={<CityJobsListView jobs={jobs} cityName={cityName} type="All" />}>
+              <CityJobsList jobs={jobs} cityName={cityName} />
             </Suspense>
 
             <div className="flex flex-col gap-4">

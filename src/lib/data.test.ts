@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { healthColor, healthTextColor, healthLabel, findCarrier, findJob, CARRIERS, JOBS } from "./data";
+import { healthColor, healthOnColor, healthTextColor, healthLabel, findCarrier, findJob, CARRIERS, JOBS } from "./data";
 
 describe("health score bands", () => {
   it("labels >=80 as GOOD, 60-79 as WATCH, <60 as RISK", () => {
@@ -53,5 +53,14 @@ describe("findCarrier / findJob", () => {
     for (const job of JOBS) {
       expect(findCarrier(job.carrierSlug), `job ${job.slug} -> carrier ${job.carrierSlug}`).toBeDefined();
     }
+  });
+});
+
+describe("healthOnColor", () => {
+  it("uses dark text only on the amber WATCH band", () => {
+    expect(healthOnColor(79)).toBe("#16181B");
+    expect(healthOnColor(60)).toBe("#16181B");
+    expect(healthOnColor(80)).toBe("#F7F7F5");
+    expect(healthOnColor(59)).toBe("#F7F7F5");
   });
 });

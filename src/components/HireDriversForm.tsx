@@ -1,23 +1,27 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState } from "react";
 import { trackEvent } from "@/lib/analytics";
-import { Segmented } from "@/components/ui/Segmented";
+import { useFormSubmit } from "@/shared/hooks/useFormSubmit";
+import { Button } from "@/shared/ui/Button";
+import { Field, TextInput } from "@/shared/ui/Field";
+import { FormError, Honeypot } from "@/shared/ui/form-bits";
+import { Segmented } from "@/shared/ui/Segmented";
 
 const POSITIONS = ["OTR", "Regional", "Local", "Team", "Owner-op"];
 const EQUIPMENT = ["Dry van", "Reefer", "Flatbed", "Power only"];
 const LANGUAGES = ["Any", "English", "Russian"];
 
 const FIELDS = [
-  ["companyName", "Company name", "Your company", "text", "organization"],
-  ["dotNumber", "DOT number", "6–8 digits", "text", "off"],
-  ["contactName", "Your name", "Who we call", "text", "name"],
-  ["phone", "Phone", "(555) 555-5555", "tel", "tel"],
-  ["pay", "Pay", "e.g. $0.70/mi or $1,800/wk", "text", "off"],
-  ["homeBase", "Home base", "City, state", "text", "address-level2"],
+  { key: "companyName", label: "Company name", placeholder: "Your company", type: "text", autoComplete: "organization" },
+  { key: "dotNumber", label: "DOT number", placeholder: "6–8 digits", type: "text", autoComplete: "off" },
+  { key: "contactName", label: "Your name", placeholder: "Who we call", type: "text", autoComplete: "name" },
+  { key: "phone", label: "Phone", placeholder: "(555) 555-5555", type: "tel", autoComplete: "tel" },
+  { key: "pay", label: "Pay", placeholder: "e.g. $0.70/mi or $1,800/wk", type: "text", autoComplete: "off" },
+  { key: "homeBase", label: "Home base", placeholder: "City, state", type: "text", autoComplete: "address-level2" },
 ] as const;
 
-type FieldKey = (typeof FIELDS)[number][0];
+type FieldKey = (typeof FIELDS)[number]["key"];
 
 export default function HireDriversForm() {
   const [fields, setFields] = useState<Record<FieldKey, string>>({
@@ -31,40 +35,16 @@ export default function HireDriversForm() {
   const [pos, setPos] = useState("OTR");
   const [eq, setEq] = useState("Dry van");
   const [lang, setLang] = useState("Any");
-  const [sent, setSent] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState(false);
 
-  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setSubmitting(true);
-    setError(false);
-    const website = new FormData(e.currentTarget).get("website");
-    try {
-      const res = await fetch("/api/hire-drivers", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...fields,
-          position: pos,
-          equipment: eq,
-          driverLanguage: lang,
-          website,
-        }),
-      });
-      if (!res.ok) throw new Error("request failed");
-      trackEvent("hire_driver_post", { position: pos });
-      setSent(true);
-    } catch {
-      setError(true);
-    } finally {
-      setSubmitting(false);
-    }
-  }
+  const { status, error, onSubmit } = useFormSubmit({
+    endpoint: "/api/hire-drivers",
+    buildBody: () => ({ ...fields, position: pos, equipment: eq, driverLanguage: lang }),
+    onSuccess: () => trackEvent("hire_driver_post", { position: pos }),
+  });
 
-  if (sent) {
+  if (status === "sent") {
     return (
-      <div className="flex flex-col gap-2.5 rounded-lg border-[1.5px] border-green bg-[#E2F0E8] p-7">
+      <div className="flex flex-col gap-2.5 rounded-lg border-[1.5px] border-green bg-green-tint p-7">
         <span className="font-display text-3xl font-extrabold uppercase leading-tight text-green">
           Job received
         </span>
@@ -77,30 +57,21 @@ export default function HireDriversForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-[18px]">
-      <input
-        type="text"
-        name="website"
-        tabIndex={-1}
-        autoComplete="off"
-        aria-hidden="true"
-        className="hidden"
-      />
+    <form onSubmit={onSubmit} className="flex flex-col gap-[18px]">
+      <Honeypot />
       <div className="grid gap-4 sm:grid-cols-2">
-        {FIELDS.map(([key, label, ph, type, autoComplete]) => (
-          <label key={key} className="flex flex-col gap-1.5">
-            <span className="text-sm font-semibold">{label} (required)</span>
-            <input
+        {FIELDS.map((f) => (
+          <Field key={f.key} label={f.label} required>
+            <TextInput
               required
-              type={type}
-              name={key}
-              autoComplete={autoComplete}
-              value={fields[key]}
-              onChange={(e) => setFields((f) => ({ ...f, [key]: e.target.value }))}
-              placeholder={ph}
-              className="h-[54px] rounded-[10px] border-[1.5px] border-[#9CA0A8] px-3.5 font-sans text-base outline-none"
+              type={f.type}
+              name={f.key}
+              autoComplete={f.autoComplete}
+              value={fields[f.key]}
+              onChange={(e) => setFields((prev) => ({ ...prev, [f.key]: e.target.value }))}
+              placeholder={f.placeholder}
             />
-          </label>
+          </Field>
         ))}
       </div>
 
@@ -117,18 +88,10 @@ export default function HireDriversForm() {
         <Segmented options={LANGUAGES} value={lang} onChange={setLang} label="Driver language" uppercase />
       </div>
 
-      <button
-        type="submit"
-        disabled={submitting}
-        className="h-[60px] rounded-xl bg-amber font-display text-2xl font-extrabold uppercase tracking-[.05em] text-asphalt hover:bg-amber-hover disabled:cursor-not-allowed disabled:opacity-60"
-      >
-        {submitting ? "Sending..." : "Send job"}
-      </button>
-      {error && (
-        <span role="alert" className="text-[13px] font-semibold text-red">
-          Something went wrong. Try again in a moment.
-        </span>
-      )}
+      <Button type="submit" size="lg" disabled={status === "submitting"} className="w-full">
+        {status === "submitting" ? "Sending..." : "Send job"}
+      </Button>
+      <FormError message={error} />
       <span className="text-[13px] text-grey">
         We check your DOT and call you to confirm before the job goes live.
         By submitting, you agree to receive a call and text about this job

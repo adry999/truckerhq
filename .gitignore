@@ -37,8 +37,10 @@ yarn-error.log*
 # vercel
 .vercel
 
-# claude code session artifacts
-.claude/
+# claude code session artifacts (.claude/skills/ stays tracked)
+.claude/worktrees/
+.claude/settings.local.json
+.worktrees/
 
 # duplicate raw export from Claude Design (docs/design/ is the tracked copy)
 /Trucker HQ brand identity/
