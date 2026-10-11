@@ -13,20 +13,22 @@ const WATCH_ITEMS: [string, string, string][] = [
   ["insp", "New inspections and crashes", "Every roadside inspection that hits your record"],
 ];
 
+const DEFAULT_WATCH: Record<string, boolean> = {
+  auth: true,
+  ins: true,
+  ucr: true,
+  boc: true,
+  oos: true,
+  insp: false,
+};
+
 export default function ComplianceAlertsForm() {
   const [dot, setDot] = useState("");
   const [phone, setPhone] = useState("");
   const [lang, setLang] = useState<"EN" | "RU">("EN");
   const [consent, setConsent] = useState(false);
   const [done, setDone] = useState(false);
-  const [watch, setWatch] = useState<Record<string, boolean>>({
-    auth: true,
-    ins: true,
-    ucr: true,
-    boc: true,
-    oos: true,
-    insp: false,
-  });
+  const [watch, setWatch] = useState(DEFAULT_WATCH);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(false);
 
@@ -39,7 +41,7 @@ export default function ComplianceAlertsForm() {
       const res = await fetch("/api/compliance-alerts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ dot, phone, language: lang, watch, website }),
+        body: JSON.stringify({ dot, phone, language: lang, watch, website, smsConsent: consent }),
       });
       if (!res.ok) throw new Error("request failed");
       trackEvent("compliance_alert_signup");
@@ -51,7 +53,6 @@ export default function ComplianceAlertsForm() {
     }
   }
 
-  const found = dot.replace(/\D/g, "").length >= 6;
   const count = Object.values(watch).filter(Boolean).length;
 
   const sample =
@@ -86,6 +87,9 @@ export default function ComplianceAlertsForm() {
               onClick={() => {
                 setDone(false);
                 setDot("");
+                setPhone("");
+                setConsent(false);
+                setWatch(DEFAULT_WATCH);
               }}
               className="flex h-[52px] items-center px-2 font-sans text-[15px] font-semibold text-green underline"
             >
@@ -119,14 +123,6 @@ export default function ComplianceAlertsForm() {
               autoComplete="off"
               className="h-14 rounded-[10px] border-[1.5px] border-[#9CA0A8] px-3.5 font-sans text-lg font-semibold tabular-nums outline-none focus:border-green"
             />
-            {found && (
-              <span className="flex items-center gap-2 text-sm font-semibold text-green">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M20 6 9 17l-5-5" />
-                </svg>
-                Carpathian Freight LLC · Des Plaines, IL
-              </span>
-            )}
           </label>
 
           <div role="group" aria-label="What to watch" className="flex flex-col gap-2.5">
@@ -168,16 +164,18 @@ export default function ComplianceAlertsForm() {
           <div className="flex flex-col gap-2.5">
             <span className="font-display text-xl font-extrabold uppercase">3. Where to text you</span>
             <div className="grid gap-3 sm:grid-cols-2">
-              <input
-                required
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                type="tel"
-                placeholder="(XXX) XXX-XXXX"
-                aria-label="Mobile phone (required)"
-                autoComplete="tel"
-                className="h-14 rounded-[10px] border-[1.5px] border-[#9CA0A8] px-3.5 font-sans text-lg tabular-nums outline-none focus:border-green"
-              />
+              <label className="flex flex-col gap-1.5">
+                <span className="text-sm font-semibold">Mobile number</span>
+                <input
+                  required
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  type="tel"
+                  placeholder="(XXX) XXX-XXXX"
+                  autoComplete="tel"
+                  className="h-14 rounded-[10px] border-[1.5px] border-[#9CA0A8] px-3.5 font-sans text-lg tabular-nums outline-none focus:border-green"
+                />
+              </label>
               <div
                 role="radiogroup"
                 aria-label="Text language"

@@ -1,5 +1,6 @@
-import { NextResponse } from "next/server";
+import { NextResponse, after } from "next/server";
 import { insertRow } from "@/lib/supabase";
+import { toUsE164 } from "@/lib/phone";
 import { guardLeadRoute, str, isHoneypotTripped } from "@/lib/api-guard";
 import { notifyDispatchStart } from "@/lib/notifications";
 
@@ -21,6 +22,9 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Missing name or phone" }, { status: 400 });
   }
 
+  const e164 = toUsE164(phone);
+  if (!e164) return NextResponse.json({ error: "Enter a valid US phone number" }, { status: 400 });
+
   const trucksRaw = Number(body?.trucks);
   const trucks = Number.isFinite(trucksRaw) ? Math.min(Math.max(trucksRaw, 1), 500) : 1;
 
@@ -34,12 +38,12 @@ export async function POST(req: Request) {
     authority: str(body?.authority, 60),
     mc_number: str(body?.mcNumber, 20),
     name,
-    phone,
+    phone: e164,
     best_time: str(body?.bestTime, 60),
     language: str(body?.language, 20) || "English",
   });
 
   if (!ok) return NextResponse.json({ error: "Could not save request" }, { status: 502 });
-  await notifyDispatchStart(phone);
+  after(() => notifyDispatchStart(e164));
   return NextResponse.json({ ok: true });
 }

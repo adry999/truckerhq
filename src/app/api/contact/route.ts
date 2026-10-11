@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { insertRow } from "@/lib/supabase";
+import { toUsE164 } from "@/lib/phone";
 import { guardLeadRoute, str, isHoneypotTripped } from "@/lib/api-guard";
 
 export async function POST(req: Request) {
@@ -15,10 +16,13 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Missing name or phone" }, { status: 400 });
   }
 
+  const e164 = toUsE164(phone);
+  if (!e164) return NextResponse.json({ error: "Enter a valid US phone number" }, { status: 400 });
+
   const ok = await insertRow("contact_messages", {
     topic: str(body?.topic, 60) || "Something else",
     name,
-    phone,
+    phone: e164,
     message: str(body?.message, 2000),
     language: str(body?.language, 20) || "EN",
   });

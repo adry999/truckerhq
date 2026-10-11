@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { insertRow } from "@/lib/supabase";
+import { toUsE164 } from "@/lib/phone";
 import { guardLeadRoute, str, isHoneypotTripped } from "@/lib/api-guard";
 
 function sanitizeList(value: unknown, maxItems: number, maxLen: number): string[] {
@@ -20,11 +21,15 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Missing carrier" }, { status: 400 });
   }
 
+  const phone = str(body?.phone, 30);
+  const e164 = phone ? toUsE164(phone) : "";
+  if (e164 === null) return NextResponse.json({ error: "Enter a valid US phone number" }, { status: 400 });
+
   const ok = await insertRow("claims", {
     dot,
     carrier_slug: carrierSlug,
     contact_method: str(body?.contactMethod, 20),
-    phone: str(body?.phone, 30),
+    phone: e164,
     equipment: sanitizeList(body?.equipment, 10, 40),
     lanes: sanitizeList(body?.lanes, 10, 40),
     also_show: sanitizeList(body?.alsoShow, 10, 60),

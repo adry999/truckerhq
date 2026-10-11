@@ -1,19 +1,9 @@
 import "server-only";
 import type { Carrier, CarrierStatus } from "@/lib/data";
 
-/**
- * Live FMCSA QCMobile API client. Server-only: never import from a
- * client component. Needs FMCSA_WEBKEY (a free webKey from
- * https://mobile.fmcsa.dot.gov/QCDevsite/docs/apiAccess, obtained by the
- * site owner via login.gov — Claude cannot register one on your behalf).
- *
- * Field names below follow FMCSA's published QCMobile response shape as
- * documented at request time. FMCSA does not publish a machine-readable
- * schema, so if responses come back with unexpected shapes, re-check a
- * live response with your own webKey and adjust `toCarrier()` below —
- * every field read here is optional-chained so a renamed/missing field
- * degrades to "unknown" instead of throwing.
- */
+// FMCSA QCMobile API. Needs FMCSA_WEBKEY (free, from
+// https://mobile.fmcsa.dot.gov/QCDevsite/docs/apiAccess). FMCSA publishes no
+// response schema, so every field read in toCarrier() is optional.
 
 const BASE_URL = "https://mobile.fmcsa.dot.gov/qc/services/carriers";
 

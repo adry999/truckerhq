@@ -7,7 +7,8 @@ import SiteFooter from "@/components/SiteFooter";
 import ApplyForm from "@/components/ApplyForm";
 import JsonLd from "@/components/JsonLd";
 import CityJobsPage from "@/components/CityJobsPage";
-import { jobPostingSchema, faqSchema, breadcrumbSchema } from "@/lib/seo";
+import SampleDataNotice from "@/components/SampleDataNotice";
+import { faqSchema, breadcrumbSchema } from "@/lib/seo";
 import { JOBS, findJob, findCarrier, healthColor } from "@/lib/data";
 import { CITY_CONTENT, CITY_SLUGS, MIN_JOBS_TO_INDEX } from "@/lib/city-content";
 
@@ -43,6 +44,7 @@ export async function generateMetadata({
     description: `${job.title} at ${job.company}, ${job.loc}. ${job.pay} ${job.payNote}. ${job.home}.`,
     path: `/jobs/${slug}`,
     ogImage: false,
+    robots: { index: false, follow: true },
   });
 }
 
@@ -131,7 +133,6 @@ export default async function JobsSlugPage({
 
   return (
     <div className="flex min-h-screen flex-col">
-      <JsonLd data={jobPostingSchema(job)} />
       <SiteHeader />
 
       <section className="bg-asphalt text-offwhite">
@@ -166,6 +167,10 @@ export default async function JobsSlugPage({
 
       <section className="mx-auto grid w-full max-w-6xl gap-5 px-4 py-7 sm:px-6 md:grid-cols-[2fr_1fr] md:py-10">
         <div className="flex min-w-0 flex-col gap-5">
+          <SampleDataNotice>
+            Sample listing. This job and employer are illustrative. Apply and a
+            Trucker HQ recruiter will call you about real openings like it.
+          </SampleDataNotice>
           <div className="grid grid-cols-2 overflow-hidden rounded-lg border border-border bg-white sm:grid-cols-3">
             {facts.map(([k, v, c]) => (
               <div key={k} className="flex flex-col gap-1 border-b border-r border-[#ECEDEA] p-5">

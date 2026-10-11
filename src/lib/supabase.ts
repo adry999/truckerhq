@@ -9,7 +9,10 @@ const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
  * but can never read them back, by design.
  */
 export async function insertRow(table: string, row: Record<string, unknown>): Promise<boolean> {
-  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) return false;
+  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+    console.error("[supabase] SUPABASE_URL/SUPABASE_ANON_KEY not set; lead not saved");
+    return false;
+  }
 
   try {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}`, {
@@ -21,6 +24,7 @@ export async function insertRow(table: string, row: Record<string, unknown>): Pr
         Prefer: "return=minimal",
       },
       body: JSON.stringify(row),
+      signal: AbortSignal.timeout(5000),
     });
     if (!res.ok) {
       const detail = await res.text().catch(() => "");

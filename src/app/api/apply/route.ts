@@ -1,5 +1,6 @@
-import { NextResponse } from "next/server";
+import { NextResponse, after } from "next/server";
 import { insertRow } from "@/lib/supabase";
+import { toUsE164 } from "@/lib/phone";
 import { guardLeadRoute, str, isHoneypotTripped } from "@/lib/api-guard";
 import { notifyApplication } from "@/lib/notifications";
 
@@ -17,16 +18,19 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
   }
 
+  const e164 = toUsE164(phone);
+  if (!e164) return NextResponse.json({ error: "Enter a valid US phone number" }, { status: 400 });
+
   const ok = await insertRow("job_applications", {
     job_slug: jobSlug,
     full_name: fullName,
-    phone,
+    phone: e164,
     cdl_class: str(body?.cdlClass, 50),
     experience: str(body?.experience, 50),
     language: str(body?.language, 20) || "EN",
   });
 
   if (!ok) return NextResponse.json({ error: "Could not save application" }, { status: 502 });
-  await notifyApplication(phone, jobSlug);
+  after(() => notifyApplication(e164, jobSlug));
   return NextResponse.json({ ok: true });
 }
