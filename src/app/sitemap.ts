@@ -4,6 +4,7 @@ import { SITE_URL } from "@/shared/config/site";
 import { GUIDES, hasGuideBody } from "@/features/guides";
 import { STATE_DIRECTORY, STATE_DATA_IS_SAMPLE } from "@/features/carriers";
 import { CITY_DIRECTORY, CITY_CONTENT, isCityIndexable } from "@/features/jobs";
+import { DISPATCH_SERVICE_PAGES } from "@/features/dispatch";
 
 const BASE_URL = SITE_URL;
 
@@ -38,6 +39,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/sms-terms`, changeFrequency: "yearly", priority: 0.2 },
   ];
 
+  const servicePageRoutes: MetadataRoute.Sitemap = DISPATCH_SERVICE_PAGES.map((p) => ({
+    url: `${BASE_URL}/dispatch/${p.slug}`,
+    changeFrequency: "monthly",
+    priority: 0.8,
+  }));
+
   // Stub guides are noindex (see guides/[slug]); keep them out of the sitemap too.
   const guideRoutes: MetadataRoute.Sitemap = GUIDES.filter(hasGuideBody).map((g) => ({
     url: `${BASE_URL}/guides/${g.slug}`,
@@ -62,5 +69,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticRoutes, ...guideRoutes, ...stateRoutes, ...cityRoutes];
+  return [...staticRoutes, ...servicePageRoutes, ...guideRoutes, ...stateRoutes, ...cityRoutes];
 }

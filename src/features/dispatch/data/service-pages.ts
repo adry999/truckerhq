@@ -459,8 +459,8 @@ export const DISPATCH_SERVICE_PAGES: ServicePage[] = [
       {
         heading: "Before your authority is active",
         paragraphs: [
-          // REVIEW: protest period length deliberately not stated; confirm the current FMCSA rule before adding a number.
-          "After you apply, the FMCSA publishes your application and opens a protest period before authority goes live. Insurance filings must be on record too. Our New MC Checklist walks through each step in order.",
+          // 10 days from FMCSA Register publication: 49 CFR 365.203.
+          "After you apply, the FMCSA publishes your application in the FMCSA Register, and a 10-day protest period runs before authority goes live. Insurance filings must be on record too. Our New MC Checklist walks through each step in order.",
           "Do not sit waiting for that date. Use it to collect your setup documents and build the packet brokers ask for.",
         ],
         bullets: [

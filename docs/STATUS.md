@@ -29,6 +29,7 @@ _Last updated: 2026-10-28 (state pages on FMCSA census data)._
 | #22 | Cleanup: dead exports and files, build artifacts, docs refresh. |
 | #23 | Real FMCSA census stats on the 50 state pages (now indexable). |
 | #24 | Draft bodies for the 10 stub guides behind a review gate. ESLint ignores `.claude/worktrees`. |
+| #26 | RU tools hub + 3 RU tools, six `/dispatch/<service>` pages, protest period fix. |
 
 PR #16:
 - `next` 16.4.3, fixing the critical self-hosting advisories.
@@ -80,7 +81,8 @@ The migrations revoke anon access and add CHECKs that reject values an older bui
    - home H1 "Диспетчер для траков…";
    - dispatch H1 "…за фикс в неделю";
    - SMS templates (`RU_SMS_APPROVED=false`);
-   - consent text.
+   - consent text;
+   - RU tools (PR #26): `src/features/profit/data/profit-copy.ts`, `src/features/compliance/data/new-mc-checklist.ts`, `src/features/compliance/data/compliance-alerts-copy.ts`, `src/app/_tools/tools-hub-copy.ts`. Unsure terms: "Ставка безубыточности", "Толлы и весовые", "страховая подача (filing)", "Узнайте раньше брокера".
 8. Twilio A2P 10DLC. Happens after launch, because it needs the privacy/terms URLs live.
 
 Go-live steps: follow `docs/launch-runbook.md` top to bottom.
@@ -116,8 +118,11 @@ Go-live steps: follow `docs/launch-runbook.md` top to bottom.
 - [x] Real per-state FMCSA census stats (`src/features/carriers/data/states/census.json`, dataset `az4n-8mr2`). The 50 state pages are indexable and in the sitemap. Refresh with `npm run data:census` (about 1 minute, optional `SOCRATA_APP_TOKEN`), ideally quarterly, and commit the JSON.
 - [ ] Real job listings. City pages index automatically once there are enough non-sample jobs.
 - [x] Prose, formula, worked example and FAQPage on profit-per-mile and the carrier lookup. The numbers come from the model code.
-- [ ] New pages: `/pricing`, `/dispatch/new-authority`, `/dispatch/{dry-van,reefer,flatbed,…}`, `/jobs/russian-speaking`, `/tools/broker-check`.
-- [ ] RU versions of tools and guides. Author pages (E-E-A-T).
+- [x] Six service pages (PR #26): `/dispatch/{dry-van,reefer,flatbed,step-deck,power-only,new-authority}`, indexable, in the sitemap and llms.txt, linked from `/dispatch`. Content in `src/features/dispatch/data/service-pages.ts`. **Client review:** resolve the 9 `// REVIEW:` comments (equipment experience the team really has, oversize/permit loads out of scope, brokers that accept new MCs, Starter MC pricing after 6 months).
+- [x] Protest period fixed to 10 days from FMCSA Register publication (49 CFR 365.203) in the New MC checklist; it said 4 days.
+- [ ] New pages: `/pricing`, `/jobs/russian-speaking`, `/tools/broker-check`. RU versions of the service pages.
+- [x] RU tools (PR #26): `/ru/tools`, `/ru/tools/profit-per-mile`, `/ru/tools/new-mc-checklist`, `/ru/tools/compliance-alerts`, with hreflang pairs. Carrier lookup stays EN.
+- [ ] RU versions of guides. Author pages (E-E-A-T).
 - [ ] Organization `sameAs` once social and Google Business Profile URLs exist.
 
 ## Verification recipe

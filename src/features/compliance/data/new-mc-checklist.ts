@@ -45,7 +45,7 @@ export const NEW_MC_COPY: Record<Locale, NewMcCopy> = {
       {
         title: "USDOT & MC number",
         description:
-          "Issued by FMCSA when you register through the Unified Registration System. Your authority goes active after a 4-day protest period.",
+          "Issued by FMCSA when you register through the Unified Registration System. Your authority goes active after a 10-day protest period that starts when the application is published in the FMCSA Register.",
       },
       {
         title: "BOC-3 process agent",
@@ -137,7 +137,7 @@ export const NEW_MC_COPY: Record<Locale, NewMcCopy> = {
     faq: [
       {
         q: "How long does it take to get my MC?",
-        a: "USDOT and MC numbers are usually issued within a few business days of applying through URS. Your authority does not go active until a 4-day protest period passes and your BOC-3 and insurance filings are on file with FMCSA.",
+        a: "USDOT and MC numbers are usually issued within a few business days of applying through URS. Your authority does not go active until the 10-day protest period after FMCSA Register publication passes and your BOC-3 and insurance filings are on file with FMCSA.",
       },
       {
         q: "Can I haul loads before the safety audit?",
@@ -178,7 +178,7 @@ export const NEW_MC_COPY: Record<Locale, NewMcCopy> = {
       {
         title: "USDOT и MC",
         description:
-          "FMCSA выдаёт номера, когда вы регистрируетесь через Unified Registration System. Авторизация становится активной после 4-дневного периода протеста (protest period).",
+          "FMCSA выдаёт номера, когда вы регистрируетесь через Unified Registration System. Авторизация становится активной после 10-дневного периода протеста (protest period), который начинается с публикации заявки в FMCSA Register.",
       },
       {
         title: "BOC-3 (process agent)",
@@ -270,7 +270,7 @@ export const NEW_MC_COPY: Record<Locale, NewMcCopy> = {
     faq: [
       {
         q: "Сколько времени занимает получение MC?",
-        a: "Номера USDOT и MC обычно выдают через несколько рабочих дней после заявки в URS. Авторизация не станет активной, пока не пройдёт 4-дневный protest period и пока в FMCSA не появятся ваши BOC-3 и страховка.",
+        a: "Номера USDOT и MC обычно выдают через несколько рабочих дней после заявки в URS. Авторизация не станет активной, пока не пройдут 10 дней protest period после публикации в FMCSA Register и пока в FMCSA не появятся ваши BOC-3 и страховка.",
       },
       {
         q: "Можно ли возить грузы до safety audit?",

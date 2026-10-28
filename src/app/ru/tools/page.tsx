@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { languageAlternates } from "@/shared/i18n/alternates";
 import { buildMetadata } from "@/shared/seo/metadata";
-import { ToolsHub } from "../../_tools/ToolsHub";
+import { ToolsHub } from "@/app/_tools/ToolsHub";
 
 export const metadata: Metadata = buildMetadata({
   title: "Бесплатные инструменты для дальнобойщиков, без регистрации",
