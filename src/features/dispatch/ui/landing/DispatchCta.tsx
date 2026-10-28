@@ -14,7 +14,7 @@ export function DispatchCta({ c }: { c: DispatchCopy }) {
           </div>
           <div className="flex min-w-[280px] flex-col gap-3">
             <Link
-              href="/dispatch/start"
+              href={c.startHref}
               className="flex h-[60px] items-center justify-center rounded-xl bg-amber px-7 font-display text-2xl font-extrabold uppercase tracking-[.05em] text-asphalt hover:bg-amber-hover"
             >
               {c.ctaStart}

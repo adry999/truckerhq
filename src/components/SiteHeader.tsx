@@ -45,9 +45,7 @@ export default function SiteHeader({
 }: SiteHeaderProps) {
   const ru = lang === "RU";
   const homeHref = ru ? "/ru" : "/";
-  // No RU dispatch-start wizard exists yet; send everyone to the EN one
-  // rather than 404 on the primary CTA.
-  const startHref = "/dispatch/start";
+  const startHref = ru ? "/ru/dispatch/start" : "/dispatch/start";
   const t = (en: string, ruText: string) => (ru ? ruText : en);
 
   const navItems = NAV.map((item) => ({

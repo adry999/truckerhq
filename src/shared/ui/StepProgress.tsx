@@ -1,15 +1,25 @@
 import { cx } from "./cx";
 
+type StepStatus = { complete: string; step: (n: number, total: number, label: string) => string };
+
+const DEFAULT_STATUS: StepStatus = {
+  complete: "All steps complete",
+  step: (n, total, label) => `Step ${n} of ${total}: ${label}`,
+};
+
 export function StepProgress({
   steps,
   current,
   onSelect,
+  status = DEFAULT_STATUS,
 }: {
   steps: readonly string[];
   /** Zero-based active step; `steps.length` means every step is complete. */
   current: number;
   /** When set, completed steps become buttons that jump back. */
   onSelect?: (index: number) => void;
+  /** Screen-reader announcement texts; English by default. */
+  status?: StepStatus;
 }) {
   const complete = current >= steps.length;
   return (
@@ -44,7 +54,7 @@ export function StepProgress({
         })}
       </ol>
       <p role="status" aria-live="polite" className="sr-only">
-        {complete ? "All steps complete" : `Step ${current + 1} of ${steps.length}: ${steps[current]}`}
+        {complete ? status.complete : status.step(current + 1, steps.length, steps[current])}
       </p>
     </>
   );

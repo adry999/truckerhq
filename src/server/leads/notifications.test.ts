@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 
 const sendSms = vi.fn(async () => {});
 vi.mock("@/server/messaging/sms", () => ({ sendSms: (...args: unknown[]) => sendSms(...(args as [])) }));
-vi.mock("@/server/messaging/sms-throttle", () => ({ claimSmsSlot: () => true }));
+vi.mock("@/server/messaging/sms-throttle", () => ({ claimSmsSlot: async () => true }));
 
 import { notifyApplication, notifyComplianceAlertsOn, notifyDispatchStart, RU_SMS_APPROVED, smsLanguage } from "./notifications";
 

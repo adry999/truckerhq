@@ -1,5 +1,5 @@
 import "server-only";
-import { serverEnv } from "@/server/env";
+import { supabaseRest } from "@/server/db/supabase-rest";
 import { httpRequest } from "@/server/http/http-request";
 
 // These mirror the Supabase schema; generate them (`supabase gen types`) once project access is set up.
@@ -69,8 +69,6 @@ export type LeadTables = {
   };
 };
 
-let warnedAnonFallback = false;
-
 /**
  * Server-only insert into a Supabase table via PostgREST. The tables have RLS enabled
  * with no anon/authenticated policies (supabase/migrations), so only the secret key
@@ -81,28 +79,15 @@ export async function insertRow<T extends keyof LeadTables>(
   table: T,
   row: LeadTables[T],
 ): Promise<boolean> {
-  const { SUPABASE_URL, SUPABASE_SECRET_KEY, SUPABASE_ANON_KEY } = serverEnv();
-  const key = SUPABASE_SECRET_KEY ?? SUPABASE_ANON_KEY;
-  if (!SUPABASE_URL || !key) {
+  const rest = supabaseRest();
+  if (!rest) {
     console.error("[supabase] SUPABASE_URL and SUPABASE_SECRET_KEY not set; lead not saved");
     return false;
   }
-  if (!SUPABASE_SECRET_KEY && !warnedAnonFallback) {
-    warnedAnonFallback = true;
-    console.warn("[supabase] SUPABASE_SECRET_KEY not set; falling back to SUPABASE_ANON_KEY");
-  }
 
-  // sb_secret_ keys are not JWTs and go on `apikey` only; legacy JWT keys also need Bearer.
-  const headers: Record<string, string> = {
-    "Content-Type": "application/json",
-    apikey: key,
-    Prefer: "return=minimal",
-  };
-  if (!key.startsWith("sb_")) headers.Authorization = `Bearer ${key}`;
-
-  const result = await httpRequest("supabase", `${SUPABASE_URL}/rest/v1/${table}`, {
+  const result = await httpRequest("supabase", `${rest.baseUrl}/${table}`, {
     method: "POST",
-    headers,
+    headers: { ...rest.headers, "Content-Type": "application/json", Prefer: "return=minimal" },
     body: JSON.stringify(row),
   });
   return result.ok;

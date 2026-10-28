@@ -1,11 +1,10 @@
 import { describe, expect, it } from "vitest";
 import {
   buildPayload,
-  callTimePhrase,
   canAdvance,
   dispatchReducer,
   initialDispatchState,
-  languageName,
+  initialDispatchStateFor,
   setField,
 } from "./dispatch-start";
 
@@ -75,15 +74,9 @@ describe("buildPayload", () => {
   });
 });
 
-describe("copy helpers", () => {
-  it("maps call times to phrases with a fallback", () => {
-    expect(callTimePhrase("Right now")).toBe("in the next 15 minutes");
-    expect(callTimePhrase("Tomorrow PM")).toBe("tomorrow afternoon");
-    expect(callTimePhrase("Whenever")).toBe("soon");
-  });
-
-  it("names the call language", () => {
-    expect(languageName("English")).toBe("English");
-    expect(languageName("Русский")).toBe("Russian");
+describe("initialDispatchStateFor", () => {
+  it("defaults the call language to the page language", () => {
+    expect(initialDispatchStateFor("EN").data.language).toBe("English");
+    expect(initialDispatchStateFor("RU").data.language).toBe("Русский");
   });
 });

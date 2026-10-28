@@ -23,7 +23,7 @@ export default function JobsRuPage() {
       <main id="main-content" tabIndex={-1} className="flex flex-1 flex-col">
         <JobsBoard lang="RU" carrierScore={(s) => findCarrier(s)?.score} />
       </main>
-      <SiteFooter />
+      <SiteFooter lang="RU" />
     </div>
   );
 }

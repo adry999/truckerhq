@@ -139,3 +139,58 @@ describe("DispatchStartWizard", () => {
     );
   });
 });
+
+describe("DispatchStartWizard in Russian", () => {
+  it("shows Russian labels but posts the same English option values", async () => {
+    render(<DispatchStartWizard locale="RU" />);
+    expect(screen.getByRole("heading", { name: "Ваш трак" })).toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole("radio", { name: "Реф" }));
+    await userEvent.click(screen.getByRole("button", { name: "Далее" }));
+
+    expect(screen.getByRole("status")).toHaveTextContent("Шаг 2 из 4: Маршруты");
+    await userEvent.type(screen.getByLabelText("Домашняя база"), "Chicago, IL");
+    await userEvent.click(screen.getByRole("checkbox", { name: "Техас и юг" }));
+    await userEvent.click(screen.getByRole("button", { name: "Далее" }));
+    await userEvent.click(screen.getByRole("button", { name: "Далее" }));
+
+    await userEvent.type(screen.getByLabelText("Имя (обязательно)"), "Тест");
+    await userEvent.type(screen.getByLabelText("Телефон (обязательно)"), "(555) 555-5555");
+    const consent = screen.getByRole("checkbox", { name: /Я согласен получать SMS/ });
+    await userEvent.click(consent);
+    expect(screen.getByRole("radio", { name: "Русский" })).toBeChecked();
+    await userEvent.click(screen.getByRole("button", { name: "Заказать звонок" }));
+
+    const success = await screen.findByRole("heading", { name: "Заявка принята" });
+    expect(success).toHaveFocus();
+    expect(screen.getByText(/Диспетчер позвонит \(555\) 555-5555 сегодня, разговор будет на русском/)).toBeInTheDocument();
+
+    expect(JSON.parse(fetchMock.mock.calls[0][1].body)).toEqual({
+      trailerType: "Reefer",
+      trucks: 1,
+      driverType: "I drive",
+      homeBase: "Chicago, IL",
+      lanes: ["Midwest", "Texas & South"],
+      homeTime: "Every week",
+      authority: "I have an MC",
+      mcNumber: "",
+      name: "Тест",
+      phone: "(555) 555-5555",
+      bestTime: "Today",
+      language: "Русский",
+      website: "",
+      smsConsent: true,
+      smsConsentVersion: SMS_CONSENT_VERSION,
+    });
+  }, 15_000);
+
+  it("pluralizes trucks in the price summary", async () => {
+    render(<DispatchStartWizard locale="RU" />);
+    expect(screen.getByText("/ неделя × 1 трак")).toBeInTheDocument();
+    const more = screen.getByRole("button", { name: "Больше траков" });
+    await userEvent.click(more);
+    expect(screen.getByText("/ неделя × 2 трака")).toBeInTheDocument();
+    for (let i = 0; i < 3; i++) await userEvent.click(more);
+    expect(screen.getByText("/ неделя × 5 траков")).toBeInTheDocument();
+  });
+});

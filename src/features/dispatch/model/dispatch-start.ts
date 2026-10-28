@@ -1,4 +1,5 @@
 import { toggleInArray } from "@/shared/lib/array";
+import type { Locale } from "@/shared/i18n/locale";
 
 export const TRAILER_TYPES = ["Dry van", "Reefer", "Flatbed", "Step deck", "Power only"];
 export const DRIVER_TYPES = ["I drive", "Company driver", "Team"];
@@ -17,17 +18,9 @@ export const NO_AUTHORITY = "I don't have one yet";
 export const BEST_TIME_OPTIONS = ["Right now", "Today", "Tomorrow AM", "Tomorrow PM"];
 export const LANGUAGE_OPTIONS = ["English", "Русский"];
 
-export const STEP_LABELS = ["Truck", "Lanes", "Authority", "Call"] as const;
 export const CALL_STEP = 3;
 export const DONE_STEP = 4;
 export const MAX_TRUCKS = 50;
-
-const TIME_PHRASES: Record<string, string> = {
-  "Right now": "in the next 15 minutes",
-  Today: "today",
-  "Tomorrow AM": "tomorrow morning",
-  "Tomorrow PM": "tomorrow afternoon",
-};
 
 export type DispatchData = {
   trailer: string;
@@ -67,7 +60,7 @@ export function setField<K extends keyof DispatchData>(field: K, value: Dispatch
   return { type: "set", field, value } as DispatchAction;
 }
 
-export const initialDispatchState: DispatchState = {
+const BASE_STATE: DispatchState = {
   step: 0,
   data: {
     trailer: "Dry van",
@@ -86,6 +79,13 @@ export const initialDispatchState: DispatchState = {
   status: "idle",
   error: null,
 };
+
+export const initialDispatchState: DispatchState = BASE_STATE;
+
+/** The language the visitor is most likely to want on the call; the API value, not a label. */
+export function initialDispatchStateFor(locale: Locale): DispatchState {
+  return { ...BASE_STATE, data: { ...BASE_STATE.data, language: locale === "RU" ? "Русский" : "English" } };
+}
 
 export function dispatchReducer(state: DispatchState, action: DispatchAction): DispatchState {
   switch (action.type) {
@@ -129,12 +129,4 @@ export function buildPayload(data: DispatchData, website: string) {
     language: data.language,
     website,
   };
-}
-
-export function callTimePhrase(bestTime: string): string {
-  return TIME_PHRASES[bestTime] ?? "soon";
-}
-
-export function languageName(language: string): string {
-  return language === "English" ? "English" : "Russian";
 }

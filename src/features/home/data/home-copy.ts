@@ -227,7 +227,7 @@ export const HOME_COPY: Record<Locale, HomeCopy> = {
       "Скидки по топливной карте",
       "Ваш сайт и профиль в Google",
     ],
-    dispatchCardCtaHref: "/dispatch/start",
+    dispatchCardCtaHref: "/ru/dispatch/start",
     dispatchCardCtaLabel: "Начать работу",
     smallServices: [
       {
@@ -286,7 +286,7 @@ export const HOME_COPY: Record<Locale, HomeCopy> = {
     pricingUnit: "/ неделя за трак",
     pricingBody:
       "Включено: диспетчер в вашем часовом поясе, торг за каждый груз, проверка брокеров, скидки по топливной карте, выставление счетов, ваш сайт и профиль в Google.",
-    pricingCtaHref: "/dispatch/start",
+    pricingCtaHref: "/ru/dispatch/start",
     pricingCtaLabel: "Начать работу",
     callLabel: "Звоните 24/7",
     exampleEyebrow: "ПРИМЕР · $8 000 GROSS В НЕДЕЛЮ",
