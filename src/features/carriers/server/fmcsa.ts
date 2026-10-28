@@ -177,12 +177,3 @@ export async function searchFmcsaCarriers(query: string): Promise<Carrier[] | nu
   if (!envelope) return null;
   return extractCarriers(envelope).map(toCarrier);
 }
-
-/** Look up a single carrier by DOT number for a profile page. */
-export async function fetchFmcsaCarrierByDot(dot: string): Promise<Carrier | null> {
-  if (!isDotNumber(dot) || !fmcsaEnabled()) return null;
-  const envelope = await fmcsaFetch(`/${dot}`);
-  if (!envelope) return null;
-  const [raw] = extractCarriers(envelope);
-  return raw ? toCarrier(raw) : null;
-}

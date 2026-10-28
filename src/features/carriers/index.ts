@@ -9,4 +9,3 @@ export { CARRIERS } from "@/features/carriers/data/carriers";
 export { STATE_CONTENT, STATE_SLUGS, STATE_DATA_IS_SAMPLE } from "@/features/carriers/data/states";
 export type { Carrier, CarrierStatus, StateCarrierRow, StateContentEntry } from "@/features/carriers/model/carriers.types";
 export { LOOKUP_FAQ } from "@/features/carriers/model/guide";
-export { SEARCH_PATH } from "@/features/carriers/model/lookup";

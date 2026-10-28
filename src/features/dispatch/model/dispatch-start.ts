@@ -18,7 +18,7 @@ export const NO_AUTHORITY = "I don't have one yet";
 export const BEST_TIME_OPTIONS = ["Right now", "Today", "Tomorrow AM", "Tomorrow PM"];
 export const LANGUAGE_OPTIONS = ["English", "Русский"];
 
-export const LANES_STEP = 1;
+const LANES_STEP = 1;
 export const CALL_STEP = 3;
 export const DONE_STEP = 4;
 export const MAX_TRUCKS = 50;

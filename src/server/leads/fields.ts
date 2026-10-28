@@ -11,7 +11,7 @@ function clean(value: unknown, max: number): string {
 /** Anything goes in; a trimmed string capped at `max` comes out ("" for non-strings). */
 export const text = (max: number) => anyInput.transform((v) => clean(v, max));
 
-export const REQUIRED_MESSAGE = "This field is required";
+const REQUIRED_MESSAGE = "This field is required";
 
 export const requiredText = (max: number, error: string = REQUIRED_MESSAGE) =>
   anyInput.transform((v, ctx) => {

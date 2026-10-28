@@ -2,7 +2,7 @@ import { SITE_URL } from "@/shared/config/site";
 import { PHONE_IS_PLACEHOLDER, PHONE_SCHEMA } from "@/shared/config/contact";
 
 export const ORG_ID = `${SITE_URL}/#org`;
-export const WEBSITE_ID = `${SITE_URL}/#website`;
+const WEBSITE_ID = `${SITE_URL}/#website`;
 
 const BRAND = "Trucker HQ";
 

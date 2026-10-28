@@ -6,7 +6,8 @@ description: TruckerHQ structure and module rules - where code goes, who may imp
 # TruckerHQ conventions
 
 Design and migration plan: `docs/superpowers/specs/2026-10-09-architecture-design.md`.
-Findings this builds on: `docs/audit/2026-10-09-codebase-audit.md`.
+Findings this builds on: `docs/audit/2026-10-09-codebase-audit.md`, `docs/audit/2026-10-28/` (launch audit).
+Current state, blockers and next steps: `docs/STATUS.md`. Go-live steps: `docs/launch-runbook.md`.
 
 ## Stack
 
@@ -18,9 +19,11 @@ Next.js 16 App Router (read `node_modules/next/dist/docs/` before Next APIs, see
 src/
 ├── app/         routes and composition only; the only place that wires several features together
 ├── features/    one folder per business capability: index.ts + model/ + ui/ (+ server/, data/ when needed)
-├── shared/      used by 2+ features: ui/, hooks/, lib/ (pure helpers), client/ (browser: analytics, consent, postJson), seo/ (metadata, structured data, OG), config/ (site, contact)
-├── server/      server-only infrastructure: env, http, db, messaging, leads
-└── components/  LEGACY: site chrome and pages not yet moved to a feature
+├── shared/      used by 2+ features: ui/, hooks/, lib/ (pure helpers), client/ (browser: analytics, consent, postJson), seo/ (metadata, structured data, OG), config/ (site, contact, sms-consent, turnstile), i18n/
+├── server/      server-only infrastructure: env, integrations, http (guard, turnstile, request), db (supabase-rest, insert-row), messaging, leads
+├── components/  LEGACY: site chrome and pages not yet moved to a feature
+└── instrumentation.ts  startup integration log
+supabase/migrations/  lead tables, RLS lockdown, sms_sends, language normalization (see supabase/README.md)
 ```
 
 - No new files in `components/`. New code goes to a feature or to `shared/`; site chrome (header, footer, layout) may stay in `components/` until it gets its own home.
@@ -55,9 +58,13 @@ Wizards: one reducer in `model/` (`{ step, data }`), one component per step, `St
 
 ## Server
 
-- Server config only through `server/env.ts` (validated, read at first use). The only other `process.env` reads are build-time public values that Next inlines literally: `shared/client/analytics.ts` (`NEXT_PUBLIC_*`) and `shared/config/site.ts` (`NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_INDEXABLE`).
+- Server config only through `server/env.ts` (validated, read at first use). The only other `process.env` reads are build-time public values that Next inlines literally: `shared/client/analytics.ts` (`NEXT_PUBLIC_GA_ID`, `NEXT_PUBLIC_META_PIXEL_ID`), `shared/config/site.ts` (`NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_INDEXABLE`) and `shared/config/turnstile.ts` (`NEXT_PUBLIC_TURNSTILE_SITE_KEY`).
 - Outbound HTTP through `server/http/http-request.ts`. Lead routes through `server/leads/create-lead-handler.ts` with a zod schema per route.
 - Modules that do I/O or read secrets start with `import "server-only"`. Pure validation (`server/leads/fields.ts`) doesn't need it.
+- Every lead POST goes through `guardLeadRoute`: optional `x-origin-secret` (Cloudflare Transform Rule), required `Origin`, rate limit keyed on `CF-Connecting-IP`, then Turnstile verify inside the handler.
+- Validation errors return `{ error, fields }` keyed by request body field; forms show them inline.
+- Supabase: inserts use `SUPABASE_SECRET_KEY` via `server/db/supabase-rest.ts`; anon has no access (RLS + revoke). New tables get RLS + a `service_role` grant in a migration under `supabase/migrations/`, idempotent, validated on a local Postgres before merge.
+- SMS only with stored consent evidence (`SMS_CONSENT_VERSION`); bump the version whenever the wording changes.
 
 ## UI
 
@@ -97,5 +104,9 @@ Wizards: one reducer in `model/` (`{ step, data }`), one component per step, `St
 | 2026-10-09 | The lead pipeline stays in `server/leads/`, not `features/leads/`. | It is infrastructure shared by six routes with no UI of its own. |
 | 2026-10-09 | Repo in `main\` with sibling worktrees. | Worktrees stay outside every tool's scan and out of `git status`. |
 | 2026-10-09 | `lib/` split into shared/{seo,config,client,lib}, server/leads/notifications and feature data; deleted. | The grab-bag blocked the layer rules (features and server/ had to import `@/lib`); each file now lives where its consumers' dependency direction allows. |
+| 2026-10-28 | Self-host on Hostinger (Node.js Web App) behind Cloudflare; off Vercel. Domain `truckerhq.us`. | Client's existing plan; `.com` taken. Client IP = `CF-Connecting-IP`, nothing else trusted. |
+| 2026-10-28 | Indexing is opt-in (`NEXT_PUBLIC_INDEXABLE=true`); sample-data pages are noindex behind data flags (`hasGuideBody`, `STATE_DATA_IS_SAMPLE`, sample jobs). | Staging/temp domains and thin pages must never reach the index of a new domain. |
+| 2026-10-28 | Turnstile and Supabase secret key fail open (skip) when unset; production readiness is logged at startup and listed in the runbook. | Dev/staging work without keys; a crash loop on Hostinger is worse than a logged warning. |
+| 2026-10-28 | Migrations that tighten constraints ship after the app change that writes compliant values. | CHECKs would reject inserts from the previous build. |
 | 2026-10-09 | Notifications take resolved values (job title) from the route, so server/ never imports a feature. | `server/` may not depend on features; the route lives in `app/`, which may, so it does the `findJob` lookup. |
 | 2026-10-09 | Home page job rows: `features/home` exports a pure `homeJobRows(lang, jobs)` over a structural job type; `HomePageContent` passes `JOBS`. | The copy used to import `JOBS` (feature to feature); the composing component may import both feature indexes. |
