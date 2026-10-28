@@ -27,6 +27,8 @@ _Last updated: 2026-10-28 (state pages on FMCSA census data)._
 | #20 | Durable SMS throttle (`sms_sends`), startup integration log, `/api/health`, RU dispatch wizard and RU footer. |
 | #21 | Field-level form errors, static carrier lookup (+ `/search`), tool guides with FAQPage, CSP report endpoint, language normalization. |
 | #22 | Cleanup: dead exports and files, build artifacts, docs refresh. |
+| #23 | Real FMCSA census stats on the 50 state pages (now indexable). |
+| #24 | Draft bodies for the 10 stub guides behind a review gate. ESLint ignores `.claude/worktrees`. |
 
 PR #16:
 - `next` 16.4.3, fixing the critical self-hosting advisories.
@@ -107,7 +109,10 @@ Go-live steps: follow `docs/launch-runbook.md` top to bottom.
 
 ### SEO / content (highest growth impact, needs client input)
 
-- [ ] Write the 10 stub guides, answer-first. Flip `hasGuideBody` per guide.
+- [~] 10 guide drafts are written (PR #24) in `src/features/guides/data/bodies/`. **Client review needed:**
+  1. Preview each draft on `npm run dev`. Drafts show a banner.
+  2. Resolve the `// REVIEW:` comments.
+  3. Set `reviewStatus: "approved"` per guide. The guide is then indexed and added to the sitemap automatically.
 - [x] Real per-state FMCSA census stats (`src/features/carriers/data/states/census.json`, dataset `az4n-8mr2`). The 50 state pages are indexable and in the sitemap. Refresh with `npm run data:census` (about 1 minute, optional `SOCRATA_APP_TOKEN`), ideally quarterly, and commit the JSON.
 - [ ] Real job listings. City pages index automatically once there are enough non-sample jobs.
 - [x] Prose, formula, worked example and FAQPage on profit-per-mile and the carrier lookup. The numbers come from the model code.
