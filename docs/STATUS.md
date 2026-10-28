@@ -30,6 +30,7 @@ _Last updated: 2026-10-28 (state pages on FMCSA census data)._
 | #23 | Real FMCSA census stats on the 50 state pages (now indexable). |
 | #24 | Draft bodies for the 10 stub guides behind a review gate. ESLint ignores `.claude/worktrees`. |
 | #26 | RU tools hub + 3 RU tools, six `/dispatch/<service>` pages, protest period fix. |
+| #27 | `/pricing` (EN + RU) and `/jobs/russian-speaking`. |
 
 PR #16:
 - `next` 16.4.3, fixing the critical self-hosting advisories.
@@ -120,7 +121,8 @@ Go-live steps: follow `docs/launch-runbook.md` top to bottom.
 - [x] Prose, formula, worked example and FAQPage on profit-per-mile and the carrier lookup. The numbers come from the model code.
 - [x] Six service pages (PR #26): `/dispatch/{dry-van,reefer,flatbed,step-deck,power-only,new-authority}`, indexable, in the sitemap and llms.txt, linked from `/dispatch`. Content in `src/features/dispatch/data/service-pages.ts`. **Client review:** resolve the 9 `// REVIEW:` comments (equipment experience the team really has, oversize/permit loads out of scope, brokers that accept new MCs, Starter MC pricing after 6 months).
 - [x] Protest period fixed to 10 days from FMCSA Register publication (49 CFR 365.203) in the New MC checklist; it said 4 days.
-- [ ] New pages: `/pricing`, `/jobs/russian-speaking`, `/tools/broker-check`. RU versions of the service pages.
+- [x] `/pricing` + `/ru/pricing` and `/jobs/russian-speaking` (PR #27), in the footer, sitemap and llms.txt. No Offer JSON-LD until prices are real. **Client review:** `// REVIEW:` in `src/app/_pricing/pricing-copy.ts` (no setup fee, payment method, Starter MC after 6 months) and `src/features/jobs/data/russian-speaking-copy.ts` (English-proficiency wording, CDL test language).
+- [ ] New pages: `/tools/broker-check`. RU versions of the service pages.
 - [x] RU tools (PR #26): `/ru/tools`, `/ru/tools/profit-per-mile`, `/ru/tools/new-mc-checklist`, `/ru/tools/compliance-alerts`, with hreflang pairs. Carrier lookup stays EN.
 - [ ] RU versions of guides. Author pages (E-E-A-T).
 - [ ] Organization `sameAs` once social and Google Business Profile URLs exist.
