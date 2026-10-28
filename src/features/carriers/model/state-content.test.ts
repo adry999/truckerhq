@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { buildStateContent } from "@/features/carriers/model/state-content";
+import { buildStateContent, formatCensusDate } from "@/features/carriers/model/state-content";
+import type { CensusSource, StateCensus } from "@/features/carriers/model/census.schema";
 import type { StateData } from "@/features/carriers/model/state-data.schema";
 
 const raw: StateData = {
@@ -7,46 +8,57 @@ const raw: StateData = {
   stateName: "Alabama",
   heroImage: "https://example.com/hero.jpg",
   heroAlt: "Alabama hero",
-  stats: ["16,500", "398", "73", "2.6"],
-  equipmentBreakdown: [{ t: "Dry van", pct: 44 }],
-  topCities: [{ t: "Birmingham", count: "4,610" }],
-  equipmentOptions: ["All", "Dry van"],
   dispatchCtaBody: "dispatch body",
   hireCtaBody: "hire body",
-  carriers: [
-    { name: "Magic City Freight Lines", city: "Birmingham", dot: "6014287", equipment: "Dry van", trucks: 9, status: "ACTIVE", score: 88 },
-  ],
+};
+
+const census: StateCensus = {
+  activeForHire: 7074,
+  newLast12Months: 1094,
+  smallFleetCount: 5500,
+  smallFleetShare: 77.8,
+  powerUnits: 61234,
+  drivers: 70000,
+  topCities: [{ city: "Birmingham", count: 810 }],
+};
+
+const source: CensusSource = {
+  name: "FMCSA Company Census File",
+  url: "https://data.transportation.gov/d/az4n-8mr2",
+  datasetId: "az4n-8mr2",
+  fetchedAt: "2026-10-28T18:47:00.897Z",
+  filters: "test",
 };
 
 describe("buildStateContent", () => {
-  it("fills the state-name templates", () => {
-    const entry = buildStateContent(raw);
-    expect(entry.title).toBe("Alabama Carriers — DOT/MC Directory");
-    expect(entry.description).toBe(
-      "For-hire interstate carriers based in Alabama. Search DOT and MC numbers, filter by equipment and check any carrier's Health Score.",
-    );
-    expect(entry.heroDescription).toBe(
-      "For-hire interstate carriers based in Alabama. Search, filter and check any Health Score.",
-    );
+  it("puts the formatted carrier count in the title, description and hero", () => {
+    const entry = buildStateContent(raw, census, source);
+    expect(entry.title).toBe("Alabama trucking carriers: 7,074 active for-hire carriers (FMCSA data)");
+    expect(entry.description).toContain("7,074 active interstate for-hire carriers");
+    expect(entry.heroDescription).toContain("7,074");
     expect(entry.dispatchCtaEyebrow).toBe("ALABAMA OWNER-OPERATOR?");
     expect(entry.dispatchCtaTitle).toBe("Flat dispatch out of Alabama");
   });
 
-  it("labels the stats and takes the total count from the first one", () => {
-    const entry = buildStateContent(raw);
-    expect(entry.totalCount).toBe("16,500");
+  it("formats the census stats and top cities", () => {
+    const entry = buildStateContent(raw, census, source);
+    expect(entry.totalCount).toBe("7,074");
     expect(entry.stats).toEqual([
-      { big: "16,500", small: "Active for-hire carriers" },
-      { big: "398", small: "New MCs in the last 30 days" },
-      { big: "73", small: "Average Health Score" },
-      { big: "2.6", small: "Trucks per carrier, average" },
+      { big: "7,074", small: "Active for-hire carriers" },
+      { big: "1,094", small: "New carriers in the last 12 months" },
+      { big: "78%", small: "Small fleets (1-5 power units)" },
+      { big: "61,234", small: "Power units registered" },
     ]);
+    expect(entry.topCities).toEqual([{ t: "Birmingham", count: "810" }]);
   });
 
   it("lets a raw override win over its template", () => {
-    const entry = buildStateContent({ ...raw, description: "Custom", dispatchCtaTitle: "Custom title" });
+    const entry = buildStateContent({ ...raw, description: "Custom", dispatchCtaTitle: "Custom title" }, census, source);
     expect(entry.description).toBe("Custom");
     expect(entry.dispatchCtaTitle).toBe("Custom title");
-    expect(entry.title).toBe("Alabama Carriers — DOT/MC Directory");
+  });
+
+  it("formats the source date as month and year", () => {
+    expect(formatCensusDate(source.fetchedAt)).toBe("October 2026");
   });
 });

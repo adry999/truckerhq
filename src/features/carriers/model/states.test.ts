@@ -7,12 +7,10 @@ describe("state content integrity", () => {
     expect(STATE_SLUGS).toHaveLength(50);
   });
 
-  it("every entry has carriers and non-empty content", () => {
+  it("every entry has census stats and non-empty content", () => {
     for (const slug of STATE_SLUGS) {
       const entry = STATE_CONTENT[slug];
-      expect(entry.carriers.length, `${slug} carriers`).toBeGreaterThan(0);
-      expect(entry.stats.length, `${slug} stats`).toBeGreaterThan(0);
-      expect(entry.equipmentBreakdown.length, `${slug} equipmentBreakdown`).toBeGreaterThan(0);
+      expect(entry.stats.length, `${slug} stats`).toBe(4);
       expect(entry.topCities.length, `${slug} topCities`).toBeGreaterThan(0);
       expect(entry.title).toContain(entry.stateName);
     }

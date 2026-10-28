@@ -12,6 +12,7 @@
     "test:coverage": "vitest run --coverage",
     "test:e2e": "playwright test",
     "typecheck": "next typegen && tsc --noEmit",
+    "data:census": "node scripts/fmcsa-state-stats.mjs",
     "check:placeholders": "node scripts/check-placeholders.mjs"
   },
   "dependencies": {

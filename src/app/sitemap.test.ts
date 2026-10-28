@@ -11,8 +11,8 @@ describe("sitemap", () => {
     expect(guideUrls).toHaveLength(1);
   });
 
-  it("leaves out state pages while their data is sample", () => {
-    expect(urls().some((u) => /\/carriers\/[^/]+$/.test(u))).toBe(false);
+  it("lists all 50 state pages now that their data is real FMCSA census data", () => {
+    expect(urls().filter((u) => /\/carriers\/[^/]+$/.test(u))).toHaveLength(50);
   });
 
   it("leaves out city pages that have no real jobs", () => {
