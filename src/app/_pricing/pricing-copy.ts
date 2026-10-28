@@ -70,7 +70,7 @@ export const PRICING_COPY: Record<Locale, PricingCopy> = {
       {
         // REVIEW: client to confirm accepted payment methods (ACH, card, other).
         q: "How do I pay?",
-        a: "You pay the weekly price by bank transfer or card. We confirm the method when you sign up.",
+        a: "You pay the flat price once a week. We agree the payment method with you when you sign up.",
       },
       {
         // REVIEW: client to confirm the Starter MC 6-month graduation terms.
@@ -152,7 +152,7 @@ export const PRICING_COPY: Record<Locale, PricingCopy> = {
       {
         // REVIEW: client to confirm accepted payment methods (ACH, card, other).
         q: "Как платить?",
-        a: "Вы платите еженедельную цену банковским переводом или картой. Способ мы уточним при подключении.",
+        a: "Вы платите фиксированную цену раз в неделю. Способ оплаты согласуем при подключении.",
       },
       {
         // REVIEW: client to confirm the Starter MC 6-month graduation terms.
