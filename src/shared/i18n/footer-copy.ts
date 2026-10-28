@@ -19,7 +19,9 @@ export const FOOTER_COPY: Record<Locale, FooterCopy> = {
         h: "SERVICES",
         links: [
           { t: "Dispatch", href: "/dispatch" },
+          { t: "Pricing", href: "/pricing" },
           { t: "Driver Jobs", href: "/jobs" },
+          { t: "Russian-speaking jobs", href: "/jobs/russian-speaking" },
           { t: "Hire Drivers", href: "/hire-drivers" },
         ],
       },
@@ -57,6 +59,7 @@ export const FOOTER_COPY: Record<Locale, FooterCopy> = {
         h: "УСЛУГИ",
         links: [
           { t: "Диспетчинг", href: "/ru/dispatch" },
+          { t: "Цены", href: "/ru/pricing" },
           { t: "Работа для водителей", href: "/ru/jobs" },
           { t: "Найм водителей", href: "/hire-drivers" },
         ],

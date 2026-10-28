@@ -18,7 +18,7 @@ describe("sitemap", () => {
   });
 
   it("leaves out city pages that have no real jobs", () => {
-    expect(urls().some((u) => /\/jobs\/[^/]+$/.test(u))).toBe(false);
+    expect(urls().some((u) => /\/jobs\/(?!russian-speaking$)[^/]+$/.test(u))).toBe(false);
   });
 
   it("lists every dispatch service page", () => {
@@ -30,6 +30,12 @@ describe("sitemap", () => {
   it("lists the Russian tool pages with hreflang pairs", () => {
     const ru = sitemap().find((e) => e.url === `${SITE_URL}/ru/tools/profit-per-mile`);
     expect(ru?.alternates?.languages).toMatchObject({ en: `${SITE_URL}/tools/profit-per-mile` });
+  });
+
+  it("lists the pricing pair and the Russian-speaking jobs page", () => {
+    expect(urls()).toEqual(
+      expect.arrayContaining([`${SITE_URL}/pricing`, `${SITE_URL}/ru/pricing`, `${SITE_URL}/jobs/russian-speaking`]),
+    );
   });
 
   it("keeps the static routes", () => {

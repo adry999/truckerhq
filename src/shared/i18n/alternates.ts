@@ -7,6 +7,7 @@ export const LOCALIZED_ROUTES = [
   { en: "/dispatch", ru: "/ru/dispatch" },
   { en: "/jobs", ru: "/ru/jobs" },
   { en: "/dispatch/start", ru: "/ru/dispatch/start" },
+  { en: "/pricing", ru: "/ru/pricing" },
   { en: "/tools", ru: "/ru/tools" },
   { en: "/tools/profit-per-mile", ru: "/ru/tools/profit-per-mile" },
   { en: "/tools/new-mc-checklist", ru: "/ru/tools/new-mc-checklist" },
