@@ -40,3 +40,14 @@ export function setConsent(value: "granted" | "denied"): void {
   cached = value;
   listeners.forEach((l) => l());
 }
+
+/** Forgets the stored choice so the banner asks again ("Cookie settings"). */
+export function resetConsent(): void {
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+  } catch {
+    // localStorage unavailable — the choice only lived in memory anyway.
+  }
+  cached = undefined;
+  listeners.forEach((l) => l());
+}

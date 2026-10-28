@@ -44,7 +44,7 @@ export type DispatchCopy = {
 export const DISPATCH_COPY: Record<Locale, DispatchCopy> = {
   EN: {
     heroAlt: "Driver in the cab at a truck stop, dawn",
-    h1Line1: "Flat weekly dispatch.",
+    h1Line1: "Flat weekly truck dispatch.",
     h1Line2: "No percentage.",
     heroBody:
       "We find the loads, push for the rate and do the paperwork. You pay one price every week, no matter how much you gross.",
@@ -134,7 +134,7 @@ export const DISPATCH_COPY: Record<Locale, DispatchCopy> = {
   },
   RU: {
     heroAlt: "Водитель в кабине на стоянке для дальнобойщиков, рассвет",
-    h1Line1: "Фиксированная цена в неделю.",
+    h1Line1: "Диспетчер для траков за фикс в неделю.",
     h1Line2: "Без процентов.",
     heroBody:
       "Мы находим грузы, торгуемся за ставку и делаем документы. Вы платите одну цену каждую неделю, независимо от вашей выручки.",

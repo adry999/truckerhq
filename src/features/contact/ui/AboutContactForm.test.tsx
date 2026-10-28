@@ -7,7 +7,7 @@ import AboutContactForm from "./AboutContactForm";
 afterEach(() => vi.unstubAllGlobals());
 
 async function fillAndSubmit() {
-  await userEvent.click(screen.getByRole("button", { name: "RU" }));
+  await userEvent.click(screen.getByRole("radio", { name: "RU" }));
   await userEvent.type(screen.getByLabelText(/^Name/), "Ann Driver");
   await userEvent.type(screen.getByLabelText(/^Phone/), "5551234567");
   await userEvent.click(screen.getByRole("button", { name: "Call me back" }));

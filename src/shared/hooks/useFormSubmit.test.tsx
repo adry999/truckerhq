@@ -60,3 +60,28 @@ describe("useFormSubmit", () => {
     );
   });
 });
+
+function FocusForm() {
+  const { status, onSubmit, successRef } = useFormSubmit({ endpoint: "/api/test", buildBody: () => ({}) });
+  if (status === "sent") {
+    return (
+      <h2 ref={successRef} tabIndex={-1}>
+        Thanks
+      </h2>
+    );
+  }
+  return (
+    <form onSubmit={onSubmit}>
+      <button type="submit">Go</button>
+    </form>
+  );
+}
+
+describe("useFormSubmit success focus", () => {
+  it("moves focus to the success heading once sent", async () => {
+    stubFetch(async () => new Response("{}", { status: 200 }));
+    render(<FocusForm />);
+    await userEvent.click(screen.getByRole("button", { name: "Go" }));
+    expect(await screen.findByRole("heading", { name: "Thanks" })).toHaveFocus();
+  });
+});

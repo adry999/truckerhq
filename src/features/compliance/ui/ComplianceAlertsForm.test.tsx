@@ -28,7 +28,7 @@ describe("ComplianceAlertsForm", () => {
     render(<ComplianceAlertsForm />);
     await userEvent.click(screen.getByLabelText(/New inspections and crashes/));
     await userEvent.click(screen.getByLabelText(/UCR registration/));
-    await userEvent.click(screen.getByRole("button", { name: "Русский" }));
+    await userEvent.click(screen.getByRole("radio", { name: "Русский" }));
     await fillAndSubmit();
     expect(await screen.findByText("Alerts are on")).toBeInTheDocument();
     expect(screen.getByText(/watching 5 items for 3412897/)).toBeInTheDocument();

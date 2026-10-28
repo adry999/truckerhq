@@ -48,24 +48,26 @@ export default async function StateCarriersRoute({
       />
       <div className="flex min-h-screen flex-col">
         <SiteHeader />
-        <StateCarriersView
-          stateAbbr={entry.stateAbbr}
-          stateName={entry.stateName}
-          heroImage={entry.heroImage}
-          heroAlt={entry.heroAlt}
-          heroDescription={entry.heroDescription}
-          stats={entry.stats}
-          equipmentBreakdown={entry.equipmentBreakdown}
-          topCities={entry.topCities}
-          equipmentOptions={entry.equipmentOptions}
-          carriers={entry.carriers}
-          totalCount={entry.totalCount}
-          dispatchCtaEyebrow={entry.dispatchCtaEyebrow}
-          dispatchCtaTitle={entry.dispatchCtaTitle}
-          dispatchCtaBody={entry.dispatchCtaBody}
-          hireCtaBody={entry.hireCtaBody}
-          basePath={`/carriers/${state}`}
-        />
+        <main id="main-content" tabIndex={-1} className="flex flex-1 flex-col">
+          <StateCarriersView
+            stateAbbr={entry.stateAbbr}
+            stateName={entry.stateName}
+            heroImage={entry.heroImage}
+            heroAlt={entry.heroAlt}
+            heroDescription={entry.heroDescription}
+            stats={entry.stats}
+            equipmentBreakdown={entry.equipmentBreakdown}
+            topCities={entry.topCities}
+            equipmentOptions={entry.equipmentOptions}
+            carriers={entry.carriers}
+            totalCount={entry.totalCount}
+            dispatchCtaEyebrow={entry.dispatchCtaEyebrow}
+            dispatchCtaTitle={entry.dispatchCtaTitle}
+            dispatchCtaBody={entry.dispatchCtaBody}
+            hireCtaBody={entry.hireCtaBody}
+            basePath={`/carriers/${state}`}
+          />
+        </main>
         <SiteFooter />
       </div>
     </>

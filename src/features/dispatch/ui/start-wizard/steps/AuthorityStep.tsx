@@ -27,14 +27,17 @@ export function AuthorityStep({ data, dispatch, headingRef }: StepProps) {
           label="MC/DOT number"
           hint={
             <span className="text-[13px] text-grey">
-              We&apos;ll pull your record from FMCSA so you don&apos;t have to type it.
+              MC or USDOT number. We&apos;ll pull your record from FMCSA so you don&apos;t have to type it.
             </span>
           }
         >
           <TextInput
             value={data.mcNumber}
             onChange={(e) => dispatch(setField("mcNumber", e.target.value))}
-            placeholder="MC 1182044"
+            placeholder="1182044"
+            inputMode="numeric"
+            autoComplete="off"
+            maxLength={16}
           />
         </Field>
       ) : (

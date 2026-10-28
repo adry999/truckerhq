@@ -70,17 +70,19 @@ export default async function JobsSlugPage({
         />
         <div className="flex min-h-screen flex-col">
           <SiteHeader />
-          <CityJobsView
-            cityName={city.cityName}
-            stateName={city.stateName}
-            heroIntro={city.heroIntro}
-            stats={city.stats}
-            jobs={city.jobs}
-            faqs={city.faqs}
-            hiringCarriers={city.hiringCarriers}
-            nearbyCities={city.nearbyCities}
-            basePath={`/jobs/${slug}`}
-          />
+          <main id="main-content" tabIndex={-1} className="flex flex-1 flex-col">
+            <CityJobsView
+              cityName={city.cityName}
+              stateName={city.stateName}
+              heroIntro={city.heroIntro}
+              stats={city.stats}
+              jobs={city.jobs}
+              faqs={city.faqs}
+              hiringCarriers={city.hiringCarriers}
+              nearbyCities={city.nearbyCities}
+              basePath={`/jobs/${slug}`}
+            />
+          </main>
           <SiteFooter />
         </div>
       </>
@@ -94,7 +96,9 @@ export default async function JobsSlugPage({
   return (
     <div className="flex min-h-screen flex-col">
       <SiteHeader />
-      <JobDetail job={job} carrier={carrier} />
+      <main id="main-content" tabIndex={-1} className="flex flex-1 flex-col">
+        <JobDetail job={job} carrier={carrier} />
+      </main>
       <SiteFooter />
     </div>
   );

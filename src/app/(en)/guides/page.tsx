@@ -19,7 +19,9 @@ export default function GuidesPage() {
     <div className="flex min-h-screen flex-col">
       <JsonLd data={guidesListSchema(GUIDES, SITE_URL)} />
       <SiteHeader />
-      <GuidesIndex />
+      <main id="main-content" tabIndex={-1} className="flex flex-1 flex-col">
+        <GuidesIndex />
+      </main>
       <SiteFooter />
     </div>
   );

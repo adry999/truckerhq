@@ -1,5 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { articleSchema } from "@/shared/seo/structured-data";
+import { SITE_URL } from "@/shared/config/site";
 import { buildMetadata } from "@/shared/seo/metadata";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
@@ -37,19 +39,24 @@ export default async function GuideDetailPage({
   const guide = findGuide(slug);
   if (!guide) notFound();
 
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: guide.title,
-    author: { "@type": "Person", name: guide.author },
+  // The byline is a placeholder until a real author is set; credit the organization then.
+  const hasRealAuthor = !/name/i.test(guide.author);
+  const schema = articleSchema({
+    title: guide.title,
+    path: `/guides/${slug}`,
     datePublished: guide.date,
-  };
+    author: hasRealAuthor ? guide.author : undefined,
+    // The per-guide OG route gets a build hash in its URL, so point at the stable root image.
+    image: `${SITE_URL}/opengraph-image`,
+  });
 
   return (
     <div className="flex min-h-screen flex-col">
       {hasGuideBody(guide) && <JsonLd data={schema} />}
       <SiteHeader />
-      <GuideArticle guide={guide} />
+      <main id="main-content" tabIndex={-1} className="flex flex-1 flex-col">
+        <GuideArticle guide={guide} />
+      </main>
       <SiteFooter />
     </div>
   );

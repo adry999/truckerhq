@@ -1,27 +1,24 @@
 "use client";
 
+import { useRef } from "react";
+import { useBodyInset } from "@/shared/hooks/useBodyInset";
+
 type Consent = "granted" | "denied";
 
+// onChoice persists the choice (see setConsent in shared/client/consent).
 export default function ConsentBanner({
   onChoice,
 }: {
   onChoice: (consent: Consent) => void;
 }) {
-  function choose(consent: Consent) {
-    try {
-      localStorage.setItem("chq_consent", consent);
-    } catch {
-      // localStorage unavailable (private mode, blocked) — consent still
-      // applies for this page view via component state.
-    }
-    onChoice(consent);
-  }
+  const ref = useRef<HTMLElement>(null);
+  // Fixed bar: pad the page by its height so it never covers a submit button.
+  useBodyInset(ref, true);
 
   return (
-    <div
-      role="dialog"
+    <section
+      ref={ref}
       aria-label="Cookie consent"
-      aria-live="polite"
       className="fixed inset-x-0 bottom-0 z-50 border-t border-white/15 bg-asphalt text-offwhite"
     >
       <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
@@ -33,21 +30,23 @@ export default function ConsentBanner({
           </a>
           .
         </p>
-        <div className="flex shrink-0 gap-2">
+        <div className="grid shrink-0 grid-cols-2 gap-2 sm:flex">
           <button
-            onClick={() => choose("denied")}
-            className="flex h-11 items-center rounded-[10px] border border-white/30 px-4 text-sm font-semibold text-offwhite hover:border-amber"
+            type="button"
+            onClick={() => onChoice("denied")}
+            className="flex h-12 items-center justify-center rounded-[10px] border border-white/30 px-4 text-sm font-semibold text-offwhite hover:border-amber sm:h-11"
           >
             Decline
           </button>
           <button
-            onClick={() => choose("granted")}
-            className="flex h-11 items-center rounded-[10px] bg-amber px-4 text-sm font-bold text-asphalt hover:bg-amber-hover"
+            type="button"
+            onClick={() => onChoice("granted")}
+            className="flex h-12 items-center justify-center rounded-[10px] bg-amber px-4 text-sm font-bold text-asphalt hover:bg-amber-hover sm:h-11"
           >
             Accept
           </button>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

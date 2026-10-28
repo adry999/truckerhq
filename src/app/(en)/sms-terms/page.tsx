@@ -4,6 +4,8 @@ import LegalDocLayout from "@/components/LegalDocLayout";
 
 export const metadata: Metadata = buildMetadata({
   title: "SMS Terms",
+  description:
+    "How Trucker HQ text messages work: what you receive, message and data rates, and how to reply STOP or HELP.",
   path: "/sms-terms",
 });
 

@@ -18,7 +18,9 @@ export default function JobsPage() {
   return (
     <div className="flex min-h-screen flex-col">
       <SiteHeader />
-      <JobsBoard lang="EN" carrierScore={(s) => findCarrier(s)?.score} />
+      <main id="main-content" tabIndex={-1} className="flex flex-1 flex-col">
+        <JobsBoard lang="EN" carrierScore={(s) => findCarrier(s)?.score} />
+      </main>
       <SiteFooter />
     </div>
   );

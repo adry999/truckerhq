@@ -1,4 +1,100 @@
 import { SITE_URL } from "@/shared/config/site";
+import { PHONE_IS_PLACEHOLDER, PHONE_SCHEMA } from "@/shared/config/contact";
+
+export const ORG_ID = `${SITE_URL}/#org`;
+export const WEBSITE_ID = `${SITE_URL}/#website`;
+
+const BRAND = "Trucker HQ";
+
+/** Sitewide entity graph: the organization and the website it publishes. */
+export function siteGraphSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": ORG_ID,
+        name: BRAND,
+        url: SITE_URL,
+        logo: `${SITE_URL}/icon.svg`,
+        description:
+          "Flat-rate truck dispatch, CDL driver jobs and free carrier tools built on public FMCSA data.",
+        areaServed: { "@type": "Country", name: "United States" },
+        knowsLanguage: ["en", "ru"],
+        // sameAs stays out until real profile URLs exist.
+        ...(PHONE_IS_PLACEHOLDER
+          ? {}
+          : {
+              contactPoint: {
+                "@type": "ContactPoint",
+                contactType: "dispatch",
+                telephone: PHONE_SCHEMA,
+                availableLanguage: ["English", "Russian"],
+              },
+            }),
+      },
+      {
+        "@type": "WebSite",
+        "@id": WEBSITE_ID,
+        name: BRAND,
+        url: SITE_URL,
+        inLanguage: ["en", "ru"],
+        publisher: { "@id": ORG_ID },
+      },
+    ],
+  };
+}
+
+/** Pass `offer` only once a real price exists; the page still shows a placeholder today. */
+export function dispatchServiceSchema(offer?: { price: string; currency?: string }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${SITE_URL}/dispatch#service`,
+    name: "Truck dispatching for owner-operators",
+    serviceType: "Truck dispatching",
+    url: `${SITE_URL}/dispatch`,
+    description:
+      "Dispatch for owner-operators and small fleets at one flat weekly price per truck, never a percentage of the load.",
+    provider: { "@id": ORG_ID },
+    areaServed: { "@type": "Country", name: "United States" },
+    audience: {
+      "@type": "Audience",
+      audienceType: "Owner-operators and small trucking fleets",
+    },
+    ...(offer
+      ? {
+          offers: {
+            "@type": "Offer",
+            price: offer.price,
+            priceCurrency: offer.currency ?? "USD",
+            url: `${SITE_URL}/dispatch`,
+          },
+        }
+      : {}),
+  };
+}
+
+export function articleSchema(article: {
+  title: string;
+  path: string;
+  datePublished: string;
+  dateModified?: string;
+  author?: string;
+  image: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: article.title,
+    datePublished: article.datePublished,
+    dateModified: article.dateModified ?? article.datePublished,
+    author: article.author ? { "@type": "Person", name: article.author } : { "@id": ORG_ID },
+    publisher: { "@id": ORG_ID },
+    mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE_URL}${article.path}` },
+    image: article.image,
+  };
+}
 
 export function contactPageSchema(page: {
   name: string;
@@ -12,8 +108,7 @@ export function contactPageSchema(page: {
     name: page.name,
     url: page.url,
     about: {
-      "@type": "Organization",
-      name: "Trucker HQ",
+      "@id": ORG_ID,
       contactPoint: {
         "@type": "ContactPoint",
         contactType: "customer service",

@@ -20,7 +20,9 @@ export default function JobsRuPage() {
   return (
     <div className="flex min-h-screen flex-col">
       <SiteHeader lang="RU" enHref="/jobs" ruHref="/ru/jobs" />
-      <JobsBoard lang="RU" carrierScore={(s) => findCarrier(s)?.score} />
+      <main id="main-content" tabIndex={-1} className="flex flex-1 flex-col">
+        <JobsBoard lang="RU" carrierScore={(s) => findCarrier(s)?.score} />
+      </main>
       <SiteFooter />
     </div>
   );

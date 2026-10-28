@@ -14,11 +14,11 @@ const LANGUAGES = ["Any", "English", "Russian"];
 
 const FIELDS = [
   { key: "companyName", label: "Company name", placeholder: "Your company", type: "text", autoComplete: "organization" },
-  { key: "dotNumber", label: "DOT number", placeholder: "6–8 digits", type: "text", autoComplete: "off" },
+  { key: "dotNumber", label: "DOT number", placeholder: "6–8 digits", type: "text", autoComplete: "off", inputMode: "numeric", pattern: "[0-9 ]*" },
   { key: "contactName", label: "Your name", placeholder: "Who we call", type: "text", autoComplete: "name" },
-  { key: "phone", label: "Phone", placeholder: "(555) 555-5555", type: "tel", autoComplete: "tel" },
+  { key: "phone", label: "Phone", placeholder: "(555) 555-5555", type: "tel", autoComplete: "tel", inputMode: "tel" },
   { key: "pay", label: "Pay", placeholder: "e.g. $0.70/mi or $1,800/wk", type: "text", autoComplete: "off" },
-  { key: "homeBase", label: "Home base", placeholder: "City, state", type: "text", autoComplete: "address-level2" },
+  { key: "homeBase", label: "Home base", placeholder: "City, state", type: "text", autoComplete: "address-level2", enterKeyHint: "next" },
 ] as const;
 
 type FieldKey = (typeof FIELDS)[number]["key"];
@@ -36,7 +36,7 @@ export default function HireDriversForm() {
   const [eq, setEq] = useState("Dry van");
   const [lang, setLang] = useState("Any");
 
-  const { status, error, onSubmit } = useFormSubmit({
+  const { status, error, onSubmit, successRef } = useFormSubmit({
     endpoint: "/api/hire-drivers",
     buildBody: () => ({ ...fields, position: pos, equipment: eq, driverLanguage: lang }),
     onSuccess: () => trackEvent("hire_driver_post", { position: pos }),
@@ -45,9 +45,13 @@ export default function HireDriversForm() {
   if (status === "sent") {
     return (
       <div className="flex flex-col gap-2.5 rounded-lg border-[1.5px] border-green bg-green-tint p-7">
-        <span className="font-display text-3xl font-extrabold uppercase leading-tight text-green">
+        <h2
+          ref={successRef}
+          tabIndex={-1}
+          className="font-display text-3xl font-extrabold uppercase leading-tight text-green outline-none"
+        >
           Job received
-        </span>
+        </h2>
         <span className="text-base leading-relaxed">
           We will call you within one business day to confirm the details and
           put your job live.
@@ -67,6 +71,9 @@ export default function HireDriversForm() {
               type={f.type}
               name={f.key}
               autoComplete={f.autoComplete}
+              inputMode={"inputMode" in f ? f.inputMode : undefined}
+              pattern={"pattern" in f ? f.pattern : undefined}
+              enterKeyHint={"enterKeyHint" in f ? f.enterKeyHint : undefined}
               value={fields[f.key]}
               onChange={(e) => setFields((prev) => ({ ...prev, [f.key]: e.target.value }))}
               placeholder={f.placeholder}

@@ -29,7 +29,7 @@ describe("DispatchStartWizard", () => {
     render(<DispatchStartWizard />);
     expect(screen.getByRole("heading", { name: "Your truck" })).toBeInTheDocument();
 
-    await userEvent.click(screen.getByRole("button", { name: "Reefer" }));
+    await userEvent.click(screen.getByRole("radio", { name: "Reefer" }));
     await userEvent.click(screen.getByRole("button", { name: "More trucks" }));
     await next();
 
@@ -40,7 +40,7 @@ describe("DispatchStartWizard", () => {
     await userEvent.click(screen.getByRole("checkbox", { name: "Texas & South" }));
     await next();
 
-    await userEvent.type(screen.getByLabelText("MC/DOT number"), "MC 1182044");
+    await userEvent.type(screen.getByLabelText("MC/DOT number"), "1182044");
     await next();
 
     await userEvent.type(screen.getByLabelText("Name (required)"), "Test Driver");
@@ -62,7 +62,7 @@ describe("DispatchStartWizard", () => {
       lanes: ["Midwest", "Texas & South"],
       homeTime: "Every week",
       authority: "I have an MC",
-      mcNumber: "MC 1182044",
+      mcNumber: "1182044",
       name: "Test Driver",
       phone: "(555) 555-5555",
       bestTime: "Today",

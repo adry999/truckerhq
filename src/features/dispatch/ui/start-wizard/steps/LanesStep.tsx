@@ -15,6 +15,8 @@ export function LanesStep({ data, dispatch, headingRef }: StepProps) {
           value={data.homeBase}
           onChange={(e) => dispatch(setField("homeBase", e.target.value))}
           placeholder="City, state"
+          autoComplete="address-level2"
+          enterKeyHint="next"
         />
       </Field>
       <ChoiceGroup

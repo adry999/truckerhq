@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { postJson } from "@/shared/client/post-json";
 
 type Status = "idle" | "submitting" | "sent" | "error";
@@ -18,6 +18,12 @@ export function useFormSubmit<T extends object>({
 }) {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
+  /** Attach to the success heading (`tabIndex={-1}`): it takes focus once the form is sent. */
+  const successRef = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    if (status === "sent") successRef.current?.focus();
+  }, [status]);
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -40,5 +46,5 @@ export function useFormSubmit<T extends object>({
     setError(null);
   }
 
-  return { status, error, onSubmit, reset };
+  return { status, error, onSubmit, reset, successRef };
 }

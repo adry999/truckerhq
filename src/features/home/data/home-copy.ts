@@ -56,7 +56,7 @@ export type HomeCopy = {
 export const HOME_COPY: Record<Locale, HomeCopy> = {
   EN: {
     eyebrow: "Dispatch · CDL jobs · Free carrier tools",
-    h1: "Dispatch that picks up at 3 a.m.",
+    h1: "Truck dispatch that picks up at 3 a.m.",
     heroBody:
       "Flat weekly rate, never a percentage. English and Russian-speaking dispatchers on every US time zone. CDL jobs and free carrier checks on the same site.",
     searchAriaLabel: "Search carriers",
@@ -201,7 +201,7 @@ export const HOME_COPY: Record<Locale, HomeCopy> = {
   },
   RU: {
     eyebrow: "Диспетчинг · Работа CDL · Бесплатные инструменты",
-    h1: "Диспетчер, который ответит в 3 часа ночи",
+    h1: "Диспетчер для траков, который ответит в 3 часа ночи",
     heroBody:
       "Фиксированная цена в неделю, никаких процентов. Диспетчеры говорят по-английски и по-русски, во всех часовых поясах США. Работа для водителей CDL и бесплатная проверка перевозчиков на одном сайте.",
     searchAriaLabel: "Поиск перевозчиков",

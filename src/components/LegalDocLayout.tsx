@@ -29,48 +29,50 @@ export default function LegalDocLayout({
   return (
     <div className="flex min-h-screen flex-col">
       <SiteHeader />
+      <main id="main-content" tabIndex={-1} className="flex flex-1 flex-col">
 
-      <section className="mx-auto flex w-full max-w-[760px] flex-1 flex-col gap-[22px] px-4 py-14 sm:px-6 md:py-20">
-        <h1 className="font-display text-4xl font-extrabold md:text-5xl">
-          {title}
-        </h1>
+        <section className="mx-auto flex w-full max-w-[760px] flex-1 flex-col gap-[22px] px-4 py-14 sm:px-6 md:py-20">
+          <h1 className="font-display text-4xl font-extrabold md:text-5xl">
+            {title}
+          </h1>
 
-        <p className="text-sm text-grey">Last updated: {lastUpdated}</p>
+          <p className="text-sm text-grey">Last updated: {lastUpdated}</p>
 
-        <div className="rounded-lg bg-[#FFF7E0] p-5 text-[15px] leading-relaxed text-[#4B5058]">
-          Outline only. The final text must be written or reviewed by a
-          lawyer before launch.
-        </div>
-
-        {sections.map((s) => (
-          <div key={s.heading} className="flex flex-col gap-2">
-            <h2 className="font-display text-2xl font-extrabold">
-              {s.heading}
-            </h2>
-            <p className="text-base leading-relaxed text-[#3F444B]">
-              {s.body}
-            </p>
+          <div className="rounded-lg bg-[#FFF7E0] p-5 text-[15px] leading-relaxed text-[#4B5058]">
+            Outline only. The final text must be written or reviewed by a
+            lawyer before launch.
           </div>
-        ))}
 
-        <div className="flex flex-wrap gap-x-6 gap-y-2 border-t border-border pt-6">
-          {otherDocs.map((d) => (
-            <Link
-              key={d.href}
-              href={d.href}
-              className="text-[15px] font-semibold text-green hover:underline"
-            >
-              {d.label} →
-            </Link>
+          {sections.map((s) => (
+            <div key={s.heading} className="flex flex-col gap-2">
+              <h2 className="font-display text-2xl font-extrabold">
+                {s.heading}
+              </h2>
+              <p className="text-base leading-relaxed text-[#3F444B]">
+                {s.body}
+              </p>
+            </div>
           ))}
-        </div>
 
-        <p className="text-sm text-grey">
-          Questions: hello@{SITE_HOST} · Trucker HQ, Street address, City,
-          ST 00000
-        </p>
-      </section>
+          <div className="flex flex-wrap gap-x-6 gap-y-2 border-t border-border pt-6">
+            {otherDocs.map((d) => (
+              <Link
+                key={d.href}
+                href={d.href}
+                className="text-[15px] font-semibold text-green hover:underline"
+              >
+                {d.label} →
+              </Link>
+            ))}
+          </div>
 
+          <p className="text-sm text-grey">
+            Questions: hello@{SITE_HOST} · Trucker HQ, Street address, City,
+            ST 00000
+          </p>
+        </section>
+
+      </main>
       <SiteFooter />
     </div>
   );
