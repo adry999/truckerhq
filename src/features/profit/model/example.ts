@@ -19,7 +19,7 @@ export const EXAMPLE_INPUTS: ProfitInputs = {
   weekMiles: 2500,
 };
 
-export function weeklyFixed(i: ProfitInputs): number {
+function weeklyFixed(i: ProfitInputs): number {
   return i.truckPayment + i.trailerPayment + i.insurance + i.otherWeekly + i.dispatchFee;
 }
 

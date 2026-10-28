@@ -23,6 +23,10 @@ _Last updated: 2026-10-28._
 | #16 | See the list below. |
 | #17 | The default email sender is derived from `SITE_HOST`. |
 | #18 | See the list below. |
+| #19 | This status file and the README refresh. |
+| #20 | Durable SMS throttle (`sms_sends`), startup integration log, `/api/health`, RU dispatch wizard and RU footer. |
+| #21 | Field-level form errors, static carrier lookup (+ `/search`), tool guides with FAQPage, CSP report endpoint, language normalization. |
+| #22 | Cleanup: dead exports and files, build artifacts, docs refresh. |
 
 PR #16:
 - `next` 16.4.3, fixing the critical self-hosting advisories.
@@ -46,6 +50,16 @@ PR #18:
 - `docs/launch-runbook.md`.
 
 Audit reports and the original plan are in `docs/audit/2026-10-28/`.
+
+## Deploy order (migrations)
+
+1. Set `SUPABASE_SECRET_KEY` and deploy the current `main`.
+2. Apply, in order:
+   1. `20261028000000_leads`
+   2. `20261028010000_sms_sends`
+   3. `20261028020000_normalize_language`
+
+The migrations revoke anon access and add CHECKs that reject values an older build would write. See `supabase/README.md`.
 
 ## Blocked on the client (launch blockers)
 
@@ -88,7 +102,8 @@ Go-live steps: follow `docs/launch-runbook.md` top to bottom.
 - [x] Lead `language` normalized to EN/RU (driver_language EN/RU/ANY), with migration `20261028020000`. **Deploy the app before applying it.**
 - [x] The dispatch wizard requires at least one lane.
 - [x] Dropped the unused `count` / `jobs` fields from the jobs data.
-- [ ] Error monitoring (Sentry) and an uptime monitor.
+- [ ] Error monitoring (Sentry): needs a DSN. Uptime monitor: point it at `GET /api/health`.
+- [ ] Disconnect the Vercel GitHub integration. Hosting moved to Hostinger, and the Vercel preview check fails with a rate limit on PRs.
 
 ### SEO / content (highest growth impact, needs client input)
 

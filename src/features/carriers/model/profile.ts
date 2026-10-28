@@ -1,9 +1,9 @@
 import type { Carrier } from "@/features/carriers/model/carriers.types";
 
 // National out-of-service averages the sample profiles are compared against.
-export const NATIONAL_OOS = { vehicle: 22.3, driver: 6.7 } as const;
+const NATIONAL_OOS = { vehicle: 22.3, driver: 6.7 } as const;
 
-export const NEW_MC_MONTHS = 6;
+const NEW_MC_MONTHS = 6;
 
 const GOOD = "#0E5C3A";
 const BAD = "#B42318";

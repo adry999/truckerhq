@@ -23,7 +23,7 @@ const [rcCyr800, rcLat800, interCyr500, interLat500, interCyr600, interLat600] =
 
 // Satori keeps one font per family name and weight, so each subset gets its own
 // family and the CSS font stack falls back from Cyrillic to Latin per glyph.
-export const ruOgFonts: OgFont[] = [
+const ruOgFonts: OgFont[] = [
   { name: "Roboto Condensed Cyrillic", data: rcCyr800, weight: 800, style: "normal" },
   { name: "Roboto Condensed Latin", data: rcLat800, weight: 800, style: "normal" },
   { name: "Inter Cyrillic", data: interCyr500, weight: 500, style: "normal" },
