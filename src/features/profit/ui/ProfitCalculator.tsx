@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 import { Button } from "@/shared/ui/Button";
+import { getCopy, type Locale } from "@/shared/i18n/locale";
 import { Card } from "@/shared/ui/Card";
+import { PROFIT_COPY } from "../data/profit-copy";
 import { EXAMPLE_INPUTS } from "../model/example";
 import { calcProfit, type ProfitInputs } from "../model/profit";
 import { NumberField } from "./NumberField";
@@ -16,43 +18,37 @@ const DEFAULT_VALUES = Object.fromEntries(
 
 type FieldConfig = {
   key: keyof ProfitInputs;
-  label: string;
   step: number;
   prefix?: string;
-  suffix?: string;
-  note?: string;
 };
 
-const GROUPS: { title: string; hint: string; fields: FieldConfig[] }[] = [
+const GROUPS: { id: "load" | "running" | "fixed"; fields: FieldConfig[] }[] = [
   {
-    title: "The load",
-    hint: "From the rate con",
+    id: "load",
     fields: [
-      { key: "loadPay", label: "Load pay", prefix: "$", step: 50 },
-      { key: "loadedMiles", label: "Loaded miles", suffix: "mi", step: 10 },
-      { key: "deadheadMiles", label: "Deadhead miles", suffix: "mi", step: 10, note: "Empty miles to pickup" },
+      { key: "loadPay", prefix: "$", step: 50 },
+      { key: "loadedMiles", step: 10 },
+      { key: "deadheadMiles", step: 10 },
     ],
   },
   {
-    title: "Running costs",
-    hint: "Change with every mile",
+    id: "running",
     fields: [
-      { key: "fuelPrice", label: "Diesel price", prefix: "$", suffix: "/ gal", step: 0.01 },
-      { key: "mpg", label: "Fuel economy", suffix: "mpg", step: 0.1 },
-      { key: "maintenancePerMile", label: "Tires & maintenance", prefix: "$", suffix: "/ mi", step: 0.01 },
-      { key: "tolls", label: "Tolls & scales", prefix: "$", suffix: "this load", step: 5 },
+      { key: "fuelPrice", prefix: "$", step: 0.01 },
+      { key: "mpg", step: 0.1 },
+      { key: "maintenancePerMile", prefix: "$", step: 0.01 },
+      { key: "tolls", prefix: "$", step: 5 },
     ],
   },
   {
-    title: "Fixed weekly costs",
-    hint: "Paid even when parked",
+    id: "fixed",
     fields: [
-      { key: "truckPayment", label: "Truck payment", prefix: "$", suffix: "/ wk", step: 25 },
-      { key: "trailerPayment", label: "Trailer", prefix: "$", suffix: "/ wk", step: 25 },
-      { key: "insurance", label: "Insurance", prefix: "$", suffix: "/ wk", step: 25 },
-      { key: "otherWeekly", label: "ELD, permits, phone", prefix: "$", suffix: "/ wk", step: 25 },
-      { key: "dispatchFee", label: "Dispatch fee", prefix: "$", suffix: "/ wk", step: 25, note: "Trucker HQ flat: $XXX / wk" },
-      { key: "weekMiles", label: "Miles per week", suffix: "mi", step: 50, note: "Spreads fixed costs per mile" },
+      { key: "truckPayment", prefix: "$", step: 25 },
+      { key: "trailerPayment", prefix: "$", step: 25 },
+      { key: "insurance", prefix: "$", step: 25 },
+      { key: "otherWeekly", prefix: "$", step: 25 },
+      { key: "dispatchFee", prefix: "$", step: 25 },
+      { key: "weekMiles", step: 50 },
     ],
   },
 ];
@@ -65,7 +61,8 @@ function parseInputs(values: FieldValues): ProfitInputs {
   return parsed;
 }
 
-export function ProfitCalculator() {
+export function ProfitCalculator({ lang = "EN" }: { lang?: Locale }) {
+  const copy = getCopy(PROFIT_COPY, lang);
   const [values, setValues] = useState<FieldValues>(DEFAULT_VALUES);
   const result = calcProfit(parseInputs(values));
 
@@ -73,33 +70,36 @@ export function ProfitCalculator() {
     <div className="grid gap-6 lg:grid-cols-[1fr_1fr]">
       <div className="flex min-w-0 flex-col gap-5">
         {GROUPS.map((group) => (
-          <Card key={group.title} className="flex flex-col gap-4 p-[22px]">
+          <Card key={group.id} className="flex flex-col gap-4 p-[22px]">
             <div className="flex items-baseline justify-between gap-3">
-              <h2 className="font-display text-2xl font-extrabold uppercase">{group.title}</h2>
-              <span className="text-[13px] text-grey">{group.hint}</span>
+              <h2 className="font-display text-2xl font-extrabold uppercase">{copy.groups[group.id].title}</h2>
+              <span className="text-[13px] text-grey">{copy.groups[group.id].hint}</span>
             </div>
             <div className="grid gap-3.5 sm:grid-cols-2">
-              {group.fields.map((field) => (
-                <NumberField
-                  key={field.key}
-                  label={field.label}
-                  prefix={field.prefix}
-                  suffix={field.suffix}
-                  note={field.note}
-                  step={field.step}
-                  value={values[field.key]}
-                  onChange={(value) => setValues((prev) => ({ ...prev, [field.key]: value }))}
-                />
-              ))}
+              {group.fields.map((field) => {
+                const text = copy.fields[field.key];
+                return (
+                  <NumberField
+                    key={field.key}
+                    label={text.label}
+                    prefix={field.prefix}
+                    suffix={text.suffix}
+                    note={text.note}
+                    step={field.step}
+                    value={values[field.key]}
+                    onChange={(value) => setValues((prev) => ({ ...prev, [field.key]: value }))}
+                  />
+                );
+              })}
             </div>
           </Card>
         ))}
         <Button variant="outline" onClick={() => setValues(DEFAULT_VALUES)} className="w-fit">
-          Reset to example
+          {copy.reset}
         </Button>
       </div>
 
-      <ProfitResults result={result} />
+      <ProfitResults result={result} lang={lang} />
     </div>
   );
 }

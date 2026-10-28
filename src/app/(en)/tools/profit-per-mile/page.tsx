@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { languageAlternates } from "@/shared/i18n/alternates";
 import { buildMetadata } from "@/shared/seo/metadata";
 import { faqSchema } from "@/shared/seo/structured-data";
 import JsonLd from "@/components/JsonLd";
@@ -12,6 +13,7 @@ export const metadata: Metadata = buildMetadata({
     "Enter the load and your costs. See your real profit and the lowest rate per mile worth taking.",
   path: "/tools/profit-per-mile",
   ogImage: false,
+  languages: languageAlternates("/tools/profit-per-mile"),
 });
 
 export default function ProfitCalculatorPage() {
