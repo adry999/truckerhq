@@ -1,15 +1,5 @@
 export type CarrierStatus = "ACTIVE" | "WARNING" | "INACTIVE";
 
-export type StateCarrierRow = {
-  name: string;
-  city: string;
-  dot: string;
-  equipment: string;
-  trucks: number;
-  status: CarrierStatus;
-  score: number;
-};
-
 export type Carrier = {
   slug: string;
   name: string;
@@ -40,13 +30,16 @@ export type StateContentEntry = {
   heroAlt: string;
   heroDescription: string;
   stats: { big: string; small: string }[];
-  equipmentBreakdown: { t: string; pct: number }[];
   topCities: { t: string; count: string }[];
-  equipmentOptions: readonly string[];
   totalCount: string;
+  /** Raw census figures behind the page, for Dataset JSON-LD. */
+  census: { activeForHire: number; powerUnits: number; drivers: number };
+  sourceName: string;
+  sourceUrl: string;
+  /** ISO timestamp the census was fetched. */
+  sourceFetchedAt: string;
   dispatchCtaEyebrow: string;
   dispatchCtaTitle: string;
   dispatchCtaBody: string;
   hireCtaBody: string;
-  carriers: StateCarrierRow[];
 };

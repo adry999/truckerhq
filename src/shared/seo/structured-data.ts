@@ -151,6 +151,29 @@ export function faqSchema(faq: { q: string; a: string }[]) {
   };
 }
 
+/** schema.org Dataset for a page whose numbers come from a public data source. */
+export function datasetSchema(dataset: {
+  name: string;
+  description: string;
+  path: string;
+  sourceName: string;
+  sourceUrl: string;
+  dateModified: string;
+  variables: string[];
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    name: dataset.name,
+    description: dataset.description,
+    url: `${SITE_URL}${dataset.path}`,
+    dateModified: dataset.dateModified,
+    variableMeasured: dataset.variables,
+    isBasedOn: { "@type": "Dataset", name: dataset.sourceName, url: dataset.sourceUrl },
+    isAccessibleForFree: true,
+  };
+}
+
 export function breadcrumbSchema(items: { name: string; path: string }[]) {
   return {
     "@context": "https://schema.org",

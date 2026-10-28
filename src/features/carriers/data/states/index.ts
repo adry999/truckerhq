@@ -1,6 +1,8 @@
 import { buildStateContent } from "@/features/carriers/model/state-content";
 import { parseStateData } from "@/features/carriers/model/state-data.schema";
+import { parseCensus } from "@/features/carriers/model/census.schema";
 import type { StateContentEntry } from "@/features/carriers/model/carriers.types";
+import censusJson from "./census.json";
 import alabama from "./alabama.json";
 import alaska from "./alaska.json";
 import arizona from "./arizona.json";
@@ -105,15 +107,21 @@ const RAW_STATES: Record<string, unknown> = {
   "wyoming": wyoming,
 };
 
+const CENSUS = parseCensus(censusJson);
+
 /**
- * The per-state stats, city lists and carrier rows in ./*.json are sample data, not
- * FMCSA figures. While true, state pages are noindex and out of the sitemap.
- * Flip to false once the numbers come from the FMCSA census.
+ * Every state's numbers come from the FMCSA census (./census.json, refreshed with
+ * `npm run data:census`), and STATE_CONTENT throws if a state lacks them. Set this to
+ * true again only if sample data is reintroduced: it noindexes the pages and drops them from the sitemap.
  */
-export const STATE_DATA_IS_SAMPLE = true;
+export const STATE_DATA_IS_SAMPLE = false;
 
 export const STATE_CONTENT: Record<string, StateContentEntry> = Object.fromEntries(
-  Object.entries(RAW_STATES).map(([slug, raw]) => [slug, buildStateContent(parseStateData(slug, raw))]),
+  Object.entries(RAW_STATES).map(([slug, raw]) => {
+    const census = CENSUS.states[slug];
+    if (!census) throw new Error(`No census data for "${slug}"; run npm run data:census`);
+    return [slug, buildStateContent(parseStateData(slug, raw), census, CENSUS.source)];
+  }),
 );
 
 export const STATE_SLUGS = Object.keys(STATE_CONTENT);

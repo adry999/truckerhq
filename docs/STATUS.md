@@ -1,6 +1,6 @@
 # Project status: where we continue
 
-_Last updated: 2026-10-28._
+_Last updated: 2026-10-28 (state pages on FMCSA census data)._
 
 ## Decisions
 
@@ -108,7 +108,7 @@ Go-live steps: follow `docs/launch-runbook.md` top to bottom.
 ### SEO / content (highest growth impact, needs client input)
 
 - [ ] Write the 10 stub guides, answer-first. Flip `hasGuideBody` per guide.
-- [ ] Real per-state FMCSA census stats. Then set `STATE_DATA_IS_SAMPLE = false` to index the 50 state pages.
+- [x] Real per-state FMCSA census stats (`src/features/carriers/data/states/census.json`, dataset `az4n-8mr2`). The 50 state pages are indexable and in the sitemap. Refresh with `npm run data:census` (about 1 minute, optional `SOCRATA_APP_TOKEN`), ideally quarterly, and commit the JSON.
 - [ ] Real job listings. City pages index automatically once there are enough non-sample jobs.
 - [x] Prose, formula, worked example and FAQPage on profit-per-mile and the carrier lookup. The numbers come from the model code.
 - [ ] New pages: `/pricing`, `/dispatch/new-authority`, `/dispatch/{dry-van,reefer,flatbed,…}`, `/jobs/russian-speaking`, `/tools/broker-check`.

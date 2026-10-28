@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import JsonLd from "@/components/JsonLd";
-import { breadcrumbSchema } from "@/shared/seo/structured-data";
+import { breadcrumbSchema, datasetSchema } from "@/shared/seo/structured-data";
 import { StateCarriersView, STATE_CONTENT, STATE_DATA_IS_SAMPLE, STATE_SLUGS } from "@/features/carriers";
 
 export function generateStaticParams() {
@@ -46,6 +46,22 @@ export default async function StateCarriersRoute({
           { name: entry.stateName, path: `/carriers/${state}` },
         ])}
       />
+      <JsonLd
+        data={datasetSchema({
+          name: `${entry.stateName} for-hire carriers (FMCSA census)`,
+          description: `Counts of active interstate for-hire carriers based in ${entry.stateName}, from the FMCSA Company Census File.`,
+          path: `/carriers/${state}`,
+          sourceName: entry.sourceName,
+          sourceUrl: entry.sourceUrl,
+          dateModified: entry.sourceFetchedAt,
+          variables: [
+            "Active for-hire carriers",
+            "New carriers in the last 12 months",
+            "Small fleet share",
+            "Power units",
+          ],
+        })}
+      />
       <div className="flex min-h-screen flex-col">
         <SiteHeader />
         <main id="main-content" tabIndex={-1} className="flex flex-1 flex-col">
@@ -56,16 +72,14 @@ export default async function StateCarriersRoute({
             heroAlt={entry.heroAlt}
             heroDescription={entry.heroDescription}
             stats={entry.stats}
-            equipmentBreakdown={entry.equipmentBreakdown}
             topCities={entry.topCities}
-            equipmentOptions={entry.equipmentOptions}
-            carriers={entry.carriers}
-            totalCount={entry.totalCount}
+            sourceName={entry.sourceName}
+            sourceUrl={entry.sourceUrl}
+            sourceFetchedAt={entry.sourceFetchedAt}
             dispatchCtaEyebrow={entry.dispatchCtaEyebrow}
             dispatchCtaTitle={entry.dispatchCtaTitle}
             dispatchCtaBody={entry.dispatchCtaBody}
             hireCtaBody={entry.hireCtaBody}
-            basePath={`/carriers/${state}`}
           />
         </main>
         <SiteFooter />
