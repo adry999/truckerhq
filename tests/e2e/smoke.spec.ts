@@ -41,7 +41,7 @@ test("dispatch start wizard submits and shows success", async ({ page }) => {
 
 test("consent banner hides after accept and stays hidden on reload", async ({ page }) => {
   await page.goto("/");
-  const banner = page.getByRole("dialog", { name: "Cookie consent" });
+  const banner = page.getByRole("region", { name: "Cookie consent" });
   await expect(banner).toBeVisible();
   await banner.getByRole("button", { name: "Accept" }).click();
   await expect(banner).toBeHidden();
