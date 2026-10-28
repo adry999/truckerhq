@@ -1,6 +1,8 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { z } from "zod";
 import { resetRateLimitForTests } from "@/server/http/api-guard";
+import { resetServerEnvForTests } from "@/server/env";
+import { resetTurnstileWarningForTests } from "@/server/http/turnstile";
 import { createLeadHandler } from "./create-lead-handler";
 import { requiredText, text, usPhone, withChecks } from "./fields";
 
@@ -13,7 +15,9 @@ const schema = withChecks(
   { phone: usPhone() },
 );
 
-function setup(overrides: { insertResult?: boolean; withNotify?: boolean } = {}) {
+function setup(
+  overrides: { insertResult?: boolean; withNotify?: boolean; smsConsent?: boolean } = {},
+) {
   const insertRow = vi.fn(async () => overrides.insertResult ?? true);
   const after = vi.fn((task: () => Promise<void>) => void task());
   const notify = vi.fn(async () => {});
@@ -30,6 +34,7 @@ function setup(overrides: { insertResult?: boolean; withNotify?: boolean } = {})
         language: "EN",
       }),
       notify: overrides.withNotify === false ? undefined : notify,
+      smsConsent: overrides.smsConsent,
       saveError: "Could not save",
       alertLabel: "Test lead",
     },
@@ -48,7 +53,18 @@ function post(body: string, headers: Record<string, string> = {}) {
 
 const valid = { name: "Ivan", phone: "(312) 555-0123", note: "hi" };
 
-beforeEach(() => resetRateLimitForTests());
+beforeEach(() => {
+  resetRateLimitForTests();
+  resetServerEnvForTests();
+  resetTurnstileWarningForTests();
+  vi.spyOn(console, "warn").mockImplementation(() => {});
+});
+afterEach(() => {
+  vi.restoreAllMocks();
+  vi.unstubAllEnvs();
+  vi.unstubAllGlobals();
+  resetServerEnvForTests();
+});
 
 describe("createLeadHandler", () => {
   it("saves and notifies with the parsed data on success", async () => {
@@ -147,5 +163,89 @@ describe("createLeadHandler", () => {
     const { handler } = setup();
     const res = await handler(post(JSON.stringify(valid), { origin: "https://evil.example.com" }));
     expect(res.status).toBe(403);
+  });
+
+  describe("turnstile", () => {
+    const fetchMock = vi.fn();
+    beforeEach(() => {
+      fetchMock.mockReset();
+      vi.stubGlobal("fetch", fetchMock);
+      vi.stubEnv("TURNSTILE_SECRET_KEY", "secret");
+      vi.spyOn(console, "error").mockImplementation(() => {});
+    });
+    const verdict = (body: object) =>
+      fetchMock.mockResolvedValue(new Response(JSON.stringify(body), { status: 200 }));
+
+    it("returns 403 and saves nothing when the token is missing", async () => {
+      const { handler, insertRow } = setup();
+      const res = await handler(post(JSON.stringify(valid)));
+      expect(res.status).toBe(403);
+      expect(await res.json()).toEqual({ error: "Verification failed" });
+      expect(insertRow).not.toHaveBeenCalled();
+      expect(fetchMock).not.toHaveBeenCalled();
+    });
+
+    it("returns 403 when Cloudflare rejects the token", async () => {
+      verdict({ success: false, "error-codes": ["invalid-input-response"] });
+      const { handler, insertRow } = setup();
+      const res = await handler(post(JSON.stringify({ ...valid, turnstileToken: "bad" })));
+      expect(res.status).toBe(403);
+      expect(insertRow).not.toHaveBeenCalled();
+    });
+
+    it("saves without the token in the row when verification passes", async () => {
+      verdict({ success: true, hostname: "localhost" });
+      const { handler, insertRow } = setup();
+      const res = await handler(post(JSON.stringify({ ...valid, turnstileToken: "good" })));
+      expect(res.status).toBe(200);
+      const [, row] = insertRow.mock.calls[0]! as unknown as [string, Record<string, unknown>];
+      expect(JSON.stringify(row)).not.toContain("good");
+      expect(row).not.toHaveProperty("turnstileToken");
+    });
+  });
+
+  describe("sms consent", () => {
+    const consentBody = { ...valid, smsConsent: true, smsConsentVersion: "v1" };
+
+    it("stores evidence and notifies when consent is given", async () => {
+      const { handler, insertRow, notify } = setup({ smsConsent: true });
+      const res = await handler(post(JSON.stringify(consentBody), { "user-agent": "UA/1" }));
+      expect(res.status).toBe(200);
+      expect(insertRow).toHaveBeenCalledWith(
+        "contact_messages",
+        expect.objectContaining({
+          sms_consent: true,
+          sms_consent_version: "v1",
+          consent_ip: "9.9.9.9",
+          consent_user_agent: "UA/1",
+          sms_consent_at: expect.stringMatching(/^\d{4}-\d{2}-\d{2}T/),
+        }),
+      );
+      expect(notify).toHaveBeenCalledTimes(1);
+    });
+
+    it("saves with empty evidence and does not notify without consent", async () => {
+      const { handler, insertRow, notify, alert } = setup({ smsConsent: true });
+      await handler(post(JSON.stringify(valid)));
+      expect(insertRow).toHaveBeenCalledWith(
+        "contact_messages",
+        expect.objectContaining({
+          sms_consent: false,
+          sms_consent_version: null,
+          sms_consent_at: null,
+          consent_ip: null,
+          consent_user_agent: null,
+        }),
+      );
+      expect(notify).not.toHaveBeenCalled();
+      expect(alert).toHaveBeenCalledTimes(1);
+    });
+
+    it("truncates the user agent to 300 characters", async () => {
+      const { handler, insertRow } = setup({ smsConsent: true });
+      await handler(post(JSON.stringify(consentBody), { "user-agent": "u".repeat(500) }));
+      const [, row] = insertRow.mock.calls[0]! as unknown as [string, { consent_user_agent: string }];
+      expect(row.consent_user_agent).toHaveLength(300);
+    });
   });
 });

@@ -19,6 +19,7 @@ const schema = withChecks(
     dot: requiredText(20, MISSING),
     phone: requiredText(30, MISSING),
     smsConsent: z.literal(true, { error: "SMS consent required" }),
+    smsConsentVersion: z.string().max(32).optional(),
     language: text(20),
     watch,
   }),
@@ -27,6 +28,7 @@ const schema = withChecks(
 
 export const POST = createLeadHandler({
   schema,
+  smsConsent: true,
   table: "compliance_alert_signups",
   toRow: (s) => ({
     dot: s.dot,

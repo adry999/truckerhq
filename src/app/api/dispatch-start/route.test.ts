@@ -28,7 +28,7 @@ function post(body: unknown, raw?: string) {
   );
 }
 
-const valid = { name: "Ivan P", phone: "(312) 555-0123" };
+const valid = { name: "Ivan P", phone: "(312) 555-0123", smsConsent: true };
 
 beforeEach(() => {
   vi.mocked(insertRow).mockReset().mockResolvedValue(true);
@@ -58,6 +58,16 @@ describe("POST /api/dispatch-start", () => {
       expect.objectContaining({ phone: "+13125550123" }),
     );
     expect(notifyDispatchStart).toHaveBeenCalledWith("+13125550123", "");
+  });
+
+  it("saves but sends no SMS without consent", async () => {
+    const res = await post({ ...valid, smsConsent: false });
+    expect(res.status).toBe(200);
+    expect(insertRow).toHaveBeenCalledWith(
+      "dispatch_requests",
+      expect.objectContaining({ sms_consent: false }),
+    );
+    expect(notifyDispatchStart).not.toHaveBeenCalled();
   });
 
   it("returns 502 and does not notify when saving fails", async () => {

@@ -3,7 +3,17 @@ import { NextResponse, after } from "next/server";
 import type { z } from "zod";
 import { insertRow, type LeadTables } from "@/server/db/insert-row";
 import { sendLeadAlert } from "@/server/leads/lead-alert";
-import { guardLeadRoute, isHoneypotTripped, readJsonBody, rejectResponse } from "@/server/http/api-guard";
+import {
+  getClientIp,
+  guardLeadRoute,
+  isHoneypotTripped,
+  readJsonBody,
+  rejectResponse,
+} from "@/server/http/api-guard";
+import { verifyTurnstile } from "@/server/http/turnstile";
+
+const MAX_CONSENT_VERSION = 32;
+const MAX_USER_AGENT = 300;
 
 type LeadDeps = {
   insertRow: typeof insertRow;
@@ -19,10 +29,26 @@ type LeadHandlerConfig<S extends z.ZodType, T extends keyof LeadTables> = {
   saveError: string;
   /** Names the lead type in the team alert email. */
   alertLabel: string;
+  /** SMS route: stores consent evidence in the row and sends `notify` only with consent. */
+  smsConsent?: boolean;
 };
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+function consentEvidence(body: Record<string, unknown>, req: Request, consented: boolean) {
+  const version = body["smsConsentVersion"];
+  return {
+    sms_consent: consented,
+    sms_consent_version:
+      consented && typeof version === "string" ? version.slice(0, MAX_CONSENT_VERSION) : null,
+    sms_consent_at: consented ? new Date().toISOString() : null,
+    consent_ip: consented ? getClientIp(req) : null,
+    consent_user_agent: consented
+      ? (req.headers.get("user-agent")?.slice(0, MAX_USER_AGENT) ?? null)
+      : null,
+  };
 }
 
 export function createLeadHandler<S extends z.ZodType, T extends keyof LeadTables>(
@@ -45,13 +71,21 @@ export function createLeadHandler<S extends z.ZodType, T extends keyof LeadTable
     const body = isRecord(parsedBody.body) ? parsedBody.body : {};
     if (isHoneypotTripped(body)) return NextResponse.json({ ok: true });
 
-    const parsed = config.schema.safeParse(body);
+    const { turnstileToken, ...fields } = body;
+    if (!(await verifyTurnstile(turnstileToken, getClientIp(req)))) {
+      return rejectResponse(403, "Verification failed");
+    }
+
+    const parsed = config.schema.safeParse(fields);
     if (!parsed.success) {
       return rejectResponse(400, parsed.error.issues[0]?.message ?? "Invalid request body");
     }
 
     const data = parsed.data as z.output<S>;
-    const row = config.toRow(data);
+    const consented = config.smsConsent === true && fields["smsConsent"] === true;
+    const row = config.smsConsent
+      ? ({ ...config.toRow(data), ...consentEvidence(fields, req, consented) } as LeadTables[T])
+      : config.toRow(data);
     const saved = await deps.insertRow(config.table, row);
     if (!saved) return rejectResponse(502, config.saveError);
 
@@ -63,7 +97,7 @@ export function createLeadHandler<S extends z.ZodType, T extends keyof LeadTable
         console.error(`[lead-alert] failed: label="${alertLabel}"`);
       }
     });
-    if (notify) deps.after(() => notify(data));
+    if (notify && (!config.smsConsent || consented)) deps.after(() => notify(data));
     return NextResponse.json({ ok: true });
   };
 }

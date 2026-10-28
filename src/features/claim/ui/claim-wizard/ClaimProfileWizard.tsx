@@ -4,10 +4,12 @@ import { useReducer, type FormEvent } from "react";
 import { trackEvent } from "@/shared/client/analytics";
 import { postJson } from "@/shared/client/post-json";
 import { useStepFocus } from "@/shared/hooks/useStepFocus";
+import { useTurnstile } from "@/shared/hooks/useTurnstile";
 import { Button } from "@/shared/ui/Button";
 import { FormError, Honeypot } from "@/shared/ui/form-bits";
 import { Notice } from "@/shared/ui/Notice";
 import { StepProgress } from "@/shared/ui/StepProgress";
+import { Turnstile } from "@/shared/ui/Turnstile";
 import {
   CARRIER,
   DETAILS_STEP,
@@ -29,6 +31,7 @@ export function ClaimProfileWizard() {
   const [{ step, data, status, error }, dispatch] = useReducer(claimReducer, initialClaimState);
   const headingRef = useStepFocus(step);
   const submitting = status === "submitting";
+  const turnstile = useTurnstile();
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -40,9 +43,13 @@ export function ClaimProfileWizard() {
     dispatch({ type: "submitStart" });
     const result = await postJson(
       "/api/claim",
-      buildPayload(data, typeof website === "string" ? website : ""),
+      {
+        ...buildPayload(data, typeof website === "string" ? website : ""),
+        ...(turnstile.token ? { turnstileToken: turnstile.token } : {}),
+      },
     );
     if (!result.ok) {
+      turnstile.reset();
       dispatch({ type: "submitFailed", message: result.message ?? GENERIC_ERROR });
       return;
     }
@@ -74,6 +81,8 @@ export function ClaimProfileWizard() {
             )}
             {step === DONE_STEP && <DoneStep headingRef={headingRef} />}
 
+            {step === DETAILS_STEP && <Turnstile controller={turnstile} />}
+
             {step !== DONE_STEP && (
               <div className="flex items-center justify-between gap-3 border-t border-divider pt-5">
                 {step === DETAILS_STEP ? (
@@ -83,7 +92,7 @@ export function ClaimProfileWizard() {
                 ) : (
                   <span />
                 )}
-                <Button type="submit" size="lg" className="px-7" disabled={!canAdvance(step, data) || submitting}>
+                <Button type="submit" size="lg" className="px-7" disabled={!canAdvance(step, data) || submitting || (step === DETAILS_STEP && !turnstile.ready)}>
                   {step === 0 ? "Continue" : submitting ? "Submitting..." : "Submit claim"}
                 </Button>
               </div>

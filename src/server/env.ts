@@ -17,6 +17,8 @@ const schema = z.object({
     (v) => (v === "" ? undefined : v),
     z.string().default(`Trucker HQ <hello@${SITE_HOST}>`),
   ),
+  SUPABASE_SECRET_KEY: optional(z.string()),
+  TURNSTILE_SECRET_KEY: optional(z.string()),
   LEADS_NOTIFY_TO: optional(z.string()),
   FMCSA_WEBKEY: optional(z.string()),
   ALLOWED_ORIGINS: optional(z.string()),

@@ -2,11 +2,15 @@
 
 import { useState } from "react";
 import { trackEvent } from "@/shared/client/analytics";
+import { SMS_CONSENT_VERSION } from "@/shared/config/sms-consent";
 import { useFormSubmit } from "@/shared/hooks/useFormSubmit";
+import { useTurnstile } from "@/shared/hooks/useTurnstile";
 import { Badge } from "@/shared/ui/Badge";
 import { Button } from "@/shared/ui/Button";
 import { Field, SelectInput, TextInput } from "@/shared/ui/Field";
 import { FormError, Honeypot } from "@/shared/ui/form-bits";
+import { SmsConsent } from "@/shared/ui/SmsConsent";
+import { Turnstile } from "@/shared/ui/Turnstile";
 
 export default function ApplyForm({ jobSlug }: { jobSlug: string }) {
   const [fullName, setFullName] = useState("");
@@ -14,10 +18,22 @@ export default function ApplyForm({ jobSlug }: { jobSlug: string }) {
   const [cdlClass, setCdlClass] = useState("A");
   const [experience, setExperience] = useState("1+ yr");
   const [language, setLanguage] = useState("EN");
+  const [smsConsent, setSmsConsent] = useState(false);
+  const turnstile = useTurnstile();
 
   const { status, error, onSubmit, successRef } = useFormSubmit({
     endpoint: "/api/apply",
-    buildBody: () => ({ jobSlug, fullName, phone, cdlClass, experience, language }),
+    buildBody: () => ({
+      jobSlug,
+      fullName,
+      phone,
+      cdlClass,
+      experience,
+      language,
+      smsConsent,
+      smsConsentVersion: SMS_CONSENT_VERSION,
+    }),
+    turnstile,
     onSuccess: () => trackEvent("job_application", { job_slug: jobSlug }),
   });
 
@@ -87,7 +103,14 @@ export default function ApplyForm({ jobSlug }: { jobSlug: string }) {
           <option value="RU">Русский</option>
         </SelectInput>
       </Field>
-      <Button type="submit" size="lg" disabled={status === "submitting"} className="mt-1 w-full">
+      <SmsConsent checked={smsConsent} onChange={setSmsConsent} />
+      <Turnstile controller={turnstile} />
+      <Button
+        type="submit"
+        size="lg"
+        disabled={status === "submitting" || !turnstile.ready}
+        className="mt-1 w-full"
+      >
         {status === "submitting" ? "Sending..." : "Send application"}
       </Button>
       <FormError message={error} />

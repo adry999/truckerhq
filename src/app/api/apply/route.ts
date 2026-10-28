@@ -14,12 +14,15 @@ const schema = withChecks(
     cdlClass: text(50),
     experience: text(50),
     language: text(20),
+    smsConsent: z.boolean().optional(),
+    smsConsentVersion: z.string().max(32).optional(),
   }),
   { phone: usPhone() },
 );
 
 export const POST = createLeadHandler({
   schema,
+  smsConsent: true,
   table: "job_applications",
   toRow: (a) => ({
     job_slug: a.jobSlug,

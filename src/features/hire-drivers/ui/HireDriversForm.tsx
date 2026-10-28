@@ -3,10 +3,12 @@
 import { useState } from "react";
 import { trackEvent } from "@/shared/client/analytics";
 import { useFormSubmit } from "@/shared/hooks/useFormSubmit";
+import { useTurnstile } from "@/shared/hooks/useTurnstile";
 import { Button } from "@/shared/ui/Button";
 import { Field, TextInput } from "@/shared/ui/Field";
 import { FormError, Honeypot } from "@/shared/ui/form-bits";
 import { Segmented } from "@/shared/ui/Segmented";
+import { Turnstile } from "@/shared/ui/Turnstile";
 
 const POSITIONS = ["OTR", "Regional", "Local", "Team", "Owner-op"];
 const EQUIPMENT = ["Dry van", "Reefer", "Flatbed", "Power only"];
@@ -35,11 +37,13 @@ export default function HireDriversForm() {
   const [pos, setPos] = useState("OTR");
   const [eq, setEq] = useState("Dry van");
   const [lang, setLang] = useState("Any");
+  const turnstile = useTurnstile();
 
   const { status, error, onSubmit, successRef } = useFormSubmit({
     endpoint: "/api/hire-drivers",
     buildBody: () => ({ ...fields, position: pos, equipment: eq, driverLanguage: lang }),
     onSuccess: () => trackEvent("hire_driver_post", { position: pos }),
+    turnstile,
   });
 
   if (status === "sent") {
@@ -95,7 +99,13 @@ export default function HireDriversForm() {
         <Segmented options={LANGUAGES} value={lang} onChange={setLang} label="Driver language" uppercase />
       </div>
 
-      <Button type="submit" size="lg" disabled={status === "submitting"} className="w-full">
+      <Turnstile controller={turnstile} />
+      <Button
+        type="submit"
+        size="lg"
+        disabled={status === "submitting" || !turnstile.ready}
+        className="w-full"
+      >
         {status === "submitting" ? "Sending..." : "Send job"}
       </Button>
       <FormError message={error} />

@@ -4,13 +4,17 @@ import { getCopy, type Locale } from "@/shared/i18n/locale";
 import Link from "next/link";
 import { useState } from "react";
 import { trackEvent } from "@/shared/client/analytics";
+import { SMS_CONSENT_VERSION } from "@/shared/config/sms-consent";
 import { useFormSubmit } from "@/shared/hooks/useFormSubmit";
+import { useTurnstile } from "@/shared/hooks/useTurnstile";
 import { Button } from "@/shared/ui/Button";
 import { CheckCard, ChoiceGroup } from "@/shared/ui/choices";
 import { Field, TextInput } from "@/shared/ui/Field";
 import { FormError, Honeypot } from "@/shared/ui/form-bits";
 import { CheckIcon } from "@/shared/ui/icons";
 import { Segmented } from "@/shared/ui/Segmented";
+import { SmsConsent } from "@/shared/ui/SmsConsent";
+import { Turnstile } from "@/shared/ui/Turnstile";
 
 const WATCH_ITEMS = [
   { key: "auth", title: "Operating authority", description: "Active, pending, revoked or inactive" },
@@ -48,11 +52,20 @@ export default function ComplianceAlertsForm() {
   const [lang, setLang] = useState<Locale>("EN");
   const [consent, setConsent] = useState(false);
   const [watch, setWatch] = useState(DEFAULT_WATCH);
+  const turnstile = useTurnstile();
 
   const { status, error, onSubmit, reset, successRef } = useFormSubmit({
     endpoint: "/api/compliance-alerts",
-    buildBody: () => ({ dot, phone, language: lang, watch, smsConsent: consent }),
+    buildBody: () => ({
+      dot,
+      phone,
+      language: lang,
+      watch,
+      smsConsent: consent,
+      smsConsentVersion: SMS_CONSENT_VERSION,
+    }),
     onSuccess: () => trackEvent("compliance_alert_signup"),
+    turnstile,
   });
 
   const count = Object.values(watch).filter(Boolean).length;
@@ -167,22 +180,14 @@ export default function ComplianceAlertsForm() {
             .
           </span>
 
-          <label className="flex items-start gap-2.5 text-[13px] leading-relaxed text-grey">
-            <input
-              required
-              type="checkbox"
-              checked={consent}
-              onChange={(e) => setConsent(e.target.checked)}
-              className="mt-0.5 h-4 w-4 shrink-0"
-            />
-            I agree to receive text alerts from Trucker HQ about this DOT
-            number.
-          </label>
+          <SmsConsent required checked={consent} onChange={setConsent} />
+
+          <Turnstile controller={turnstile} />
 
           <Button
             type="submit"
             size="lg"
-            disabled={status === "submitting" || !consent}
+            disabled={status === "submitting" || !consent || !turnstile.ready}
             className="w-full"
           >
             {status === "submitting" ? "Sending..." : "Turn on alerts"}

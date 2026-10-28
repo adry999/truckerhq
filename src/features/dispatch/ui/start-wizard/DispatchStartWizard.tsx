@@ -1,11 +1,15 @@
 "use client";
 
-import { useReducer, type FormEvent } from "react";
+import { useReducer, useState, type FormEvent } from "react";
 import { trackEvent } from "@/shared/client/analytics";
 import { postJson } from "@/shared/client/post-json";
+import { SMS_CONSENT_VERSION } from "@/shared/config/sms-consent";
 import { useStepFocus } from "@/shared/hooks/useStepFocus";
+import { useTurnstile } from "@/shared/hooks/useTurnstile";
 import { FormError, Honeypot } from "@/shared/ui/form-bits";
+import { SmsConsent } from "@/shared/ui/SmsConsent";
 import { StepProgress } from "@/shared/ui/StepProgress";
+import { Turnstile } from "@/shared/ui/Turnstile";
 import {
   CALL_STEP,
   DONE_STEP,
@@ -29,6 +33,8 @@ const GENERIC_ERROR = "Something went wrong. Try again, or call us directly.";
 export function DispatchStartWizard() {
   const [{ step, data, status, error }, dispatch] = useReducer(dispatchReducer, initialDispatchState);
   const headingRef = useStepFocus(step);
+  const [smsConsent, setSmsConsent] = useState(false);
+  const turnstile = useTurnstile();
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -41,9 +47,15 @@ export function DispatchStartWizard() {
     dispatch({ type: "submitStart" });
     const result = await postJson(
       "/api/dispatch-start",
-      buildPayload(data, typeof website === "string" ? website : ""),
+      {
+        ...buildPayload(data, typeof website === "string" ? website : ""),
+        smsConsent,
+        smsConsentVersion: SMS_CONSENT_VERSION,
+        ...(turnstile.token ? { turnstileToken: turnstile.token } : {}),
+      },
     );
     if (!result.ok) {
+      turnstile.reset();
       dispatch({ type: "submitFailed", message: result.message ?? GENERIC_ERROR });
       return;
     }
@@ -77,9 +89,16 @@ export function DispatchStartWizard() {
               >
                 <Honeypot />
                 <Step data={data} dispatch={dispatch} headingRef={headingRef} />
+                {step === CALL_STEP && (
+                  <>
+                    <SmsConsent checked={smsConsent} onChange={setSmsConsent} />
+                    <Turnstile controller={turnstile} />
+                  </>
+                )}
                 <WizardNav
                   step={step}
                   submitting={status === "submitting"}
+                  blocked={step === CALL_STEP && !turnstile.ready}
                   onBack={() => dispatch({ type: "back" })}
                 />
                 <FormError message={error} />
