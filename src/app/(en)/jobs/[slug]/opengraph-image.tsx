@@ -17,11 +17,11 @@ export default async function OpengraphImage({
     return renderOgImage({
       theme: "dark",
       sub: "JOBS",
-      kicker: `${city.stats[0]?.big ?? ""} Open Jobs`,
+      kicker: "CDL Jobs",
       heading: `CDL jobs in ${city.cityName}`,
       headingSize: 108,
       paragraph: "Pay and home time on every listing. Apply in English or Russian.",
-      big: "Updated daily",
+      big: "Pay up front",
     });
   }
 

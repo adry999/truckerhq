@@ -36,6 +36,8 @@ export type CityJob = {
   pay: string;
   home: string;
   posted: string;
+  /** Illustrative listing, not a real opening. Sample jobs never count toward indexing. */
+  sample?: boolean;
 };
 
 export type CityContentEntry = {

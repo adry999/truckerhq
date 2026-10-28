@@ -4,12 +4,10 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
   "atlanta-ga": {
     cityName: "Atlanta, GA",
     stateName: "Georgia",
-    title: "CDL Jobs in Atlanta, GA: 225 Openings",
-    description: "Truck driving jobs near Atlanta. Pay and home time on every listing. Updated daily.",
-    heroIntro: "225 truck driving jobs within 50 miles of Atlanta, updated today. Atlanta sits at the I-75/I-85 interchange and is one of the busiest freight hubs in the Southeast, with steady dry van, reefer, and intermodal work moving through its rail ramps and distribution centers.",
+    title: "CDL Jobs in Atlanta, GA",
+    description: "Truck driving jobs near Atlanta. Pay and home time on every listing.",
+    heroIntro: "Truck driving jobs near Atlanta. Atlanta sits at the I-75/I-85 interchange and is one of the busiest freight hubs in the Southeast, with steady dry van, reefer, and intermodal work moving through its rail ramps and distribution centers.",
     stats: [
-      { big: "225", small: "Open jobs" },
-      { big: "58", small: "Local jobs" },
       { big: "$0.60–0.71/mi", small: "Typical OTR pay" },
       { big: "$24–29/hr", small: "Typical local pay" },
     ],
@@ -23,6 +21,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$0.64–0.69/mi",
         home: "Home every 2 weeks",
         posted: "Today",
+        sample: true,
       },
       {
         title: "Local Delivery Driver, Food Distribution",
@@ -33,6 +32,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$1,350/wk",
         home: "Home daily",
         posted: "Today",
+        sample: true,
       },
       {
         title: "Regional Dry Van, Southeast",
@@ -43,6 +43,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$0.65/mi",
         home: "Home weekly",
         posted: "1 day ago",
+        sample: true,
       },
       {
         title: "Team Drivers, Coast to Coast",
@@ -53,6 +54,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$0.88/mi split",
         home: "Out 2-3 weeks",
         posted: "1 day ago",
+        sample: true,
       },
       {
         title: "Local Drayage Driver, Rail Ramp",
@@ -63,6 +65,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$27/hr",
         home: "Home daily",
         posted: "2 days ago",
+        sample: true,
       },
       {
         title: "Regional Flatbed, Building Materials",
@@ -73,6 +76,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$0.68/mi",
         home: "Home weekends",
         posted: "3 days ago",
+        sample: true,
       },
     ],
     hiringCarriers: [
@@ -107,12 +111,10 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
   "charlotte-nc": {
     cityName: "Charlotte, NC",
     stateName: "North Carolina",
-    title: "CDL Jobs in Charlotte, NC: 155 Openings",
-    description: "Truck driving jobs near Charlotte. Pay and home time on every listing. Updated daily.",
-    heroIntro: "155 truck driving jobs within 50 miles of Charlotte, updated today. Charlotte sits at the I-77/I-85 interchange, one of the busiest freight crossroads in the Southeast, with steady dry van, reefer, and intermodal work moving through the region daily.",
+    title: "CDL Jobs in Charlotte, NC",
+    description: "Truck driving jobs near Charlotte. Pay and home time on every listing.",
+    heroIntro: "Truck driving jobs near Charlotte. Charlotte sits at the I-77/I-85 interchange, one of the busiest freight crossroads in the Southeast, with steady dry van, reefer, and intermodal work moving through the region daily.",
     stats: [
-      { big: "155", small: "Open jobs" },
-      { big: "38", small: "Local jobs" },
       { big: "$0.60–0.72/mi", small: "Typical OTR pay" },
       { big: "$24–30/hr", small: "Typical local pay" },
     ],
@@ -126,6 +128,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$0.64–0.70/mi",
         home: "Home every 2 weeks",
         posted: "Today",
+        sample: true,
       },
       {
         title: "Local P&D Driver",
@@ -136,6 +139,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$28/hr",
         home: "Home daily",
         posted: "Today",
+        sample: true,
       },
       {
         title: "Regional Reefer Driver",
@@ -146,6 +150,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$1,700/wk",
         home: "Home weekly",
         posted: "1 day ago",
+        sample: true,
       },
       {
         title: "Team Drivers, I-85 Corridor",
@@ -156,6 +161,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$0.85/mi split",
         home: "Out 2 weeks",
         posted: "1 day ago",
+        sample: true,
       },
       {
         title: "Local Dry Van, Grocery Distribution",
@@ -166,6 +172,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$26/hr",
         home: "Home daily",
         posted: "2 days ago",
+        sample: true,
       },
       {
         title: "Regional Dry Van, Southeast",
@@ -176,6 +183,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$0.62/mi",
         home: "Home weekends",
         posted: "3 days ago",
+        sample: true,
       },
     ],
     hiringCarriers: [
@@ -212,12 +220,10 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
   "chicago-il": {
     cityName: "Chicago, IL",
     stateName: "Illinois",
-    title: "CDL Jobs in Chicago, IL: 148 Openings",
-    description: "Truck driving jobs near Chicago. Pay and home time on every listing. Updated daily.",
-    heroIntro: "148 truck driving jobs within 50 miles of Chicago, updated today. Chicago is one of the largest freight hubs in the US, with steady dry van and intermodal work out of the I-55 and I-80 corridors.",
+    title: "CDL Jobs in Chicago, IL",
+    description: "Truck driving jobs near Chicago. Pay and home time on every listing.",
+    heroIntro: "Truck driving jobs near Chicago. Chicago is one of the largest freight hubs in the US, with steady dry van and intermodal work out of the I-55 and I-80 corridors.",
     stats: [
-      { big: "148", small: "Open jobs" },
-      { big: "41", small: "Local jobs" },
       { big: "$0.62–0.74/mi", small: "Typical OTR pay" },
       { big: "$26–32/hr", small: "Typical local pay" },
     ],
@@ -231,6 +237,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$0.68–0.72/mi",
         home: "Home every 2 weeks",
         posted: "Today",
+        sample: true,
       },
       {
         title: "Local Intermodal Driver",
@@ -241,6 +248,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$1,500/wk",
         home: "Home daily",
         posted: "Today",
+        sample: true,
       },
       {
         title: "Regional Reefer Driver",
@@ -251,6 +259,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$1,750/wk",
         home: "Home weekly",
         posted: "1 day ago",
+        sample: true,
       },
       {
         title: "Team Drivers, Coast to Coast",
@@ -261,6 +270,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$0.90/mi split",
         home: "Out 3 weeks",
         posted: "1 day ago",
+        sample: true,
       },
       {
         title: "Local Flatbed, Steel Coils",
@@ -271,6 +281,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$30/hr",
         home: "Home daily",
         posted: "2 days ago",
+        sample: true,
       },
       {
         title: "Regional Dry Van, Midwest",
@@ -281,6 +292,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$0.66/mi",
         home: "Home weekends",
         posted: "3 days ago",
+        sample: true,
       },
     ],
     hiringCarriers: [
@@ -316,12 +328,10 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
   "columbus-oh": {
     cityName: "Columbus, OH",
     stateName: "Ohio",
-    title: "CDL Jobs in Columbus, OH: 140 Openings",
-    description: "Truck driving jobs near Columbus. Pay and home time on every listing. Updated daily.",
-    heroIntro: "140 truck driving jobs within 50 miles of Columbus, updated today. Columbus sits at the crossroads of I-70 and I-71, putting it within a day's drive of most of the eastern US population and making it one of the busiest distribution hubs in the country.",
+    title: "CDL Jobs in Columbus, OH",
+    description: "Truck driving jobs near Columbus. Pay and home time on every listing.",
+    heroIntro: "Truck driving jobs near Columbus. Columbus sits at the crossroads of I-70 and I-71, putting it within a day's drive of most of the eastern US population and making it one of the busiest distribution hubs in the country.",
     stats: [
-      { big: "140", small: "Open jobs" },
-      { big: "37", small: "Local jobs" },
       { big: "$0.58–0.70/mi", small: "Typical OTR pay" },
       { big: "$24–29/hr", small: "Typical local pay" },
     ],
@@ -335,6 +345,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$0.60–0.66/mi",
         home: "Home every 2 weeks",
         posted: "Today",
+        sample: true,
       },
       {
         title: "Local Distribution Driver",
@@ -345,6 +356,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$1,350/wk",
         home: "Home daily",
         posted: "Today",
+        sample: true,
       },
       {
         title: "Regional Reefer Driver",
@@ -355,6 +367,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$1,650/wk",
         home: "Home weekly",
         posted: "1 day ago",
+        sample: true,
       },
       {
         title: "Team Drivers, Coast to Coast",
@@ -365,6 +378,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$0.85/mi split",
         home: "Out 2-3 weeks",
         posted: "1 day ago",
+        sample: true,
       },
       {
         title: "Local Flatbed, Building Materials",
@@ -375,6 +389,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$27/hr",
         home: "Home daily",
         posted: "2 days ago",
+        sample: true,
       },
       {
         title: "Regional Dry Van, Midwest & Northeast",
@@ -385,6 +400,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$0.64/mi",
         home: "Home weekends",
         posted: "3 days ago",
+        sample: true,
       },
     ],
     hiringCarriers: [
@@ -420,12 +436,10 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
   "dallas-tx": {
     cityName: "Dallas, TX",
     stateName: "Texas",
-    title: "CDL Jobs in Dallas, TX: 210 Openings",
-    description: "Truck driving jobs near Dallas. Pay and home time on every listing. Updated daily.",
-    heroIntro: "210 truck driving jobs within 50 miles of Dallas, updated today. Dallas-Fort Worth sits at the junction of I-35, I-30, and I-20, making it one of the country's largest inland freight and distribution hubs.",
+    title: "CDL Jobs in Dallas, TX",
+    description: "Truck driving jobs near Dallas. Pay and home time on every listing.",
+    heroIntro: "Truck driving jobs near Dallas. Dallas-Fort Worth sits at the junction of I-35, I-30, and I-20, making it one of the country's largest inland freight and distribution hubs.",
     stats: [
-      { big: "210", small: "Open jobs" },
-      { big: "52", small: "Local jobs" },
       { big: "$0.60–0.72/mi", small: "Typical OTR pay" },
       { big: "$24–29/hr", small: "Typical local pay" },
     ],
@@ -439,6 +453,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$0.64–0.70/mi",
         home: "Home every 2 weeks",
         posted: "Today",
+        sample: true,
       },
       {
         title: "Local Delivery Driver, Distribution Center",
@@ -449,6 +464,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$1,150/wk",
         home: "Home daily",
         posted: "Today",
+        sample: true,
       },
       {
         title: "Regional Dry Van Driver",
@@ -459,6 +475,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$1,600/wk",
         home: "Home weekly",
         posted: "1 day ago",
+        sample: true,
       },
       {
         title: "Team Drivers, Coast to Coast",
@@ -469,6 +486,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$0.85/mi split",
         home: "Out 2-3 weeks",
         posted: "1 day ago",
+        sample: true,
       },
       {
         title: "Local Flatbed, Building Materials",
@@ -479,6 +497,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$27/hr",
         home: "Home daily",
         posted: "2 days ago",
+        sample: true,
       },
       {
         title: "Regional Reefer Driver, Central US",
@@ -489,6 +508,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$0.63/mi",
         home: "Home weekends",
         posted: "3 days ago",
+        sample: true,
       },
     ],
     hiringCarriers: [
@@ -524,12 +544,10 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
   "houston-tx": {
     cityName: "Houston, TX",
     stateName: "Texas",
-    title: "CDL Jobs in Houston, TX: 195 Openings",
-    description: "Truck driving jobs near Houston. Pay and home time on every listing. Updated daily.",
-    heroIntro: "195 truck driving jobs within 50 miles of Houston, updated today. The Port of Houston drives heavy petrochemical and energy-sector freight, with steady tanker, flatbed, and dry van work along I-10, I-45, and I-69.",
+    title: "CDL Jobs in Houston, TX",
+    description: "Truck driving jobs near Houston. Pay and home time on every listing.",
+    heroIntro: "Truck driving jobs near Houston. The Port of Houston drives heavy petrochemical and energy-sector freight, with steady tanker, flatbed, and dry van work along I-10, I-45, and I-69.",
     stats: [
-      { big: "195", small: "Open jobs" },
-      { big: "52", small: "Local jobs" },
       { big: "$0.60–0.72/mi", small: "Typical OTR pay" },
       { big: "$25–31/hr", small: "Typical local pay" },
     ],
@@ -543,6 +561,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$0.68–0.74/mi",
         home: "Home every 2 weeks",
         posted: "Today",
+        sample: true,
       },
       {
         title: "Local Drayage Driver, Port of Houston",
@@ -553,6 +572,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$1,450/wk",
         home: "Home daily",
         posted: "Today",
+        sample: true,
       },
       {
         title: "Regional Flatbed, Energy Sector",
@@ -563,6 +583,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$1,700/wk",
         home: "Home weekly",
         posted: "1 day ago",
+        sample: true,
       },
       {
         title: "OTR Dry Van, I-10 Lanes",
@@ -573,6 +594,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$0.60–0.66/mi",
         home: "Out 2 weeks",
         posted: "1 day ago",
+        sample: true,
       },
       {
         title: "Local Tanker Driver, Refinery Runs",
@@ -583,6 +605,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$29/hr",
         home: "Home daily",
         posted: "2 days ago",
+        sample: true,
       },
       {
         title: "Regional Dry Van, Texas Triangle",
@@ -593,6 +616,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$0.64/mi",
         home: "Home weekends",
         posted: "3 days ago",
+        sample: true,
       },
     ],
     hiringCarriers: [
@@ -628,12 +652,10 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
   "indianapolis-in": {
     cityName: "Indianapolis, IN",
     stateName: "Indiana",
-    title: "CDL Jobs in Indianapolis, IN: 150 Openings",
-    description: "Truck driving jobs near Indianapolis. Pay and home time on every listing. Updated daily.",
-    heroIntro: "150 truck driving jobs within 50 miles of Indianapolis, updated today. Known as the Crossroads of America where I-65, I-70, and I-69 converge, Indianapolis also hosts one of the largest FedEx air cargo hubs in the country, driving steady dry van, reefer, and regional freight demand.",
+    title: "CDL Jobs in Indianapolis, IN",
+    description: "Truck driving jobs near Indianapolis. Pay and home time on every listing.",
+    heroIntro: "Truck driving jobs near Indianapolis. Known as the Crossroads of America where I-65, I-70, and I-69 converge, Indianapolis also hosts one of the largest FedEx air cargo hubs in the country, driving steady dry van, reefer, and regional freight demand.",
     stats: [
-      { big: "150", small: "Open jobs" },
-      { big: "38", small: "Local jobs" },
       { big: "$0.58–0.70/mi", small: "Typical OTR pay" },
       { big: "$24–29/hr", small: "Typical local pay" },
     ],
@@ -647,6 +669,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$0.62–0.68/mi",
         home: "Home every 2 weeks",
         posted: "Today",
+        sample: true,
       },
       {
         title: "Local Air Cargo Driver",
@@ -657,6 +680,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$27/hr",
         home: "Home daily",
         posted: "Today",
+        sample: true,
       },
       {
         title: "Regional Reefer Driver",
@@ -667,6 +691,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$1,650/wk",
         home: "Home weekly",
         posted: "1 day ago",
+        sample: true,
       },
       {
         title: "Team Drivers, Coast to Coast",
@@ -677,6 +702,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$0.85/mi split",
         home: "Out 2-3 weeks",
         posted: "1 day ago",
+        sample: true,
       },
       {
         title: "Local Flatbed, Steel Haul",
@@ -687,6 +713,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$28/hr",
         home: "Home daily",
         posted: "2 days ago",
+        sample: true,
       },
       {
         title: "Regional Dry Van, Midwest Lanes",
@@ -697,6 +724,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$0.64/mi",
         home: "Home weekends",
         posted: "3 days ago",
+        sample: true,
       },
     ],
     hiringCarriers: [
@@ -732,12 +760,10 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
   "los-angeles-ca": {
     cityName: "Los Angeles, CA",
     stateName: "California",
-    title: "CDL Jobs in Los Angeles, CA: 340 Openings",
-    description: "Truck driving jobs near Los Angeles. Pay and home time on every listing. Updated daily.",
-    heroIntro: "340 truck driving jobs within 50 miles of Los Angeles, updated today. The Port of LA and Port of Long Beach together form the busiest container gateway in the country, driving heavy year-round demand for drayage and local drivers.",
+    title: "CDL Jobs in Los Angeles, CA",
+    description: "Truck driving jobs near Los Angeles. Pay and home time on every listing.",
+    heroIntro: "Truck driving jobs near Los Angeles. The Port of LA and Port of Long Beach together form the busiest container gateway in the country, driving heavy year-round demand for drayage and local drivers.",
     stats: [
-      { big: "340", small: "Open jobs" },
-      { big: "162", small: "Local jobs" },
       { big: "$0.65–0.78/mi", small: "Typical OTR pay" },
       { big: "$28–36/hr", small: "Typical local pay" },
     ],
@@ -751,6 +777,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$1,650/wk",
         home: "Home daily",
         posted: "Today",
+        sample: true,
       },
       {
         title: "Local Drayage, Port of LA",
@@ -761,6 +788,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$27–33/hr",
         home: "Home daily",
         posted: "Today",
+        sample: true,
       },
       {
         title: "OTR Company Driver, Dry Van",
@@ -771,6 +799,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$0.68–0.78/mi",
         home: "Home every 2 weeks",
         posted: "Today",
+        sample: true,
       },
       {
         title: "Regional Reefer Driver, SoCal to NorCal",
@@ -781,6 +810,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$1,800/wk",
         home: "Home weekly",
         posted: "1 day ago",
+        sample: true,
       },
       {
         title: "Local Chassis & Container Hauler",
@@ -791,6 +821,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$29/hr",
         home: "Home daily",
         posted: "1 day ago",
+        sample: true,
       },
       {
         title: "Team Drivers, West Coast Line-Haul",
@@ -801,6 +832,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$0.95/mi split",
         home: "Out 2 weeks",
         posted: "2 days ago",
+        sample: true,
       },
     ],
     hiringCarriers: [
@@ -835,12 +867,10 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
   "louisville-ky": {
     cityName: "Louisville, KY",
     stateName: "Kentucky",
-    title: "CDL Jobs in Louisville, KY: 130 Openings",
-    description: "Truck driving jobs near Louisville. Pay and home time on every listing. Updated daily.",
-    heroIntro: "130 truck driving jobs within 50 miles of Louisville, updated today. Louisville is home to UPS Worldport, the largest UPS air hub in the world, sitting right at the I-64/I-65/I-71 interchange, which keeps local feeder and package work steady year-round.",
+    title: "CDL Jobs in Louisville, KY",
+    description: "Truck driving jobs near Louisville. Pay and home time on every listing.",
+    heroIntro: "Truck driving jobs near Louisville. Louisville is home to UPS Worldport, the largest UPS air hub in the world, sitting right at the I-64/I-65/I-71 interchange, which keeps local feeder and package work steady year-round.",
     stats: [
-      { big: "130", small: "Open jobs" },
-      { big: "58", small: "Local jobs" },
       { big: "$0.58–0.70/mi", small: "Typical OTR pay" },
       { big: "$24–29/hr", small: "Typical local pay" },
     ],
@@ -854,6 +884,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$27/hr",
         home: "Home daily",
         posted: "Today",
+        sample: true,
       },
       {
         title: "Local Air Cargo Shuttle Driver",
@@ -864,6 +895,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$26/hr",
         home: "Home daily",
         posted: "Today",
+        sample: true,
       },
       {
         title: "OTR Company Driver",
@@ -874,6 +906,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$0.60–0.66/mi",
         home: "Home every 2 weeks",
         posted: "Today",
+        sample: true,
       },
       {
         title: "Local Delivery Driver, Hub Feeder",
@@ -884,6 +917,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$1,150/wk",
         home: "Home daily",
         posted: "1 day ago",
+        sample: true,
       },
       {
         title: "Regional Dry Van Driver",
@@ -894,6 +928,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$0.64/mi",
         home: "Home weekly",
         posted: "1 day ago",
+        sample: true,
       },
       {
         title: "Team Drivers, Air Cargo Line-Haul",
@@ -904,6 +939,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$0.85/mi split",
         home: "Out 10 days",
         posted: "2 days ago",
+        sample: true,
       },
     ],
     hiringCarriers: [
@@ -939,12 +975,10 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
   "memphis-tn": {
     cityName: "Memphis, TN",
     stateName: "Tennessee",
-    title: "CDL Jobs in Memphis, TN: 175 Openings",
-    description: "Truck driving jobs near Memphis. Pay and home time on every listing. Updated daily.",
-    heroIntro: "175 truck driving jobs within 50 miles of Memphis, updated today. Memphis is home to the FedEx World Hub, the largest air cargo hub on Earth, and sits where I-40, I-55, and I-69 meet Mississippi River barge-to-truck freight.",
+    title: "CDL Jobs in Memphis, TN",
+    description: "Truck driving jobs near Memphis. Pay and home time on every listing.",
+    heroIntro: "Truck driving jobs near Memphis. Memphis is home to the FedEx World Hub, the largest air cargo hub on Earth, and sits where I-40, I-55, and I-69 meet Mississippi River barge-to-truck freight.",
     stats: [
-      { big: "175", small: "Open jobs" },
-      { big: "68", small: "Local jobs" },
       { big: "$0.60–0.70/mi", small: "Typical OTR pay" },
       { big: "$24–29/hr", small: "Typical local pay" },
     ],
@@ -958,6 +992,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$26/hr",
         home: "Home daily",
         posted: "Today",
+        sample: true,
       },
       {
         title: "Local Package Feeder Driver",
@@ -968,6 +1003,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$24/hr",
         home: "Home daily",
         posted: "Today",
+        sample: true,
       },
       {
         title: "OTR Company Driver",
@@ -978,6 +1014,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$0.62–0.68/mi",
         home: "Home every 2 weeks",
         posted: "Today",
+        sample: true,
       },
       {
         title: "Regional Reefer Driver",
@@ -988,6 +1025,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$1,700/wk",
         home: "Home weekly",
         posted: "1 day ago",
+        sample: true,
       },
       {
         title: "Local Drayage Driver, River Port",
@@ -998,6 +1036,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$28/hr",
         home: "Home daily",
         posted: "2 days ago",
+        sample: true,
       },
       {
         title: "Regional Flatbed Driver",
@@ -1008,6 +1047,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$0.65/mi",
         home: "Home weekends",
         posted: "3 days ago",
+        sample: true,
       },
     ],
     hiringCarriers: [
@@ -1043,12 +1083,10 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
   "phoenix-az": {
     cityName: "Phoenix, AZ",
     stateName: "Arizona",
-    title: "CDL Jobs in Phoenix, AZ: 165 Openings",
-    description: "Truck driving jobs near Phoenix. Pay and home time on every listing. Updated daily.",
-    heroIntro: "165 truck driving jobs within 50 miles of Phoenix, updated today. Phoenix sits at the crossroads of I-10 and I-17, and its fast-growing warehouse and distribution market keeps steady demand for local shuttle and regional dry van drivers.",
+    title: "CDL Jobs in Phoenix, AZ",
+    description: "Truck driving jobs near Phoenix. Pay and home time on every listing.",
+    heroIntro: "Truck driving jobs near Phoenix. Phoenix sits at the crossroads of I-10 and I-17, and its fast-growing warehouse and distribution market keeps steady demand for local shuttle and regional dry van drivers.",
     stats: [
-      { big: "165", small: "Open jobs" },
-      { big: "38", small: "Local jobs" },
       { big: "$0.60–0.70/mi", small: "Typical OTR pay" },
       { big: "$24–29/hr", small: "Typical local pay" },
     ],
@@ -1062,6 +1100,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$0.62–0.68/mi",
         home: "Home every 2 weeks",
         posted: "Today",
+        sample: true,
       },
       {
         title: "Local Warehouse Shuttle Driver",
@@ -1072,6 +1111,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$1,350/wk",
         home: "Home daily",
         posted: "Today",
+        sample: true,
       },
       {
         title: "Regional Reefer Driver",
@@ -1082,6 +1122,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$1,650/wk",
         home: "Home weekly",
         posted: "1 day ago",
+        sample: true,
       },
       {
         title: "Team Drivers, West Coast Lanes",
@@ -1092,6 +1133,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$0.85/mi split",
         home: "Out 2-3 weeks",
         posted: "1 day ago",
+        sample: true,
       },
       {
         title: "Local Flatbed, Building Materials",
@@ -1102,6 +1144,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$27/hr",
         home: "Home daily",
         posted: "2 days ago",
+        sample: true,
       },
       {
         title: "Regional Dry Van, Southwest",
@@ -1112,6 +1155,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
         pay: "$0.64/mi",
         home: "Home weekends",
         posted: "3 days ago",
+        sample: true,
       },
     ],
     hiringCarriers: [

@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { CITY_CONTENT, CITY_SLUGS } from "./city-content";
-import { MIN_JOBS_TO_INDEX } from "@/features/jobs/model/jobs";
+import { MIN_JOBS_TO_INDEX, isCityIndexable, realJobCount } from "@/features/jobs/model/jobs";
 import { CITY_DIRECTORY } from "@/features/jobs/model/cities";
 import { CITY_NAME_TO_SLUG } from "./city-slugs";
 
@@ -16,15 +16,29 @@ describe("city content integrity", () => {
       expect(entry.hiringCarriers.length, `${slug} hiringCarriers`).toBeGreaterThan(0);
       expect(entry.nearbyCities.length, `${slug} nearbyCities`).toBeGreaterThan(0);
       expect(entry.faqs.length, `${slug} faqs`).toBeGreaterThan(0);
-      expect(entry.jobs.length, `${slug} indexable`).toBeGreaterThanOrEqual(MIN_JOBS_TO_INDEX);
     }
   });
 
-  it("CITY_DIRECTORY has one entry per city, matching the 'Open jobs' stat", () => {
+  it("CITY_DIRECTORY has one entry per city", () => {
     expect(CITY_DIRECTORY).toHaveLength(Object.keys(CITY_CONTENT).length);
     for (const dir of CITY_DIRECTORY) {
       expect(CITY_CONTENT[dir.slug].cityName).toBe(dir.name);
-      expect(CITY_CONTENT[dir.slug].stats[0]?.big).toBe(dir.count);
+    }
+  });
+
+  it("carries no invented opening counts or freshness claims", () => {
+    for (const slug of CITY_SLUGS) {
+      const { title, description, heroIntro, stats } = CITY_CONTENT[slug];
+      expect(title, slug).not.toMatch(/\d+ openings/i);
+      expect(`${description} ${heroIntro}`, slug).not.toMatch(/updated (today|daily)|\d+ truck driving jobs/i);
+      expect(stats.map((s) => s.small), slug).not.toContain("Open jobs");
+    }
+  });
+
+  it("marks every listing as sample, so no city counts as indexable yet", () => {
+    for (const slug of CITY_SLUGS) {
+      expect(realJobCount(CITY_CONTENT[slug]), slug).toBe(0);
+      expect(isCityIndexable(CITY_CONTENT[slug]), slug).toBe(false);
     }
   });
 

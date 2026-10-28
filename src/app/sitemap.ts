@@ -1,9 +1,9 @@
 import type { MetadataRoute } from "next";
 import { sitemapAlternates } from "@/shared/i18n/alternates";
 import { SITE_URL } from "@/shared/config/site";
-import { GUIDES } from "@/features/guides";
-import { STATE_DIRECTORY } from "@/features/carriers";
-import { CITY_DIRECTORY, CITY_CONTENT, MIN_JOBS_TO_INDEX } from "@/features/jobs";
+import { GUIDES, hasGuideBody } from "@/features/guides";
+import { STATE_DIRECTORY, STATE_DATA_IS_SAMPLE } from "@/features/carriers";
+import { CITY_DIRECTORY, CITY_CONTENT, isCityIndexable } from "@/features/jobs";
 
 const BASE_URL = SITE_URL;
 
@@ -34,14 +34,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/sms-terms`, changeFrequency: "yearly", priority: 0.2 },
   ];
 
-  const guideRoutes: MetadataRoute.Sitemap = GUIDES.map((g) => ({
+  // Stub guides are noindex (see guides/[slug]); keep them out of the sitemap too.
+  const guideRoutes: MetadataRoute.Sitemap = GUIDES.filter(hasGuideBody).map((g) => ({
     url: `${BASE_URL}/guides/${g.slug}`,
     lastModified: g.date,
     changeFrequency: "monthly",
     priority: 0.5,
   }));
 
-  const stateRoutes: MetadataRoute.Sitemap = STATE_DIRECTORY.map((s) => ({
+  // State pages are noindex while their data is sample (see carriers/[state]).
+  const stateRoutes: MetadataRoute.Sitemap = (STATE_DATA_IS_SAMPLE ? [] : STATE_DIRECTORY).map((s) => ({
     url: `${BASE_URL}/carriers/${s.slug}`,
     changeFrequency: "weekly",
     priority: 0.7,
@@ -49,7 +51,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Thin city pages are noindex (see jobs/[slug]); keep them out of the sitemap too.
   const cityRoutes: MetadataRoute.Sitemap = CITY_DIRECTORY.filter(
-    (c) => CITY_CONTENT[c.slug].jobs.length >= MIN_JOBS_TO_INDEX,
+    (c) => isCityIndexable(CITY_CONTENT[c.slug]),
   ).map((c) => ({
     url: `${BASE_URL}/jobs/${c.slug}`,
     changeFrequency: "daily",

@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { faqSchema, breadcrumbSchema, contactPageSchema } from "./structured-data";
+import { SITE_URL } from "@/shared/config/site";
 
 describe("faqSchema", () => {
   it("wraps each Q/A pair as a schema.org Question", () => {
@@ -29,9 +30,9 @@ describe("breadcrumbSchema", () => {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://truckerhq.com/",
+      item: `${SITE_URL}/`,
     });
-    expect(schema.itemListElement[1].item).toBe("https://truckerhq.com/carriers/texas");
+    expect(schema.itemListElement[1].item).toBe(`${SITE_URL}/carriers/texas`);
     expect(schema.itemListElement[1].position).toBe(2);
   });
 });

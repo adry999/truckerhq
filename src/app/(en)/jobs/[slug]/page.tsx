@@ -9,7 +9,7 @@ import { findCarrier } from "@/features/carriers";
 import {
   CityJobsView,
   JobDetail,
-  MIN_JOBS_TO_INDEX,
+  isCityIndexable,
   jobsStaticSlugs,
   resolveJobsSlug,
 } from "@/features/jobs";
@@ -33,10 +33,7 @@ export async function generateMetadata({
       description: city.description,
       path: `/jobs/${slug}`,
       ogImage: false,
-      robots:
-        city.jobs.length >= MIN_JOBS_TO_INDEX
-          ? undefined
-          : { index: false, follow: true },
+      robots: isCityIndexable(city) ? undefined : { index: false, follow: true },
     });
   }
 

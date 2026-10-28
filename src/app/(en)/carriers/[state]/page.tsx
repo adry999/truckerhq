@@ -5,7 +5,7 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/shared/seo/structured-data";
-import { StateCarriersView, STATE_CONTENT, STATE_SLUGS } from "@/features/carriers";
+import { StateCarriersView, STATE_CONTENT, STATE_DATA_IS_SAMPLE, STATE_SLUGS } from "@/features/carriers";
 
 export function generateStaticParams() {
   return STATE_SLUGS.map((state) => ({ state }));
@@ -24,6 +24,7 @@ export async function generateMetadata({
     description: entry.description,
     path: `/carriers/${state}`,
     ogImage: "/opengraph-image",
+    robots: STATE_DATA_IS_SAMPLE ? { index: false, follow: true } : undefined,
   });
 }
 

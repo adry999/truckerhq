@@ -12,6 +12,11 @@ const READ_NEXT_SLUGS = [
   "detention-pay-how-to-get-it-on-the-rate-con",
 ];
 
+/** Only the featured guide has a body today; the rest render a placeholder and stay out of search. */
+export function hasGuideBody(guide: Guide): boolean {
+  return guide.slug === FEATURED_SLUG;
+}
+
 export function findGuide(slug: string): Guide | undefined {
   return GUIDES.find((g) => g.slug === slug);
 }

@@ -51,7 +51,6 @@ export function JobsBoard({
                 className="flex h-11 items-center gap-2 rounded-[10px] border-[1.5px] border-border bg-white px-3.5 text-[15px] font-semibold hover:border-green"
               >
                 {city.name}
-                <span className="text-[13px] font-medium text-grey">{city.count}</span>
               </Link>
             ))}
           </div>

@@ -4,7 +4,7 @@ import { buildMetadata } from "@/shared/seo/metadata";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import JsonLd from "@/components/JsonLd";
-import { GUIDES, GuideArticle, findGuide, guideDescription } from "@/features/guides";
+import { GUIDES, GuideArticle, findGuide, guideDescription, hasGuideBody } from "@/features/guides";
 
 export function generateStaticParams() {
   return GUIDES.map((g) => ({ slug: g.slug }));
@@ -24,6 +24,7 @@ export async function generateMetadata({
     description: guideDescription(guide),
     path: `/guides/${slug}`,
     ogImage: false,
+    robots: hasGuideBody(guide) ? undefined : { index: false, follow: true },
   });
 }
 
@@ -46,7 +47,7 @@ export default async function GuideDetailPage({
 
   return (
     <div className="flex min-h-screen flex-col">
-      <JsonLd data={schema} />
+      {hasGuideBody(guide) && <JsonLd data={schema} />}
       <SiteHeader />
       <GuideArticle guide={guide} />
       <SiteFooter />

@@ -105,6 +105,13 @@ const RAW_STATES: Record<string, unknown> = {
   "wyoming": wyoming,
 };
 
+/**
+ * The per-state stats, city lists and carrier rows in ./*.json are sample data, not
+ * FMCSA figures. While true, state pages are noindex and out of the sitemap.
+ * Flip to false once the numbers come from the FMCSA census.
+ */
+export const STATE_DATA_IS_SAMPLE = true;
+
 export const STATE_CONTENT: Record<string, StateContentEntry> = Object.fromEntries(
   Object.entries(RAW_STATES).map(([slug, raw]) => [slug, buildStateContent(parseStateData(slug, raw))]),
 );
