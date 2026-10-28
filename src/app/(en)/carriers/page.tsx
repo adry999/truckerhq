@@ -24,9 +24,9 @@ export default function CarriersIndexPage() {
               Carriers by state
             </h1>
             <p className="max-w-xl text-lg leading-relaxed text-[#D4D6DA]">
-              For-hire interstate carriers by state. Pick a state to search DOT
-              and MC numbers, filter by equipment and check any carrier&apos;s
-              Health Score.
+              Active for-hire interstate carriers by state, from the FMCSA
+              census. Pick a state, then look up any DOT or MC number and
+              check its Health Score.
             </p>
           </div>
         </section>

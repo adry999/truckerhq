@@ -1,0 +1,1711 @@
+{
+  "source": {
+    "name": "FMCSA Company Census File",
+    "url": "https://data.transportation.gov/d/az4n-8mr2",
+    "datasetId": "az4n-8mr2",
+    "fetchedAt": "2026-10-28T18:47:00.897Z",
+    "filters": "status_code='A' AND carrier_operation='A' AND classdef like '%AUTHORIZED FOR HIRE%' AND phy_country='US'; grouped by phy_state. New = add_date >= 20251028. Small fleet = power_units 1-5."
+  },
+  "states": {
+    "alabama": {
+      "activeForHire": 7074,
+      "newLast12Months": 1094,
+      "smallFleetCount": 5625,
+      "smallFleetShare": 79.5,
+      "powerUnits": 59085,
+      "drivers": 49876,
+      "topCities": [
+        {
+          "city": "Birmingham",
+          "count": 468
+        },
+        {
+          "city": "Mobile",
+          "count": 441
+        },
+        {
+          "city": "Montgomery",
+          "count": 328
+        },
+        {
+          "city": "Dothan",
+          "count": 190
+        },
+        {
+          "city": "Huntsville",
+          "count": 175
+        },
+        {
+          "city": "Tuscaloosa",
+          "count": 142
+        }
+      ]
+    },
+    "alaska": {
+      "activeForHire": 327,
+      "newLast12Months": 32,
+      "smallFleetCount": 200,
+      "smallFleetShare": 61.2,
+      "powerUnits": 4176,
+      "drivers": 4282,
+      "topCities": [
+        {
+          "city": "Anchorage",
+          "count": 102
+        },
+        {
+          "city": "Wasilla",
+          "count": 34
+        },
+        {
+          "city": "Fairbanks",
+          "count": 33
+        },
+        {
+          "city": "Skagway",
+          "count": 17
+        },
+        {
+          "city": "Palmer",
+          "count": 16
+        },
+        {
+          "city": "Juneau",
+          "count": 15
+        }
+      ]
+    },
+    "arizona": {
+      "activeForHire": 8578,
+      "newLast12Months": 1452,
+      "smallFleetCount": 6897,
+      "smallFleetShare": 80.4,
+      "powerUnits": 661541,
+      "drivers": 90395,
+      "topCities": [
+        {
+          "city": "Phoenix",
+          "count": 1897
+        },
+        {
+          "city": "Tucson",
+          "count": 646
+        },
+        {
+          "city": "Glendale",
+          "count": 539
+        },
+        {
+          "city": "Yuma",
+          "count": 437
+        },
+        {
+          "city": "Buckeye",
+          "count": 380
+        },
+        {
+          "city": "Mesa",
+          "count": 297
+        }
+      ]
+    },
+    "arkansas": {
+      "activeForHire": 4323,
+      "newLast12Months": 550,
+      "smallFleetCount": 3459,
+      "smallFleetShare": 80,
+      "powerUnits": 117264,
+      "drivers": 101411,
+      "topCities": [
+        {
+          "city": "Little Rock",
+          "count": 264
+        },
+        {
+          "city": "Springdale",
+          "count": 118
+        },
+        {
+          "city": "Jonesboro",
+          "count": 115
+        },
+        {
+          "city": "Fort Smith",
+          "count": 94
+        },
+        {
+          "city": "Texarkana",
+          "count": 82
+        },
+        {
+          "city": "Conway",
+          "count": 80
+        }
+      ]
+    },
+    "california": {
+      "activeForHire": 62513,
+      "newLast12Months": 7581,
+      "smallFleetCount": 52690,
+      "smallFleetShare": 84.3,
+      "powerUnits": 432541,
+      "drivers": 430690,
+      "topCities": [
+        {
+          "city": "Fresno",
+          "count": 4641
+        },
+        {
+          "city": "Bakersfield",
+          "count": 3051
+        },
+        {
+          "city": "Sacramento",
+          "count": 2298
+        },
+        {
+          "city": "Los Angeles",
+          "count": 2192
+        },
+        {
+          "city": "Fontana",
+          "count": 1689
+        },
+        {
+          "city": "San Diego",
+          "count": 1503
+        }
+      ]
+    },
+    "colorado": {
+      "activeForHire": 7337,
+      "newLast12Months": 1116,
+      "smallFleetCount": 5896,
+      "smallFleetShare": 80.4,
+      "powerUnits": 111665,
+      "drivers": 46883,
+      "topCities": [
+        {
+          "city": "Denver",
+          "count": 1006
+        },
+        {
+          "city": "Aurora",
+          "count": 940
+        },
+        {
+          "city": "Greeley",
+          "count": 340
+        },
+        {
+          "city": "Colorado Springs",
+          "count": 321
+        },
+        {
+          "city": "Commerce City",
+          "count": 240
+        },
+        {
+          "city": "Thornton",
+          "count": 223
+        }
+      ]
+    },
+    "connecticut": {
+      "activeForHire": 4925,
+      "newLast12Months": 792,
+      "smallFleetCount": 3991,
+      "smallFleetShare": 81,
+      "powerUnits": 41414,
+      "drivers": 25910,
+      "topCities": [
+        {
+          "city": "Hartford",
+          "count": 320
+        },
+        {
+          "city": "Bridgeport",
+          "count": 286
+        },
+        {
+          "city": "Danbury",
+          "count": 279
+        },
+        {
+          "city": "Waterbury",
+          "count": 205
+        },
+        {
+          "city": "Stamford",
+          "count": 205
+        },
+        {
+          "city": "East Hartford",
+          "count": 172
+        }
+      ]
+    },
+    "delaware": {
+      "activeForHire": 2036,
+      "newLast12Months": 318,
+      "smallFleetCount": 1586,
+      "smallFleetShare": 77.9,
+      "powerUnits": 8498,
+      "drivers": 12051,
+      "topCities": [
+        {
+          "city": "Wilmington",
+          "count": 339
+        },
+        {
+          "city": "Newark",
+          "count": 279
+        },
+        {
+          "city": "Dover",
+          "count": 201
+        },
+        {
+          "city": "New Castle",
+          "count": 194
+        },
+        {
+          "city": "Middletown",
+          "count": 116
+        },
+        {
+          "city": "Bear",
+          "count": 101
+        }
+      ]
+    },
+    "florida": {
+      "activeForHire": 30825,
+      "newLast12Months": 6325,
+      "smallFleetCount": 24561,
+      "smallFleetShare": 79.7,
+      "powerUnits": 296550,
+      "drivers": 366305,
+      "topCities": [
+        {
+          "city": "Miami",
+          "count": 3159
+        },
+        {
+          "city": "Orlando",
+          "count": 1990
+        },
+        {
+          "city": "Jacksonville",
+          "count": 1834
+        },
+        {
+          "city": "Tampa",
+          "count": 1256
+        },
+        {
+          "city": "Hialeah",
+          "count": 1124
+        },
+        {
+          "city": "Kissimmee",
+          "count": 846
+        }
+      ]
+    },
+    "georgia": {
+      "activeForHire": 23076,
+      "newLast12Months": 3742,
+      "smallFleetCount": 18520,
+      "smallFleetShare": 80.3,
+      "powerUnits": 460369,
+      "drivers": 263572,
+      "topCities": [
+        {
+          "city": "Atlanta",
+          "count": 1907
+        },
+        {
+          "city": "Lawrenceville",
+          "count": 831
+        },
+        {
+          "city": "Mcdonough",
+          "count": 522
+        },
+        {
+          "city": "Savannah",
+          "count": 469
+        },
+        {
+          "city": "Douglasville",
+          "count": 417
+        },
+        {
+          "city": "Conyers",
+          "count": 405
+        }
+      ]
+    },
+    "hawaii": {
+      "activeForHire": 258,
+      "newLast12Months": 11,
+      "smallFleetCount": 88,
+      "smallFleetShare": 34.1,
+      "powerUnits": 3435,
+      "drivers": 3217,
+      "topCities": [
+        {
+          "city": "Honolulu",
+          "count": 90
+        },
+        {
+          "city": "Kapolei",
+          "count": 19
+        },
+        {
+          "city": "Waianae",
+          "count": 13
+        },
+        {
+          "city": "Kailua Kona",
+          "count": 12
+        },
+        {
+          "city": "Ewa Beach",
+          "count": 11
+        },
+        {
+          "city": "Waipahu",
+          "count": 11
+        }
+      ]
+    },
+    "idaho": {
+      "activeForHire": 4391,
+      "newLast12Months": 466,
+      "smallFleetCount": 3578,
+      "smallFleetShare": 81.5,
+      "powerUnits": 23862,
+      "drivers": 24017,
+      "topCities": [
+        {
+          "city": "Boise",
+          "count": 341
+        },
+        {
+          "city": "Nampa",
+          "count": 264
+        },
+        {
+          "city": "Idaho Falls",
+          "count": 247
+        },
+        {
+          "city": "Caldwell",
+          "count": 189
+        },
+        {
+          "city": "Twin Falls",
+          "count": 180
+        },
+        {
+          "city": "Meridian",
+          "count": 179
+        }
+      ]
+    },
+    "illinois": {
+      "activeForHire": 28035,
+      "newLast12Months": 4164,
+      "smallFleetCount": 20005,
+      "smallFleetShare": 71.4,
+      "powerUnits": 335090,
+      "drivers": 323919,
+      "topCities": [
+        {
+          "city": "Chicago",
+          "count": 3445
+        },
+        {
+          "city": "Schaumburg",
+          "count": 644
+        },
+        {
+          "city": "Plainfield",
+          "count": 610
+        },
+        {
+          "city": "Aurora",
+          "count": 578
+        },
+        {
+          "city": "Naperville",
+          "count": 529
+        },
+        {
+          "city": "Des Plaines",
+          "count": 443
+        }
+      ]
+    },
+    "indiana": {
+      "activeForHire": 13914,
+      "newLast12Months": 2045,
+      "smallFleetCount": 10709,
+      "smallFleetShare": 77,
+      "powerUnits": 231134,
+      "drivers": 125047,
+      "topCities": [
+        {
+          "city": "Indianapolis",
+          "count": 3383
+        },
+        {
+          "city": "Greenwood",
+          "count": 1138
+        },
+        {
+          "city": "Fort Wayne",
+          "count": 529
+        },
+        {
+          "city": "Fishers",
+          "count": 365
+        },
+        {
+          "city": "Avon",
+          "count": 263
+        },
+        {
+          "city": "Plainfield",
+          "count": 236
+        }
+      ]
+    },
+    "iowa": {
+      "activeForHire": 7901,
+      "newLast12Months": 729,
+      "smallFleetCount": 6355,
+      "smallFleetShare": 80.4,
+      "powerUnits": 73168,
+      "drivers": 65826,
+      "topCities": [
+        {
+          "city": "Des Moines",
+          "count": 347
+        },
+        {
+          "city": "Cedar Rapids",
+          "count": 178
+        },
+        {
+          "city": "Davenport",
+          "count": 171
+        },
+        {
+          "city": "Sioux City",
+          "count": 137
+        },
+        {
+          "city": "Waterloo",
+          "count": 132
+        },
+        {
+          "city": "Council Bluffs",
+          "count": 117
+        }
+      ]
+    },
+    "kansas": {
+      "activeForHire": 5205,
+      "newLast12Months": 512,
+      "smallFleetCount": 3964,
+      "smallFleetShare": 76.2,
+      "powerUnits": 72541,
+      "drivers": 46880,
+      "topCities": [
+        {
+          "city": "Wichita",
+          "count": 471
+        },
+        {
+          "city": "Garden City",
+          "count": 298
+        },
+        {
+          "city": "Kansas City",
+          "count": 278
+        },
+        {
+          "city": "Olathe",
+          "count": 262
+        },
+        {
+          "city": "Overland Park",
+          "count": 196
+        },
+        {
+          "city": "Topeka",
+          "count": 123
+        }
+      ]
+    },
+    "kentucky": {
+      "activeForHire": 6040,
+      "newLast12Months": 1019,
+      "smallFleetCount": 4687,
+      "smallFleetShare": 77.6,
+      "powerUnits": 32948,
+      "drivers": 35029,
+      "topCities": [
+        {
+          "city": "Louisville",
+          "count": 1710
+        },
+        {
+          "city": "Bowling Green",
+          "count": 293
+        },
+        {
+          "city": "Lexington",
+          "count": 263
+        },
+        {
+          "city": "Florence",
+          "count": 102
+        },
+        {
+          "city": "London",
+          "count": 78
+        },
+        {
+          "city": "Owensboro",
+          "count": 72
+        }
+      ]
+    },
+    "louisiana": {
+      "activeForHire": 4354,
+      "newLast12Months": 770,
+      "smallFleetCount": 3354,
+      "smallFleetShare": 77,
+      "powerUnits": 66215,
+      "drivers": 52903,
+      "topCities": [
+        {
+          "city": "Baton Rouge",
+          "count": 351
+        },
+        {
+          "city": "Shreveport",
+          "count": 279
+        },
+        {
+          "city": "New Orleans",
+          "count": 223
+        },
+        {
+          "city": "Lafayette",
+          "count": 146
+        },
+        {
+          "city": "Slidell",
+          "count": 116
+        },
+        {
+          "city": "Lake Charles",
+          "count": 96
+        }
+      ]
+    },
+    "maine": {
+      "activeForHire": 1387,
+      "newLast12Months": 130,
+      "smallFleetCount": 1071,
+      "smallFleetShare": 77.2,
+      "powerUnits": 108474,
+      "drivers": 8501,
+      "topCities": [
+        {
+          "city": "Portland",
+          "count": 48
+        },
+        {
+          "city": "Auburn",
+          "count": 31
+        },
+        {
+          "city": "Fort Kent",
+          "count": 26
+        },
+        {
+          "city": "South Portland",
+          "count": 25
+        },
+        {
+          "city": "Scarborough",
+          "count": 21
+        },
+        {
+          "city": "Lewiston",
+          "count": 20
+        }
+      ]
+    },
+    "maryland": {
+      "activeForHire": 11001,
+      "newLast12Months": 1654,
+      "smallFleetCount": 9020,
+      "smallFleetShare": 82,
+      "powerUnits": 67455,
+      "drivers": 66367,
+      "topCities": [
+        {
+          "city": "Baltimore",
+          "count": 997
+        },
+        {
+          "city": "Silver Spring",
+          "count": 464
+        },
+        {
+          "city": "Laurel",
+          "count": 309
+        },
+        {
+          "city": "Hagerstown",
+          "count": 294
+        },
+        {
+          "city": "Upper Marlboro",
+          "count": 259
+        },
+        {
+          "city": "Hyattsville",
+          "count": 251
+        }
+      ]
+    },
+    "massachusetts": {
+      "activeForHire": 7291,
+      "newLast12Months": 1093,
+      "smallFleetCount": 5561,
+      "smallFleetShare": 76.3,
+      "powerUnits": 197899,
+      "drivers": 108056,
+      "topCities": [
+        {
+          "city": "Worcester",
+          "count": 280
+        },
+        {
+          "city": "Lawrence",
+          "count": 263
+        },
+        {
+          "city": "Brockton",
+          "count": 228
+        },
+        {
+          "city": "Springfield",
+          "count": 226
+        },
+        {
+          "city": "Methuen",
+          "count": 147
+        },
+        {
+          "city": "Lynn",
+          "count": 133
+        }
+      ]
+    },
+    "michigan": {
+      "activeForHire": 10319,
+      "newLast12Months": 1678,
+      "smallFleetCount": 7480,
+      "smallFleetShare": 72.5,
+      "powerUnits": 178262,
+      "drivers": 115959,
+      "topCities": [
+        {
+          "city": "Detroit",
+          "count": 702
+        },
+        {
+          "city": "Dearborn",
+          "count": 527
+        },
+        {
+          "city": "Grand Rapids",
+          "count": 374
+        },
+        {
+          "city": "Canton",
+          "count": 223
+        },
+        {
+          "city": "Warren",
+          "count": 223
+        },
+        {
+          "city": "Sterling Heights",
+          "count": 204
+        }
+      ]
+    },
+    "minnesota": {
+      "activeForHire": 10978,
+      "newLast12Months": 1447,
+      "smallFleetCount": 8722,
+      "smallFleetShare": 79.4,
+      "powerUnits": 64659,
+      "drivers": 159068,
+      "topCities": [
+        {
+          "city": "Minneapolis",
+          "count": 1351
+        },
+        {
+          "city": "Saint Paul",
+          "count": 512
+        },
+        {
+          "city": "Saint Cloud",
+          "count": 411
+        },
+        {
+          "city": "Burnsville",
+          "count": 254
+        },
+        {
+          "city": "Bloomington",
+          "count": 199
+        },
+        {
+          "city": "Rochester",
+          "count": 180
+        }
+      ]
+    },
+    "mississippi": {
+      "activeForHire": 6030,
+      "newLast12Months": 851,
+      "smallFleetCount": 4893,
+      "smallFleetShare": 81.1,
+      "powerUnits": 169141,
+      "drivers": 29050,
+      "topCities": [
+        {
+          "city": "Jackson",
+          "count": 338
+        },
+        {
+          "city": "Olive Branch",
+          "count": 215
+        },
+        {
+          "city": "Southaven",
+          "count": 162
+        },
+        {
+          "city": "Gulfport",
+          "count": 148
+        },
+        {
+          "city": "Hattiesburg",
+          "count": 143
+        },
+        {
+          "city": "Natchez",
+          "count": 119
+        }
+      ]
+    },
+    "missouri": {
+      "activeForHire": 9566,
+      "newLast12Months": 1318,
+      "smallFleetCount": 7405,
+      "smallFleetShare": 77.4,
+      "powerUnits": 139433,
+      "drivers": 89043,
+      "topCities": [
+        {
+          "city": "Kansas City",
+          "count": 1104
+        },
+        {
+          "city": "Saint Louis",
+          "count": 924
+        },
+        {
+          "city": "St Louis",
+          "count": 294
+        },
+        {
+          "city": "Springfield",
+          "count": 251
+        },
+        {
+          "city": "Florissant",
+          "count": 209
+        },
+        {
+          "city": "Independence",
+          "count": 154
+        }
+      ]
+    },
+    "montana": {
+      "activeForHire": 2212,
+      "newLast12Months": 189,
+      "smallFleetCount": 1807,
+      "smallFleetShare": 81.7,
+      "powerUnits": 11464,
+      "drivers": 11053,
+      "topCities": [
+        {
+          "city": "Billings",
+          "count": 203
+        },
+        {
+          "city": "Kalispell",
+          "count": 118
+        },
+        {
+          "city": "Missoula",
+          "count": 91
+        },
+        {
+          "city": "Sidney",
+          "count": 82
+        },
+        {
+          "city": "Bozeman",
+          "count": 79
+        },
+        {
+          "city": "Great Falls",
+          "count": 67
+        }
+      ]
+    },
+    "nebraska": {
+      "activeForHire": 5528,
+      "newLast12Months": 524,
+      "smallFleetCount": 4581,
+      "smallFleetShare": 82.9,
+      "powerUnits": 70713,
+      "drivers": 60194,
+      "topCities": [
+        {
+          "city": "Omaha",
+          "count": 771
+        },
+        {
+          "city": "Lincoln",
+          "count": 351
+        },
+        {
+          "city": "Grand Island",
+          "count": 179
+        },
+        {
+          "city": "South Sioux City",
+          "count": 94
+        },
+        {
+          "city": "Bellevue",
+          "count": 89
+        },
+        {
+          "city": "Fremont",
+          "count": 74
+        }
+      ]
+    },
+    "nevada": {
+      "activeForHire": 4553,
+      "newLast12Months": 759,
+      "smallFleetCount": 3641,
+      "smallFleetShare": 80,
+      "powerUnits": 132030,
+      "drivers": 20591,
+      "topCities": [
+        {
+          "city": "Las Vegas",
+          "count": 2694
+        },
+        {
+          "city": "Reno",
+          "count": 319
+        },
+        {
+          "city": "Henderson",
+          "count": 317
+        },
+        {
+          "city": "North Las Vegas",
+          "count": 314
+        },
+        {
+          "city": "Sparks",
+          "count": 171
+        },
+        {
+          "city": "N Las Vegas",
+          "count": 116
+        }
+      ]
+    },
+    "new-hampshire": {
+      "activeForHire": 1569,
+      "newLast12Months": 216,
+      "smallFleetCount": 1228,
+      "smallFleetShare": 78.3,
+      "powerUnits": 8271,
+      "drivers": 9928,
+      "topCities": [
+        {
+          "city": "Manchester",
+          "count": 111
+        },
+        {
+          "city": "Nashua",
+          "count": 102
+        },
+        {
+          "city": "Salem",
+          "count": 43
+        },
+        {
+          "city": "Derry",
+          "count": 38
+        },
+        {
+          "city": "Londonderry",
+          "count": 34
+        },
+        {
+          "city": "Concord",
+          "count": 29
+        }
+      ]
+    },
+    "new-jersey": {
+      "activeForHire": 18203,
+      "newLast12Months": 3245,
+      "smallFleetCount": 14746,
+      "smallFleetShare": 81,
+      "powerUnits": 138946,
+      "drivers": 109437,
+      "topCities": [
+        {
+          "city": "Newark",
+          "count": 921
+        },
+        {
+          "city": "Elizabeth",
+          "count": 720
+        },
+        {
+          "city": "Paterson",
+          "count": 626
+        },
+        {
+          "city": "Jersey City",
+          "count": 486
+        },
+        {
+          "city": "Perth Amboy",
+          "count": 406
+        },
+        {
+          "city": "Clifton",
+          "count": 336
+        }
+      ]
+    },
+    "new-mexico": {
+      "activeForHire": 3339,
+      "newLast12Months": 429,
+      "smallFleetCount": 2683,
+      "smallFleetShare": 80.4,
+      "powerUnits": 16119,
+      "drivers": 14854,
+      "topCities": [
+        {
+          "city": "Albuquerque",
+          "count": 535
+        },
+        {
+          "city": "Hobbs",
+          "count": 400
+        },
+        {
+          "city": "Carlsbad",
+          "count": 192
+        },
+        {
+          "city": "Las Cruces",
+          "count": 176
+        },
+        {
+          "city": "Lovington",
+          "count": 173
+        },
+        {
+          "city": "Clovis",
+          "count": 134
+        }
+      ]
+    },
+    "new-york": {
+      "activeForHire": 11373,
+      "newLast12Months": 1780,
+      "smallFleetCount": 8164,
+      "smallFleetShare": 71.8,
+      "powerUnits": 95632,
+      "drivers": 84915,
+      "topCities": [
+        {
+          "city": "Brooklyn",
+          "count": 1019
+        },
+        {
+          "city": "Bronx",
+          "count": 422
+        },
+        {
+          "city": "Rochester",
+          "count": 347
+        },
+        {
+          "city": "New York",
+          "count": 309
+        },
+        {
+          "city": "Buffalo",
+          "count": 273
+        },
+        {
+          "city": "Albany",
+          "count": 243
+        }
+      ]
+    },
+    "north-carolina": {
+      "activeForHire": 18345,
+      "newLast12Months": 2742,
+      "smallFleetCount": 14903,
+      "smallFleetShare": 81.2,
+      "powerUnits": 231445,
+      "drivers": 109889,
+      "topCities": [
+        {
+          "city": "Charlotte",
+          "count": 2952
+        },
+        {
+          "city": "Raleigh",
+          "count": 853
+        },
+        {
+          "city": "Greensboro",
+          "count": 634
+        },
+        {
+          "city": "Fayetteville",
+          "count": 413
+        },
+        {
+          "city": "Durham",
+          "count": 352
+        },
+        {
+          "city": "Monroe",
+          "count": 343
+        }
+      ]
+    },
+    "north-dakota": {
+      "activeForHire": 2513,
+      "newLast12Months": 235,
+      "smallFleetCount": 1944,
+      "smallFleetShare": 77.4,
+      "powerUnits": 21896,
+      "drivers": 20234,
+      "topCities": [
+        {
+          "city": "Fargo",
+          "count": 331
+        },
+        {
+          "city": "Williston",
+          "count": 280
+        },
+        {
+          "city": "Dickinson",
+          "count": 133
+        },
+        {
+          "city": "Grand Forks",
+          "count": 124
+        },
+        {
+          "city": "Bismarck",
+          "count": 113
+        },
+        {
+          "city": "West Fargo",
+          "count": 109
+        }
+      ]
+    },
+    "ohio": {
+      "activeForHire": 21555,
+      "newLast12Months": 3503,
+      "smallFleetCount": 16076,
+      "smallFleetShare": 74.6,
+      "powerUnits": 389699,
+      "drivers": 254414,
+      "topCities": [
+        {
+          "city": "Columbus",
+          "count": 2998
+        },
+        {
+          "city": "Cincinnati",
+          "count": 1463
+        },
+        {
+          "city": "Cleveland",
+          "count": 1030
+        },
+        {
+          "city": "Dayton",
+          "count": 892
+        },
+        {
+          "city": "Toledo",
+          "count": 474
+        },
+        {
+          "city": "Mason",
+          "count": 386
+        }
+      ]
+    },
+    "oklahoma": {
+      "activeForHire": 5663,
+      "newLast12Months": 906,
+      "smallFleetCount": 4475,
+      "smallFleetShare": 79,
+      "powerUnits": 96246,
+      "drivers": 35684,
+      "topCities": [
+        {
+          "city": "Oklahoma City",
+          "count": 815
+        },
+        {
+          "city": "Tulsa",
+          "count": 446
+        },
+        {
+          "city": "Edmond",
+          "count": 166
+        },
+        {
+          "city": "Broken Arrow",
+          "count": 144
+        },
+        {
+          "city": "Yukon",
+          "count": 128
+        },
+        {
+          "city": "Norman",
+          "count": 82
+        }
+      ]
+    },
+    "oregon": {
+      "activeForHire": 5677,
+      "newLast12Months": 640,
+      "smallFleetCount": 4524,
+      "smallFleetShare": 79.7,
+      "powerUnits": 79651,
+      "drivers": 30917,
+      "topCities": [
+        {
+          "city": "Portland",
+          "count": 1231
+        },
+        {
+          "city": "Salem",
+          "count": 273
+        },
+        {
+          "city": "Gresham",
+          "count": 266
+        },
+        {
+          "city": "Hermiston",
+          "count": 169
+        },
+        {
+          "city": "Beaverton",
+          "count": 161
+        },
+        {
+          "city": "Klamath Falls",
+          "count": 107
+        }
+      ]
+    },
+    "pennsylvania": {
+      "activeForHire": 23252,
+      "newLast12Months": 3998,
+      "smallFleetCount": 18335,
+      "smallFleetShare": 78.9,
+      "powerUnits": 393373,
+      "drivers": 183945,
+      "topCities": [
+        {
+          "city": "Philadelphia",
+          "count": 3389
+        },
+        {
+          "city": "Allentown",
+          "count": 782
+        },
+        {
+          "city": "Pittsburgh",
+          "count": 648
+        },
+        {
+          "city": "Reading",
+          "count": 517
+        },
+        {
+          "city": "Harrisburg",
+          "count": 483
+        },
+        {
+          "city": "Easton",
+          "count": 371
+        }
+      ]
+    },
+    "rhode-island": {
+      "activeForHire": 1375,
+      "newLast12Months": 222,
+      "smallFleetCount": 1141,
+      "smallFleetShare": 83,
+      "powerUnits": 8914,
+      "drivers": 9624,
+      "topCities": [
+        {
+          "city": "Providence",
+          "count": 360
+        },
+        {
+          "city": "Pawtucket",
+          "count": 126
+        },
+        {
+          "city": "Cranston",
+          "count": 122
+        },
+        {
+          "city": "Johnston",
+          "count": 98
+        },
+        {
+          "city": "Warwick",
+          "count": 87
+        },
+        {
+          "city": "Woonsocket",
+          "count": 49
+        }
+      ]
+    },
+    "south-carolina": {
+      "activeForHire": 8625,
+      "newLast12Months": 1429,
+      "smallFleetCount": 7092,
+      "smallFleetShare": 82.2,
+      "powerUnits": 31854,
+      "drivers": 36303,
+      "topCities": [
+        {
+          "city": "Columbia",
+          "count": 607
+        },
+        {
+          "city": "Greenville",
+          "count": 331
+        },
+        {
+          "city": "Summerville",
+          "count": 256
+        },
+        {
+          "city": "Spartanburg",
+          "count": 239
+        },
+        {
+          "city": "Rock Hill",
+          "count": 228
+        },
+        {
+          "city": "Myrtle Beach",
+          "count": 209
+        }
+      ]
+    },
+    "south-dakota": {
+      "activeForHire": 2650,
+      "newLast12Months": 215,
+      "smallFleetCount": 2211,
+      "smallFleetShare": 83.4,
+      "powerUnits": 13598,
+      "drivers": 19739,
+      "topCities": [
+        {
+          "city": "Sioux Falls",
+          "count": 347
+        },
+        {
+          "city": "Rapid City",
+          "count": 110
+        },
+        {
+          "city": "Watertown",
+          "count": 71
+        },
+        {
+          "city": "Aberdeen",
+          "count": 60
+        },
+        {
+          "city": "Yankton",
+          "count": 49
+        },
+        {
+          "city": "Belle Fourche",
+          "count": 46
+        }
+      ]
+    },
+    "tennessee": {
+      "activeForHire": 10000,
+      "newLast12Months": 1528,
+      "smallFleetCount": 7710,
+      "smallFleetShare": 77.1,
+      "powerUnits": 231900,
+      "drivers": 226908,
+      "topCities": [
+        {
+          "city": "Memphis",
+          "count": 1455
+        },
+        {
+          "city": "Nashville",
+          "count": 825
+        },
+        {
+          "city": "Knoxville",
+          "count": 395
+        },
+        {
+          "city": "Murfreesboro",
+          "count": 353
+        },
+        {
+          "city": "Chattanooga",
+          "count": 350
+        },
+        {
+          "city": "Antioch",
+          "count": 349
+        }
+      ]
+    },
+    "texas": {
+      "activeForHire": 51016,
+      "newLast12Months": 9258,
+      "smallFleetCount": 39269,
+      "smallFleetShare": 77,
+      "powerUnits": 416095,
+      "drivers": 536121,
+      "topCities": [
+        {
+          "city": "Houston",
+          "count": 6329
+        },
+        {
+          "city": "Dallas",
+          "count": 2478
+        },
+        {
+          "city": "Laredo",
+          "count": 2259
+        },
+        {
+          "city": "El Paso",
+          "count": 1812
+        },
+        {
+          "city": "San Antonio",
+          "count": 1504
+        },
+        {
+          "city": "Fort Worth",
+          "count": 1504
+        }
+      ]
+    },
+    "utah": {
+      "activeForHire": 4715,
+      "newLast12Months": 654,
+      "smallFleetCount": 3630,
+      "smallFleetShare": 77,
+      "powerUnits": 106216,
+      "drivers": 36555,
+      "topCities": [
+        {
+          "city": "Salt Lake City",
+          "count": 408
+        },
+        {
+          "city": "West Valley City",
+          "count": 195
+        },
+        {
+          "city": "West Jordan",
+          "count": 180
+        },
+        {
+          "city": "Ogden",
+          "count": 149
+        },
+        {
+          "city": "Vernal",
+          "count": 124
+        },
+        {
+          "city": "Sandy",
+          "count": 103
+        }
+      ]
+    },
+    "vermont": {
+      "activeForHire": 790,
+      "newLast12Months": 69,
+      "smallFleetCount": 614,
+      "smallFleetShare": 77.7,
+      "powerUnits": 4899,
+      "drivers": 4680,
+      "topCities": [
+        {
+          "city": "Lyndonville",
+          "count": 22
+        },
+        {
+          "city": "Brattleboro",
+          "count": 18
+        },
+        {
+          "city": "Rutland",
+          "count": 17
+        },
+        {
+          "city": "Bennington",
+          "count": 16
+        },
+        {
+          "city": "Swanton",
+          "count": 15
+        },
+        {
+          "city": "Williston",
+          "count": 15
+        }
+      ]
+    },
+    "virginia": {
+      "activeForHire": 10852,
+      "newLast12Months": 1704,
+      "smallFleetCount": 8768,
+      "smallFleetShare": 80.8,
+      "powerUnits": 74374,
+      "drivers": 76541,
+      "topCities": [
+        {
+          "city": "Woodbridge",
+          "count": 538
+        },
+        {
+          "city": "Alexandria",
+          "count": 500
+        },
+        {
+          "city": "Richmond",
+          "count": 498
+        },
+        {
+          "city": "Manassas",
+          "count": 338
+        },
+        {
+          "city": "Fredericksburg",
+          "count": 333
+        },
+        {
+          "city": "Chesapeake",
+          "count": 288
+        }
+      ]
+    },
+    "washington": {
+      "activeForHire": 11105,
+      "newLast12Months": 1249,
+      "smallFleetCount": 8946,
+      "smallFleetShare": 80.6,
+      "powerUnits": 130704,
+      "drivers": 105202,
+      "topCities": [
+        {
+          "city": "Vancouver",
+          "count": 1043
+        },
+        {
+          "city": "Kent",
+          "count": 857
+        },
+        {
+          "city": "Auburn",
+          "count": 535
+        },
+        {
+          "city": "Seattle",
+          "count": 524
+        },
+        {
+          "city": "Puyallup",
+          "count": 398
+        },
+        {
+          "city": "Tacoma",
+          "count": 393
+        }
+      ]
+    },
+    "west-virginia": {
+      "activeForHire": 1766,
+      "newLast12Months": 199,
+      "smallFleetCount": 1340,
+      "smallFleetShare": 75.9,
+      "powerUnits": 9531,
+      "drivers": 9114,
+      "topCities": [
+        {
+          "city": "Martinsburg",
+          "count": 85
+        },
+        {
+          "city": "Morgantown",
+          "count": 81
+        },
+        {
+          "city": "Charleston",
+          "count": 49
+        },
+        {
+          "city": "Princeton",
+          "count": 42
+        },
+        {
+          "city": "Huntington",
+          "count": 38
+        },
+        {
+          "city": "Parkersburg",
+          "count": 29
+        }
+      ]
+    },
+    "wisconsin": {
+      "activeForHire": 7939,
+      "newLast12Months": 880,
+      "smallFleetCount": 5788,
+      "smallFleetShare": 72.9,
+      "powerUnits": 86716,
+      "drivers": 88859,
+      "topCities": [
+        {
+          "city": "Milwaukee",
+          "count": 992
+        },
+        {
+          "city": "Green Bay",
+          "count": 191
+        },
+        {
+          "city": "Madison",
+          "count": 180
+        },
+        {
+          "city": "Kenosha",
+          "count": 177
+        },
+        {
+          "city": "Oak Creek",
+          "count": 148
+        },
+        {
+          "city": "Racine",
+          "count": 97
+        }
+      ]
+    },
+    "wyoming": {
+      "activeForHire": 2049,
+      "newLast12Months": 282,
+      "smallFleetCount": 1495,
+      "smallFleetShare": 73,
+      "powerUnits": 10265,
+      "drivers": 9510,
+      "topCities": [
+        {
+          "city": "Sheridan",
+          "count": 265
+        },
+        {
+          "city": "Cheyenne",
+          "count": 223
+        },
+        {
+          "city": "Gillette",
+          "count": 171
+        },
+        {
+          "city": "Casper",
+          "count": 167
+        },
+        {
+          "city": "Rock Springs",
+          "count": 85
+        },
+        {
+          "city": "Douglas",
+          "count": 59
+        }
+      ]
+    }
+  }
+}

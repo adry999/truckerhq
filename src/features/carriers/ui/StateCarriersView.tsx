@@ -1,9 +1,8 @@
 import { StateHero } from "@/features/carriers/ui/state/StateHero";
 import { StateStats } from "@/features/carriers/ui/state/StateStats";
-import { StateBreakdowns } from "@/features/carriers/ui/state/StateBreakdowns";
-import { StateCarrierListSection } from "@/features/carriers/ui/state/StateCarrierListSection";
+import { StateTopCities } from "@/features/carriers/ui/state/StateTopCities";
+import { StateLookupCta } from "@/features/carriers/ui/state/StateLookupCta";
 import { StateCtas } from "@/features/carriers/ui/state/StateCtas";
-import type { StateCarrierRow } from "@/features/carriers/model/carriers.types";
 
 export type StateCarriersViewProps = {
   stateAbbr: string;
@@ -12,16 +11,14 @@ export type StateCarriersViewProps = {
   heroAlt: string;
   heroDescription: string;
   stats: { big: string; small: string }[];
-  equipmentBreakdown: { t: string; pct: number }[];
   topCities: { t: string; count: string }[];
-  equipmentOptions: readonly string[];
-  carriers: StateCarrierRow[];
-  totalCount: string;
+  sourceName: string;
+  sourceUrl: string;
+  sourceFetchedAt: string;
   dispatchCtaEyebrow: string;
   dispatchCtaTitle: string;
   dispatchCtaBody: string;
   hireCtaBody: string;
-  basePath: string;
 };
 
 export function StateCarriersView({
@@ -31,16 +28,14 @@ export function StateCarriersView({
   heroAlt,
   heroDescription,
   stats,
-  equipmentBreakdown,
   topCities,
-  equipmentOptions,
-  carriers,
-  totalCount,
+  sourceName,
+  sourceUrl,
+  sourceFetchedAt,
   dispatchCtaEyebrow,
   dispatchCtaTitle,
   dispatchCtaBody,
   hireCtaBody,
-  basePath,
 }: StateCarriersViewProps) {
   return (
     <>
@@ -52,14 +47,12 @@ export function StateCarriersView({
         heroDescription={heroDescription}
       />
       <StateStats stats={stats} />
-      <StateBreakdowns equipmentBreakdown={equipmentBreakdown} topCities={topCities} />
-      <StateCarrierListSection
-        stateAbbr={stateAbbr}
+      <StateTopCities stateName={stateName} topCities={topCities} />
+      <StateLookupCta
         stateName={stateName}
-        equipmentOptions={equipmentOptions}
-        carriers={carriers}
-        totalCount={totalCount}
-        basePath={basePath}
+        sourceName={sourceName}
+        sourceUrl={sourceUrl}
+        sourceFetchedAt={sourceFetchedAt}
       />
       <StateCtas
         stateName={stateName}

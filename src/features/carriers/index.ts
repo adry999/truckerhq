@@ -7,5 +7,5 @@ export { findCarrier } from "@/features/carriers/model/carriers";
 export { STATE_DIRECTORY } from "@/features/carriers/model/states";
 export { CARRIERS } from "@/features/carriers/data/carriers";
 export { STATE_CONTENT, STATE_SLUGS, STATE_DATA_IS_SAMPLE } from "@/features/carriers/data/states";
-export type { Carrier, CarrierStatus, StateCarrierRow, StateContentEntry } from "@/features/carriers/model/carriers.types";
+export type { Carrier, CarrierStatus, StateContentEntry } from "@/features/carriers/model/carriers.types";
 export { LOOKUP_FAQ } from "@/features/carriers/model/guide";

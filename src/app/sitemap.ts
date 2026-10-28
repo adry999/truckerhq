@@ -42,7 +42,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.5,
   }));
 
-  // State pages are noindex while their data is sample (see carriers/[state]).
+  // State pages are noindex only if sample data returns (see STATE_DATA_IS_SAMPLE).
   const stateRoutes: MetadataRoute.Sitemap = (STATE_DATA_IS_SAMPLE ? [] : STATE_DIRECTORY).map((s) => ({
     url: `${BASE_URL}/carriers/${s.slug}`,
     changeFrequency: "weekly",
