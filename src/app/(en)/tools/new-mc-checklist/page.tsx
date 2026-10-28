@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { languageAlternates } from "@/shared/i18n/alternates";
 import { buildMetadata } from "@/shared/seo/metadata";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
@@ -12,6 +13,7 @@ export const metadata: Metadata = buildMetadata({
     "Every filing and setup step for a new trucking authority, from BOC-3 to the new entrant audit.",
   path: "/tools/new-mc-checklist",
   ogImage: false,
+  languages: languageAlternates("/tools/new-mc-checklist"),
 });
 
 export default function NewMcChecklistPage() {
