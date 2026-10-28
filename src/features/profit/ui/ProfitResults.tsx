@@ -1,5 +1,7 @@
 import { Button } from "@/shared/ui/Button";
+import { getCopy, type Locale } from "@/shared/i18n/locale";
 import { Card } from "@/shared/ui/Card";
+import { PROFIT_COPY } from "../data/profit-copy";
 import { verdictFor, type ProfitResult, type VerdictKey } from "../model/profit";
 
 const TONE: Record<VerdictKey, string> = {
@@ -21,7 +23,8 @@ function money(value: number, decimals = 0) {
   });
 }
 
-export function ProfitResults({ result }: { result: ProfitResult }) {
+export function ProfitResults({ result, lang = "EN" }: { result: ProfitResult; lang?: Locale }) {
+  const { results: t } = getCopy(PROFIT_COPY, lang);
   const { loadPay, profit, perMile, totalCost, totalMiles } = result;
   const verdict = verdictFor(profit, perMile, totalMiles);
   const tone = verdict ? TONE[verdict.key] : "text-offwhite";
@@ -32,21 +35,21 @@ export function ProfitResults({ result }: { result: ProfitResult }) {
   const share = (amount: number) =>
     barTotal ? `${Math.min(100, Math.max(0, (amount / barTotal) * 100)).toFixed(1)}%` : "0%";
   const segments = [
-    { label: "Fuel", amount: result.fuel, color: "bg-input-border" },
-    { label: "Maintenance", amount: result.maintenance, color: "bg-grey" },
-    { label: "Tolls", amount: result.tolls, color: "bg-ink-2" },
-    { label: "Fixed", amount: result.fixed, color: "bg-[#C9CBCF]" },
-    { label: "Profit", amount: Math.max(0, profit), color: "bg-amber" },
+    { label: t.segments.fuel, amount: result.fuel, color: "bg-input-border" },
+    { label: t.segments.maintenance, amount: result.maintenance, color: "bg-grey" },
+    { label: t.segments.tolls, amount: result.tolls, color: "bg-ink-2" },
+    { label: t.segments.fixed, amount: result.fixed, color: "bg-[#C9CBCF]" },
+    { label: t.segments.profit, amount: Math.max(0, profit), color: "bg-amber" },
   ];
 
   const lines: { label: string; value: string; strong?: boolean }[] = [
-    { label: "Load pay", value: money(loadPay) },
-    { label: "Rate per loaded mile", value: "$" + result.ratePerLoadedMile.toFixed(2) },
-    { label: "Fuel", value: "−" + money(result.fuel) },
-    { label: "Tires & maintenance", value: "−" + money(result.maintenance) },
-    { label: "Tolls & scales", value: "−" + money(result.tolls) },
-    { label: `Fixed costs (${totalMiles.toLocaleString("en-US")} mi)`, value: "−" + money(result.fixed) },
-    { label: "Profit on this load", value: money(profit), strong: true },
+    { label: t.lines.loadPay, value: money(loadPay) },
+    { label: t.lines.ratePerMile, value: "$" + result.ratePerLoadedMile.toFixed(2) },
+    { label: t.lines.fuel, value: "−" + money(result.fuel) },
+    { label: t.lines.maintenance, value: "−" + money(result.maintenance) },
+    { label: t.lines.tolls, value: "−" + money(result.tolls) },
+    { label: t.fixedLine(totalMiles.toLocaleString("en-US")), value: "−" + money(result.fixed) },
+    { label: t.lines.profit, value: money(profit), strong: true },
   ];
 
   return (
@@ -54,20 +57,20 @@ export function ProfitResults({ result }: { result: ProfitResult }) {
       <div className="overflow-hidden rounded-[10px] bg-asphalt text-offwhite">
         <div className="flex flex-col gap-1.5 px-6 pt-6 pb-5">
           <div className="font-display text-[15px] font-bold tracking-[.14em] text-on-dark-muted">
-            PROFIT PER MILE · ALL MILES
+            {t.eyebrow}
           </div>
           <div className={`flex flex-wrap items-baseline gap-3 ${tone}`}>
             <span className="font-display text-8xl font-extrabold tabular-nums">
               {totalMiles > 0 ? money(perMile, 2) : "—"}
             </span>
-            <span className="font-display text-3xl font-extrabold">/ mi</span>
+            <span className="font-display text-3xl font-extrabold">{t.perMileUnit}</span>
           </div>
           {verdict && badge && (
             <div
               className={`flex w-fit items-center gap-2 rounded-lg px-3 py-1.5 font-display text-[17px] font-extrabold tracking-[.08em] ${badge.badge}`}
             >
               <span className={`h-2 w-2 rounded-full ${badge.dot}`} />
-              {verdict.label}
+              {t.verdicts[verdict.key]}
             </div>
           )}
         </div>
@@ -101,26 +104,27 @@ export function ProfitResults({ result }: { result: ProfitResult }) {
         </div>
         <div className="flex flex-col gap-1 bg-green px-6 py-5">
           <div className="font-display text-[15px] font-bold tracking-[.14em] text-amber-on-green">
-            BREAK-EVEN RATE
+            {t.breakEvenEyebrow}
           </div>
           <div className="flex flex-wrap items-baseline gap-2.5 tabular-nums">
             <span className="font-display text-4xl font-extrabold">{money(totalCost)}</span>
             <span className="text-[15px] text-[#DCE6E0]">
-              ${result.breakEvenPerLoadedMile.toFixed(2)} per loaded mile
+              {t.perLoadedMile("$" + result.breakEvenPerLoadedMile.toFixed(2))}
             </span>
           </div>
           <div className="text-sm leading-relaxed text-[#DCE6E0]">
-            Below this, the load costs you money.
+            {t.breakEvenNote}
           </div>
         </div>
       </div>
       <Card className="flex flex-col gap-2.5 p-5">
-        <div className="font-display text-xl font-extrabold uppercase">Paying a percentage?</div>
+        <div className="font-display text-xl font-extrabold uppercase">{t.percentTitle}</div>
         <div className="text-sm leading-relaxed text-ink-2">
-          A 10% dispatcher takes <b className="text-asphalt">{money(loadPay * 0.1)}</b> of this
-          load. Our flat weekly price does not change with the rate.
+          {t.percentBefore}
+          <b className="text-asphalt">{money(loadPay * 0.1)}</b>
+          {t.percentAfter}
         </div>
-        <Button href="/dispatch">See flat dispatch</Button>
+        <Button href={t.dispatchHref}>{t.percentCta}</Button>
       </Card>
     </div>
   );
