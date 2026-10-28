@@ -1,5 +1,9 @@
 # Launch audit — 2026-10-28
 
+> **Progress:** Phase 1 and most of Phase 2 code work is merged (PRs #16–#18).
+> The current checklist lives in [`docs/STATUS.md`](../../STATUS.md); this file is the original plan.
+> Decided domain: `truckerhq.us` (not truckerhq.com, which is taken).
+
 Seven parallel audits (Opus: security, SEO, launch; Fable: code quality, LLM/GEO,
 UI/UX, performance). Full reports in this folder; this file is the merged plan.
 
