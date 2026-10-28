@@ -1,8 +1,14 @@
-import { findGuide } from "@/features/guides";
+import { GUIDES, findGuide } from "@/features/guides";
 import { ogImageSize, ogImageContentType, renderOgImage } from "@/shared/seo/og";
 
 export const size = ogImageSize;
 export const contentType = ogImageContentType;
+
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return GUIDES.map((g) => ({ slug: g.slug }));
+}
 
 export default async function OpengraphImage({
   params,

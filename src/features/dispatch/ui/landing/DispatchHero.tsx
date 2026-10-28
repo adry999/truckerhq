@@ -1,5 +1,6 @@
 import { PHONE_HREF } from "@/shared/config/contact";
 import Image from "next/image";
+import heroImage from "@/assets/images/dispatch-hero.jpg";
 import type { DispatchCopy } from "@/features/dispatch/data/dispatch-copy";
 
 export function DispatchHero({ c }: { c: DispatchCopy }) {
@@ -7,7 +8,7 @@ export function DispatchHero({ c }: { c: DispatchCopy }) {
     <section className="relative overflow-hidden bg-asphalt text-offwhite">
       <div className="absolute inset-0">
         <Image
-          src="https://images.unsplash.com/photo-1783247007596-cca4a61a16f5?fm=jpg&q=70&w=2000&auto=format&fit=crop"
+          src={heroImage}
           alt={c.heroAlt}
           fill
           loading="eager"

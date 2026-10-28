@@ -19,9 +19,9 @@ export function HireDriversHero() {
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[rgba(22,24,27,.94)] via-[rgba(22,24,27,.7)] to-[rgba(22,24,27,.35)]" />
       <div className="relative mx-auto flex max-w-6xl flex-col gap-[22px] px-4 py-16 sm:px-6 md:py-28">
         <h1 className="max-w-3xl font-display text-5xl font-extrabold uppercase leading-[0.9] sm:text-6xl md:text-7xl lg:text-8xl">
-          A parked truck
+          Hire CDL drivers.
           <br />
-          <span className="text-amber">makes no money.</span>
+          <span className="text-amber">A parked truck makes no money.</span>
         </h1>
         <p className="max-w-xl text-lg leading-relaxed text-[#D4D6DA] md:text-xl">
           Post a driver job and get checked CDL drivers calling you. English

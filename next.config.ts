@@ -23,13 +23,16 @@ const nextConfig: NextConfig = {
   },
   poweredByHeader: false,
   images: {
+    // Small server: WebP only (AVIF encoding is CPU-heavy), fewer width variants, long cache.
     remotePatterns: [
       {
         protocol: "https",
         hostname: "images.unsplash.com",
       },
     ],
-    formats: ["image/avif", "image/webp"],
+    formats: ["image/webp"],
+    deviceSizes: [640, 828, 1080, 1280, 1920],
+    minimumCacheTTL: 2592000,
   },
   async headers() {
     return [

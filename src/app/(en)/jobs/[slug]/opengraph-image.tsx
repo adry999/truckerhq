@@ -1,8 +1,14 @@
-import { resolveJobsSlug } from "@/features/jobs";
+import { jobsStaticSlugs, resolveJobsSlug } from "@/features/jobs";
 import { ogImageSize, ogImageContentType, renderOgImage } from "@/shared/seo/og";
 
 export const size = ogImageSize;
 export const contentType = ogImageContentType;
+
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return jobsStaticSlugs();
+}
 
 export default async function OpengraphImage({
   params,
