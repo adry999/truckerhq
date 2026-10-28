@@ -25,6 +25,8 @@ export function DetailsStep({ data, dispatch, headingRef }: StepProps) {
           value={data.phone}
           onChange={(e) => dispatch({ type: "setPhone", value: e.target.value })}
           type="tel"
+          autoComplete="tel"
+          inputMode="tel"
           placeholder="(XXX) XXX-XXXX"
           className="max-w-sm tabular-nums"
         />

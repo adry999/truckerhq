@@ -25,9 +25,9 @@ export function LookupLanding({ mode }: { mode: string }) {
             </span>
           </div>
           <h1 className="font-display text-5xl font-extrabold uppercase leading-[0.9] sm:text-6xl md:text-7xl">
-            Check any carrier
+            MC &amp; DOT number lookup.
             <br />
-            in 10 seconds.
+            Any carrier in 10 seconds.
           </h1>
           <p className="max-w-xl text-lg leading-relaxed text-[#D4D6DA]">
             Authority, insurance, inspections and crashes from public FMCSA

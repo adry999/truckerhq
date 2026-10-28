@@ -45,6 +45,7 @@ export const POST = createLeadHandler({
     best_time: d.bestTime,
     language: d.language || "English",
   }),
-  notify: (d) => notifyDispatchStart(d.phone),
+  notify: (d) => notifyDispatchStart(d.phone, d.language),
   saveError: "Could not save request",
+  alertLabel: "Dispatch request",
 });

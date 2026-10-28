@@ -34,6 +34,11 @@ export function LookupResults({
           >
             <input
               name="q"
+              type="search"
+              enterKeyHint="search"
+              autoCapitalize="off"
+              autoCorrect="off"
+              spellCheck={false}
               defaultValue={query}
               aria-label="Search carriers"
               placeholder="DOT, MC or name"

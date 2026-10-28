@@ -29,6 +29,7 @@ export const POST = createLeadHandler({
     experience: a.experience,
     language: a.language || "EN",
   }),
-  notify: (a) => notifyApplication(a.phone, findJob(a.jobSlug)?.title),
+  notify: (a) => notifyApplication(a.phone, findJob(a.jobSlug)?.title, a.language),
   saveError: "Could not save application",
+  alertLabel: "Job application",
 });

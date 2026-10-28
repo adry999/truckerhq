@@ -17,7 +17,7 @@ export function WizardNav({
         <button
           type="button"
           onClick={onBack}
-          className="font-display text-base font-bold uppercase tracking-[.05em] text-grey hover:text-asphalt"
+          className="-ml-3 flex min-h-11 items-center rounded-lg px-3 font-display text-base font-bold uppercase tracking-[.05em] text-grey hover:text-asphalt"
         >
           ← Back
         </button>

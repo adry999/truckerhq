@@ -1,3 +1,10 @@
+"use client";
+
+import { useRef, type KeyboardEvent } from "react";
+
+const NEXT_KEYS = ["ArrowRight", "ArrowDown"];
+const PREV_KEYS = ["ArrowLeft", "ArrowUp"];
+
 export function Segmented({
   options,
   value,
@@ -16,13 +23,31 @@ export function Segmented({
   containerClassName?: string;
   buttonClassName?: string;
 }) {
+  const buttons = useRef<(HTMLButtonElement | null)[]>([]);
+  const selected = options.indexOf(value);
+
+  function onKeyDown(e: KeyboardEvent<HTMLDivElement>) {
+    const step = NEXT_KEYS.includes(e.key) ? 1 : PREV_KEYS.includes(e.key) ? -1 : 0;
+    if (!step) return;
+    e.preventDefault();
+    const from = Math.max(selected, 0);
+    const to = (from + step + options.length) % options.length;
+    onChange(options[to]);
+    buttons.current[to]?.focus();
+  }
+
   return (
-    <div role="group" aria-label={label} className={containerClassName}>
-      {options.map((o) => (
+    <div role="radiogroup" aria-label={label} onKeyDown={onKeyDown} className={containerClassName}>
+      {options.map((o, i) => (
         <button
           key={o}
+          ref={(el) => {
+            buttons.current[i] = el;
+          }}
           type="button"
-          aria-pressed={value === o}
+          role="radio"
+          aria-checked={value === o}
+          tabIndex={i === Math.max(selected, 0) ? 0 : -1}
           onClick={() => onChange(o)}
           className={`${buttonClassName} rounded-[10px] ${
             value === o

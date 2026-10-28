@@ -30,7 +30,7 @@ export function StepProgress({
                 <button
                   type="button"
                   onClick={() => onSelect(i)}
-                  className={cx(labelClass, "text-left text-amber hover:underline")}
+                  className={cx(labelClass, "flex min-h-11 items-start pt-1 text-left text-amber hover:underline")}
                 >
                   {label}
                 </button>

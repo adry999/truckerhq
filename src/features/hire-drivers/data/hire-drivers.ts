@@ -1,5 +1,7 @@
+import heroSrc from "@/assets/images/hire-drivers-hero.jpg";
+
 export const HERO_IMAGE = {
-  src: "https://images.unsplash.com/photo-1724556271642-e9acaf03ac23?fm=jpg&q=70&w=2000&auto=format&fit=crop",
+  src: heroSrc,
   alt: "Driver walking to a truck in a yard, morning",
 };
 

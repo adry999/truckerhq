@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Guide } from "@/features/guides/data/guides";
-import { FEATURED_SLUG, readNextGuides, updatedLabel } from "@/features/guides/model/guides";
+import { hasGuideBody, readNextGuides, updatedLabel } from "@/features/guides/model/guides";
 import { FeaturedGuideBody } from "@/features/guides/ui/FeaturedGuideBody";
 import { GuideReadNext } from "@/features/guides/ui/GuideReadNext";
 
@@ -35,7 +35,7 @@ export function GuideArticle({ guide }: { guide: Guide }) {
 
       <div className="aspect-video rounded-lg bg-border" />
 
-      {guide.slug === FEATURED_SLUG ? (
+      {hasGuideBody(guide) ? (
         <FeaturedGuideBody />
       ) : (
         <article>

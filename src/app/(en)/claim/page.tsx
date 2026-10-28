@@ -16,24 +16,26 @@ export default function ClaimPage() {
   return (
     <div className="flex min-h-screen flex-col">
       <SiteHeader />
+      <main id="main-content" tabIndex={-1} className="flex flex-1 flex-col">
 
-      <section className="bg-asphalt text-offwhite">
-        <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 pt-10 pb-6 sm:px-6 md:pt-14">
-          <div className="flex flex-wrap gap-2 text-sm text-on-dark-muted">
-            <Link href="/tools/carrier-lookup" className="text-offwhite">
-              Carrier Lookup
-            </Link>
-            <span>/</span>
-            <span>Claim profile</span>
+        <section className="bg-asphalt text-offwhite">
+          <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 pt-10 pb-6 sm:px-6 md:pt-14">
+            <div className="flex flex-wrap gap-2 text-sm text-on-dark-muted">
+              <Link href="/tools/carrier-lookup" className="text-offwhite">
+                Carrier Lookup
+              </Link>
+              <span>/</span>
+              <span>Claim profile</span>
+            </div>
+            <h1 className="font-display text-5xl font-extrabold uppercase leading-[0.9] sm:text-6xl md:text-7xl">
+              Claim your carrier profile
+            </h1>
           </div>
-          <h1 className="font-display text-5xl font-extrabold uppercase leading-[0.9] sm:text-6xl md:text-7xl">
-            Claim your carrier profile
-          </h1>
-        </div>
-      </section>
+        </section>
 
-      <ClaimProfileWizard />
+        <ClaimProfileWizard />
 
+      </main>
       <SiteFooter />
     </div>
   );

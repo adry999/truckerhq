@@ -19,7 +19,9 @@ export default function NewMcChecklistPage() {
     <div className="flex min-h-screen flex-col">
       <JsonLd data={faqSchema(NEW_MC_FAQ)} />
       <SiteHeader />
-      <NewMcChecklist />
+      <main id="main-content" tabIndex={-1} className="flex flex-1 flex-col">
+        <NewMcChecklist />
+      </main>
       <SiteFooter />
     </div>
   );

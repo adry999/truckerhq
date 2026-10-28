@@ -4,6 +4,8 @@ import LegalDocLayout from "@/components/LegalDocLayout";
 
 export const metadata: Metadata = buildMetadata({
   title: "Terms of Use",
+  description:
+    "Terms for using Trucker HQ: the free carrier tools, the Health Score, dispatch services and job listings.",
   path: "/terms",
 });
 

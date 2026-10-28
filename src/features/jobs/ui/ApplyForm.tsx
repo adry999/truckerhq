@@ -15,7 +15,7 @@ export default function ApplyForm({ jobSlug }: { jobSlug: string }) {
   const [experience, setExperience] = useState("1+ yr");
   const [language, setLanguage] = useState("EN");
 
-  const { status, error, onSubmit } = useFormSubmit({
+  const { status, error, onSubmit, successRef } = useFormSubmit({
     endpoint: "/api/apply",
     buildBody: () => ({ jobSlug, fullName, phone, cdlClass, experience, language }),
     onSuccess: () => trackEvent("job_application", { job_slug: jobSlug }),
@@ -28,9 +28,13 @@ export default function ApplyForm({ jobSlug }: { jobSlug: string }) {
           <span className="h-2 w-2 rounded-full bg-green" />
           SENT
         </Badge>
-        <span className="font-display text-3xl font-extrabold uppercase leading-tight">
+        <h2
+          ref={successRef}
+          tabIndex={-1}
+          className="font-display text-3xl font-extrabold uppercase leading-tight outline-none"
+        >
           Application sent
-        </span>
+        </h2>
         <span className="text-[15px] leading-relaxed text-ink-2">
           A Trucker HQ recruiter will call you within one business day. Keep your phone on.
         </span>
@@ -57,6 +61,7 @@ export default function ApplyForm({ jobSlug }: { jobSlug: string }) {
           type="tel"
           name="phone"
           autoComplete="tel"
+          inputMode="tel"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
           placeholder="(555) 555-5555"

@@ -38,7 +38,9 @@ export default async function CarrierProfilePage({
   return (
     <div className="flex min-h-screen flex-col">
       <SiteHeader />
-      <CarrierProfile carrier={c} />
+      <main id="main-content" tabIndex={-1} className="flex flex-1 flex-col">
+        <CarrierProfile carrier={c} />
+      </main>
       <SiteFooter />
     </div>
   );

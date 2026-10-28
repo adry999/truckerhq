@@ -14,6 +14,8 @@ export function JobsSearchFormView({ lang, q }: { lang: Locale; q: string }) {
     >
       <input
         name="q"
+        type="search"
+        enterKeyHint="search"
         defaultValue={q}
         aria-label={c.searchAriaLabel}
         placeholder={c.searchPlaceholder}

@@ -27,6 +27,7 @@ export function CallStep({ data, dispatch, headingRef }: StepProps) {
             type="tel"
             name="phone"
             autoComplete="tel"
+            inputMode="tel"
             value={data.phone}
             onChange={(e) => dispatch(setField("phone", e.target.value))}
             placeholder="(555) 555-5555"

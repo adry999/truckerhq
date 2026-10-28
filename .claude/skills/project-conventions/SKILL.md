@@ -10,7 +10,7 @@ Findings this builds on: `docs/audit/2026-10-09-codebase-audit.md`.
 
 ## Stack
 
-Next.js 16 App Router (read `node_modules/next/dist/docs/` before Next APIs, see `AGENTS.md`), React 19, TypeScript strict, Tailwind 4 (`@theme` tokens in `src/app/globals.css`), zod 4. Vitest 5 (node by default, `// @vitest-environment jsdom` per component test file), Testing Library, Playwright in `tests/e2e/`. Deployed on Vercel. CI: `.github/workflows/ci.yml` runs lint, typecheck, test:coverage, check:placeholders, build, e2e.
+Next.js 16 App Router (read `node_modules/next/dist/docs/` before Next APIs, see `AGENTS.md`), React 19, TypeScript strict, Tailwind 4 (`@theme` tokens in `src/app/globals.css`), zod 4. Vitest 5 (node by default, `// @vitest-environment jsdom` per component test file), Testing Library, Playwright in `tests/e2e/`. Self-hosted Node.js on Hostinger behind Cloudflare (CF-Connecting-IP is the client IP). CI: `.github/workflows/ci.yml` runs lint, typecheck, test:coverage, check:placeholders, build, e2e.
 
 ## Layout
 
@@ -55,7 +55,7 @@ Wizards: one reducer in `model/` (`{ step, data }`), one component per step, `St
 
 ## Server
 
-- Server config only through `server/env.ts` (validated, read at first use). The only other `process.env` reads are build-time public values that Next inlines literally: `shared/client/analytics.ts` (`NEXT_PUBLIC_*`) and `shared/config/site.ts` (`VERCEL_PROJECT_PRODUCTION_URL`).
+- Server config only through `server/env.ts` (validated, read at first use). The only other `process.env` reads are build-time public values that Next inlines literally: `shared/client/analytics.ts` (`NEXT_PUBLIC_*`) and `shared/config/site.ts` (`NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_INDEXABLE`).
 - Outbound HTTP through `server/http/http-request.ts`. Lead routes through `server/leads/create-lead-handler.ts` with a zod schema per route.
 - Modules that do I/O or read secrets start with `import "server-only"`. Pure validation (`server/leads/fields.ts`) doesn't need it.
 

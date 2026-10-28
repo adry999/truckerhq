@@ -2,11 +2,13 @@ import "server-only";
 import { NextResponse, after } from "next/server";
 import type { z } from "zod";
 import { insertRow, type LeadTables } from "@/server/db/insert-row";
+import { sendLeadAlert } from "@/server/leads/lead-alert";
 import { guardLeadRoute, isHoneypotTripped, readJsonBody, rejectResponse } from "@/server/http/api-guard";
 
 type LeadDeps = {
   insertRow: typeof insertRow;
   after: (task: () => Promise<void>) => void;
+  alert: typeof sendLeadAlert;
 };
 
 type LeadHandlerConfig<S extends z.ZodType, T extends keyof LeadTables> = {
@@ -15,6 +17,8 @@ type LeadHandlerConfig<S extends z.ZodType, T extends keyof LeadTables> = {
   toRow: (input: z.output<S>) => LeadTables[T];
   notify?: (input: z.output<S>) => Promise<void>;
   saveError: string;
+  /** Names the lead type in the team alert email. */
+  alertLabel: string;
 };
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -23,7 +27,7 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 
 export function createLeadHandler<S extends z.ZodType, T extends keyof LeadTables>(
   config: LeadHandlerConfig<S, T>,
-  deps: LeadDeps = { insertRow, after },
+  deps: LeadDeps = { insertRow, after, alert: sendLeadAlert },
 ): (req: Request) => Promise<Response> {
   return async function handle(req) {
     const guarded = guardLeadRoute(req);
@@ -47,10 +51,18 @@ export function createLeadHandler<S extends z.ZodType, T extends keyof LeadTable
     }
 
     const data = parsed.data as z.output<S>;
-    const saved = await deps.insertRow(config.table, config.toRow(data));
+    const row = config.toRow(data);
+    const saved = await deps.insertRow(config.table, row);
     if (!saved) return rejectResponse(502, config.saveError);
 
-    const { notify } = config;
+    const { notify, alertLabel } = config;
+    deps.after(async () => {
+      try {
+        await deps.alert(alertLabel, row);
+      } catch {
+        console.error(`[lead-alert] failed: label="${alertLabel}"`);
+      }
+    });
     if (notify) deps.after(() => notify(data));
     return NextResponse.json({ ok: true });
   };

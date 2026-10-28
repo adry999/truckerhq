@@ -13,7 +13,7 @@ async function fillAndSubmit() {
   await userEvent.type(screen.getByLabelText(/^Phone/), "5551234567");
   await userEvent.type(screen.getByLabelText(/^Pay/), "$0.70/mi");
   await userEvent.type(screen.getByLabelText(/^Home base/), "Dallas, TX");
-  await userEvent.click(screen.getByRole("button", { name: "REEFER" }));
+  await userEvent.click(screen.getByRole("radio", { name: "REEFER" }));
   await userEvent.click(screen.getByRole("button", { name: "Send job" }));
 }
 

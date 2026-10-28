@@ -1,4 +1,4 @@
-import { PHONE_SCHEMA } from "@/shared/config/contact";
+import { PHONE_IS_PLACEHOLDER, PHONE_SCHEMA } from "@/shared/config/contact";
 import type { Metadata } from "next";
 import { buildMetadata } from "@/shared/seo/metadata";
 import { SITE_URL } from "@/shared/config/site";
@@ -18,7 +18,7 @@ export const metadata: Metadata = buildMetadata({
 const CONTACT_SCHEMA = contactPageSchema({
   name: "About Trucker HQ",
   url: `${SITE_URL}/about`,
-  telephone: PHONE_SCHEMA,
+  telephone: PHONE_IS_PLACEHOLDER ? undefined : PHONE_SCHEMA,
   email: CONTACT_EMAIL,
 });
 
@@ -27,7 +27,9 @@ export default function AboutPage() {
     <div className="flex min-h-screen flex-col">
       <JsonLd data={CONTACT_SCHEMA} />
       <SiteHeader />
-      <About />
+      <main id="main-content" tabIndex={-1} className="flex flex-1 flex-col">
+        <About />
+      </main>
       <SiteFooter />
     </div>
   );

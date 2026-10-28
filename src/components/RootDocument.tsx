@@ -2,7 +2,7 @@ import { Barlow_Condensed, Inter, Overpass, Roboto_Condensed } from "next/font/g
 import JsonLd from "@/components/JsonLd";
 import Analytics from "@/components/Analytics";
 import "@/app/globals.css";
-import { SITE_URL } from "@/shared/config/site";
+import { siteGraphSchema } from "@/shared/seo/structured-data";
 
 const barlowCondensed = Barlow_Condensed({
   variable: "--font-barlow-condensed",
@@ -19,28 +19,29 @@ const robotoCondensed = Roboto_Condensed({
   preload: false,
 });
 
-const inter = Inter({
+// EN pages preload only the Latin subset; RU pages also get Cyrillic. Both share
+// the --font-inter variable, and each page applies only one of them.
+const interLatin = Inter({
+  variable: "--font-inter",
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+});
+
+const interLatinCyrillic = Inter({
   variable: "--font-inter",
   weight: ["400", "500", "600", "700"],
   subsets: ["latin", "cyrillic"],
 });
 
+// Logo-only font: not preloaded.
 const overpass = Overpass({
   variable: "--font-overpass",
   weight: ["800", "900"],
   subsets: ["latin"],
+  preload: false,
 });
 
-const ORGANIZATION_SCHEMA = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "Trucker HQ",
-  url: SITE_URL,
-  description:
-    "Flat-rate truck dispatch, CDL driver jobs and free carrier tools built on public FMCSA data.",
-  areaServed: "US",
-  availableLanguage: ["English", "Russian"],
-};
+const SKIP_LABEL = { en: "Skip to content", ru: "Перейти к содержимому" } as const;
 
 export default function RootDocument({
   lang,
@@ -52,11 +53,18 @@ export default function RootDocument({
   return (
     <html
       lang={lang}
-      className={`${barlowCondensed.variable} ${robotoCondensed.variable} ${inter.variable} ${overpass.variable} h-full antialiased`}
+      className={`${barlowCondensed.variable} ${robotoCondensed.variable} ${(lang === "ru" ? interLatinCyrillic : interLatin).variable} ${overpass.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">
-        <JsonLd data={ORGANIZATION_SCHEMA} />
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-[100] focus:rounded-lg focus:bg-amber focus:px-4 focus:py-2 focus:font-semibold focus:text-asphalt focus:outline-2 focus:outline-offset-2 focus:outline-asphalt"
+        >
+          {SKIP_LABEL[lang]}
+        </a>
+        <JsonLd data={siteGraphSchema()} />
         <Analytics />
+        {/* Each page renders <main id="main-content"> between its own header and footer. */}
         {children}
       </body>
     </html>

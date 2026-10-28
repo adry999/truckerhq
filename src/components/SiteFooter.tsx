@@ -1,5 +1,7 @@
 import { PHONE_DISPLAY, PHONE_HREF } from "@/shared/config/contact";
+import { SITE_HOST } from "@/shared/config/site";
 import Link from "next/link";
+import { CookieSettingsButton } from "@/shared/ui/CookieSettingsButton";
 import Logo from "./Logo";
 
 const COLUMNS: { h: string; links: { t: string; href?: string }[] }[] = [
@@ -26,7 +28,7 @@ const COLUMNS: { h: string; links: { t: string; href?: string }[] }[] = [
     h: "CONTACT",
     links: [
       { t: `${PHONE_DISPLAY} · 24/7`, href: PHONE_HREF },
-      { t: "hello@truckerhq.com", href: "/about#contact" },
+      { t: `hello@${SITE_HOST}`, href: `mailto:hello@${SITE_HOST}` },
       { t: "Guides", href: "/guides" },
       { t: "About us", href: "/about" },
     ],
@@ -85,6 +87,7 @@ export default function SiteFooter() {
                 {l.t}
               </Link>
             ))}
+            <CookieSettingsButton className="text-[#AEB2B8] hover:text-amber" />
             <span>
               <Link href="/" className="text-[#AEB2B8] hover:text-amber">
                 English

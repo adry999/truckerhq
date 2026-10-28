@@ -23,7 +23,9 @@ export default function HomePageRU() {
     <div className="flex min-h-screen flex-col">
       <JsonLd data={faqSchema(HOME_COPY.RU.faq)} />
       <SiteHeader lang="RU" enHref="/" ruHref="/ru" />
-      <HomePage lang="RU" jobRows={homeJobRows("RU", JOBS)} />
+      <main id="main-content" tabIndex={-1} className="flex flex-1 flex-col">
+        <HomePage lang="RU" jobRows={homeJobRows("RU", JOBS)} />
+      </main>
       <SiteFooter />
     </div>
   );

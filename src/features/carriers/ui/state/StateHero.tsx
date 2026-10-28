@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { stateHeroSource } from "@/features/carriers/data/state-heroes";
 
 export function StateHero({
   stateAbbr,
@@ -18,7 +19,7 @@ export function StateHero({
     <section className="relative overflow-hidden bg-asphalt text-offwhite">
       <div className="absolute inset-0">
         <Image
-          src={heroImage}
+          src={stateHeroSource(heroImage)}
           alt={heroAlt}
           fill
           loading="eager"

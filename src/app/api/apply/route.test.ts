@@ -20,8 +20,8 @@ function post(body: unknown, raw?: string) {
     new Request("https://truckerhq.com/api/apply", {
       method: "POST",
       headers: {
-        origin: "https://truckerhq.com",
-        "x-forwarded-for": `10.0.1.${++n}`,
+        origin: "http://localhost:3000",
+        "cf-connecting-ip": `10.0.1.${++n}`,
         "content-type": "application/json",
       },
       body: raw ?? JSON.stringify(body),
@@ -63,12 +63,12 @@ describe("POST /api/apply", () => {
   it("passes the job title of a known slug to the notification", async () => {
     const job = JOBS[0];
     await post({ ...valid, jobSlug: job.slug });
-    expect(notifyApplication).toHaveBeenCalledWith("+13125550123", job.title);
+    expect(notifyApplication).toHaveBeenCalledWith("+13125550123", job.title, "");
   });
 
   it("passes no job title for an unknown slug", async () => {
     await post(valid);
-    expect(notifyApplication).toHaveBeenCalledWith("+13125550123", undefined);
+    expect(notifyApplication).toHaveBeenCalledWith("+13125550123", undefined, "");
   });
 
   it("returns 502 and does not notify when saving fails", async () => {

@@ -1,8 +1,14 @@
-import { resolveJobsSlug } from "@/features/jobs";
+import { jobsStaticSlugs, resolveJobsSlug } from "@/features/jobs";
 import { ogImageSize, ogImageContentType, renderOgImage } from "@/shared/seo/og";
 
 export const size = ogImageSize;
 export const contentType = ogImageContentType;
+
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return jobsStaticSlugs();
+}
 
 export default async function OpengraphImage({
   params,
@@ -17,11 +23,11 @@ export default async function OpengraphImage({
     return renderOgImage({
       theme: "dark",
       sub: "JOBS",
-      kicker: `${city.stats[0]?.big ?? ""} Open Jobs`,
+      kicker: "CDL Jobs",
       heading: `CDL jobs in ${city.cityName}`,
       headingSize: 108,
       paragraph: "Pay and home time on every listing. Apply in English or Russian.",
-      big: "Updated daily",
+      big: "Pay up front",
     });
   }
 

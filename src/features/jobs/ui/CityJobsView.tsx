@@ -15,8 +15,8 @@ export type CityJobsViewProps = {
   stats: { big: string; small: string }[];
   jobs: CityJob[];
   faqs: { q: string; a: string }[];
-  hiringCarriers: { name: string; score: number; jobs: number }[];
-  nearbyCities: { name: string; count: number }[];
+  hiringCarriers: { name: string; score: number }[];
+  nearbyCities: { name: string }[];
   basePath: string;
 };
 
@@ -139,7 +139,6 @@ export function CityJobsView({
                         {c.name}
                       </span>
                     </span>
-                    <span className="text-sm text-grey">{c.jobs} jobs</span>
                   </Link>
                 ))}
               </div>
@@ -152,7 +151,7 @@ export function CityJobsView({
               <div className="flex flex-wrap gap-1.5">
                 {nearbyCities.map((c) => {
                   const slug = CITY_NAME_TO_SLUG[c.name];
-                  const label = `${c.name} (${c.count})`;
+                  const label = c.name;
                   const className =
                     "flex h-11 items-center rounded-[10px] border-[1.5px] border-border bg-white px-3 text-sm font-semibold text-asphalt";
                   return slug ? (

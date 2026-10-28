@@ -1,25 +1,26 @@
 import Image from "next/image";
 import Link from "next/link";
+import heroImage from "@/assets/images/home-hero.jpg";
 import type { HomeCopy } from "@/features/home/data/home-copy";
 
 export function HomeHero({ c }: { c: HomeCopy }) {
   return (
-    <section className="relative overflow-hidden bg-asphalt text-offwhite">
-      <div className="absolute inset-0 hidden md:block md:left-[52%]">
-        {/* lazy: display:none on mobile skips the fetch; in viewport on desktop so it loads at once */}
+    <section className="relative flex flex-col overflow-hidden bg-asphalt text-offwhite">
+      {/* One image: right half on desktop, 16:9 block under the content on mobile (order-2) */}
+      <div className="relative order-2 mx-4 mb-14 mt-7 aspect-video overflow-hidden rounded-lg sm:mx-6 md:absolute md:inset-0 md:left-[52%] md:m-0 md:aspect-auto md:rounded-none">
         <Image
-          src="https://images.unsplash.com/photo-1720811559395-3ed8d1b16649?fm=jpg&q=70&w=2000&auto=format&fit=crop"
+          src={heroImage}
           alt={c.heroImageAlt}
           fill
-          loading="lazy"
+          loading="eager"
           fetchPriority="high"
           className="object-cover"
-          sizes="48vw"
+          sizes="(min-width: 768px) 48vw, 100vw"
         />
       </div>
       <div className="pointer-events-none absolute inset-0 hidden bg-gradient-to-r from-[rgba(22,24,27,.95)] via-[rgba(22,24,27,.75)] to-[rgba(22,24,27,.15)] md:block" />
 
-      <div className="relative mx-auto flex max-w-6xl flex-col gap-6 px-4 py-14 sm:px-6 md:py-24">
+      <div className="relative order-1 mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 pb-0 pt-14 sm:px-6 md:py-24">
         <div className="font-display text-base font-bold uppercase tracking-[.12em] text-amber">
           {c.eyebrow}
         </div>
@@ -68,19 +69,8 @@ export function HomeHero({ c }: { c: HomeCopy }) {
             Health Score
           </span>
         </Link>
-
-        <div className="relative mt-1.5 aspect-video overflow-hidden rounded-lg md:hidden">
-          <Image
-            src="https://images.unsplash.com/photo-1720811559395-3ed8d1b16649?fm=jpg&q=70&w=2000&auto=format&fit=crop"
-            alt={c.heroImageAlt}
-            fill
-            fetchPriority="high"
-            className="object-cover"
-            sizes="100vw"
-          />
-        </div>
       </div>
-      <div className="road-line relative h-1.5" />
+      <div className="road-line relative order-3 h-1.5" />
     </section>
   );
 }

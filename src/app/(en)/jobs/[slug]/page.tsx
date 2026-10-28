@@ -9,7 +9,7 @@ import { findCarrier } from "@/features/carriers";
 import {
   CityJobsView,
   JobDetail,
-  MIN_JOBS_TO_INDEX,
+  isCityIndexable,
   jobsStaticSlugs,
   resolveJobsSlug,
 } from "@/features/jobs";
@@ -33,10 +33,7 @@ export async function generateMetadata({
       description: city.description,
       path: `/jobs/${slug}`,
       ogImage: false,
-      robots:
-        city.jobs.length >= MIN_JOBS_TO_INDEX
-          ? undefined
-          : { index: false, follow: true },
+      robots: isCityIndexable(city) ? undefined : { index: false, follow: true },
     });
   }
 
@@ -73,17 +70,19 @@ export default async function JobsSlugPage({
         />
         <div className="flex min-h-screen flex-col">
           <SiteHeader />
-          <CityJobsView
-            cityName={city.cityName}
-            stateName={city.stateName}
-            heroIntro={city.heroIntro}
-            stats={city.stats}
-            jobs={city.jobs}
-            faqs={city.faqs}
-            hiringCarriers={city.hiringCarriers}
-            nearbyCities={city.nearbyCities}
-            basePath={`/jobs/${slug}`}
-          />
+          <main id="main-content" tabIndex={-1} className="flex flex-1 flex-col">
+            <CityJobsView
+              cityName={city.cityName}
+              stateName={city.stateName}
+              heroIntro={city.heroIntro}
+              stats={city.stats}
+              jobs={city.jobs}
+              faqs={city.faqs}
+              hiringCarriers={city.hiringCarriers}
+              nearbyCities={city.nearbyCities}
+              basePath={`/jobs/${slug}`}
+            />
+          </main>
           <SiteFooter />
         </div>
       </>
@@ -97,7 +96,9 @@ export default async function JobsSlugPage({
   return (
     <div className="flex min-h-screen flex-col">
       <SiteHeader />
-      <JobDetail job={job} carrier={carrier} />
+      <main id="main-content" tabIndex={-1} className="flex flex-1 flex-col">
+        <JobDetail job={job} carrier={carrier} />
+      </main>
       <SiteFooter />
     </div>
   );

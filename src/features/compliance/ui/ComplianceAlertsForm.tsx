@@ -49,7 +49,7 @@ export default function ComplianceAlertsForm() {
   const [consent, setConsent] = useState(false);
   const [watch, setWatch] = useState(DEFAULT_WATCH);
 
-  const { status, error, onSubmit, reset } = useFormSubmit({
+  const { status, error, onSubmit, reset, successRef } = useFormSubmit({
     endpoint: "/api/compliance-alerts",
     buildBody: () => ({ dot, phone, language: lang, watch, smsConsent: consent }),
     onSuccess: () => trackEvent("compliance_alert_signup"),
@@ -72,7 +72,11 @@ export default function ComplianceAlertsForm() {
           <div className="flex h-[52px] w-[52px] items-center justify-center rounded-full bg-green text-amber">
             <CheckIcon size={26} />
           </div>
-          <h2 className="font-display text-4xl font-extrabold uppercase leading-tight">
+          <h2
+            ref={successRef}
+            tabIndex={-1}
+            className="font-display text-4xl font-extrabold uppercase leading-tight outline-none"
+          >
             Alerts are on
           </h2>
           <p className="text-base leading-relaxed text-ink-3">
@@ -135,6 +139,7 @@ export default function ComplianceAlertsForm() {
                   type="tel"
                   placeholder="(XXX) XXX-XXXX"
                   autoComplete="tel"
+                  inputMode="tel"
                   className="text-lg tabular-nums"
                 />
               </Field>

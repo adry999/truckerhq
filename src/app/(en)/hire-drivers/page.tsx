@@ -18,7 +18,9 @@ export default function HireDriversPage() {
     <div className="flex min-h-screen flex-col">
       <JsonLd data={faqSchema(HIRE_FAQ)} />
       <SiteHeader />
-      <HireDrivers />
+      <main id="main-content" tabIndex={-1} className="flex flex-1 flex-col">
+        <HireDrivers />
+      </main>
       <SiteFooter />
     </div>
   );

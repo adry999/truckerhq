@@ -1,6 +1,7 @@
 import { PHONE_DISPLAY, PHONE_HREF } from "@/shared/config/contact";
+import { SITE_HOST } from "@/shared/config/site";
 
-export const CONTACT_EMAIL = "hello@truckerhq.com";
+export const CONTACT_EMAIL = `hello@${SITE_HOST}`;
 
 export const FACTS = [
   { label: "Founded", value: "20XX" },

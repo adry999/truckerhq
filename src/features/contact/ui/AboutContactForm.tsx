@@ -23,7 +23,7 @@ export default function AboutContactForm() {
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
 
-  const { status, error, onSubmit } = useFormSubmit({
+  const { status, error, onSubmit, successRef } = useFormSubmit({
     endpoint: "/api/contact",
     buildBody: () => ({ topic, name, phone, message, language: lang }),
     onSuccess: () => trackEvent("contact_message", { topic }),
@@ -35,9 +35,13 @@ export default function AboutContactForm() {
         <span className="flex h-12 w-12 items-center justify-center rounded-full bg-green text-offwhite">
           <CheckIcon size={24} />
         </span>
-        <span className="font-display text-3xl font-extrabold uppercase leading-tight text-green">
+        <h2
+          ref={successRef}
+          tabIndex={-1}
+          className="font-display text-3xl font-extrabold uppercase leading-tight text-green outline-none"
+        >
           Got it
-        </span>
+        </h2>
         <span className="text-base leading-relaxed">
           Someone from the team will call you in {LANGUAGE_NAMES[lang]} shortly.
         </span>
@@ -75,6 +79,7 @@ export default function AboutContactForm() {
           type="tel"
           name="phone"
           autoComplete="tel"
+          inputMode="tel"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
           placeholder="(XXX) XXX-XXXX"

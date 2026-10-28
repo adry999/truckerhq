@@ -4,6 +4,15 @@ import type { CityContentEntry, Job, JobWithScore } from "@/features/jobs/model/
 
 export const MIN_JOBS_TO_INDEX = 5;
 
+/** Real (non-sample) openings on a city page. */
+export function realJobCount(city: Pick<CityContentEntry, "jobs">): number {
+  return city.jobs.filter((j) => !j.sample).length;
+}
+
+export function isCityIndexable(city: Pick<CityContentEntry, "jobs">): boolean {
+  return realJobCount(city) >= MIN_JOBS_TO_INDEX;
+}
+
 export const DEFAULT_CARRIER_SCORE = 75;
 
 export function findJob(slug: string): Job | undefined {

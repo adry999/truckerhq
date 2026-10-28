@@ -4,6 +4,8 @@ import LegalDocLayout from "@/components/LegalDocLayout";
 
 export const metadata: Metadata = buildMetadata({
   title: "Privacy Policy",
+  description:
+    "What Trucker HQ collects through its forms and tools, how we use it, who sees it, and how to ask us to update or delete it.",
   path: "/privacy",
 });
 

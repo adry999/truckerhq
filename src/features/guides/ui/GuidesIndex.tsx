@@ -13,7 +13,7 @@ export function GuidesIndex() {
           </h1>
           <p className="max-w-xl text-lg leading-relaxed text-on-dark">
             Short, practical answers from our dispatchers: rates, brokers,
-            paperwork and starting out. Every guide in English and Russian.
+            paperwork and starting out.
           </p>
         </div>
         <div className="road-line h-1.5" />
@@ -30,7 +30,7 @@ export function GuidesIndex() {
               NEW MC CHECKLIST
             </span>
             <span className="font-display text-2xl font-extrabold uppercase leading-tight">
-              17 steps for your first 6 months, with progress saved.
+              A step-by-step checklist for your first 6 months.
             </span>
             <Button href="/tools/new-mc-checklist" className="mt-1 w-fit">
               Open checklist

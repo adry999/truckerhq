@@ -22,13 +22,15 @@ function money(value: number, decimals = 0) {
 }
 
 export function ProfitResults({ result }: { result: ProfitResult }) {
-  const { loadPay, profit, perMile, totalCost } = result;
-  const verdict = verdictFor(perMile);
-  const tone = TONE[verdict.key];
-  const badge = VERDICT_BADGE[verdict.key];
+  const { loadPay, profit, perMile, totalCost, totalMiles } = result;
+  const verdict = verdictFor(profit, perMile, totalMiles);
+  const tone = verdict ? TONE[verdict.key] : "text-offwhite";
+  const badge = verdict ? VERDICT_BADGE[verdict.key] : null;
 
+  // On a losing load the costs exceed the pay, so scale the bar to the larger of the two.
+  const barTotal = Math.max(loadPay, totalCost);
   const share = (amount: number) =>
-    loadPay ? `${Math.max(0, (amount / loadPay) * 100).toFixed(1)}%` : "0%";
+    barTotal ? `${Math.min(100, Math.max(0, (amount / barTotal) * 100)).toFixed(1)}%` : "0%";
   const segments = [
     { label: "Fuel", amount: result.fuel, color: "bg-input-border" },
     { label: "Maintenance", amount: result.maintenance, color: "bg-grey" },
@@ -43,7 +45,7 @@ export function ProfitResults({ result }: { result: ProfitResult }) {
     { label: "Fuel", value: "−" + money(result.fuel) },
     { label: "Tires & maintenance", value: "−" + money(result.maintenance) },
     { label: "Tolls & scales", value: "−" + money(result.tolls) },
-    { label: `Fixed costs (${result.totalMiles.toLocaleString()} mi)`, value: "−" + money(result.fixed) },
+    { label: `Fixed costs (${totalMiles.toLocaleString("en-US")} mi)`, value: "−" + money(result.fixed) },
     { label: "Profit on this load", value: money(profit), strong: true },
   ];
 
@@ -56,16 +58,18 @@ export function ProfitResults({ result }: { result: ProfitResult }) {
           </div>
           <div className={`flex flex-wrap items-baseline gap-3 ${tone}`}>
             <span className="font-display text-8xl font-extrabold tabular-nums">
-              {money(perMile, 2)}
+              {totalMiles > 0 ? money(perMile, 2) : "—"}
             </span>
             <span className="font-display text-3xl font-extrabold">/ mi</span>
           </div>
-          <div
-            className={`flex w-fit items-center gap-2 rounded-lg px-3 py-1.5 font-display text-[17px] font-extrabold tracking-[.08em] ${badge.badge}`}
-          >
-            <span className={`h-2 w-2 rounded-full ${badge.dot}`} />
-            {verdict.label}
-          </div>
+          {verdict && badge && (
+            <div
+              className={`flex w-fit items-center gap-2 rounded-lg px-3 py-1.5 font-display text-[17px] font-extrabold tracking-[.08em] ${badge.badge}`}
+            >
+              <span className={`h-2 w-2 rounded-full ${badge.dot}`} />
+              {verdict.label}
+            </div>
+          )}
         </div>
         <div className="flex flex-col gap-2 px-6 pb-5">
           <div className="flex h-4 overflow-hidden rounded-md bg-[#33373D]">

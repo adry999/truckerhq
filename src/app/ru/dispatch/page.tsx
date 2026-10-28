@@ -22,7 +22,9 @@ export default function DispatchRuPage() {
     <div className="flex min-h-screen flex-col">
       <JsonLd data={faqSchema(DISPATCH_COPY.RU.faq)} />
       <SiteHeader lang="RU" enHref="/dispatch" ruHref="/ru/dispatch" />
-      <DispatchPage lang="RU" />
+      <main id="main-content" tabIndex={-1} className="flex flex-1 flex-col">
+        <DispatchPage lang="RU" />
+      </main>
       <SiteFooter />
     </div>
   );

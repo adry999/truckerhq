@@ -81,3 +81,17 @@ describe("consent store", () => {
     expect(getConsentServerSnapshot()).toBeNull();
   });
 });
+
+describe("resetConsent", () => {
+  it("forgets the stored choice and notifies subscribers", async () => {
+    localStorage.setItem("chq_consent", "granted");
+    const { getConsentSnapshot, resetConsent, subscribeConsent } = await load();
+    expect(getConsentSnapshot()).toBe("granted");
+    const listener = vi.fn();
+    subscribeConsent(listener);
+    resetConsent();
+    expect(listener).toHaveBeenCalledOnce();
+    expect(localStorage.getItem("chq_consent")).toBeNull();
+    expect(getConsentSnapshot()).toBeNull();
+  });
+});

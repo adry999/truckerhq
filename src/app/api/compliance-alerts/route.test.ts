@@ -19,8 +19,8 @@ function post(body: unknown, raw?: string) {
     new Request("https://truckerhq.com/api/compliance-alerts", {
       method: "POST",
       headers: {
-        origin: "https://truckerhq.com",
-        "x-forwarded-for": `10.0.3.${++n}`,
+        origin: "http://localhost:3000",
+        "cf-connecting-ip": `10.0.3.${++n}`,
         "content-type": "application/json",
       },
       body: raw ?? JSON.stringify(body),
@@ -57,7 +57,7 @@ describe("POST /api/compliance-alerts", () => {
       "compliance_alert_signups",
       expect.objectContaining({ phone: "+13125550123" }),
     );
-    expect(notifyComplianceAlertsOn).toHaveBeenCalledWith("+13125550123", "1234567");
+    expect(notifyComplianceAlertsOn).toHaveBeenCalledWith("+13125550123", "1234567", "");
   });
 
   it("returns 502 and does not notify when saving fails", async () => {
