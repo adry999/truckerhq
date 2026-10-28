@@ -1,6 +1,7 @@
 import { getCopy, type Locale } from "@/shared/i18n/locale";
 import { DISPATCH_COPY } from "@/features/dispatch/data/dispatch-copy";
 import { DispatchHero } from "./DispatchHero";
+import { DispatchEquipment } from "./DispatchEquipment";
 import { DispatchIncluded } from "./DispatchIncluded";
 import { DispatchPricing } from "./DispatchPricing";
 import { DispatchSteps } from "./DispatchSteps";
@@ -16,6 +17,7 @@ export function DispatchPage({ lang }: { lang: Locale }) {
       <DispatchHero c={c} />
       <DispatchIncluded c={c} />
       <DispatchPricing c={c} />
+      <DispatchEquipment c={c} />
       <DispatchSteps c={c} />
       <DispatchGross c={c} lang={lang} />
       <DispatchFaq c={c} />

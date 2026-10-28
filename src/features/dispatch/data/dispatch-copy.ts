@@ -29,6 +29,9 @@ export type DispatchCopy = {
     popular?: boolean;
   }[];
   mostPopular: string;
+  equipmentHeading: string;
+  equipmentSub: string;
+  equipment: { href: string; label: string }[];
   stepsHeading: string;
   steps: { n: string; title: string; desc: string }[];
   grossEyebrow: string;
@@ -111,6 +114,16 @@ export const DISPATCH_COPY: Record<Locale, DispatchCopy> = {
       },
     ],
     mostPopular: "MOST POPULAR",
+    equipmentHeading: "Dispatch by equipment",
+    equipmentSub: "What we look for on each trailer type, and what to check before you book.",
+    equipment: [
+      { href: "/dispatch/dry-van", label: "Dry van dispatch" },
+      { href: "/dispatch/reefer", label: "Reefer dispatch" },
+      { href: "/dispatch/flatbed", label: "Flatbed dispatch" },
+      { href: "/dispatch/step-deck", label: "Step deck dispatch" },
+      { href: "/dispatch/power-only", label: "Power only dispatch" },
+      { href: "/dispatch/new-authority", label: "New MC authority dispatch" },
+    ],
     stepsHeading: "Rolling in 3 steps",
     steps: [
       { n: "1", title: "Call or sign up", desc: "Tell us your truck, equipment, lanes and home time. Send your MC, W-9 and insurance." },
@@ -202,6 +215,16 @@ export const DISPATCH_COPY: Record<Locale, DispatchCopy> = {
       },
     ],
     mostPopular: "ПОПУЛЯРНЫЙ",
+    equipmentHeading: "Диспетчер по типу трейлера",
+    equipmentSub: "Что мы проверяем для каждого типа трейлера. Страницы на английском.",
+    equipment: [
+      { href: "/dispatch/dry-van", label: "Dry van (сухой фургон)" },
+      { href: "/dispatch/reefer", label: "Reefer (рефрижератор)" },
+      { href: "/dispatch/flatbed", label: "Flatbed (бортовой)" },
+      { href: "/dispatch/step-deck", label: "Step deck" },
+      { href: "/dispatch/power-only", label: "Power only" },
+      { href: "/dispatch/new-authority", label: "Новый MC (new authority)" },
+    ],
     stepsHeading: "Старт за 3 шага",
     steps: [
       { n: "1", title: "Звоните или регистрируйтесь", desc: "Расскажите про грузовик, оборудование, маршруты и время дома. Пришлите MC, W-9 и страховку." },
