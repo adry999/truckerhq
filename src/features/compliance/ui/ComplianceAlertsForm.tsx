@@ -5,6 +5,11 @@ import Link from "next/link";
 import { useState } from "react";
 import { trackEvent } from "@/shared/client/analytics";
 import { SMS_CONSENT_VERSION } from "@/shared/config/sms-consent";
+import {
+  COMPLIANCE_ALERTS_COPY,
+  WATCH_KEYS,
+  type WatchKey,
+} from "@/features/compliance/data/compliance-alerts-copy";
 import { useFormSubmit } from "@/shared/hooks/useFormSubmit";
 import { useTurnstile } from "@/shared/hooks/useTurnstile";
 import { Button } from "@/shared/ui/Button";
@@ -15,17 +20,6 @@ import { CheckIcon } from "@/shared/ui/icons";
 import { Segmented } from "@/shared/ui/Segmented";
 import { SmsConsent } from "@/shared/ui/SmsConsent";
 import { Turnstile } from "@/shared/ui/Turnstile";
-
-const WATCH_ITEMS = [
-  { key: "auth", title: "Operating authority", description: "Active, pending, revoked or inactive" },
-  { key: "ins", title: "Insurance filing", description: "BIPD and cargo on file, cancellation notices" },
-  { key: "ucr", title: "UCR registration", description: "Reminder before the yearly deadline" },
-  { key: "boc", title: "BOC-3 process agent", description: "Filing missing or removed" },
-  { key: "oos", title: "Out-of-service order", description: "Any new OOS order on your DOT" },
-  { key: "insp", title: "New inspections and crashes", description: "Every roadside inspection that hits your record" },
-] as const;
-
-type WatchKey = (typeof WATCH_ITEMS)[number]["key"];
 
 const DEFAULT_WATCH: Record<WatchKey, boolean> = {
   auth: true,
@@ -46,10 +40,12 @@ const SAMPLES: Record<Locale, string> = {
 
 const HEADING = "font-display text-xl font-extrabold uppercase";
 
-export default function ComplianceAlertsForm() {
+/** `lang` is the page language; the person can still pick a different SMS language. */
+export default function ComplianceAlertsForm({ lang = "EN" }: { lang?: Locale }) {
+  const copy = getCopy(COMPLIANCE_ALERTS_COPY, lang);
   const [dot, setDot] = useState("");
   const [phone, setPhone] = useState("");
-  const [lang, setLang] = useState<Locale>("EN");
+  const [textLang, setTextLang] = useState<Locale>(lang);
   const [consent, setConsent] = useState(false);
   const [watch, setWatch] = useState(DEFAULT_WATCH);
   const turnstile = useTurnstile();
@@ -59,7 +55,7 @@ export default function ComplianceAlertsForm() {
     buildBody: () => ({
       dot,
       phone,
-      language: lang,
+      language: textLang,
       watch,
       smsConsent: consent,
       smsConsentVersion: SMS_CONSENT_VERSION,
@@ -91,22 +87,21 @@ export default function ComplianceAlertsForm() {
             tabIndex={-1}
             className="font-display text-4xl font-extrabold uppercase leading-tight outline-none"
           >
-            Alerts are on
+            {copy.sentTitle}
           </h2>
           <p className="text-base leading-relaxed text-ink-3">
-            We&apos;re watching {count} items for {dot || "DOT 3412897"}. A
-            confirmation text is on its way.
+            {copy.sentBody.replace("{count}", String(count)).replace("{dot}", dot || "DOT 3412897")}
           </p>
           <div className="mt-1.5 flex flex-wrap gap-3">
-            <Button href="/tools/new-mc-checklist" variant="outline">
-              New MC Checklist
+            <Button href={copy.checklistHref} variant="outline">
+              {copy.checklistLink}
             </Button>
             <button
               type="button"
               onClick={watchAnother}
               className="flex h-[52px] items-center px-2 font-sans text-[15px] font-semibold text-green underline"
             >
-              Watch another carrier
+              {copy.watchAnother}
             </button>
           </div>
         </div>
@@ -117,7 +112,7 @@ export default function ComplianceAlertsForm() {
         >
           <Honeypot />
           <Field
-            label="1. Your DOT or MC number"
+            label={copy.dotLabel}
             required
             error={fieldErrors.dot}
             labelClassName={HEADING}
@@ -136,23 +131,23 @@ export default function ComplianceAlertsForm() {
             />
           </Field>
 
-          <ChoiceGroup legend={<span className={HEADING}>2. What to watch</span>}>
-            {WATCH_ITEMS.map((item) => (
+          <ChoiceGroup legend={<span className={HEADING}>{copy.watchLegend}</span>}>
+            {WATCH_KEYS.map((key) => (
               <CheckCard
-                key={item.key}
-                name={item.key}
-                title={item.title}
-                description={item.description}
-                checked={watch[item.key]}
-                onChange={(on) => setWatch((w) => ({ ...w, [item.key]: on }))}
+                key={key}
+                name={key}
+                title={copy.watchItems[key].title}
+                description={copy.watchItems[key].description}
+                checked={watch[key]}
+                onChange={(on) => setWatch((w) => ({ ...w, [key]: on }))}
               />
             ))}
           </ChoiceGroup>
 
           <div className="flex flex-col gap-2.5">
-            <span className={HEADING}>3. Where to text you</span>
+            <span className={HEADING}>{copy.contactHeading}</span>
             <div className="grid gap-3 sm:grid-cols-2">
-              <Field label="Mobile number" error={fieldErrors.phone}>
+              <Field label={copy.phoneLabel} error={fieldErrors.phone}>
                 <TextInput
                   required
                   value={phone}
@@ -169,9 +164,9 @@ export default function ComplianceAlertsForm() {
               </Field>
               <Segmented
                 options={LANGUAGE_OPTIONS}
-                value={LANGUAGE_LABELS[lang]}
-                onChange={(v) => setLang(v === LANGUAGE_LABELS.RU ? "RU" : "EN")}
-                label="Text language"
+                value={LANGUAGE_LABELS[textLang]}
+                onChange={(v) => setTextLang(v === LANGUAGE_LABELS.RU ? "RU" : "EN")}
+                label={copy.textLanguageLabel}
                 containerClassName="grid grid-cols-2 gap-1.5 sm:self-end"
                 buttonClassName="h-[52px] text-base font-semibold"
               />
@@ -179,21 +174,20 @@ export default function ComplianceAlertsForm() {
           </div>
 
           <span className="text-[13px] leading-relaxed text-grey">
-            Free, usually 1–3 texts a year. Msg &amp; data rates may apply.
-            Reply STOP to cancel, HELP for help. See our{" "}
+            {copy.disclosure.before}{" "}
             <Link href="/sms-terms" className="underline hover:text-asphalt">
-              SMS terms
+              {copy.disclosure.smsTerms}
             </Link>{" "}
-            and{" "}
+            {copy.disclosure.and}{" "}
             <Link href="/privacy" className="underline hover:text-asphalt">
-              Privacy policy
+              {copy.disclosure.privacy}
             </Link>
             .
           </span>
 
-          <SmsConsent required checked={consent} onChange={setConsent} />
+          <SmsConsent required checked={consent} onChange={setConsent} locale={lang} />
 
-          <Turnstile controller={turnstile} />
+          <Turnstile controller={turnstile} locale={lang} />
 
           <Button
             type="submit"
@@ -201,7 +195,7 @@ export default function ComplianceAlertsForm() {
             disabled={status === "submitting" || !consent || !turnstile.ready}
             className="w-full"
           >
-            {status === "submitting" ? "Sending..." : "Turn on alerts"}
+            {status === "submitting" ? copy.submitting : copy.submit}
           </Button>
           <FormError message={error} />
         </form>
@@ -210,21 +204,16 @@ export default function ComplianceAlertsForm() {
       <aside className="flex flex-col gap-4">
         <div className="flex flex-col gap-3.5 rounded-lg bg-asphalt p-6 text-offwhite">
           <span className="font-display text-[15px] font-bold tracking-[.1em] text-amber">
-            WHAT A TEXT LOOKS LIKE
+            {copy.sampleEyebrow}
           </span>
           <div className="max-w-[340px] rounded-2xl rounded-bl-md bg-[#2A2D32] p-4 text-[15px] leading-relaxed">
-            {getCopy(SAMPLES, lang)}
+            {getCopy(SAMPLES, textLang)}
           </div>
-          <span className="text-[13px] text-on-dark-muted">Trucker HQ · today, 7:02 AM</span>
+          <span className="text-[13px] text-on-dark-muted">{copy.sampleStamp}</span>
         </div>
         <div className="flex flex-col gap-2.5 rounded-lg border border-border bg-white p-[22px]">
-          <h2 className="font-display text-2xl font-extrabold">Why this matters</h2>
-          <p className="text-[15px] leading-relaxed text-ink-3">
-            If your insurance filing lapses, FMCSA can revoke your authority,
-            and brokers stop tendering loads. Most carriers find out when a
-            load gets cancelled. A text the same day gives you time to call
-            your agent.
-          </p>
+          <h2 className="font-display text-2xl font-extrabold">{copy.whyHeading}</h2>
+          <p className="text-[15px] leading-relaxed text-ink-3">{copy.whyBody}</p>
         </div>
       </aside>
     </div>

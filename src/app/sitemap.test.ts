@@ -1,6 +1,8 @@
 import { describe, it, expect } from "vitest";
 import sitemap from "./sitemap";
 import { GUIDES, hasGuideBody } from "@/features/guides";
+import { DISPATCH_SERVICE_PAGES } from "@/features/dispatch";
+import { SITE_URL } from "@/shared/config/site";
 
 const urls = () => sitemap().map((e) => e.url);
 
@@ -17,6 +19,17 @@ describe("sitemap", () => {
 
   it("leaves out city pages that have no real jobs", () => {
     expect(urls().some((u) => /\/jobs\/[^/]+$/.test(u))).toBe(false);
+  });
+
+  it("lists every dispatch service page", () => {
+    for (const p of DISPATCH_SERVICE_PAGES) {
+      expect(urls()).toContain(`${SITE_URL}/dispatch/${p.slug}`);
+    }
+  });
+
+  it("lists the Russian tool pages with hreflang pairs", () => {
+    const ru = sitemap().find((e) => e.url === `${SITE_URL}/ru/tools/profit-per-mile`);
+    expect(ru?.alternates?.languages).toMatchObject({ en: `${SITE_URL}/tools/profit-per-mile` });
   });
 
   it("keeps the static routes", () => {

@@ -64,11 +64,11 @@ export const FOOTER_COPY: Record<Locale, FooterCopy> = {
       {
         h: "БЕСПЛАТНЫЕ ИНСТРУМЕНТЫ",
         links: [
-          { t: "Все инструменты", href: "/tools" },
+          { t: "Все инструменты", href: "/ru/tools" },
           { t: "Проверка перевозчика", href: "/tools/carrier-lookup" },
-          { t: "Прибыль за милю", href: "/tools/profit-per-mile" },
-          { t: "Оповещения о compliance", href: "/tools/compliance-alerts" },
-          { t: "Чек-лист нового MC", href: "/tools/new-mc-checklist" },
+          { t: "Прибыль за милю", href: "/ru/tools/profit-per-mile" },
+          { t: "Оповещения о compliance", href: "/ru/tools/compliance-alerts" },
+          { t: "Чек-лист нового MC", href: "/ru/tools/new-mc-checklist" },
           { t: "Перевозчики Техаса", href: "/carriers/texas" },
         ],
       },

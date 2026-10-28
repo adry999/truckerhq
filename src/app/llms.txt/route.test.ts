@@ -9,7 +9,8 @@ async function loadGet(indexable: boolean) {
 
 afterEach(() => vi.unstubAllEnvs());
 
-describe("GET /llms.txt", () => {
+// The first test pays the cold import of the route after resetModules.
+describe("GET /llms.txt", { timeout: 20_000 }, () => {
   it("returns 404 when the site is not indexable", async () => {
     const GET = await loadGet(false);
     expect((await GET()).status).toBe(404);

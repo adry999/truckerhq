@@ -4,6 +4,7 @@ import { SITE_URL } from "@/shared/config/site";
 import { GUIDES, hasGuideBody } from "@/features/guides";
 import { STATE_DIRECTORY, STATE_DATA_IS_SAMPLE } from "@/features/carriers";
 import { CITY_DIRECTORY, CITY_CONTENT, isCityIndexable } from "@/features/jobs";
+import { DISPATCH_SERVICE_PAGES } from "@/features/dispatch";
 
 const BASE_URL = SITE_URL;
 
@@ -22,17 +23,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/ru/jobs`, changeFrequency: "daily", priority: 0.8, alternates: sitemapAlternates("/jobs") },
     { url: `${BASE_URL}/hire-drivers`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE_URL}/carriers`, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${BASE_URL}/tools`, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE_URL}/tools`, changeFrequency: "monthly", priority: 0.8, alternates: sitemapAlternates("/tools") },
+    { url: `${BASE_URL}/ru/tools`, changeFrequency: "monthly", priority: 0.7, alternates: sitemapAlternates("/tools") },
     { url: `${BASE_URL}/tools/carrier-lookup`, changeFrequency: "weekly", priority: 0.8 },
-    { url: `${BASE_URL}/tools/profit-per-mile`, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${BASE_URL}/tools/compliance-alerts`, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${BASE_URL}/tools/new-mc-checklist`, changeFrequency: "monthly", priority: 0.7 },
+    ...(["/tools/profit-per-mile", "/tools/compliance-alerts", "/tools/new-mc-checklist"] as const).flatMap(
+      (path): MetadataRoute.Sitemap => [
+        { url: `${BASE_URL}${path}`, changeFrequency: "monthly", priority: 0.7, alternates: sitemapAlternates(path) },
+        { url: `${BASE_URL}/ru${path}`, changeFrequency: "monthly", priority: 0.6, alternates: sitemapAlternates(path) },
+      ],
+    ),
     { url: `${BASE_URL}/guides`, changeFrequency: "weekly", priority: 0.7 },
     { url: `${BASE_URL}/about`, changeFrequency: "monthly", priority: 0.5 },
     { url: `${BASE_URL}/privacy`, changeFrequency: "yearly", priority: 0.2 },
     { url: `${BASE_URL}/terms`, changeFrequency: "yearly", priority: 0.2 },
     { url: `${BASE_URL}/sms-terms`, changeFrequency: "yearly", priority: 0.2 },
   ];
+
+  const servicePageRoutes: MetadataRoute.Sitemap = DISPATCH_SERVICE_PAGES.map((p) => ({
+    url: `${BASE_URL}/dispatch/${p.slug}`,
+    changeFrequency: "monthly",
+    priority: 0.8,
+  }));
 
   // Stub guides are noindex (see guides/[slug]); keep them out of the sitemap too.
   const guideRoutes: MetadataRoute.Sitemap = GUIDES.filter(hasGuideBody).map((g) => ({
@@ -58,5 +69,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticRoutes, ...guideRoutes, ...stateRoutes, ...cityRoutes];
+  return [...staticRoutes, ...servicePageRoutes, ...guideRoutes, ...stateRoutes, ...cityRoutes];
 }
