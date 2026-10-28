@@ -1,5 +1,7 @@
 import { GUIDES } from "@/features/guides/data/guides";
 import type { Guide } from "@/features/guides/data/guides";
+import type { GuideBodyData } from "@/features/guides/data/guide-body";
+import { GUIDE_BODIES } from "@/features/guides/data/guide-bodies";
 
 export const FEATURED_SLUG = "how-to-tell-if-a-load-pays-enough";
 
@@ -12,9 +14,25 @@ const READ_NEXT_SLUGS = [
   "detention-pay-how-to-get-it-on-the-rate-con",
 ];
 
-/** Only the featured guide has a body today; the rest render a placeholder and stay out of search. */
+export function getGuideBody(guide: Guide): GuideBodyData | undefined {
+  return GUIDE_BODIES[guide.slug];
+}
+
+/**
+ * Publishing gate: the featured guide, or a guide whose body is approved.
+ * Drafts stay noindex and out of the sitemap until reviewStatus is "approved".
+ */
 export function hasGuideBody(guide: Guide): boolean {
-  return guide.slug === FEATURED_SLUG;
+  return guide.slug === FEATURED_SLUG || getGuideBody(guide)?.reviewStatus === "approved";
+}
+
+/** A draft body is previewed outside production only; production keeps the stub. */
+export function isDraftPreview(guide: Guide): boolean {
+  return (
+    process.env.NODE_ENV !== "production" &&
+    !hasGuideBody(guide) &&
+    getGuideBody(guide)?.reviewStatus === "draft"
+  );
 }
 
 export function findGuide(slug: string): Guide | undefined {
