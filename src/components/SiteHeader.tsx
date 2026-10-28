@@ -28,9 +28,13 @@ const RU_LABELS: Record<string, string> = {
   Guides: "Статьи",
 };
 
-// Only Dispatch and Jobs have RU pages so far; everything else falls
+// Only Dispatch, Jobs and Tools have RU pages so far; everything else falls
 // back to the English route.
-const RU_ROUTES: Record<string, string> = { "/dispatch": "/ru/dispatch", "/jobs": "/ru/jobs" };
+const RU_ROUTES: Record<string, string> = {
+  "/dispatch": "/ru/dispatch",
+  "/jobs": "/ru/jobs",
+  "/tools": "/ru/tools",
+};
 
 type SiteHeaderProps = {
   lang?: Locale;
