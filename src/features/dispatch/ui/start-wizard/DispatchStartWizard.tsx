@@ -5,6 +5,7 @@ import { trackEvent } from "@/shared/client/analytics";
 import { postJson } from "@/shared/client/post-json";
 import { SMS_CONSENT_VERSION } from "@/shared/config/sms-consent";
 import { getCopy, type Locale } from "@/shared/i18n/locale";
+import { splitFieldErrors, useFieldErrors, useFocusInvalid } from "@/shared/hooks/useFieldErrors";
 import { useStepFocus } from "@/shared/hooks/useStepFocus";
 import { useTurnstile } from "@/shared/hooks/useTurnstile";
 import { FormError, Honeypot } from "@/shared/ui/form-bits";
@@ -14,10 +15,14 @@ import { Turnstile } from "@/shared/ui/Turnstile";
 import {
   CALL_STEP,
   DONE_STEP,
+  type DispatchAction,
   buildPayload,
   canAdvance,
   dispatchReducer,
+  firstErrorStep,
   initialDispatchStateFor,
+  isDispatchField,
+  payloadKey,
 } from "@/features/dispatch/model/dispatch-start";
 import { START_WIZARD_COPY } from "@/features/dispatch/data/start-wizard-copy";
 import { AuthorityStep } from "./steps/AuthorityStep";
@@ -40,15 +45,25 @@ export function DispatchStartWizard({ locale = "EN" }: { locale?: Locale }) {
   const headingRef = useStepFocus(step);
   const [smsConsent, setSmsConsent] = useState(false);
   const turnstile = useTurnstile();
+  const { fieldErrors, setFieldErrors, clearFieldError, clearFieldErrors } = useFieldErrors();
+  const { formRef, requestFocus } = useFocusInvalid();
+
+  /** Editing a field drops the server error shown for it. */
+  function dispatchEdit(action: DispatchAction) {
+    if (action.type === "set") clearFieldError(payloadKey(action.field));
+    else if (action.type === "toggleLane") clearFieldError("lanes");
+    dispatch(action);
+  }
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (!canAdvance(step, data)) return;
     if (step < CALL_STEP) {
       dispatch({ type: "next" });
       return;
     }
-    if (!canAdvance(step, data)) return;
     const website = new FormData(e.currentTarget).get("website");
+    clearFieldErrors();
     dispatch({ type: "submitStart" });
     const result = await postJson(
       "/api/dispatch-start",
@@ -61,7 +76,16 @@ export function DispatchStartWizard({ locale = "EN" }: { locale?: Locale }) {
     );
     if (!result.ok) {
       turnstile.reset();
-      dispatch({ type: "submitFailed", message: result.message ?? c.genericError });
+      // Server messages are English; the localized generic text only covers failures with no usable message.
+      const { matched, hasUnmatched } = splitFieldErrors(result.fields, isDispatchField);
+      const errorStep = firstErrorStep(matched);
+      if (errorStep !== null) {
+        setFieldErrors(matched);
+        requestFocus();
+        if (errorStep < step) dispatch({ type: "goTo", step: errorStep });
+      }
+      const message = errorStep !== null && !hasUnmatched ? null : (result.message ?? c.genericError);
+      dispatch({ type: "submitFailed", message });
       return;
     }
     trackEvent("dispatch_start_request", { trucks: data.trucks, authority: data.authority });
@@ -90,11 +114,18 @@ export function DispatchStartWizard({ locale = "EN" }: { locale?: Locale }) {
               <SuccessPanel data={data} headingRef={headingRef} c={c} />
             ) : (
               <form
+                ref={formRef}
                 onSubmit={onSubmit}
                 className="flex flex-col gap-7 rounded-lg border border-border bg-white p-[22px] sm:p-7"
               >
                 <Honeypot />
-                <Step data={data} dispatch={dispatch} headingRef={headingRef} c={c} />
+                <Step
+                  data={data}
+                  dispatch={dispatchEdit}
+                  headingRef={headingRef}
+                  c={c}
+                  fieldErrors={fieldErrors}
+                />
                 {step === CALL_STEP && (
                   <>
                     <SmsConsent checked={smsConsent} onChange={setSmsConsent} locale={locale} />

@@ -4,7 +4,7 @@ import { Field, TextInput } from "@/shared/ui/Field";
 import { AUTHORITY_OPTIONS, NO_AUTHORITY, setField } from "@/features/dispatch/model/dispatch-start";
 import { STEP_HEADING, type StepProps } from "../step-props";
 
-export function AuthorityStep({ data, dispatch, headingRef, c }: StepProps) {
+export function AuthorityStep({ data, dispatch, headingRef, c, fieldErrors }: StepProps) {
   return (
     <div className="flex flex-col gap-7">
       <h2 ref={headingRef} tabIndex={-1} className={STEP_HEADING}>
@@ -26,6 +26,7 @@ export function AuthorityStep({ data, dispatch, headingRef, c }: StepProps) {
         <Field
           label={c.authority.mcLabel}
           hint={<span className="text-[13px] text-grey">{c.authority.mcHint}</span>}
+          error={fieldErrors.mcNumber}
         >
           <TextInput
             value={data.mcNumber}

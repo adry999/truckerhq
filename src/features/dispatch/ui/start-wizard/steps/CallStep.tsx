@@ -4,14 +4,14 @@ import { Field, TextInput } from "@/shared/ui/Field";
 import { BEST_TIME_OPTIONS, LANGUAGE_OPTIONS, setField } from "@/features/dispatch/model/dispatch-start";
 import { SEGMENT_BUTTON, STEP_HEADING, type StepProps } from "../step-props";
 
-export function CallStep({ data, dispatch, headingRef, c }: StepProps) {
+export function CallStep({ data, dispatch, headingRef, c, fieldErrors }: StepProps) {
   return (
     <div className="flex flex-col gap-7">
       <h2 ref={headingRef} tabIndex={-1} className={STEP_HEADING}>
         {c.call.heading}
       </h2>
       <div className="grid gap-4 sm:grid-cols-2">
-        <Field label={c.call.name} required requiredSuffix={c.requiredSuffix}>
+        <Field label={c.call.name} required requiredSuffix={c.requiredSuffix} error={fieldErrors.name}>
           <TextInput
             required
             name="name"
@@ -21,7 +21,7 @@ export function CallStep({ data, dispatch, headingRef, c }: StepProps) {
             placeholder={c.call.namePlaceholder}
           />
         </Field>
-        <Field label={c.call.phone} required requiredSuffix={c.requiredSuffix}>
+        <Field label={c.call.phone} required requiredSuffix={c.requiredSuffix} error={fieldErrors.phone}>
           <TextInput
             required
             type="tel"

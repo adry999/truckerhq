@@ -1,9 +1,7 @@
 import { z } from "zod";
 import { notifyComplianceAlertsOn } from "@/server/leads/notifications";
 import { createLeadHandler } from "@/server/leads/create-lead-handler";
-import { anyInput, dotNumber, requiredText, text, usPhone, withChecks } from "@/server/leads/fields";
-
-const MISSING = "Missing DOT or phone";
+import { anyInput, dotNumber, language, requiredText, usPhone, withChecks } from "@/server/leads/fields";
 
 const watch = anyInput.transform((value) => {
   const out: Record<string, boolean> = {};
@@ -16,11 +14,11 @@ const watch = anyInput.transform((value) => {
 
 const schema = withChecks(
   z.object({
-    dot: requiredText(20, MISSING),
-    phone: requiredText(30, MISSING),
+    dot: requiredText(20),
+    phone: requiredText(30),
     smsConsent: z.literal(true, { error: "SMS consent required" }),
     smsConsentVersion: z.string().max(32).optional(),
-    language: text(20),
+    language: language(),
     watch,
   }),
   { phone: usPhone(), dot: dotNumber() },
@@ -33,7 +31,7 @@ export const POST = createLeadHandler({
   toRow: (s) => ({
     dot: s.dot,
     phone: s.phone,
-    language: s.language || "EN",
+    language: s.language,
     watch: s.watch,
   }),
   notify: (s) => notifyComplianceAlertsOn(s.phone, s.dot, s.language),

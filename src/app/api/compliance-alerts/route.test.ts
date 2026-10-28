@@ -45,7 +45,10 @@ describe("POST /api/compliance-alerts", () => {
   it("rejects an invalid phone with 400 and saves nothing", async () => {
     const res = await post({ ...valid, phone: "555-0123" });
     expect(res.status).toBe(400);
-    expect(await res.json()).toEqual({ error: "Enter a valid US phone number" });
+    expect(await res.json()).toEqual({
+      error: "Enter a valid US phone number",
+      fields: { phone: "Enter a valid US phone number" },
+    });
     expect(insertRow).not.toHaveBeenCalled();
   });
 
@@ -57,7 +60,7 @@ describe("POST /api/compliance-alerts", () => {
       "compliance_alert_signups",
       expect.objectContaining({ phone: "+13125550123" }),
     );
-    expect(notifyComplianceAlertsOn).toHaveBeenCalledWith("+13125550123", "1234567", "");
+    expect(notifyComplianceAlertsOn).toHaveBeenCalledWith("+13125550123", "1234567", "EN");
   });
 
   it("returns 502 and does not notify when saving fails", async () => {
@@ -75,7 +78,10 @@ describe("POST /api/compliance-alerts", () => {
   it("requires SMS consent", async () => {
     const res = await post({ ...valid, smsConsent: false });
     expect(res.status).toBe(400);
-    expect(await res.json()).toEqual({ error: "SMS consent required" });
+    expect(await res.json()).toEqual({
+      error: "SMS consent required",
+      fields: { smsConsent: "SMS consent required" },
+    });
     expect(insertRow).not.toHaveBeenCalled();
   });
 

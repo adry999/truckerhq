@@ -78,7 +78,13 @@ export function createLeadHandler<S extends z.ZodType, T extends keyof LeadTable
 
     const parsed = config.schema.safeParse(fields);
     if (!parsed.success) {
-      return rejectResponse(400, parsed.error.issues[0]?.message ?? "Invalid request body");
+      const error = parsed.error.issues[0]?.message ?? "Invalid request body";
+      const fieldErrors: Record<string, string> = {};
+      for (const issue of parsed.error.issues) {
+        const key = issue.path[0];
+        if (typeof key === "string" && !(key in fieldErrors)) fieldErrors[key] = issue.message;
+      }
+      return NextResponse.json({ error, fields: fieldErrors }, { status: 400 });
     }
 
     const data = parsed.data as z.output<S>;

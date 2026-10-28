@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useId, type ReactNode } from "react";
 import { cx } from "./cx";
 
 const CARD =
@@ -85,15 +85,23 @@ export function ChoiceGroup({
   legend,
   children,
   className,
+  error,
 }: {
   legend: ReactNode;
   children: ReactNode;
   className?: string;
+  error?: ReactNode;
 }) {
+  const errorId = `${useId()}-error`;
   return (
-    <fieldset className="flex flex-col gap-2">
+    <fieldset className="flex flex-col gap-2" aria-describedby={error ? errorId : undefined}>
       <legend className="mb-2 text-sm font-semibold">{legend}</legend>
       <div className={className ?? "flex flex-col gap-2.5"}>{children}</div>
+      {error && (
+        <div id={errorId} role="alert" className="text-[13px] font-semibold text-red">
+          {error}
+        </div>
+      )}
     </fieldset>
   );
 }

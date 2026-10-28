@@ -45,7 +45,10 @@ describe("POST /api/dispatch-start", () => {
   it("rejects an invalid phone with 400 and saves nothing", async () => {
     const res = await post({ ...valid, phone: "555-0123" });
     expect(res.status).toBe(400);
-    expect(await res.json()).toEqual({ error: "Enter a valid US phone number" });
+    expect(await res.json()).toEqual({
+      error: "Enter a valid US phone number",
+      fields: { phone: "Enter a valid US phone number" },
+    });
     expect(insertRow).not.toHaveBeenCalled();
   });
 
@@ -57,7 +60,7 @@ describe("POST /api/dispatch-start", () => {
       "dispatch_requests",
       expect.objectContaining({ phone: "+13125550123" }),
     );
-    expect(notifyDispatchStart).toHaveBeenCalledWith("+13125550123", "");
+    expect(notifyDispatchStart).toHaveBeenCalledWith("+13125550123", "EN");
   });
 
   it("saves but sends no SMS without consent", async () => {
@@ -80,6 +83,28 @@ describe("POST /api/dispatch-start", () => {
   it("returns 400 for a malformed JSON body", async () => {
     const res = await post(null, "{not json");
     expect(res.status).toBe(400);
+  });
+
+  it.each([
+    ["Русский", "RU"],
+    ["English", "EN"],
+    ["ru", "RU"],
+    [undefined, "EN"],
+  ])("stores language %j as %s", async (sent, stored) => {
+    await post({ ...valid, language: sent });
+    expect(insertRow).toHaveBeenCalledWith(
+      "dispatch_requests",
+      expect.objectContaining({ language: stored }),
+    );
+  });
+
+  it("returns per-field errors with the first message as error", async () => {
+    const res = await post({ ...valid, name: "" });
+    expect(res.status).toBe(400);
+    expect(await res.json()).toEqual({
+      error: "This field is required",
+      fields: { name: "This field is required" },
+    });
   });
 
   it("clamps trucks above 500 to 500", async () => {

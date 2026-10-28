@@ -1,6 +1,8 @@
 import type { Carrier, CarrierStatus } from "@/features/carriers/model/carriers.types";
 
 export const LOOKUP_PATH = "/tools/carrier-lookup";
+// Dynamic results route; the landing stays static so a CDN can cache it.
+export const SEARCH_PATH = "/tools/carrier-lookup/search";
 
 export const MODES = ["All", "DOT", "MC", "Name"] as const;
 export const STATUSES = ["All", "ACTIVE", "WARNING", "INACTIVE"] as const;
@@ -44,17 +46,10 @@ export function countByStatus(carriers: Carrier[], status: LookupStatusFilter | 
   return filterByStatus(carriers, status).length;
 }
 
-export function modeHref(mode: string): string {
-  const sp = new URLSearchParams();
-  if (mode !== "All") sp.set("mode", mode);
-  const qs = sp.toString();
-  return qs ? `${LOOKUP_PATH}?${qs}` : LOOKUP_PATH;
-}
-
 export function statusHref(rawQuery: string, status: string): string {
   const sp = new URLSearchParams({ q: rawQuery });
   if (status !== "All") sp.set("status", status);
-  return `${LOOKUP_PATH}?${sp.toString()}`;
+  return `${SEARCH_PATH}?${sp.toString()}`;
 }
 
 export function searchPlaceholder(mode: string): string {

@@ -52,7 +52,10 @@ describe("POST /api/apply", () => {
   it("rejects an invalid phone with 400 and saves nothing", async () => {
     const res = await post({ ...valid, phone: "555-0123" });
     expect(res.status).toBe(400);
-    expect(await res.json()).toEqual({ error: "Enter a valid US phone number" });
+    expect(await res.json()).toEqual({
+      error: "Enter a valid US phone number",
+      fields: { phone: "Enter a valid US phone number" },
+    });
     expect(insertRow).not.toHaveBeenCalled();
   });
 
@@ -69,12 +72,12 @@ describe("POST /api/apply", () => {
   it("passes the job title of a known slug to the notification", async () => {
     const job = JOBS[0];
     await post({ ...valid, jobSlug: job.slug });
-    expect(notifyApplication).toHaveBeenCalledWith("+13125550123", job.title, "");
+    expect(notifyApplication).toHaveBeenCalledWith("+13125550123", job.title, "EN");
   });
 
   it("passes no job title for an unknown slug", async () => {
     await post(valid);
-    expect(notifyApplication).toHaveBeenCalledWith("+13125550123", undefined, "");
+    expect(notifyApplication).toHaveBeenCalledWith("+13125550123", undefined, "EN");
   });
 
   it("stores consent evidence with the row", async () => {

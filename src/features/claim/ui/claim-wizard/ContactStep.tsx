@@ -2,7 +2,7 @@ import { ChoiceGroup, RadioCard } from "@/shared/ui/choices";
 import { CONTACT_METHODS } from "@/features/claim/model/claim";
 import { STEP_HEADING, type StepProps } from "./step-props";
 
-export function ContactStep({ data, dispatch, headingRef }: StepProps) {
+export function ContactStep({ data, dispatch, headingRef, fieldErrors }: StepProps) {
   return (
     <div className="flex flex-col gap-5">
       <div className="flex flex-col gap-1.5">
@@ -14,7 +14,10 @@ export function ContactStep({ data, dispatch, headingRef }: StepProps) {
           live.
         </p>
       </div>
-      <ChoiceGroup legend={<span className="sr-only">Contact method</span>}>
+      <ChoiceGroup
+        legend={<span className="sr-only">Contact method</span>}
+        error={fieldErrors.contactMethod}
+      >
         {CONTACT_METHODS.map((method) => (
           <RadioCard
             key={method.id}

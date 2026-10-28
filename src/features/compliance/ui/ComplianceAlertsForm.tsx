@@ -54,7 +54,7 @@ export default function ComplianceAlertsForm() {
   const [watch, setWatch] = useState(DEFAULT_WATCH);
   const turnstile = useTurnstile();
 
-  const { status, error, onSubmit, reset, successRef } = useFormSubmit({
+  const { status, error, fieldErrors, clearFieldError, onSubmit, reset, successRef } = useFormSubmit({
     endpoint: "/api/compliance-alerts",
     buildBody: () => ({
       dot,
@@ -66,6 +66,7 @@ export default function ComplianceAlertsForm() {
     }),
     onSuccess: () => trackEvent("compliance_alert_signup"),
     turnstile,
+    knownFields: ["dot", "phone"],
   });
 
   const count = Object.values(watch).filter(Boolean).length;
@@ -115,18 +116,25 @@ export default function ComplianceAlertsForm() {
           className="flex flex-col gap-[22px] rounded-lg border border-border bg-white p-[22px]"
         >
           <Honeypot />
-          <label className="flex flex-col gap-1.5">
-            <span className={HEADING}>1. Your DOT or MC number (required)</span>
+          <Field
+            label="1. Your DOT or MC number"
+            required
+            error={fieldErrors.dot}
+            labelClassName={HEADING}
+          >
             <TextInput
               required
               value={dot}
-              onChange={(e) => setDot(e.target.value)}
+              onChange={(e) => {
+                setDot(e.target.value);
+                clearFieldError("dot");
+              }}
               placeholder="DOT 3412897"
               inputMode="numeric"
               autoComplete="off"
               className="text-lg font-semibold tabular-nums"
             />
-          </label>
+          </Field>
 
           <ChoiceGroup legend={<span className={HEADING}>2. What to watch</span>}>
             {WATCH_ITEMS.map((item) => (
@@ -144,11 +152,14 @@ export default function ComplianceAlertsForm() {
           <div className="flex flex-col gap-2.5">
             <span className={HEADING}>3. Where to text you</span>
             <div className="grid gap-3 sm:grid-cols-2">
-              <Field label="Mobile number">
+              <Field label="Mobile number" error={fieldErrors.phone}>
                 <TextInput
                   required
                   value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
+                  onChange={(e) => {
+                    setPhone(e.target.value);
+                    clearFieldError("phone");
+                  }}
                   type="tel"
                   placeholder="(XXX) XXX-XXXX"
                   autoComplete="tel"

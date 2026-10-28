@@ -3,27 +3,16 @@
 import { useState } from "react";
 import { Button } from "@/shared/ui/Button";
 import { Card } from "@/shared/ui/Card";
+import { EXAMPLE_INPUTS } from "../model/example";
 import { calcProfit, type ProfitInputs } from "../model/profit";
 import { NumberField } from "./NumberField";
 import { ProfitResults } from "./ProfitResults";
 
 type FieldValues = Record<keyof ProfitInputs, string>;
 
-const DEFAULT_VALUES: FieldValues = {
-  loadPay: "2400",
-  loadedMiles: "1000",
-  deadheadMiles: "120",
-  fuelPrice: "3.85",
-  mpg: "6.8",
-  maintenancePerMile: "0.18",
-  tolls: "40",
-  truckPayment: "650",
-  trailerPayment: "200",
-  insurance: "450",
-  otherWeekly: "150",
-  dispatchFee: "0",
-  weekMiles: "2500",
-};
+const DEFAULT_VALUES = Object.fromEntries(
+  Object.entries(EXAMPLE_INPUTS).map(([key, value]) => [key, String(value)]),
+) as FieldValues;
 
 type FieldConfig = {
   key: keyof ProfitInputs;

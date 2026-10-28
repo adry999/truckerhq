@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { act, render, screen } from "@testing-library/react";
+import { act, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { SMS_CONSENT_VERSION } from "@/shared/config/sms-consent";
 import ApplyForm from "./ApplyForm";
@@ -91,5 +91,37 @@ describe("ApplyForm", () => {
     render(<ApplyForm jobSlug="acme-otr" />);
     await fillAndSubmit();
     expect(await screen.findByRole("alert")).toHaveTextContent("Enter a valid US phone number");
+  });
+});
+
+describe("ApplyForm field errors", () => {
+  function failWith(body: object) {
+    vi.stubGlobal("fetch", vi.fn(async () => Response.json(body, { status: 400 })));
+  }
+
+  it("shows the server message under the matching field and clears it on edit", async () => {
+    failWith({ error: "Check the form", fields: { phone: "Enter a valid US phone number" } });
+    render(<ApplyForm jobSlug="acme-otr" />);
+    await fillAndSubmit();
+
+    const phone = screen.getByLabelText(/^Phone/);
+    await waitFor(() => expect(phone).toHaveAttribute("aria-invalid", "true"));
+    expect(phone).toHaveAccessibleDescription("Enter a valid US phone number");
+    expect(phone).toHaveFocus();
+    expect(screen.getByLabelText(/^Full name/)).not.toHaveAttribute("aria-invalid");
+    // The global message is only for errors no field shows.
+    expect(screen.queryByText("Check the form")).not.toBeInTheDocument();
+
+    await userEvent.type(phone, "9");
+    expect(phone).not.toHaveAttribute("aria-invalid");
+    expect(screen.queryByText("Enter a valid US phone number")).not.toBeInTheDocument();
+  });
+
+  it("falls back to the global message when no rendered field matches", async () => {
+    failWith({ error: "Verification failed", fields: { turnstileToken: "Verification failed" } });
+    render(<ApplyForm jobSlug="acme-otr" />);
+    await fillAndSubmit();
+    expect(await screen.findByText("Verification failed")).toBeInTheDocument();
+    expect(screen.getByLabelText(/^Phone/)).not.toHaveAttribute("aria-invalid");
   });
 });

@@ -11,7 +11,9 @@ function clean(value: unknown, max: number): string {
 /** Anything goes in; a trimmed string capped at `max` comes out ("" for non-strings). */
 export const text = (max: number) => anyInput.transform((v) => clean(v, max));
 
-export const requiredText = (max: number, error: string) =>
+export const REQUIRED_MESSAGE = "This field is required";
+
+export const requiredText = (max: number, error: string = REQUIRED_MESSAGE) =>
   anyInput.transform((v, ctx) => {
     const out = clean(v, max);
     if (!out) ctx.issues.push({ code: "custom", message: error, input: v });
@@ -38,6 +40,25 @@ export const optionalUsPhone = () =>
       return z.NEVER;
     }
     return e164;
+  });
+
+const EN_LANGUAGE = /^(en|english|англ)/i;
+const RU_LANGUAGE = /^(ru|russian|рус)/i;
+
+/** Maps what clients send ("English", "Русский", "ru", ...) to the stored "EN" | "RU". Unknown -> "EN". */
+export const language = () =>
+  anyInput.transform((v): "EN" | "RU" => {
+    const s = clean(v, 50);
+    return RU_LANGUAGE.test(s) ? "RU" : "EN";
+  });
+
+/** Like `language` plus "Any"; empty or unknown -> "ANY". */
+export const driverLanguage = () =>
+  anyInput.transform((v): "EN" | "RU" | "ANY" => {
+    const s = clean(v, 50);
+    if (EN_LANGUAGE.test(s)) return "EN";
+    if (RU_LANGUAGE.test(s)) return "RU";
+    return "ANY";
   });
 
 export const textList = (maxItems: number, maxLen: number) =>

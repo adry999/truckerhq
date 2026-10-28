@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { buildMetadata } from "@/shared/seo/metadata";
+import { faqSchema } from "@/shared/seo/structured-data";
+import JsonLd from "@/components/JsonLd";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import { ProfitCalculator } from "@/features/profit";
+import { PROFIT_FAQ, ProfitCalculator, ProfitGuide } from "@/features/profit";
 
 export const metadata: Metadata = buildMetadata({
   title: "Trucking Profit per Mile Calculator",
@@ -17,6 +19,7 @@ export default function ProfitCalculatorPage() {
     <div className="flex min-h-screen flex-col">
       <SiteHeader />
       <main id="main-content" tabIndex={-1} className="flex flex-1 flex-col">
+        <JsonLd data={faqSchema([...PROFIT_FAQ])} />
 
         <section className="bg-asphalt text-offwhite">
           <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-10 sm:px-6 md:py-16">
@@ -42,6 +45,8 @@ export default function ProfitCalculatorPage() {
         <section className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 md:py-14">
           <ProfitCalculator />
         </section>
+
+        <ProfitGuide />
 
       </main>
       <SiteFooter />

@@ -5,6 +5,8 @@ export type StepProps = {
   data: ClaimData;
   dispatch: Dispatch<ClaimAction>;
   headingRef: Ref<HTMLHeadingElement>;
+  /** Server messages keyed by request body field. */
+  fieldErrors: Record<string, string>;
 };
 
 export const STEP_HEADING = "font-display text-3xl font-extrabold uppercase leading-tight outline-none";

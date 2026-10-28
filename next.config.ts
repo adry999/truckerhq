@@ -16,6 +16,8 @@ const CSP = [
   "base-uri 'self'",
   "form-action 'self'",
   "object-src 'none'",
+  "report-uri /api/csp-report",
+  "report-to csp",
 ].join("; ");
 
 const nextConfig: NextConfig = {
@@ -35,6 +37,17 @@ const nextConfig: NextConfig = {
     deviceSizes: [640, 828, 1080, 1280, 1920],
     minimumCacheTTL: 2592000,
   },
+  // The lookup landing is static; searches live on /search. Old ?q= links redirect there.
+  async redirects() {
+    return [
+      {
+        source: "/tools/carrier-lookup",
+        has: [{ type: "query", key: "q" }],
+        destination: "/tools/carrier-lookup/search",
+        permanent: false,
+      },
+    ];
+  },
   async headers() {
     return [
       {
@@ -52,6 +65,7 @@ const nextConfig: NextConfig = {
             value: "max-age=63072000; includeSubDomains; preload",
           },
           { key: "Content-Security-Policy-Report-Only", value: CSP },
+          { key: "Reporting-Endpoints", value: 'csp="/api/csp-report"' },
         ],
       },
     ];
