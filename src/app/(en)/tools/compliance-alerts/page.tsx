@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { languageAlternates } from "@/shared/i18n/alternates";
 import { buildMetadata } from "@/shared/seo/metadata";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
@@ -10,6 +11,7 @@ export const metadata: Metadata = buildMetadata({
     "Get a text when your authority, insurance filing, UCR or safety status changes. Free.",
   path: "/tools/compliance-alerts",
   ogImage: false,
+  languages: languageAlternates("/tools/compliance-alerts"),
 });
 
 export default function ComplianceAlertsPage() {

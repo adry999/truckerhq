@@ -54,6 +54,29 @@ describe("ComplianceAlertsForm", () => {
     expect(screen.getByLabelText(/^1\. Your DOT or MC number/)).toHaveValue("");
   });
 
+  it("shows Russian labels and consent and defaults the text language to Russian on the RU page", async () => {
+    const fetchMock = vi.fn(async () => new Response("{}", { status: 200 }));
+    vi.stubGlobal("fetch", fetchMock);
+    render(<ComplianceAlertsForm lang="RU" />);
+    expect(screen.getByLabelText(/^1\. Ваш номер DOT или MC/)).toBeInTheDocument();
+    expect(screen.getByLabelText(/^Мобильный номер/)).toBeInTheDocument();
+    expect(screen.getByRole("radio", { name: "Русский" })).toBeChecked();
+    expect(screen.getByLabelText(/Я согласен получать SMS от Trucker HQ/)).toBeInTheDocument();
+    expect(screen.queryByLabelText(/I agree to receive text messages/)).not.toBeInTheDocument();
+
+    await userEvent.type(screen.getByLabelText(/^1\. Ваш номер DOT или MC/), "3412897");
+    await userEvent.type(screen.getByLabelText(/^Мобильный номер/), "5551234567");
+    await userEvent.click(screen.getByLabelText(/Я согласен получать SMS от Trucker HQ/));
+    await userEvent.click(screen.getByRole("button", { name: "Включить уведомления" }));
+    expect(await screen.findByText("Уведомления включены")).toBeInTheDocument();
+    const [, init] = fetchMock.mock.calls[0] as unknown as [string, RequestInit];
+    expect(JSON.parse(init.body as string)).toMatchObject({ language: "RU", smsConsent: true });
+    expect(screen.getByRole("link", { name: "New MC Checklist" })).toHaveAttribute(
+      "href",
+      "/ru/tools/new-mc-checklist",
+    );
+  }, 15000);
+
   it("shows the server error message in the alert", async () => {
     vi.stubGlobal(
       "fetch",
