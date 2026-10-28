@@ -91,16 +91,27 @@ describe("calcProfit", () => {
 
 describe("verdictFor", () => {
   it("is good from 0.50 per mile up", () => {
-    expect(verdictFor(0.5)).toEqual({ key: "good", label: "GOOD LOAD" });
-    expect(verdictFor(2.21).key).toBe("good");
+    expect(verdictFor(560, 0.5, 1120)).toEqual({ key: "good", label: "GOOD LOAD" });
+    expect(verdictFor(2475, 2.21, 1120)?.key).toBe("good");
   });
 
   it("is thin between 0 and 0.50", () => {
-    expect(verdictFor(0.49)).toEqual({ key: "thin", label: "THIN MARGIN" });
-    expect(verdictFor(0).key).toBe("thin");
+    expect(verdictFor(500, 0.49, 1020)).toEqual({ key: "thin", label: "THIN MARGIN" });
+    expect(verdictFor(0, 0, 1000)?.key).toBe("thin");
   });
 
   it("is losing below zero", () => {
-    expect(verdictFor(-0.01)).toEqual({ key: "losing", label: "LOSING MONEY" });
+    expect(verdictFor(-10, -0.01, 1000)).toEqual({ key: "losing", label: "LOSING MONEY" });
+  });
+
+  it("is losing at zero miles when tolls exceed the pay", () => {
+    const r = calcProfit({ ...EXAMPLE, loadPay: 20, loadedMiles: 0, deadheadMiles: 0 });
+    expect(r.profit).toBeLessThan(0);
+    expect(verdictFor(r.profit, r.perMile, r.totalMiles)?.key).toBe("losing");
+  });
+
+  it("gives no per-mile verdict at zero miles with nothing lost", () => {
+    const r = calcProfit({ ...EXAMPLE, loadedMiles: 0, deadheadMiles: 0, tolls: 0 });
+    expect(verdictFor(r.profit, r.perMile, r.totalMiles)).toBeNull();
   });
 });

@@ -78,7 +78,14 @@ export function calcProfit(inputs: ProfitInputs): ProfitResult {
   };
 }
 
-export function verdictFor(perMile: number): { key: VerdictKey; label: string } {
-  const key: VerdictKey = perMile >= GOOD_PER_MILE ? "good" : perMile >= 0 ? "thin" : "losing";
+/** `null` when there are no miles to rate: a per-mile verdict would be meaningless. */
+export function verdictFor(
+  profit: number,
+  perMile: number,
+  totalMiles: number,
+): { key: VerdictKey; label: string } | null {
+  if (profit < 0) return { key: "losing", label: VERDICT_LABELS.losing };
+  if (totalMiles <= 0) return null;
+  const key: VerdictKey = perMile >= GOOD_PER_MILE ? "good" : "thin";
   return { key, label: VERDICT_LABELS[key] };
 }

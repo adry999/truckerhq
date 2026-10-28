@@ -6,6 +6,9 @@ export default defineConfig({
   plugins: [react()],
   test: {
     environment: "node",
+    // The default forks pool times out starting workers for the jsdom suites on
+    // slower machines. Threads start faster; each file stays isolated.
+    pool: "threads",
     setupFiles: ["tests/support/setup-dom.ts"],
     include: ["src/**/*.test.{ts,tsx}"],
     exclude: ["tests/e2e/**", "node_modules/**"],

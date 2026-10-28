@@ -27,7 +27,7 @@ export function authorityAge(c: Carrier): string {
     : `${Math.floor(c.ageMonths / 12)} yr ${c.ageMonths % 12} mo`;
 }
 
-export function scoreBreakdown(c: Carrier): ScoreFactor[] {
+export function scoreBreakdown(c: Omit<Carrier, "score">): ScoreFactor[] {
   return [
     {
       t: "Authority",
@@ -54,7 +54,7 @@ export function scoreBreakdown(c: Carrier): ScoreFactor[] {
     {
       t: "Inspections",
       max: 30,
-      v: Math.max(0, Math.round(30 - c.oosVehicle * 0.6 - c.oosDriver)),
+      v: Math.max(0, Math.round(30 - Math.min(20, c.oosVehicle * 0.6) - Math.min(10, c.oosDriver * 1.5))),
       note:
         c.inspections < 3
           ? "Too few inspections to judge fully."
@@ -69,6 +69,11 @@ export function scoreBreakdown(c: Carrier): ScoreFactor[] {
         : "No reportable crashes in 24 months.",
     },
   ];
+}
+
+/** Headline 0-100 score: the sum of the four factors in `scoreBreakdown`. */
+export function healthScore(c: Omit<Carrier, "score">): number {
+  return scoreBreakdown(c).reduce((sum, f) => sum + f.v, 0);
 }
 
 export function profileCta(c: Carrier): ProfileCta {

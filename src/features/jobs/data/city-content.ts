@@ -96,7 +96,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
     faqs: [
       {
         q: "How much do truck drivers make in Atlanta?",
-        a: "On current Trucker HQ listings, OTR company drivers out of Atlanta are offered $0.60 to $0.71 per mile, and local drivers $24 to $29 per hour. Team and specialized jobs pay more.",
+        a: "Typical sample offers for OTR company drivers out of Atlanta run $0.60 to $0.71 per mile, and for local drivers $24 to $29 per hour. These are illustrative ranges, not statistics from live postings. Team and specialized jobs pay more.",
       },
       {
         q: "Are there local CDL jobs with home time every night?",
@@ -205,7 +205,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
     faqs: [
       {
         q: "How much do truck drivers make in Charlotte?",
-        a: "On current Trucker HQ listings, OTR company drivers out of Charlotte are offered $0.60 to $0.72 per mile, and local drivers $24 to $30 per hour. Team and flatbed jobs pay more.",
+        a: "Typical sample offers for OTR company drivers out of Charlotte run $0.60 to $0.72 per mile, and for local drivers $24 to $30 per hour. These are illustrative ranges, not statistics from live postings. Team and flatbed jobs pay more.",
       },
       {
         q: "Are there local CDL jobs with home time every night?",
@@ -313,7 +313,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
     faqs: [
       {
         q: "How much do truck drivers make in Chicago?",
-        a: "On current Trucker HQ listings, OTR company drivers out of Chicago are offered $0.62 to $0.74 per mile, and local drivers $26 to $32 per hour. Team and specialized jobs pay more.",
+        a: "Typical sample offers for OTR company drivers out of Chicago run $0.62 to $0.74 per mile, and for local drivers $26 to $32 per hour. These are illustrative ranges, not statistics from live postings. Team and specialized jobs pay more.",
       },
       {
         q: "Are there local CDL jobs with home time every night?",
@@ -421,7 +421,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
     faqs: [
       {
         q: "How much do truck drivers make in Columbus?",
-        a: "On current Trucker HQ listings, OTR company drivers out of Columbus are offered $0.58 to $0.70 per mile, and local drivers $24 to $29 per hour. Team and specialized jobs pay more.",
+        a: "Typical sample offers for OTR company drivers out of Columbus run $0.58 to $0.70 per mile, and for local drivers $24 to $29 per hour. These are illustrative ranges, not statistics from live postings. Team and specialized jobs pay more.",
       },
       {
         q: "Are there local CDL jobs with home time every night?",
@@ -529,7 +529,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
     faqs: [
       {
         q: "How much do truck drivers make in Dallas?",
-        a: "On current Trucker HQ listings, OTR company drivers out of Dallas are offered $0.60 to $0.72 per mile, and local drivers $24 to $29 per hour. Team and specialized freight pays more.",
+        a: "Typical sample offers for OTR company drivers out of Dallas run $0.60 to $0.72 per mile, and for local drivers $24 to $29 per hour. These are illustrative ranges, not statistics from live postings. Team and specialized freight pays more.",
       },
       {
         q: "Are there local CDL jobs with home time every night?",
@@ -637,7 +637,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
     faqs: [
       {
         q: "How much do truck drivers make in Houston?",
-        a: "On current Trucker HQ listings, OTR company drivers out of Houston are offered $0.60 to $0.72 per mile, and local drivers $25 to $31 per hour. Tanker and specialized petrochemical hauls pay more.",
+        a: "Typical sample offers for OTR company drivers out of Houston run $0.60 to $0.72 per mile, and for local drivers $25 to $31 per hour. These are illustrative ranges, not statistics from live postings. Tanker and specialized petrochemical hauls pay more.",
       },
       {
         q: "Are there local CDL jobs with home time every night?",
@@ -745,7 +745,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
     faqs: [
       {
         q: "How much do truck drivers make in Indianapolis?",
-        a: "On current Trucker HQ listings, OTR company drivers out of Indianapolis are offered $0.58 to $0.70 per mile, and local drivers $24 to $29 per hour. Team and specialized freight pays more.",
+        a: "Typical sample offers for OTR company drivers out of Indianapolis run $0.58 to $0.70 per mile, and for local drivers $24 to $29 per hour. These are illustrative ranges, not statistics from live postings. Team and specialized freight pays more.",
       },
       {
         q: "Are there local CDL jobs with home time every night?",
@@ -852,7 +852,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
     faqs: [
       {
         q: "How much do truck drivers make in Los Angeles?",
-        a: "On current Trucker HQ listings, OTR company drivers out of Los Angeles are offered $0.65 to $0.78 per mile, and local drivers $28 to $36 per hour. Port drayage and specialized freight often pay more.",
+        a: "Typical sample offers for OTR company drivers out of Los Angeles run $0.65 to $0.78 per mile, and for local drivers $28 to $36 per hour. These are illustrative ranges, not statistics from live postings. Port drayage and specialized freight often pay more.",
       },
       {
         q: "Are there local CDL jobs with home time every night?",
@@ -960,7 +960,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
     faqs: [
       {
         q: "How much do truck drivers make in Louisville?",
-        a: "On current Trucker HQ listings, OTR company drivers out of Louisville are offered $0.58 to $0.70 per mile, and local drivers $24 to $29 per hour. Air cargo feeder and team routes pay more.",
+        a: "Typical sample offers for OTR company drivers out of Louisville run $0.58 to $0.70 per mile, and for local drivers $24 to $29 per hour. These are illustrative ranges, not statistics from live postings. Air cargo feeder and team routes pay more.",
       },
       {
         q: "Are there local CDL jobs with home time every night?",
@@ -1068,7 +1068,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
     faqs: [
       {
         q: "How much do truck drivers make in Memphis?",
-        a: "On current Trucker HQ listings, OTR company drivers out of Memphis are offered $0.60 to $0.70 per mile, and local drivers $24 to $29 per hour. Air cargo and drayage work often pays more.",
+        a: "Typical sample offers for OTR company drivers out of Memphis run $0.60 to $0.70 per mile, and for local drivers $24 to $29 per hour. These are illustrative ranges, not statistics from live postings. Air cargo and drayage work often pays more.",
       },
       {
         q: "Are there local CDL jobs with home time every night?",
@@ -1175,7 +1175,7 @@ export const CITY_CONTENT: Record<string, CityContentEntry> = {
     faqs: [
       {
         q: "How much do truck drivers make in Phoenix?",
-        a: "On current Trucker HQ listings, OTR company drivers out of Phoenix are offered $0.60 to $0.70 per mile, and local drivers $24 to $29 per hour. Team and specialized jobs pay more.",
+        a: "Typical sample offers for OTR company drivers out of Phoenix run $0.60 to $0.70 per mile, and for local drivers $24 to $29 per hour. These are illustrative ranges, not statistics from live postings. Team and specialized jobs pay more.",
       },
       {
         q: "Are there local CDL jobs with home time every night?",

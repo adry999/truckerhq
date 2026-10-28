@@ -57,7 +57,7 @@ describe("POST /api/compliance-alerts", () => {
       "compliance_alert_signups",
       expect.objectContaining({ phone: "+13125550123" }),
     );
-    expect(notifyComplianceAlertsOn).toHaveBeenCalledWith("+13125550123", "1234567");
+    expect(notifyComplianceAlertsOn).toHaveBeenCalledWith("+13125550123", "1234567", "");
   });
 
   it("returns 502 and does not notify when saving fails", async () => {

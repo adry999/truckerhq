@@ -57,7 +57,7 @@ describe("POST /api/dispatch-start", () => {
       "dispatch_requests",
       expect.objectContaining({ phone: "+13125550123" }),
     );
-    expect(notifyDispatchStart).toHaveBeenCalledWith("+13125550123");
+    expect(notifyDispatchStart).toHaveBeenCalledWith("+13125550123", "");
   });
 
   it("returns 502 and does not notify when saving fails", async () => {

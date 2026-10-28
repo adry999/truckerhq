@@ -34,7 +34,7 @@ export const POST = createLeadHandler({
     language: s.language || "EN",
     watch: s.watch,
   }),
-  notify: (s) => notifyComplianceAlertsOn(s.phone, s.dot),
+  notify: (s) => notifyComplianceAlertsOn(s.phone, s.dot, s.language),
   saveError: "Could not save signup",
   alertLabel: "Compliance alerts",
 });

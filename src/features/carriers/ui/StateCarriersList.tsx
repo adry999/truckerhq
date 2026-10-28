@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { CARRIERS } from "@/features/carriers/data/carriers";
 import { STATUS_COLORS } from "@/features/carriers/ui/status-colors";
 import type { StateCarrierRow } from "@/features/carriers/model/carriers.types";
 import { healthLabel, healthTextColor } from "@/shared/lib/health-score";
@@ -9,12 +10,80 @@ import { Button } from "@/shared/ui/Button";
 import { EmptyState } from "@/shared/ui/EmptyState";
 import { HealthBadge } from "@/shared/ui/HealthBadge";
 
+// State rows carry sample DOTs. Only DOTs that have a sample profile can be opened;
+// sending the rest to the live lookup would show an empty result or an unrelated carrier.
+export function profileHref(dot: string): string | null {
+  const match = CARRIERS.find((carrier) => carrier.dot === dot);
+  return match ? `/tools/carrier-lookup/${match.slug}` : null;
+}
+
 type StateCarriersListProps = {
   stateAbbr: string;
   stateName: string;
   carriers: StateCarrierRow[];
   totalCount: string;
 };
+
+function CarrierRow({
+  carrier: c,
+  stateAbbr,
+  first,
+}: {
+  carrier: StateCarrierRow;
+  stateAbbr: string;
+  first: boolean;
+}) {
+  const sc = STATUS_COLORS[c.status];
+  const href = profileHref(c.dot);
+  const rowClass = `grid grid-cols-[1fr_auto] items-center gap-3 px-5 py-[18px] tabular-nums md:grid-cols-[2.2fr_1fr_1.2fr_80px_130px_110px] md:gap-4 ${
+    first ? "" : "border-t border-divider"
+  }`;
+  const content = (
+    <>
+      <span className="col-span-2 flex flex-col gap-0.5 md:col-span-1">
+        <span className="text-[17px] font-bold">{c.name}</span>
+        <span className="text-sm text-grey">
+          {c.city}, {stateAbbr}
+          <span className="md:hidden">
+            {" "}
+            · {c.equipment} · {c.trucks} truck
+            {c.trucks === 1 ? "" : "s"}
+          </span>
+        </span>
+      </span>
+      <span className="hidden text-[15px] md:block">{c.dot}</span>
+      <span className="hidden text-[15px] md:block">{c.equipment}</span>
+      <span className="hidden text-[15px] md:block">{c.trucks}</span>
+      <span>
+        <span
+          className="flex items-center gap-1.5 rounded-lg px-2.5 py-1 font-display text-[15px] font-extrabold tracking-[.08em]"
+          style={{ background: sc.bg, color: sc.fg }}
+        >
+          <span className="h-2 w-2 rounded-full" style={{ background: sc.dot }} />
+          {c.status}
+        </span>
+      </span>
+      <span className="flex justify-end">
+        <span className="flex items-center gap-1.5 rounded-[10px] border-[1.5px] border-border py-0.5 pl-1 pr-1.5">
+          <HealthBadge score={c.score} />
+          <span
+            className="pr-1 font-display text-sm font-extrabold tracking-[.06em]"
+            style={{ color: healthTextColor(c.score) }}
+          >
+            {healthLabel(c.score)}
+          </span>
+        </span>
+      </span>
+            </>
+  );
+  return href ? (
+    <Link href={href} className={`${rowClass} hover:bg-offwhite`}>
+      {content}
+    </Link>
+  ) : (
+    <div className={rowClass}>{content}</div>
+  );
+}
 
 export function StateCarriersListView({
   stateAbbr,
@@ -36,53 +105,9 @@ export function StateCarriersListView({
           <span>AUTHORITY</span>
           <span className="text-right">HEALTH</span>
         </div>
-        {shown.map((c, i) => {
-          const sc = STATUS_COLORS[c.status];
-          return (
-            <Link
-              key={c.dot}
-              href={`/tools/carrier-lookup?q=${c.dot}&mode=DOT`}
-              className={`grid grid-cols-[1fr_auto] items-center gap-3 px-5 py-[18px] tabular-nums hover:bg-offwhite md:grid-cols-[2.2fr_1fr_1.2fr_80px_130px_110px] md:gap-4 ${
-                i ? "border-t border-divider" : ""
-              }`}
-            >
-              <span className="col-span-2 flex flex-col gap-0.5 md:col-span-1">
-                <span className="text-[17px] font-bold">{c.name}</span>
-                <span className="text-sm text-grey">
-                  {c.city}, {stateAbbr}
-                  <span className="md:hidden">
-                    {" "}
-                    · {c.equipment} · {c.trucks} truck
-                    {c.trucks === 1 ? "" : "s"}
-                  </span>
-                </span>
-              </span>
-              <span className="hidden text-[15px] md:block">{c.dot}</span>
-              <span className="hidden text-[15px] md:block">{c.equipment}</span>
-              <span className="hidden text-[15px] md:block">{c.trucks}</span>
-              <span>
-                <span
-                  className="flex items-center gap-1.5 rounded-lg px-2.5 py-1 font-display text-[15px] font-extrabold tracking-[.08em]"
-                  style={{ background: sc.bg, color: sc.fg }}
-                >
-                  <span className="h-2 w-2 rounded-full" style={{ background: sc.dot }} />
-                  {c.status}
-                </span>
-              </span>
-              <span className="flex justify-end">
-                <span className="flex items-center gap-1.5 rounded-[10px] border-[1.5px] border-border py-0.5 pl-1 pr-1.5">
-                  <HealthBadge score={c.score} />
-                  <span
-                    className="pr-1 font-display text-sm font-extrabold tracking-[.06em]"
-                    style={{ color: healthTextColor(c.score) }}
-                  >
-                    {healthLabel(c.score)}
-                  </span>
-                </span>
-              </span>
-            </Link>
-          );
-        })}
+        {shown.map((c, i) => (
+          <CarrierRow key={c.dot} carrier={c} stateAbbr={stateAbbr} first={i === 0} />
+        ))}
         {shown.length === 0 && (
           <EmptyState bordered={false}>
             No {stateName} carriers match this filter. Try a different equipment type.
