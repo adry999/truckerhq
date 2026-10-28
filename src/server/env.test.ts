@@ -1,5 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { serverEnv, resetServerEnvForTests } from "./env";
+import { SITE_HOST } from "@/shared/config/site";
 
 beforeEach(() => resetServerEnvForTests());
 afterEach(() => {
@@ -50,7 +51,7 @@ describe("serverEnv", () => {
 
   it("defaults RESEND_FROM", () => {
     vi.stubEnv("RESEND_FROM", "");
-    expect(serverEnv().RESEND_FROM).toBe("Trucker HQ <hello@truckerhq.com>");
+    expect(serverEnv().RESEND_FROM).toBe(`Trucker HQ <hello@${SITE_HOST}>`);
     resetServerEnvForTests();
     vi.stubEnv("RESEND_FROM", "Me <me@example.com>");
     expect(serverEnv().RESEND_FROM).toBe("Me <me@example.com>");
