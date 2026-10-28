@@ -19,8 +19,8 @@ function post(body: unknown, raw?: string) {
     new Request("https://truckerhq.com/api/dispatch-start", {
       method: "POST",
       headers: {
-        origin: "https://truckerhq.com",
-        "x-forwarded-for": `10.0.2.${++n}`,
+        origin: "http://localhost:3000",
+        "cf-connecting-ip": `10.0.2.${++n}`,
         "content-type": "application/json",
       },
       body: raw ?? JSON.stringify(body),

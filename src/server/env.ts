@@ -16,9 +16,10 @@ const schema = z.object({
     (v) => (v === "" ? undefined : v),
     z.string().default("Trucker HQ <hello@truckerhq.com>"),
   ),
+  LEADS_NOTIFY_TO: optional(z.string()),
   FMCSA_WEBKEY: optional(z.string()),
-  VERCEL_URL: optional(z.string()),
-  VERCEL_BRANCH_URL: optional(z.string()),
+  ALLOWED_ORIGINS: optional(z.string()),
+  CF_ORIGIN_SECRET: optional(z.string()),
 });
 
 export type ServerEnv = Readonly<z.output<typeof schema>>;

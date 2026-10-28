@@ -1,4 +1,5 @@
 import "server-only";
+import { timingSafeEqual } from "node:crypto";
 import { NextResponse } from "next/server";
 import { SITE_URL } from "@/shared/config/site";
 import { serverEnv } from "@/server/env";
@@ -8,26 +9,28 @@ const WINDOW_MS = 60_000;
 const MAX_REQUESTS_PER_WINDOW = 5;
 const MAX_TRACKED_KEYS = 1000;
 
-let allowedOrigins: Set<string> | undefined;
-
 function getAllowedOrigins(): Set<string> {
-  if (!allowedOrigins) {
-    const { VERCEL_URL, VERCEL_BRANCH_URL } = serverEnv();
-    allowedOrigins = new Set([
-      "https://truckerhq.com",
-      "https://www.truckerhq.com",
-      SITE_URL,
-      // This deployment's own URLs, so forms also work on preview deployments.
-      ...[VERCEL_URL, VERCEL_BRANCH_URL].filter(Boolean).map((h) => `https://${h}`),
-    ]);
-  }
-  return allowedOrigins;
+  const { ALLOWED_ORIGINS } = serverEnv();
+  const extra = (ALLOWED_ORIGINS ?? "")
+    .split(",")
+    .map((o) => o.trim().replace(/\/+$/, ""))
+    .filter(Boolean);
+  const origins = new Set([new URL(SITE_URL).origin, ...extra]);
+  if (process.env.NODE_ENV !== "production") origins.add("http://localhost:3000");
+  return origins;
 }
 
-// In-memory sliding window. Resets per cold start and is per-instance, so it
-// is a speed bump against casual abuse, not a hard guarantee under Fluid
-// Compute's multi-instance scaling. Good enough for a lead-gen form; swap
-// for a shared store (Upstash, Vercel KV-alike) if abuse gets serious.
+function hasValidOriginSecret(req: Request): boolean {
+  const secret = serverEnv().CF_ORIGIN_SECRET;
+  if (!secret) return true;
+  const sent = Buffer.from(req.headers.get("x-origin-secret") ?? "");
+  const expected = Buffer.from(secret);
+  return sent.length === expected.length && timingSafeEqual(sent, expected);
+}
+
+// In-memory sliding window. Resets on restart and is per-process, so it is a
+// speed bump against casual abuse, not a hard guarantee. Good enough for a
+// lead-gen form; swap for a shared store if abuse gets serious.
 const hits = new Map<string, number[]>();
 
 export function resetRateLimitForTests(): void {
@@ -44,16 +47,10 @@ function sweepExpired(now: number): void {
   }
 }
 
+// The app sits behind Cloudflare, which sets cf-connecting-ip itself. Other
+// forwarding headers are client-controlled and would let anyone dodge the limit.
 export function getClientIp(req: Request): string {
-  // Vercel sets the first two itself and they can't be spoofed through its edge;
-  // a client-supplied x-forwarded-for entry can.
-  const vercel = req.headers.get("x-vercel-forwarded-for");
-  if (vercel) return vercel.split(",")[0]!.trim();
-  const real = req.headers.get("x-real-ip");
-  if (real) return real;
-  const fwd = req.headers.get("x-forwarded-for");
-  if (fwd) return fwd.split(",")[0]!.trim();
-  return "unknown";
+  return req.headers.get("cf-connecting-ip")?.trim() || "unknown";
 }
 
 export function isRateLimited(key: string): boolean {
@@ -67,7 +64,7 @@ export function isRateLimited(key: string): boolean {
 
 export function isAllowedOrigin(req: Request): boolean {
   const origin = req.headers.get("origin");
-  if (!origin) return true; // non-browser clients (curl, server-to-server) send no Origin
+  if (!origin) return false; // browsers always send Origin on a POST fetch
   return getAllowedOrigins().has(origin);
 }
 
@@ -115,10 +112,11 @@ export async function readJsonBody(
 }
 
 /**
- * Runs the shared abuse checks (origin, rate limit) for a POST lead-form
+ * Runs the shared abuse checks (origin secret, origin, rate limit) for a POST lead-form
  * route. Returns a Response to short-circuit with, or null to continue.
  */
 export function guardLeadRoute(req: Request): Response | null {
+  if (!hasValidOriginSecret(req)) return rejectResponse(403, "Forbidden");
   if (!isAllowedOrigin(req)) return rejectResponse(403, "Forbidden");
   const ip = getClientIp(req);
   if (isRateLimited(`${new URL(req.url).pathname}:${ip}`)) {

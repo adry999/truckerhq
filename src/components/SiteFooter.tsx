@@ -1,4 +1,5 @@
 import { PHONE_DISPLAY, PHONE_HREF } from "@/shared/config/contact";
+import { SITE_HOST } from "@/shared/config/site";
 import Link from "next/link";
 import Logo from "./Logo";
 
@@ -26,7 +27,7 @@ const COLUMNS: { h: string; links: { t: string; href?: string }[] }[] = [
     h: "CONTACT",
     links: [
       { t: `${PHONE_DISPLAY} · 24/7`, href: PHONE_HREF },
-      { t: "hello@truckerhq.com", href: "/about#contact" },
+      { t: `hello@${SITE_HOST}`, href: "/about#contact" },
       { t: "Guides", href: "/guides" },
       { t: "About us", href: "/about" },
     ],

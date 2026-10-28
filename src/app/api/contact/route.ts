@@ -26,4 +26,5 @@ export const POST = createLeadHandler({
     language: c.language || "EN",
   }),
   saveError: "Could not save message",
+  alertLabel: "Contact message",
 });

@@ -34,4 +34,5 @@ export const POST = createLeadHandler({
     driver_language: h.driverLanguage,
   }),
   saveError: "Could not save job",
+  alertLabel: "Hire drivers",
 });

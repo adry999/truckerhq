@@ -47,4 +47,5 @@ export const POST = createLeadHandler({
   }),
   notify: (d) => notifyDispatchStart(d.phone),
   saveError: "Could not save request",
+  alertLabel: "Dispatch request",
 });

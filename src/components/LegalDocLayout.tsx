@@ -1,6 +1,7 @@
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import { SITE_HOST } from "@/shared/config/site";
 
 type LegalSection = {
   heading: string;
@@ -65,7 +66,7 @@ export default function LegalDocLayout({
         </div>
 
         <p className="text-sm text-grey">
-          Questions: hello@truckerhq.com · Trucker HQ, Street address, City,
+          Questions: hello@{SITE_HOST} · Trucker HQ, Street address, City,
           ST 00000
         </p>
       </section>

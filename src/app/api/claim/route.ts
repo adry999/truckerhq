@@ -28,4 +28,5 @@ export const POST = createLeadHandler({
     also_show: c.alsoShow,
   }),
   saveError: "Could not save claim",
+  alertLabel: "Carrier claim",
 });

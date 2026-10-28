@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { SITE_HOST } from "@/shared/config/site";
 
 export const ogImageSize = { width: 1200, height: 630 };
 export const ogImageContentType = "image/png";
@@ -236,7 +237,7 @@ export function renderOgImage(c: OgCardConfig) {
               color: t.subFg,
             }}
           >
-            truckerhq.com
+            {SITE_HOST}
           </div>
         </div>
 

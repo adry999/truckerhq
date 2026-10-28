@@ -31,4 +31,5 @@ export const POST = createLeadHandler({
   }),
   notify: (a) => notifyApplication(a.phone, findJob(a.jobSlug)?.title),
   saveError: "Could not save application",
+  alertLabel: "Job application",
 });

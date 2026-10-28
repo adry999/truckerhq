@@ -17,6 +17,7 @@ function setup(overrides: { insertResult?: boolean; withNotify?: boolean } = {})
   const insertRow = vi.fn(async () => overrides.insertResult ?? true);
   const after = vi.fn((task: () => Promise<void>) => void task());
   const notify = vi.fn(async () => {});
+  const alert = vi.fn(async () => {});
   const handler = createLeadHandler(
     {
       schema,
@@ -30,16 +31,17 @@ function setup(overrides: { insertResult?: boolean; withNotify?: boolean } = {})
       }),
       notify: overrides.withNotify === false ? undefined : notify,
       saveError: "Could not save",
+      alertLabel: "Test lead",
     },
-    { insertRow, after },
+    { insertRow, after, alert },
   );
-  return { handler, insertRow, after, notify };
+  return { handler, insertRow, after, notify, alert };
 }
 
 function post(body: string, headers: Record<string, string> = {}) {
   return new Request("https://truckerhq.com/api/test", {
     method: "POST",
-    headers: { origin: "https://truckerhq.com", "x-real-ip": "9.9.9.9", ...headers },
+    headers: { origin: "http://localhost:3000", "cf-connecting-ip": "9.9.9.9", ...headers },
     body,
   });
 }
@@ -61,14 +63,35 @@ describe("createLeadHandler", () => {
       message: "hi",
       language: "EN",
     });
-    expect(after).toHaveBeenCalledTimes(1);
+    expect(after).toHaveBeenCalledTimes(2);
     expect(notify).toHaveBeenCalledWith({ name: "Ivan", phone: "+13125550123", note: "hi" });
   });
 
-  it("does not schedule anything when notify is not configured", async () => {
-    const { handler, after } = setup({ withNotify: false });
+  it("schedules only the team alert when notify is not configured", async () => {
+    const { handler, after, alert } = setup({ withNotify: false });
     expect((await handler(post(JSON.stringify(valid)))).status).toBe(200);
-    expect(after).not.toHaveBeenCalled();
+    expect(after).toHaveBeenCalledTimes(1);
+    expect(alert).toHaveBeenCalledTimes(1);
+  });
+
+  it("sends the team alert with the label and the inserted row", async () => {
+    const { handler, alert } = setup();
+    await handler(post(JSON.stringify(valid)));
+    expect(alert).toHaveBeenCalledWith("Test lead", {
+      topic: "t",
+      name: "Ivan",
+      phone: "+13125550123",
+      message: "hi",
+      language: "EN",
+    });
+  });
+
+  it("still responds ok when the alert fails", async () => {
+    const { handler, alert } = setup();
+    alert.mockRejectedValueOnce(new Error("boom"));
+    const res = await handler(post(JSON.stringify(valid)));
+    expect(res.status).toBe(200);
+    expect(await res.json()).toEqual({ ok: true });
   });
 
   it("returns ok without saving when the honeypot is filled", async () => {
@@ -112,11 +135,12 @@ describe("createLeadHandler", () => {
   });
 
   it("returns 502 and does not notify when saving fails", async () => {
-    const { handler, after } = setup({ insertResult: false });
+    const { handler, after, alert } = setup({ insertResult: false });
     const res = await handler(post(JSON.stringify(valid)));
     expect(res.status).toBe(502);
     expect(await res.json()).toEqual({ error: "Could not save" });
     expect(after).not.toHaveBeenCalled();
+    expect(alert).not.toHaveBeenCalled();
   });
 
   it("applies the origin guard", async () => {
