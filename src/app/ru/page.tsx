@@ -26,7 +26,7 @@ export default function HomePageRU() {
       <main id="main-content" tabIndex={-1} className="flex flex-1 flex-col">
         <HomePage lang="RU" jobRows={homeJobRows("RU", JOBS)} />
       </main>
-      <SiteFooter />
+      <SiteFooter lang="RU" />
     </div>
   );
 }

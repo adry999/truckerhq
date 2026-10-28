@@ -4,23 +4,23 @@ import { Field, TextInput } from "@/shared/ui/Field";
 import { HOME_TIME_OPTIONS, REGIONS, setField } from "@/features/dispatch/model/dispatch-start";
 import { SEGMENT_BUTTON, STEP_HEADING, type StepProps } from "../step-props";
 
-export function LanesStep({ data, dispatch, headingRef }: StepProps) {
+export function LanesStep({ data, dispatch, headingRef, c }: StepProps) {
   return (
     <div className="flex flex-col gap-7">
       <h2 ref={headingRef} tabIndex={-1} className={STEP_HEADING}>
-        Lanes and home time
+        {c.lanes.heading}
       </h2>
-      <Field label="Home base">
+      <Field label={c.lanes.homeBase}>
         <TextInput
           value={data.homeBase}
           onChange={(e) => dispatch(setField("homeBase", e.target.value))}
-          placeholder="City, state"
+          placeholder={c.lanes.homeBasePlaceholder}
           autoComplete="address-level2"
           enterKeyHint="next"
         />
       </Field>
       <ChoiceGroup
-        legend="Where do you want to run? (Pick any)"
+        legend={c.lanes.legend}
         className="grid grid-cols-2 gap-2.5 sm:grid-cols-3"
       >
         {REGIONS.map((region) => (
@@ -28,19 +28,20 @@ export function LanesStep({ data, dispatch, headingRef }: StepProps) {
             key={region}
             name="lanes"
             value={region}
-            title={region}
+            title={c.options[region] ?? region}
             checked={data.lanes.includes(region)}
             onChange={() => dispatch({ type: "toggleLane", lane: region })}
           />
         ))}
       </ChoiceGroup>
       <div className="flex flex-col gap-2">
-        <span className="text-sm font-semibold">How often home?</span>
+        <span className="text-sm font-semibold">{c.lanes.homeTime}</span>
         <Segmented
           options={HOME_TIME_OPTIONS}
           value={data.homeTime}
           onChange={(v) => dispatch(setField("homeTime", v))}
-          label="How often home?"
+          label={c.lanes.homeTime}
+          labels={c.options}
           buttonClassName={SEGMENT_BUTTON}
         />
       </div>

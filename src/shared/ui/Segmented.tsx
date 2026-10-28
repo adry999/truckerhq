@@ -11,6 +11,7 @@ export function Segmented({
   onChange,
   label,
   uppercase = false,
+  labels,
   containerClassName = "flex flex-wrap gap-1.5",
   buttonClassName = "h-[50px] flex-1 basis-[110px] font-display text-[17px] font-extrabold tracking-[.05em]",
 }: {
@@ -20,6 +21,8 @@ export function Segmented({
   /** Accessible name for the group — pass the same text as the visible label above it. */
   label: string;
   uppercase?: boolean;
+  /** Display text per option value; the value itself is shown when missing. */
+  labels?: Record<string, string>;
   containerClassName?: string;
   buttonClassName?: string;
 }) {
@@ -55,7 +58,7 @@ export function Segmented({
               : "border-[1.5px] border-input-border bg-white text-asphalt"
           }`}
         >
-          {uppercase ? o.toUpperCase() : o}
+          {uppercase ? (labels?.[o] ?? o).toUpperCase() : (labels?.[o] ?? o)}
         </button>
       ))}
     </div>

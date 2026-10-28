@@ -4,19 +4,19 @@ import { Field, TextInput } from "@/shared/ui/Field";
 import { AUTHORITY_OPTIONS, NO_AUTHORITY, setField } from "@/features/dispatch/model/dispatch-start";
 import { STEP_HEADING, type StepProps } from "../step-props";
 
-export function AuthorityStep({ data, dispatch, headingRef }: StepProps) {
+export function AuthorityStep({ data, dispatch, headingRef, c }: StepProps) {
   return (
     <div className="flex flex-col gap-7">
       <h2 ref={headingRef} tabIndex={-1} className={STEP_HEADING}>
-        Your authority
+        {c.authority.heading}
       </h2>
-      <ChoiceGroup legend={<span className="sr-only">Your authority</span>}>
+      <ChoiceGroup legend={<span className="sr-only">{c.authority.heading}</span>}>
         {AUTHORITY_OPTIONS.map((option) => (
           <RadioCard
             key={option}
             name="authority"
             value={option}
-            title={option}
+            title={c.options[option] ?? option}
             checked={data.authority === option}
             onChange={(v) => dispatch(setField("authority", v))}
           />
@@ -24,12 +24,8 @@ export function AuthorityStep({ data, dispatch, headingRef }: StepProps) {
       </ChoiceGroup>
       {data.authority !== NO_AUTHORITY ? (
         <Field
-          label="MC/DOT number"
-          hint={
-            <span className="text-[13px] text-grey">
-              MC or USDOT number. We&apos;ll pull your record from FMCSA so you don&apos;t have to type it.
-            </span>
-          }
+          label={c.authority.mcLabel}
+          hint={<span className="text-[13px] text-grey">{c.authority.mcHint}</span>}
         >
           <TextInput
             value={data.mcNumber}
@@ -42,11 +38,11 @@ export function AuthorityStep({ data, dispatch, headingRef }: StepProps) {
         </Field>
       ) : (
         <div className="rounded-lg border-[1.5px] border-amber bg-amber-tint p-4 text-[15px] leading-relaxed text-asphalt">
-          No problem. We&apos;ll walk you through the{" "}
+          {c.authority.noAuthority.before}
           <Link href="/tools/new-mc-checklist" className="font-semibold text-green underline">
-            New MC Checklist
-          </Link>{" "}
-          on the call and start booking as soon as your authority is active.
+            {c.authority.noAuthority.link}
+          </Link>
+          {c.authority.noAuthority.after}
         </div>
       )}
     </div>

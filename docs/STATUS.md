@@ -73,11 +73,11 @@ Go-live steps: follow `docs/launch-runbook.md` top to bottom.
 
 ### P1: before or at launch
 
-- [ ] **Visual check of the home hero on mobile.** The layout is new and hasn't been checked in a browser yet (`src/features/home/ui/HomeHero.tsx`).
-- [ ] **Durable SMS throttle.** It lives in memory and resets on restart. Move it to a Supabase table or rely on Twilio-side limits (`src/server/messaging/sms-throttle.ts`).
-- [ ] **Startup env validation + `/api/health`.** Today a missing Supabase env only shows up as a 502 per form.
-- [ ] **RU dispatch wizard (`/ru/dispatch/start`).** RU visitors currently land in the EN wizard. The RU footer is still English.
-- [ ] **Remaining hot-linked Unsplash image:** `src/features/home/ui/HomeDispatch.tsx`. After it, drop `images.remotePatterns`.
+- [x] Visual check of the home hero on mobile (iPhone 13 viewport, no horizontal overflow).
+- [x] Durable SMS throttle: Supabase `sms_sends` table (migration `20261028010000`), with an in-memory fallback.
+- [x] Startup integration log (`src/instrumentation.ts`) and `GET /api/health`, which returns `{ ok, leads }` so it doesn't reveal which integrations are set.
+- [x] RU dispatch wizard at `/ru/dispatch/start` and an RU footer. **The RU strings need native review** (`src/features/dispatch/data/start-wizard-copy.ts`, `src/shared/i18n/footer-copy.ts`).
+- [x] HomeDispatch image is local, with honest alt text. It's still a stock placeholder (a gaming desk), so swap it for a real photo of the team. `remotePatterns` stays only as a fallback for the state hero map.
 - [ ] **Placeholder gate.** Once real values exist, switch CI to `check:placeholders --strict`.
 
 ### P2: soon after launch

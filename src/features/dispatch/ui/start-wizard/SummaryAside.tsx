@@ -1,4 +1,5 @@
 import { Card } from "@/shared/ui/Card";
+import { optionLabel, type StartWizardCopy } from "@/features/dispatch/data/start-wizard-copy";
 import type { DispatchData } from "@/features/dispatch/model/dispatch-start";
 
 function SummaryRow({ label, value }: { label: string; value: string }) {
@@ -10,41 +11,43 @@ function SummaryRow({ label, value }: { label: string; value: string }) {
   );
 }
 
-export function SummaryAside({ step, data }: { step: number; data: DispatchData }) {
+export function SummaryAside({ step, data, c }: { step: number; data: DispatchData; c: StartWizardCopy }) {
   const { trucks } = data;
+  const label = (value: string) => optionLabel(c, value);
+  const a = c.aside;
   return (
     <aside className="flex flex-col gap-4 min-[900px]:sticky min-[900px]:top-24 min-[900px]:self-start">
       <div className="flex flex-col gap-2 rounded-lg bg-asphalt p-5 text-offwhite">
         <span className="font-display text-[13px] font-bold tracking-[.14em] text-amber">
-          YOUR PRICE
+          {a.price}
         </span>
         <div className="flex flex-wrap items-baseline gap-2">
           <span className="font-display text-4xl font-extrabold">$XXX</span>
           <span className="text-[15px] text-on-dark">
-            / week × {trucks} truck{trucks === 1 ? "" : "s"}
+            {a.unit(trucks)}
           </span>
         </div>
         <span className="text-[13px] leading-relaxed text-on-dark-muted">
-          Flat, week to week. No percentage and no contract.
+          {a.note}
         </span>
       </div>
 
       <Card className="flex flex-col gap-2.5 p-5">
-        <span className="font-display text-lg font-extrabold uppercase">So far</span>
+        <span className="font-display text-lg font-extrabold uppercase">{a.soFar}</span>
         <div className="flex flex-col gap-2 text-[15px]">
-          <SummaryRow label="Equipment" value={data.trailer} />
-          <SummaryRow label="Trucks" value={String(trucks)} />
-          <SummaryRow label="Drivers" value={data.driver} />
+          <SummaryRow label={a.equipment} value={label(data.trailer)} />
+          <SummaryRow label={a.trucks} value={String(trucks)} />
+          <SummaryRow label={a.drivers} value={label(data.driver)} />
           {step >= 1 && (
             <>
-              <SummaryRow label="Lanes" value={data.lanes.length ? data.lanes.join(", ") : "—"} />
-              <SummaryRow label="Home" value={data.homeTime} />
+              <SummaryRow label={a.lanes} value={data.lanes.length ? data.lanes.map(label).join(", ") : "—"} />
+              <SummaryRow label={a.home} value={label(data.homeTime)} />
             </>
           )}
           {step >= 2 && (
             <SummaryRow
-              label="Authority"
-              value={data.mcNumber.trim() ? data.mcNumber : data.authority}
+              label={a.authority}
+              value={data.mcNumber.trim() ? data.mcNumber : label(data.authority)}
             />
           )}
         </div>

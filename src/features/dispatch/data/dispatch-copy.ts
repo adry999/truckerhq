@@ -39,6 +39,7 @@ export type DispatchCopy = {
   ctaHeading: string;
   ctaBody: string;
   ctaStart: string;
+  startHref: string;
 };
 
 export const DISPATCH_COPY: Record<Locale, DispatchCopy> = {
@@ -131,6 +132,7 @@ export const DISPATCH_COPY: Record<Locale, DispatchCopy> = {
     ctaHeading: "Ready to roll?",
     ctaBody: "Ten minutes on the phone. We can book your first load today.",
     ctaStart: "Start dispatch",
+    startHref: "/dispatch/start",
   },
   RU: {
     heroAlt: "Водитель в кабине на стоянке для дальнобойщиков, рассвет",
@@ -221,5 +223,6 @@ export const DISPATCH_COPY: Record<Locale, DispatchCopy> = {
     ctaHeading: "Готовы стартовать?",
     ctaBody: "Десять минут по телефону. Мы можем забронировать ваш первый груз уже сегодня.",
     ctaStart: "Начать диспетчинг",
+    startHref: "/ru/dispatch/start",
   },
 };

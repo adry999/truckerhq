@@ -4,6 +4,7 @@ import { useReducer, useState, type FormEvent } from "react";
 import { trackEvent } from "@/shared/client/analytics";
 import { postJson } from "@/shared/client/post-json";
 import { SMS_CONSENT_VERSION } from "@/shared/config/sms-consent";
+import { getCopy, type Locale } from "@/shared/i18n/locale";
 import { useStepFocus } from "@/shared/hooks/useStepFocus";
 import { useTurnstile } from "@/shared/hooks/useTurnstile";
 import { FormError, Honeypot } from "@/shared/ui/form-bits";
@@ -13,12 +14,12 @@ import { Turnstile } from "@/shared/ui/Turnstile";
 import {
   CALL_STEP,
   DONE_STEP,
-  STEP_LABELS,
   buildPayload,
   canAdvance,
   dispatchReducer,
-  initialDispatchState,
+  initialDispatchStateFor,
 } from "@/features/dispatch/model/dispatch-start";
+import { START_WIZARD_COPY } from "@/features/dispatch/data/start-wizard-copy";
 import { AuthorityStep } from "./steps/AuthorityStep";
 import { CallStep } from "./steps/CallStep";
 import { LanesStep } from "./steps/LanesStep";
@@ -28,10 +29,14 @@ import { SummaryAside } from "./SummaryAside";
 import { WizardNav } from "./WizardNav";
 
 const STEPS = [TruckStep, LanesStep, AuthorityStep, CallStep];
-const GENERIC_ERROR = "Something went wrong. Try again, or call us directly.";
 
-export function DispatchStartWizard() {
-  const [{ step, data, status, error }, dispatch] = useReducer(dispatchReducer, initialDispatchState);
+export function DispatchStartWizard({ locale = "EN" }: { locale?: Locale }) {
+  const c = getCopy(START_WIZARD_COPY, locale);
+  const [{ step, data, status, error }, dispatch] = useReducer(
+    dispatchReducer,
+    locale,
+    initialDispatchStateFor,
+  );
   const headingRef = useStepFocus(step);
   const [smsConsent, setSmsConsent] = useState(false);
   const turnstile = useTurnstile();
@@ -56,7 +61,7 @@ export function DispatchStartWizard() {
     );
     if (!result.ok) {
       turnstile.reset();
-      dispatch({ type: "submitFailed", message: result.message ?? GENERIC_ERROR });
+      dispatch({ type: "submitFailed", message: result.message ?? c.genericError });
       return;
     }
     trackEvent("dispatch_start_request", { trucks: data.trucks, authority: data.authority });
@@ -70,7 +75,8 @@ export function DispatchStartWizard() {
       <section className="bg-asphalt text-offwhite">
         <div className="mx-auto flex max-w-6xl flex-col gap-5 px-4 pb-10 pt-6 sm:px-6 md:pb-14">
           <StepProgress
-            steps={STEP_LABELS}
+            steps={c.stepLabels}
+            status={c.stepStatus}
             current={step}
             onSelect={(index) => dispatch({ type: "goTo", step: index })}
           />
@@ -81,18 +87,18 @@ export function DispatchStartWizard() {
         <div className="grid gap-6 min-[900px]:grid-cols-3">
           <div className="min-[900px]:col-span-2">
             {step === DONE_STEP ? (
-              <SuccessPanel data={data} headingRef={headingRef} />
+              <SuccessPanel data={data} headingRef={headingRef} c={c} />
             ) : (
               <form
                 onSubmit={onSubmit}
                 className="flex flex-col gap-7 rounded-lg border border-border bg-white p-[22px] sm:p-7"
               >
                 <Honeypot />
-                <Step data={data} dispatch={dispatch} headingRef={headingRef} />
+                <Step data={data} dispatch={dispatch} headingRef={headingRef} c={c} />
                 {step === CALL_STEP && (
                   <>
-                    <SmsConsent checked={smsConsent} onChange={setSmsConsent} />
-                    <Turnstile controller={turnstile} />
+                    <SmsConsent checked={smsConsent} onChange={setSmsConsent} locale={locale} />
+                    <Turnstile controller={turnstile} locale={locale} />
                   </>
                 )}
                 <WizardNav
@@ -100,12 +106,13 @@ export function DispatchStartWizard() {
                   submitting={status === "submitting"}
                   blocked={step === CALL_STEP && !turnstile.ready}
                   onBack={() => dispatch({ type: "back" })}
+                  c={c.nav}
                 />
                 <FormError message={error} />
               </form>
             )}
           </div>
-          <SummaryAside step={step} data={data} />
+          <SummaryAside step={step} data={data} c={c} />
         </div>
       </section>
     </>

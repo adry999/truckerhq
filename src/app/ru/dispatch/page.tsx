@@ -25,7 +25,7 @@ export default function DispatchRuPage() {
       <main id="main-content" tabIndex={-1} className="flex flex-1 flex-col">
         <DispatchPage lang="RU" />
       </main>
-      <SiteFooter />
+      <SiteFooter lang="RU" />
     </div>
   );
 }

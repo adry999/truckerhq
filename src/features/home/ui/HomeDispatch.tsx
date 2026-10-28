@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import dispatchImage from "@/assets/images/home-dispatch.jpg";
 import type { HomeCopy } from "@/features/home/data/home-copy";
 
 export function HomeDispatch({ c, ru }: { c: HomeCopy; ru: boolean }) {
@@ -10,8 +11,10 @@ export function HomeDispatch({ c, ru }: { c: HomeCopy; ru: boolean }) {
         <div className="row-span-2 flex flex-col overflow-hidden rounded-lg bg-green text-offwhite">
           <div className="relative h-[220px]">
             <Image
-              src="https://images.unsplash.com/photo-1631914730551-1cfbcdf6f603?fm=jpg&q=70&w=2000&auto=format&fit=crop"
-              alt={ru ? "Диспетчерская Trucker HQ" : "Trucker HQ dispatch office"}
+              // Stock placeholder: swap for a real photo of the dispatch team.
+              src={dispatchImage}
+              alt={ru ? "Рабочее место с клавиатурой, гарнитурой и монитором" : "Desk with a keyboard, headset and monitor at night"}
+              placeholder="blur"
               fill
               className="object-cover"
               sizes="(min-width: 768px) 60vw, 100vw"

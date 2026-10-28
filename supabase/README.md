@@ -20,3 +20,10 @@ To see old rows that break a limit, run `alter table ... validate constraint <na
 
 Regenerate types and replace the hand-written `LeadTables` in `src/server/db/insert-row.ts`:
 `supabase gen types typescript --project-id <ref> > src/server/db/database.types.ts`.
+
+## SMS throttle
+
+`migrations/20261028010000_sms_sends.sql` adds `sms_sends`, the durable log behind the SMS throttle
+(1 SMS per phone per 10 min, 30 per hour overall). Without the table the app falls back to its
+in-memory throttle. Rows older than an hour are never read; prune them occasionally:
+`delete from public.sms_sends where sent_at < now() - interval '7 days';`

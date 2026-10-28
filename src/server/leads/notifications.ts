@@ -14,7 +14,7 @@ export function smsLanguage(language: string | undefined): "EN" | "RU" {
 }
 
 async function send(phone: string, body: string): Promise<void> {
-  if (!claimSmsSlot(phone)) {
+  if (!(await claimSmsSlot(phone))) {
     console.warn(`[sms] throttled: to=***${phone.slice(-4)}`);
     return;
   }

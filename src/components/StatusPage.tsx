@@ -42,7 +42,7 @@ export default function StatusPage({
         </section>
 
       </main>
-      <SiteFooter />
+      <SiteFooter lang={lang} />
     </div>
   );
 }

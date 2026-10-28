@@ -58,7 +58,7 @@ export function DispatchPricing({ c }: { c: DispatchCopy }) {
                   ))}
                 </ul>
                 <Link
-                  href="/dispatch/start"
+                  href={c.startHref}
                   className={`mt-1.5 flex h-14 items-center justify-center rounded-xl font-display text-xl font-extrabold uppercase tracking-[.05em] ${
                     p.featured
                       ? "bg-amber text-asphalt hover:bg-amber-hover"

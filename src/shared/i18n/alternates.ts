@@ -6,6 +6,7 @@ export const LOCALIZED_ROUTES = [
   { en: "/", ru: "/ru" },
   { en: "/dispatch", ru: "/ru/dispatch" },
   { en: "/jobs", ru: "/ru/jobs" },
+  { en: "/dispatch/start", ru: "/ru/dispatch/start" },
 ] as const;
 
 type Pair = (typeof LOCALIZED_ROUTES)[number];

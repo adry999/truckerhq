@@ -25,12 +25,14 @@ export function Field({
   hint,
   error,
   required,
+  requiredSuffix = " (required)",
   children,
 }: {
   label: string;
   hint?: ReactNode;
   error?: ReactNode;
   required?: boolean;
+  requiredSuffix?: string;
   children: ReactNode;
 }) {
   const id = useId();
@@ -43,7 +45,7 @@ export function Field({
       <label className="flex flex-col gap-1.5">
         <span className="text-sm font-semibold">
           {label}
-          {required && " (required)"}
+          {required && requiredSuffix}
         </span>
         <FieldContext.Provider value={{ describedBy, invalid: Boolean(error) }}>
           {children}
