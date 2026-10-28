@@ -1,6 +1,6 @@
 import { FULL_RECRUITING_FEATURES, JOB_POST_FEATURES } from "@/features/hire-drivers/data/hire-drivers";
 
-export function HireDriversPlans() {
+export function HireDriversPlans({ postHref = "#post" }: { postHref?: string } = {}) {
   return (
     <section className="mx-auto flex w-full max-w-6xl flex-col gap-7 px-4 py-14 sm:px-6 md:py-24">
       <h2 className="font-display text-4xl font-extrabold md:text-5xl">
@@ -25,7 +25,7 @@ export function HireDriversPlans() {
             ))}
           </ul>
           <a
-            href="#post"
+            href={postHref}
             className="flex h-14 items-center justify-center rounded-xl border-2 border-asphalt font-display text-xl font-extrabold uppercase tracking-[.05em] hover:bg-asphalt hover:text-offwhite"
           >
             Post a job
@@ -50,7 +50,7 @@ export function HireDriversPlans() {
               ))}
             </ul>
             <a
-              href="#post"
+              href={postHref}
               className="flex h-14 items-center justify-center rounded-xl bg-amber font-display text-xl font-extrabold uppercase tracking-[.05em] text-asphalt hover:bg-amber-hover"
             >
               Start recruiting
