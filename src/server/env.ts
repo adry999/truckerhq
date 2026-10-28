@@ -1,5 +1,6 @@
 import "server-only";
 import { z } from "zod";
+import { SITE_HOST } from "@/shared/config/site";
 
 // Empty strings (e.g. `FOO=` in .env files) count as unset.
 const optional = <T extends z.ZodType>(schema: T) =>
@@ -14,7 +15,7 @@ const schema = z.object({
   RESEND_API_KEY: optional(z.string()),
   RESEND_FROM: z.preprocess(
     (v) => (v === "" ? undefined : v),
-    z.string().default("Trucker HQ <hello@truckerhq.com>"),
+    z.string().default(`Trucker HQ <hello@${SITE_HOST}>`),
   ),
   LEADS_NOTIFY_TO: optional(z.string()),
   FMCSA_WEBKEY: optional(z.string()),
