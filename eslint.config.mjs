@@ -89,6 +89,8 @@ const eslintConfig = defineConfig([
     "test-results/**",
     "playwright-report/**",
     "coverage/**",
+    // Claude Code worktrees are full repo copies with their own builds.
+    ".claude/worktrees/**",
   ]),
 ]);
 

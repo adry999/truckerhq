@@ -1,12 +1,12 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { articleSchema } from "@/shared/seo/structured-data";
+import { articleSchema, faqSchema } from "@/shared/seo/structured-data";
 import { SITE_URL } from "@/shared/config/site";
 import { buildMetadata } from "@/shared/seo/metadata";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import JsonLd from "@/components/JsonLd";
-import { GUIDES, GuideArticle, findGuide, guideDescription, hasGuideBody } from "@/features/guides";
+import { GUIDES, GuideArticle, findGuide, getGuideBody, guideDescription, hasGuideBody } from "@/features/guides";
 
 export function generateStaticParams() {
   return GUIDES.map((g) => ({ slug: g.slug }));
@@ -50,9 +50,12 @@ export default async function GuideDetailPage({
     image: `${SITE_URL}/opengraph-image`,
   });
 
+  const faqs = getGuideBody(guide)?.faqs ?? [];
+
   return (
     <div className="flex min-h-screen flex-col">
       {hasGuideBody(guide) && <JsonLd data={schema} />}
+      {hasGuideBody(guide) && faqs.length > 0 && <JsonLd data={faqSchema(faqs)} />}
       <SiteHeader />
       <main id="main-content" tabIndex={-1} className="flex flex-1 flex-col">
         <GuideArticle guide={guide} />

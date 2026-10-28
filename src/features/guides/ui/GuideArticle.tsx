@@ -1,11 +1,13 @@
 import Link from "next/link";
 import type { Guide } from "@/features/guides/data/guides";
-import { hasGuideBody, readNextGuides, updatedLabel } from "@/features/guides/model/guides";
+import { getGuideBody, hasGuideBody, isDraftPreview, readNextGuides, updatedLabel } from "@/features/guides/model/guides";
 import { FeaturedGuideBody } from "@/features/guides/ui/FeaturedGuideBody";
+import { GuideBody } from "@/features/guides/ui/GuideBody";
 import { GuideReadNext } from "@/features/guides/ui/GuideReadNext";
 
 export function GuideArticle({ guide }: { guide: Guide }) {
   const readNext = readNextGuides(guide);
+  const body = getGuideBody(guide);
 
   return (
     <section className="mx-auto flex w-full max-w-3xl flex-col gap-5 px-4 py-7 sm:px-6 md:py-10">
@@ -35,7 +37,9 @@ export function GuideArticle({ guide }: { guide: Guide }) {
 
       <div className="aspect-video rounded-lg bg-border" />
 
-      {hasGuideBody(guide) ? (
+      {body && (hasGuideBody(guide) || isDraftPreview(guide)) ? (
+        <GuideBody body={body} draft={body.reviewStatus === "draft"} />
+      ) : hasGuideBody(guide) ? (
         <FeaturedGuideBody />
       ) : (
         <article>
