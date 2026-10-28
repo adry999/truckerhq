@@ -7,6 +7,8 @@ export type StepProps = {
   dispatch: Dispatch<DispatchAction>;
   headingRef: Ref<HTMLHeadingElement>;
   c: StartWizardCopy;
+  /** Server messages keyed by request body field (shown as is, they are English). */
+  fieldErrors: Record<string, string>;
 };
 
 export const STEP_HEADING = "font-display text-3xl font-extrabold uppercase outline-none";

@@ -2,18 +2,16 @@ import { z } from "zod";
 import { notifyApplication } from "@/server/leads/notifications";
 import { findJob } from "@/features/jobs";
 import { createLeadHandler } from "@/server/leads/create-lead-handler";
-import { requiredText, text, usPhone, withChecks } from "@/server/leads/fields";
-
-const MISSING = "Missing required fields";
+import { language, requiredText, text, usPhone, withChecks } from "@/server/leads/fields";
 
 const schema = withChecks(
   z.object({
-    fullName: requiredText(100, MISSING),
-    phone: requiredText(30, MISSING),
-    jobSlug: requiredText(100, MISSING),
+    fullName: requiredText(100),
+    phone: requiredText(30),
+    jobSlug: requiredText(100),
     cdlClass: text(50),
     experience: text(50),
-    language: text(20),
+    language: language(),
     smsConsent: z.boolean().optional(),
     smsConsentVersion: z.string().max(32).optional(),
   }),
@@ -30,7 +28,7 @@ export const POST = createLeadHandler({
     phone: a.phone,
     cdl_class: a.cdlClass,
     experience: a.experience,
-    language: a.language || "EN",
+    language: a.language,
   }),
   notify: (a) => notifyApplication(a.phone, findJob(a.jobSlug)?.title, a.language),
   saveError: "Could not save application",

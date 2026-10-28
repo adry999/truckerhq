@@ -30,7 +30,7 @@ export function HomeHero({ c }: { c: HomeCopy }) {
         <p className="max-w-xl text-lg leading-relaxed text-[#D4D6DA] md:text-xl">{c.heroBody}</p>
 
         <form
-          action="/tools/carrier-lookup"
+          action="/tools/carrier-lookup/search"
           method="get"
           className="mt-2 flex max-w-3xl flex-col gap-1.5 rounded-lg border-[3px] border-amber bg-white p-1.5 sm:flex-row"
         >

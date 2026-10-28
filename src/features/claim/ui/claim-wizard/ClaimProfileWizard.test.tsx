@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { ClaimProfileWizard } from "./ClaimProfileWizard";
 
@@ -79,5 +79,37 @@ describe("ClaimProfileWizard", () => {
     await userEvent.click(screen.getByRole("button", { name: "← Back" }));
     expect(screen.getByRole("heading", { name: "Choose how we reach you" })).toHaveFocus();
     expect(screen.getByRole("radio", { name: /\(•••\) •••-4471/ })).toBeChecked();
+  });
+});
+
+describe("ClaimProfileWizard field errors", () => {
+  it("shows the phone message, focuses the field and clears it on edit", async () => {
+    fetchMock.mockResolvedValue(
+      Response.json({ error: "Check the form", fields: { phone: "Enter a valid US phone number" } }, { status: 400 }),
+    );
+    render(<ClaimProfileWizard />);
+    await reachDetails();
+    await userEvent.type(screen.getByLabelText("Dispatch phone"), "555");
+    await userEvent.click(screen.getByRole("button", { name: "Submit claim" }));
+
+    const phone = screen.getByLabelText("Dispatch phone");
+    await waitFor(() => expect(phone).toHaveAttribute("aria-invalid", "true"));
+    expect(phone).toHaveAccessibleDescription("Enter a valid US phone number");
+    expect(phone).toHaveFocus();
+
+    await userEvent.type(phone, "5");
+    expect(phone).not.toHaveAttribute("aria-invalid");
+  });
+
+  it("goes back to the contact step when the contact method is rejected", async () => {
+    fetchMock.mockResolvedValue(
+      Response.json({ error: "Check the form", fields: { contactMethod: "Pick a contact method" } }, { status: 400 }),
+    );
+    render(<ClaimProfileWizard />);
+    await reachDetails();
+    await userEvent.click(screen.getByRole("button", { name: "Submit claim" }));
+
+    expect(await screen.findByRole("heading", { name: "Choose how we reach you" })).toBeInTheDocument();
+    expect(screen.getByRole("group", { name: "Contact method" })).toHaveAccessibleDescription("Pick a contact method");
   });
 });

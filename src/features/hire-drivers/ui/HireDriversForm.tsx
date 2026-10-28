@@ -39,11 +39,12 @@ export default function HireDriversForm() {
   const [lang, setLang] = useState("Any");
   const turnstile = useTurnstile();
 
-  const { status, error, onSubmit, successRef } = useFormSubmit({
+  const { status, error, fieldErrors, clearFieldError, onSubmit, successRef } = useFormSubmit({
     endpoint: "/api/hire-drivers",
     buildBody: () => ({ ...fields, position: pos, equipment: eq, driverLanguage: lang }),
     onSuccess: () => trackEvent("hire_driver_post", { position: pos }),
     turnstile,
+    knownFields: FIELDS.map((f) => f.key),
   });
 
   if (status === "sent") {
@@ -69,7 +70,7 @@ export default function HireDriversForm() {
       <Honeypot />
       <div className="grid gap-4 sm:grid-cols-2">
         {FIELDS.map((f) => (
-          <Field key={f.key} label={f.label} required>
+          <Field key={f.key} label={f.label} required error={fieldErrors[f.key]}>
             <TextInput
               required
               type={f.type}
@@ -79,7 +80,10 @@ export default function HireDriversForm() {
               pattern={"pattern" in f ? f.pattern : undefined}
               enterKeyHint={"enterKeyHint" in f ? f.enterKeyHint : undefined}
               value={fields[f.key]}
-              onChange={(e) => setFields((prev) => ({ ...prev, [f.key]: e.target.value }))}
+              onChange={(e) => {
+                setFields((prev) => ({ ...prev, [f.key]: e.target.value }));
+                clearFieldError(f.key);
+              }}
               placeholder={f.placeholder}
             />
           </Field>

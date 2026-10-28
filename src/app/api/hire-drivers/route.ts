@@ -1,20 +1,18 @@
 import { z } from "zod";
 import { createLeadHandler } from "@/server/leads/create-lead-handler";
-import { requiredText, text, usPhone, withChecks } from "@/server/leads/fields";
-
-const MISSING = "Missing required fields";
+import { driverLanguage, requiredText, text, usPhone, withChecks } from "@/server/leads/fields";
 
 const schema = withChecks(
   z.object({
-    companyName: requiredText(150, MISSING),
-    dotNumber: requiredText(20, MISSING),
-    contactName: requiredText(100, MISSING),
-    phone: requiredText(30, MISSING),
+    companyName: requiredText(150),
+    dotNumber: requiredText(20),
+    contactName: requiredText(100),
+    phone: requiredText(30),
     pay: text(100),
     homeBase: text(100),
     position: text(100),
     equipment: text(100),
-    driverLanguage: text(50),
+    driverLanguage: driverLanguage(),
   }),
   { phone: usPhone() },
 );

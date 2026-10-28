@@ -30,7 +30,7 @@ export type ProfitResult = {
 
 export type VerdictKey = "good" | "thin" | "losing";
 
-const GOOD_PER_MILE = 0.5;
+export const GOOD_PER_MILE = 0.5;
 
 const VERDICT_LABELS: Record<VerdictKey, string> = {
   good: "GOOD LOAD",

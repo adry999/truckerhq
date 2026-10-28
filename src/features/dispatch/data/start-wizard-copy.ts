@@ -15,7 +15,15 @@ export type StartWizardCopy = {
     fewer: string;
     more: string;
   };
-  lanes: { heading: string; homeBase: string; homeBasePlaceholder: string; legend: string; homeTime: string };
+  lanes: {
+    heading: string;
+    homeBase: string;
+    homeBasePlaceholder: string;
+    legend: string;
+    homeTime: string;
+    /** Shown when no lane is picked. */
+    required: string;
+  };
   authority: {
     heading: string;
     mcLabel: string;
@@ -81,6 +89,7 @@ const EN: StartWizardCopy = {
     homeBasePlaceholder: "City, state",
     legend: "Where do you want to run? (Pick any)",
     homeTime: "How often home?",
+    required: "Pick at least one lane to continue.",
   },
   authority: {
     heading: "Your authority",
@@ -206,6 +215,7 @@ const RU: StartWizardCopy = {
     homeBasePlaceholder: "Город, штат",
     legend: "Где хотите ездить? (можно выбрать несколько)",
     homeTime: "Как часто бываете дома?",
+    required: "Выберите хотя бы один маршрут, чтобы продолжить.",
   },
   authority: {
     heading: "Ваше авторити",

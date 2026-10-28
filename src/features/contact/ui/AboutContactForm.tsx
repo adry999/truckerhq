@@ -26,11 +26,12 @@ export default function AboutContactForm() {
   const [message, setMessage] = useState("");
   const turnstile = useTurnstile();
 
-  const { status, error, onSubmit, successRef } = useFormSubmit({
+  const { status, error, fieldErrors, clearFieldError, onSubmit, successRef } = useFormSubmit({
     endpoint: "/api/contact",
     buildBody: () => ({ topic, name, phone, message, language: lang }),
     onSuccess: () => trackEvent("contact_message", { topic }),
     turnstile,
+    knownFields: ["name", "phone", "message"],
   });
 
   if (status === "sent") {
@@ -66,18 +67,21 @@ export default function AboutContactForm() {
         <Segmented options={TOPICS} value={topic} onChange={setTopic} label="Topic" uppercase />
       </div>
 
-      <Field label="Name" required>
+      <Field label="Name" required error={fieldErrors.name}>
         <TextInput
           required
           name="name"
           autoComplete="name"
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => {
+            setName(e.target.value);
+            clearFieldError("name");
+          }}
           placeholder="Your name"
         />
       </Field>
 
-      <Field label="Phone" required>
+      <Field label="Phone" required error={fieldErrors.phone}>
         <TextInput
           required
           type="tel"
@@ -85,17 +89,23 @@ export default function AboutContactForm() {
           autoComplete="tel"
           inputMode="tel"
           value={phone}
-          onChange={(e) => setPhone(e.target.value)}
+          onChange={(e) => {
+            setPhone(e.target.value);
+            clearFieldError("phone");
+          }}
           placeholder="(XXX) XXX-XXXX"
         />
       </Field>
 
-      <Field label="Anything we should know?">
+      <Field label="Anything we should know?" error={fieldErrors.message}>
         <TextArea
           rows={3}
           maxLength={2000}
           value={message}
-          onChange={(e) => setMessage(e.target.value)}
+          onChange={(e) => {
+            setMessage(e.target.value);
+            clearFieldError("message");
+          }}
           placeholder="Truck, lanes, MC number"
         />
       </Field>

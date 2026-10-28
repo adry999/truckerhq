@@ -11,7 +11,7 @@ import { STEP_HEADING, type StepProps } from "./step-props";
 const GROUP_LEGEND = "font-display text-xl font-extrabold uppercase";
 const CHIP_GRID = "grid grid-cols-2 gap-2.5 sm:grid-cols-3";
 
-export function DetailsStep({ data, dispatch, headingRef }: StepProps) {
+export function DetailsStep({ data, dispatch, headingRef, fieldErrors }: StepProps) {
   const toggle = (field: ToggleField, value: string) => dispatch({ type: "toggle", field, value });
 
   return (
@@ -20,7 +20,7 @@ export function DetailsStep({ data, dispatch, headingRef }: StepProps) {
         What brokers and drivers should see
       </h2>
 
-      <Field label="Dispatch phone">
+      <Field label="Dispatch phone" error={fieldErrors.phone}>
         <TextInput
           value={data.phone}
           onChange={(e) => dispatch({ type: "setPhone", value: e.target.value })}
@@ -32,7 +32,11 @@ export function DetailsStep({ data, dispatch, headingRef }: StepProps) {
         />
       </Field>
 
-      <ChoiceGroup legend={<span className={GROUP_LEGEND}>Equipment</span>} className={CHIP_GRID}>
+      <ChoiceGroup
+        legend={<span className={GROUP_LEGEND}>Equipment</span>}
+        className={CHIP_GRID}
+        error={fieldErrors.equipment}
+      >
         {EQUIPMENT_OPTIONS.map((option) => (
           <CheckCard
             key={option}
@@ -45,7 +49,11 @@ export function DetailsStep({ data, dispatch, headingRef }: StepProps) {
         ))}
       </ChoiceGroup>
 
-      <ChoiceGroup legend={<span className={GROUP_LEGEND}>Lanes you run</span>} className={CHIP_GRID}>
+      <ChoiceGroup
+        legend={<span className={GROUP_LEGEND}>Lanes you run</span>}
+        className={CHIP_GRID}
+        error={fieldErrors.lanes}
+      >
         {LANE_OPTIONS.map((option) => (
           <CheckCard
             key={option}
@@ -58,7 +66,7 @@ export function DetailsStep({ data, dispatch, headingRef }: StepProps) {
         ))}
       </ChoiceGroup>
 
-      <ChoiceGroup legend={<span className={GROUP_LEGEND}>Also show</span>}>
+      <ChoiceGroup legend={<span className={GROUP_LEGEND}>Also show</span>} error={fieldErrors.alsoShow}>
         {ALSO_SHOW.map(({ id, label }) => (
           <CheckCard
             key={id}

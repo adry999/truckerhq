@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { SMS_CONSENT_VERSION } from "@/shared/config/sms-consent";
 import { DispatchStartWizard } from "./DispatchStartWizard";
@@ -138,6 +138,85 @@ describe("DispatchStartWizard", () => {
       "Something went wrong. Try again, or call us directly.",
     );
   });
+});
+
+describe("DispatchStartWizard lanes requirement", () => {
+  it("blocks Next with a hint until a lane is picked", async () => {
+    render(<DispatchStartWizard />);
+    await next();
+    await userEvent.click(screen.getByRole("checkbox", { name: "Midwest" }));
+    expect(screen.getByText("Pick at least one lane to continue.")).toHaveAttribute("role", "alert");
+    await next();
+    expect(screen.getByRole("heading", { name: "Lanes and home time" })).toBeInTheDocument();
+    await userEvent.click(screen.getByRole("checkbox", { name: "Anywhere" }));
+    expect(screen.queryByText("Pick at least one lane to continue.")).not.toBeInTheDocument();
+    await next();
+    expect(screen.getByRole("heading", { name: "Your authority" })).toBeInTheDocument();
+  });
+
+  it("shows the Russian hint in the Russian wizard", async () => {
+    render(<DispatchStartWizard locale="RU" />);
+    await userEvent.click(screen.getByRole("button", { name: "Далее" }));
+    await userEvent.click(screen.getByRole("checkbox", { name: "Мидвест" }));
+    expect(screen.getByText("Выберите хотя бы один маршрут, чтобы продолжить.")).toHaveAttribute("role", "alert");
+  });
+});
+
+describe("DispatchStartWizard field errors", () => {
+  async function submitCallStep() {
+    await userEvent.type(screen.getByLabelText("Name (required)"), "Test Driver");
+    await userEvent.type(screen.getByLabelText("Phone (required)"), "555");
+    await userEvent.click(screen.getByRole("checkbox", { name: /I agree to receive text messages/ }));
+    await userEvent.click(screen.getByRole("button", { name: "Request my call" }));
+  }
+
+  it("shows a field message on the call step and clears it when the field is edited", async () => {
+    fetchMock.mockResolvedValue(
+      Response.json({ error: "Check the form", fields: { phone: "Enter a valid US phone number" } }, { status: 400 }),
+    );
+    render(<DispatchStartWizard />);
+    await reachCallStep();
+    await submitCallStep();
+
+    const phone = screen.getByLabelText("Phone (required)");
+    await waitFor(() => expect(phone).toHaveAttribute("aria-invalid", "true"));
+    expect(phone).toHaveAccessibleDescription("Enter a valid US phone number");
+    expect(phone).toHaveFocus();
+    expect(screen.queryByText("Check the form")).not.toBeInTheDocument();
+
+    await userEvent.type(phone, "5");
+    expect(phone).not.toHaveAttribute("aria-invalid");
+    expect(screen.queryByText("Enter a valid US phone number")).not.toBeInTheDocument();
+  }, 15_000);
+
+  it("jumps back to the earlier step that owns the failing field and focuses it", async () => {
+    fetchMock.mockResolvedValue(
+      Response.json({ error: "Check the form", fields: { mcNumber: "Enter a valid MC number" } }, { status: 400 }),
+    );
+    render(<DispatchStartWizard />);
+    await next();
+    await next();
+    await userEvent.type(screen.getByLabelText("MC/DOT number"), "abc");
+    await next();
+    await submitCallStep();
+
+    const mc = await screen.findByLabelText("MC/DOT number");
+    expect(screen.getByRole("heading", { name: "Your authority" })).toBeInTheDocument();
+    await waitFor(() => expect(mc).toHaveAttribute("aria-invalid", "true"));
+    expect(mc).toHaveAccessibleDescription(expect.stringContaining("Enter a valid MC number"));
+    expect(mc).toHaveFocus();
+  }, 15_000);
+
+  it("keeps the Russian generic text for failures without a usable message", async () => {
+    fetchMock.mockRejectedValue(new TypeError("offline"));
+    render(<DispatchStartWizard locale="RU" />);
+    for (let i = 0; i < 3; i++) await userEvent.click(screen.getByRole("button", { name: "Далее" }));
+    await userEvent.type(screen.getByLabelText("Имя (обязательно)"), "Тест");
+    await userEvent.type(screen.getByLabelText("Телефон (обязательно)"), "555");
+    await userEvent.click(screen.getByRole("checkbox", { name: /Я согласен получать SMS/ }));
+    await userEvent.click(screen.getByRole("button", { name: "Заказать звонок" }));
+    expect(await screen.findByRole("alert")).toHaveTextContent("Что-то пошло не так.");
+  }, 15_000);
 });
 
 describe("DispatchStartWizard in Russian", () => {

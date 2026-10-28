@@ -4,13 +4,13 @@ import { Field, TextInput } from "@/shared/ui/Field";
 import { HOME_TIME_OPTIONS, REGIONS, setField } from "@/features/dispatch/model/dispatch-start";
 import { SEGMENT_BUTTON, STEP_HEADING, type StepProps } from "../step-props";
 
-export function LanesStep({ data, dispatch, headingRef, c }: StepProps) {
+export function LanesStep({ data, dispatch, headingRef, c, fieldErrors }: StepProps) {
   return (
     <div className="flex flex-col gap-7">
       <h2 ref={headingRef} tabIndex={-1} className={STEP_HEADING}>
         {c.lanes.heading}
       </h2>
-      <Field label={c.lanes.homeBase}>
+      <Field label={c.lanes.homeBase} error={fieldErrors.homeBase}>
         <TextInput
           value={data.homeBase}
           onChange={(e) => dispatch(setField("homeBase", e.target.value))}
@@ -22,6 +22,7 @@ export function LanesStep({ data, dispatch, headingRef, c }: StepProps) {
       <ChoiceGroup
         legend={c.lanes.legend}
         className="grid grid-cols-2 gap-2.5 sm:grid-cols-3"
+        error={data.lanes.length === 0 ? c.lanes.required : fieldErrors.lanes}
       >
         {REGIONS.map((region) => (
           <CheckCard

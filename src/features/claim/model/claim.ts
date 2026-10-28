@@ -12,6 +12,25 @@ export const STEPS = ["Contact", "Details", "Done"];
 export const DETAILS_STEP = 1;
 export const DONE_STEP = 2;
 
+/** Request body key -> wizard step that shows it, so a server error can send the visitor back. */
+const FIELD_STEP: Record<string, number> = {
+  contactMethod: 0,
+  phone: DETAILS_STEP,
+  equipment: DETAILS_STEP,
+  lanes: DETAILS_STEP,
+  alsoShow: DETAILS_STEP,
+};
+
+export function isClaimField(key: string): boolean {
+  return key in FIELD_STEP;
+}
+
+/** Earliest step holding one of the failing fields, or null when none belongs to the wizard. */
+export function firstErrorStep(fields: Record<string, string>): number | null {
+  const steps = Object.keys(fields).flatMap((key) => (key in FIELD_STEP ? [FIELD_STEP[key]] : []));
+  return steps.length > 0 ? Math.min(...steps) : null;
+}
+
 export type ContactMethod = "phone" | "email";
 
 export const CONTACT_METHODS: { id: ContactMethod; label: string; masked: string }[] = [
@@ -58,8 +77,9 @@ export type ClaimAction =
   | { type: "toggle"; field: ToggleField; value: string }
   | { type: "next" }
   | { type: "back" }
+  | { type: "goTo"; step: number }
   | { type: "submitStart" }
-  | { type: "submitFailed"; message: string }
+  | { type: "submitFailed"; message: string | null }
   | { type: "submitted" };
 
 export const initialClaimState: ClaimState = {
@@ -90,6 +110,8 @@ export function claimReducer(state: ClaimState, action: ClaimAction): ClaimState
       return { ...state, step: state.step + 1 };
     case "back":
       return { ...state, step: state.step - 1 };
+    case "goTo":
+      return { ...state, step: action.step };
     case "submitStart":
       return { ...state, status: "submitting", error: null };
     case "submitFailed":

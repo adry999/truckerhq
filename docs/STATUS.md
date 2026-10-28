@@ -82,12 +82,12 @@ Go-live steps: follow `docs/launch-runbook.md` top to bottom.
 
 ### P2: soon after launch
 
-- [ ] Enforce CSP: move from Report-Only to enforcing, after a clean week of reports.
-- [ ] Carrier lookup landing is still dynamic, so Cloudflare can't cache it. Consider `cacheComponents` (`src/app/(en)/tools/carrier-lookup/page.tsx`).
-- [ ] Map API validation errors to individual fields. Today the API returns one message string.
-- [ ] Normalize lead `language` values across tables ("English" vs "EN" vs "Any"). Needs a migration.
-- [ ] The dispatch wizard allows empty Lanes (`canAdvance` in the dispatch model).
-- [ ] Drop the unused `count` / `jobs` fields from the jobs types and data.
+- [ ] Enforce CSP: move from Report-Only to enforcing, after a clean week of reports. Reports are logged by `POST /api/csp-report` as `[csp-report]` lines.
+- [x] Carrier lookup landing is static. Searches go to `/tools/carrier-lookup/search` (noindex), and old `?q=` links 307-redirect there.
+- [x] Field-level API errors (`{ error, fields }`) shown inline. Wizards jump back to the step that has the error.
+- [x] Lead `language` normalized to EN/RU (driver_language EN/RU/ANY), with migration `20261028020000`. **Deploy the app before applying it.**
+- [x] The dispatch wizard requires at least one lane.
+- [x] Dropped the unused `count` / `jobs` fields from the jobs data.
 - [ ] Error monitoring (Sentry) and an uptime monitor.
 
 ### SEO / content (highest growth impact, needs client input)
@@ -95,7 +95,7 @@ Go-live steps: follow `docs/launch-runbook.md` top to bottom.
 - [ ] Write the 10 stub guides, answer-first. Flip `hasGuideBody` per guide.
 - [ ] Real per-state FMCSA census stats. Then set `STATE_DATA_IS_SAMPLE = false` to index the 50 state pages.
 - [ ] Real job listings. City pages index automatically once there are enough non-sample jobs.
-- [ ] Prose, formula, worked example and FAQ around the tools (profit per mile, lookup).
+- [x] Prose, formula, worked example and FAQPage on profit-per-mile and the carrier lookup. The numbers come from the model code.
 - [ ] New pages: `/pricing`, `/dispatch/new-authority`, `/dispatch/{dry-van,reefer,flatbed,…}`, `/jobs/russian-speaking`, `/tools/broker-check`.
 - [ ] RU versions of tools and guides. Author pages (E-E-A-T).
 - [ ] Organization `sameAs` once social and Google Business Profile URLs exist.

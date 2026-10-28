@@ -2,10 +2,11 @@ import type { MetadataRoute } from "next";
 import { INDEXABLE, SITE_URL } from "@/shared/config/site";
 
 // Filtered listings are crawlable and canonicalize to the base URL; only
-// carrier lookup is blocked, since each ?q= hits the live FMCSA API.
+// carrier lookup searches are blocked, since each one hits the live FMCSA API.
+// The old ?q= URLs stay listed in case a crawler still holds them.
 // /dispatch/start and /claim stay crawlable: their noindex meta is only
 // seen if Google may fetch them.
-const DISALLOW = ["/tools/carrier-lookup?"];
+const DISALLOW = ["/tools/carrier-lookup/search", "/tools/carrier-lookup?"];
 
 // Search and retrieval crawlers that cite pages in answers, plus the opt-in
 // tokens for Google and Apple AI features. A named group replaces the "*"

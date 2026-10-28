@@ -8,6 +8,8 @@ import {
   textList,
   dotNumber,
   withChecks,
+  language,
+  driverLanguage,
 } from "./fields";
 
 describe("text", () => {
@@ -97,5 +99,45 @@ describe("withChecks", () => {
     expect(schema.safeParse({ a: "x", b: "y", phone: "bad" }).error?.issues[0]?.message).toBe(
       "Enter a valid US phone number",
     );
+  });
+});
+
+describe("requiredText default message", () => {
+  it("uses a human-readable message when none is given", () => {
+    expect(requiredText(5).safeParse("").error?.issues[0]?.message).toBe("This field is required");
+  });
+});
+
+describe("language", () => {
+  it.each([
+    ["EN", "EN"],
+    ["en", "EN"],
+    ["English", "EN"],
+    ["Английский", "EN"],
+    ["RU", "RU"],
+    ["ru", "RU"],
+    ["Russian", "RU"],
+    ["Русский", "RU"],
+    ["", "EN"],
+    ["klingon", "EN"],
+    [undefined, "EN"],
+    [42, "EN"],
+  ])("maps %j to %s", (input, out) => {
+    expect(language().parse(input)).toBe(out);
+  });
+});
+
+describe("driverLanguage", () => {
+  it.each([
+    ["Any", "ANY"],
+    ["any", "ANY"],
+    ["English", "EN"],
+    ["Russian", "RU"],
+    ["русский", "RU"],
+    ["", "ANY"],
+    ["klingon", "ANY"],
+    [undefined, "ANY"],
+  ])("maps %j to %s", (input, out) => {
+    expect(driverLanguage().parse(input)).toBe(out);
   });
 });

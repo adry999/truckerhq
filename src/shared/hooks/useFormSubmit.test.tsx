@@ -121,3 +121,44 @@ describe("useFormSubmit success focus", () => {
     expect(await screen.findByRole("heading", { name: "Thanks" })).toHaveFocus();
   });
 });
+
+function FieldForm({ knownFields }: { knownFields?: readonly string[] }) {
+  const { error, fieldErrors, clearFieldError, onSubmit } = useFormSubmit({
+    endpoint: "/api/test",
+    buildBody: () => ({ phone: "1" }),
+    knownFields,
+  });
+  return (
+    <form onSubmit={onSubmit}>
+      <input
+        aria-label="phone"
+        aria-invalid={fieldErrors.phone ? true : undefined}
+        onChange={() => clearFieldError("phone")}
+      />
+      <p data-testid="field">{fieldErrors.phone}</p>
+      <p data-testid="global">{error}</p>
+      <button type="submit">Go</button>
+    </form>
+  );
+}
+
+describe("useFormSubmit field errors", () => {
+  it("exposes field messages, drops the global one, focuses the field and clears on edit", async () => {
+    stubFetch(async () => Response.json({ error: "Check the form", fields: { phone: "Bad phone" } }, { status: 400 }));
+    render(<FieldForm />);
+    await userEvent.click(screen.getByRole("button", { name: "Go" }));
+    expect(await screen.findByText("Bad phone")).toBeInTheDocument();
+    expect(screen.getByTestId("global")).toBeEmptyDOMElement();
+    expect(screen.getByLabelText("phone")).toHaveFocus();
+    await userEvent.type(screen.getByLabelText("phone"), "x");
+    expect(screen.getByTestId("field")).toBeEmptyDOMElement();
+  });
+
+  it("keeps the global message when the failing field is not rendered", async () => {
+    stubFetch(async () => Response.json({ error: "Check the form", fields: { phone: "Bad phone" } }, { status: 400 }));
+    render(<FieldForm knownFields={["name"]} />);
+    await userEvent.click(screen.getByRole("button", { name: "Go" }));
+    expect(await screen.findByText("Check the form")).toBeInTheDocument();
+    expect(screen.getByTestId("field")).toBeEmptyDOMElement();
+  });
+});

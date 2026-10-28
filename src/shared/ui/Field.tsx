@@ -26,6 +26,7 @@ export function Field({
   error,
   required,
   requiredSuffix = " (required)",
+  labelClassName = "text-sm font-semibold",
   children,
 }: {
   label: string;
@@ -33,6 +34,7 @@ export function Field({
   error?: ReactNode;
   required?: boolean;
   requiredSuffix?: string;
+  labelClassName?: string;
   children: ReactNode;
 }) {
   const id = useId();
@@ -43,7 +45,7 @@ export function Field({
   return (
     <div className="flex flex-col gap-1.5">
       <label className="flex flex-col gap-1.5">
-        <span className="text-sm font-semibold">
+        <span className={labelClassName}>
           {label}
           {required && requiredSuffix}
         </span>

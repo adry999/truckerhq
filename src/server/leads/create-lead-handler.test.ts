@@ -122,9 +122,15 @@ describe("createLeadHandler", () => {
     const { handler, insertRow } = setup();
     const res = await handler(post(JSON.stringify({ phone: "bad" })));
     expect(res.status).toBe(400);
-    expect(await res.json()).toEqual({ error: "Missing name" });
+    expect(await res.json()).toEqual({
+      error: "Missing name",
+      fields: { name: "Missing name" },
+    });
     const res2 = await handler(post(JSON.stringify({ ...valid, phone: "555-0123" })));
-    expect(await res2.json()).toEqual({ error: "Enter a valid US phone number" });
+    expect(await res2.json()).toEqual({
+      error: "Enter a valid US phone number",
+      fields: { phone: "Enter a valid US phone number" },
+    });
     expect(insertRow).not.toHaveBeenCalled();
   });
 

@@ -3,8 +3,11 @@ import {
   buildPayload,
   canAdvance,
   dispatchReducer,
+  firstErrorStep,
   initialDispatchState,
   initialDispatchStateFor,
+  isDispatchField,
+  payloadKey,
   setField,
 } from "./dispatch-start";
 
@@ -47,6 +50,11 @@ describe("canAdvance", () => {
     expect([0, 1, 2].every((step) => canAdvance(step, data))).toBe(true);
   });
 
+  it("requires at least one lane on the lanes step", () => {
+    expect(canAdvance(1, { ...data, lanes: [] })).toBe(false);
+    expect(canAdvance(1, { ...data, lanes: ["Anywhere"] })).toBe(true);
+  });
+
   it("requires name and phone on the call step", () => {
     expect(canAdvance(3, data)).toBe(false);
     expect(canAdvance(3, { ...data, name: "Ion" })).toBe(false);
@@ -78,5 +86,21 @@ describe("initialDispatchStateFor", () => {
   it("defaults the call language to the page language", () => {
     expect(initialDispatchStateFor("EN").data.language).toBe("English");
     expect(initialDispatchStateFor("RU").data.language).toBe("Русский");
+  });
+});
+
+describe("server field errors", () => {
+  it("maps request keys to the earliest wizard step", () => {
+    expect(firstErrorStep({ phone: "x", mcNumber: "y" })).toBe(2);
+    expect(firstErrorStep({ lanes: "x", name: "y" })).toBe(1);
+    expect(firstErrorStep({ smsConsent: "x" })).toBeNull();
+    expect(isDispatchField("homeBase")).toBe(true);
+    expect(isDispatchField("website")).toBe(false);
+  });
+
+  it("names wizard fields by the key the API receives", () => {
+    expect(payloadKey("trailer")).toBe("trailerType");
+    expect(payloadKey("driver")).toBe("driverType");
+    expect(payloadKey("mcNumber")).toBe("mcNumber");
   });
 });

@@ -10,7 +10,7 @@ describe("robots", () => {
   it("keeps noindex pages crawlable and blocks only the live carrier lookup", () => {
     const rule = rules().find((r) => r.userAgent === "*");
     expect(rule?.allow).toBe("/");
-    expect(rule?.disallow).toEqual(["/tools/carrier-lookup?"]);
+    expect(rule?.disallow).toEqual(["/tools/carrier-lookup/search", "/tools/carrier-lookup?"]);
   });
 
   it.each([
@@ -28,6 +28,6 @@ describe("robots", () => {
   ])("gives %s its own group that allows the site and repeats the lookup disallow", (bot) => {
     const rule = rules().find((r) => r.userAgent === bot);
     expect(rule?.allow).toBe("/");
-    expect(rule?.disallow).toEqual(["/tools/carrier-lookup?"]);
+    expect(rule?.disallow).toEqual(["/tools/carrier-lookup/search", "/tools/carrier-lookup?"]);
   });
 });

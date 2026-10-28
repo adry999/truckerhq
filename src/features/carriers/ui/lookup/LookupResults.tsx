@@ -2,6 +2,7 @@ import Link from "next/link";
 import { CarrierResultRow } from "@/features/carriers/ui/lookup/CarrierResultRow";
 import {
   LOOKUP_PATH,
+  SEARCH_PATH,
   STATUSES,
   countByStatus,
   dataSourceNote,
@@ -29,7 +30,7 @@ export function LookupResults({
       <section className="bg-asphalt">
         <div className="mx-auto max-w-6xl px-4 py-5 sm:px-6">
           <form
-            action={LOOKUP_PATH}
+            action={SEARCH_PATH}
             className="flex max-w-2xl gap-1.5 rounded-lg border-2 border-amber bg-white p-1.5"
           >
             <input

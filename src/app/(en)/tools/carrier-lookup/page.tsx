@@ -1,10 +1,10 @@
-import { Suspense } from "react";
 import type { Metadata } from "next";
 import { buildMetadata } from "@/shared/seo/metadata";
+import { faqSchema } from "@/shared/seo/structured-data";
+import JsonLd from "@/components/JsonLd";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import { LookupLanding } from "@/features/carriers";
-import { LookupSearch, LookupSearchFallback } from "./lookup-search";
+import { LOOKUP_FAQ, LookupLanding } from "@/features/carriers";
 
 export const metadata: Metadata = buildMetadata({
   title: "Carrier Lookup by DOT or MC Number",
@@ -14,37 +14,15 @@ export const metadata: Metadata = buildMetadata({
   ogImage: false,
 });
 
-const MAX_QUERY_LENGTH = 100;
-
-type Param = string | string[] | undefined;
-
-// A repeated key (?q=a&q=b) arrives as an array; take the first.
-function firstParam(value: Param): string | undefined {
-  return Array.isArray(value) ? value[0] : value;
-}
-
-export default async function CarrierLookupPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ q?: Param; status?: Param; mode?: Param }>;
-}) {
-  const params = await searchParams;
-  const status = firstParam(params.status) ?? "All";
-  const mode = firstParam(params.mode) ?? "All";
-  const rawQuery = firstParam(params.q);
-  const query = rawQuery?.slice(0, MAX_QUERY_LENGTH);
-
+// Static on purpose: reads no request data, so the CDN can cache the page.
+// Searches go to /tools/carrier-lookup/search, which is dynamic.
+export default function CarrierLookupPage() {
   return (
     <div className="flex min-h-screen flex-col">
       <SiteHeader />
       <main id="main-content" tabIndex={-1} className="flex flex-1 flex-col">
-        {query === undefined ? (
-          <LookupLanding mode={mode} />
-        ) : (
-          <Suspense key={`${query}|${status}`} fallback={<LookupSearchFallback query={query} />}>
-            <LookupSearch query={query} status={status} />
-          </Suspense>
-        )}
+        <JsonLd data={faqSchema([...LOOKUP_FAQ])} />
+        <LookupLanding />
       </main>
       <SiteFooter />
     </div>

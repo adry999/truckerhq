@@ -1,9 +1,7 @@
 import { z } from "zod";
 import { notifyDispatchStart } from "@/server/leads/notifications";
 import { createLeadHandler } from "@/server/leads/create-lead-handler";
-import { anyInput, requiredText, text, textList, usPhone, withChecks } from "@/server/leads/fields";
-
-const MISSING = "Missing name or phone";
+import { anyInput, language, requiredText, text, textList, usPhone, withChecks } from "@/server/leads/fields";
 
 const trucks = anyInput.transform((value) => {
   const n = Number(value);
@@ -12,8 +10,8 @@ const trucks = anyInput.transform((value) => {
 
 const schema = withChecks(
   z.object({
-    name: requiredText(100, MISSING),
-    phone: requiredText(30, MISSING),
+    name: requiredText(100),
+    phone: requiredText(30),
     trailerType: text(60),
     trucks,
     driverType: text(60),
@@ -23,7 +21,7 @@ const schema = withChecks(
     authority: text(60),
     mcNumber: text(20),
     bestTime: text(60),
-    language: text(20),
+    language: language(),
     smsConsent: z.boolean().optional(),
     smsConsentVersion: z.string().max(32).optional(),
   }),
@@ -46,7 +44,7 @@ export const POST = createLeadHandler({
     name: d.name,
     phone: d.phone,
     best_time: d.bestTime,
-    language: d.language || "English",
+    language: d.language,
   }),
   notify: (d) => notifyDispatchStart(d.phone, d.language),
   saveError: "Could not save request",

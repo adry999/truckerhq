@@ -19,23 +19,36 @@ describe("postJson", () => {
       ok: false,
       status: 400,
       message: "Enter a valid US phone number",
+      fields: {},
+    });
+  });
+
+  it("returns per-field messages from a 400 and drops non-string values", async () => {
+    stubFetch(async () =>
+      Response.json({ error: "Check the form", fields: { phone: "Enter a valid phone", dot: 5, name: "" } }, { status: 400 }),
+    );
+    expect(await postJson("/api/x", {})).toEqual({
+      ok: false,
+      status: 400,
+      message: "Check the form",
+      fields: { phone: "Enter a valid phone" },
     });
   });
 
   it("hides the message on a 5xx so the UI shows generic copy", async () => {
     stubFetch(async () => Response.json({ error: "upstream exploded" }, { status: 502 }));
-    expect(await postJson("/api/x", {})).toEqual({ ok: false, status: 502, message: null });
+    expect(await postJson("/api/x", {})).toEqual({ ok: false, status: 502, message: null, fields: {} });
   });
 
   it("reports a null status when the network fails", async () => {
     stubFetch(async () => {
       throw new TypeError("Failed to fetch");
     });
-    expect(await postJson("/api/x", {})).toEqual({ ok: false, status: null, message: null });
+    expect(await postJson("/api/x", {})).toEqual({ ok: false, status: null, message: null, fields: {} });
   });
 
   it("tolerates a non-JSON error body", async () => {
     stubFetch(async () => new Response("nope", { status: 429 }));
-    expect(await postJson("/api/x", {})).toEqual({ ok: false, status: 429, message: null });
+    expect(await postJson("/api/x", {})).toEqual({ ok: false, status: 429, message: null, fields: {} });
   });
 });

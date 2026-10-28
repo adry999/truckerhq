@@ -3,6 +3,7 @@
 import { useReducer, type FormEvent } from "react";
 import { trackEvent } from "@/shared/client/analytics";
 import { postJson } from "@/shared/client/post-json";
+import { splitFieldErrors, useFieldErrors, useFocusInvalid } from "@/shared/hooks/useFieldErrors";
 import { useStepFocus } from "@/shared/hooks/useStepFocus";
 import { useTurnstile } from "@/shared/hooks/useTurnstile";
 import { Button } from "@/shared/ui/Button";
@@ -11,6 +12,7 @@ import { Notice } from "@/shared/ui/Notice";
 import { StepProgress } from "@/shared/ui/StepProgress";
 import { Turnstile } from "@/shared/ui/Turnstile";
 import {
+  type ClaimAction,
   CARRIER,
   DETAILS_STEP,
   DONE_STEP,
@@ -18,7 +20,9 @@ import {
   buildPayload,
   canAdvance,
   claimReducer,
+  firstErrorStep,
   initialClaimState,
+  isClaimField,
 } from "@/features/claim/model/claim";
 import { ContactStep } from "./ContactStep";
 import { DetailsStep } from "./DetailsStep";
@@ -32,6 +36,16 @@ export function ClaimProfileWizard() {
   const headingRef = useStepFocus(step);
   const submitting = status === "submitting";
   const turnstile = useTurnstile();
+  const { fieldErrors, setFieldErrors, clearFieldError, clearFieldErrors } = useFieldErrors();
+  const { formRef, requestFocus } = useFocusInvalid();
+
+  /** Editing a field drops the server error shown for it. */
+  function dispatchEdit(action: ClaimAction) {
+    if (action.type === "setContactMethod") clearFieldError("contactMethod");
+    else if (action.type === "setPhone") clearFieldError("phone");
+    else if (action.type === "toggle") clearFieldError(action.field);
+    dispatch(action);
+  }
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -40,6 +54,7 @@ export function ClaimProfileWizard() {
       return;
     }
     const website = new FormData(e.currentTarget).get("website");
+    clearFieldErrors();
     dispatch({ type: "submitStart" });
     const result = await postJson(
       "/api/claim",
@@ -50,7 +65,15 @@ export function ClaimProfileWizard() {
     );
     if (!result.ok) {
       turnstile.reset();
-      dispatch({ type: "submitFailed", message: result.message ?? GENERIC_ERROR });
+      const { matched, hasUnmatched } = splitFieldErrors(result.fields, isClaimField);
+      const errorStep = firstErrorStep(matched);
+      if (errorStep !== null) {
+        setFieldErrors(matched);
+        requestFocus();
+        if (errorStep < step) dispatch({ type: "goTo", step: errorStep });
+      }
+      const message = errorStep !== null && !hasUnmatched ? null : (result.message ?? GENERIC_ERROR);
+      dispatch({ type: "submitFailed", message });
       return;
     }
     trackEvent("carrier_profile_claimed", { dot: CARRIER.dot });
@@ -71,13 +94,26 @@ export function ClaimProfileWizard() {
             Demo: the carrier shown is a sample. Ownership claims are verified manually by phone.
           </Notice>
           <form
+            ref={formRef}
             onSubmit={onSubmit}
             className="flex flex-col gap-5 rounded-lg border border-border bg-white p-[22px]"
           >
             <Honeypot />
-            {step === 0 && <ContactStep data={data} dispatch={dispatch} headingRef={headingRef} />}
+            {step === 0 && (
+              <ContactStep
+                data={data}
+                dispatch={dispatchEdit}
+                headingRef={headingRef}
+                fieldErrors={fieldErrors}
+              />
+            )}
             {step === DETAILS_STEP && (
-              <DetailsStep data={data} dispatch={dispatch} headingRef={headingRef} />
+              <DetailsStep
+                data={data}
+                dispatch={dispatchEdit}
+                headingRef={headingRef}
+                fieldErrors={fieldErrors}
+              />
             )}
             {step === DONE_STEP && <DoneStep headingRef={headingRef} />}
 

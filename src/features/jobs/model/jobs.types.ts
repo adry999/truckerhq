@@ -48,7 +48,7 @@ export type CityContentEntry = {
   heroIntro: string;
   stats: { big: string; small: string }[];
   jobs: CityJob[];
-  hiringCarriers: { name: string; score: number; jobs: number }[];
-  nearbyCities: { name: string; count: number }[];
+  hiringCarriers: { name: string; score: number }[];
+  nearbyCities: { name: string }[];
   faqs: { q: string; a: string }[];
 };

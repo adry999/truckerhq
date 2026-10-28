@@ -27,3 +27,13 @@ Regenerate types and replace the hand-written `LeadTables` in `src/server/db/ins
 (1 SMS per phone per 10 min, 30 per hour overall). Without the table the app falls back to its
 in-memory throttle. Rows older than an hour are never read; prune them occasionally:
 `delete from public.sms_sends where sent_at < now() - interval '7 days';`
+
+## Language normalization
+
+`migrations/20261028020000_normalize_language.sql` rewrites existing `language` values to `EN`/`RU`
+(`hire_driver_requests.driver_language` to `EN`/`RU`/`ANY`; anything unrecognized becomes `EN`/`ANY`),
+sets matching column defaults, then adds `*_language_check` CHECK constraints (`NOT VALID`, then
+`VALIDATE`). The API normalizes the same way (`language()` / `driverLanguage()` in
+`src/server/leads/fields.ts`: english/англ* -> EN, russian/рус* -> RU, unknown driver language -> ANY),
+so clients may keep sending "English", "Русский" etc. Deploy the app change before or together with
+the migration, otherwise an old build inserting "English" hits the CHECK. Safe to rerun.

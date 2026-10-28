@@ -4,7 +4,6 @@ import {
   dataSourceNote,
   filterByStatus,
   matchSampleCarriers,
-  modeHref,
   normalizeQuery,
   searchPlaceholder,
   statusHref,
@@ -42,14 +41,9 @@ describe("filterByStatus", () => {
 });
 
 describe("lookup links", () => {
-  it("modeHref omits the mode for All", () => {
-    expect(modeHref("All")).toBe("/tools/carrier-lookup");
-    expect(modeHref("DOT")).toBe("/tools/carrier-lookup?mode=DOT");
-  });
-
   it("statusHref keeps the query and omits the status for All", () => {
-    expect(statusHref("freight", "All")).toBe("/tools/carrier-lookup?q=freight");
-    expect(statusHref("freight", "ACTIVE")).toBe("/tools/carrier-lookup?q=freight&status=ACTIVE");
+    expect(statusHref("freight", "All")).toBe("/tools/carrier-lookup/search?q=freight");
+    expect(statusHref("freight", "ACTIVE")).toBe("/tools/carrier-lookup/search?q=freight&status=ACTIVE");
   });
 });
 

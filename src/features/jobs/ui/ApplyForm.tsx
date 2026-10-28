@@ -21,7 +21,7 @@ export default function ApplyForm({ jobSlug }: { jobSlug: string }) {
   const [smsConsent, setSmsConsent] = useState(false);
   const turnstile = useTurnstile();
 
-  const { status, error, onSubmit, successRef } = useFormSubmit({
+  const { status, error, fieldErrors, clearFieldError, onSubmit, successRef } = useFormSubmit({
     endpoint: "/api/apply",
     buildBody: () => ({
       jobSlug,
@@ -34,6 +34,7 @@ export default function ApplyForm({ jobSlug }: { jobSlug: string }) {
       smsConsentVersion: SMS_CONSENT_VERSION,
     }),
     turnstile,
+    knownFields: ["fullName", "phone"],
     onSuccess: () => trackEvent("job_application", { job_slug: jobSlug }),
   });
 
@@ -61,17 +62,20 @@ export default function ApplyForm({ jobSlug }: { jobSlug: string }) {
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-3.5 p-5">
       <Honeypot />
-      <Field label="Full name" required>
+      <Field label="Full name" required error={fieldErrors.fullName}>
         <TextInput
           required
           name="fullName"
           autoComplete="name"
           value={fullName}
-          onChange={(e) => setFullName(e.target.value)}
+          onChange={(e) => {
+            setFullName(e.target.value);
+            clearFieldError("fullName");
+          }}
           placeholder="Your name"
         />
       </Field>
-      <Field label="Phone" required>
+      <Field label="Phone" required error={fieldErrors.phone}>
         <TextInput
           required
           type="tel"
@@ -79,7 +83,10 @@ export default function ApplyForm({ jobSlug }: { jobSlug: string }) {
           autoComplete="tel"
           inputMode="tel"
           value={phone}
-          onChange={(e) => setPhone(e.target.value)}
+          onChange={(e) => {
+            setPhone(e.target.value);
+            clearFieldError("phone");
+          }}
           placeholder="(555) 555-5555"
         />
       </Field>

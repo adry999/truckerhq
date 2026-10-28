@@ -119,7 +119,7 @@ export function CityJobsView({
                 {hiringCarriers.map((c) => (
                   <Link
                     key={c.name}
-                    href={`/tools/carrier-lookup?q=${encodeURIComponent(c.name)}&mode=Name`}
+                    href={`/tools/carrier-lookup/search?q=${encodeURIComponent(c.name)}`}
                     className="flex items-center justify-between gap-3 border-t border-[#ECEDEA] pt-3 first:border-t-0 first:pt-0 hover:opacity-80"
                   >
                     <span className="flex items-center gap-2.5">
