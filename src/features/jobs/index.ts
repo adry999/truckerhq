@@ -6,3 +6,6 @@ export { JOBS } from "@/features/jobs/data/jobs";
 export { CITY_CONTENT } from "@/features/jobs/data/city-content";
 export { CITY_DIRECTORY } from "@/features/jobs/model/cities";
 export type { Job, JobType, JobCarrier, CityContentEntry } from "@/features/jobs/model/jobs.types";
+export { RussianSpeakingJobs } from "@/features/jobs/ui/RussianSpeakingJobs";
+export { RUSSIAN_SPEAKING_COPY } from "@/features/jobs/data/russian-speaking-copy";
+export { russianSpeakingJobs } from "@/features/jobs/model/russian-speaking";
