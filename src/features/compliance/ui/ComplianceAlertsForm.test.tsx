@@ -2,6 +2,7 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { SMS_CONSENT_VERSION } from "@/shared/config/sms-consent";
 import ComplianceAlertsForm from "./ComplianceAlertsForm";
 
 afterEach(() => vi.unstubAllGlobals());
@@ -9,7 +10,7 @@ afterEach(() => vi.unstubAllGlobals());
 async function fillAndSubmit() {
   await userEvent.type(screen.getByLabelText(/^1\. Your DOT or MC number/), "3412897");
   await userEvent.type(screen.getByLabelText(/^Mobile number/), "5551234567");
-  await userEvent.click(screen.getByLabelText(/I agree to receive text alerts/));
+  await userEvent.click(screen.getByLabelText(/I agree to receive text messages from Trucker HQ/));
   await userEvent.click(screen.getByRole("button", { name: "Turn on alerts" }));
 }
 
@@ -18,7 +19,7 @@ describe("ComplianceAlertsForm", () => {
     render(<ComplianceAlertsForm />);
     const submit = screen.getByRole("button", { name: "Turn on alerts" });
     expect(submit).toBeDisabled();
-    await userEvent.click(screen.getByLabelText(/I agree to receive text alerts/));
+    await userEvent.click(screen.getByLabelText(/I agree to receive text messages from Trucker HQ/));
     expect(submit).toBeEnabled();
   });
 
@@ -40,6 +41,7 @@ describe("ComplianceAlertsForm", () => {
       language: "RU",
       watch: { auth: true, ins: true, ucr: false, boc: true, oos: true, insp: true },
       smsConsent: true,
+      smsConsentVersion: SMS_CONSENT_VERSION,
       website: "",
     });
   });

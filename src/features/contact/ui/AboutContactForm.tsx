@@ -4,11 +4,13 @@ import { LOCALES, type Locale } from "@/shared/i18n/locale";
 import { useState } from "react";
 import { trackEvent } from "@/shared/client/analytics";
 import { useFormSubmit } from "@/shared/hooks/useFormSubmit";
+import { useTurnstile } from "@/shared/hooks/useTurnstile";
 import { Button } from "@/shared/ui/Button";
 import { Field, TextArea, TextInput } from "@/shared/ui/Field";
 import { FormError, Honeypot } from "@/shared/ui/form-bits";
 import { CheckIcon } from "@/shared/ui/icons";
 import { Segmented } from "@/shared/ui/Segmented";
+import { Turnstile } from "@/shared/ui/Turnstile";
 
 const TOPICS = ["Dispatch", "Driver job", "Hiring drivers", "Something else"];
 const LANGUAGE_NAMES: Record<Locale, string> = {
@@ -22,11 +24,13 @@ export default function AboutContactForm() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
+  const turnstile = useTurnstile();
 
   const { status, error, onSubmit, successRef } = useFormSubmit({
     endpoint: "/api/contact",
     buildBody: () => ({ topic, name, phone, message, language: lang }),
     onSuccess: () => trackEvent("contact_message", { topic }),
+    turnstile,
   });
 
   if (status === "sent") {
@@ -107,7 +111,13 @@ export default function AboutContactForm() {
         />
       </div>
 
-      <Button type="submit" size="lg" disabled={status === "submitting"} className="w-full">
+      <Turnstile controller={turnstile} />
+      <Button
+        type="submit"
+        size="lg"
+        disabled={status === "submitting" || !turnstile.ready}
+        className="w-full"
+      >
         {status === "submitting" ? "Sending..." : "Call me back"}
       </Button>
       <FormError message={error} />

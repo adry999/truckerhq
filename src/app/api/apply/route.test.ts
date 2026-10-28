@@ -29,7 +29,13 @@ function post(body: unknown, raw?: string) {
   );
 }
 
-const valid = { fullName: "Ivan P", phone: "(312) 555-0123", jobSlug: "some-job" };
+const valid = {
+  fullName: "Ivan P",
+  phone: "(312) 555-0123",
+  jobSlug: "some-job",
+  smsConsent: true,
+  smsConsentVersion: "2026-10-28",
+};
 
 beforeEach(() => {
   vi.mocked(insertRow).mockReset().mockResolvedValue(true);
@@ -69,6 +75,29 @@ describe("POST /api/apply", () => {
   it("passes no job title for an unknown slug", async () => {
     await post(valid);
     expect(notifyApplication).toHaveBeenCalledWith("+13125550123", undefined, "");
+  });
+
+  it("stores consent evidence with the row", async () => {
+    await post(valid);
+    expect(insertRow).toHaveBeenCalledWith(
+      "job_applications",
+      expect.objectContaining({
+        sms_consent: true,
+        sms_consent_version: "2026-10-28",
+        sms_consent_at: expect.any(String),
+        consent_ip: expect.stringMatching(/^10\.0\.1\./),
+      }),
+    );
+  });
+
+  it("saves but sends no SMS without consent", async () => {
+    const res = await post({ ...valid, smsConsent: undefined });
+    expect(res.status).toBe(200);
+    expect(insertRow).toHaveBeenCalledWith(
+      "job_applications",
+      expect.objectContaining({ sms_consent: false, sms_consent_at: null }),
+    );
+    expect(notifyApplication).not.toHaveBeenCalled();
   });
 
   it("returns 502 and does not notify when saving fails", async () => {

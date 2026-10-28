@@ -4,10 +4,13 @@ import { CALL_STEP } from "@/features/dispatch/model/dispatch-start";
 export function WizardNav({
   step,
   submitting,
+  blocked = false,
   onBack,
 }: {
   step: number;
   submitting: boolean;
+  /** Holds the submit button until the spam check has produced a token. */
+  blocked?: boolean;
   onBack: () => void;
 }) {
   const last = step === CALL_STEP;
@@ -24,7 +27,7 @@ export function WizardNav({
       ) : (
         <span />
       )}
-      <Button type="submit" size="lg" className="px-7" disabled={submitting}>
+      <Button type="submit" size="lg" className="px-7" disabled={submitting || blocked}>
         {last ? (submitting ? "Sending..." : "Request my call") : "Next"}
       </Button>
     </div>

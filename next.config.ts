@@ -6,11 +6,12 @@ import type { NextConfig } from "next";
 // "Content-Security-Policy" once a deploy comes back clean.
 const CSP = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net",
+  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net https://challenges.cloudflare.com",
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: https://images.unsplash.com https://www.facebook.com",
+  "img-src 'self' data: https://images.unsplash.com https://www.facebook.com https://*.google-analytics.com https://*.googletagmanager.com",
   "font-src 'self'",
-  "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://www.facebook.com",
+  "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://www.facebook.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://challenges.cloudflare.com",
+  "frame-src https://challenges.cloudflare.com",
   "frame-ancestors 'none'",
   "base-uri 'self'",
   "form-action 'self'",

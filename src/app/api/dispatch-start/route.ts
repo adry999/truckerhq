@@ -24,12 +24,15 @@ const schema = withChecks(
     mcNumber: text(20),
     bestTime: text(60),
     language: text(20),
+    smsConsent: z.boolean().optional(),
+    smsConsentVersion: z.string().max(32).optional(),
   }),
   { phone: usPhone() },
 );
 
 export const POST = createLeadHandler({
   schema,
+  smsConsent: true,
   table: "dispatch_requests",
   toRow: (d) => ({
     trailer_type: d.trailerType,

@@ -4,11 +4,18 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useFormSubmit } from "./useFormSubmit";
 
-function TestForm({ onSuccess }: { onSuccess?: () => void }) {
+function TestForm({
+  onSuccess,
+  turnstile,
+}: {
+  onSuccess?: () => void;
+  turnstile?: { token: string | null; reset: () => void };
+}) {
   const { status, error, onSubmit } = useFormSubmit({
     endpoint: "/api/test",
     buildBody: (form) => ({ name: new FormData(form).get("name") }),
     onSuccess,
+    turnstile,
   });
   return (
     <form onSubmit={onSubmit}>
@@ -30,6 +37,35 @@ function stubFetch(impl: () => Promise<Response>) {
 afterEach(() => vi.unstubAllGlobals());
 
 describe("useFormSubmit", () => {
+  it("adds the turnstile token to the body and leaves the widget alone on success", async () => {
+    const fetchMock = stubFetch(async () => new Response("{}", { status: 200 }));
+    const reset = vi.fn();
+    render(<TestForm turnstile={{ token: "tok-1", reset }} />);
+    await userEvent.click(screen.getByRole("button", { name: "Go" }));
+    await screen.findByText("sent");
+    const call = fetchMock.mock.calls[0] as unknown as [string, RequestInit];
+    expect(JSON.parse(call[1].body as string)).toEqual({ name: "Ann", website: "", turnstileToken: "tok-1" });
+    expect(reset).not.toHaveBeenCalled();
+  });
+
+  it("omits turnstileToken when there is no token", async () => {
+    const fetchMock = stubFetch(async () => new Response("{}", { status: 200 }));
+    render(<TestForm turnstile={{ token: null, reset: vi.fn() }} />);
+    await userEvent.click(screen.getByRole("button", { name: "Go" }));
+    await screen.findByText("sent");
+    const call = fetchMock.mock.calls[0] as unknown as [string, RequestInit];
+    expect(JSON.parse(call[1].body as string)).not.toHaveProperty("turnstileToken");
+  });
+
+  it("resets the widget after a failed submit", async () => {
+    stubFetch(async () => Response.json({ error: "Nope" }, { status: 400 }));
+    const reset = vi.fn();
+    render(<TestForm turnstile={{ token: "tok-1", reset }} />);
+    await userEvent.click(screen.getByRole("button", { name: "Go" }));
+    await screen.findByRole("alert");
+    expect(reset).toHaveBeenCalledOnce();
+  });
+
   it("marks the form sent, calls onSuccess and posts the body with the honeypot", async () => {
     const fetchMock = stubFetch(async () => new Response("{}", { status: 200 }));
     const onSuccess = vi.fn();

@@ -2,6 +2,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { SMS_CONSENT_VERSION } from "@/shared/config/sms-consent";
 import { DispatchStartWizard } from "./DispatchStartWizard";
 
 const fetchMock = vi.fn();
@@ -45,6 +46,9 @@ describe("DispatchStartWizard", () => {
 
     await userEvent.type(screen.getByLabelText("Name (required)"), "Test Driver");
     await userEvent.type(screen.getByLabelText("Phone (required)"), "(555) 555-5555");
+    const consent = screen.getByRole("checkbox", { name: /I agree to receive text messages/ });
+    expect(consent).not.toBeChecked();
+    await userEvent.click(consent);
     await userEvent.click(screen.getByRole("button", { name: "Request my call" }));
 
     const success = await screen.findByRole("heading", { name: "You're on the list" });
@@ -68,6 +72,8 @@ describe("DispatchStartWizard", () => {
       bestTime: "Today",
       language: "English",
       website: "",
+      smsConsent: true,
+      smsConsentVersion: SMS_CONSENT_VERSION,
     });
     // The full four-step flow takes ~2s alone and can pass the 5s default under a parallel run.
   }, 15_000);
@@ -108,6 +114,9 @@ describe("DispatchStartWizard", () => {
     await reachCallStep();
     await userEvent.type(screen.getByLabelText("Name (required)"), "Test Driver");
     await userEvent.type(screen.getByLabelText("Phone (required)"), "555");
+    const consent = screen.getByRole("checkbox", { name: /I agree to receive text messages/ });
+    expect(consent).not.toBeChecked();
+    await userEvent.click(consent);
     await userEvent.click(screen.getByRole("button", { name: "Request my call" }));
 
     expect(await screen.findByRole("alert")).toHaveTextContent("Too many requests");
@@ -120,6 +129,9 @@ describe("DispatchStartWizard", () => {
     await reachCallStep();
     await userEvent.type(screen.getByLabelText("Name (required)"), "Test Driver");
     await userEvent.type(screen.getByLabelText("Phone (required)"), "555");
+    const consent = screen.getByRole("checkbox", { name: /I agree to receive text messages/ });
+    expect(consent).not.toBeChecked();
+    await userEvent.click(consent);
     await userEvent.click(screen.getByRole("button", { name: "Request my call" }));
 
     expect(await screen.findByRole("alert")).toHaveTextContent(
