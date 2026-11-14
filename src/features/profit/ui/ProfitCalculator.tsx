@@ -75,7 +75,7 @@ export function ProfitCalculator({ lang = "EN" }: { lang?: Locale }) {
               <h2 className="font-display text-2xl font-extrabold uppercase">{copy.groups[group.id].title}</h2>
               <span className="text-[13px] text-grey">{copy.groups[group.id].hint}</span>
             </div>
-            <div className="grid gap-3.5 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
               {group.fields.map((field) => {
                 const text = copy.fields[field.key];
                 return (

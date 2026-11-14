@@ -15,11 +15,11 @@ export function NewMcCta({ lang = "EN" }: { lang?: Locale }) {
             <h2 className="font-display text-5xl font-extrabold leading-[0.95] md:text-6xl">
               {c.heading}
             </h2>
-            <p className="text-lg leading-relaxed text-[#E3EAE6]">
+            <p className="text-lg leading-relaxed text-on-green">
               {c.body}
             </p>
           </div>
-          <div className="flex min-w-[280px] flex-col gap-3">
+          <div className="flex w-full min-w-[280px] flex-col gap-3 sm:w-auto">
             <Link
               href={c.primaryHref}
               className="flex h-[60px] items-center justify-center rounded-xl bg-amber px-7 font-display text-2xl font-extrabold uppercase tracking-[.05em] text-asphalt hover:bg-amber-hover"
