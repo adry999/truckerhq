@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Segmented } from "@/shared/ui/Segmented";
 import { Field, TextInput } from "@/shared/ui/Field";
 import { BEST_TIME_OPTIONS, LANGUAGE_OPTIONS, setField } from "@/features/dispatch/model/dispatch-start";
-import { SEGMENT_BUTTON, STEP_HEADING, type StepProps } from "../step-props";
+import { SEGMENT_BUTTON, SEGMENT_GRID_4, STEP_HEADING, type StepProps } from "../step-props";
 
 export function CallStep({ data, dispatch, headingRef, c, fieldErrors }: StepProps) {
   return (
@@ -42,6 +42,7 @@ export function CallStep({ data, dispatch, headingRef, c, fieldErrors }: StepPro
           onChange={(v) => dispatch(setField("bestTime", v))}
           label={c.call.bestTime}
           labels={c.options}
+          containerClassName={SEGMENT_GRID_4}
           buttonClassName={SEGMENT_BUTTON}
         />
       </div>

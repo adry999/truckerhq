@@ -12,4 +12,7 @@ export type StepProps = {
 };
 
 export const STEP_HEADING = "font-display text-3xl font-extrabold uppercase outline-none";
-export const SEGMENT_BUTTON = "h-[50px] flex-1 basis-[130px] px-3 font-sans text-[15px] font-semibold";
+export const SEGMENT_BUTTON = "h-[50px] px-3 font-sans text-[15px] font-semibold leading-tight";
+export const SEGMENT_GRID_3 = "grid grid-cols-2 gap-2 sm:grid-cols-3";
+export const SEGMENT_GRID_4 = "grid grid-cols-2 gap-2 sm:grid-cols-4";
+export const SEGMENT_GRID_5 = "grid grid-cols-2 gap-2 sm:grid-cols-5";

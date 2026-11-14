@@ -2,7 +2,7 @@ import { Segmented } from "@/shared/ui/Segmented";
 import { CheckCard, ChoiceGroup } from "@/shared/ui/choices";
 import { Field, TextInput } from "@/shared/ui/Field";
 import { HOME_TIME_OPTIONS, REGIONS, setField } from "@/features/dispatch/model/dispatch-start";
-import { SEGMENT_BUTTON, STEP_HEADING, type StepProps } from "../step-props";
+import { SEGMENT_BUTTON, SEGMENT_GRID_4, STEP_HEADING, type StepProps } from "../step-props";
 
 export function LanesStep({ data, dispatch, headingRef, c, fieldErrors }: StepProps) {
   return (
@@ -43,6 +43,7 @@ export function LanesStep({ data, dispatch, headingRef, c, fieldErrors }: StepPr
           onChange={(v) => dispatch(setField("homeTime", v))}
           label={c.lanes.homeTime}
           labels={c.options}
+          containerClassName={SEGMENT_GRID_4}
           buttonClassName={SEGMENT_BUTTON}
         />
       </div>

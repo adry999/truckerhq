@@ -1,4 +1,6 @@
 import { PHONE_HREF } from "@/shared/config/contact";
+import { buttonClass } from "@/shared/ui/Button";
+import { ButtonRow } from "@/shared/ui/ButtonRow";
 import Image from "next/image";
 import heroImage from "@/assets/images/dispatch-hero.jpg";
 import type { DispatchCopy } from "@/features/dispatch/data/dispatch-copy";
@@ -18,28 +20,22 @@ export function DispatchHero({ c }: { c: DispatchCopy }) {
         />
       </div>
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[rgba(22,24,27,.94)] via-[rgba(22,24,27,.7)] to-[rgba(22,24,27,.35)]" />
-      <div className="relative mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-2 md:items-center md:py-28">
+      <div className="relative mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-2 md:items-center md:py-28 lg:grid-cols-[minmax(0,1fr)_400px]">
         <div className="flex flex-col gap-5">
-          <h1 className="font-display text-5xl font-extrabold uppercase leading-[0.9] sm:text-6xl md:text-7xl lg:text-8xl">
+          <h1 className="font-display text-5xl font-extrabold uppercase leading-[0.9] sm:text-6xl lg:text-[80px]">
             {c.h1Line1}
             <br />
-            <span className="text-amber">{c.h1Line2}</span>
+            <span className="text-amber lg:whitespace-nowrap">{c.h1Line2}</span>
           </h1>
           <p className="max-w-lg text-lg leading-relaxed text-[#D4D6DA] md:text-xl">{c.heroBody}</p>
-          <div className="flex flex-wrap gap-3">
-            <a
-              href="#pricing"
-              className="flex h-14 items-center rounded-xl bg-amber px-7 font-display text-xl font-extrabold uppercase tracking-[.05em] text-asphalt hover:bg-amber-hover"
-            >
+          <ButtonRow>
+            <a href="#pricing" className={buttonClass({ size: "lg" })}>
               {c.ctaSeePackages}
             </a>
-            <a
-              href={PHONE_HREF}
-              className="flex h-14 items-center rounded-xl border-2 border-offwhite px-6 font-display text-xl font-extrabold uppercase tracking-[.05em] text-offwhite hover:bg-offwhite hover:text-asphalt"
-            >
+            <a href={PHONE_HREF} className={buttonClass({ variant: "outlineLight", size: "lg" })}>
               {c.ctaCall}
             </a>
-          </div>
+          </ButtonRow>
         </div>
         <div className="justify-self-end w-full max-w-[420px] rounded-[10px] bg-green p-1.5">
           <div className="flex flex-col gap-3.5 rounded-md border-[1.5px] border-white/70 p-6">
