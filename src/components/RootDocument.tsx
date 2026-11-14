@@ -63,7 +63,7 @@ export default function RootDocument({
           {SKIP_LABEL[lang]}
         </a>
         <JsonLd data={siteGraphSchema()} />
-        <Analytics />
+        <Analytics lang={lang} />
         {/* Each page renders <main id="main-content"> between its own header and footer. */}
         {children}
       </body>

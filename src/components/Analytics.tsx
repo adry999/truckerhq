@@ -97,7 +97,7 @@ function PageviewTracker() {
   return null;
 }
 
-export default function Analytics() {
+export default function Analytics({ lang = "en" }: { lang?: "en" | "ru" }) {
   const consent = useSyncExternalStore(subscribeConsent, getConsentSnapshot, getConsentServerSnapshot);
 
   useEffect(() => {
@@ -125,7 +125,7 @@ export default function Analytics() {
           </Suspense>
         </>
       )}
-      {consent === null && <ConsentBanner onChoice={setConsent} />}
+      {consent === null && <ConsentBanner lang={lang} onChoice={setConsent} />}
     </>
   );
 }

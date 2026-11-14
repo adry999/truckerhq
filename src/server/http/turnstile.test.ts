@@ -32,8 +32,23 @@ describe("verifyTurnstile", () => {
     expect(warnSpy).toHaveBeenCalledTimes(1);
   });
 
+  it("rejects when no secret is configured on the live site", async () => {
+    vi.stubEnv("TURNSTILE_SECRET_KEY", "");
+    vi.stubEnv("NODE_ENV", "production");
+    vi.stubEnv("NEXT_PUBLIC_INDEXABLE", "true");
+    expect(await verifyTurnstile("tok", "1.2.3.4")).toBe(false);
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+
   describe("with a secret", () => {
     beforeEach(() => vi.stubEnv("TURNSTILE_SECRET_KEY", "s3cret"));
+
+    it("rejects a localhost token on the live site", async () => {
+      vi.stubEnv("NODE_ENV", "production");
+      vi.stubEnv("NEXT_PUBLIC_INDEXABLE", "true");
+      respond({ success: true, hostname: "localhost" });
+      expect(await verifyTurnstile("tok", "1.2.3.4")).toBe(false);
+    });
 
     it("posts the form-encoded secret, token and ip and accepts a success", async () => {
       respond({ success: true, hostname: "localhost" });

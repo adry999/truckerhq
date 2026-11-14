@@ -1,6 +1,6 @@
 import "server-only";
 import { SITE_HOST } from "@/shared/config/site";
-import { serverEnv } from "@/server/env";
+import { isLiveProduction, serverEnv } from "@/server/env";
 import { httpRequest } from "@/server/http/http-request";
 
 const SITEVERIFY_URL = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
@@ -15,11 +15,16 @@ export function resetTurnstileWarningForTests(): void {
 
 /**
  * Verifies a Turnstile token server-side. With no TURNSTILE_SECRET_KEY the check is
- * skipped (dev / staging) and that is logged once. A token works only once and lives 5 min.
+ * skipped on dev / staging (logged once) and fails closed on the live site.
+ * A token works only once and lives 5 min.
  */
 export async function verifyTurnstile(token: unknown, ip: string | null): Promise<boolean> {
   const { TURNSTILE_SECRET_KEY } = serverEnv();
   if (!TURNSTILE_SECRET_KEY) {
+    if (isLiveProduction()) {
+      console.error("[turnstile] TURNSTILE_SECRET_KEY not set on the live site; rejecting");
+      return false;
+    }
     if (!warnedUnset) {
       warnedUnset = true;
       console.warn("[turnstile] TURNSTILE_SECRET_KEY not set; bot check skipped");
@@ -48,5 +53,6 @@ export async function verifyTurnstile(token: unknown, ip: string | null): Promis
   }
   if (data.success !== true) return false;
   const host = data.hostname ?? "";
-  return LOCAL_HOSTS.has(host) || host === SITE_HOST || host === `www.${SITE_HOST}`;
+  if (LOCAL_HOSTS.has(host)) return !isLiveProduction();
+  return host === SITE_HOST || host === `www.${SITE_HOST}`;
 }

@@ -21,7 +21,7 @@ Order matters: 0 -> 1 -> 2 -> 3 (temp domain smoke test) -> 4 -> 5 -> 6/7/8 -> 9
   - [ ] Twilio (client name + EIN; used only in section 11)
   - [ ] Google (Search Console, GA4, Business Profile), Bing Webmaster, Yandex Webmaster
   - [ ] FMCSA webKey on the client's login.gov: https://mobile.fmcsa.dot.gov/QCDevsite/docs/getStarted
-- [ ] Legal pages final (not "Outline only") and real address/phone in place. Required for 10DLC (section 11): `npm run check:placeholders -- --strict` returns 0 hits.
+- [ ] Legal pages final (not "Outline only") and real address/phone in place. Required for 10DLC (section 11): `npm run check:placeholders -- --strict` returns 0 hits. An indexable build (`NEXT_PUBLIC_INDEXABLE=true`) runs this check strictly and fails while any placeholder is left or `NEXT_PUBLIC_SITE_URL` is not an https:// URL.
 - [ ] CI green on `main` (lint, typecheck, test, build).
 - [ ] Generate secrets now (keep in a password manager):
   ```sh
@@ -202,7 +202,7 @@ Set these after the zone is Active and SSL is Active on the origin. Rule order m
 ### 9.1 Cutover
 - [ ] Section 3 temp-domain test passed.
 - [ ] Add `truckerhq.us` as the custom domain in hPanel (DNS records still **grey**). Wait for Hostinger SSL = Active.
-- [ ] Set `NEXT_PUBLIC_SITE_URL=https://truckerhq.us`, `NEXT_PUBLIC_INDEXABLE=true`, `CF_ORIGIN_SECRET`; remove `ALLOWED_ORIGINS`; redeploy (rebuild is required for `NEXT_PUBLIC_*`).
+- [ ] Set `NEXT_PUBLIC_SITE_URL=https://truckerhq.us`, `NEXT_PUBLIC_INDEXABLE=true`, `CF_ORIGIN_SECRET`; remove `ALLOWED_ORIGINS`; redeploy (rebuild is required for `NEXT_PUBLIC_*`). With `NEXT_PUBLIC_INDEXABLE=true` the forms fail closed: they reject every submission (403) if `TURNSTILE_SECRET_KEY` or `CF_ORIGIN_SECRET` is missing.
 - [ ] Switch `@` and `www` to **Proxied**. SSL/TLS -> **Full (strict)**.
 - [ ] Apply section 5 rules (Transform Rule last, after the env var is live, to avoid locking yourself out; if forms 403, compare both secrets).
 
