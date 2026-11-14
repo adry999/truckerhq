@@ -1,0 +1,112 @@
+{
+ "slug": "truckerhq",
+ "font": {
+  "heading": {
+   "family": "Barlow Condensed",
+   "weight": 800,
+   "files": [
+    "/home/claude/p/_tools/node_modules/@fontsource/barlow-condensed/files/barlow-condensed-latin-800-normal.woff2",
+    "/home/claude/p/_tools/node_modules/@fontsource/barlow-condensed/files/barlow-condensed-latin-ext-800-normal.woff2"
+   ]
+  },
+  "body": {
+   "pkg": "inter",
+   "family": "Inter"
+  }
+ },
+ "colors": {
+  "bg": "#f5f5f3",
+  "text": "#1a1c21",
+  "heading": "#1a1c21",
+  "muted": "#454a52",
+  "accent": "#115e3b",
+  "line": "#d6d6d2",
+  "tagBg": "#1a1c21",
+  "tagText": "#f2a900"
+ },
+ "titleSize": 72,
+ "coverTitleSize": 88,
+ "extraCss": "h1{text-transform:uppercase;letter-spacing:0}",
+ "slides": [
+  {
+   "type": "cover",
+   "file": "coperta",
+   "titleRo": "Trucker HQ: dispecerat la preț fix",
+   "titleEn": "Trucker HQ: flat-rate truck dispatch",
+   "tags": [
+    "Site web",
+    "Engleză și rusă",
+    "Unelte gratuite"
+   ],
+   "crop": {
+    "img": "shots/profit-coperta.png",
+    "w": 900,
+    "left": 70
+   }
+  },
+  {
+   "type": "feature",
+   "file": "profit-pe-mila",
+   "catRo": "Unelte",
+   "catEn": "Tools",
+   "titleRo": "Profit pe milă",
+   "titleEn": "Profit per mile",
+   "textRo": "Transportatorul pune plata cursei și costurile și vede cât câștigă pe milă și sub ce tarif pierde bani. Calculatorul arată și cât ar lua un dispecer pe procent.",
+   "textEn": "The carrier enters the load pay and costs and sees what they earn per mile and below which rate they lose money. The calculator also shows what a percentage dispatcher would take.",
+   "crop": {
+    "img": "shots/profit-rezultat.png",
+    "bg": "shots/profit-full.png",
+    "w": 500,
+    "left": 150
+   }
+  },
+  {
+   "type": "feature",
+   "file": "cerere-de-dispecerat",
+   "catRo": "Dispecerat",
+   "catEn": "Dispatch",
+   "titleRo": "Cerere în 4 pași",
+   "titleEn": "A 4-step request",
+   "textRo": "Camion, rute, autorizație, apel: transportatorul răspunde pe rând, cu butoane, nu cu formulare lungi. Cererea se salvează și primește confirmare prin SMS.",
+   "textEn": "Truck, lanes, authority, call: the carrier answers step by step, with buttons rather than long forms. The request is saved and gets an SMS confirmation.",
+   "crop": {
+    "img": "shots/cerere.png",
+    "bg": "shots/cerere-full.png",
+    "w": 640,
+    "left": 110
+   }
+  },
+  {
+   "type": "feature",
+   "file": "alerte-de-conformitate",
+   "catRo": "Unelte",
+   "catEn": "Tools",
+   "titleRo": "Alerte de conformitate",
+   "titleEn": "Compliance alerts",
+   "textRo": "Transportatorul alege ce vrea urmărit: autorizația, asigurarea, UCR, BOC-3, opririle din circulație. Înscrierea cere acord explicit pentru SMS, în engleză sau rusă.",
+   "textEn": "The carrier picks what to watch: authority, insurance, UCR, BOC-3, out-of-service orders. Signing up requires explicit SMS consent, in English or Russian.",
+   "crop": {
+    "img": "shots/alerte.png",
+    "bg": "shots/alerte-full.png",
+    "w": 470,
+    "left": 170
+   }
+  },
+  {
+   "type": "feature",
+   "file": "versiunea-in-rusa",
+   "catRo": "Conținut",
+   "catEn": "Content",
+   "titleRo": "Și în rusă",
+   "titleEn": "Also in Russian",
+   "textRo": "Paginile importante au versiune completă în rusă, de la dispecerat și joburi la ghidul pentru autorizații noi. Și alertele SMS pot fi primite în rusă.",
+   "textEn": "The key pages have a full Russian version, from dispatch and jobs to the guide for new authorities. SMS alerts can be received in Russian too.",
+   "crop": {
+    "img": "shots/ru.png",
+    "bg": "shots/ru-full.png",
+    "w": 900,
+    "left": 70
+   }
+  }
+ ]
+}
