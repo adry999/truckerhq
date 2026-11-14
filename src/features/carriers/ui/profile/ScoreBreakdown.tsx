@@ -1,5 +1,6 @@
 import { healthColor } from "@/shared/lib/health-score";
 import type { ScoreFactor } from "@/features/carriers/model/profile";
+import { factorPercent, isFactorHealthy } from "@/features/carriers/ui/profile/factor-health";
 
 export function ScoreBreakdown({ factors }: { factors: ScoreFactor[] }) {
   return (
@@ -18,10 +19,10 @@ export function ScoreBreakdown({ factors }: { factors: ScoreFactor[] }) {
           <div className="h-2.5 overflow-hidden rounded-md bg-[#ECEDEA]">
             <div
               className="h-full rounded-md"
-              style={{ width: `${Math.round((b.v / b.max) * 100)}%`, background: healthColor((b.v / b.max) * 100) }}
+              style={{ width: `${Math.round(factorPercent(b))}%`, background: healthColor(factorPercent(b)) }}
             />
           </div>
-          <div className="text-sm text-grey">{b.note}</div>
+          <div className={`text-sm ${isFactorHealthy(b) ? "text-grey" : "text-ink-2"}`}>{b.note}</div>
         </div>
       ))}
     </div>

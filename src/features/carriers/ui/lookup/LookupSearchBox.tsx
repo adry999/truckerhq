@@ -43,8 +43,7 @@ export function LookupSearchBox() {
         </div>
         <button
           type="submit"
-          className="min-h-[60px] rounded px-8 font-display text-2xl font-extrabold uppercase tracking-[.05em] text-asphalt"
-          style={{ background: "var(--color-amber)" }}
+          className="min-h-[60px] rounded-md bg-amber px-8 font-display text-2xl font-extrabold uppercase tracking-[.05em] text-asphalt hover:bg-amber-hover"
         >
           Search
         </button>

@@ -1,4 +1,5 @@
-import Link from "next/link";
+import { Button } from "@/shared/ui/Button";
+import { ButtonRow } from "@/shared/ui/ButtonRow";
 
 export function StateCtas({
   stateName,
@@ -27,12 +28,11 @@ export function StateCtas({
             <div className="flex-1 text-base leading-relaxed text-[#E3EAE6]">
               {dispatchCtaBody}
             </div>
-            <Link
-              href="/dispatch"
-              className="flex h-14 w-fit items-center rounded-xl bg-amber px-[26px] font-display text-xl font-extrabold uppercase tracking-[.05em] text-asphalt hover:bg-amber-hover"
-            >
-              See dispatch
-            </Link>
+            <ButtonRow>
+              <Button href="/dispatch" size="lg">
+                See dispatch
+              </Button>
+            </ButtonRow>
           </div>
         </div>
         <div className="flex flex-col gap-3.5 rounded-[10px] bg-asphalt p-6 text-offwhite shadow-[inset_0_0_0_1.5px_rgba(247,247,245,.14)]">
@@ -45,12 +45,11 @@ export function StateCtas({
           <div className="flex-1 text-base leading-relaxed text-[#C9CBCF]">
             {hireCtaBody}
           </div>
-          <Link
-            href="/hire-drivers"
-            className="flex h-14 w-fit items-center rounded-xl border-2 border-offwhite px-[26px] font-display text-xl font-extrabold uppercase tracking-[.05em] text-offwhite hover:bg-offwhite hover:text-asphalt"
-          >
-            Hire drivers
-          </Link>
+          <ButtonRow>
+            <Button href="/hire-drivers" variant="outlineLight" size="lg">
+              Hire drivers
+            </Button>
+          </ButtonRow>
         </div>
       </div>
     </section>

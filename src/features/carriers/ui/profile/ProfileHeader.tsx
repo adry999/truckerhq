@@ -50,7 +50,7 @@ export function ProfileHeader({ carrier: c }: { carrier: Carrier }) {
               </span>
             </div>
           </div>
-          <div className="flex items-center gap-[18px] rounded-[10px] bg-[#1F2226] p-[22px] shadow-[inset_0_0_0_1.5px_rgba(247,247,245,.14)]">
+          <div className="flex w-full items-center gap-[18px] rounded-[10px] bg-surface-dark p-[22px] sm:w-auto shadow-[inset_0_0_0_1.5px_rgba(247,247,245,.14)]">
             <div
               className="flex h-28 w-28 shrink-0 items-center justify-center rounded-full"
               style={{ background: `conic-gradient(${healthColor(c.score)} ${c.score}%, #33373D 0)` }}

@@ -3,6 +3,7 @@ import { Notice } from "@/shared/ui/Notice";
 import { STATUS_COLORS } from "@/features/carriers/ui/status-colors";
 import { ProfileHeader } from "@/features/carriers/ui/profile/ProfileHeader";
 import { ClaimBanner } from "@/features/carriers/ui/profile/ClaimBanner";
+import { AttentionSummary } from "@/features/carriers/ui/profile/AttentionSummary";
 import { ScoreBreakdown } from "@/features/carriers/ui/profile/ScoreBreakdown";
 import { ProfilePanels } from "@/features/carriers/ui/profile/ProfilePanels";
 import { ProfileSidebar } from "@/features/carriers/ui/profile/ProfileSidebar";
@@ -10,6 +11,8 @@ import { profileCta, profilePanels, scoreBreakdown } from "@/features/carriers/m
 import type { Carrier } from "@/features/carriers/model/carriers.types";
 
 export function CarrierProfile({ carrier }: { carrier: Carrier }) {
+  const factors = scoreBreakdown(carrier);
+
   return (
     <>
       <ProfileHeader carrier={carrier} />
@@ -25,7 +28,8 @@ export function CarrierProfile({ carrier }: { carrier: Carrier }) {
             </Link>
             .
           </Notice>
-          <ScoreBreakdown factors={scoreBreakdown(carrier)} />
+          <AttentionSummary factors={factors} />
+          <ScoreBreakdown factors={factors} />
           <ProfilePanels panels={profilePanels(carrier, STATUS_COLORS[carrier.status].fg)} />
         </div>
         <ProfileSidebar cta={profileCta(carrier)} />

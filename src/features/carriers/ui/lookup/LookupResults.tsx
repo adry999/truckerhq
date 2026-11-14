@@ -43,7 +43,7 @@ export function LookupResults({
               defaultValue={query}
               aria-label="Search carriers"
               placeholder="DOT, MC or name"
-              className="min-h-[50px] flex-1 border-0 bg-transparent px-3.5 font-sans text-[17px] text-asphalt outline-none"
+              className="min-h-[50px] min-w-0 flex-1 border-0 bg-transparent px-3.5 font-sans text-[17px] text-asphalt outline-none"
             />
             <button
               type="submit"

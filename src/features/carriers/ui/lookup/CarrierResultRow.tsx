@@ -23,13 +23,16 @@ export function CarrierResultRow({
         <span className="text-sm text-grey">
           {c.city}, {c.st}
         </span>
+        <span className="text-sm text-grey md:hidden">
+          {[`DOT ${c.dot}`, c.mc].filter((v) => v !== "—").join(" · ")}
+        </span>
       </span>
       <span className="hidden text-[15px] md:block">{c.dot}</span>
       <span className="hidden text-[15px] md:block">{c.mc}</span>
       <span className="hidden text-[15px] md:block">{c.trucks || "—"}</span>
       <span>
         <span
-          className="flex items-center gap-1.5 rounded-lg px-2.5 py-1 font-display text-[15px] font-extrabold tracking-[.08em]"
+          className="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1 font-display text-[15px] font-extrabold tracking-[.08em]"
           style={{ background: sc.bg, color: sc.fg }}
         >
           <span className="h-2 w-2 rounded-full" style={{ background: sc.dot }} />

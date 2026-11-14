@@ -47,13 +47,15 @@ export function StateCarriersView({
         heroDescription={heroDescription}
       />
       <StateStats stats={stats} />
-      <StateTopCities stateName={stateName} topCities={topCities} />
-      <StateLookupCta
-        stateName={stateName}
-        sourceName={sourceName}
-        sourceUrl={sourceUrl}
-        sourceFetchedAt={sourceFetchedAt}
-      />
+      <div className="mx-auto grid w-full max-w-6xl gap-10 px-4 pb-2 pt-14 sm:px-6 md:pt-20 lg:grid-cols-2 lg:items-start lg:gap-12">
+        <StateTopCities stateName={stateName} topCities={topCities} />
+        <StateLookupCta
+          stateName={stateName}
+          sourceName={sourceName}
+          sourceUrl={sourceUrl}
+          sourceFetchedAt={sourceFetchedAt}
+        />
+      </div>
       <StateCtas
         stateName={stateName}
         dispatchCtaEyebrow={dispatchCtaEyebrow}
