@@ -8,7 +8,7 @@ export function LookupLanding() {
   return (
     <>
       <section className="bg-asphalt text-offwhite">
-        <div className="mx-auto flex max-w-4xl flex-col gap-[22px] px-4 py-14 sm:px-6 md:py-24">
+        <div className="mx-auto flex max-w-6xl flex-col gap-[22px] px-4 py-14 sm:px-6 md:py-24">
           <div className="flex items-center gap-2.5">
             <span className="flex h-7 items-center rounded-lg bg-amber px-2.5 font-display text-[15px] font-extrabold tracking-[.08em] text-asphalt">
               FREE

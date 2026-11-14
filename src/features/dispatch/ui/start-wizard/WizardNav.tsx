@@ -18,19 +18,19 @@ export function WizardNav({
 }) {
   const last = step === CALL_STEP;
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
       {step > 0 ? (
         <button
           type="button"
           onClick={onBack}
-          className="-ml-3 flex min-h-11 items-center rounded-lg px-3 font-display text-base font-bold uppercase tracking-[.05em] text-grey hover:text-asphalt"
+          className="flex min-h-11 items-center justify-center rounded-lg px-3 font-display text-base font-bold uppercase tracking-[.05em] text-grey hover:text-asphalt sm:-ml-3"
         >
           {c.back}
         </button>
       ) : (
-        <span />
+        <span className="hidden sm:block" />
       )}
-      <Button type="submit" size="lg" className="px-7" disabled={submitting || blocked}>
+      <Button type="submit" size="lg" className="w-full px-7 sm:w-auto" disabled={submitting || blocked}>
         {last ? (submitting ? c.sending : c.submit) : c.next}
       </Button>
     </div>

@@ -64,7 +64,15 @@ export default function AboutContactForm() {
 
       <div className="flex flex-col gap-1.5">
         <span className="text-sm font-semibold">Topic</span>
-        <Segmented options={TOPICS} value={topic} onChange={setTopic} label="Topic" uppercase />
+        <Segmented
+          options={TOPICS}
+          value={topic}
+          onChange={setTopic}
+          label="Topic"
+          uppercase
+          containerClassName="grid grid-cols-2 gap-1.5"
+          buttonClassName="h-[50px] font-display text-[17px] font-extrabold tracking-[.05em]"
+        />
       </div>
 
       <Field label="Name" required error={fieldErrors.name}>

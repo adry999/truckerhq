@@ -41,11 +41,11 @@ export function PricingPage({ lang }: { lang: Locale }) {
               </h1>
               <p className="max-w-xl text-lg leading-relaxed text-[#D4D6DA]">{t.intro}</p>
             </div>
-            <div className="grid grid-cols-3 gap-3.5 rounded-[10px] border-[1.5px] border-white/30 p-6">
+            <div className="grid grid-cols-3 divide-x divide-white/20 rounded-[10px] border-[1.5px] border-white/30 py-5 sm:py-6">
               {t.facts.map((f) => (
-                <div key={f.label}>
-                  <div className="font-display text-3xl font-extrabold text-amber">{f.value}</div>
-                  <div className="text-sm text-[#DCE6E0]">{f.label}</div>
+                <div key={f.label} className="flex min-w-0 flex-col gap-1 px-3 sm:px-5">
+                  <div className="font-display text-xl font-extrabold leading-none text-amber sm:text-3xl">{f.value}</div>
+                  <div className="text-[13px] leading-snug text-on-green-muted sm:text-sm">{f.label}</div>
                 </div>
               ))}
             </div>

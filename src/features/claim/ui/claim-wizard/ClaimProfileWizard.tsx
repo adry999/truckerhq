@@ -119,21 +119,23 @@ export function ClaimProfileWizard() {
 
             {step === DETAILS_STEP && <Turnstile controller={turnstile} />}
 
-            {step !== DONE_STEP && (
-              <div className="flex items-center justify-between gap-3 border-t border-divider pt-5">
-                {step === DETAILS_STEP ? (
-                  <Button variant="ghost" onClick={() => dispatch({ type: "back" })}>
-                    ← Back
+            <div className="[&>p:not(:empty)]:mt-3">
+              {step !== DONE_STEP && (
+                <div className="flex flex-col gap-2 border-t border-divider pt-5 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
+                  {step === DETAILS_STEP ? (
+                    <Button variant="ghost" className="w-full sm:w-auto" onClick={() => dispatch({ type: "back" })}>
+                      ← Back
+                    </Button>
+                  ) : (
+                    <span className="hidden sm:block" />
+                  )}
+                  <Button type="submit" size="lg" className="w-full px-7 sm:w-auto" disabled={!canAdvance(step, data) || submitting || (step === DETAILS_STEP && !turnstile.ready)}>
+                    {step === 0 ? "Continue" : submitting ? "Submitting..." : "Submit claim"}
                   </Button>
-                ) : (
-                  <span />
-                )}
-                <Button type="submit" size="lg" className="px-7" disabled={!canAdvance(step, data) || submitting || (step === DETAILS_STEP && !turnstile.ready)}>
-                  {step === 0 ? "Continue" : submitting ? "Submitting..." : "Submit claim"}
-                </Button>
-              </div>
-            )}
-            <FormError message={error} />
+                </div>
+              )}
+              <FormError message={error} />
+            </div>
           </form>
         </div>
         <PreviewAside step={step} data={data} />

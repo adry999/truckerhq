@@ -1,6 +1,6 @@
 import { Segmented } from "@/shared/ui/Segmented";
 import { DRIVER_TYPES, TRAILER_TYPES, setField } from "@/features/dispatch/model/dispatch-start";
-import { SEGMENT_BUTTON, STEP_HEADING, type StepProps } from "../step-props";
+import { SEGMENT_BUTTON, SEGMENT_GRID_3, SEGMENT_GRID_5, STEP_HEADING, type StepProps } from "../step-props";
 import { TruckCounter } from "../TruckCounter";
 
 export function TruckStep({ data, dispatch, headingRef, c }: StepProps) {
@@ -17,6 +17,7 @@ export function TruckStep({ data, dispatch, headingRef, c }: StepProps) {
           onChange={(v) => dispatch(setField("trailer", v))}
           label={c.truck.trailer}
           labels={c.options}
+          containerClassName={SEGMENT_GRID_5}
           buttonClassName={SEGMENT_BUTTON}
         />
       </div>
@@ -39,6 +40,7 @@ export function TruckStep({ data, dispatch, headingRef, c }: StepProps) {
           onChange={(v) => dispatch(setField("driver", v))}
           label={c.truck.driver}
           labels={c.options}
+          containerClassName={SEGMENT_GRID_3}
           buttonClassName={SEGMENT_BUTTON}
         />
       </div>

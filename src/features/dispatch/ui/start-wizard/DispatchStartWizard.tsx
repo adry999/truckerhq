@@ -132,14 +132,16 @@ export function DispatchStartWizard({ locale = "EN" }: { locale?: Locale }) {
                     <Turnstile controller={turnstile} locale={locale} />
                   </>
                 )}
-                <WizardNav
-                  step={step}
-                  submitting={status === "submitting"}
-                  blocked={step === CALL_STEP && !turnstile.ready}
-                  onBack={() => dispatch({ type: "back" })}
-                  c={c.nav}
-                />
-                <FormError message={error} />
+                <div className="[&>p:not(:empty)]:mt-3">
+                  <WizardNav
+                    step={step}
+                    submitting={status === "submitting"}
+                    blocked={step === CALL_STEP && !turnstile.ready}
+                    onBack={() => dispatch({ type: "back" })}
+                    c={c.nav}
+                  />
+                  <FormError message={error} />
+                </div>
               </form>
             )}
           </div>

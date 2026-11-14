@@ -1,5 +1,6 @@
 import { NEW_MC_COPY } from "@/features/compliance/data/new-mc-checklist";
 import { getCopy, type Locale } from "@/shared/i18n/locale";
+import { Steps } from "@/shared/ui/Steps";
 
 export function NewMcAudit({ lang = "EN" }: { lang?: Locale }) {
   const c = getCopy(NEW_MC_COPY, lang);
@@ -17,20 +18,7 @@ export function NewMcAudit({ lang = "EN" }: { lang?: Locale }) {
             {c.auditIntro}
           </p>
         </div>
-        <div className="relative grid gap-8 md:grid-cols-4">
-          <div className="absolute left-7 right-7 top-[27px] hidden h-1 bg-[repeating-linear-gradient(90deg,#F2A900_0_32px,transparent_32px_52px)] md:block" />
-          {c.auditSteps.map((s) => (
-            <div key={s.number} className="relative flex flex-col gap-3.5">
-              <div className="flex h-[58px] w-[58px] items-center justify-center rounded-md bg-asphalt font-display text-3xl font-extrabold text-amber shadow-[0_0_0_6px_var(--color-offwhite)]">
-                {s.number}
-              </div>
-              <div className="font-display text-2xl font-extrabold uppercase">{s.title}</div>
-              <div className="max-w-[300px] text-base leading-relaxed text-[#3F444B]">
-                {s.description}
-              </div>
-            </div>
-          ))}
-        </div>
+        <Steps items={c.auditSteps} />
       </div>
     </section>
   );

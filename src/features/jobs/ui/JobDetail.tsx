@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { healthColor } from "@/shared/lib/health-score";
+import { Button } from "@/shared/ui/Button";
 import { Notice } from "@/shared/ui/Notice";
 import { DEFAULT_CARRIER_SCORE, jobFacts, jobSections } from "@/features/jobs/model/jobs";
 import type { Job, JobCarrier } from "@/features/jobs/model/jobs.types";
@@ -39,6 +40,9 @@ export function JobDetail({ job, carrier }: { job: Job; carrier?: JobCarrier }) 
           <div className="text-[17px] text-[#D4D6DA]">
             {job.company} · {job.loc} · Posted {job.posted.toLowerCase()}
           </div>
+          <Button href="#apply" size="lg" className="sm:w-fit lg:hidden">
+            Apply now
+          </Button>
         </div>
       </section>
 
@@ -50,11 +54,11 @@ export function JobDetail({ job, carrier }: { job: Job; carrier?: JobCarrier }) 
           </Notice>
           <div className="grid grid-cols-2 overflow-hidden rounded-lg border border-border bg-white sm:grid-cols-3">
             {facts.map(([k, v, c]) => (
-              <div key={k} className="flex flex-col gap-1 border-b border-r border-[#ECEDEA] p-5">
+              <div key={k} className="flex flex-col gap-1 border-b border-r border-divider p-4 sm:p-5">
                 <span className="font-display text-sm font-bold tracking-[.12em] text-grey">
                   {k}
                 </span>
-                <span className={`font-display text-[26px] font-extrabold tabular-nums leading-tight ${c}`}>
+                <span className={`font-display text-xl font-extrabold tabular-nums leading-tight text-balance sm:text-2xl ${c}`}>
                   {v}
                 </span>
               </div>
@@ -78,7 +82,7 @@ export function JobDetail({ job, carrier }: { job: Job; carrier?: JobCarrier }) 
           {carrier && (
             <Link
               href={`/tools/carrier-lookup/${carrier.slug}`}
-              className="flex items-center gap-[18px] rounded-lg border-[1.5px] border-border bg-white p-5 hover:border-green"
+              className="flex flex-wrap items-center gap-x-[18px] gap-y-3 rounded-lg border-[1.5px] border-border bg-white p-5 hover:border-green"
             >
               <div
                 className="flex h-[72px] w-[72px] shrink-0 items-center justify-center rounded-full"
@@ -95,18 +99,18 @@ export function JobDetail({ job, carrier }: { job: Job; carrier?: JobCarrier }) 
                   ABOUT THE CARRIER
                 </span>
                 <span className="text-lg font-bold">{carrier.name}</span>
-                <span className="text-sm text-[#4B5058]">
+                <span className="text-sm text-ink-2">
                   DOT {carrier.dot} · {carrier.trucks} trucks · Health Score {score}
                 </span>
               </div>
-              <span className="font-display text-[17px] font-bold tracking-[.05em] text-green">
+              <span className="w-full border-t border-divider pt-3 font-display text-[17px] font-bold tracking-[.05em] text-green sm:w-auto sm:border-0 sm:pt-0">
                 PROFILE →
               </span>
             </Link>
           )}
         </div>
 
-        <aside className="h-fit overflow-hidden rounded-[10px] border-2 border-asphalt bg-white md:sticky md:top-24">
+        <aside id="apply" className="h-fit scroll-mt-20 overflow-hidden rounded-[10px] border-2 border-asphalt bg-white md:sticky md:top-24">
           <div className="flex items-baseline justify-between gap-3 bg-asphalt px-5 py-[18px] text-offwhite">
             <span className="font-display text-2xl font-extrabold uppercase">Apply now</span>
             <span className="text-[13px] text-[#AEB2B8]">2 minutes</span>

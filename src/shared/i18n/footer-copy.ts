@@ -2,9 +2,13 @@ import type { Locale } from "@/shared/i18n/locale";
 
 export type FooterLink = { t: string; href: string };
 
+export type FooterGroup = { h: string; links: FooterLink[] };
+
 export type FooterCopy = {
   tagline: string;
-  columns: { h: string; links: FooterLink[] }[];
+  columns: FooterGroup[];
+  contactHeading: string;
+  company: FooterGroup;
   legalLine: string;
   legal: FooterLink[];
   cookieSettings: string;
@@ -36,14 +40,15 @@ export const FOOTER_COPY: Record<Locale, FooterCopy> = {
           { t: "Texas carriers", href: "/carriers/texas" },
         ],
       },
-      {
-        h: "CONTACT",
-        links: [
-          { t: "Guides", href: "/guides" },
-          { t: "About us", href: "/about" },
-        ],
-      },
     ],
+    contactHeading: "CONTACT",
+    company: {
+      h: "COMPANY",
+      links: [
+        { t: "Guides", href: "/guides" },
+        { t: "About us", href: "/about" },
+      ],
+    },
     legalLine: "© 2026 Trucker HQ. Carrier data from public FMCSA records.",
     legal: [
       { t: "Privacy", href: "/privacy" },
@@ -75,14 +80,15 @@ export const FOOTER_COPY: Record<Locale, FooterCopy> = {
           { t: "Перевозчики Техаса", href: "/carriers/texas" },
         ],
       },
-      {
-        h: "КОНТАКТЫ",
-        links: [
-          { t: "Статьи", href: "/guides" },
-          { t: "О нас", href: "/about" },
-        ],
-      },
     ],
+    contactHeading: "КОНТАКТЫ",
+    company: {
+      h: "КОМПАНИЯ",
+      links: [
+        { t: "Статьи", href: "/guides" },
+        { t: "О нас", href: "/about" },
+      ],
+    },
     legalLine: "© 2026 Trucker HQ. Данные о перевозчиках — из открытых записей FMCSA.",
     legal: [
       { t: "Конфиденциальность", href: "/privacy" },

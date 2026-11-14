@@ -2,6 +2,8 @@ import { cx } from "./cx";
 
 type StepStatus = { complete: string; step: (n: number, total: number, label: string) => string };
 
+const LABEL = "flex min-h-11 items-start pt-1 text-left font-display text-sm font-bold uppercase tracking-[.08em]";
+
 const DEFAULT_STATUS: StepStatus = {
   complete: "All steps complete",
   step: (n, total, label) => `Step ${n} of ${total}: ${label}`,
@@ -28,7 +30,6 @@ export function StepProgress({
         {steps.map((label, i) => {
           const future = i > current;
           const past = i < current;
-          const labelClass = "font-display text-sm font-bold uppercase tracking-[.08em]";
           return (
             <li
               key={label}
@@ -40,12 +41,12 @@ export function StepProgress({
                 <button
                   type="button"
                   onClick={() => onSelect(i)}
-                  className={cx(labelClass, "flex min-h-11 items-start pt-1 text-left text-amber hover:underline")}
+                  className={cx(LABEL, "text-amber hover:underline")}
                 >
                   {label}
                 </button>
               ) : (
-                <span className={cx(labelClass, future ? "text-on-dark-muted" : "text-amber")}>
+                <span className={cx(LABEL, future ? "text-on-dark-muted" : "text-amber")}>
                   {label}
                 </span>
               )}

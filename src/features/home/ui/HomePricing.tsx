@@ -1,5 +1,6 @@
 import { PHONE_HREF } from "@/shared/config/contact";
-import Link from "next/link";
+import { ButtonRow } from "@/shared/ui/ButtonRow";
+import { Button, buttonClass } from "@/shared/ui/Button";
 import type { HomeCopy } from "@/features/home/data/home-copy";
 
 export function HomePricing({ c }: { c: HomeCopy }) {
@@ -15,25 +16,19 @@ export function HomePricing({ c }: { c: HomeCopy }) {
           </h2>
           <div className="flex items-baseline gap-2.5">
             <span className="font-display text-6xl font-extrabold text-amber md:text-8xl">$XXX</span>
-            <span className="text-lg text-[#C9CBCF]">{c.pricingUnit}</span>
+            <span className="text-lg text-on-dark-soft">{c.pricingUnit}</span>
           </div>
-          <p className="max-w-lg text-lg leading-relaxed text-[#D4D6DA]">{c.pricingBody}</p>
-          <div className="mt-2 flex flex-wrap gap-3">
-            <Link
-              href={c.pricingCtaHref}
-              className="flex h-14 items-center rounded-xl bg-amber px-7 font-display text-xl font-extrabold uppercase tracking-[.05em] text-asphalt hover:bg-amber-hover"
-            >
+          <p className="max-w-lg text-lg leading-relaxed text-on-dark">{c.pricingBody}</p>
+          <ButtonRow className="mt-2">
+            <Button href={c.pricingCtaHref} size="lg">
               {c.pricingCtaLabel}
-            </Link>
-            <a
-              href={PHONE_HREF}
-              className="flex h-14 items-center rounded-xl border-2 border-offwhite px-6 font-display text-xl font-extrabold uppercase tracking-[.05em] text-offwhite hover:bg-offwhite hover:text-asphalt"
-            >
+            </Button>
+            <a href={PHONE_HREF} className={buttonClass({ variant: "outlineLight", size: "lg" })}>
               {c.callLabel}
             </a>
-          </div>
+          </ButtonRow>
         </div>
-        <div className="rounded-[10px] bg-green p-1.5">
+        <div className="rounded-[10px] bg-green p-1.5 md:self-start">
           <div className="flex flex-col gap-[18px] rounded-md border-[1.5px] border-white/70 p-6">
             <div className="font-display text-[15px] font-bold tracking-[.14em] text-amber-on-green">{c.exampleEyebrow}</div>
             <div className="flex items-baseline justify-between gap-3 border-b border-white/25 pb-4">
@@ -48,7 +43,7 @@ export function HomePricing({ c }: { c: HomeCopy }) {
               <span className="text-base font-bold">Trucker HQ</span>
               <span className="font-display text-4xl font-extrabold text-amber">$XXX</span>
             </div>
-            <div className="text-sm leading-relaxed text-[#DCE6E0]">{c.exampleFooter}</div>
+            <div className="text-sm leading-relaxed text-on-green-muted">{c.exampleFooter}</div>
           </div>
         </div>
       </div>

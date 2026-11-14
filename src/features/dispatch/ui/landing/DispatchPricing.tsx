@@ -1,5 +1,8 @@
 import Link from "next/link";
+import { cx } from "@/shared/ui/cx";
 import type { DispatchCopy } from "@/features/dispatch/data/dispatch-copy";
+
+const CARD_ROWS = "row-span-7 grid grid-rows-subgrid";
 
 export function DispatchPricing({ c }: { c: DispatchCopy }) {
   return (
@@ -9,26 +12,29 @@ export function DispatchPricing({ c }: { c: DispatchCopy }) {
           <h2 className="font-display text-4xl font-extrabold md:text-5xl">{c.pricingHeading}</h2>
           <p className="max-w-2xl text-lg leading-relaxed text-[#4B5058]">{c.pricingSub}</p>
         </div>
-        <div className="grid items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {c.packages.map((p) => (
             <div
               key={p.name}
-              className={
-                p.featured
-                  ? "flex rounded-[10px] bg-green p-1.5"
-                  : "flex rounded-[10px] border-[1.5px] border-border"
-              }
+              className={cx(
+                CARD_ROWS,
+                "gap-y-0 rounded-[10px]",
+                p.featured ? "bg-green p-1.5" : "border-[1.5px] border-border",
+              )}
             >
               <div
-                className={`flex flex-1 flex-col gap-3.5 rounded-md p-6 ${
-                  p.featured ? "border-[1.5px] border-white/70 text-offwhite" : "text-asphalt"
-                }`}
+                className={cx(
+                  CARD_ROWS,
+                  "gap-y-3.5 rounded-md p-6 xl:p-5",
+                  p.featured ? "border-[1.5px] border-white/70 text-offwhite" : "text-asphalt",
+                )}
               >
                 <div className="flex min-h-7 items-center justify-between gap-2">
                   <span
-                    className={`font-display text-[15px] font-bold tracking-[.14em] ${
-                      p.featured ? "text-amber-on-green" : "text-grey"
-                    }`}
+                    className={cx(
+                      "font-display text-[15px] font-bold tracking-[.14em]",
+                      p.featured ? "text-amber-on-green" : "text-grey",
+                    )}
                   >
                     {p.who}
                   </span>
@@ -39,17 +45,17 @@ export function DispatchPricing({ c }: { c: DispatchCopy }) {
                   )}
                 </div>
                 <div className="font-display text-[34px] font-extrabold uppercase leading-[0.95]">{p.name}</div>
-                <div className="flex items-baseline gap-1.5">
-                  <span className="font-display text-5xl font-extrabold">$XXX</span>
-                  <span className={`text-[15px] ${p.featured ? "text-[#DCE6E0]" : "text-[#4B5058]"}`}>
+                <div className="flex flex-wrap items-baseline gap-x-1.5">
+                  <span className="font-display text-5xl font-extrabold xl:text-[44px]">$XXX</span>
+                  <span className={cx("whitespace-nowrap text-sm", p.featured ? "text-on-green-muted" : "text-ink-2")}>
                     {p.unit}
                   </span>
                 </div>
-                <div className={`text-[15px] leading-snug ${p.featured ? "text-[#DCE6E0]" : "text-[#4B5058]"}`}>
+                <div className={cx("text-[15px] leading-snug", p.featured ? "text-on-green-muted" : "text-ink-2")}>
                   {p.desc}
                 </div>
-                <div className={`h-px ${p.featured ? "bg-white/25" : "bg-border"}`} />
-                <ul className="flex flex-1 flex-col gap-2.5">
+                <div className={cx("h-px", p.featured ? "bg-white/25" : "bg-border")} />
+                <ul className="flex flex-col gap-2.5">
                   {p.items.map((it) => (
                     <li key={it} className="flex gap-2.5 text-[15px] leading-snug">
                       <span className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-sm bg-amber" />
@@ -59,11 +65,12 @@ export function DispatchPricing({ c }: { c: DispatchCopy }) {
                 </ul>
                 <Link
                   href={c.startHref}
-                  className={`mt-1.5 flex h-14 items-center justify-center rounded-xl font-display text-xl font-extrabold uppercase tracking-[.05em] ${
+                  className={cx(
+                    "mt-1.5 flex h-14 items-center justify-center rounded-xl font-display text-xl font-extrabold uppercase tracking-[.05em]",
                     p.featured
                       ? "bg-amber text-asphalt hover:bg-amber-hover"
-                      : "border-2 border-asphalt text-asphalt hover:bg-asphalt hover:text-offwhite"
-                  }`}
+                      : "border-2 border-asphalt text-asphalt hover:bg-asphalt hover:text-offwhite",
+                  )}
                 >
                   {p.cta}
                 </Link>

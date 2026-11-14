@@ -1,5 +1,6 @@
-import Link from "next/link";
 import { PHONE_HREF } from "@/shared/config/contact";
+import { Button, buttonClass } from "@/shared/ui/Button";
+import { ButtonRow } from "@/shared/ui/ButtonRow";
 import type { ServicePage } from "@/features/dispatch/data/service-pages";
 
 export function ServiceHero({ page }: { page: ServicePage }) {
@@ -11,20 +12,14 @@ export function ServiceHero({ page }: { page: ServicePage }) {
           {page.h1}
         </h1>
         <p className="max-w-2xl text-lg leading-relaxed text-[#D4D6DA] md:text-xl">{page.intro}</p>
-        <div className="flex flex-wrap gap-3">
-          <Link
-            href="/dispatch/start"
-            className="flex h-14 items-center rounded-xl bg-amber px-7 font-display text-xl font-extrabold uppercase tracking-[.05em] text-asphalt hover:bg-amber-hover"
-          >
+        <ButtonRow>
+          <Button href="/dispatch/start" size="lg">
             Start dispatch
-          </Link>
-          <a
-            href={PHONE_HREF}
-            className="flex h-14 items-center rounded-xl border-2 border-offwhite px-6 font-display text-xl font-extrabold uppercase tracking-[.05em] text-offwhite hover:bg-offwhite hover:text-asphalt"
-          >
+          </Button>
+          <a href={PHONE_HREF} className={buttonClass({ variant: "outlineLight", size: "lg" })}>
             Call us
           </a>
-        </div>
+        </ButtonRow>
       </div>
       <div className="road-line relative h-1.5" />
     </section>
