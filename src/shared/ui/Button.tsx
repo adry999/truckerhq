@@ -16,18 +16,23 @@ type Common = {
   size?: keyof typeof SIZES;
   className?: string;
 };
-type ButtonProps = Common & { href?: undefined } & Omit<ComponentProps<"button">, "className">;
-type LinkProps = Common & { href: string } & Omit<ComponentProps<typeof Link>, "className" | "href">;
 
-export function Button(props: ButtonProps | LinkProps) {
-  const { variant = "primary", size = "md", className, ...rest } = props;
-  const classes = cx(
+/** Button classes for elements that cannot be a `Button`, such as `CallLink` anchors. */
+export function buttonClass({ variant = "primary", size = "md", className }: Common = {}) {
+  return cx(
     "inline-flex items-center justify-center rounded-xl px-6 font-display font-extrabold uppercase tracking-[.05em]",
     "disabled:cursor-not-allowed disabled:opacity-60",
     SIZES[size],
     VARIANTS[variant],
     className,
   );
+}
+type ButtonProps = Common & { href?: undefined } & Omit<ComponentProps<"button">, "className">;
+type LinkProps = Common & { href: string } & Omit<ComponentProps<typeof Link>, "className" | "href">;
+
+export function Button(props: ButtonProps | LinkProps) {
+  const { variant, size, className, ...rest } = props;
+  const classes = buttonClass({ variant, size, className });
   if (rest.href !== undefined) {
     return <Link {...(rest as Omit<LinkProps, keyof Common>)} className={classes} />;
   }
