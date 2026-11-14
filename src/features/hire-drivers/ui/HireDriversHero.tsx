@@ -1,4 +1,6 @@
 import Image from "next/image";
+import { buttonClass, Button } from "@/shared/ui/Button";
+import { ButtonRow } from "@/shared/ui/ButtonRow";
 import { PHONE_DISPLAY, PHONE_HREF } from "@/shared/config/contact";
 import { HERO_IMAGE } from "@/features/hire-drivers/data/hire-drivers";
 
@@ -23,24 +25,18 @@ export function HireDriversHero() {
           <br />
           <span className="text-amber">A parked truck makes no money.</span>
         </h1>
-        <p className="max-w-xl text-lg leading-relaxed text-[#D4D6DA] md:text-xl">
+        <p className="max-w-xl text-lg leading-relaxed text-on-dark md:text-xl">
           Post a driver job and get checked CDL drivers calling you. English
           and Russian-speaking drivers, solo and team.
         </p>
-        <div className="flex flex-wrap gap-3">
-          <a
-            href="#post"
-            className="flex h-14 items-center rounded-xl bg-amber px-7 font-display text-xl font-extrabold uppercase tracking-[.05em] text-asphalt hover:bg-amber-hover"
-          >
+        <ButtonRow>
+          <Button href="#post" size="lg">
             Post a driver job
-          </a>
-          <a
-            href={PHONE_HREF}
-            className="flex h-14 items-center rounded-xl border-2 border-offwhite px-6 font-display text-xl font-extrabold uppercase tracking-[.05em] text-offwhite hover:bg-offwhite hover:text-asphalt"
-          >
+          </Button>
+          <a href={PHONE_HREF} className={buttonClass({ variant: "outlineLight", size: "lg" })}>
             Call {PHONE_DISPLAY}
           </a>
-        </div>
+        </ButtonRow>
       </div>
       <div className="road-line relative h-1.5" />
     </section>

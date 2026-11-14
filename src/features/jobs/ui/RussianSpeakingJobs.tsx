@@ -4,6 +4,7 @@ import { RUSSIAN_SPEAKING_COPY as c } from "@/features/jobs/data/russian-speakin
 import { withCarrierScores } from "@/features/jobs/model/jobs";
 import { russianSpeakingJobs } from "@/features/jobs/model/russian-speaking";
 import { Button } from "@/shared/ui/Button";
+import { ButtonRow } from "@/shared/ui/ButtonRow";
 import { EmptyState } from "@/shared/ui/EmptyState";
 import { FaqList } from "@/shared/ui/FaqList";
 import JobCard from "./JobCard";
@@ -34,14 +35,14 @@ export function RussianSpeakingJobs({
             <span className="text-amber">{c.h1Line2}</span>
           </h1>
           <p className="max-w-xl text-lg leading-relaxed text-on-dark">{c.heroBody}</p>
-          <div className="flex flex-wrap gap-3">
+          <ButtonRow>
             <Button href="/ru/jobs" lang="ru" size="lg">
               {c.ruLinkLabel}
             </Button>
             <Button href="/jobs" variant="outlineLight" size="lg">
               {c.allJobsLabel}
             </Button>
-          </div>
+          </ButtonRow>
         </div>
         <div className="road-line h-1.5" />
       </section>
@@ -109,12 +110,12 @@ export function RussianSpeakingJobs({
               {c.dispatchHeading}
             </span>
             <span className="text-[15px] leading-relaxed">{c.dispatchBody}</span>
-            <div className="flex flex-wrap gap-3">
+            <ButtonRow>
               <Button href="/dispatch">{c.dispatchEn}</Button>
               <Button href="/ru/dispatch" lang="ru" variant="outlineLight">
                 {c.dispatchRu}
               </Button>
-            </div>
+            </ButtonRow>
           </div>
         </div>
       </section>

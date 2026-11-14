@@ -39,7 +39,7 @@ export function JobsResultsView({
 
   return (
     <>
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-3 [mask-image:linear-gradient(to_right,black_calc(100%-32px),transparent)] md:[mask-image:none]">
         <FilterChips
           param="type"
           options={TYPES}
@@ -47,6 +47,7 @@ export function JobsResultsView({
           basePath={c.basePath}
           label={c.jobTypeLabel}
           showLabel
+          uppercase
         />
         <FilterChips
           param="equip"
@@ -55,6 +56,7 @@ export function JobsResultsView({
           basePath={c.basePath}
           label={c.equipmentLabel}
           showLabel
+          uppercase
         />
       </div>
 

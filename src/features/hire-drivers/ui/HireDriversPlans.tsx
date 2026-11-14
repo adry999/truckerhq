@@ -1,3 +1,4 @@
+import { buttonClass } from "@/shared/ui/Button";
 import { FULL_RECRUITING_FEATURES, JOB_POST_FEATURES } from "@/features/hire-drivers/data/hire-drivers";
 
 export function HireDriversPlans({ postHref = "#post" }: { postHref?: string } = {}) {
@@ -7,14 +8,14 @@ export function HireDriversPlans({ postHref = "#post" }: { postHref?: string } =
         Two ways to hire
       </h2>
       <div className="grid gap-4 md:grid-cols-2">
-        <div className="flex flex-col gap-3.5 rounded-[10px] border-[1.5px] border-border bg-white p-6">
+        <div className="flex flex-col gap-3.5 rounded-[10px] border-[1.5px] border-border bg-white p-[30px]">
           <div className="font-display text-[15px] font-bold tracking-[.14em] text-grey">
             DO IT YOURSELF
           </div>
           <div className="font-display text-4xl font-extrabold uppercase">Job post</div>
           <div className="flex items-baseline gap-1.5">
             <span className="font-display text-5xl font-extrabold">$XXX</span>
-            <span className="text-[15px] text-[#4B5058]">/ 30 days</span>
+            <span className="text-[15px] text-ink-2">/ 30 days</span>
           </div>
           <ul className="flex flex-1 flex-col gap-2.5">
             {JOB_POST_FEATURES.map((it) => (
@@ -26,7 +27,7 @@ export function HireDriversPlans({ postHref = "#post" }: { postHref?: string } =
           </ul>
           <a
             href={postHref}
-            className="flex h-14 items-center justify-center rounded-xl border-2 border-asphalt font-display text-xl font-extrabold uppercase tracking-[.05em] hover:bg-asphalt hover:text-offwhite"
+            className={buttonClass({ variant: "outline", size: "lg" })}
           >
             Post a job
           </a>
@@ -39,7 +40,7 @@ export function HireDriversPlans({ postHref = "#post" }: { postHref?: string } =
             <div className="font-display text-4xl font-extrabold uppercase">Full recruiting</div>
             <div className="flex items-baseline gap-1.5">
               <span className="font-display text-5xl font-extrabold">$XXX</span>
-              <span className="text-[15px] text-[#DCE6E0]">per driver hired</span>
+              <span className="text-[15px] text-on-green-muted">per driver hired</span>
             </div>
             <ul className="flex flex-1 flex-col gap-2.5">
               {FULL_RECRUITING_FEATURES.map((it) => (
@@ -51,7 +52,7 @@ export function HireDriversPlans({ postHref = "#post" }: { postHref?: string } =
             </ul>
             <a
               href={postHref}
-              className="flex h-14 items-center justify-center rounded-xl bg-amber font-display text-xl font-extrabold uppercase tracking-[.05em] text-asphalt hover:bg-amber-hover"
+              className={buttonClass({ size: "lg" })}
             >
               Start recruiting
             </a>
