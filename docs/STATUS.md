@@ -82,7 +82,7 @@ The migrations revoke anon access and add CHECKs that reject values an older bui
    - home H1 "Диспетчер для траков…";
    - dispatch H1 "…за фикс в неделю";
    - SMS templates (`RU_SMS_APPROVED=false`);
-   - consent text;
+   - consent text, including the RU cookie banner (`src/components/ConsentBanner.tsx`);
    - RU tools (PR #26): `src/features/profit/data/profit-copy.ts`, `src/features/compliance/data/new-mc-checklist.ts`, `src/features/compliance/data/compliance-alerts-copy.ts`, `src/app/_tools/tools-hub-copy.ts`. Unsure terms: "Ставка безубыточности", "Толлы и весовые", "страховая подача (filing)", "Узнайте раньше брокера".
 8. Twilio A2P 10DLC. Happens after launch, because it needs the privacy/terms URLs live.
 
@@ -97,7 +97,9 @@ Go-live steps: follow `docs/launch-runbook.md` top to bottom.
 - [x] Startup integration log (`src/instrumentation.ts`) and `GET /api/health`, which returns `{ ok, leads }` so it doesn't reveal which integrations are set.
 - [x] RU dispatch wizard at `/ru/dispatch/start` and an RU footer. **The RU strings need native review** (`src/features/dispatch/data/start-wizard-copy.ts`, `src/shared/i18n/footer-copy.ts`).
 - [x] HomeDispatch image is local, with honest alt text. It's still a stock placeholder (a gaming desk), so swap it for a real photo of the team. `remotePatterns` stays only as a fallback for the state hero map.
-- [ ] **Placeholder gate.** Once real values exist, switch CI to `check:placeholders --strict`.
+- [x] **Placeholder gate.** `npm run build` runs `check:placeholders` first; an indexable build fails while placeholders remain or `NEXT_PUBLIC_SITE_URL` is unset.
+- [x] Fail closed on the live site: without `TURNSTILE_SECRET_KEY` or `CF_ORIGIN_SECRET`, lead forms return 403 when `NEXT_PUBLIC_INDEXABLE=true`.
+- [x] A lead whose Supabase insert fails is still emailed to `LEADS_NOTIFY_TO`, labelled "(NOT SAVED)".
 
 ### P2: soon after launch
 

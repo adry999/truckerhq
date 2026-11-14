@@ -249,4 +249,10 @@ describe("guardLeadRoute", () => {
   it("does not require the secret header when CF_ORIGIN_SECRET is unset", () => {
     expect(guardLeadRoute(req())).toBeNull();
   });
+
+  it("returns 403 on the live site when CF_ORIGIN_SECRET is unset", () => {
+    vi.stubEnv("NODE_ENV", "production");
+    vi.stubEnv("NEXT_PUBLIC_INDEXABLE", "true");
+    expect(guardLeadRoute(req())!.status).toBe(403);
+  });
 });

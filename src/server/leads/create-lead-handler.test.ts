@@ -156,13 +156,14 @@ describe("createLeadHandler", () => {
     expect(insertRow).not.toHaveBeenCalled();
   });
 
-  it("returns 502 and does not notify when saving fails", async () => {
-    const { handler, after, alert } = setup({ insertResult: false });
+  it("returns 502, skips the SMS and emails the unsaved lead when saving fails", async () => {
+    const { handler, after, alert, notify } = setup({ insertResult: false });
     const res = await handler(post(JSON.stringify(valid)));
     expect(res.status).toBe(502);
     expect(await res.json()).toEqual({ error: "Could not save" });
-    expect(after).not.toHaveBeenCalled();
-    expect(alert).not.toHaveBeenCalled();
+    expect(after).toHaveBeenCalledTimes(1);
+    expect(alert).toHaveBeenCalledWith("Test lead (NOT SAVED)", expect.any(Object));
+    expect(notify).not.toHaveBeenCalled();
   });
 
   it("applies the origin guard", async () => {

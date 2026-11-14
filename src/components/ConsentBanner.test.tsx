@@ -22,6 +22,12 @@ describe("ConsentBanner", () => {
     expect(localStorage.getItem("chq_consent")).toBeNull();
   });
 
+  it("speaks Russian on RU pages", () => {
+    render(<ConsentBanner lang="ru" onChoice={() => {}} />);
+    expect(screen.getByRole("region", { name: "Согласие на cookie" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Принять" })).toBeInTheDocument();
+  });
+
   it("pads the page while shown and releases it on unmount", () => {
     const { unmount } = render(<ConsentBanner onChoice={() => {}} />);
     expect(document.body.style.paddingBottom).toBe("0px");

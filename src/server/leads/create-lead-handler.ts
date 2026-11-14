@@ -93,9 +93,9 @@ export function createLeadHandler<S extends z.ZodType, T extends keyof LeadTable
       ? ({ ...config.toRow(data), ...consentEvidence(fields, req, consented) } as LeadTables[T])
       : config.toRow(data);
     const saved = await deps.insertRow(config.table, row);
-    if (!saved) return rejectResponse(502, config.saveError);
-
-    const { notify, alertLabel } = config;
+    const { notify } = config;
+    // Alert even when the insert failed: the email is then the only copy of the lead.
+    const alertLabel = saved ? config.alertLabel : `${config.alertLabel} (NOT SAVED)`;
     deps.after(async () => {
       try {
         await deps.alert(alertLabel, row);
@@ -103,6 +103,8 @@ export function createLeadHandler<S extends z.ZodType, T extends keyof LeadTable
         console.error(`[lead-alert] failed: label="${alertLabel}"`);
       }
     });
+    if (!saved) return rejectResponse(502, config.saveError);
+
     if (notify && (!config.smsConsent || consented)) deps.after(() => notify(data));
     return NextResponse.json({ ok: true });
   };

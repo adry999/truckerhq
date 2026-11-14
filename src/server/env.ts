@@ -47,6 +47,11 @@ export function serverEnv(): ServerEnv {
   return cached;
 }
 
+/** The real public site (production build, indexable), as opposed to dev or a temp/staging domain. */
+export function isLiveProduction(): boolean {
+  return process.env.NODE_ENV === "production" && process.env.NEXT_PUBLIC_INDEXABLE === "true";
+}
+
 export function resetServerEnvForTests(): void {
   cached = undefined;
 }

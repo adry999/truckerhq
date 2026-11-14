@@ -2,7 +2,7 @@ import "server-only";
 import { timingSafeEqual } from "node:crypto";
 import { NextResponse } from "next/server";
 import { SITE_URL } from "@/shared/config/site";
-import { serverEnv } from "@/server/env";
+import { isLiveProduction, serverEnv } from "@/server/env";
 
 const MAX_BODY_BYTES = 16_000;
 const WINDOW_MS = 60_000;
@@ -22,7 +22,8 @@ function getAllowedOrigins(): Set<string> {
 
 function hasValidOriginSecret(req: Request): boolean {
   const secret = serverEnv().CF_ORIGIN_SECRET;
-  if (!secret) return true;
+  // Optional on dev / the temp domain; without it on the live site cf-connecting-ip can be spoofed.
+  if (!secret) return !isLiveProduction();
   const sent = Buffer.from(req.headers.get("x-origin-secret") ?? "");
   const expected = Buffer.from(secret);
   return sent.length === expected.length && timingSafeEqual(sent, expected);
