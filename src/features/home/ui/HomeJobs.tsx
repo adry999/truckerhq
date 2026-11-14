@@ -19,27 +19,29 @@ export function HomeJobs({ c, rows }: { c: HomeCopy; rows: readonly HomeJobRow[]
           <Link
             key={j.title + j.company}
             href={j.href}
-            className={`flex flex-wrap items-center gap-x-6 gap-y-2.5 px-5 py-[18px] hover:bg-offwhite ${
-              i ? "border-t border-[#ECEDEA]" : ""
+            className={`grid gap-3 px-5 py-[18px] hover:bg-offwhite md:grid-cols-[minmax(0,1fr)_13rem_7rem] lg:grid-cols-[minmax(0,1fr)_16rem_8rem] md:items-center md:gap-6 ${
+              i ? "border-t border-divider" : ""
             }`}
           >
-            <div className="flex flex-1 basis-64 flex-col gap-1">
+            <div className="flex flex-col gap-1">
               <div className="text-[17px] font-bold">{j.title}</div>
               <div className="text-sm text-grey">
                 {j.company} · {j.loc}
               </div>
             </div>
-            <div className="flex flex-wrap gap-2">
-              <span className="flex h-7 items-center rounded-md bg-[#E2F0E8] px-2.5 font-display text-[15px] font-extrabold tracking-[.08em] text-green">
-                {j.type}
-              </span>
-              <span className="flex h-7 items-center rounded-md bg-[#EEEFEC] px-2.5 font-display text-[15px] font-bold tracking-[.06em] text-[#3F444B]">
-                {j.equip}
-              </span>
-            </div>
-            <div className="flex basis-36 flex-col items-start gap-0.5">
-              <div className="text-[17px] font-bold tabular-nums">{j.pay}</div>
-              <div className="text-[13px] text-grey">{j.posted}</div>
+            <div className="flex items-center justify-between gap-4 md:contents">
+              <div className="flex flex-wrap gap-2">
+                <span className="flex h-7 items-center rounded-md bg-green-tint px-2.5 font-display text-[15px] font-extrabold tracking-[.08em] text-green">
+                  {j.type}
+                </span>
+                <span className="flex h-7 items-center rounded-md bg-surface-muted px-2.5 font-display text-[15px] font-bold tracking-[.06em] text-ink-3">
+                  {j.equip}
+                </span>
+              </div>
+              <div className="flex shrink-0 flex-col items-end gap-0.5 md:items-start">
+                <div className="text-[17px] font-bold tabular-nums">{j.pay}</div>
+                <div className="text-[13px] text-grey">{j.posted}</div>
+              </div>
             </div>
           </Link>
         ))}
